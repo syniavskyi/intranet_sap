@@ -1,2 +1,2 @@
-# intranet_sap
-BTech Intranet 2.0 based on SAP ERP
+# BTech Intranet
+Intranet 2.0 based on SAP ERP
