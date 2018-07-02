@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.plane-calendar {
+    height: 100%;
+    width: 100%;
+}
+
+.calendar-nav-and-content {
+    display: flex;
+    width: 100%;
+    /* height: 100%;*/
+    min-height: 100%;
+    background: rgb(219, 219, 219);
+}
+
+.calendar-content {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    /* width: 100%; */
+    height: 100%;
+}
+
+.calendar-header {
+    display: flex;
+    width: 95%;
+    align-self:center;
+    height: 5%;
+    min-height:3.5rem;
+}
+
+.calendar-header-title-and-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-header-menu {
+    display: flex;
+    color: #7b7777;
+    margin: 0;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.calendar-header-title {
+    color: #7b7777;
+    margin: 0;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.calendar-tiles {
+    display: flex;
+    height: 95%;
+    width: 100%;
+    justify-content: center;
+}
+
+.calendar-tile {
+    display: flex;
+    /* align-self:center; */
+    background: white;
+    width: 95%;
+    height: 95%;
+    border-radius: 4px;
+    box-shadow: 0 0 10px grey;
+}
+
+@media (min-width: 44rem) {
+    .calendar-header-menu {
+        display: none;
+    }
+    .calendar-content {
+        width:80%;
+    }
+}

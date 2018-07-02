@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+
+/* Planes for Login and Registration  */
+
+.plane-parent {
+    display: flex;
+    background: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.plane {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background: radial-gradient(ellipse 162% 190% at -1% 50%, #f7f7f7 55%, lightgray 60%, white 60.7%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    /*background: radial-gradient(ellipse 50% 150% at 4% 50%, white 58%, #e5e5e5 60%, white 60%);*/
+}
+
+
+/* Planes for side navigation Menu */
+
+.plane-nav-and-content {
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #d8d8d8;
+    min-height: 45rem;
+}
+
+.nav-title {
+    width: 100%;
+    font-family: 'Roboto';
+    margin: 0;
+    padding: .5rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 143, 32);
+    text-shadow: 0px 0px 5px rgba(255, 165, 0, 0.45);
+}
+
+.logout-button {
+    position: absolute;
+    z-index: 1;
+    top: .5rem;
+    left: .7rem;
+    background: url(../images/nav3/power-20.png) no-repeat center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 0;
+    border-radius: 50%;
+    transition: all .3s ease;
+}
+
+.logout-button:hover {
+    cursor:pointer;
+    box-shadow: 0 0 10px rgb(168, 168, 168);
+}
+
+.logout-button:hover > .logout-text {
+    display: flex;
+    text-shadow: 0 0 5px rgb(168, 168, 168);
+}
+
+.logout-text {
+    font-size: 1rem;
+    color:rgb(168, 168, 168);
+    animation: slide-up;
+    animation-duration: .4s;
+    font-family: 'Roboto';
+    position: absolute;
+    top: 2.5rem;
+    left: -.5rem;
+    display:none;
+}
+
+.plane-nav {
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 15%;
+    align-items: center;
+    min-width: 12rem;
+    min-height: 45rem;
+    height: 100%;
+    /* background: url("../images/banner4.png"); */
+    background: white;
+    box-shadow: 0 0 5px 3px grey;
+}
+
+.nav-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 8.1rem;
+    padding: 0;
+}
+
+.nav-user-img {
+    border-radius: 50%;
+    box-shadow: 0 0 15px grey;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav li {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+li p {
+    transition: margin .35s ease;
+}
+li:hover p {
+    margin-left: 13%;
+}
+
+.nav-router-link {
+    width: 100%;
+    height: 100%;
+    /* margin: .3rem 1.2rem; */
+    margin: 2% 10%;
+    text-decoration: none;
+}
+
+.nav-item {
+    font-family:'Roboto';
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border:0;
+   /* box-shadow: 0 -7px 9px -7px rgba(0,0,0,0.4); */
+    background: transparent;
+    text-decoration: none;
+    padding: 0;
+    border-radius: .31rem;
+    transition: all 0.2s ease;
+}
+
+.nav-item-img {
+    display: flex;
+    margin-left: 5%;
+}
+
+.nav-item p {
+    display: flex;
+    color: #616161;
+    margin: 0;
+    padding: 1rem 0;
+    margin-left: 1rem;
+    justify-content: flex-start;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.active-router-link {
+    cursor: pointer;
+    background: #FFB05C;
+    box-shadow: 0 16px 15px -14px gray;
+    outline: none;
+    border-radius: .3rem;
+}
+.nav-item:hover,
+.nav-item:focus {
+    cursor: pointer;
+    background: lightgrey;
+}
+
+
+.active-router-link p {
+    color: white;
+}
+
+.nav-item:hover p,
+.nav-item:focus p {
+    color: white;
+}
+/* Planes for side navigation menu */
+
+.backdrop { 
+    position: fixed;
+    display: flex;
+    display:none;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.plane div {
+    flex-shrink: 0;
+}
+
+.plane-left {
+    min-width: 9rem;
+    min-height: 13rem; 
+    width: 29%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.login-credentials {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-user {
+    width: 8rem;
+}
+
+.p-hello {
+    font-size: 2rem
+}
+
+.p-login {
+    text-align: center;
+    max-width: 11rem;
+}
+
+.input {
+    font-family: inherit;
+    margin-bottom: 2rem;
+    outline: none;
+    font-size: 1rem;
+    height: 2rem;
+    padding: 0.2rem 0.6rem;
+    border: 0px;
+    border-bottom: 2px solid grey;
+    font-family: inherit;
+    background: rgba(255,255,255, 0);
+    transition: border-bottom 0.4s ease;
+    border-radius: 0px;
+}
+
+.label {
+    height: 1.8rem;
+    align-self: center;
+    color: rgba(0,0,0, 0.6);
+    transition: font-size 0.3s ease;
+}
+
+.input:hover,
+.input:focus {
+    cursor: text;
+    border-bottom: 2px solid orange;
+}
+
+.button {
+    height: 3.5rem;
+    width: 12rem;
+    background: #ff974b;
+    border: 0;
+    border-radius: 5px;
+    transition: all 0.4s ease;
+    font-family: inherit;
+    font-weight: 500;
+    color: white;
+    font-size: 1rem;
+}
+
+.button .span-arrow {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.button .span-arrow:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -1.2rem;
+  transition: 0.4s;
+}
+
+.button:hover .span-arrow {
+  padding-right: 1.2rem;
+}
+
+.button:hover .span-arrow:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button:hover,
+.button:focus {
+    cursor: pointer;
+    box-shadow: 1px 0px 50px rgba(255, 151, 71, 0.78);
+    background: rgb(240, 134, 52);
+}
+.slide-enter-active {
+    animation: slide-in 400ms ease-out forwards;
+  }
+
+  .slide-leave-active {
+    animation: slide-out 400ms ease-out forwards;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+  }
+
+/* media for dashboard, nav and others */
+
+@media (min-width: 40rem) {
+    .plane-nav {
+        width: 20%;
+        display: flex;
+    }
+
+    .plane-nav-and-content {
+        display: flex;
+        flex-direction: row;
+    }
+    .dashboard-header-menu {
+        display: none;
+    }
+    
+}
+
+.plane-component {
+    margin:0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto';
+}
+
+.component-nav-and-content {
+    display: flex;
+    flex-direction: row;
+    background: #d8d8d8;
+    min-height: 100%;
+}
+
+.component-content {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: min-content;
+}
+.content-header {
+    align-self: center;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3%;
+    min-height: 3rem;
+}
+.content-header-title-and-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-header-menu {
+    color: #7b7777;
+    margin: 0;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 .5rem;
+}
+.content-header-title {
+    color: #7b7777;
+    margin: 0;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@media(min-width: 44rem) {
+    .content-header-menu {
+        display: none;
+    }
+    .component-content {
+        width: 80%;
+    }
+}
