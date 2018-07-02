@@ -1,0 +1,25 @@
+/* body {
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    height: 100%;
+} */
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto';
+  max-width: 100%;
+}
+
+#app {
+  /*font-family: 'Montserrat', 'Avenir', Helvetica, Arial, sans-serif;*/
+  font-family: 'Montserrat';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}

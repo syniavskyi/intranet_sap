@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Intranet Login Page</title>
+        <link rel="stylesheet" href="../shared.css">
+        <link rel="stylesheet" href="login.css">
+    </head>
+    <body>
+        <div class="backdrop"></div>
+        <div class="modal">
+            <h1 class="modal__title">Do you want to continue?</h1>
+            <div class="modal__actions">
+                <button class="modal__action modal__action--negative" type="button">No!</button>
+            </div>
+        </div>
+        <div class="plane-parent">
+            <div class="plane">
+                <div class="plane-left">
+                    <img class="img-user" src="../images/grouper-256.png">
+                    <p class="p-login">Zaloguj się do Intranetu</p>
+                </div>
+                <div class="login-credentials">
+                    <input class="input input-login-email" type="email">
+                    <label class="label label-login-email">Użytkownik</label>
+                    <input class="input input-login-pass" type="password">
+                    <label for="password" class="label label-login-pass">Hasło</label>
+                    <p class="forgot-pass">Zapomniałeś hasło?</p>
+                    <button class="button"><span>Zaloguj</span></button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

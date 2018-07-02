@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Intranet Login Page</title>
+        <link rel="stylesheet" href="../shared.css">
+        <link rel="stylesheet" href="profile.css">
+    </head>
+    <body>
+            <div class="plane-profile">
+                <div class="profile-nav-and-content">
+                    <div class="plane-nav">
+                            <p class="nav-title">BTech</p>
+                        <div class="nav-user">
+                            <img class="nav-user-img" width="130px" src="../../images/if_users.png">
+                        </div>
+                        <nav class="nav">
+                            <ul class="nav-list">
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if_profile-32_wh.png">
+                                        <p>Profil</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if_home_32_wh.png">
+                                        <p>Home</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if_docu_32_wh.png">
+                                        <p>Newsy</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if_calendar_32%20(2).png">
+                                        <p>Kalendarz</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if_docu_32_wh.png">
+                                        <p>Pracownicy</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if_docu_32_wh.png">
+                                        <p>Informacje</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="nav-item">
+                                        <img class="nav-item-img" src="../../images/nav/if-files_32_wh.png">
+                                        <p>Pliki</p>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="profile-content">
+                        <div class="profile-header">
+                            <div class="profile-header-title-and-menu">
+                                <img src="../../images/nav/if_menu-32.png" width="32px" class="profile-header-menu">
+                                <p class="profile-header-title">Profil</p>
+                            </div>
+                            <button class="profile-header-button" v-if="!editMode" @click="editMode = !editMode">Edytuj dane</button>
+                            <div class="header-button-save-reject" style="display:none;">
+                                <button class="border-btn save-btn" v-else @click="editMode = !editMode" :disabled="$v.$invalid">Zapisz<br>zmiany</button>
+                                <button class="border-btn reject-btn">Odrzuć<br>zmiany</button>
+                            </div>
+                        </div>
+                        <h3 class="user-header-name">{{userData.fullName}}</h3>
+                    <div class="profile-tiles"> 
+                        <div class="profile-tile">  <!-- container for section -->
+                            <div class="profile-tile-header">
+                                <h2>Dane kontaktowe</h2>
+                                <div class="tile-underscore"></div>
+                            </div>  
+                            <div class="profile-tile-content">
+                                <div class="profile-tile-inputs-section">
+                                    <div class="profile-tile-inputs">
+                                        <div>
+                                            <label class="label-profile">Adres</label>
+                                            <input class="inputEdit inputProfile" :disabled="!editMode"  v-model="userData.address">
+                                        </div>
+                                        <div>
+                                            <label class="label-profile">Email</label>
+                                            <input class="inputEdit inputProfile" :disabled="!editMode" v-model="userData.email" @blur="$v.userData.email.$touch()">
+                                            <div class="error-wrapper">
+                                                <p class="profile-error profile-error-email" v-if="$v.userData.email.$invalid">Adres email posiada nieprawidłowy format lub nie jest wprowadzony.</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="label-profile">Telefon</label>
+                                            <input class="inputEdit inputProfile" :disabled="!editMode" v-model="userData.phone"  @blur="$v.userData.phone.$touch()">
+                                            <div class="error-wrapper">
+                                                <p class="profile-error profile-error-phone" v-if="$v.userData.phone.$invalid" >Podany numer telefonu posiada nieprawidłowy format.</p>  
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    <div class="profile-tile-inputs">
+                                        <div>
+                                            <label class="label-profile">Skype</label> 
+                                            <input class="inputEdit inputProfile" :disabled="!editMode" v- model="userData.skype">  
+                                        </div>
+                                        <div>
+                                            <label class="label-profile">Slack</label>
+                                            <input class="inputEdit inputProfile" :disabled="!editMode" v-model="userData.slack">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-user-header">
+                                    <div class="profile-user-img">
+                                        <div class="overlay">
+                                            <p>Zmień zdjęcie</p>
+                                            <img class="img-user-class" src="../../images/if_camera2_254216.png" width="30px">
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="profile-tile">
+                            <div class="profile-tile-header">
+                                <h2>Dane pracownika</h2>
+                                <div class="tile-underscore"></div>
+                            </div> 
+                            <div class="profile-tile-content">
+                                <div class="profile-tile-inputs-section">
+                                    <div  class="profile-tile-inputs">
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Oddział</label>
+                                            <input disabled value="Wrocław" class="inputDisabled inputProfile" :disabled="true" v-model="userData.department">
+                                        </div> 
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Dział</label>
+                                            <input disabled value="Fiori" class="inputDisabled inputProfile" :disabled="true" v-model="userData.dzial">
+                                        </div>
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Pozycja</label>
+                                            <input disabled value="Programista" class="inputDisabled inputProfile" :disabled="true" v-model="userData.position">
+                                        </div> 
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Aktualny projekt</label>
+                                            <input disabled value="Orange" class="inputDisabled inputProfile" :disabled="true" v-model="userData.project">
+                                        </div>
+                                    </div>
+                                    <div class="profile-tile-inputs">
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Etat</label>
+                                            <input disabled value="Pełny" class="inputDisabled inputProfile" :disabled="true" v-model="userData.worktime">
+                                        </div> 
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Data zatrudnienia</label>
+                                            <input disabled value="16.04.2017" class="inputDisabled inputProfile" :disabled="true"  v-model="userData.date">
+                                        </div> 
+                                        <div>   <!-- container for single label + input/p -->           
+                                            <label class="label-profile">Staż pracy</label>
+                                            <input disabled value="1 Rok" class="inputDisabled inputProfile" :disabled="true" v-model="userData.time">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="side-content">
+                                    <p class="cv-title">CV użytkownika</p>
+                                    <div class="cv-buttons">
+                                        <div class="button-cv">
+                                            <a>
+                                                <span class="button-circle lang-circle">PL</span>
+                                            </a>
+                                            <div class="add-download">
+                                                <label class="add" for="add-docx-pl">+</label>
+                                                <input id="add-docx-pl" type="file" class="add doc-add-pl">
+                                                <div class="docx">.docx</div>
+                                                <a class="download doc-dowload-pl">&#x21e3;</a>
+                                            </div>
+                                            <div class="add-download">
+                                                <label for="add-pdf-pl" class="add pdf-add-pl">+</label>
+                                                <input id="add-pdf-pl" type="file">
+                                                <div class="pdf">.pdf</div>
+                                                <a class="download pdf-add-pl">&#x21e3;</a>
+                                            </div>
+                                        </div>
+                                        <div class="button-cv">
+                                            <a>
+                                                <span class="button-circle lang-circle">EN</span></a>
+                                            <div class="add-download">
+                                                <label class="add" for="add-docx-en">+</label>
+                                                <input id="add-docx-en" type="file">
+                                                <div class="docx">.docx</div>
+                                                <a href class="download">&#x21e3;</a>
+                                            </div>
+                                            <div class="add-download">
+                                                <label class="add" for="add-pdf-en">+</label>
+                                                <input id="add-pdf-en" type=file>
+                                                <div class="pdf">.pdf</div>
+                                                <a class="download">&#x21e3;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>
