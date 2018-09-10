@@ -27,7 +27,6 @@
     /*background: radial-gradient(ellipse 50% 150% at 4% 50%, white 58%, #e5e5e5 60%, white 60%);*/
 }
 
-
 /* Planes for side navigation Menu */
 
 .plane-nav-and-content {
@@ -138,15 +137,15 @@
 li p {
     transition: margin .35s ease;
 }
-li:hover p {
+/* li:hover p {
     margin-left: 13%;
-}
+} */
 
 .nav-router-link {
     width: 100%;
     height: 100%;
     /* margin: .3rem 1.2rem; */
-    margin: 2% 10%;
+    margin: 1.5% 10%;
     text-decoration: none;
 }
 
@@ -327,11 +326,291 @@ li:hover p {
 }
 .slide-enter-active {
     animation: slide-in 400ms ease-out forwards;
-  }
+}
 
-  .slide-leave-active {
+.slide-leave-active {
     animation: slide-out 400ms ease-out forwards;
-  }
+}
+
+.checkbox-wrap {
+    display: flex;
+    align-self: center;
+    position: relative;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox-margin {margin-right:.5rem}
+.checkbox-wrap input {
+    opacity: 0;
+}
+.checkbox-in {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: rgb(224, 224, 224);
+    border-radius:2px;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.checkbox-wrap input:checked ~ div:after {
+    opacity: 1;
+}
+.checkbox-wrap input:checked ~ div {
+    background: orange;
+}
+
+.checkbox-wrap input:checked:hover ~ div {
+    background: rgb(218, 141, 0);
+}
+.checkbox-wrap input:disabled ~ div {
+    background: rgb(243, 243, 243);
+    cursor: context-menu;
+    pointer-events: none;
+}
+.checkbox-wrap input:disabled:checked ~ div {
+    background: orange;
+}
+/* FOR WHEN CHECKBOX IS CHECKED BUT DISABLED */
+.checkbox-wrap input:disabled:checked:hover ~ div {
+    background: rgb(243, 243, 243);
+}
+/* FOR WHEN CHECKBOX IS CHECKED BUT DISABLED */
+
+.checkbox-wrap div:hover {
+    background: #ccc;
+}
+
+.checkbox-in:after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    opacity:0;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Grey out checkbox in Profile Tile experience */
+.checkbox-margin:disabled:not(:checked),
+.checkbox-margin:disabled:not(:checked) ~ div,
+.checkbox-margin:disabled:not(:checked) ~ p {
+    display: none;
+    color: #ccc;
+}
+
+.checkbox-label {
+    padding:0;
+    margin:0;
+    cursor: pointer;
+    margin-left:.5rem;
+}
+/*     DIALOG  /   MODAL - start       */
+.modal-new,
+.modal-new-m,
+.modal-new-s {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 1010;
+    background: white;
+    border-radius: .5rem;
+    box-shadow: 0 0 50px 1px #333;
+}
+
+.modal-new {
+    width: 600px;
+    height: 550px;
+}
+
+.modal-new-s {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 550px;
+    height: 400px;
+}
+
+.modal-new-m {
+    width: 800px;
+    height: 600px;
+}
+
+.modal-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-overlay {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-header-new {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Lato';
+}
+
+.modal-title-new {
+    margin-left: 1rem;
+}
+
+.modal-exit-new {
+    font-size: 1.2rem;
+    align-self: flex-start;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    background: transparent;
+    color: #ccc;
+    font-weight: bold;
+    border: 0;
+    -webkit-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.modal-exit-new:hover {
+    color: grey;
+}
+/*     DIALOG  /   MODAL - end     */
+
+/* Disabling Mozilla Firefox automatic red box-shadow for required inputs */
+input:required {
+    box-shadow: none;
+}
+
+/* Functional Buttons (for Profile) */
+.func-btn {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    border:2px solid transparent;
+    color: white;
+    background: orange;
+    font-family: 'Lato';
+    font-size: 1rem;
+    padding: 0.25rem .4rem;
+    margin-right: 1rem;
+    box-shadow: #a76c00 1px 1px 0,
+    #a76c00 2px 2px 0,
+    #a76c00 3px 3px 0;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.func-btn:hover {
+    transform: translate(.1rem, .1rem);
+    box-shadow: rgb(167, 108, 0) 0 0  0;
+    background: rgb(240, 156, 0);
+}
+
+func-btn
+/* Functional Buttons (for Profile) */
+
+/* COOL DIV INPUT - start */
+.cd-for-input,
+.cd-for-input-xxl {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.cd-for-input-xxl {
+    width: 26rem;
+}
+
+.cd-input {
+    display: flex;
+    text-align: center;
+    height: 2rem;
+    font-family: 'Roboto';
+    font-size: 1rem;
+    background :transparent;
+    border:0;
+    width: 100%;
+    outline: none;
+    text-indent: 0.5rem;
+    border-bottom: 1px solid #757575;
+    position: relative;
+}
+
+.cd-label {
+    display: flex;
+    align-items: flex-end;
+    color:#999; 
+    position:absolute;
+    pointer-events:none;
+    background-color: white;
+    transition:0.3s ease all; 
+    font-weight: 400;
+
+    left:0.3rem;
+    top: 0.5rem;
+    font-size:1.2rem;
+}
+
+.cd-input:focus ~ label,
+.cd-input:valid ~ label {
+    top: -.65rem;
+    font-size: .9rem;
+    color: rgb(255, 145, 0);
+    padding: 0 .2rem;
+}
+
+.cd-span { position:relative; display:flex; width:100%; }
+    
+.cd-span:before, .cd-span:after {
+    content:'';
+    display: flex;
+    flex-shrink: 0;
+    height:2px; 
+    width:0;
+    bottom:0; 
+    position:absolute;
+    background:rgb(255, 145, 0); 
+    transition:0.5s ease all; 
+    -moz-transition:0.5s ease all; 
+    -webkit-transition:0.5s ease all;
+}
+.cd-span:before {
+    left:50%;
+}
+.cd-span:after {
+    right:50%; 
+}
+
+.cd-input:focus ~ span:before, .cd-input:focus ~ span:after,
+.cd-input:valid ~ span:before, .cd-input:valid ~ span:after {
+    width: 50%;
+}
+
+/* COOL DIV INPUT - end */
+
+/* background: linear-gradient(to right, #ffffff 0%,#e5e5e5 10%,#e5e5e5 90%,#ffffff 100%); */
 
   @keyframes slide-in {
     from {
@@ -361,6 +640,7 @@ li:hover p {
     .plane-nav {
         width: 20%;
         display: flex;
+        min-width: 15.7rem;
     }
 
     .plane-nav-and-content {
@@ -370,7 +650,6 @@ li:hover p {
     .dashboard-header-menu {
         display: none;
     }
-    
 }
 
 .plane-component {
@@ -405,7 +684,7 @@ li:hover p {
     align-items: center;
     justify-content: space-between;
     height: 3%;
-    min-height: 3rem;
+    min-height: 3.5rem;
 }
 .content-header-title-and-menu {
     display: flex;

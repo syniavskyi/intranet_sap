@@ -1,4 +1,8 @@
 <template>
+<div class="plane-profile">
+    <div class="profile-nav-and-content">
+  <app-menu></app-menu>
+  <h1> {{ $t("header.registration") }} </h1>
   <div class="plane-parent plane-parent-registration">
     <!-- SUCCESS DIALOG -->
     <transition name="slide-backdrop" v-if="closeSuccessDialog">
@@ -69,19 +73,22 @@
       </div>
     </div>
   </div>
+    </div>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
 import { required, minLength, email } from "vuelidate/lib/validators";
-import i18n from '../../lang/lang'
+import i18n from "../../lang/lang";
 
+import Menu from "../Menu.vue";
 export default {
   data() {
     return {
       fullName: "",
       email: "",
-      mail: '',
+      mail: "",
       role: [],
       roleChosen: "",
       department: [],
@@ -105,10 +112,13 @@ export default {
     // }
   },
   beforeCreate() {
-    this.$store.commit('DISPLAY_MENU', false);
-    if (this.$store.getters.idDataLoaded === false) {
-      this.$store.dispatch('loadData', localStorage.getItem('token'))
+    // this.$store.commit("DISPLAY_MENU", false);
+    if (this.$store.getters.isDataLoaded === false) {
+      this.$store.dispatch("loadData");
     }
+  },
+  components: {
+    "app-menu": Menu
   },
   methods: {
     checkEmail(value) {

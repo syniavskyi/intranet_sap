@@ -1,3 +1,9 @@
+
+import odata from 'odata'
+import axios from 'axios'
+
+let utils = require('../../utils')
+
 const state = {
   delegationCostsList: [],
   currencyList: [
@@ -44,19 +50,14 @@ const state = {
     totalDelegationAmount: 0,
     allowanceDeduction: 0
   },
-  defaultCostData: {
-    firstLeavePlace: null,
-    firstLeaveHour: null,
-    firstArrivalHour:null,
-    secondLeaveHour: null,
-    secondArrivalHour: null,
-    secondArrivalPlace: null
-  },
   newDelegationValidated: false,
   delegationTableValidated: false,
   defaultCostsData: {},
   fullExpences: [],
-  dailyAllowance: 30.00
+  dailyAllowance: 30.00,
+  NewDelegationNumber: null,
+  showConfirmDelegation: false,
+  createDelegationSuccess: null
 };
 
 const mutations = {
@@ -75,9 +76,6 @@ const mutations = {
   SET_DELEGATION_TABLE_VALIDATED(state, isValidated) {
     state.newDelegationValidated = isValidated
   },
-  SET_DEFAULT_COST_DATA(state, list) {
-    state.defaultCostsData = list
-  },
   SET_FULL_EXPENCES(state, list) {
     state.fullExpences = list
   },
@@ -86,6 +84,18 @@ const mutations = {
   },  
   SET_TOTAL_COST_CURR_DATA(state, list) {
     state.totalCostsInCurr = list
+  },
+  SET_NEW_DELEG_NO(state, number) {
+    state.NewDelegationNumber = number
+  },
+  SET_SHOW_CONFIRM_DELEG(state, show) {
+    state.showConfirmDelegation = show
+  },
+  CREATE_DELEG_SUCCESS(state, isSuccess) {
+    state.createDelegationSuccess = isSuccess
+  },
+  SET_DEFAULT_COST_DATA(state, data) {
+    state.defaultCostsData = data
   }
 };
 
@@ -229,28 +239,263 @@ const actions = {
 
   },
   toggleTile({}, element) {
-    element.el.style.display = (element.style.display === "flex") ? "none" : "flex"
+    let height;
+    if (element.elChild.className === "delegations-table-wrapper") {
+      let tableHeight = Array.prototype.reduce.call(element.elChild.firstElementChild.childNodes, function(p, c) {
+        return p + (c.offsetHeight || 0); 
+      }, 0),
+      footerHeight = Array.prototype.reduce.call(element.elChild.lastElementChild.childNodes, function(p, c) {
+        return p + (c.offsetHeight || 0)
+      }, 0)
+      height = (footerHeight + tableHeight)
+    } else {
+      height = Array.prototype.reduce.call(element.elChild.childNodes, 
+        function(p, c) { 
+          return p + (c.offsetHeight || 0);
+        }, 0)
+    }
+    height = height + 16 + "px"
+    if (!element.el.style.height || element.el.style.height == "0px") {
+        element.el.style.height = height
+        // element.el.addEventListener("transitionend", (e) => {
+        //   if (e.propertyName === "height")
+        //   element.el.style.overflow = "visible"  
+        // })
+        element.el.style.overflow = "visible"
+        element.el.style.opacity = "1"
+    } else {
+        element.el.style.height = "0px"
+        element.el.style.overflow = "hidden"
+        element.el.style.opacity = "0";
+    }
+  },
 
-    },
-    countAllCosts({getters, commit, dispatch}){
-      const accCosts = getters.getAccomodationCostData,
-            otherCosts = getters.getOtherCostData,
-            trvCosts = getters.getTravelCostData,
-            advanceData = getters.getAdvanceData
+  calcHeight({}, element) {
+    let height;
+    if (element.elChild.className === "delegations-table-wrapper") {
+      let tableHeight = Array.prototype.reduce.call(element.elChild.firstElementChild.childNodes, function(p, c) {
+        return p + (c.offsetHeight || 0); 
+      }, 0),
+      footerHeight = Array.prototype.reduce.call(element.elChild.lastElementChild.childNodes, function(p, c) {
+        return p + (c.offsetHeight || 0)
+      }, 0)
+      height = (footerHeight + tableHeight)
+    } else {
+      height = Array.prototype.reduce.call(element.elChild.childNodes, 
+        function(p, c) { 
+          return p + (c.offsetHeight || 0);
+        }, 0)
+    }
+    height = height + 16 + "px"
+    return height;
+  },
+
+  checkWidthAndToggle({}, element) {
+    const x = window.matchMedia("(max-width: 64rem)"),
+          z = window.matchMedia("(min-width: 64.1rem)")
+    let el = element.el.lastChild
+      if (x.matches || z.matches) {
+        if (element.el.lastChild.style.height) {
+          if (element.el.lastChild.style.height != "0px") {
+            let elChild = element.el.lastChild.firstChild
+            const name = {el, elChild}
+            this.dispatch("calcHeight", name).then(height => {
+              height = height
+              if (element.el.lastChild.style.height != height) {
+                  this.dispatch("toggleTile", name);
+                }
+            })
+          }
+        }
+      }
+  },
+
+  countAllCosts({getters, commit, dispatch}){
+    const accCosts = getters.getAccomodationCostData,
+          otherCosts = getters.getOtherCostData,
+          trvCosts = getters.getTravelCostData,
+          advanceData = getters.getAdvanceData
  
-      for (let i =0; i<accCosts.length; i++) {dispatch('getAccCostRate', i)}
-      for (let i =0; i<otherCosts.length; i++) {dispatch('getOtherCostRate', i)}
-      for (let i =0; i<trvCosts.length; i++) {dispatch('getTravelRate', i)}
-      for (let i =0; i<advanceData.length; i++) {dispatch('getAdvanceRate', i)}
+    for (let i =0; i<accCosts.length; i++) {dispatch('getAccCostRate', i)}
+    for (let i =0; i<otherCosts.length; i++) {dispatch('getOtherCostRate', i)}
+    for (let i =0; i<trvCosts.length; i++) {dispatch('getTravelRate', i)}
+    for (let i =0; i<advanceData.length; i++) {dispatch('getAdvanceRate', i)}
     },
     countTotalCost({getters}){
       const  totalCostsInCurr = getters.getTotalCostsInCurr
 
       totalCostsInCurr.amount =  0
       totalCostsInCurr.amount =  totalCostsInCurr.travel + totalCostsInCurr.accomodation + totalCostsInCurr.others - allDeduction
-    }
+    },
+    getDelegationNumber({commit, getters}, data) {
+      
+      let urlQuery = getters.getUrlQuery
+      let url = "Delegations(DelegDate=" + data.DelegDate + ",UserId='" + data.UserAlias + "')" +urlQuery
+      axios({
+        method: 'GET',
+        url: url,
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        }
+      }).then(res => {
+        commit('SET_NEW_DELEG_NO', res.data.d.DelegNo)
+        console.log(res.data.d);
+      }).catch(error => {
+        console.log(error);
+      })
+    },
+    saveDelegationNumber({commit, dispatch, getters}){
+        const oDelegation = getters.getNewDelegation
+        let urlQuery = getters.getUrlQuery
+        let data = {
+            UserId: oDelegation.userId,
+            DelegDate: utils.formatDateForBackend(oDelegation.dates.start),
+            DelegNo: getters.getNewDelegationNumber
+        }
+        
+        axios({
+          method: 'POST',
+          url: 'Delegations' + urlQuery,
+          data: data,
+          headers: {
+            "X-Requested-With": "XMLHttpRequest"
+          }
+        }).then(res => {
+          commit('CREATE_DELEG_SUCCESS',true)
+          dispatch('clearDelegationForm')
+        }).catch(error => { 
+          console.log(error);
+          commit('CREATE_DELEG_SUCCESS',false)
+        })
+      
+     },
+     clearDelegationForm({commit}){
+      const totalCosts= {
+        accPayback: 0,
+        othPayback: 0,
+        trvPayback: 0,
+        totalPayback: 0,
+        accomodation: 0,
+        travel: 0,
+        others: 0,
+        amount: 0,
+        advance: 0
+      }
+      commit('SET_TOTAL_COST_DATA', totalCosts)
+
+      const totalCostsInCurr = {
+        accPayback: 0,
+        othPayback: 0,
+        trvPayback: 0,
+        totalPayback: 0,
+        accomodation: 0,
+        flatRateForAcc: 0,
+        travel: 0,
+        others: 0,
+        amount: 0,
+        advance: 0
+      }
+      commit('SET_TOTAL_COST_CURR_DATA', totalCostsInCurr)
+      
+      const newDelegation = {
+        number: null,
+        userId: null,
+        createDate: null,
+        destination: null,
+        purpose: null,
+        hours: 0,
+        totalAllowance: 0,
+        currency: 'PLN',
+        totalReturnAmount: 0,
+        totalDelegationAmount: 0,
+        allowanceDeduction: 0
+      }
+      commit('SET_NEW_DELEGATION', newDelegation)
+      commit('SET_NEW_DELEGATION_VALIDATED', false) 
+
+      const costAccomodationData = [{
+        docDate: null,
+        company: null,
+        docNo: null,
+        payback: false,
+        currency: 'PLN',
+        amount: 0,
+        totalAmount: 0,
+        flatRate: false,
+        flatRateDays: null,
+        totalAmount: 0,
+        currencyRate: 1,
+        rateDate: null, //total  amount in delegation curr and rate for it
+        totalAmountInCurr: 0,
+        delegationCurrRate: 1
+      }]
+
+      commit('SET_COST_ACCOMODATION_DATA', costAccomodationData)
+      commit('SET_ACC_COSTS_VALIDATED', false)
+
+      const advanceData = [{
+        date: null,
+        currency: null,
+        amount: 0, // totalAmountInPln
+        totalAmount: 0,
+        currencyRate: 1,
+        rateDate: null, //total  amount in delegation curr and rate for it
+        totalAmountCurr: 0,
+        delegationCurrRate: 1
+        }]
+      commit('SET_ADVANCE_DATA', advanceData)
+      commit('SET_ADVANCE_VALIDATED', false)
+
+
+      const otherCostData = [{
+        docDate: null,
+        company: null,
+        docNo: null,
+        payback: false,
+        currency: 'PLN',
+        amount: 0,
+        totalAmount: 0,
+        currencyRate: 1,
+        rateDate: null, //total  amount in delegation curr and rate for it
+        totalAmountCurr: 0,
+        delegationCurrRate: 1
+      }]
+      commit('SET_OTHER_COST_DATA', otherCostData)
+      commit('SET_OTHER_COSTS_VALIDATED', false)
+
+      const costTravelData= [{
+        docDate: null,
+        company: null,
+        docNo: null,
+        payback: false,
+        currency: 'PLN',
+        amount: 0,
+        totalAmount: 0,
+        transport: null,
+        licensePlateNo: null,
+        flatRate: null,
+        engineCapacity: null,
+        kilometers: 0,
+        currencyRate: 1,
+        rateDate: null, //total  amount in delegation curr and rate for it
+        totalAmountCurr: 0,
+        delegationCurrRate: 1
+      }]
+      commit('SET_COST_TRAVEL_DATA', costTravelData)
+      commit('SET_TRV_COSTS_VALIDATED', false)
+
+      commit('SET_DEFAULT_COST_DATA', {})
+      commit('SET_DELEG_COST_LIST', [])
+      commit('SET_DELEGATION_TABLE_VALIDATED', false) 
+      commit('SET_FULL_EXPENCES', [])
+      commit('SET_NEW_DELEG_NO', null)
+      commit('CREATE_DELEG_SUCCESS', null)
+     }
+
+
   
 };
+
 
 const getters = {
   getDelegationCostsList(state) {
@@ -285,6 +530,15 @@ const getters = {
   },
   getTotalCostsInCurr(state){
     return state.totalCostsInCurr
+  },
+  getNewDelegationNumber(state){
+    return state.NewDelegationNumber
+  },
+  getShowConfirmDelegation(state){
+    return state.showConfirmDelegation
+  },
+  getCreateDelegSuccess(state){
+    return state.createDelegationSuccess
   }
 };
 

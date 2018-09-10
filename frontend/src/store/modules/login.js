@@ -6,13 +6,11 @@ const state = {
   sendEmailSuccess: false,
   sendEmailError: false,
   username: null,
-  userId: null
+  userId: null,
+  urlQuery: null
 }
 
 const mutations = {
-  AUTH_USER(state, token) {
-    state.idToken = token;
-  },
   SET_LOGIN_ERROR(state, isError) {
     state.loginError = isError
   },
@@ -24,88 +22,67 @@ const mutations = {
   },
   GET_USER_ID(state, data) {
     state.userId = data;
+  },
+  SET_URL_QUERY(state, data) {
+    state.urlQuery = data
   }
 }
 
 const actions = {
   login({
     commit,
-    dispatch
+    dispatch,
+    getters
   }, authData) {
-    commit('CLEAR_AUTH_DATA');
-    const md5 = require('js-md5')
-    var hashedPassword = md5(authData.password)
+    // commit('CLEAR_AUTH_DATA');
     var params = new URLSearchParams()
-    params.append('grant_type', 'password')
-    params.append('username', authData.username)
-    params.append('password', hashedPassword)
+    params.append('sap-user', authData.username)
+    params.append('sap-password', authData.password)
+    let url = '?sap-user=' + authData.username + '&sap-password=' + authData.password + '&sap-language=' +authData.language
+
     axios({
-      method: 'post',
-      url: 'oauth/token',
-      auth: {
-        username: 'vuejs-client',
-        password: 'password'
-      },
+      method: 'get',
+      url: url,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
       },
       data: params
     }).then(res => {
+      localStorage.setItem('authorized', true)
       console.log(res)
+      commit('SET_URL_QUERY', url)
       commit('SET_LOGIN_ERROR', false)
-      commit('AUTH_USER', res.data.access_token)
-      commit('DISPLAY_MENU', true)
-
-      localStorage.setItem('token', res.data.access_token)
-      dispatch('getUserId');
-      dispatch('setExpirationDate', res.data.expires_in)
-      dispatch('setLogoutTimer', res.data.expires_in)
-      dispatch('loadData', res.data.access_token)
-
-      router.replace('/dashboard')
-    }).catch(error => {
+      // commit('AUTH_USER', res.data.access_token)
+      // commit('DISPLAY_MENU', true)
+      let userData = {
+        user: authData.username,
+        lang: authData.language
+      } 
+      dispatch('loadData', userData)
+      if (getters.isDataLoaded){
+        router.replace('/dashboard')
+      }
+      }).catch(error => {
       console.log(error)
       commit('SET_LOGIN_ERROR', true)
     })
   },
-  getUserId({commit, dispatch}) {
-    var URL = '/api/getIdByToken?access_token=' + localStorage.getItem('token');
-
-    axios.get(URL).then(res => {
-      const data = res.data;
-
-      commit('GET_USER_ID', data);
-      dispatch('showStarterPage');
-    })
-  },
-  showStarterPage({commit, state}) {
+  showStarterPage({
+    commit,
+    state
+  }) {
     var URL = '/api/users/' + state.userId + '/showStarterPage';
 
     axios.get(URL).then(res => {
       const data = res.data;
 
       // console.log(data);
-      if(data) {
+      if (data) {
         router.replace('/starterpage')
       } else {
         router.replace('/dashboard')
       }
     })
-  },
-  setLogoutTimer({
-    commit,
-    dispatch
-  }, expirationTime) {
-    setTimeout(() => {
-      dispatch('logout')
-    }, expirationTime * 1000)
-  },
-  setExpirationDate({
-    commit
-  }, expiresIn) {
-    const now = new Date()
-    const expirationDate = new Date(now.getTime() + expiresIn * 1000)
-    localStorage.setItem('expirationDate', expirationDate);
   },
   tryAutoLogin({
     commit,
@@ -151,8 +128,6 @@ const actions = {
       console.log(error)
     })
   },
-
-
 }
 
 const getters = {
@@ -167,6 +142,9 @@ const getters = {
   },
   isSendEmailError(state) {
     return state.sendEmailError
+  },
+  getUrlQuery(state){
+    return state.urlQuery
   }
 }
 

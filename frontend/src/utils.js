@@ -26,3 +26,7 @@ export const createRateDate = function(rateDate) {
   
     return rateDate
   }
+
+  export const formatDateForBackend = function(date){
+    return '\/Date(' + new Date(date).getTime().toString() + ')\/'
+  }

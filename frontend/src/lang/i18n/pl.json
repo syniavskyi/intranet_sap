@@ -4,6 +4,7 @@
         "forgotPass": "Nie pamiętasz hasła?",
         "resetPass": "Zresetuj hasło",
         "editData": "Edytuj dane",
+        "edit": "Edytuj",
         "saveChanges": "Zapisz zmiany",
         "save": "Zapisz",
         "cancel": "Anuluj",
@@ -14,9 +15,16 @@
         "addProject": "Dodaj projekt",
         "editProjects": "Edytuj projekty",
         "removeProject": "Usuń projekt",
-        "finishEdit": "Zakończ edycję"
+        "finishEdit": "Zakończ edycję",
+        "add": "Dodaj",
+        "delete": "Usuń",
+        "click": "Kliknij",
+        "back": "Wróć",
+        "clear": "Wyczyść",
+        "addNewEntry": "Dodaj nowy wpis"
      },
     "label": {
+        "nationality": "Narodowość",
         "user": "Użytkownik",
         "password": "Hasło",
         "enterEmail": "Wprowadź email",
@@ -40,14 +48,20 @@
         "eventTitle": "Nazwa wydarzenia",
         "eventTime": "Godzina wydarzenia",
         "eventDescription": "Opis wydarzenia",
+        "eventType": "Typ wydarzenia",
         "priority": "Priorytet",
+        "visibility": "Widoczność",
+        "createdBy": "Utworzony przez",
+        "targetGroup": "Grupa docelowa",
         "employee": "Pracownik",
-        "documentList": "Poniżej znajduje się lista dokumentów które musisz wypełnić i dostarczyć",
+        "documentListNew": "Poniżej znajduje się lista dokumentów które musisz wypełnić i dostarczyć",
+        "documentListInfo": "Poniżej znajduje się lista dokumentów, z którymi musisz się zapoznać",
         "appliesTo": "Dotyczy",
         "number": "Numer",
         "delegationNo": "Numer delegacji",
         "day": "Dnia",
         "forTime": "Na czas",
+        "from": "Od",
         "to": "Do",
         "target": "W celu",
         "transport": "Transport",
@@ -69,7 +83,29 @@
         "totalDelegationAmount": "Łączna wartość delegacji",
         "advanceAmount": "Wartość zaliczki",
         "totalReturnAmount": "Łączna wartość do zwrotu",
-        "allowanceDeduction": "Potrącenie diety"
+        "allowanceDeduction": "Potrącenie diety",
+        "private": "Prywatne",
+        "public": "Publiczne",
+        "street": "Ulica",
+        "buildingNumber": "Nr budynku",
+        "apartmentNumber": "Nr lokalu",
+        "city": "Miasto",
+        "postalCode": "Kod pocztowy",
+        "foreignLanguages": "Języki obce",
+        "level": "Poziom",
+        "sapModulesExp": "Doświadczenie modułowe SAP",
+        "programmingLanguages": "Języki programowania",
+        "technologies": "Technologie",
+        "extensions": "Rozszerzenia",
+        "additionalSkills": "Dodatkowe umiejętności",
+        "present": "Obecnie",
+        "fieldOfStudy": "Kierunek",
+        "university": "Uczelnia",
+        "formOfStudy": "Tryb studiów",
+        "degree": "Stopień",
+        "dateOfBirth": "Data urodzenia",
+        "knowledgeOfForeignLanguages": "Znajomość języków",
+        "sapModules": "Moduły SAP"
     },
     "header": {
         "login": "Zaloguj się do Intranetu",
@@ -99,18 +135,21 @@
         "accomodationCosts": "Koszty noclegu",
         "otherCosts": "Pozostałe koszty",
         "travelCosts": "Koszty podróży",
-        "advance": "Zaliczka"
+        "advance": "Zaliczka",
+        "education": "Wykształcenie",
+        "skills": "Umiejętności",
+        "registration": "Rejestracja"
         
     },
     "message": {
         "loginError": "Wprowadzona nazwa użytkownika lub hasło są nieprawidłowe",
         "sendEmailSuccess": "Na podany adres email wysłano nowe hasło.",
         "sendEmailError": "Niepowodzenie podczas wysyłania maila. Sprawdź wprowadzony adres email",
-        "emailValidation": "Adres email posiada nieprawidłowy format lub nie jest wprowadzony.",
+        "emailValidation": "Email posiada nieprawidłowy format lub jest pusty.",
         "phoneValidation": "Numer telefonu posiada nieprawidłowy format",
         "saveChangesError": "Niepowodzenie podczas zapisu danych.",
         "noChanges": "Nie wprowadzono zmian",
-        "dateValidation": "Wprowadzona data posiada nieprawidłowy format",
+        "dateValidation": "Data posiada nieprawidłowy format",
         "hourValidation": "Wprowadzona godzina posiada nieprawidłowy format",
         "newAccountPassword": "Utworzono nowe konto. Na maila wysłano hasło do konta.",
         "fileUploadError": "Niepowodzenie podczas zapisu pliku.",
@@ -124,6 +163,12 @@
         "language": {
             "english": "Angielski",
             "polish": "Polski"
+        },
+        "cvLanguage": {
+            "english": "EN",
+            "polish": "PL",
+            "german": "DE",
+            "russian": "RU"
         },
         "car": {
             "private": "Samochód prywatny",
@@ -173,7 +218,8 @@
             "advanceAmount": "Kwota zaliczki",
             "days": "Liczba dni"
         },
-        "addModule": "Wybierz moduł z listy"  
+        "addModule": "Wybierz moduł z listy",
+        "addIndustry": "Wybierz branżę z listy"
     },
     "news": {
         "monday": "Poniedziałek",

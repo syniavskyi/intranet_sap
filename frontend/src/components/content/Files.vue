@@ -1,12 +1,12 @@
 <template>
-  <div class="plane-documents">
-    <div class="documents-nav-and-content">
+  <div class="plane-component">
+    <div class="component-nav-and-content">
       <app-menu></app-menu>
-      <div class="documents-content">
-        <div class="documents-header"> 
-          <div class="documents-header-title-and-menu">
-            <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="documents-header-menu">
-            <p class="documents-header-title">Dokumenty</p>
+      <div class="component-content">
+        <div class="content-header"> 
+          <div class="content-header-title-and-menu">
+            <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu">
+            <p class="content-header-title">Dokumenty</p>
           </div>
         </div>
         <div class="documents-page-tiles">

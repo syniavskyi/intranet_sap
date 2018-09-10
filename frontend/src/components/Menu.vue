@@ -3,7 +3,7 @@
         <button class="logout-button" @click="logout"><span class="logout-text">wyloguj</span></button> 
         <p class="nav-title">BTech</p>
         <div class="nav-user">
-            <img class="nav-user-img" width="130px" :src="userData.image">
+            <!-- <img class="nav-user-img" width="130px" :src="userData.image"> -->
         </div>
         <nav class="nav">
             <ul class="nav-list">
@@ -16,21 +16,21 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link class="nav-router-link" to="/dashboard">
+                    <router-link class="nav-router-link" to="/news">
                         <button class="nav-item">
                             <img class="nav-item-img" src="../assets/images/nav3/grey_616161/home-g-24.png">
                             <p>{{ $t("header.home") }}</p>
                         </button>
                     </router-link>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link class="nav-router-link" to="/news">
                         <button class="nav-item">
                             <img class="nav-item-img" src="../assets/images/nav3/grey_616161/view-dashboard-g-24.png">
                             <p>{{ $t("header.news") }}</p>
                         </button>
                     </router-link>
-                </li>
+                </li> -->
                 <li>
                     <router-link class="nav-router-link" to="/calendar">
                         <button class="nav-item">
@@ -47,14 +47,14 @@
                         </button>
                     </router-link>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link class="nav-router-link" to="/informations">
                         <button class="nav-item">
                             <img class="nav-item-img" src="../assets/images/nav3/grey_616161/information-g-24.png">
                             <p>{{ $t("header.informations") }}</p>
                         </button>
                     </router-link>
-                </li>
+                </li> -->
                 <li>
                     <router-link class="nav-router-link" to="/files">
                         <button class="nav-item">
@@ -79,6 +79,14 @@
                         </button>
                     </router-link>
                 </li>
+                 <li>
+                    <router-link class="nav-router-link" to="/registration">
+                        <button class="nav-item">
+                             <img class="nav-item-img" src="../assets/images/nav3/grey_616161/account-plus-24.png">
+                             <p>{{ $t("header.registration") }}</p>
+                        </button>
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </div>
@@ -87,11 +95,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-computed: {
-    ...mapGetters({
-      userData: 'userData',
-    })
-  },
+ 
   methods: {
      logout() {
         this.$store.dispatch('logout')

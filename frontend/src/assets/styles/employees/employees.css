@@ -1,63 +1,3 @@
-/* body {
-    margin:0;
-    padding:0;
-    width: 100vw; */
-    /* height: 100vh; */
-    /* height: auto;
-} */
-
-.plane-employees {
-    width:100%;
-    height:100%;
-}
-
-.employees-nav-and-content {
-    display:flex;
-    width: 100%;
-    /* height: 100%; */
-    height: auto;
-    background: rgb(219, 219, 219);
-}
-
-.employees-header {
-    align-self: center;
-    width: 95%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 3%;
-    min-height: 3.5rem;
-    flex-shrink: 0;
-}
-.employees-header-title-and-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.employees-header-menu {
-    color: #7b7777;
-    margin: 0;
-    line-height: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 0 .5rem;
-}
-
-.employees-header-title {
-    color: #7b7777;
-    margin: 0;
-    line-height: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.employees-content {
-    display:flex;
-    flex-direction: column;
-    width: 100%;
-    height: min-content;
-}
-
 .employees-table {
     margin:0;
     padding:0;
@@ -69,6 +9,7 @@
     background: white;
     box-shadow: 0 0 10px grey;
     border-radius: 5px;
+    margin-bottom: 1rem;
 }
 
 .emp-thead {
@@ -126,6 +67,7 @@
     align-items: center;
     width: 73%;
     border-bottom: 1px solid #ccc;
+    text-align: center;
 }
 
 .emp-tbody-item:first-child .emp-tbody-item-txt {

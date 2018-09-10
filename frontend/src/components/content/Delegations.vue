@@ -1,99 +1,122 @@
 <template>
-<div class="plane-delegations" refs="delegationContent" id="delegation-content">
-    <div class="delegations-nav-and-content">
+<div class="plane-component" >
+    <div class="component-nav-and-content">
         <app-menu></app-menu>
-        <div name="testname" class="delegations-content" >
-            <div class="delegations-header">
-                <div class="delegations-header-title-and-menu">
-                    <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="delegations-header-menu">
-                    <p class="delegations-header-title">{{ $t("header.delegations") }}</p>
+        <div name="testname" class="component-content delegations-content" >
+            <div class="content-header">
+                <div class="content-header-title-and-menu">
+                    <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu">
+                    <p class="content-header-title">{{ $t("header.delegations") }}</p>
                 </div>
             </div>
+            <confirm-dialog v-if="showDialog"></confirm-dialog>
             <div class="delegations-tiles">
                 <div class="delegations-tile delegations-inputs">
                     <div class="delegations-tile-header">
                         <div class="delegations-tile-title"> 
-                            <p  v-show="showUsername">{{userData.firstName}} {{userData.lastName}}</p>
-                            <div class="delegations-div-cool-head">
-                                <select required v-if="!showUsername" class="delegations-select-cool" v-model="newDelegation.userId" @change="setUsername">
+                            <p  v-if="showUsername">{{userData.Fullname}}</p>
+                            <div class="delegations-div-cool-head" v-if="showSelectForAllUsers">
+                                <select required  class="delegations-select-cool" v-model="newDelegation.userId" @change="setUsername">
                                     <option v-for="user in usersList" :key="user.id" :value="user.id">{{ user.firstName }} {{ user.lastName }}</option>
                                 </select> 
-                                <label v-if="!showUsername" class="delegations-label-cool-select">Wybierz pracownika</label>
+                                <label class="delegations-label-cool-select">Wybierz pracownika</label>
+                            </div>
+                             <div  v-if="showSelectForTeam" class="delegations-div-cool-head">
+                                <select required class="delegations-select-cool" v-model="newDelegation.userId" @change="setUsername">
+                                    <option v-for="user in filteredTeamUsers" :key="user.UserAlias" :value="user.UserAlias">{{ user.Fullname }}</option>
+                                </select> 
+                                <label  class="delegations-label-cool-select">Wybierz członka zespołu</label>
                             </div>
                             <button class="del-generate-pdf" @click="generatePdf">GENERUJ PDF</button>
                         </div>
                         <div class="delegations-tile-underscore"></div>
-                        
                     </div>
                     <div class="delegations-tile-content delegations-tile-content-1">
-                        <div class="delegations-inputs-section">
-                            <div class="delegations-div-cool">    
-                                <p class="del-p-cool"> {{ setDelegationNo() }} </p>
-                                <label class="delegations-label-cool">{{ $t("label.delegationNo") }} </label>
+                        <div class="del-inputs-sections">
+                            <div class="delegation-number">Numer Delegacji: <span>&nbsp; {{ delegationNumber }} </span> </div>
+                            <div class="delegations-inputs-section">
+                                <!-- <div class="delegations-div-unders">
+                                    <div class="del-underscore">1</div>
+                                </div> -->
+                                <p class="del-inputs-header">Cel / Czas</p>
+                                <div class="delegations-div-cool">
+                                    <input required class="delegations-input-cool" ref="autocomplete" placeholder=""  onfocus="value = ''" v-model="newDelegation.destination" @input="checkNewDelegation" />
+                                    <span class="delegations-div-bar"></span>
+                                    <label class="delegations-label-cool">{{ $t("label.to") }} </label>
+                                </div>
+                                <div class="delegations-div-cool">
+                                    <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
+                                    <span class="delegations-div-bar"></span>
+                                    <label class="delegations-label-cool">{{ $t("label.target") }} </label>
+                                </div>
+                                <div class="delegations-div-cool">
+                                    <v-date-picker class="delegations-input-date" @input="checkNewDelegation" v-model="newDelegation.createDate">
+                                        <input value="newDelegation.createDate" />
+                                    </v-date-picker>
+                                    <label class="delegations-label-cool-select">{{ $t("label.day") }} </label>
+                                </div>
+                                <div class="delegations-div-cool">
+                                    <v-date-picker class="delegations-input-date" @input="setDelegationNo" is-expanded mode="range" v-model="newDelegation.dates">
+                                        <input value="newDelegation.dates" />
+                                    </v-date-picker>
+                                    <label class="delegations-label-cool-select">{{ $t("label.forTime") }} </label>
+                                </div>
                             </div>
-                            <div class="delegations-div-cool">
-                                <v-date-picker class="delegations-input-date" @input="checkNewDelegation" v-model="newDelegation.createDate">
-                                    <input value="newDelegation.createDate" />
-                                </v-date-picker>
-                                <label class="delegations-label-cool-select">{{ $t("label.day") }} </label>
+                            <!-- <div class="del-vline"></div> -->
+                            <div class="delegations-inputs-section">
+                                
+                                <!-- <div class="delegations-div-cool">     -->
+                                    <!-- <p class="del-p-cool"> DJA/0203/2018  </p> -->
+                                    <!-- {{ setDelegationNo() }} -->
+                                    <!-- <label class="delegations-label-cool">{{ $t("label.delegationNo") }} </label> -->
+                                <!-- </div> -->
+                                <div class="delegations-div-cool">
+                                    <select required class="delegations-select-cool" v-model="newDelegation.currency" @change="countAllCosts">
+                                        <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
+                                    </select>
+                                    <label class="delegations-label-cool-select">{{ $t("table.delegations.currency") }} </label>
+                                </div>
+                                
+                                <div class="delegations-div-cool">
+                                    <p class="del-p-cool">{{dailyAllowance}} PLN </p>
+                                    <label class="delegations-label-cool">{{ $t("label.dailyAllowance") }} </label>
+                                </div>
+                                <div class="delegations-div-cool">
+                                    <p class="del-p-cool">{{newDelegation.totalAllowance}} {{newDelegation.currency}} </p>
+                                    <label class="delegations-label-cool">{{ $t("label.totalAllowance") }}: </label>
+                                </div>
+                                <div class="delegations-div-cool-curr">
+                                    <p class="del-inp-curr">{{newDelegation.currency}}</p>
+                                    <input required id="del-inp-curr1" class="delegations-input-cool" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
+                                    <span class="delegations-div-bar"></span>
+                                    <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
+                                </div>
                             </div>
-                            <div class="delegations-div-cool">
-                                <v-date-picker class="delegations-input-date" @input="countAllowance" is-expanded mode="range" v-model="newDelegation.dates">
-                                    <input value="newDelegation.dates" />
-                                </v-date-picker>
-                                <label class="delegations-label-cool-select">{{ $t("label.forTime") }} </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <select required class="delegations-select-cool" v-model="newDelegation.currency" @change="countAllCosts">
-                                    <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
-                                </select>
-                                <label class="delegations-label-cool-select">{{ $t("table.delegations.currency") }} </label>
-                            </div>
-                        </div>
-                        <div class="delegations-inputs-section">
-                            <div class="delegations-div-cool">
-                                <!-- <input required class="delegations-input-cool" v-model="newDelegation.destination" @input="checkNewDelegation" /> -->
-                                <input required class="delegations-input-cool" ref="autocomplete" placeholder=""  onfocus="value = ''" v-model="newDelegation.destination" @input="checkNewDelegation" />
-                                <!-- <input required ref="autocomplete" placeholder="Search"  class="delegations-input-cool" onfocus="value = ''" v-model="newDelegation.destination" @input="checkNewDelegation" /> -->
-                                <span class="delegations-div-bar"></span>
-                                <label class="delegations-label-cool">{{ $t("label.to") }} </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <p class="del-p-cool">{{ newDelegation.hours }}</p>
-                                <label class="delegations-label-cool">{{ $t("label.hoursInDelegation") }} </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <p class="del-p-cool">{{dailyAllowance}} PLN </p>
-                                <label class="delegations-label-cool">{{ $t("label.dailyAllowance") }} </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <p class="del-p-cool">{{newDelegation.totalAllowance}} {{newDelegation.currency}} </p>
-                                <label class="delegations-label-cool">{{ $t("label.totalAllowance") }}: </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <input required class="delegations-input-cool" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" /><p>{{newDelegation.currency}} </p>
-                                <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
-                            </div>
-                        </div>
-                        <div class="delegations-inputs-section">
-                            
-                            <div class="delegations-div-cool">
-                                <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
-                                <span class="delegations-div-bar"></span>
-                                <label class="delegations-label-cool">{{ $t("label.target") }} </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <p class="del-p-cool"> {{ totalCostsInCurr.amount}}  {{newDelegation.currency}}</p>
-                                <label class="delegations-label-cool">{{ $t("label.totalDelegationAmount") }}: </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <p class="del-p-cool"> {{ totalCostsInCurr.advance}}  {{newDelegation.currency}}</p>
-                                <label class="delegations-label-cool">{{ $t("label.advanceAmount") }}: </label>
-                            </div>
-                            <div class="delegations-div-cool">
-                                <input required class="delegations-input-cool" v-model="totalCostsInCurr.totalPayback"/> <p>{{newDelegation.currency}}</p>
-                                <span class="delegations-div-bar"></span>
-                                <label class="delegations-label-cool">{{ $t("label.totalReturnAmount") }}: </label>
+                            <!-- <div class="del-vline"></div> -->
+                            <div class="delegations-inputs-section">
+                                <!-- <div class="delegations-div-unders"> -->
+                                    <!-- <div class="del-underscore">3</div> -->
+                                    <!-- <p class="del-div-p" style="display:none;">Sumaryczne</p>
+                                    <div class="del-underscore"></div> -->
+                                <!-- </div> -->
+                                <div class="delegations-div-cool">
+                                    <p class="del-p-cool">{{ newDelegation.hours }}</p>
+                                    <label class="delegations-label-cool">{{ $t("label.hoursInDelegation") }} </label>
+                                </div>
+                                <div class="delegations-div-cool">
+                                    <p class="del-p-cool"> {{ totalCostsInCurr.amount}}  {{newDelegation.currency}}</p>
+                                    <label class="delegations-label-cool">{{ $t("label.totalDelegationAmount") }}: </label>
+                                </div>
+                                <div class="delegations-div-cool">
+                                    <p class="del-p-cool"> {{ totalCostsInCurr.advance}}  {{newDelegation.currency}}</p>
+                                    <label class="delegations-label-cool">{{ $t("label.advanceAmount") }}: </label>
+                                </div>
+                                <div class="delegations-div-cool-curr">
+                                    <p class="del-inp-curr">{{newDelegation.currency}}</p>
+                                    <input required class="delegations-input-cool" v-model="totalCostsInCurr.totalPayback"/>
+                                    <span class="delegations-div-bar"></span>
+                                    <label class="delegations-label-cool-s">{{ $t("label.totalReturnAmount") }}: </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,7 +126,6 @@
                 <travel-costs-table></travel-costs-table>
                 <accomodation-costs-table></accomodation-costs-table>
                 <other-costs-table></other-costs-table>
- 
             </div>
         </div>
     </div>
@@ -127,12 +149,18 @@ import OtherCosts from '../tables/OtherCosts'
 import TravelCosts from '../tables/TravelCosts'
 import AdvanceTable from '../tables/AdvanceTable'
 import DelegationTable from '../tables/DelegationTable'
+import Dialog from '../dialogs/ConfirmDelegationDialog'
+
+let utils = require('../../utils')
+
 export default {
     data() {
         return {
             showUsername: true,
             delegationUsername: null,
-            generatingPdfMode: false
+            generatingPdfMode: false,
+            showSelectForTeam: false,
+            showSelectForAllUsers: false
         }
     },
     mounted() {
@@ -152,7 +180,8 @@ export default {
         'other-costs-table': OtherCosts,
         'travel-costs-table': TravelCosts,
         'advance-table': AdvanceTable,
-        'delegation-table': DelegationTable
+        'delegation-table': DelegationTable,
+        'confirm-dialog': Dialog
     },
     beforeCreate() {
         if (this.$store.getters.isDataLoaded === false) {
@@ -160,17 +189,28 @@ export default {
         }
     },
     created(){
-const role = localStorage.getItem('role')
-        if (role === 'ROLE_ADMIN') {
-            this.showUsername = false
-        } else {
-            this.newDelegation.userId = localStorage.getItem('id')
-            this.delegationUsername = localStorage.getItem('name')
+    const roles = this.$store.getters.getUserAuth
+        for (let i=0; i<roles.length; i++) {
+            if (roles[i].Key === "ZDELEG" && roles[i].Value === "TEAM"){
+                this.showSelectForTeam = true
+                this.showUsername = false
+            } else  if (roles[i].Key === "ZDELEG" && roles[i].Value === "*"){
+                this.showUsername = false
+                this.showSelectForAllUsers = true
+            } else {
+                this.showUsername = true
+            }
         }
+        // if (role === 'ROLE_ADMIN') {
+        //     this.showUsername = false
+        // } else {
+        //     this.newDelegation.userId = localStorage.getItem('id')
+        //     this.delegationUsername = localStorage.getItem('id')
+        // }
     },
     computed: {
         ...mapGetters({
-            userData: 'userData',
+            userData: 'getUserInfo',
             accCostValidated: 'getAccCostValidated',
             currencyList: 'getCurrencyList',
             totalCosts: 'getTotalCosts',
@@ -180,10 +220,19 @@ const role = localStorage.getItem('role')
             dailyAllowance: 'getDailyAllowance',
             usersList: 'usersList',
             totalCostsInCurr: 'getTotalCostsInCurr',
-            advanceData: 'getAdvanceData'
+            advanceData: 'getAdvanceData',
+            delegationNumber: 'getNewDelegationNumber',
+            showDialog: 'getShowConfirmDelegation'
         }),
         disableSaveBtn() {
             return (this.newDelegationValidated && this.delegationTableValidated && this.accCostValidated) ? false : true
+        },
+        filteredTeamUsers(){
+            let aFilteredUsers = this.usersList,
+                sTeam = this.userData.DepartmentName
+
+              aFilteredUsers = aFilteredUsers.filter(function(oData){ return oData.DepartmentName === sTeam });
+              return aFilteredUsers
         }
     },
     methods: {
@@ -193,18 +242,16 @@ const role = localStorage.getItem('role')
             countAllCosts: 'countAllCosts'
         }),
         setDelegationNo(){
+            this.delegationUsername = 'UIO'
             if (this.newDelegation.dates && this.delegationUsername) {
-            const date = this.newDelegation.dates.start,
-                year = moment(date).format('YYYY'),
-                month = moment(date).format('MM'),
-                username = this.delegationUsername,
-                number = username + '/' + year + '/' + month
-            // number = '${username}/${year}/${month}'
-            this.newDelegation.number = number
-            return number
-            } else {
-                return null
-            }
+                const data = {
+                    UserAlias: this.delegationUsername,
+                    // DelegDate: utils.formatDateForBackend(this.newDelegation.dates.start)
+                    DelegDate: "datetime'" + moment(this.newDelegation.dates.start).format("YYYY-MM-DD") + "T00:00:00'"
+                }
+                this.$store.dispatch('getDelegationNumber', data)
+                this.countAllowance()
+            } 
         },
         setUsername(){
             const users = this.usersList,
@@ -217,45 +264,9 @@ const role = localStorage.getItem('role')
                 }
             }
         },
-        //  generatePdf() {
-        //    this.generatingPdfMode = true
-           
-        //    const source = document.body.getElementsByClassName('delegations-content')[0]
-        //    let pdf = new jsPDF('p', 'pt', 'letter'),
-        //          width = pdf.internal.pageSize.getWidth(),
-        //          height = pdf.internal.pageSize.getHeight()
-        
-        //    html2canvas(source).then(canvas => {
-        //     for (let i = 0; i < Math.round(source.clientHeight/980); i++) {
-        //         let srcImg  = canvas
-
-        //         window.onePageCanvas = document.createElement("canvas")
-        //         onePageCanvas.setAttribute('width', 900)
-        //         onePageCanvas.setAttribute('height', 980)
-        //         let ctx = onePageCanvas.getContext('2d')
-                
-        //         ctx.drawImage(srcImg, 0, 980*i,900,980,0,0,900,980)
-        //         // cxt.drawImage(img,sx,sy,swidth,sheight,x,y,width,height)
-
-        //         let canvasDataURL = onePageCanvas.toDataURL("image/png", 1),
-        //             width         = onePageCanvas.width,
-        //             height        = onePageCanvas.clientHeight
-                
-               
-        //         if (i > 0) {
-        //             pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
-        //         }
-
-        //         pdf.setPage(i+1); //! now we declare that we're working on that page
-        //         pdf.addImage(canvas, 'PNG', 20, 40, (width*.62), (height*.62)); //! now we add content to that page!
-        //     }
-        //     pdf.save(this.newDelegation.number + '.pdf'); //! after the for loop is finished running, we save the pdf.
-        //     })
-            
-        // } 
         generatePdf() {
             this.generatingPdfMode = true
-            this.loopClasses()
+            // this.loopClasses()
             const source = document.body.getElementsByClassName('delegations-content')[0]
 
             html2canvas(source).then(canvas => {
@@ -280,7 +291,9 @@ const role = localStorage.getItem('role')
                             }
                         }
                     }
-                    pdf.save(this.newDelegation.number + '.pdf');
+                    let fileName = this.delegationNumber ? this.delegationNumber : 'Delegacja'
+                    pdf.save(fileName + '.pdf');
+                    this.$store.commit('SET_SHOW_CONFIRM_DELEG', true)
             })
         },
 
@@ -302,20 +315,34 @@ const role = localStorage.getItem('role')
             while (i--) {
                 cClasses[i].className = sClassName
             }
+        },
+
+        setCurrency(e) {
+            let el = this.$el
         }
     }
 }
 </script>
 
 <style>
-table,
-th,
-td {
-    border: 1px solid black;
+.del-inputs-header {
+    position: absolute;
+    color: #ccc;
+    top:-.5rem;
+    left:auto;
+    right: auto;
+    border-radius: 2rem;
+    transition: all 0.4s ease;
+    padding: .2rem .3rem;
 }
 
-#delegationCostsTabletd,
-td {
-    width: 200px;
+
+.del-inputs-sections {
+    display:  flex;
+    width: 100%;
+    height: 90%;
+    justify-content: space-around;
+    align-items: flex-end;
 }
+
 </style>

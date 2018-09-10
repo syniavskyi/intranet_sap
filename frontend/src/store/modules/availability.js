@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const state = {
     userProjects: [],
+    userProjects1: [],
     disableSaveNewProject: true,
     disableSaveEditProject: true,
     beforeEditingCache: null,

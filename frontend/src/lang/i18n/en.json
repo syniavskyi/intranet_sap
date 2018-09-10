@@ -4,6 +4,7 @@
         "forgotPass": "Forgot password?",
         "resetPass": "Reset password",
         "editData": "Edit data",
+        "edit": "Edit",
         "saveChanges": "Save changes",
         "save": "Save",
         "cancel": "Cancel",
@@ -14,9 +15,16 @@
         "addProject": "Add project",
         "editProjects": "Edit projects",
         "removeProject": "Remove project",
-        "finishEdit": "Finish editing"
+        "finishEdit": "Finish editing",
+        "add": "Add",
+        "delete": "Delete",
+        "click": "Click",
+        "back": "Back",
+        "clear": "Clear",
+        "addNewEntry": "Add new entry"
     },
     "label": {
+        "nationality": "Nationality",
         "user": "User",
         "password": "Password",
         "enterEmail": "Enter email",
@@ -39,14 +47,20 @@
         "eventTitle": "Event title",
         "eventTime": "Event time",
         "eventDescription": "Event description",
+        "eventType": "Event type",
         "priority": "Priority",
+        "visibility": "Visibility",
+        "createdBy": "Created by",
+        "targetGroup": "Target group",
         "employee": "Employee",
-        "documentList": "Below is a list of documents that you must fill and deliver",
+        "documentListNew": "Below is a list of documents that you must fill and deliver",
+        "documentListInfo": "Below is a list of documents that you must acquaint",
         "appliesTo": "Applies to",
         "number": "Number",
         "delegationNo": "Delegation number",
         "day": "On",
         "forTime": "For:",
+        "from": "From",
         "to": "To",
         "target": "In order to",
         "transport": "Transport",
@@ -69,7 +83,30 @@
         "totalDelegationAmount": "Total delegation amount",
         "advanceAmount": "Advance amount",
         "totalReturnAmount": "Total amount of return",
-        "allowanceDeduction": "Allowance deduction"
+        "allowanceDeduction": "Allowance deduction",
+        "private": "Private",
+        "public": "Public",
+        "street": "Street",
+        "buildingNumber": "BuildingNumber",
+        "apartmentNumber": "ApartmentNumber",
+        "city": "City",
+        "postalCode": "PostalCode",
+        "foreignLanguages": "Foreign Languages",
+        "level": "Level",
+        "sapModulesExp": "SAP modules expirience",
+        "programmingLanguages": "Programming Languages",
+        "technologies": "Technologies",
+        "extensions": "Extensions",
+        "additionalSkills": "Additional skills",
+        "present": "Present",
+        "fieldOfStudy": "Field of Study",
+        "university": "University",
+        "formOfStudy": "Form of Study",
+        "degree": "Degree",
+        "dateOfBirth": "Date of birth",
+        "knowledgeOfForeignLanguages": "Knowledge of foreign languages",
+        "sapModules": "SAP Modules",
+        "industry": "Industry"
 
     },
     "header": {
@@ -92,13 +129,17 @@
         "welcome": "Welcome in BTech!",
         "delegations": "Delegations",
         "experience": "Experience",
+        "projects": "Projects",
         "travelExp": "Travel expences",
         "costs": "Costs",
         "selectEmployee": "Select employee" ,
         "addProject": "Add project",
         "otherCosts": "Other costs",
         "travelCosts": "Travel costs",
-        "advance": "Advance"
+        "advance": "Advance",
+        "education": "Education",
+        "skills": "Skills",
+        "registration": "Rejestracja"
     },
     "message": {
         "loginError": "Password or username are invalid.",
@@ -122,6 +163,12 @@
         "language": {
             "english": "English",
             "polish": "Polish"
+        },
+        "cvLanguage": {
+            "english": "EN",
+            "polish": "PL",
+            "german": "DE",
+            "russian": "RU"
         },
         "car": {
             "private": "Private car",
@@ -171,7 +218,8 @@
             "advanceAmount": "Advance amount",
             "days": "Number of days"
         },
-        "addModule": "Select module"   
+        "addModule": "Select module",
+        "addIndustry": "Select industry"
     },
     "news": {
         "monday": "Monday",

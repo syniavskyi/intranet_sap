@@ -1,12 +1,12 @@
 <template>
-<div class="plane-availability">
-    <div class="availability-nav-and-content">
+<div class="plane-component">
+    <div class="component-nav-and-content">
         <app-menu></app-menu>
-        <div class="availability-content">
-            <div class="availability-header">
-                <div class="avaiability-header-title-and-menu">
-                    <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="availability-header-menu">
-                    <p class="availability-header-title">{{ $t("header.availability") }}</p>
+        <div class="component-content">
+            <div class="content-header">
+                <div class="content-header-title-and-menu">
+                    <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu">
+                    <p class="content-header-title">{{ $t("header.availability") }}</p>
                     <p @click="closeAlert" class="ava-error-header" v-if="saveSuccess">Pomyślnie zapisano dane</p>
                     <p @click="closeAlert" v-if="editError">{{ $t("message.editProjectError") }}</p>
                     <p @click="closeAlert" v-if="removeError">{{ $t("message.removeProjectError") }}</p>
@@ -16,158 +16,162 @@
                 </div>
             </div>
             <div class="availability-tiles">
-                <div class="availability-tile ava-tile-1">
-                    <div class="availability-tile-header">
-                        <div class="ava-tile-header-title">
-                            <h2 v-if="selectedUser === null">{{ $t("header.selectEmployee") }}</h2>
-                            <h2 class="ava-selected-user-h2" v-else-if="selectedUser !== null">{{ selectedUser.firstName }} {{ selectedUser.lastName }}</h2>
-                            <div class="availability-tile-underscore"></div>
+                <div class="availability-tiles-row">
+                    <div class="availability-tile ava-tile-1">
+                        <div class="availability-tile-header">
+                            <div class="ava-tile-header-title">
+                                <h2 v-if="selectedUser === null">{{ $t("header.selectEmployee") }}</h2>
+                                <h2 class="ava-selected-user-h2" v-else-if="selectedUser !== null">{{ selectedUser.firstName }} {{ selectedUser.lastName }}</h2>
+                                <div class="availability-tile-underscore"></div>
+                            </div>
+                        </div>
+                        <div class="availability-tile-content">
+                            <div class="ava-select-and-calendar">
+                                <div class="availability-select-options">
+                                    <div class="ava-div-select-cool">
+                                        <select required class="ava-select-cool" v-model="selectedBranch">
+                                                 <option v-for="branch in branchList" :key="branch.Key" :value="branch.Key">{{ branch.Value }}</option> 
+                                        </select>
+                                        <label class="ava-select-label-cool">{{ $t("label.department") }}</label>
+                                    </div>
+                                    <div class="ava-div-select-cool" v-if="selectedBranch != null">
+                                        <select required class="ava-select-cool" v-model="selectedDepartment">
+                                              <option v-for="department in departmentList" :key="department.Key" :value="department.Key">{{ department.Value }}</option>
+                                        </select>
+                                        <label class="ava-select-label-cool">{{ $t("label.branch") }}</label>
+                                    </div>
+                                    <div class="ava-div-select-cool" v-if="selectedDepartment != null">
+                                        <select required class="ava-select-cool" v-model="selectedUser" @change="loadUserProjects(selectedUser.id)">
+                                            <option v-for="user in filteredUsers" :value="user" :key="user.id">{{ user.firstName }} {{ user.lastName }}</option>
+                                        </select>
+                                        <label class="ava-select-label-cool">{{ $t("label.employee") }}</label>
+                                    </div>
+                                    <div class="ava-div-select-cool" v-if="selectedUser != null">
+                                        <select required class="ava-select-cool" v-model="selectedType">
+                                            <option  key="p" value="p">projekt</option>
+                                            <option  key="l" value="l">urlop</option>
+                                            <option  key="o" value="o">inne</option>
+                                            <option  key="r" value="r">praca zdalna</option>
+                                            <!-- <option v-for="branch in branchList" :key="branch.branchId" :value="selectedBranch = branch.branchId">{{ branch.branchName }}</option> -->
+                                        </select>
+                                        <label class="ava-select-label-cool">Rodzaj wpisu</label>
+                                    </div>
+                                    <div class="ava-div-select-cool" v-if="selectedUser != null">
+                                        <select required class="ava-select-cool" v-model="selectedStatus">
+                                            <option  key="c" value="c">potwierdzony</option>
+                                            <option  key="p" value="p">planowany</option>
+                                            <!-- <option v-for="branch in branchList" :key="branch.branchId" :value="selectedBranch = branch.branchId">{{ branch.branchName }}</option> -->
+                                        </select>
+                                        <label class="ava-select-label-cool">Status</label>
+                                    </div>
+                                    <button class="ava-button ava-button-edit" v-if="selectedUser != null" @click="showContent=true">Wyświetl</button>
+                                </div>
+
+                                <!-- <div class="calendar" v-if="selectedUser != null"> -->
+                                <div class="ava-calendar">
+                                    <v-calendar class="availability-calendar" :theme-styles="themeStyles" v-if="selectedUser != null" :attributes="attributes" mode='single' is-inline></v-calendar>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
-                    <div class="availability-tile-content">
-                        <div class="ava-select-and-calendar">
-                            <div class="availability-select-options">
-                                <div class="ava-div-select-cool">
-                                    <select required class="ava-select-cool" v-model="selectedDepartment">
-                                        <option v-for="department in departmentList" :key="department.depId" :value="department.depId">{{ department.depName }}</option>
-                                    </select>
-                                    <label class="ava-select-label-cool">{{ $t("label.department") }}</label>
-                                </div>
-                                <div class="ava-div-select-cool" v-if="selectedDepartment != null">
-                                    <select required class="ava-select-cool" v-model="selectedBranch">
-                                        <option v-for="section in sectionsList" :key="section.id" :value="section.id"> {{ section.name }}</option>
-                                        <!-- <option v-for="branch in branchList" :key="branch.branchId" :value="selectedBranch = branch.branchId">{{ branch.branchName }}</option> -->
-                                    </select>
-                                    <label class="ava-select-label-cool">{{ $t("label.branch") }}</label>
-                                </div>
-                                <div class="ava-div-select-cool" v-if="selectedBranch != null">
-                                    <select required class="ava-select-cool" v-model="selectedUser" @change="loadUserProjects(selectedUser.id)">
-                                        <option v-for="user in filteredUsers" :value="user" :key="user.id">{{ user.firstName }} {{ user.lastName }}</option>
-                                    </select>
-                                    <label class="ava-select-label-cool">{{ $t("label.employee") }}</label>
-                                </div>
-                                <div class="ava-div-select-cool" v-if="selectedUser != null">
-                                    <select required class="ava-select-cool" v-model="selectedType">
-                                        <option  key="p" value="p">projekt</option>
-                                        <option  key="l" value="l">urlop</option>
-                                        <option  key="o" value="o">inne</option>
-                                        <option  key="r" value="r">praca zdalna</option>
-                                        <!-- <option v-for="branch in branchList" :key="branch.branchId" :value="selectedBranch = branch.branchId">{{ branch.branchName }}</option> -->
-                                    </select>
-                                    <label class="ava-select-label-cool">Rodzaj wpisu</label>
-                                </div>
-                                <div class="ava-div-select-cool" v-if="selectedUser != null">
-                                    <select required class="ava-select-cool" v-model="selectedStatus">
-                                        <option  key="c" value="c">potwierdzony</option>
-                                        <option  key="p" value="p">planowany</option>
-                                        <!-- <option v-for="branch in branchList" :key="branch.branchId" :value="selectedBranch = branch.branchId">{{ branch.branchName }}</option> -->
-                                    </select>
-                                    <label class="ava-select-label-cool">Status</label>
-                                </div>
-                                <button class="ava-button ava-button-edit" v-if="selectedUser != null" @click="showContent=true">Wyświetl</button>
-                            </div>
 
-                            <!-- <div class="calendar" v-if="selectedUser != null"> -->
-                            <div class="ava-calendar">
-                                <v-calendar class="availability-calendar" :theme-styles="themeStyles" v-if="selectedUser != null" :attributes="attributes" mode='single' is-inline></v-calendar>
+                    <!-- for adding new project -->
+                    <div class="availability-tile ava-tile-2" v-if="selectedType === 'p' && showContent == true">
+                        <div class="availability-tile-header">
+                            <div class="ava-tile-header-title">
+                                <h2>{{ $t("header.addProject") }}</h2>
+                                <div class="availability-tile-underscore"></div>
                             </div>
-
+                            <!-- <button class="ava-button ava-button-add" @click="showAddProjectDialog = true"> Dodaj projekt </button> -->
                         </div>
+                        <div class="availability-tile-content">
+                            <div id="add-project-dialog">
+                                <div class="ava-add-1">
+                                    <div class="ava-div-select-cool">
+                                        <select required class="ava-select-cool" @change="removeSelectedProject" v-model="newProjectForUser.contractorId">
+                                            <option v-for="contractor in contractorsList" :key="contractor.id" :value="contractor.id"> {{ contractor.name }}</option>
+                                        </select>
+                                        <label class="ava-select-label-cool">{{ $t("label.contractor") }}</label>
+                                    </div>
+                                </div>
+                                <div class="ava-add-2">
+                                    <div class="ava-div-input-cool">
+                                        <select required class="ava-select-cool" @change="validateNewProject" v-model="newProjectForUser.projectId">
+                                            <option v-for="project in filteredProjects" :key="project.id" :value="project.id"> {{ project.name }}</option>
+                                        </select>
+                                        <label class="ava-select-label-cool">{{ $t("label.project") }}</label>
+                                    </div>
+                                    <div class="ava-div-input-cool">
+                                        <input required class="ava-input-range-perc" v-model="newProjectForUser.engag" @input="validateNewEngag(newProjectForUser.engag)" type="number" min="0" max="100" /><span class="ava-perc-span">%</span>
+                                        <span class="ava-div-bar"></span>
+                                        <label class="ava-input-label-cool">{{ $t("label.engag") }}</label>
+                                    </div>
 
+                                </div>
+                                <div class="ava-add-3">
+                                    <div class="ava-div-select-cool">
+                                        <v-date-picker required class="ava-input-range-wide" @input="validateNewProject" popoverDirection="top" is-expanded mode="range" v-model="newProjectForUser.dates">
+                                            <input class="ava-input-range-wide" value="newProjectForUser.dates" />
+                                        </v-date-picker>
+                                        <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
+                                    </div>
+                                    <div class="ava-div-input-cool">
+                                        <textarea class="ava-textarea" required maxlength="50" @change="validateNewProject" v-model="newProjectForUser.notes" />
+                                        <label class="ava-select-label-cool">Uwagi</label>
+                                    </div>
+                                    <div class="ava-div-buttons">
+                                        <button class="ava-button" @click="onCancelCreate">{{ $t("button.cancel") }}</button>
+                                        <button class="ava-button ava-button-edit" :disabled="disableSaveNewProject" @click="addNewProjectForUser">{{ $t("button.addProject") }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="availability-tile ava-tile-2" v-if="selectedType !== 'p' && showContent == true">
+                        <div class="availability-tile-header">
+                            <div class="ava-tile-header-title">
+                                <h2>Dodaj wpis</h2>
+                                <div class="availability-tile-underscore"></div>
+                            </div>
+                            <!-- <button class="ava-button ava-button-add" @click="showAddProjectDialog = true"> Dodaj projekt </button> -->
+                        </div>
+                        <div class="availability-tile-content">
+                            <div id="add-project-dialog">
+                                <div class="ava-add-1">
+                                    <div class="ava-div-select-cool">
+                                        <v-date-picker required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range">
+                                            <input class="ava-input-range-wide" />
+                                        </v-date-picker>
+                                        <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
+                                    </div>
+                                </div>
+                                <div class="ava-add-2">
+                                    <div class="ava-div-input-cool" v-if="selectedType == 'o'">
+                                        <textarea class="ava-textarea" required maxlength="50" />
+                                        <label class="ava-select-label-cool">Uwagi</label>
+                                    </div>
+
+                                    <div class="ava-div-buttons">
+                                        <button class="ava-button" >{{ $t("button.cancel") }}</button>
+                                        <button class="ava-button ava-button-edit" >Dodaj wpis</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- for adding new project -->
-                <div class="availability-tile ava-tile-2" v-if="selectedType === 'p' && showContent == true">
-                    <div class="availability-tile-header">
-                        <div class="ava-tile-header-title">
-                            <h2>{{ $t("header.addProject") }}</h2>
-                            <div class="availability-tile-underscore"></div>
-                        </div>
-                        <!-- <button class="ava-button ava-button-add" @click="showAddProjectDialog = true"> Dodaj projekt </button> -->
-                    </div>
-                    <div class="availability-tile-content">
-                        <div id="add-project-dialog">
-                            <div class="ava-add-1">
-                                <div class="ava-div-select-cool">
-                                    <select required class="ava-select-cool" @change="removeSelectedProject" v-model="newProjectForUser.contractorId">
-                                        <option v-for="contractor in contractorsList" :key="contractor.id" :value="contractor.id"> {{ contractor.name }}</option>
-                                    </select>
-                                    <label class="ava-select-label-cool">{{ $t("label.contractor") }}</label>
-                                </div>
-                            </div>
-                            <div class="ava-add-2">
-                                <div class="ava-div-input-cool">
-                                    <select required class="ava-select-cool" @change="validateNewProject" v-model="newProjectForUser.projectId">
-                                        <option v-for="project in filteredProjects" :key="project.id" :value="project.id"> {{ project.name }}</option>
-                                    </select>
-                                    <label class="ava-select-label-cool">{{ $t("label.project") }}</label>
-                                </div>
-                                <div class="ava-div-input-cool">
-                                    <input required class="ava-input-range-perc" v-model="newProjectForUser.engag" @input="validateNewEngag(newProjectForUser.engag)" type="number" min="0" max="100" /><span class="ava-perc-span">%</span>
-                                    <span class="ava-div-bar"></span>
-                                    <label class="ava-input-label-cool">{{ $t("label.engag") }}</label>
-                                </div>
-
-                            </div>
-                            <div class="ava-add-3">
-                                <div class="ava-div-select-cool">
-                                    <v-date-picker required class="ava-input-range-wide" @input="validateNewProject" popoverDirection="top" is-expanded mode="range" v-model="newProjectForUser.dates">
-                                        <input class="ava-input-range-wide" value="newProjectForUser.dates" />
-                                    </v-date-picker>
-                                    <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
-                                </div>
-                                <div class="ava-div-input-cool">
-                                    <textarea required maxlength="50" @change="validateNewProject" v-model="newProjectForUser.notes" />
-                                    <label class="ava-select-label-cool">Uwagi</label>
-                                </div>
-                                <div class="ava-div-buttons">
-                                    <button class="ava-button" @click="onCancelCreate">{{ $t("button.cancel") }}</button>
-                                    <button class="ava-button ava-button-edit" :disabled="disableSaveNewProject" @click="addNewProjectForUser">{{ $t("button.addProject") }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="availability-tile ava-tile-2" v-if="selectedType !== 'p' && showContent == true">
-                    <div class="availability-tile-header">
-                        <div class="ava-tile-header-title">
-                            <h2>Dodaj wpis</h2>
-                            <div class="availability-tile-underscore"></div>
-                        </div>
-                        <!-- <button class="ava-button ava-button-add" @click="showAddProjectDialog = true"> Dodaj projekt </button> -->
-                    </div>
-                    <div class="availability-tile-content">
-                        <div id="add-project-dialog">
-                            <div class="ava-add-1">
-                                <div class="ava-div-select-cool">
-                                    <v-date-picker required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range">
-                                        <input class="ava-input-range-wide" />
-                                    </v-date-picker>
-                                    <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
-                                </div>
-                            </div>
-                            <div class="ava-add-2">
-                                <div class="ava-div-input-cool" v-if="selectedType == 'o'">
-                                    <textarea required maxlength="50" />
-                                    <label class="ava-select-label-cool">Uwagi</label>
-                                </div>
-
-                                <div class="ava-div-buttons">
-                                    <button class="ava-button" >{{ $t("button.cancel") }}</button>
-                                    <button class="ava-button ava-button-edit" >Dodaj wpis</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                <div class="availability-tiles-row">
+                    <app-availability-projects-table v-if="selectedType === 'p' && showContent == true"></app-availability-projects-table>
+                    <app-leaves-table v-if="selectedType !== 'p' && showContent == true"></app-leaves-table>
                 </div>
             </div>
 
             <!-- for adding other entry -->
 
-            <app-availability-projects-table v-if="selectedType === 'p' && showContent == true"></app-availability-projects-table>
-            <app-leaves-table v-if="selectedType !== 'p' && showContent == true"></app-leaves-table>
+            
         </div>
 
     </div>
@@ -212,6 +216,7 @@ export default {
     computed: {
         ...mapGetters({
             departmentList: 'depList',
+            branchList: 'branchList',
             usersList: 'usersList',
             userProjectsList: 'userProjectsList',
             sectionsList: 'sectionsList',
@@ -234,7 +239,7 @@ export default {
             let filteredUsers = []
 
             for (let i = 0; i < usersList.length; i++) {
-                if (usersList[i].section === this.selectedBranch.toString() && usersList[i].depName === this.selectedDepartment) {
+                if (usersList[i].SectionName === this.selectedBranch.toString() && usersList[i].DepartmentName === this.selectedDepartment) {
                     filteredUsers.push(usersList[i])
                 }
             }

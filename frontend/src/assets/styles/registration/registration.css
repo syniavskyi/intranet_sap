@@ -151,7 +151,7 @@ input[class*="input-highlight"] {
     }     
     .label {
         align-self: flex-start;
-        margin-left: 2rem;
+        margin-left: 2.5rem;
     }
     .div-select {
         width: 90%;

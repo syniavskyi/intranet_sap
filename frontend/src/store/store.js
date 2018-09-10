@@ -17,6 +17,11 @@ import otherCosts from './modules/tables/otherCosts'
 import travelCosts from './modules/tables/travelCosts'
 import advanceTable from './modules/tables/advanceTable'
 import news from './modules/news'
+import userEducation from './modules/profileComponents/userEducation'
+import userExperience from './modules/profileComponents/userExperience'
+import userProjects from './modules/profileComponents/userProjects'
+import userSkills from './modules/profileComponents/userSkills'
+import cv from './modules/cv'
 
 import settings from './modules/settings'
 
@@ -42,6 +47,11 @@ export default new Vuex.Store({
         otherCosts,
         travelCosts,
         advanceTable,
-        news
+        news,
+        userEducation,
+        userExperience,
+        userProjects,
+        userSkills,
+        cv
     }
 });

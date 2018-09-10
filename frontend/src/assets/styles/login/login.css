@@ -10,26 +10,6 @@
     font-family: 'Open Sans';
 } */
 
-.modal {
-    font-family: 'Raleway';
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 200;
-    top: 15%;
-    left: 17%;
-    width: 60%;
-    height: 18rem;
-    background: white;
-    padding: 0;
-    margin: 0;
-    box-shadow: -1px 10px 10px rgba(0, 0, 0, 0.5);
-    border-radius: .3rem;
-    min-width: 15.5rem;
-    min-height: 20rem;
-}
-
 .modal-header {
     padding: 0.5rem;
     word-wrap: break-word;
@@ -61,7 +41,11 @@
 }
 
 .modal-email {
-    padding-left: 1rem;
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    /* padding-left: 1rem; */
     align-self: center;
     color: grey;
 }
@@ -216,7 +200,6 @@
     color: darkslategrey;
     width: 90%;
     padding: 0.05rem;
-    padding-left: 30px;
     height: 3rem;
     border-radius: 3px;
     font-size: 0.8rem;
@@ -295,16 +278,10 @@ button[disabled] span {
     }  
     .label {
         align-self: flex-start;
-        margin-left: 2rem;
+        margin-left: 2.5rem;
     }
     .plane-parent-login {
         height: 100%;
-    }
-    .modal {
-        width:40%;
-        align-self: center;
-        top: 30%;
-        left: 30%;
     }
 }
 
@@ -383,13 +360,8 @@ opacity: 0;
     .plane-parent-login {
         min-height: 27rem;
     }
-    .modal {
-        top: 10%;
-        width: 40%;
-        left: 30%;
-    }
     .label {
-        margin-left: 2rem;
+        margin-left: 2.5rem;
         align-self: flex-start;
     }
 }

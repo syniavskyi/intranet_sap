@@ -1,6 +1,6 @@
-# frontend
+# intranet
 
-> Intranet project with sap backend
+> BTech Intranet 2.0 by Fiori Team
 
 ## Build Setup
 

@@ -22,7 +22,10 @@ const state = {
         today: null,
         dayDesc: null,
         isDay: null,
-    }
+    },
+    news: null,
+    newsJson: {},
+    articles: []
 }
 
 const mutations = {
@@ -34,31 +37,37 @@ const mutations = {
     },
     ADD_TODAY(state, data) {
         state.todayDate = data
-    } 
+    },
+    ADD_NEWS(state, data) {
+        state.news = data
+    },
+    ADD_JSON_NEWS(state, data) {
+        state.newsJson = data
+    },
+    ADD_ARTICLES(state, data) {
+        state.articles = data
+    }
 }
 
 const actions = {
+    // take location
     geoLoc({commit, state, dispatch}) {
-        const geo = navigator.geolocation
+        var geoLocat = {}
+        var geo = navigator.geolocation;
         if(geo) {
           geo.getCurrentPosition(function(location) {
-            const geoLocat = {
-                lat: 0,
-                len: 0
-            }
-            geoLocat.lat = (location.coords.latitude.toFixed(2))
-            geoLocat.len = (location.coords.longitude.toFixed(2))
-            console.log('szerokość ' + geoLocat.lat)
-            console.log('długość ' + geoLocat.len)
-            commit('SET_LOCATION', geoLocat)
-            if(geoLocat) {
-                dispatch("getWeatherData")
-            }
+            var geoLocat = {};
+            geoLocat.lat = (location.coords.latitude.toFixed(2));
+            geoLocat.len = (location.coords.longitude.toFixed(2));
+            commit('SET_LOCATION', geoLocat);
+            dispatch("getWeatherData");
           })   
-        }
-        else {
-          console.log("nie")
-          // jak nie, to wrocław
+        } else {
+   // set Wrocław to default localisation
+        geoLocat.lat = 51
+        geoLocat.len = 16
+        commit('SET_LOCATION', geoLocat);
+        dispatch("getWeatherData");
         }
       },
     getWeatherData({commit, state}) {
@@ -69,10 +78,10 @@ const actions = {
          const weather = {}
          weather.lon = data.coord.lon
          weather.lat = data.coord.lat
-         if(data.name = 'Wroclaw'){
+         if(data.name =='Wroclaw'){
             weather.town = 'Wrocław'
          }
-        else if(data.name = 'Dabrowa Gornicza'){
+        else if(data.name == 'Dabrowa Gornicza'){
             weather.town = 'Dąbrowa Górnicza'
              }
         else {
@@ -87,7 +96,9 @@ const actions = {
          commit('ADD_WEATHER_DATA', weather)
          })
       },
-      getToday({commit, state}){
+
+      getToday({commit}){
+          //day of the week
           const todayDate= {}
           todayDate.today = new Date()
           const today3 = todayDate.today.getDate()
@@ -98,7 +109,7 @@ const actions = {
           const year = todayDate.today.getFullYear(),
            today2 = todayDate.today.getDay(),
            hour = todayDate.today.getHours()
-          todayDate.dayDesc = "";
+          todayDate.dayDesc = ""
           switch(today2) {
               case 0: todayDate.dayDesc = i18n.t("news.sunday"); break
               case 1: todayDate.dayDesc = i18n.t("news.monday"); break
@@ -114,8 +125,89 @@ const actions = {
           } else {
               todayDate.isDay = false
           }
-          commit('ADD_TODAY', todayDate);
+          commit('ADD_TODAY', todayDate)
+      },
+
+      getNews({commit, dispatch}) {
+          // get news from RSS -> XML
+        axios.get('https://fakty.interia.pl/ciekawostki/feed')
+        .then(res => {
+          console.log(res)
+          const news = res.data
+          commit('ADD_NEWS', news)
+          dispatch("xmlToJson")
+        })
+        .catch(function(error) {
+          console.log(error)
+        });
+    },
+     xmlToJson({commit, state, dispatch}) {
+         // parse XML to JSON
+        let xmlTxt = state.news
+        const convert = require('xml-to-json-promise')
+         convert.xmlDataToJSON(xmlTxt).then(json => {
+             xmlTxt = json.rss.channel[0].item
+             console.log(xmlTxt)
+             commit('ADD_JSON_NEWS', xmlTxt)
+             dispatch("getArticles")
+         })
+      },
+      getArticles({commit, state}) {
+          // make html object
+          let allArticles = state.newsJson,
+          articles = []
+          for(let i = 0; i < (allArticles.length); i++) {
+            let article = document.createRange().createContextualFragment(allArticles[i].description[0]),
+            a,  p, link,
+            titleAlt = allArticles[i].title[0],
+            title = document.createTextNode(allArticles[i].title[0]),
+            param = document.createElement('p'),
+            ahref = document.createElement('a'),
+            ahrefImg = document.createElement('a'),
+            div = document.createElement('div'),
+            img = document.createElement('img'),
+            headDiv = document.createElement('div'),
+            contentDiv = document.createElement('div'),
+            head = document.createElement('h1')
+            head.appendChild(title)
+            ahref.appendChild(head)
+            link = allArticles[i].link[0]
+            ahref.href = link
+
+            headDiv.appendChild(ahref)
+            headDiv.className = "artTitle"
+            if(article.childNodes[0].childNodes[0].nodeType == 1) {
+                a = article.childNodes[0].childNodes[0];
+                p = article.childNodes[0].childNodes[1];
+                param.appendChild(p);
+            } else {
+                img.id = "img"+[i]
+                ahrefImg.className = "articleImg"
+                ahrefImg.appendChild(img);
+                ahrefImg.href = link;
+                p = article.childNodes[0].childNodes[0];
+                param.appendChild(p);
+            }
+            div.appendChild(headDiv)
+            contentDiv.className = "artContent"
+            if(a) {
+            contentDiv.appendChild(a)
+            contentDiv.appendChild(param)
+            div.appendChild(contentDiv)
+            } else {
+            contentDiv.appendChild(ahrefImg)
+            contentDiv.appendChild(param)
+            div.appendChild(contentDiv)
+            }
+            div.className = "artAll"
+            
+            let art = div
+            document.getElementById('articles').appendChild(art)
+            articles.push(art)
+          }
+          commit('ADD_ARTICLES', articles)
       }
+    
 }
 
 const getters = {
@@ -127,6 +219,15 @@ const getters = {
      },
      today: state => {
         return state.todayDate
+     },
+     articlesRaw: state => {
+         return state.news
+     },
+     articlesJson: state => {
+         return state.newsJson
+     },
+     articles: state => {
+         return state.articles
      }
 }
 

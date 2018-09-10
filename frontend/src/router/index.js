@@ -15,11 +15,10 @@ import Files from '@/components/content/Files'
 import Informations from '@/components/content/Informations'
 import Availability from '@/components/content/Availability'
 import StarterPage from '@/components/content/StarterPage'
+import CV from '@/components/content/CV'
 import Delegations from '@/components/content/Delegations'
 
-
 import AuthGuard from './auth-guard'
-import authGuard from './auth-guard';
 
 Vue.use(Router)
 
@@ -33,66 +32,73 @@ export default new Router({
     {
         path: '/registration',
         name: 'Registration',
-        component: Registration
-        // beforeEnter: AuthGuard
+        component: Registration,
+        beforeEnter: AuthGuard
     },
     {
         path: '/dashboard',
         name: 'Dashboard',
-        component: Dashboard
-        // beforeEnter: AuthGuard
+        component: Dashboard,
+        beforeEnter: AuthGuard
     },
     {
         path: '/news',
         name: 'News',
-        component: News
-        // beforeEnter: AuthGuard
+        component: News,
+        beforeEnter: AuthGuard
     },
     {
         path: '/profile',
         name: 'Profile',
-        component: Profile
-        // beforeEnter: AuthGuard
+        component: Profile,
+        beforeEnter: AuthGuard
     },
     {
         path: '/employees',
         name: 'Employees',
-        component: Employees
-        // beforeEnter: AuthGuard
+        component: Employees,
+        beforeEnter: AuthGuard
     },
     {
         path: '/informations',
         name: 'Informations',
-        component: Informations
-        // beforeEnter: AuthGuard
+        component: Informations,
+        beforeEnter: AuthGuard
     },
     {
         path: '/files',
         name: 'Files',
-        component: Files
-        // beforeEnter: AuthGuard
+        component: Files,
+        beforeEnter: AuthGuard
     },
     {
         path: '/calendar',
         name: 'Calendar',
-        component: Calendar
-        // beforeEnter: AuthGuard
+        component: Calendar,
+        beforeEnter: AuthGuard
     },
     {
         path: '/availability',
         name: 'Availability',
-        component: Availability
-        // beforeEnter: AuthGuard
+        component: Availability,
+        beforeEnter: AuthGuard
     },
     {
         path: '/starterpage',
         name: 'StarterPage',
-        component: StarterPage
+        component: StarterPage,
+        beforeEnter: AuthGuard
     },
     {
         path: '/delegations',
         name: 'Delegations',
-        component: Delegations
+        component: Delegations,
+        beforeEnter: AuthGuard
+    },
+    {
+        path: '/cv',
+        name: 'CV',
+        component: CV
     }
 ],
 linkExactActiveClass: 'active-router-link'
