@@ -1,12 +1,13 @@
 <template>
 <div class="plane-profile">
     <div class="profile-nav-and-content">
-        <app-menu></app-menu>
+        <app-menu v-show="displayMenu"></app-menu>
         <!-- <leave-page-dialog v-if="showLeavePageDialog" @action-selected="leavePage" @close="showLeavePageDialog = false"></leave-page-dialog> -->
         <div class="profile-content">
             <div class="profile-header">
                 <div class="profile-header-title-and-menu">
-                    <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="profile-header-menu">
+                    <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="profile-header-menu"> -->
+                    <div @click="showMenu" class="content-header-menu">&#9776;</div>
                     <p class="profile-header-title">{{ $t("header.profile") }}</p>
                 </div>
                 <div v-if="!editMode" class="prof-input-lang"> 
@@ -143,7 +144,10 @@
                         <div class="profile-tile-header">
                             <div class="profile-tile-header-row">
                                 <h2 class="prof-tile-h2">{{ $t("header.employee") }}</h2>
-                                <button @click="showChangePassword" class="func-btn"><span class="prof-btn-txt">zmień hasło</span><span class="prof-btn-icon">&#x1f513;</span></button>
+                                <button @click="showChangePassword" class="func-btn">
+                                  <span class="prof-btn-txt">zmień hasło</span>
+                                  <span class="prof-btn-icon">&#x1f513;</span>
+                                </button>
                             </div>
                             <div class="tile-underscore"></div>
                         </div>
@@ -308,6 +312,12 @@ export default {
       this.$store.dispatch("loadData");
     }
   },
+  created() {
+    window.addEventListener("resize", this.showMenu)
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.showMenu)
+  },
   // mounted() {
   //   const sUserId = localStorage.getItem("id"),
   //               sLanguage = 'PL',
@@ -326,18 +336,12 @@ export default {
   //         image.src = url
   // },
   beforeRouteLeave(to, from, next) {
-    //   const answer = window.confirm('Zmiana')
-    //   if(answer) {
-    let lang = this.loginLanguage;
+    let lang = this.loginLanguage.toLowerCase();
     if (lang == "") {
       lang = "pl";
     }
     this.$store.commit('SET_LANG', lang);
-    // this.setLanguage(lang);
     next();
-    //   } else {
-    //       next(false);
-    //   }
   },
   components: {
     MaskedInput,
@@ -361,7 +365,8 @@ export default {
       cvLanguageList: "getCvLanguageList",
       loginLanguage: "getLoginLanguage",
       showSelectCv: "getShowSelectCvDialog",
-      showPasswordDialog: "getShowSelectChangePasswordDialog"
+      showPasswordDialog: "getShowSelectChangePasswordDialog",
+      displayMenu: "getShowMenu"
     }),
     formatAddress() {
       const data = this.userData;
@@ -378,6 +383,17 @@ export default {
   //     this.routeToGo = to.name
   // },
   methods: {
+    // onResetPassword() {
+    //   const url = "https://nw5.local.pl:8050/Users(UserAlias='SJI',Language='PL')"
+    // },
+    showMenu(event) {
+      var x = window.matchMedia("(max-width: 40rem)")
+      if (x.matches && event.type === "resize") {
+        this.$store.commit("SET_DISPLAY_MENU", false)
+      } else {
+        this.$store.commit("SET_DISPLAY_MENU", true);
+      }
+    },
     onEdit() {
       this.showNoChangesAlert = false;
       this.editMode = !this.editMode;
@@ -502,9 +518,12 @@ export default {
     getNewData() {
       this.$store.commit('SET_LANG', this.selectedCvLang);
       let cvLang = this.selectedCvLang.toUpperCase();
+      if(!cvLang) {
+        let cvLang = loginLanguage.toUpperCase();
+      }
       let userData = {};
-      userData.user = "UIO";
-      userData.lang = cvLang;
+        userData.user = "UIO";
+        userData.lang = cvLang;
       this.$store.dispatch("loadData", userData);
     },
     onHover() {

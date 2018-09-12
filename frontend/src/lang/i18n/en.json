@@ -21,7 +21,9 @@
         "click": "Click",
         "back": "Back",
         "clear": "Clear",
-        "addNewEntry": "Add new entry"
+        "addNewEntry": "Add new entry",
+        "selectGroup": "Select group",
+        "selectUser": "SelectUser"
     },
     "label": {
         "nationality": "Nationality",

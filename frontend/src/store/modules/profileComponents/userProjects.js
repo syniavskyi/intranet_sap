@@ -118,7 +118,7 @@ const actions = {
     dataToSend.IsCurrent = dataToSend.IsCurrent ? 'X' : '-' 
     dataToSend.DateStartToChange = utils.formatDateForBackend(dataToSend.DateStartToChange)
     dataToSend.DateEndToChange = utils.formatDateForBackend(dataToSend.DateEndToChange)
-    dispatch('formatToString', dataToSend)
+    dispatch('formatProjectToString', dataToSend)
     const url = "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStart).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" +  moment(dataToSend.DateEnd).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" +  dataToSend.ProjectName + "',Language='" +  dataToSend.Language + "')";
     odata(url).put(dataToSend).save(function (oData) {
       console.log("zamianka");
@@ -126,7 +126,7 @@ const actions = {
       console.error(status); 
     });
   },
-  formatToString({dispatch, getters, commit}, dataToSend) {
+  formatProjectToString({}, dataToSend) {
     let object = {};
     object.Modules = dataToSend.Modules;
     object.Industries = dataToSend.Industries;
@@ -356,18 +356,6 @@ const actions = {
     } 
     commit('SET_OBJECT', object); 
   },
-  setProjectsIsCurrentField({commit}) {
-    let projects = this.getters.getUserProjectsList;
-    for(let i = 0; i < projects.length; i++) {
-      if(projects[i].IsCurrent === 'X') {
-        projects[i].IsCurrent = true;
-      }
-      else {
-        projects[i].IsCurrent = false;
-      }
-    }
-    commit('SET_USER_PROJECTS_LIST', projects);
-  }
 }
 
 const getters = {

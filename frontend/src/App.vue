@@ -17,11 +17,11 @@ export default {
   components: {
     'app-menu': Menu
   },
-  computed: {
-    showMenu() {
-      return this.$store.getters.showMenu
-    }
-  }
+  // computed: {
+  //   showMenu() {
+  //     return this.$store.getters.showMenu
+  //   }
+  // }
 
 }
 </script>

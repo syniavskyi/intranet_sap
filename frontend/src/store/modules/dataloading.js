@@ -1,6 +1,7 @@
 import axios from 'axios'
 import router from '@/router/index.js'
 import odata from 'odata'
+let utils = require('../../utils')
 
 const state = {
   departmentList: [],
@@ -11,14 +12,13 @@ const state = {
   contractorsList: [],
   isLoaded: false,
   userInfo: {},
-  userData: {},
   studyTypes: [],
   academicTitles: [],
   langLevels: [],
   userFiles: [],
   fullLanguageList: [],
   workPositionList: [],
-  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP'],
+  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP'],
   schoolDescList: [],
   fieldOfStudyDescList: [],
   sapModulesList: [],
@@ -26,6 +26,8 @@ const state = {
   UserRole: [],
   userAdverts: [{Id: '001', Message: 'Wiadomość1', ValidTo: new Date()}, {Id:'002', Message: 'Wiadomość2', ValidTo: new Date()}],
   userAuth: [],
+  availStatus: [],
+  availType: [],
   targetGroup: []
 };
 
@@ -60,9 +62,6 @@ const mutations = {
   SET_LANG_LEVELS(state, data) {
     state.langLevels = data
   },
-  SET_FORMATTED_DATE(state, data) {
-    state.userData = data
-  },
   SET_LANGUAGE_LIST(state, data) {
     state.fullLanguageList = data;
   },
@@ -84,11 +83,14 @@ const mutations = {
   SET_NEW_USER_FILES_LIST(state, data) {
     state.newUserFiles = data;
   },
-  SET_USER_ROLE(state, data) {
-    state.userRole = data;
-  },
   SET_USER_AUTH(state, data) {
     state.userAuth = data;
+  },
+  SET_AVAIL_STATUS(state, data){
+    state.availStatus = data
+  },
+  SET_AVAIL_TYPE(state, data){
+    state.availType = data
   },
   SET_TARGET_GROUP(state, data) {
     state.targetGroup = data;
@@ -96,52 +98,6 @@ const mutations = {
 };
 
 const actions = {
-  formatData({
-    commit
-  }, data) {
-    if (data) {
-      if (data.EmploymentDate !== null) {
-        let nParsedDate = parseInt(data.EmploymentDate.substring(6, data.EmploymentDate.length - 2))
-
-        data.EmploymentDate = new Date(nParsedDate);
-      }
-
-      if (data.UserCvProjects.results.length > 0) {
-        for (let i = 0; i < data.UserCvProjects.results.length; i++) {
-          if (data.UserCvProjects.results[i].DateStart !== null && data.UserCvProjects.results[i].DateEnd !== null) {
-            let nParsedCvDateStart = parseInt(data.UserCvProjects.results[i].DateStart.substring(6, data.UserCvProjects.results[i].DateStart.length - 2)),
-              nParsedCvDateEnd = parseInt(data.UserCvProjects.results[i].DateEnd.substring(6, data.UserCvProjects.results[i].DateEnd.length - 2))
-
-            data.UserCvProjects.results[i].DateStart = new Date(nParsedCvDateStart);
-            data.UserCvProjects.results[i].DateEnd = new Date(nParsedCvDateEnd);
-          }
-        }
-      }
-      if (data.UserEducations.results.length > 0) {
-        for (let j = 0; j < data.UserEducations.results.length; j++) {
-          if (data.UserEducations.results[j].DateStart !== null && data.UserEducations.results[j].DateEnd !== null) {
-            let nParsedEducationDateStart = parseInt(data.UserEducations.results[j].DateStart.substring(6, data.UserEducations.results[j].DateStart.length - 2)),
-              nParsedEducationDateEnd = parseInt(data.UserEducations.results[j].DateEnd.substring(6, data.UserEducations.results[j].DateEnd.length - 2))
-
-            data.UserEducations.results[j].DateStart = new Date(nParsedEducationDateStart);
-            data.UserEducations.results[j].DateEnd = new Date(nParsedEducationDateEnd);
-          }
-        }
-      }
-      if (data.UserExperiences.results.length > 0) {
-        for (let k = 0; k < data.UserExperiences.results.length; k++) {
-          if (data.UserExperiences.results[k].DateStart !== null && data.UserExperiences.results[k].DateEnd !== null) {
-            let nParsedExperienceDateStart = parseInt(data.UserExperiences.results[k].DateStart.substring(6, data.UserExperiences.results[k].DateStart.length - 2)),
-              nParsedExperienceDateEnd = parseInt(data.UserExperiences.results[k].DateEnd.substring(6, data.UserExperiences.results[k].DateEnd.length - 2))
-
-            data.UserExperiences.results[k].DateStart = new Date(nParsedExperienceDateStart);
-            data.UserExperiences.results[k].DateEnd = new Date(nParsedExperienceDateEnd);
-          }
-        }
-      }
-      commit('SET_FORMATTED_DATE', data);
-    }
-  },
   loadData({
     commit,
     state,
@@ -175,8 +131,6 @@ const actions = {
     if(domainData.lang === undefined) {
       domainData.lang = "PL"
     }
-
-    // let lang = 'PL'
     axios({
       method: 'GET',
       url: "Dictionaries" + urlQuery  + "&$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
@@ -211,6 +165,12 @@ const actions = {
       } else if (domainData.name == 'ZINTRANET_EVENT_TYPE') {
         const aEventType = res.data.d.results;
         commit('SET_EVENT_TYPE', aEventType);
+      } else if (domainData.name == 'ZINTRANET_AVAIL_STATUS'){
+        const aStatus = res.data.d.results;
+        commit('SET_AVAIL_STATUS', aStatus);
+      } else if (domainData.name == 'ZINTRANET_AVAIL_TYPE'){
+        const aType = res.data.d.results;
+        commit('SET_AVAIL_TYPE', aType);
       } else if (domainData.name == 'ZINTRANET_TARGET_GROUP') {
         const aTargetGroup = res.data.d.results;
         commit('SET_TARGET_GROUP', aTargetGroup);
@@ -261,24 +221,18 @@ const actions = {
   // url: 'Users' + '(UserAlias=' + "'UIO'" + ',' + 'Language=' + "'PL'" + ')' + '?$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang',
   getUserData({
     commit, getters,
-    dispatch,
-    state
+    dispatch
   }, userData) {
     let urlQuery = getters.getUrlQuery
-    let userData2 = {};
-    userData2.user = 'UIO';
-    userData2.lang = 'PL';
-    if(userData === undefined) {
+
+    if(userData === undefined) { // TEMPORARY
      let userData = {
         user: 'UIO',
          lang: 'PL'
       }
     }
-    // let c = userData;
-    // let userData2 = {};
-    // userData2.user = 'UIO';
-    // userData2.lang = 'PL';
-    userData.user = 'UIO'
+    userData.user = 'UIO' // TEMPORARY
+
     axios({
       method: 'GET',
       url: 'Users' + '(UserAlias=' + "'" + userData.user + "'," +  "Language='" + userData.lang + "')"  + urlQuery +  '&$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang,UserFiles,UserRole,UserAuth',
@@ -286,36 +240,59 @@ const actions = {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
       }
     }).then(res => {
-      console.log(res)
-      const oUserData = res.data.d,
-        sUserId = 'UIO'
-      dispatch('formatData', oUserData);
-      let oFormattedUserData = state.userData;
-      oFormattedUserData.imgUrl = "http://nw5.local.pl:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileType='USER-PHOTO',Language='PL',UserAlias='" +
-      sUserId + "')/$value"
-      // localStorage.setItem('id', oFormattedUserData.UserAlias)
+      
+      let sUserId = 'UIO' // TEMPORARY
+      
+      // let sUserId = res.data.d.UserAlias 
       localStorage.setItem('id', sUserId);
-      dispatch('getUserFilesData')
-      commit('SET_USER_AUTH', oFormattedUserData.UserAuth.results)
-      commit('SET_USER_INFO', oFormattedUserData);
-      commit('SET_USER_EDUCATION', oUserData.UserEducations.results);
-      dispatch('setEduIsCurrentField');
-      commit('SET_USER_EXPERIENCE', oUserData.UserExperiences.results);
-      dispatch('setExpIsCurrentField');
-      commit('SET_USER_SKILLS', oUserData.UserSkills.results);
-      dispatch('adjustUserSkills', userData);
-      commit('SET_USER_LANGS', oUserData.UserLang.results);
-      dispatch('adjustLang');
-      commit('SET_USER_PROJECTS_LIST', oUserData.UserCvProjects.results);
+      
+      dispatch('formatUserData', res.data.d); // format dates for date pickers and "is current" fields
+      dispatch('getUserFilesData') // get data about all user files (cv, photos, documents etc.)
+      
+      let oData = getters.getUserInfo;
+            
+      commit('SET_USER_AUTH', oData.UserAuth.results) //set user authorization data
+      
+      commit('SET_USER_EDUCATION', oData.UserEducations.results); //set user education data for profile and cv
+      commit('SET_USER_EXPERIENCE', oData.UserExperiences.results); //set user experience data for profile and cv
+      
+      commit('SET_USER_SKILLS', oData.UserSkills.results); //set user skills data for profile and cv
+      dispatch('formatToArray',  oData.UserSkills.results); 
+
+      commit('SET_USER_PROJECTS_LIST', oData.UserCvProjects.results); //set user projects data for profile and cv
       dispatch('adjustProjects');
-      dispatch('setProjectsIsCurrentField');
-      commit('SET_NEW_USER_FILES_LIST', oUserData.UserFiles.results);
-      // dispatch('checkStatus');
-      commit('SET_USER_ROLE', oUserData.UserRole.results)
+
+      commit('SET_USER_LANGS', oData.UserLang.results);
+      // dispatch('adjustLang');
+
+      commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
+      
       commit('SET_DATA_LOADED', true)
     }).catch(error => {
       console.log(error);
     })
+  },
+  formatUserData({
+    commit
+  }, data) {
+    if (data) {
+        data.EmploymentDate = utils.dateStringToObj(data.EmploymentDate)
+      for (let key in data) {
+        if (key === "UserCvProjects" || key === "UserEducations" || key === "UserExperiences"){
+          let obj = data[key].results;
+          for (let i = 0; i < obj.length; i++) {
+            if (obj[i].DateStart){
+              obj[i].DateStart =  utils.dateStringToObj(obj[i].DateStart);
+            }
+            if (obj[i].DateEnd){
+              obj[i].DateEnd =  utils.dateStringToObj(obj[i].DateEnd);
+            }
+            obj[i].IsCurrent = obj[i].IsCurrent === 'X' ? true : false
+          }
+        }
+     }
+      commit('SET_USER_INFO', data);
+    }
   },
   getUsersLists({
     commit,getters
@@ -329,7 +306,9 @@ const actions = {
       }
     }).then(res => {
       commit('GET_USER_LIST', res.data.d.results);
-    }).catch(error => { })
+    }).catch(error => {
+      console.log(error)
+     })
   },
   getAllLanguages({commit, getters},) {
     let urlQuery = getters.getUrlQuery
@@ -341,7 +320,9 @@ const actions = {
       }
     }).then(res => {
       commit('SET_LANGUAGE_LIST', res.data.d.results);
-    }).catch(error => { })
+    }).catch(error => { 
+      console.log(error)
+    })
   },
   getSchoolDesc({commit, getters}, lang) {
     if(lang === undefined) {
@@ -356,7 +337,9 @@ const actions = {
       }
     }).then(res => {
       commit('SET_SCHOOL_DESC_LIST', res.data.d.results);
-    }).catch(error => { })
+    }).catch(error => {
+      console.log(error)
+     })
   },
 
   getUserFilesData({commit, getters}){
@@ -370,7 +353,9 @@ const actions = {
       }
     }).then(res => {
       commit('SET_USER_FILES_LIST', res.data.d.results);
-    }).catch(error => { })
+    }).catch(error => { 
+      console.log(error)
+    })
   },
   getFieldOfStudyDesc({commit, getters}, lang) {
     if(lang === undefined) {
@@ -451,7 +436,13 @@ const getters = {
     return state.userAdverts;
   },
   getUserAuth(state){
-    return state.userAuth;
+    return state.userAuth
+  },
+  getAvailStatus(state){
+    return state.availStatus
+  },
+  getAvailType(state) {
+    return state.availType
   },
   getTargetGroup(state) {
     return state.targetGroup;

@@ -1,25 +1,32 @@
 <template>
   <div class="plane-component">
     <div class="component-nav-and-content">
-      <app-menu></app-menu>
+      <app-menu v-show="displayMenu"></app-menu>
       <div class="component-content">
         <div class="content-header">
           <div class="content-header-title-and-menu">
-            <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu">
+            <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu"> -->
+            <div @click="showMenu" class="content-header-menu">&#9776;</div>
             <p class="content-header-title">Lista Pracowników</p>
           </div>
         </div>
-        <div id="searchEmployee">
-          <p>Wpisz imię lub nazwisko</p>
-          <input v-model="aFilters.user"/>
-          <p>Lub wybierz dział</p>
-          <div class="ava-div-select-cool">
-                    <select required class="ava-select-cool" v-model="aFilters.department">
-                        <option v-for="department in departmentList" :key="department.Key" :value="department.Value">{{ department.Value }}</option>
-                    </select>
-                      <label class="ava-select-label-cool">{{ $t("label.branch") }}</label>
+        <div class="emp-tile">
+          <div class="emp-filters">
+            <div class="emp-section">
+              <div class="cd-for-input"> 
+                <input required class="cd-input" v-model="aFilters.user"/>
+                <span class="cd-span"></span>
+                <label class="cd-label">Wpisz imię lub nazwisko</label>
+              </div>
+              <div class="ava-div-select-cool">
+                <select required class="ava-select-cool" v-model="aFilters.department">
+                  <option v-for="department in departmentList" :key="department.Key" :value="department.Value">{{ department.Value }}</option>
+                </select>
+                <label class="ava-select-label-cool">Lub wybierz dział</label>
+              </div>
+            </div>
+            <button class="func-btn emp-btn" @click="clearFilters">Wyczyść</button>
           </div>
-          <button @click="clearFilters">Wyczyść</button>
         </div>
         <div class="employees-table">
           <div class="emp-thead">
@@ -78,13 +85,21 @@ import { mapGetters } from 'vuex';
     components: {
         'app-menu': Menu
     },
+    created() {
+      window.addEventListener("resize", this.showMenu)
+    // this.$store.dispatch('getPriority');
+    // this.$store.dispatch('getEventType');
+    },
+    destroyed() {
+      window.removeEventListener("resize", this.showMenu)
+    },
     beforeCreate() {
       if (this.$store.getters.isDataLoaded === false) {
             this.$store.dispatch('loadData', localStorage.getItem('token'))
       }
     },
     computed: {
-      ...mapGetters({usersList:"usersList", departmentList: 'depList'}),
+      ...mapGetters({usersList:"usersList", departmentList: 'depList', displayMenu: 'getShowMenu'}),
       filteredUsers:function(){
         let self = this,
             aFilteredUsers = this.usersList,
@@ -112,7 +127,15 @@ import { mapGetters } from 'vuex';
     methods: {
       clearFilters() {
         this.aFilters = {}
-      }
+      },
+      showMenu(event) {
+        var x = window.matchMedia("(max-width: 40rem)")
+        if (x.matches && event.type === "resize") {
+          this.$store.commit("DISPLAY_MENU", false)
+        } else {
+          this.$store.commit("DISPLAY_MENU", true);
+        }
+      },
     }
   }
 </script>

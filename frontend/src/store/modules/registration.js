@@ -6,11 +6,15 @@ const state = {
   email: '',
   mail: '',
   emailExists: false,
-  dialog: false,
-  dialogFalse: false
+  // dialog: false,
+  // dialogFalse: false
+  errorDialog: false
 };
 
 const mutations = {
+  SET_SHOW_ERROR_DIALOG(state, data) {
+    state.errorDialog;
+  },
   ADD_EMAILS(state, data) {
     state.emails = data;
   },

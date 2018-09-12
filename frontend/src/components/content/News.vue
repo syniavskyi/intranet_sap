@@ -1,7 +1,7 @@
 <template>
 <div class="plane-component">
     <div class="component-nav-and-content">
-        <app-menu></app-menu>
+        <app-menu v-show="getShowMenu"></app-menu>
             <div class="component-content">
                 <div class="content-header">
                 <div class="content-header-title-and-menu">
@@ -10,7 +10,7 @@
             </div>
         </div>
         <!-- slideshow with users adverts -->
-        <div id="adverts">
+        <!-- <div id="adverts">
             <div class="slider elements-list" id="slider1">
                 <div class="slider-slides-cnt">
                     <article class="element slider-slide">
@@ -32,73 +32,79 @@
                     <li class="slider-dots-element"><button class="slider-dots-button" type="button">3</button></li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <div class="content-body">
-          <div id="usersAdverts">
-            <!-- place to add custom adverts and edit existing ones -->
-            <h3>Moje ogłoszenia</h3>
-            <ul>
-              <li  v-for="(advert, index) in userAdverts" :key="advert.Id">  
-                <input disabled v-model="advert.Message"/> 
-                 <v-date-picker popoverDirection="top" is-expanded mode="single" v-model="advert.ValidTo">
-                      <input value="advert.ValidTo"/>
-                  </v-date-picker>
-                <button @click="editAdvert(index)">edytuj</button> 
-                <button @click="removeAdvert(index)">X</button>
-              </li>
-            </ul>
-           <input v-model="newAdvert"/><button>+</button>
-          </div>
+            <div class="gallery items-3">
+                <!-- place to add custom adverts and edit existing ones -->
+                <!-- <h3>Moje ogłoszenia</h3> -->
+                <ul>
+                    <div id="item-1" class="control-operator"></div>
 
-          <div class="api">
-          <div class="content-event">
-            <p>Events API</p>
-           </div>
-            <div class="content-weather"  :class="today.isDay ? 'weatherDay' : 'weatherNight' ">
-              <div class="intro">
-                <div class="town">
-                    <p> {{weatherData.town}} </p>
-                </div>
-                <div class="icon">
-                  <img :src="weatherData.icon" alt="icon" height="64px">
-                </div>
-              </div>
-              <div class="info">
-                <div class="weather-header">
-                </div> 
-                <div class="temp">
-                  <!-- <img src="../../assets/images/weather/temps.png" height="46px" class="iconTemp"/> -->
-                  <p> {{ weatherData.celcius }} <sup>o</sup>C </p> 
-                </div>
-              </div> 
-              <!-- <div class="description">
-                    <p> {{weatherData.description}} </p> 
-              </div> -->
-              <div class="additional">
-                <div class="weatherDesc">
-                    <img src="../../assets/images/weather/winds.png" class="iconWeather"/>
-                    <p> {{weatherData.wind}} km/h</p>
-                </div>
-                <div class="weatherDesc">
-                    <img src="../../assets/images/weather/clouds.png"  class="iconWeather"/>
-                    <p> {{weatherData.clouds}}%</p>
-                </div>
-                <div class="weatherDesc">
-                    <img src="../../assets/images/weather/humiditys.png" class="iconWeather"/>
-                    <p> {{weatherData.humidity}}%</p>
-                </div>
-              </div> 
-              <div class="date">
-                <p> {{ today.dayDesc }}, {{ today.today }} </p>  
-              </div>
+                    <li class="item" v-for="(advert, index) in userAdverts" :key="advert.Id" :id="advert.Id">  
+                        <div class="control-operator"></div>
+                        <input disabled v-model="advert.Message"/> 
+                            <v-date-picker popoverDirection="top" is-expanded mode="single" v-model="advert.ValidTo">
+                                <input value="advert.ValidTo"/>
+                            </v-date-picker>
+                        <button @click="editAdvert(index)">edytuj</button> 
+                        <button @click="removeAdvert(index)">X</button>
+                    </li>
+                    <div class="controls">
+                        <a href="/#001" class="control-button">•</a>
+                        <a href="/#002" class="control-button">•</a>
+                        <a href="/#003" class="control-button">•</a>
+                    </div>
+                </ul>
+                <input v-model="newAdvert"/>
+                <button>+</button>
             </div>
-          </div>
-          <div class="content-news">
-            <div id="articles">
+            <div class="api">
+                <div class="content-event">
+                    <p>Events API</p>
+                </div>
+                <div class="content-weather"  :class="today.isDay ? 'weatherDay' : 'weatherNight' ">
+                    <div class="intro">
+                        <div class="town">
+                            <p> {{weatherData.town}} </p>
+                        </div>
+                        <div class="icon">
+                            <img :src="weatherData.icon" alt="icon" height="64px">
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="weather-header"></div> 
+                        <div class="temp">
+                        <!-- <img src="../../assets/images/weather/temps.png" height="46px" class="iconTemp"/> -->
+                            <p> {{ weatherData.celcius }} <sup>o</sup>C </p> 
+                        </div>
+                    </div> 
+                <!-- <div class="description">
+                        <p> {{weatherData.description}} </p> 
+                </div> -->
+                    <div class="additional">
+                        <div class="weatherDesc">
+                            <img src="../../assets/images/weather/winds.png" class="iconWeather"/>
+                            <p> {{weatherData.wind}} km/h</p>
+                        </div>
+                        <div class="weatherDesc">
+                            <img src="../../assets/images/weather/clouds.png"  class="iconWeather"/>
+                            <p> {{weatherData.clouds}}%</p>
+                        </div>
+                        <div class="weatherDesc">
+                            <img src="../../assets/images/weather/humiditys.png" class="iconWeather"/>
+                            <p> {{weatherData.humidity}}%</p>
+                        </div>
+                    </div> 
+                    <div class="date">
+                        <p>{{ today.dayDesc }}, {{ today.today }}</p>  
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="content-news">
+                <div id="articles"></div>
+            </div>
         </div>
-      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -128,7 +134,7 @@ export default {
     "app-menu": Menu
   },
   computed: {
-    ...mapGetters(["geoLocation2", "weatherData", "today", "articlesRaw", "articlesJson", "articles", "userAdverts"]),
+    ...mapGetters(["geoLocation2", "weatherData", "today", "articlesRaw", "articlesJson", "articles", "userAdverts", "getShowMenu"]),
   },
   methods: {
     ...mapActions(["geoLoc", "getWeatherData", "getToday", "getNews", "xmlToJson", "getArticles"]),

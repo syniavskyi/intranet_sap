@@ -12,15 +12,17 @@ import availability from './modules/availability'
 import dataloading from './modules/dataloading'
 import starterpage from './modules/starterpage'
 import delegations from './modules/delegations'
-import accomodationCosts from './modules/tables/accomodationCosts'
-import otherCosts from './modules/tables/otherCosts'
-import travelCosts from './modules/tables/travelCosts'
-import advanceTable from './modules/tables/advanceTable'
+import accomodationCosts from './modules/delegationComponents/accomodationCosts'
+import otherCosts from './modules/delegationComponents/otherCosts'
+import travelCosts from './modules/delegationComponents/travelCosts'
+import advanceTable from './modules/delegationComponents/advanceTable'
 import news from './modules/news'
 import userEducation from './modules/profileComponents/userEducation'
 import userExperience from './modules/profileComponents/userExperience'
 import userProjects from './modules/profileComponents/userProjects'
 import userSkills from './modules/profileComponents/userSkills'
+import availLeaves from './modules/availabilityComponents/availLeaves'
+import availProjects from './modules/availabilityComponents/availProjects'
 import cv from './modules/cv'
 
 import settings from './modules/settings'
@@ -52,6 +54,8 @@ export default new Vuex.Store({
         userExperience,
         userProjects,
         userSkills,
+        availLeaves,
+        availProjects,
         cv
     }
 });

@@ -1,11 +1,12 @@
 <template>
 <div class="plane-component" >
     <div class="component-nav-and-content">
-        <app-menu></app-menu>
+        <app-menu v-show="displayMenu"></app-menu>
         <div name="testname" class="component-content delegations-content" >
             <div class="content-header">
                 <div class="content-header-title-and-menu">
-                    <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu">
+                    <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu"> -->
+                    <div @click="showMenu" class="content-header-menu">&#9776;</div>
                     <p class="content-header-title">{{ $t("header.delegations") }}</p>
                 </div>
             </div>
@@ -17,7 +18,7 @@
                             <p  v-if="showUsername">{{userData.Fullname}}</p>
                             <div class="delegations-div-cool-head" v-if="showSelectForAllUsers">
                                 <select required  class="delegations-select-cool" v-model="newDelegation.userId" @change="setUsername">
-                                    <option v-for="user in usersList" :key="user.id" :value="user.id">{{ user.firstName }} {{ user.lastName }}</option>
+                                    <option v-for="user in usersList" :key="user.id" :value="user.id">{{ user.Fullname }}</option>
                                 </select> 
                                 <label class="delegations-label-cool-select">Wybierz pracownika</label>
                             </div>
@@ -144,11 +145,11 @@ import {
     mapActions
 } from 'vuex'
 import Menu from '../Menu.vue'
-import AccomodationCosts from '../tables/accomodationCosts'
-import OtherCosts from '../tables/OtherCosts'
-import TravelCosts from '../tables/TravelCosts'
-import AdvanceTable from '../tables/AdvanceTable'
-import DelegationTable from '../tables/DelegationTable'
+import AccomodationCosts from './delegationComponents/accomodationCosts'
+import OtherCosts from './delegationComponents/OtherCosts'
+import TravelCosts from './delegationComponents/TravelCosts'
+import AdvanceTable from './delegationComponents/AdvanceTable'
+import DelegationTable from './delegationComponents/DelegationTable'
 import Dialog from '../dialogs/ConfirmDelegationDialog'
 
 let utils = require('../../utils')
@@ -189,9 +190,10 @@ export default {
         }
     },
     created(){
-    const roles = this.$store.getters.getUserAuth
+        // window.addEventListener("resize", this.showMenu)
+        const roles = this.$store.getters.getUserAuth
         for (let i=0; i<roles.length; i++) {
-            if (roles[i].Key === "ZDELEG" && roles[i].Value === "TEAM"){
+            if (roles[i].Key === "ZDELEG" && roles[i].Value === "TEAM" && this.userData.DepartmentName !== ""){
                 this.showSelectForTeam = true
                 this.showUsername = false
             } else  if (roles[i].Key === "ZDELEG" && roles[i].Value === "*"){
@@ -208,6 +210,9 @@ export default {
         //     this.delegationUsername = localStorage.getItem('id')
         // }
     },
+    // destroyed() {
+    //     window.removeEventListener("resize", this.showMenu)
+    // },
     computed: {
         ...mapGetters({
             userData: 'getUserInfo',
@@ -222,7 +227,8 @@ export default {
             totalCostsInCurr: 'getTotalCostsInCurr',
             advanceData: 'getAdvanceData',
             delegationNumber: 'getNewDelegationNumber',
-            showDialog: 'getShowConfirmDelegation'
+            showDialog: 'getShowConfirmDelegation',
+            displayMenu: 'getShowMenu'
         }),
         disableSaveBtn() {
             return (this.newDelegationValidated && this.delegationTableValidated && this.accCostValidated) ? false : true
@@ -242,7 +248,6 @@ export default {
             countAllCosts: 'countAllCosts'
         }),
         setDelegationNo(){
-            this.delegationUsername = 'UIO'
             if (this.newDelegation.dates && this.delegationUsername) {
                 const data = {
                     UserAlias: this.delegationUsername,
@@ -254,15 +259,8 @@ export default {
             } 
         },
         setUsername(){
-            const users = this.usersList,
-                    selectedId = this.newDelegation.userId
-            for (let i=0; i <users.length; i ++) {
-                let user = users[i]
-                if (selectedId == user.id) {
-                    this.delegationUsername = (user.username).toUpperCase()
-                    return
-                }
-            }
+            this.delegationUsername = this.newDelegation.userId
+            this.setDelegationNo()
         },
         generatePdf() {
             this.generatingPdfMode = true
@@ -316,7 +314,14 @@ export default {
                 cClasses[i].className = sClassName
             }
         },
-
+        showMenu(event) {
+            var x = window.matchMedia("(max-width: 40rem)")
+            if (x.matches && event.type === "resize") {
+                this.$store.commit("SET_DISPLAY_MENU", false)
+            } else {
+                this.$store.commit("SET_DISPLAY_MENU", true);
+            }
+        },
         setCurrency(e) {
             let el = this.$el
         }

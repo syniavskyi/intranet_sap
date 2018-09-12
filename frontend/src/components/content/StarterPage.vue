@@ -33,7 +33,10 @@
                         <p class="starter-list-item-popover">{{ list.FileId }}</p>
                       </div>
                     </div>
-                    <input class="starter-page-checkbox" :checked="list.Status" @change="changeCheckbox(list)" type="checkbox">
+                    <!-- <div class="checkbox-wrap starter-page-checkbox"> -->
+                      <input class="starter-page-checkbox" :checked="list.Status" @change="changeCheckbox(list)" type="checkbox">
+                      <!-- <div @change="changeCheckbox(list)" class="checkbox-in"></div> -->
+                    <!-- </div> -->
                   </li>
                 </ul>
                 <div class="starter-page-list-bottom">
@@ -61,7 +64,7 @@
                     <div class="starter-page-list-item-wrapper">
                       <div class="starter-page-item-text" :class="list.Status ? 'line-through' : 'none'">
                         {{ list.FileId }}
-                        <p class="starter-list-item-popover">{{ list.FileName }}</p>
+                        <p class="starter-list-item-popover">{{ list.Filename }}</p>
                       </div>
                     </div>
                     <input class="starter-page-checkbox" :checked="list.Status" @change="changeCheckbox(list)" type="checkbox">
@@ -95,7 +98,7 @@ export default {
     'app-menu': Menu
   },
   beforeCreate() {
-    this.$store.commit('DISPLAY_MENU', false);
+    // this.$store.commit('DISPLAY_MENU', false);
     if (this.$store.getters.idDataLoaded === false) {
       this.$store.dispatch('loadData', localStorage.getItem('token'))
     }
@@ -109,7 +112,7 @@ export default {
   },
     computed: {
       ...mapGetters({
-      setBuTton: 'returnCheckList',
+      setButton: 'returnCheckList',
       docListNew: 'docListNew',
       listForStatus: 'getListForStatus',
       docListInfo: 'docListInfo'

@@ -36,6 +36,7 @@ require('./assets/styles/employees/employees.css');
 require('./assets/styles/files/files.css');
 require('./assets/styles/delegations/delegations.css');
 require('./assets/styles/calendar/calendar.css');
+require('./assets/styles/gallery/gallery.css');
 
 require('./assets/styles/news/news.css');
 
@@ -48,11 +49,11 @@ Vue.config.productionTip = false
 // axios.defaults.baseURL = 'http://10.0.2.6:8080/';
 // axios.defaults.baseURL = 'https://btech-intranet.herokuapp.com/';
 // axios.defaults.baseURL = 'http://10.0.2.5:8080/';
-axios.defaults.baseURL = 'http://nw5.local.pl:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/';
+axios.defaults.baseURL = 'http://10.0.1.85:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/';
 // axios.defaults.baseURL = 'http://192.168.99.71:8080/';
 
 odata().config({
-    endpoint: 'http://nw5.local.pl:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/',
+    endpoint: 'http://10.0.1.85:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/',
     headers: [
     {name:"X-Requested-With", value: "XMLHttpRequest"},
     // {name:"Content-Type", value : "application/json"},
