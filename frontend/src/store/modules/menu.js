@@ -6,7 +6,7 @@ const state = {
 };
 
 const mutations = {
-    DISPLAY_MENU (state, show) {
+    SET_DISPLAY_MENU (state, show) {
         state.showMenu = show
     }
 };
@@ -25,7 +25,6 @@ const actions = {
               }).then(res => {
                 console.log(res)
                 commit('CLEAR_AUTH_DATA');
-                commit('DISPLAY_MENU', false);
               }).catch(error => {
                 console.log(error)
             })
@@ -38,7 +37,7 @@ const actions = {
 };
 
 const getters = {
-    showMenu(state){
+    getShowMenu(state){
         return state.showMenu
     }
 };

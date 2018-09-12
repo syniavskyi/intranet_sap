@@ -1,7 +1,13 @@
 <template>
     <div class="plane-nav">
-        <button class="logout-button" @click="logout"><span class="logout-text">wyloguj</span></button> 
-        <p class="nav-title">BTech</p>
+        <!-- <div class="modal-overlay-menu"></div> -->
+        <div class="nav-header">
+            <button class="logout-button" @click="logout">
+                <span class="logout-text">wyloguj</span>
+            </button> 
+            <p class="nav-title">BTech</p>
+            <button @click="closeMenu" class="close-btn">&#10006;</button>
+        </div>
         <div class="nav-user">
             <!-- <img class="nav-user-img" width="130px" :src="userData.image"> -->
         </div>
@@ -96,11 +102,28 @@
 import { mapGetters } from 'vuex'
 export default {
  
-  methods: {
-     logout() {
-        this.$store.dispatch('logout')
-     }
+    methods: {
+        logout() {
+            this.$store.dispatch('logout')
+        },
+
+        closeMenu() {
+            this.$store.commit("DISPLAY_MENU", false)
+        }
     }
 }
 
 </script>
+
+<style>
+.modal-overlay-menu {
+    display: flex;
+    position: absolute;
+    z-index: 100;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.384);
+}
+</style>

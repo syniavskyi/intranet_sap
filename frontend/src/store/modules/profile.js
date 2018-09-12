@@ -88,6 +88,17 @@ const actions = {
           console.log(error);
         })
   },
+
+  submitPassword({commit, getters}, userData) {
+    let urlQuery = getters.getUrlQuery
+    userData.Action = 'C'
+    const url = 'Users' + '(' + "UserAlias='"+ userData.UserAlias + "',Language='" + userData.Language +  "')" + urlQuery
+    odata(url).put(userData).save(function (data) {
+      console.log("changed");
+    }, function (status) {
+      console.error(status); 
+    });
+  },
  
   
   onTileEdit({}, data) {

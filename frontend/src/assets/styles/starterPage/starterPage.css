@@ -107,7 +107,6 @@
 }
 .starter-page-pdf {
     background: rgb(255, 114, 114);
-    padding: .1rem .65rem;
 }
 .starter-page-docx {
     background: rgb(114, 114, 255);
@@ -150,7 +149,7 @@
     font-size: .8rem;
     top: -3.7rem;
     /* left: 0%; */
-    left: 50%;
+    left: 53%;
     transform: translateX(-55%);
     -webkit-transform: translateX(-55%);
     -moz-transform:  translateX(-55%);
@@ -170,7 +169,7 @@
     border-style: solid;
     border-color: #7c7c7c transparent transparent transparent;
     top: 100%;
-    right: 40%;
+    right: 46%;
 }
 
 .starter-page-checkbox {
@@ -196,34 +195,40 @@
     /* .plane-nav {
         min-height: 100vh;
     } */
- .starter-header-menu {
+    .starter-header-menu {
         display: none;
     }
+}
+
+@media (min-width: 60rem) {
     .starter-page-list-item-wrapper {
         margin-right: 2rem;
     }
-    .starter-list-item-popover {
+    /* .starter-list-item-popover {
         top: -1.62rem;
-        left: 100%;
+        left: 105%;
         transform: translateX(0%);
         -webkit-transform: translateX(0%);
         -moz-transform:  translateX(0%);
         -ms-transform: translateX(0%);
         -o-transform:  translateX(0%);
+    } */
+    .starter-list-item-popover {
+        top: -4.9rem;
     }
     .starter-page-item {
         position: static;
-        height: 2.4rem;
+        /* height: 2.4rem; */
     }
     
     .starter-page-item-text {
         position: relative;
     }
-    .starter-list-item-popover::after {
+    /* .starter-list-item-popover::after {
         top: 35%;
         right: 100%;
         transform: rotate(90deg);
-    }
+    } */
     .starter-page-pdf,
     .starter-page-docx {
         display: flex;

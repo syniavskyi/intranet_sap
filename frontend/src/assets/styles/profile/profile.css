@@ -1414,11 +1414,11 @@ max-width: max-content;
     }
 }
 
-@media (min-width:0rem) and (max-width: 44rem) {
+/* @media (min-width:0rem) and (max-width: 44rem) {
     .plane-nav {
         display: none;
     }
-}
+} */
 @media (min-width: 44rem) {
     .profile-header-menu {
         display: none;

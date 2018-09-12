@@ -21,7 +21,9 @@
         "click": "Kliknij",
         "back": "Wróć",
         "clear": "Wyczyść",
-        "addNewEntry": "Dodaj nowy wpis"
+        "addNewEntry": "Dodaj nowy wpis",
+        "selectGroup": "Wybierz grupę",
+        "selectUser": "Wybierz użytkownika"
      },
     "label": {
         "nationality": "Narodowość",

@@ -169,11 +169,10 @@
     height: 10%;
 }
 .availability-tile-header h2{
-    padding: .3rem;
+    padding: 0.5rem 1rem;
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.3rem;
-    margin-left: .5rem;
 }
 .ava-tile-header-title {
     display: flex;

@@ -12,6 +12,7 @@ body {
   padding: 0;
   font-family: 'Roboto';
   max-width: 100%;
+  position: relative;
   /* overflow-y: hidden; */
   /* margin-left: calc(100vw - 100%);  */
 }

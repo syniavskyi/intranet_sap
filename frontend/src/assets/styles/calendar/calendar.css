@@ -37,15 +37,28 @@
 }
 
 .department {
-    width: 12rem;
+    width: 14rem;
     position: absolute;
     right: 2rem;
     bottom: 2rem;
     box-shadow: 0 0 4px;
     background-color: white;
     padding: .2rem;
+    height: 25rem;
+    z-index: 5;
 }
 
+.user-list {
+    height: 20rem;
+    width: 14rem;
+    border: none;
+    overflow: scroll;
+    font-size: .8rem;
+    margin: .1rem;
+}
+.user-list:focus {
+    outline: none;
+}
 .privacy-button {
     background-color: white;
     border: none;
@@ -63,7 +76,9 @@
    box-shadow: 0 0 2px rgb(241, 153, 51);
    border: .7px solid white;
 }
-
+.select-button {
+    width: 13rem;
+}
  .input-active:focus,
  .input-active:hover{
     cursor: pointer;
@@ -80,6 +95,10 @@
     background-color: white;
     border: none;
     box-shadow: 0 0 4px rgb(173, 168, 163);
+}
+.clear-button {
+    right: 4rem;
+    bottom: .4rem;
 }
 .event-feature{
     display: flex;
@@ -109,9 +128,11 @@
 }
 .calendar-modal-date,
 .calendar-modal-date input {
-    width: 15rem;
+    width: 21rem;
     padding: 0;
-    border: 0;
+    height: 2.1rem;
+    text-align: left;
+    text-indent: 0.3rem;
 }
 
 /* new */
@@ -332,6 +353,9 @@ marginForm button {
     .modal-input,
     .privacy-button {
         width: 20.5rem;
+    }
+    .select-button {
+        width: 13rem;
     }
 }
 @media (min-width: 67rem){
