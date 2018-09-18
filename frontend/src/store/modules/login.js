@@ -44,7 +44,10 @@ const actions = {
       method: 'get',
       url: url,
       headers: {
-        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        "Content-type": "application/atom+xml; charset=utf-8",
+        "X-CSRF-Token": "Fetch",
+        "X-Requested-With" : "XMLHttpRequest",
+        "DataServiceVersion" : "2.0"
       },
       data: params
     }).then(res => {
