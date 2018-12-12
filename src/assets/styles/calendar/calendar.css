@@ -1,0 +1,458 @@
+/* body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+} */
+.modal-event {
+    height: auto;
+}
+.modal-calendar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 75%;
+    align-self: center;
+    margin-top: 2%;
+    height: 28rem;
+}
+
+.calendar-tiles {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+.calendar-in-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+}
+
+.cal-and-fils {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+}
+
+.cal-and-fils {
+    box-shadow: 0 0 10px grey;
+}
+
+.calendar-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 10px grey;
+    margin-top: 1rem;
+}
+.add-event-content {
+    display: flex;
+}
+
+.cal-btn-edit,
+.cal-btn-del {
+    align-self: center;
+    border:0;
+    border-radius: 4px;
+    font: .9rem 'Roboto';
+    padding: .2rem .4rem;
+    transition: box-shadow .2s, color .2s, background-color .2s;
+    cursor: pointer;
+}
+
+.cal-btn-edit {
+    background: orange;
+    color: white;
+}
+
+.cal-btn-del {
+    background: transparent;
+    color: grey;
+}
+
+.cal-btn-edit:hover {
+    background: #c47f00;
+}
+
+.cal-btn-del:hover {
+    color: brown;
+}
+
+.department {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* justify-content: center; */
+    width: 14rem;
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    box-shadow: 0 0 10px grey;
+    border-radius: 8px;
+    background-color: white;
+    padding: .2rem;
+    height: 25rem;
+    z-index: 5;
+}
+
+.department:before {
+    position: absolute;
+    top: 15.92rem;
+    left: -1.65rem;
+    transform: rotate(-90deg);
+    content: '';
+    border-style: solid;
+    border-width: 0 15px 22px 15px;
+    border-color: transparent transparent #dfdfdf transparent;
+}
+
+.dep-selects {
+    display: flex;
+    flex-direction: column;
+}
+
+.department-footer {
+    display: flex;
+    width: 92%;
+    justify-content: space-between;
+    padding: .2rem;
+}
+
+.cal-save-btn,
+.cal-back-btn {
+    display:flex;
+    justify-content: center;
+    font: .9rem 'Roboto';
+    cursor: pointer;
+    color: grey;
+    border-radius: 5px;
+    outline: none;
+    transition: color .2s, border-color .2s, box-shadow .2s;
+} 
+
+.cal-back-btn:hover {
+    color: #333;
+    box-shadow: 0 0 8px #333;
+}
+
+.cal-save-btn {
+    background-color: white;
+    border: 1px solid grey;
+    box-shadow: 0 0 4px rgb(173, 168, 163);
+}
+
+.cal-save-btn:hover {
+    color: orange;
+    border-color: orange;
+    box-shadow: 0 0 8px orange;
+}
+
+.cal-back-btn {
+    background-color: white;
+    border: 0;
+    box-shadow: 0 0 4px rgb(173, 168, 163);
+}
+
+.user-list {
+    height: 19rem;
+    width: 14rem;
+    border: none;
+    overflow: auto;
+    font-size: .8rem;
+    padding: 0 .5rem;
+}
+
+.user-list option {
+    color: #5c5c5c;
+    padding: .1rem;
+    font: .9rem 'Roboto';
+}
+
+.user-list:focus {
+    outline: none;
+}
+.privacy-button {
+    background-color: white;
+    border: none;
+    color: inherit;
+    border: .7px solid #ccc;
+    border-radius: 3px;
+    height: 2.2rem;
+    width: 20.5rem;
+    box-shadow: 0 0 10px transparent;
+    transition: box-shadow .2s, border .2s;
+}
+
+.privacy-button:hover,
+.privacy-button:focus {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 8px rgb(241, 153, 51);
+}
+
+.evt-desc,
+.evt-type,
+.evt-priv {
+    display: flex;
+    color: #5e5e5e;
+    font-family: 'Roboto';
+}
+
+.evt-desc {
+    align-self: center;
+}
+
+.evt-priv {
+    font-size: .8rem;
+}
+
+
+.cal-group-label {
+    position: absolute;
+    left: .5rem;
+    top: .4rem;
+    color: orange;
+    font: 1.2rem 'Roboto';
+}
+
+.dep-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #ccc;
+    height: 2rem;
+    border-radius: 4px;
+    color: grey;
+    font: 1.1rem 'Roboto';
+    transition: border-color .2s, color .2s; 
+    cursor: pointer;
+}
+
+.dep-btn:hover,
+.dep-btn:active {
+    color: orange;
+    border-color: orange;
+}
+
+.dep-btn:first-of-type {
+    margin-bottom: .3rem;
+}
+
+.event-feature {
+    display: flex;
+    height: 1.5rem;
+    justify-content: space-between;
+    position: relative;
+    width: 20.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.event-select, 
+.modal-input {
+    width: 13rem;
+}
+.input {
+    padding: 0;
+}
+.cal-filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 11rem;
+    padding-top: .5rem;
+    font-family: inherit;
+    background: white;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+}
+
+.cal-btn {
+    align-self: center;
+    width: 5rem;
+}
+
+.calendar-modal-date,
+.calendar-modal-date input {
+    width: 21rem;
+    padding: 0;
+    height: 2.1rem;
+    text-align: left;
+    text-indent: 0.3rem;
+}
+
+.click-paragraph {
+    margin:0;
+    color: #ff5200eb;
+    font-size: 12px;
+    position: absolute;
+    right: .7rem;
+    top: .65rem;
+    pointer-events: none;
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+    align-self: center;
+}
+.form-buttons button {
+    margin: 0;
+}
+.cal-input {
+    width: 20.5rem;
+    position: relative;
+}
+
+.cal-label {
+    position: absolute;
+    top: -.65rem;
+    left: .25rem;
+    color: orange;
+    background: white;
+    padding: 0 .2rem;
+}
+
+/* neew */
+.add-button {
+    height: 2rem;
+    width: 4.5rem;
+}
+
+.events-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 7rem;
+}
+.add-event-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.add-event-title {
+    font-size: 1.4rem;
+    color: grey;
+    margin: 1rem 2rem;
+}
+
+.selected-day {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 16.6rem;
+}
+
+.li-event {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
+    padding-bottom: .4rem;
+    padding-top: 0;
+    width: 16rem;
+    height: 9.5rem;
+    margin: .5rem;
+    box-shadow: 0 0 10px grey;
+    border-radius: .2rem;
+}
+
+.event-attr {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 6.5rem;
+    width: 15rem;
+}
+
+.low-prio-event,
+.medium-prio-event,
+.high-prio-event {
+    width: 100%;
+    height: .2rem;
+    background-color:#fde997;
+    border-top-left-radius: .2rem;
+    border-top-right-radius: .2rem;
+}
+
+.medium-prio-event {
+    background-color:#fc9354;
+}
+
+.high-prio-event {
+    background-color:#ff6666;
+}
+.event-attr-header {
+    font-size: 20px;
+    color: #333;
+    font-weight: 480;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.event-attr-header p{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color: #380303;
+    font-weight: 480;
+    display: flex;
+    justify-content: center;
+}
+.event-time {
+    display: flex;
+    justify-content: space-between;
+}
+.event-select-error{
+    width: 90%;
+    align-self: center;
+    color: red;
+    font-size: .7rem;
+}
+@media (min-width: 44rem) {
+    .calendar-header-menu {
+        display: none;
+    }
+    .calendar-content {
+        width:80%;
+    }
+}
+
+@media (min-width: 53.125rem) {
+    .calendar-in-row {
+        flex-direction: row;
+    }
+    .cal-and-fils {
+        margin-right: 1rem;
+    }
+    .calendar-tile {
+        margin: 0;
+        align-self: flex-start;
+    }
+}
+@media (min-width: 85rem) {
+    .event-select, 
+    .modal-input,
+    .privacy-button {
+        width: 20.5rem;
+    }
+}

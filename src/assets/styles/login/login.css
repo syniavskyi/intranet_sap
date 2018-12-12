@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+/* body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+} */
+
+.plane-parent-login {
+    flex-shrink: 0;
+    min-height: 39rem;
+    width: 100%;
+    height: 100%;
+}
+
+.plane-login {
+    flex-shrink: 0;
+    min-height: 37rem;
+}
+
+[class*="input-login-"] {
+    width: 15rem;
+}
+
+.input:focus + label[class*='label-login'] {
+    font-size: 1.2rem;
+}
+
+.label-login-email {
+    order: 0; 
+}
+.input-login-email {
+    order: 1;
+}
+.label-login-pass {
+    order: 2; 
+}
+.input-login-pass {
+    width: 14rem;
+    order: 3;
+}
+
+.label + .forgot-pass {
+    margin-top: 0;
+}
+
+.label + .input {
+    margin-bottom: 0.5rem;
+}
+
+.show-pass-eye {
+    width: 1rem;
+    padding: 0;
+}
+
+.login-pass-div {
+    order: 3;
+    width: 20rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.login-pass-div > .input {
+    margin-bottom: 0.5rem;
+}
+
+.forgot-pass {
+    font-size: 0.8rem;
+    color: lightslategray;
+    line-height: 1rem;
+    text-align: right;
+    order: 4;
+    width: 80%;
+    margin-bottom: .5rem;
+    margin-right: 2rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-pass:hover {
+    cursor: pointer;
+    color: orange;
+}
+
+.forgot-pass + .login-error {
+    margin-top: 0rem;
+}
+
+.login-error {
+    display: flex;
+    font-family: 'Raleway';
+    order: 6;
+    background: rgba(255, 0, 0, 0.4);
+    text-align: center;
+    justify-content: center;
+    width: 16rem;
+    padding: 0.05rem;
+    height: 4rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    align-items: center;
+}
+
+.div-select-login {
+    width: 16rem;
+    align-items: center;
+    display: flex;
+    order: 5;
+    align-self: center;
+    justify-content: space-between;
+ }
+
+.div-select-login + .button {
+    margin-top: 2rem;
+}
+.select-login {
+    outline: none;
+    text-indent: 2rem;
+    background: transparent;
+    height: 2rem;
+    width: 10rem;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    background-image: url("../../images/expand2.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.success-alert,
+.error-alert {
+    display: flex;
+    font-family: 'Raleway';
+    order: 6;
+    text-align: center;
+    align-self: center;
+    width: 90%;
+    padding: 0.05rem;
+    height: 3rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    align-items: center;
+}
+
+.success-alert {
+    background: rgba(118, 231, 143, 0.534);
+    color: darkslategrey;
+}
+
+.error-alert {
+    background: rgba(231, 118, 118, 0.534);
+    color: rgb(165, 25, 25);
+}
+
+.login-button {
+    margin-top: 1rem;
+    order: 7;
+}
+
+.login-error + .button-login {
+    margin-top: 0rem;
+}
+
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active,
+button[disabled]:focus  {
+   border: 1px solid #ccc;
+   background-color: transparent;
+   color: #ccc;
+   cursor: not-allowed;
+   box-shadow: none;
+}
+
+button[disabled] span {
+   cursor: not-allowed;
+}
+
+.show-pass-eye {
+    font-size: 0.8rem;
+    align-self: right;
+    order: 1;
+    height: 2.5rem;
+    width: 1rem;
+    z-index: 100;
+    background: transparent;
+    transition: border 0.5s ease;
+    border: none;
+    padding: none;
+    margin:none;
+ }
+ .show-pass-eye:hover {
+     cursor: pointer;
+ }
+ .show-pass-eye:focus {
+     outline: none;
+ }
+ .loading-icon {
+     margin-right: 2px;
+     display: inline-block;
+     animation: spin 2s linear infinite;
+ }
+ 
+ @keyframes spin {
+     100%  {
+         transform: rotate(360deg);
+     }
+ }
+
+@media (min-width: 43rem) {
+    .plane-login {
+        display: flex;
+        width: 70%;
+        height: 70%;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60%);
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .plane-left {
+        width: 29%;
+    }  
+    .label {
+        align-self: flex-start;
+        margin-left: 2.5rem;
+    }
+    .plane-parent-login {
+        height: 100%;
+    }
+}
+
+.fade-alert-enter {
+    opacity: 0;
+}
+
+.fade-alert-enter-active {
+    transition: opacity 2s;    
+}
+
+
+.fade-alert-leave-active  {
+    transition: opacity 2s;   
+    opacity: 0;
+}
+.show-alert-enter {
+opacity: 0;
+}
+
+.show-alert-move {
+    transition: transform 2s; 
+}
+
+.show-alert-enter-active {
+    animation: slide-in 2s ease-out forwards;
+    transition: opacity 2s;
+}
+
+.show-alert-leave-active {
+    animation: slide-out 2s ease-out forwards;
+    transition: opacity 2s;
+    opacity: 0;
+    position: absolute;
+}
+
+@keyframes show-alert-in {
+    from {
+        transform: translateY(20px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes show-alert-out {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(20px);
+    }
+
+}
+
+@media (min-height: 0rem) and (max-height: 38rem) {
+    .plane {
+        justify-content: flex-start;
+    }
+    .plane-left {
+        margin-top: 1rem;
+    }
+}
+
+@media (min-height: 0rem) and (max-height: 35rem) and (min-width: 35rem) {
+    .plane-login {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: row;
+        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60.7%);
+        justify-content: flex-start;
+        min-height: 26rem;
+        flex-shrink: 0;
+    }
+    .plane-parent-login {
+        min-height: 27rem;
+    }
+    .label {
+        margin-left: 2.5rem;
+        align-self: flex-start;
+    }
+}
+
+@media (min-width: 43rem) {
+    .div-select-login {
+        align-items: center;
+        justify-content: space-between;
+        width: 20rem;
+     }
+     .div-select-login > select {
+         margin-right: 2rem;
+         margin-top: 1rem;
+     }
+}
+

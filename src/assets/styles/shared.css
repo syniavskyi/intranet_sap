@@ -1,0 +1,775 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+
+/* Planes for Login and Registration  */
+
+.plane-parent {
+    display: flex;
+    background: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.plane {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background: radial-gradient(ellipse 162% 190% at -1% 50%, #f7f7f7 55%, lightgray 60%, white 60.7%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    /*background: radial-gradient(ellipse 50% 150% at 4% 50%, white 58%, #e5e5e5 60%, white 60%);*/
+}
+
+/* Planes for side navigation Menu */
+
+.plane-nav-and-content {
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #d8d8d8;
+    min-height: 45rem;
+}
+
+.nav-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.nav-title {
+    width: 100%;
+    font-family: 'Roboto';
+    margin: 0;
+    padding: .5rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 143, 32);
+    text-shadow: 0px 0px 5px rgba(255, 165, 0, 0.45);
+}
+
+.logout-button {
+    position: relative;
+    z-index: 1;
+    top: .5rem;
+    left: .7rem;
+    background: url(../images/nav3/power-20.png) no-repeat center;
+    width: 2.6rem;
+    height: 2.2rem;
+    border: 0;
+    border-radius: 50%;
+    transition: all .3s ease;
+    padding:0;
+}
+
+.logout-button:hover {
+    cursor:pointer;
+    box-shadow: 0 0 10px rgb(168, 168, 168);
+}
+
+.logout-button:hover > .logout-text {
+    display: flex;
+    text-shadow: 0 0 5px rgb(168, 168, 168);
+}
+
+.logout-text {
+    font-size: 1rem;
+    color:rgb(168, 168, 168);
+    animation: slide-up;
+    animation-duration: .4s;
+    font-family: 'Roboto';
+    position: absolute;
+    top: 2.5rem;
+    left: -.5rem;
+    display:none;
+}
+
+.close-btn {
+    font-size: 1.2rem;
+    align-self: flex-start;
+    margin-top: .5rem;
+    margin-right: .5rem;
+    font-size: 1.5rem;
+    background: transparent;
+    color: #ccc;
+    font-weight: bold;
+    border: 0;
+    -webkit-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: grey;
+}
+
+.btn-delete-row {
+    height: 2rem;
+    color: #333;
+    background: #ccc;
+    box-shadow: 0 3px 3px -2px gray;
+    text-transform: capitalize;
+    border: 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    justify-content: center;
+    align-items: center;
+    margin: .5rem;
+    outline-color: orange;
+}
+
+.btn-delete-row:hover {
+    cursor: pointer;
+    background: rgb(173, 173, 173);
+    color: rgb(90, 90, 90);
+}
+
+.plane-nav {
+    z-index: 1600;
+    /* display: none; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* width: 15%; */
+    width: 300px;
+    align-items: center;
+    min-width: 12rem;
+    min-height: 45rem;
+    height: auto;
+    /* background: url("../images/banner4.png"); */
+    background: white;
+    box-shadow: 0 0 5px 3px grey;
+}
+
+.nav-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 8.1rem;
+    padding: 0;
+}
+
+.nav-user-img {
+    border-radius: 50%;
+    box-shadow: 0 0 15px grey;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav li {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+li p {
+    transition: margin .35s ease;
+}
+/* li:hover p {
+    margin-left: 13%;
+} */
+
+.nav-router-link {
+    width: 100%;
+    height: 100%;
+    /* margin: .3rem 1.2rem; */
+    margin: 1.5% 10%;
+    text-decoration: none;
+}
+
+.nav-item {
+    font-family:'Roboto';
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border:0;
+   /* box-shadow: 0 -7px 9px -7px rgba(0,0,0,0.4); */
+    background: transparent;
+    text-decoration: none;
+    padding: 0;
+    border-radius: .31rem;
+    transition: all 0.2s ease;
+}
+
+.nav-item-img {
+    display: flex;
+    margin-left: 5%;
+}
+
+.nav-item p {
+    display: flex;
+    color: #616161;
+    margin: 0;
+    padding: 1rem 0;
+    margin-left: 1rem;
+    justify-content: flex-start;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.active-router-link {
+    cursor: pointer;
+    background: #FFB05C;
+    box-shadow: 0 16px 15px -14px gray;
+    outline: none;
+    border-radius: .3rem;
+}
+.nav-item:hover,
+.nav-item:focus {
+    cursor: pointer;
+    background: lightgrey;
+}
+
+
+.active-router-link p {
+    color: white;
+}
+
+.nav-item:hover p,
+.nav-item:focus p {
+    color: white;
+}
+/* Planes for side navigation menu */
+
+.backdrop { 
+    position: fixed;
+    display: flex;
+    display:none;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.plane div {
+    flex-shrink: 0;
+}
+
+.plane-left {
+    min-width: 9rem;
+    min-height: 13rem; 
+    width: 29%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.login-credentials {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-user {
+    width: 8rem;
+}
+
+.p-hello {
+    font-size: 2rem
+}
+
+.p-login {
+    text-align: center;
+    max-width: 11rem;
+}
+
+.input {
+    font-family: inherit;
+    margin-bottom: 2rem;
+    outline: none;
+    font-size: 1rem;
+    height: 2rem;
+    padding: 0.2rem 0.6rem;
+    border: 0px;
+    border-bottom: 2px solid grey;
+    font-family: inherit;
+    background: rgba(255,255,255, 0);
+    transition: border-bottom 0.4s ease;
+    border-radius: 0px;
+}
+
+.label {
+    height: 1.8rem;
+    align-self: center;
+    color: rgba(0,0,0, 0.6);
+    transition: font-size 0.3s ease;
+}
+
+.input:hover,
+.input:focus {
+    cursor: text;
+    border-bottom: 2px solid orange;
+}
+
+.button {
+    height: 3.5rem;
+    width: 12rem;
+    background: #ff974b;
+    border: 0;
+    border-radius: 5px;
+    transition: all 0.4s ease;
+    font-family: inherit;
+    font-weight: 500;
+    color: white;
+    font-size: 1rem;
+    align-self: center;
+}
+
+.button .span-arrow {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.button .span-arrow:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -1.2rem;
+  transition: 0.4s;
+}
+
+.button:hover .span-arrow {
+  padding-right: 1.2rem;
+}
+
+.button:hover .span-arrow:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button:hover,
+.button:focus {
+    cursor: pointer;
+    box-shadow: 1px 0px 50px rgba(255, 151, 71, 0.78);
+    background: rgb(240, 134, 52);
+}
+.slide-enter-active {
+    animation: slide-in 400ms ease-out forwards;
+}
+
+.slide-leave-active {
+    animation: slide-out 400ms ease-out forwards;
+}
+
+/* CHECKBOX */
+
+.checkbox-wrap {
+    display: flex;
+    align-self: center;
+    position: relative;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox-margin {margin-right:.5rem}
+.checkbox-wrap input {
+    opacity: 0;
+    margin:5px;
+    padding: 0;
+}
+.checkbox-in {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: rgb(224, 224, 224);
+    border-radius:2px;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.checkbox-wrap input:checked ~ div:after {
+    opacity: 1;
+}
+.checkbox-wrap input:checked ~ div {
+    background: orange;
+}
+
+.checkbox-wrap input:checked:hover ~ div {
+    background: rgb(218, 141, 0);
+}
+.checkbox-wrap input:disabled ~ div {
+    background: rgb(243, 243, 243);
+    cursor: context-menu;
+    pointer-events: none;
+}
+
+/* WHEN CHECKBOX IS CHECKED BUT DISABLED */
+.checkbox-wrap input:disabled:checked ~ div {
+    background: orange;
+}
+.checkbox-wrap input:disabled:checked:hover ~ div {
+    background: rgb(243, 243, 243);
+}
+/* WHEN CHECKBOX IS CHECKED BUT DISABLED */
+
+.checkbox-wrap div:hover {
+    background: #ccc;
+}
+
+.checkbox-in:after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    opacity:0;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Grey out checkbox in Profile Tile experience */
+.checkbox-margin:disabled:not(:checked),
+.checkbox-margin:disabled:not(:checked) ~ div,
+.checkbox-margin:disabled:not(:checked) ~ p {
+    display: none;
+    color: #ccc;
+}
+
+.checkbox-label {
+    padding:0;
+    margin:0;
+    cursor: pointer;
+    margin-left:.5rem;
+}
+/* CHECKBOX */
+
+/* Disabling Mozilla Firefox automatic red box-shadow for required inputs */
+input:required {
+    box-shadow: none;
+}
+
+/* Functional Buttons */
+.func-btn {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    border:2px solid transparent;
+    color: #f7f7f7;
+    background: #f7a000;
+    font: 1rem 'Open Sans';
+    padding: 0.25rem .4rem;
+    margin-right: 1rem;
+    /* box-shadow: #a76c00 1px 1px 0,
+    #a76c00 2px 2px 0,
+    #a76c00 3px 3px 0; */
+    box-shadow: 0 2px 8px grey;
+    transition: box-shadow 0.25s ease;
+    cursor: pointer;
+    max-height: 2rem;
+    margin-top:.5rem;
+}
+
+.func-btn:hover {
+    box-shadow:0 1px 16px #bd8f1c;
+}
+
+.clear-btn,
+.oclear-btn {
+    background-color: white;
+    border-radius: 4px;
+    padding: .3rem .4rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.clear-btn {
+    border: 2px solid grey;
+    color: grey;
+}
+.clear-btn:hover {
+    color:white;
+    background-color: grey
+}
+
+.oclear-btn {
+    border: 2px solid orange;
+    color: orange;
+}
+.oclear-btn:hover {
+    background-color: orange;
+    color: white;
+}
+/* Functional Buttons */
+
+/* LOADER */
+@keyframes loader {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0.2;
+        transform: translateY(-1rem);
+    }
+}
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.5rem;
+    margin-left: -4rem;
+    display: flex;
+    justify-content: center;
+    z-index: 2000;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background: radial-gradient(#b2b2b2 50%, transparent 80% );
+}
+.loader > div {
+    width: 1rem;
+    height: 1rem;
+    margin: 4rem 0.2rem;
+    background: orange;
+    border-radius: 50%;
+    animation: loader 0.6s infinite alternate;
+}
+.loader > div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.loader > div:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* LOADER */
+
+/* MESSAGE TOAST */
+.toast {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    font-size: .9rem;
+    bottom: 3rem;
+    text-align: center;
+    left: 50%;
+    display: flex;
+    max-width: 10rem;
+    flex-wrap: wrap;
+    color: white;
+    margin-left: -4rem;
+    background: rgba(0, 0, 0, 0.507);
+    padding: 0.5rem 0.6rem;
+    border-radius: 4px;
+    animation: slide-in-up 0.3s;
+    word-break: break-word;
+    box-shadow: 0 0 8px #333;
+    z-index: 1450;
+}
+/* MESSAGE TOAST */
+
+/* tile head */
+.tile-head {
+    display: flex;
+    flex-direction: column;
+    min-height: 3.4rem;
+    height: 10%;
+}
+
+.tile-head-title {
+    display: flex;
+    font-weight: 500;
+    color: #333;
+    margin: 0rem;
+    padding: 0.5rem 1rem;
+}
+
+.tile-head-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tile-content {
+    display: flex;
+}
+
+.tile-underscore {
+    width: 5rem;
+    height: 0.5rem;
+    background: orange;
+}
+
+.tile-content {
+    display: flex;
+    height: 90%;
+    align-self: center;
+    width: 100%;
+    justify-content: center;
+}
+/* tile head */
+
+/* background: linear-gradient(to right, #ffffff 0%,#e5e5e5 10%,#e5e5e5 90%,#ffffff 100%); */
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-up {
+      from {
+          transform: translateY(150px);
+          opacity: 0;
+      }
+      to {
+          transform: translateY(0);
+          opacity: 1;
+      }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+  }
+  @keyframes slide-to-left {
+      from {
+          transform: translateX(-100px);
+          opacity:0;
+      }
+      to {
+          transform:translateX(0);
+          opacity: 1;
+      }
+  }
+
+/* media for dashboard, nav and others */
+
+@media (min-width: 40.1rem) {
+    .content-header-menu {
+        display: none;
+    }
+}
+@media (min-width: 40rem) {
+    .plane-nav {
+        z-index: 1400;
+        position: static;
+        width: 20%;
+        display: flex;
+        min-width: 15.7rem;
+    }
+    .close-btn {
+        visibility: hidden;
+    }
+    .plane-nav-and-content {
+        display: flex;
+        flex-direction: row;
+    }
+    .dashboard-header-menu {
+        display: none;
+    }
+}
+
+.plane-component {
+    margin:0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto';
+}
+
+.component-nav-and-content {
+    display: flex;
+    flex-direction: row;
+    background: #d8d8d8;
+    min-height: 100%;
+}
+
+.component-content {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: min-content;
+}
+.content-header {
+    align-self: center;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3%;
+    min-height: 3.5rem;
+}
+.content-header-title-and-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-header-menu {
+    color: #7b7777;
+    margin: 0;
+    line-height: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 0 .5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.content-header-menu:hover {
+    color: orange;
+}
+.content-header-title {
+    color: #7b7777;
+    margin: 0;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@media(min-width: 44rem) {
+    
+    .component-content {
+        width: 80%;
+    }
+}

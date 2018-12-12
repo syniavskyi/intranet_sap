@@ -1,0 +1,259 @@
+/* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA / DATEPICKER - start */
+.cd-for-input-xs,
+.cd-for-input-s,
+.cd-for-input,
+.cd-for-input-xl,
+.cd-for-input-xxl,
+.cd-for-select,
+.cd-for-select-xl {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.cd-for-input-xs {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 8.6rem;
+}
+
+.cd-for-input-s{
+    width: 13rem;
+}
+
+.cd-for-select {
+    width: 15rem;
+}
+
+.cd-for-input {
+    width: 15rem;
+}
+
+.cd-for-input-xl,
+.cd-for-select-xl {
+    width: 20.5rem;
+}
+
+.cd-for-input-xxl {
+    width: 26rem;
+}
+
+.cd-input {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: 2rem;
+    font-family: 'Roboto';
+    font-size: 1rem;
+    background :transparent;
+    border:0;
+    outline: none;
+    text-indent: 0.5rem;
+    border-bottom: 1px solid #757575;
+    position: relative;
+    cursor: text;
+}
+
+.cd-input[type="time"] {
+    height: 2.2rem;
+}
+
+.cd-textarea {
+    max-width: 95%;
+    min-width: 94%;
+    min-height: 1.5rem;
+    padding: 0.3rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid lightgrey;
+}
+
+.cd-textarea:disabled {
+    background-color: transparent;
+}
+
+.cd-select,
+.cd-tselect {
+    display: flex;
+    width: 100%;
+    height: 2rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    border:0;
+    font-family: 'Roboto';
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    font-size: 1rem;
+    background: white;
+    text-indent: .5rem;
+    background-image: url("../images/expand2.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    border: 1px solid lightgrey;
+    outline-color: orange;
+    cursor: pointer;
+}
+
+.cd-date {
+    width: 20.5rem;
+    text-align: center;
+    border: 0;
+    display:flex;
+    align-items:center;
+    border-radius: 4px;
+    outline-color: orange;
+}
+.cd-date input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20.5rem;
+    text-align: center;
+    height: 1.8rem;
+    border:0;
+    border-radius: 4px;
+    background: transparent;
+    font-size: 1rem;
+    border: 1px solid rgb(207, 207, 207);
+    outline-color: orange
+}
+
+.cd-label,
+.cd-slabel {
+    display: flex;
+    align-items: flex-end;
+    color:#999; 
+    position:absolute;
+    pointer-events:none;
+    background-color: white;
+    transition:0.3s ease all; 
+    font-weight: 400;
+    font-size:1.2rem;
+    padding: 0 .2rem;
+}
+
+/* transparent label */
+.cd-tlabel {
+    display: flex;
+    align-items: flex-end;
+    color:#999; 
+    position:absolute;
+    pointer-events:none;
+    background: transparent;
+    transition:0.3s ease all; 
+    font-weight: 400;
+    font-size:1.2rem;
+}
+
+.cd-label {
+    top: 0.5rem;
+    left:0.3rem;
+}
+
+.cd-slabel {
+    top: 0.25rem;
+    left:0.3rem;
+}
+
+.cd-tlabel {
+    top: 0.3rem;
+    left: 0.3rem;
+}
+
+.cd-input:focus ~ label,
+.cd-input:valid ~ label,
+.cd-select:focus ~ label,
+.cd-select:valid ~ label,
+.cd-textarea:focus ~ label,
+.cd-textarea:valid ~ label,
+.cd-date ~ label {
+    top: -.65rem;
+    font-size: .9rem;
+    color: rgb(255, 145, 0);
+    padding: 0 .2rem;
+}
+
+.cd-tselect:valid ~ label,
+.cd-tselect:focus ~ label {
+    top: -.6rem;
+    font-size: .9rem;
+    color: rgb(255, 145, 0);
+    background: linear-gradient(#D8D8D8 25%, white);
+    padding: 0 .2rem;
+}
+
+.cd-span { position:relative; display:flex; width:100%; }
+    
+.cd-span:before, .cd-span:after {
+    content:'';
+    display: table;
+    flex-shrink: 0;
+    height:2px; 
+    width:0;
+    bottom:0; 
+    position:absolute;
+    background:rgb(255, 145, 0); 
+    transition:0.5s ease all; 
+    -moz-transition:0.5s ease all; 
+    -webkit-transition:0.5s ease all;
+}
+.cd-span:before {
+    left:50%;
+}
+.cd-span:after {
+    right:50%; 
+}
+
+ .cd-input:focus ~ span:before, .cd-input:focus ~ span:after {
+    width: 50%;
+}
+
+.cd-range,
+.cd-range input {
+    font-size: 1rem;
+    width: 100%;
+    width: 8rem;
+}
+
+.cd-range,
+.cd-range input {
+    border: 1px solid lightgrey;
+    text-align: center;
+    border-radius: 4px;
+    height: 1.9rem;
+}
+
+/* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA  - end */
+
+/* COOL RADIOBUTTON */
+.cd-rbtn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border-radius: 50%;
+    appearance: none;
+    border: 2px solid #999;
+    width: 1rem;
+    height: 1rem;
+    transition: border .3s;
+    margin:0;
+    cursor: pointer;
+}
+
+.cd-rbtn:checked {
+    border: 8px solid orange;
+    box-shadow: 0 0 10px orange;
+}
+
+.cd-rbtn:checked + label {
+    color: grey;
+}
+
+.cd-Lrbtn {
+    color: #999;
+    cursor: pointer;
+    transition: color .1s;
+}
+/* COOL RADIOBUTTON */

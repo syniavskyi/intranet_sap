@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
+@impo\rt url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
+
+.modal-text {
+    font-family: 'Raleway';
+    color: grey;
+    display: flex;
+    align-self: center;
+}
+
+.modal-text > p {
+    padding: 5rem;
+}
+
+.reg-tile {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 95%;
+    align-items: center;
+    align-self: center;
+    border-radius: 4px;
+    box-shadow: 0 0 10px grey;
+    height: 30rem;
+    justify-content: center;
+}
+
+.registration-credentials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: center;
+}
+
+.registration-credentials > div {
+    margin: 1rem;
+}
+
+.checkbox-absolute {
+    position: absolute;
+    right: -1.7rem;
+    top: .45rem;
+}
+
+.div-pass {
+    display: flex;
+    flex-direction: row;
+}
+
+.reg-pass-input {
+    width: 9.7rem;
+    order: 0;
+    font-family:Verdana,sans-serif;
+}
+
+.gen-pass {
+    font-size: 0.8rem;
+    font-family: 'Raleway';
+    align-self: flex-start;
+    order: 1;
+    height: 2.525rem;
+    width: 5rem;
+    z-index: 100;
+    background: transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-top: 2px solid transparent;
+    transition: border 0.5s ease;
+}
+
+.gen-pass:hover {
+    cursor: pointer;
+    border: 2px solid orange;
+}
+
+.gen-pass:focus {
+    outline: none;
+}
+
+.div-select {
+    width: 80%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+ }
+
+.div-select + .div-select {
+    margin-top: 1rem;
+}
+
+.div-select + .button {
+    margin-top: 2rem;
+}
+
+.select {
+    text-indent: 2rem;
+    background: transparent;
+    height: 2rem;
+    width: 12rem;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    background-image: url("../../images/expand2.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+@media (min-width: 43rem) {
+    .plane-registration {
+        display: flex;
+        width: 70%;
+        height: 70%;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60%);
+        flex-direction: row;
+        justify-content: flex-start;
+        min-height: 32rem;
+    }
+    .plane-left {
+        width: 29%;
+    }     
+    .label {
+        align-self: flex-start;
+        margin-left: 2.5rem;
+    }
+    .div-select {
+        width: 90%;
+        align-self: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .select {
+        margin-left: auto;
+        margin-top: 1rem;
+    }
+    .plane-parent-registration {
+        height: 100%;
+        min-height: 0;
+    }
+}
+
+@media (min-height: 0rem) and (max-height: 35rem) and (min-width: 43rem) {
+    .plane-registration {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: row;
+        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60%);
+        justify-content: flex-start;
+        min-height: 32rem;
+        flex-shrink: 0;
+    }
+    .plane-parent-registration {
+        min-height: 32rem;
+        height: 100%;
+        flex-shrink: 0;
+    }
+}

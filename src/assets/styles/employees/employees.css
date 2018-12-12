@@ -1,0 +1,208 @@
+.emp-tile {
+    display: flex;
+    background: white;
+    align-self: center;
+    min-height: 10.5rem;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px grey;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px
+}
+
+.emp-filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
+.emp-section {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    min-height: 7rem;
+}
+
+.emp-btn {
+    width: 6rem;
+    align-items :center;
+    justify-content: center;
+}
+
+.employees-table {
+    margin:0;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 88%;
+    align-self: center;
+    background: white;
+    box-shadow: 0 0 10px grey;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.emp-thead {
+    display: none;
+    width: 100%;
+}
+
+.emp-thead-item {
+    display:flex;
+    width: 20%;
+    font-weight: bold;
+    color: #e5e5e5;
+}
+
+.emp-tbody {
+    display: flex;
+    flex-direction: column;
+}
+
+.emp-tbody-row {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.emp-tbody-item {
+    display:flex;
+    height: 3rem;
+}
+.emp-tbody-item:first-child .emp-tbody-item-title:first-child {
+    border-top-left-radius: 5px;
+}
+.emp-tbody-item:last-child .emp-tbody-item-title:first-child {
+    border-bottom-left-radius: 5px; 
+}
+.emp-tbody-item-title {
+    display: flex;
+    width: 27%;
+    height: 3rem;
+    background: rgb(192, 192, 192);
+    justify-content: center;
+    align-items: center;
+    color: #e5e5e5;
+    text-align: center;
+    font-weight: bold;
+}
+
+.emp-tbody-item-txt {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: .5rem;
+    align-items: center;
+    width: 73%;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.emp-tbody-item:first-child .emp-tbody-item-txt {
+    border-top: 1px solid #ccc;
+}
+
+.emp-tbody-item:last-of-type .emp-tbody-item-txt {
+    font-size: .9rem;
+}
+
+@media (min-width: 50rem) {
+    .emp-tile {
+        min-height: 8rem;
+    }
+    .emp-section {
+        min-height: 4rem;
+    }
+    .emp-section {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 44rem) {
+    .employees-content  {
+        width: 80%;
+    }
+    .employees-header-menu {
+        display: none;
+    }
+    
+}
+
+@media (min-width: 50rem) {
+    .employees-table {
+        width: 95%;
+    }
+    .emp-thead {
+        display:flex;
+    }
+    .emp-thead-item {
+        justify-content: center;
+        height: 3rem;
+        align-items: center;
+        background: rgb(192, 192, 192);
+    }
+    .emp-tbody-row {
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+    }
+    .emp-tbody-item {
+        padding:0;
+        height: 2.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+    .emp-tbody-item-txt { 
+        padding-left: 0;
+        width: 100%;
+        justify-content: center;
+        border: 0;
+    }
+    .emp-tbody-item:first-child .emp-tbody-item-txt {
+        border:0;
+    }
+    .emp-tbody-item-title {
+        display: none;
+    }
+    .emp-tbody-item:nth-of-type(1),
+    .emp-thead-item:nth-of-type(1) {
+        width: 25%;
+        flex-shrink: 1;
+    }
+    .emp-tbody-item:nth-of-type(5),
+    .emp-thead-item:nth-of-type(5) {
+        width: 35%;
+        flex-shrink: 1;
+    }
+    .emp-thead-item:nth-of-type(2),
+    .emp-thead-item:nth-of-type(3),
+    .emp-tbody-item:nth-of-type(2),
+    .emp-tbody-item:nth-of-type(3) {
+        width: 10%;
+    }
+    .emp-tbody-item:nth-of-type(4),
+    .emp-thead-item:nth-of-type(4) {
+        width: 20%;
+        flex-shrink: 2;
+    }
+    .emp-tbody-item:nth-of-type(odd) {
+        background:none;
+    }
+    .emp-tbody-row:nth-of-type(even) {
+        background: rgb(231, 231, 231);
+    }
+}
+
+@media (min-width: 62rem) {
+    .emp-filters {
+        width: 70%;
+    }
+}
