@@ -257,7 +257,8 @@
     "select": {
         "language": {
             "english": "Angielski",
-            "polish": "Polski"
+            "polish": "Polski",
+            "ukrainian": "Ukraiński"
         },
         "cvLanguage": {
             "english": "EN",
