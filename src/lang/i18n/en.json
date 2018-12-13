@@ -260,7 +260,8 @@
     "select": {
         "language": {
             "english": "English",
-            "polish": "Polish"
+            "polish": "Polish",
+            "ukrainian": "Ukrainian"
         },
         "cvLanguage": {
             "english": "EN",

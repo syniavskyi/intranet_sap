@@ -11,6 +11,10 @@ const state = {
     {
       id: 'pl',
       description: i18n.t('select.language.polish')
+    },
+    {
+      id: 'ua',
+      description: i18n.t('select.language.ukrainian')
     }
   ],
   loginLanguage: '',
@@ -46,6 +50,10 @@ const actions = {
       {
         id: 'pl',
         description: i18n.t('select.language.polish')
+      },
+      {
+        id: 'ua',
+        description: i18n.t('select.language.ukrainian')
       }
     ]
     commit('SET_LANG_LIST', newList);
