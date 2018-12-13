@@ -32,21 +32,22 @@ const mutations = {
 
 const actions = {
     logout({commit}){
-        let URL2 = "?sap-user=''&sap-password=''&sap-language=''"
-        var URL1 = "http://nw5.local.pl:8050/sap/public/bc/icf/logoff"
+        // let URL2 = "?sap-user=''&sap-password=''&sap-language=''"
+        var URL1 = window.location.origin + "/api/sap/public/bc/icf/logoff"
         axios.get(URL1).then(res => {
-            axios({
-                method: 'get',
-                url: URL2,
-                statusCode: { 401: function() {
-                    //This empty handler function will prevent authentication pop-up in chrome/firefox
-                } }
-              }).then(res => {
-                console.log(res)
-                commit('CLEAR_AUTH_DATA');
-              }).catch(error => {
-                console.log(error)
-            })
+            // axios({
+            //     method: 'get',
+            //     url: URL2,
+            //     statusCode: { 401: function() {
+            //         //This empty handler function will prevent authentication pop-up in chrome/firefox
+            //     } }
+            //   }).then(res => {
+            //     console.log(res)
+            //     commit('CLEAR_AUTH_DATA');
+            //   }).catch(error => {
+            //     console.log(error)
+            // })
+            commit('CLEAR_AUTH_DATA');
             localStorage.setItem('authorized', "false")
             router.replace('/');
         }).catch(error => {
