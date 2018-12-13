@@ -501,7 +501,7 @@ export default {
       this.disableSubmit = false;
       let data = {
         file: this.photo,
-        userId: localStorage.getItem("id"),
+        userId:  this.selectedUser,//localStorage.getItem("id"),
         type: "USER-PHOTO",
         language: "PL"
       };
