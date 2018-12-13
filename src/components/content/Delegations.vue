@@ -140,7 +140,7 @@ let utils = require('../../utils')
 export default {
     data() {
         return {
-            delegationUsername: null,
+            delegationUsername: localStorage.getItem('id'),
             generatingPdfMode: false
         }
     },
@@ -209,7 +209,7 @@ export default {
             } 
         },
         setUsername(){
-            this.delegationUsername = this.newDelegation.userId
+            this.delegationUsername = this.newDelegation.userId;
             this.setDelegationNo()
         },
         generatePdf() {
