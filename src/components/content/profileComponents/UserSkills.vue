@@ -20,7 +20,6 @@
           <button class="profile-edit-btn-e" :disabled="bDisabled" v-if="editMode" @click="save()"><span class="prof-btn-txt">{{ $t("button.save") }}</span><span class="prof-btn-icon">&#10004;</span></button>
         </div>
       </div>
-      
       <div class="tile-underscore"></div>
     </div>
     <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
@@ -51,8 +50,10 @@
                 <label class="label-select-profile">{{ $t("label.level") }}</label>
               </div>
               <div class="prof-skills-btns">
-                <button class="prof-skills-delete" @click="remove(index)" v-if="editMode">{{ $t("button.delete") }}</button>
-                <button class="prof-skills-save saveLangBtn" :disabled="true" @click="saveLang(index)" v-if="editMode">{{ $t("button.save") }}</button>
+                <button class="prof-skills-delete" @click="remove(index)" v-if="editMode" title="usuń">&#10005;</button>
+                <!-- {{ $t("button.delete") }} -->
+                <button class="prof-skills-save" :disabled="true" @click="saveLang(index)" v-if="editMode" title="zapisz">&#10004;</button>
+                <!-- {{ $t("button.save") }} -->
               </div>
             </div>
           </div>
@@ -72,7 +73,7 @@
             <!-- Języki programowania -->
             <input v-on:keyup.enter="addProgramLang" required class="inputProfile inputEditPos" v-if="editMode" v-model="newProgramLang"/>
             <span class="prof-div-bar"></span>
-            <button class="prof-div-pos-btn" v-if="editMode" @click="addProgramLang">+</button>
+            <button class="prof-div-pos-btn" v-if="editMode" @click="addProgramLang">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'ProgramLang', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.programmingLanguages") }}</label>
             <div class="prof-skills-elems">
@@ -85,7 +86,7 @@
             <!-- Technologie -->
             <input v-on:keyup.enter="addTechnology" required class="inputProfile inputEditPos" v-if="editMode" v-model="newTechnology"/>
             <span class="prof-div-bar"></span>
-            <button tooltip="usuń" class="prof-div-pos-btn" v-if="editMode" @click="addTechnology">+</button>
+            <button tooltip="usuń" class="prof-div-pos-btn" v-if="editMode" @click="addTechnology">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'Technologies', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.technologies") }}</label>
             <div class="prof-skills-elems">
@@ -96,7 +97,7 @@
             <!-- Extensions -->
             <input v-on:keyup.enter="addExtension" required class="inputProfile inputEditPos" v-if="editMode" v-model="newExtension"/>
             <span class="prof-div-bar"></span>
-            <button class="prof-div-pos-btn" v-if="editMode" @click="addExtension">+</button>
+            <button class="prof-div-pos-btn" v-if="editMode" @click="addExtension">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'Extensions', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.extensions") }}</label>
             <div class="prof-skills-elems">
@@ -107,7 +108,7 @@
             <!-- Additional experience -->
             <input v-on:keyup.enter="addAdditional" required class="inputProfile inputEditPos" v-if="editMode" v-model="newAdditional"/>
             <span class="prof-div-bar"></span>
-            <button class="prof-div-pos-btn" v-if="editMode" @click="addAdditional">+</button>
+            <button class="prof-div-pos-btn" v-if="editMode" @click="addAdditional">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'AdditionalSkills', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.additionalSkills") }}</label>
             <div class="prof-skills-elems">
@@ -214,11 +215,11 @@ export default {
             this.userLangs[index].LanguageId &&
             this.userLangs[index].LangLevel)
         ) {
-          document.getElementsByClassName("saveLangBtn")[
+          document.getElementsByClassName("prof-skills-save")[
             index
           ].disabled = false;
         } else {
-          document.getElementsByClassName("saveLangBtn")[index].disabled = true;
+          document.getElementsByClassName("prof-skills-save")[index].disabled = true;
         }
       // }  
     },
