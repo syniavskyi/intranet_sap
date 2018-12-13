@@ -136,7 +136,7 @@
                 <div class="profile-tile-content">
                   <div class="profile-user-header">
                     <div class="profile-user-img">
-                      <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
+                      <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px" >
                       <p class="profile-error profile-error-image" v-if="photoUploadError">{{ $t("message.photoUploadError") }}</p>
                       <label for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
                         <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload" id="change-user-image">
@@ -303,21 +303,6 @@ export default {
     }
   },
   mounted() {
-  //   const sUserId = localStorage.getItem("id"),
-  //               sLanguage = 'PL',
-  //               sFileType = "USER-PHOTO",
-  //               image = document.getElementById('userProfilePhoto');
-
-  //           const url =
-  //               "http://nw5.local.pl:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileType='" +
-  //               sFileType +
-  //               "',Language='" +
-  //               sLanguage +
-  //               "',UserAlias='" +
-  //               sUserId +
-  //               "')/$value";
-
-  //         image.src = url
   },
   // set login language
   beforeRouteLeave(to, from, next) {
@@ -383,7 +368,7 @@ export default {
       displayMenu: "getShowMenu",
       displayOverlay: "getShowMenuOverlay",
       usersList: "usersList",
-      userPhoto: "getUserPhotoUrl",
+      userPhoto: "getSelectedUserPhotoUrl",
       loginAlias: "getLoginAlias",
       disabledBtnToEdit: "getDisabledBtnToEdit",
       showLeavePageDialog: "getLeavePageDialog",
