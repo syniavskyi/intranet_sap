@@ -154,11 +154,13 @@ body {
     flex-direction: column;
     width: 10rem;
     height: 10rem;
-    margin: .5rem;
+    margin: .7rem;
     box-shadow: 0 0 8px #ccc;
     border-radius: 4px;
     padding: .5rem;
     justify-content: space-between;
+    flex:1;
+    flex-basis: 8rem;
 }
 
 .event-type {

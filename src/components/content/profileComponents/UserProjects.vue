@@ -69,12 +69,13 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.duration") }} </div>
               <div class="prof-tbody-item-txt">
-                <p class="table-p">{{ $t("label.startDate") }}</p>
+                <p class="prof-table-p" v-if="editMode">{{ $t("label.startDate") }}</p>
                 <p class="table-p" v-if="!projectEditMode"> {{ formatDate(userProjects[index].DateStart) }} </p>
                <v-date-picker popoverDirection="top" :max-date="project.IsCurrent ? new Date() : project.DateEnd" v-if="projectEditMode" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateStart">
                   <input value="userProjects[index].DateStart" />
                 </v-date-picker>
-                <p class="table-p">{{ $t("label.endDate") }}</p>
+                <div class="table-p">&#8722;</div>
+                <p class="prof-table-p" v-if="editMode">{{ $t("label.endDate") }}</p>
                 <div name="endDateDiv" :id="formatId(index)">
                   <p class="table-p" v-if="!projectEditMode && !project.IsCurrent"> {{ formatDate(userProjects[index].DateEnd) }} </p>
                   <v-date-picker popoverDirection="top" :max-date="new Date()" :min-date="project.DateStart" v-if="projectEditMode && !project.IsCurrent" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateEnd">
@@ -115,7 +116,7 @@
             </div>
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.Descr") }} </div>
-              <button class="btn-hint" v-if="projectEditMode" @click="showHintFnProject({show: true, index: index})">?</button>
+              <button class="btn-hint-item" v-if="projectEditMode" @click="showHintFnProject({show: true, index: index})">?</button>
               <div class="prof-tbody-item-txt">
                 <!-- class="profile-table-textarea" -->
                 <textarea class="cd-textarea" :disabled="!projectEditMode" @input="checkFields(index)" v-model="userProjects[index].Description" />

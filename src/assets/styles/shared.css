@@ -157,7 +157,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 8.1rem;
+    min-height: 12rem;
     padding: 0;
 }
 
@@ -482,7 +482,7 @@ input:required {
     border-radius: 4px;
     border:2px solid transparent;
     color: #f7f7f7;
-    background: #f7a000;
+    background: #FFB05C;
     font: 1rem 'Open Sans';
     padding: 0.25rem .4rem;
     margin-right: 1rem;
@@ -618,6 +618,7 @@ input:required {
 
 .tile-content {
     display: flex;
+    justify-content: center;
 }
 
 .tile-underscore {
@@ -634,6 +635,12 @@ input:required {
     justify-content: center;
 }
 /* tile head */
+
+.table-p {
+    color: grey;
+    padding: 0;
+    margin: 0;
+}
 
 /* background: linear-gradient(to right, #ffffff 0%,#e5e5e5 10%,#e5e5e5 90%,#ffffff 100%); */
 
