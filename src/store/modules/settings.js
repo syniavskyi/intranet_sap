@@ -13,7 +13,7 @@ const state = {
       description: i18n.t('select.language.polish')
     },
     {
-      id: 'ua',
+      id: 'uk',
       description: i18n.t('select.language.ukrainian')
     }
   ],
@@ -52,7 +52,7 @@ const actions = {
         description: i18n.t('select.language.polish')
       },
       {
-        id: 'ua',
+        id: 'uk',
         description: i18n.t('select.language.ukrainian')
       }
     ]
