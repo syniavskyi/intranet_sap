@@ -118,11 +118,11 @@ const actions = {
         "X-Requested-With": "XMLHttpRequest",
         "Slug": slugHeader,
         "x-csrf-token": getters.getToken
-        // "Cookie": getters.getCookie
       }
     }).then(res => {
       let message = res.headers;
       dispatch('displayModal', message);
+      dispatch('loadUserPhoto', data.userId);
     }).catch(error => {
       console.log(error);
     })

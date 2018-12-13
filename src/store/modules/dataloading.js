@@ -26,6 +26,7 @@ const state = {
   targetGroup: [],
   roles: [],
   userPhotoUrl: null,
+  selectedUserPhotoUrl: null,
   selectedForCvUser: '',
   promiseListToRead: [],
   promiseList: [],
@@ -90,7 +91,10 @@ const mutations = {
     state.roles = data;
   },
   SET_USER_PHOTO_URL(state, url) {
-    state.userPhotoUrl = url
+    state.userPhotoUrl = url;
+  },
+  SET_SEL_USER_PHOTO_URL(state, url){
+    state.selectedUserPhotoUrl = url;
   },
   SET_SELECTED_FOR_CV_USER(state, data) {
     state.selectedForCvUser = data;
@@ -275,26 +279,25 @@ const actions = {
     })
   },
 
-  getUserPhoto({}){
-    return axios({
-      method: 'GET',
-      url: `AttachmentMedias(FileId='USER-PHOTO',Language='PL',UserAlias='UIO')/$value`,
-      headers: {
-        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
-      }
-    })
-  },
+  // getUserPhoto({}){
+  //   return axios({
+  //     method: 'GET',
+  //     url: `AttachmentMedias(FileId='USER-PHOTO',Language='PL',UserAlias='UIO')/$value`,
+  //     headers: {
+  //       "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+  //     }
+  //   })
+  // },
 
   loadUserPhoto({
     commit, getters
-  }) {
-    const sUserId = "UIO",// userData.user,
+  }, userAlias) {
+    const sUserId = userAlias,
+      sLoggedUser =  localStorage.getItem("id"), //
       sLanguage = 'PL',
       sFileType = "USER-PHOTO";
     const url =
       window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileId='" +
-      // " http://nw5.local.pl:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileId='" +
       sFileType +
       "',Language='" +
       sLanguage +
@@ -316,11 +319,23 @@ const actions = {
       ctx.drawImage(image, 0, 0, image.width, image.height);
 
       let dataURL = imgCanvas.toDataURL("image/png");
+      if(sLoggedUser === sUserId){
+        commit('SET_USER_PHOTO_URL', dataURL);
+      } 
+      commit('SET_SEL_USER_PHOTO_URL', dataURL);
+      
+      
 
-      commit('SET_USER_PHOTO_URL', dataURL)
+      // localStorage.setItem("image", dataURL)
+    }, false);
+    image.addEventListener("error", function () {
+      if(sLoggedUser === sUserId){
+        commit('SET_USER_PHOTO_URL', "");
+      } 
+      commit('SET_SEL_USER_PHOTO_URL', "");
+    });
 
-      localStorage.setItem("image", dataURL)
-    }, false)
+
 
   },
   checkPageToDisplay({}, changePage) {
@@ -622,7 +637,7 @@ const actions = {
         if(!getters.getDataForHint) {
           skillSet = 'SET_USER_SKILLS';
           dispatch('getUserFilesData') // get data about all user files (cv, photos, documents etc.)
-          dispatch('loadUserPhoto', userData) //load user's photo for menu and profile TO BE READ
+          dispatch('loadUserPhoto', oData.UserAlias); //load user's photo for menu and profile TO BE READ
           let aAuth = utils.checkRole(oData.UserAuth.results);
           dispatch("_setAuthorizations", aAuth);
           //set authorization for all objects - to optimize      
@@ -735,6 +750,9 @@ const getters = {
   },
   getUserPhotoUrl(state) {
     return state.userPhotoUrl
+  },
+  getSelectedUserPhotoUrl(state){
+    return state.selectedUserPhotoUrl;
   },
   getSelectedForCvUser(state) {
     return state.selectedForCvUser;
