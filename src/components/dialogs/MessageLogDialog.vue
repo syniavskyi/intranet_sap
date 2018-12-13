@@ -3,15 +3,16 @@
     <div class="modal-overlay"></div>
     <transition name="modal-fade">
         <div class="modal-new-stretch" role="dialog">
-          <header class="modal-header-err">
-            <h1 class="modal-title">{{ $t("header.error") }}</h1>
+          <header class="modal-header-err" :class="headerClass">
+            <h1 v-if="messageLog.length > 1" class="modal-title">{{ formatHeader(message.severity) }}</h1>
+            <h1 v-if="messageLog[0]" class="modal-title">{{ formatHeader(messageLog[0].severity) }}</h1>
             <button @click="closeModal" class="modal-close">&#10006;</button>
           </header>
           <div class="modal-content-list">
-            <section v-if="messageLog.length > 1" class="modal-item-err" v-for="(message, index) in messageLog" :key="index">
+            <section v-if="messageLog.length > 1" :class="message.severity" class="modal-item" v-for="(message, index) in messageLog" :key="index">
               {{index+1}}. {{message.message}}
             </section>
-            <section v-if="messageLog[0]" class="modal-item-err">
+            <section v-if="messageLog[0]" :class="messageLog[0].severity" class="modal-item">
                 {{messageLog[0].message}}
             </section>
           </div>
@@ -28,10 +29,14 @@ export default {
     computed: {
       ...mapGetters({
         messageLog: "getMessageLog",
-        showModal: "getShowModal"})
+        showModal: "getShowModal",
+        headerClass: "getHeaderModalClass"}),
     },
     methods:  { 
-      ...mapActions(["closeModal"])
+      ...mapActions(["closeModal"]),
+      formatHeader(header) {
+        return i18n.t("header.info");
+      }
     }
 }
 </script>
