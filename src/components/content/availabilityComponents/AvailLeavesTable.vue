@@ -87,7 +87,6 @@ export default {
             userAvail: 'getUserAvail',
             availTypes: 'getAvailType',
             availStatus: 'getAvailStatus',
-            loginAlias: "getLoginAlias",
             newLeave: "getNewLeaveForUser",
             authAcc: 'getAvailAcceptAuth',
             filteredTeamUsers: 'getFilteredTeamUsers',
@@ -224,10 +223,10 @@ export default {
            let avail = utils.createClone(fullData.avail);
                 if(fullData.operation === 'save') {
                 this.userAvail[fullData.avail.EntryId].Filter = false;
-                document.getElementsByClassName("eduButtonsAvail")[fullData.index].children[0].disabled = true;
+                // document.getElementsByClassName("eduButtonsAvail")[fullData.index].children[0].disabled = true;
             } else if(fullData.operation === 'confirm' || fullData.operation === 'reject') {
                 this._beforeEditingCache = utils.createClone(this.userAvail);
-                document.getElementsByClassName("confirmButtonAvail")[fullData.index].children[0].disabled = true;
+                // document.getElementsByClassName("confirmButtonAvail")[fullData.index].children[0].disabled = true;
                 }   if(fullData.operation === "confirm") {
                         this.userAvail[fullData.avail.EntryId].StatusId = 'CO';
                         avail.Action = 'A';

@@ -215,7 +215,9 @@
         "office": "Office",
         "information": "Information",
         "instructions": "Instructions",
-        "error": "Error"
+        "error": "Error",
+        "info": "Informacja",
+        "warning": "Ostrzeżenie"
     },
     "message": {
         "loginError": "Password or username are invalid.",

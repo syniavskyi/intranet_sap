@@ -144,17 +144,17 @@
 
 /* ERROR MODAL / MESSAGE LOG DIALOG */
 
-.modal-item-err {
+.modal-item {
     display: flex;
     align-self: stretch; 
     background: #FFBABA;
-    padding: 10px;
+    padding: 25px;
     color: #D8000C;
     /* box-shadow: 0 0 10px grey; */
     border-bottom: 1px solid #D8000C;
 }
 
-.modal-item-err:last-of-type {
+.modal-item:last-of-type {
     border-bottom-left-radius: .45rem;
     border-bottom-right-radius: .45rem;
     border-bottom: 0;
@@ -189,6 +189,27 @@
     animation: modal-trans;
     animation-duration: .55s;
 }
+.warning {
+    color: orangered;
+    background-color: orange;
+    }
+.error {
+    color: red;
+    background-color: rgb(255, 51, 0);
+    }
+.info{
+    color: green;
+    background-color: #0dff005b;
+    } 
+.modal-header-war {
+    background-color: orangered;
+    }
+.modal-header-err {
+       background-color: red;
+    }
+.modal-header-info {
+     background-color: green;
+    } 
 
 @keyframes modal-trans {
     from {

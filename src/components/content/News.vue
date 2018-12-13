@@ -73,7 +73,7 @@
                                     <img :src="weatherData.icon" alt="icon" height="64px">
                                 </div>
                             </div>
-                            <div class="info">
+                            <div>
                                 <div class="weather-header"></div>
                                 <div class="temp">
                                 <!-- <img src="../../assets/images/weather/temps.png" height="46px" class="iconTemp"/> -->

@@ -1,12 +1,16 @@
 const state = {
     showToast: false,
     timeoutRunning: false,
-    showModal: false
+    showModal: false,
+    headerModalClass: ''
 }
 
 const mutations = {
     SET_SHOW_MODAL(state, data) {
         state.showModal = data;
+    },
+    SET_HEADER_MODAL_CLASS(state, data) {
+        state.headerModalClass = data;
     }
 }
 
@@ -28,10 +32,17 @@ const actions = {
     displayModal({commit}, headers) {
           let jsonStr = headers["sap-message"];
           if(jsonStr) {
-            try{
+            try {
               let messageObj = JSON.parse(jsonStr);
               commit('SET_MESSAGE_LOG', messageObj.details);
               commit('SET_SHOW_MODAL', true);
+              if(messageObj.details.find(o => o.severity === 'error')) {
+                commit('SET_HEADER_MODAL_CLASS', 'modal-header-err');
+              } else if(messageObj.details.find(o => o.severity === 'warning') ){
+                commit('SET_HEADER_MODAL_CLASS', 'modal-header-war');
+              } else {
+                commit('SET_HEADER_MODAL_CLASS', 'modal-header-info');
+              }
              }
             catch(err){}
           }
@@ -44,6 +55,9 @@ const getters = {
     },
     getShowModal(state){
         return state.showModal;
+    },
+    getHeaderModalClass(state) {
+        return state.headerModalClass;
     }
 }
 
