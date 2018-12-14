@@ -3,7 +3,7 @@
     background: white;
     align-self: center;
     min-height: 10.5rem;
-    width: 95%;
+    width: 100%;
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 10px grey;
@@ -25,7 +25,7 @@
     width: 100%;
     flex-direction: column;
     align-items: center;
-    min-height: 7rem;
+    min-height: 9rem;
 }
 
 .emp-btn {
@@ -74,6 +74,15 @@
     margin-bottom: 1rem;
 }
 
+.emp-tbody-row:hover .emp-tbody-item:first-of-type .emp-tbody-item-txt {
+    color: #FFB05C;
+    cursor: pointer;
+}
+
+.emp-tbody-row:hover .emp-tbody-item:first-of-type {
+    background-color: #FFB05C; 
+}
+
 .emp-tbody-item {
     display:flex;
     height: 3rem;
@@ -104,6 +113,7 @@
     width: 73%;
     border-bottom: 1px solid #ccc;
     text-align: center;
+    transition: color .1s;
 }
 
 .emp-tbody-item:first-child .emp-tbody-item-txt {
@@ -116,7 +126,8 @@
 
 @media (min-width: 50rem) {
     .emp-tile {
-        min-height: 8rem;
+        min-height: 6rem;
+        width: 95%;
     }
     .emp-section {
         min-height: 4rem;

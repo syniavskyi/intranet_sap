@@ -6,7 +6,6 @@
       <div class="component-content">
         <div class="content-header">
           <div class="content-header-title-and-menu">
-            <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu"> -->
             <div @click="showMenu" class="content-header-menu">&#9776;</div>
             <p class="content-header-title">{{ $t("header.employeesList") }}</p>
           </div>
@@ -25,8 +24,8 @@
                 </select>
                 <label class="ava-select-label-cool">{{ $t("label.orSelectDep") }}</label>
               </div>
+              <button class="func-btn emp-btn" @click="clearFilters">{{ $t("button.clear") }}</button>
             </div>
-            <button class="func-btn emp-btn" @click="clearFilters">{{ $t("button.clear") }}</button>
           </div>
         </div>
         <div class="employees-table">
@@ -38,7 +37,7 @@
             <div class="emp-thead-item">{{ $t("label.email") }}</div>
           </div>
           <div class="emp-tbody">
-            <div class="emp-tbody-row" v-for="user in filteredUsers" :key="user.PersonNumber">
+            <div class="emp-tbody-row" title="Przejdź do profilu pracownika wybierając jego imie i nazwisko" v-for="user in filteredUsers" :key="user.PersonNumber">
               <div class="emp-tbody-item">
                 <div class="emp-tbody-item-title"> {{ $t("label.fullName") }} </div>
                 <div  class="emp-tbody-item-txt"  @click="navigateToProfile(user)"> {{ user.Fullname }} </div>

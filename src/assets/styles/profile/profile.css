@@ -708,6 +708,13 @@
     border-radius: 2px;
 }
 
+.img-user-class {
+    max-height: 200px;
+    max-width: 250px;
+    width: auto;
+    height: auto;
+}
+
 .profile-user-img > label {
     margin:1rem 0;
 }
