@@ -326,7 +326,17 @@ export default {
       next()
     }
     // next();
-  },  
+  },
+  beforeRouteEnter(to, from, next) {
+    if(from.name  ===  "Employees") {
+      next(vm  => {
+        vm.selectedUser  =  vm.$route.params.user;
+        vm.getNewData();
+      });
+    } else {
+        next();
+      }
+  },
   created() {
     this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
     let oStore = this.$store,
