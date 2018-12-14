@@ -58,7 +58,9 @@
                             </div>
                             <div class="tile-content">
                                 <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
-                                    <div class="event-date">{{setDateTo(event)}}</div>
+                                    <div class="event-date">{{setDateTo(event)}}
+                                      <button v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc">?</button>
+                                    </div>
                                     <div class="event-title">{{ event.EventName }}</div>
                                     <div class="event-type">{{event.EventTypeName}}</div>
                                 </div>
@@ -141,7 +143,8 @@ export default {
       isMoreThanOneAdvert: true,
       advertLoaded: this.$store.getters.getShowAdverts,
       loading: true,
-      loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id")
+      loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id"),
+      eventDesc: null
     };
   },
   mounted() {
@@ -156,7 +159,6 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("geoLoc");
-    // this.$store.dispatch("getNews");
   },
   created() {
     this.getToday();
@@ -176,46 +178,6 @@ export default {
     "new-message": NewMessageDialog,
     "modal": Modal
   },
-  // computed: {
-  //   ...mapGetters({
-  //     geoLocation2: "geoLocation2",
-  //     weatherData: "weatherData",
-  //     today: "today",
-  //     articlesRaw: "articlesRaw",
-  //     articlesJson: "articlesJson",
-  //     rticles: "articles",
-  //     displayMenu: "getShowMenu",
-  //     displayOverlay: "getShowMenuOverlay",
-  //     events: "getAllEvents",
-  //     showToast: "getDisplayToast",
-  //     showNewMessage: "getShowNewMessageDialog",
-  //     advertsList: "getAdverts",
-  //     usersList: "usersList",
-  //     getShowAdverts: "getShowAdverts",
-  //     showAdvertsLoader: "getAdvertsLoader"
-  //   }),
-  //   eventsSrt: function() {
-  //    this.events.sort((a,b) => (a.DateFrom > b.DateFrom) ? 1 : ((b.DateFrom > a.DateFrom) ? -1 : 0)); 
-
-  //   let addDays = function(date, days) {
-  //       let result = new Date(date);
-  //       result.setDate(result.getDate() + days);
-  //       return result;
-  //         }
-  //    let substructDays = function(date, days) {
-  //       let result = new Date(date);
-  //       result.setDate(result.getDate() - days);
-  //       return result;
-  //         }    
-  
-  //   let filteredEvents = this.events.filter(function(oItem){
-  //     let eventDays = (oItem.DateTo - oItem.DateFrom) / 86400000;
-  //       return oItem.DateFrom > new Date() && oItem.DateFrom < addDays(new Date(), 7)
-  //           || new Date() > substructDays(new Date(), eventDays) && oItem.DateFrom < new Date() && oItem.DateTo > new Date()
-  //     });
-  // return filteredEvents;
-  //   }
-  // },
   computed: Object.assign(
     mapGetters({
       geoLocation2: "geoLocation2",
@@ -371,7 +333,10 @@ export default {
       }
 
       this.$store.dispatch("displayToast");
-    }
+    },
+    setEventDesc(eventId) {
+      this.eventDesc = this.events.find(o => o.EventId === eventId).Description;
+    },
   }
 };
 </script>
