@@ -9,6 +9,8 @@
             <button @click="closeMenu" class="close-btn">&#10006;</button>
         </div>
         <div class="nav-user">
+            <div class="picture-loader" v-if="!userPhotoUrl">
+            </div>
             <img class="nav-user-img" width="130px" :src="userPhotoUrl">
         </div>
         <nav class="nav">

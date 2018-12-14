@@ -136,7 +136,9 @@
                 <div class="profile-tile-content">
                   <div class="profile-user-header">
                     <div class="profile-user-img">
-                      <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px" >
+                      <div class="picture-loader" v-if="!userPhoto">
+                      </div>
+                      <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
                       <p class="profile-error profile-error-image" v-if="photoUploadError">{{ $t("message.photoUploadError") }}</p>
                       <label for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
                         <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload" id="change-user-image">
