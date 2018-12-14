@@ -13,7 +13,11 @@
         <div class="documents-page-tiles">
 
           <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" aria-expanded="false" class="documents-tiles-row-header">{{ $t("header.documents") }}</div>
+            <div @click.self="toggleDocTile" aria-expanded="false" class="documents-tiles-row-header">
+              <i18n path="header.documentsCount" tag="p">
+                   <span place="number"> {{docFiles.length}} </span>
+             </i18n>
+            </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in docFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
@@ -22,7 +26,7 @@
                 </div>
                 <div class="documents-tile-content">
                   <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" title="ściągnij">
+                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
                       <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
                       <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
                       <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
@@ -35,7 +39,11 @@
             </div>
           </div>
           <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">{{ $t("header.systemData")}}</div>
+            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
+              <i18n path="header.systemData" tag="p">
+                    <span place="number"> {{systemFiles.length}} </span>
+            </i18n>
+            </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in systemFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
@@ -44,7 +52,7 @@
                 </div>
                 <div class="documents-tile-content">
                   <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" title="ściągnij">
+                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
                       <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
                       <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
                       <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
@@ -57,7 +65,11 @@
             </div>
           </div>
           <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">{{ $t("header.office") }}</div>
+            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
+              <i18n path="header.office" tag="p">
+                    <span place="number"> {{officeFiles.length}} </span>
+            </i18n>
+            </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in officeFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
@@ -66,7 +78,7 @@
                 </div>
                 <div class="documents-tile-content">
                  <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" title="ściągnij">
+                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
                       <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
                       <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
                       <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
@@ -79,7 +91,11 @@
             </div>
           </div>
           <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">{{ $t("header.information") }}</div>
+            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
+              <i18n path="header.information" tag="p">
+                    <span place="number"> {{infoFiles.length}} </span>
+            </i18n>
+              </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in infoFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
@@ -88,7 +104,7 @@
                 </div>
                 <div class="documents-tile-content">
                  <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" title="ściągnij">
+                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
                       <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
                       <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
                       <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
@@ -101,7 +117,11 @@
             </div>
           </div>
           <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">{{ $t("header.instructions") }}</div>
+            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
+              <i18n path="header.instructions" tag="p">
+                    <span place="number"> {{instrFiles.length}} </span>
+            </i18n>
+            </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in instrFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
@@ -110,7 +130,7 @@
                 </div>
                 <div class="documents-tile-content">
                  <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" title="ściągnij">
+                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
                       <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
                       <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
                       <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>

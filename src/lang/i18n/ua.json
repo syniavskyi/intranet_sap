@@ -180,6 +180,7 @@
         "employees": "Працівники",
         "informations": "Інформація",
         "documents": "Документи",
+        "documentsCount": "Документи {number}",
         "personalData": "Персональні дані",
         "contact": "Контактні дані",
         "employee": "Дані працівника",
@@ -337,5 +338,11 @@
         "year": " рік ",
         "yearsF": " років ",
         "yearsM": " років "
+    },
+    "title": {
+        "download": "download",
+        "delete": "delete",
+        "save": "save",
+        "reset": "reset"
     }
 }

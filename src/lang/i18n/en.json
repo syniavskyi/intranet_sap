@@ -180,6 +180,7 @@
         "employees": "Employees",
         "informations": "Informations",
         "documents": "Documents",
+        "documentsCount": "Documents {number}",
         "personalData": "Personal data",
         "contact": "Contact details",
         "employee": "Personal details",
@@ -211,10 +212,10 @@
         "userNotRegisteredTitle": "Account not created",
         "messages": "Messages",
         "homepage": "Home",
-        "systemData": "System data",
-        "office": "Office",
-        "information": "Information",
-        "instructions": "Instructions",
+        "systemData": "System data {number}",
+        "office": "Office {number}",
+        "information": "Information {number}",
+        "instructions": "Instructions {number}",
         "error": "Error",
         "info": "Information",
         "warning": "Warning"
@@ -339,5 +340,11 @@
         "year": " year ",
         "yearsF": " years ",
         "yearsM": " years "
+    },
+    "title": {
+        "download": "download",
+        "delete": "delete",
+        "save": "save",
+        "reset": "reset"
     }
 }

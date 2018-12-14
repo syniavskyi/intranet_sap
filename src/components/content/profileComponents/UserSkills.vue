@@ -50,9 +50,9 @@
                 <label class="label-select-profile">{{ $t("label.level") }}</label>
               </div>
               <div class="prof-skills-btns">
-                <button class="prof-skills-delete" @click="remove(index)" v-if="editMode" title="usuń">&#10005;</button>
+                <button class="prof-skills-delete" @click="remove(index)" v-if="editMode" :title="$t('title.delete')" >&#10005;</button>
                 <!-- {{ $t("button.delete") }} -->
-                <button class="prof-skills-save" :disabled="true" @click="saveLang(index)" v-if="editMode" title="zapisz">&#10004;</button>
+                <button class="prof-skills-save" :disabled="true" @click="saveLang(index)" v-if="editMode" :title="$t('title.save')">&#10004;</button>
                 <!-- {{ $t("button.save") }} -->
               </div>
             </div>
@@ -66,7 +66,7 @@
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'SapModules', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-select-profile' : 'label-skills'">{{ $t("label.sapModulesExp") }}</label>
             <div class="prof-skills-elems">
-              <button title="usuń" class="prof-div-pos-elem" :disabled="!editMode" v-for="sapModule in userSkills.SapModules" :key="sapModule"  @click="removeModule(sapModule)">{{sapModule}}</button>
+              <button :title="$t('title.delete')" class="prof-div-pos-elem" :disabled="!editMode" v-for="sapModule in userSkills.SapModules" :key="sapModule"  @click="removeModule(sapModule)">{{sapModule}}</button>
             </div>
           </div>
           <div class="prof-input-xl">
@@ -77,7 +77,7 @@
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'ProgramLang', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.programmingLanguages") }}</label>
             <div class="prof-skills-elems">
-              <button title="usuń" class="prof-div-pos-elem" :disabled="!editMode" v-for="lang in userSkills.ProgramLang" :key="lang"  @click="removeProgramLang(lang)">{{lang}}</button>
+              <button :title="$t('title.delete')" class="prof-div-pos-elem" :disabled="!editMode" v-for="lang in userSkills.ProgramLang" :key="lang"  @click="removeProgramLang(lang)">{{lang}}</button>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'Technologies', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.technologies") }}</label>
             <div class="prof-skills-elems">
-              <button title="usuń" class="prof-div-pos-elem" :disabled="!editMode" v-for="tech in userSkills.Technologies" :key="tech"  @click="removeTechnology(tech)">{{tech}}</button>
+              <button :title="$t('title.delete')" class="prof-div-pos-elem" :disabled="!editMode" v-for="tech in userSkills.Technologies" :key="tech"  @click="removeTechnology(tech)">{{tech}}</button>
             </div>
           </div>
           <div class="prof-input-xl">
@@ -101,7 +101,7 @@
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'Extensions', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.extensions") }}</label>
             <div class="prof-skills-elems">
-              <button title="usuń" class="prof-div-pos-elem" :disabled="!editMode" v-for="ext in userSkills.Extensions" :key="ext"  @click="removeExtension(ext)">{{ext}}</button>
+              <button :title="$t('title.delete')" class="prof-div-pos-elem" :disabled="!editMode" v-for="ext in userSkills.Extensions" :key="ext"  @click="removeExtension(ext)">{{ext}}</button>
             </div>
           </div>
           <div class="prof-input-xl">
@@ -112,7 +112,7 @@
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'AdditionalSkills', show: true})" v-if="editMode">?</button>
             <label :class="editMode ? 'label-profile': 'label-skills'">{{ $t("label.additionalSkills") }}</label>
             <div class="prof-skills-elems">
-              <button title="usuń" class="prof-div-pos-elem" :disabled="!editMode" v-for="add in userSkills.AdditionalSkills" :key="add"  @click="removeAdditional(add)">{{add}}</button>
+              <button :title="$t('title.delete')" class="prof-div-pos-elem" :disabled="!editMode" v-for="add in userSkills.AdditionalSkills" :key="add"  @click="removeAdditional(add)">{{add}}</button>
             </div>
           </div>
         </div>
