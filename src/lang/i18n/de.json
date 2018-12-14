@@ -180,6 +180,7 @@
         "employees": "Employees",
         "informations": "Informations",
         "documents": "Documents",
+        "documentsCount": "Documents {number}",
         "personalData": "Personal data",
         "contact": "Kontakt details",
         "employee": "Personal details",
@@ -338,5 +339,11 @@
         "year": " year ",
         "yearsF": " years ",
         "yearsM": " years "
+    },
+    "title": {
+        "download": "download",
+        "delete": "löschen",
+        "save": "speichern",
+        "reset": "zurücksetzen"
     }
 }

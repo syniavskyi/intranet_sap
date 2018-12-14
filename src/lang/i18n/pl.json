@@ -179,6 +179,7 @@
         "employees": "Pracownicy",
         "informations": "Informacje",
         "documents": "Dokumenty",
+        "documentsCount": "Documenty {number}",
         "personalData": "Dane osobowe",
         "contact": "Dane kontaktowe",
         "employee": "Dane pracownika",
@@ -338,5 +339,11 @@
         "year": " rok ",
         "yearsF": " lata ",
         "yearsM": " lat "
+    },
+    "title": {
+        "download": "pobierz",
+        "delete": "usuń",
+        "save": "zapisz",
+        "reset": "resetuj"
     }
 }

@@ -55,14 +55,14 @@
                                         <select required class="ava-select-cool" v-model="selectedType">
                                             <option v-for="type in availTypesList" :value="type.Key" :key="type.Key">{{type.Value}}</option>
                                         </select>
-                                        <button class="ava-select-reset" title="resetuj" v-if="selectedType" @click="selectedType = null">&#10006;</button>
+                                        <button class="ava-select-reset" :title="$t('title.reset')" v-if="selectedType" @click="selectedType = null">&#10006;</button>
                                         <label class="ava-select-label-cool">{{ $t("label.entryType") }}</label>
                                     </div>
                                     <div class="ava-div-select-cool" v-if="selectedUser != null">
                                         <select required class="ava-select-cool" v-model="selectedStatus">
                                             <option v-for="status in availStatusList" :key="status.Key" :value="status.Key">{{ status.Value }}</option>
                                         </select>
-                                        <button class="ava-select-reset" title="resetuj" v-if="selectedStatus" @click="selectedStatus = null">&#10006;</button>
+                                        <button class="ava-select-reset" :title="$t('title.reset')" v-if="selectedStatus" @click="selectedStatus = null">&#10006;</button>
                                         <label class="ava-select-label-cool">{{ $t("label.status") }}</label>
                                     </div>
                                     <button class="ava-button ava-button-edit" v-if="selectedUser != null" @click="showContent = true">{{ $t("label.display") }}</button>

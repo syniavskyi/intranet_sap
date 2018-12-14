@@ -23,6 +23,9 @@
     position: relative;
     margin: .5rem 0;
     border: 1px solid lightgrey;
+    /* SPI */
+    height: 6.5rem;
+    text-indent: 1.3rem;
 }
 
 .documents-tiles-row-header,
@@ -204,6 +207,9 @@
     .documents-tiles-row {
         width: 95%;
         border-radius: 3px;
+        /* SPI */
+        height: 6.5rem;
+        text-indent: 1.3rem;
     }
     .documents-tile-1-3 {
         width: 95%;

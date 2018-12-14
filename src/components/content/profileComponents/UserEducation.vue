@@ -98,7 +98,7 @@
             </div>
           </div>
           <div class="prof-row-btns eduButtons">
-            <button title="" :disabled="true" class="prof-row-btn" v-if="editMode" @click="save(index)">&#x2714;</button>
+            <button :disabled="true" class="prof-row-btn" v-if="editMode" @click="save(index)">&#x2714;</button>
             <button class="prof-row-dbtn" v-if="editMode" @click="remove(index)">X</button>
           </div>
         </div>

@@ -20,7 +20,7 @@
                 <ul class="starter-page-ul">
                   <li class="starter-page-item" v-for="list in docListNew" :key="list.FileId">
                     <div class="starter-page-list-item-btns">
-                      <a class="starter-page-file-btn" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
+                      <a class="starter-page-file-btn" :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
                       <div v-if="checkFileFormat(list.Filename) == '.pdf'">
                         <p class="starter-page-pdf">{{checkFileFormat(list.Filename)}}</p>
                       </div>
@@ -53,7 +53,7 @@
                 <ul class="starter-page-ul">
                   <li class="starter-page-item" v-for="list in docListInfo" :key="list.FileId">
                     <div class="starter-page-list-item-btns">
-                      <a class="starter-page-file-btn" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
+                      <a class="starter-page-file-btn" :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
                       <div v-if="checkFileFormat(list.Filename) == '.pdf'">
                         <p class="starter-page-pdf"> {{checkFileFormat(list.Filename)}}</p>
                       </div>

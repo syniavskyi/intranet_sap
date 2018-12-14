@@ -39,8 +39,8 @@
                 <input accept=".pdf" id="add-docx-pl" type="file" class="add doc-add-pl" ref="file" @change="handleCvUpload('PDF')">
               </label>
             </div>
-            <a title="ściągnij" :disabled="disableFileOptions" class="download pdf-add-pl" :href="setDownloadLink()">&#x21e3;</a>
-            <button title="usuń" :disabled="disableFileOptions" class="download pdf-add-pl" @click="deleteFile">X</button>
+            <a :title="$t('title.download')" :disabled="disableFileOptions" class="download pdf-add-pl" :href="setDownloadLink()">&#x21e3;</a>
+            <button :title="$t('title.delete')" :disabled="disableFileOptions" class="download pdf-add-pl" @click="deleteFile">X</button>
           </div>
         </div>
       </div>
