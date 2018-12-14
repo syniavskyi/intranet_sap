@@ -250,7 +250,7 @@ export default {
   
     let filteredEvents = this.events.filter(function(oItem){
       let eventDays = (oItem.DateTo - oItem.DateFrom) / 86400000;
-        return oItem.DateFrom > new Date() && oItem.DateFrom < addDays(new Date(), 7)
+        return oItem.DateFrom > substructDays(new Date(), 1) && oItem.DateFrom < addDays(new Date(), 7)
             || new Date() > substructDays(new Date(), eventDays) && oItem.DateFrom < new Date() && oItem.DateTo > new Date()
       });
     return filteredEvents;
