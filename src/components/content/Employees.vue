@@ -41,7 +41,7 @@
             <div class="emp-tbody-row" v-for="user in filteredUsers" :key="user.PersonNumber">
               <div class="emp-tbody-item">
                 <div class="emp-tbody-item-title"> {{ $t("label.fullName") }} </div>
-                <div class="emp-tbody-item-txt"> {{ user.Fullname }} </div>
+                <div  class="emp-tbody-item-txt"  @click="navigateToProfile(user)"> {{ user.Fullname }} </div>
               </div>
               <div class="emp-tbody-item">
                 <div class="emp-tbody-item-title"> {{ $t("label.branch") }} </div>
@@ -72,6 +72,7 @@ import i18n from "../../lang/lang";
 import Menu from "../Menu.vue";
 import { mapGetters, mapActions } from "vuex";
 import Modal from '../dialogs/MessageLogDialog';
+import  router  from  '@/router/index.js'
 const utils = require("../../utils")
 
 export default {
@@ -186,6 +187,9 @@ export default {
     showMenu(event) {
       let name = { window, event };
       this.$store.dispatch("setSideMenu", name);
+    },
+    navigateToProfile(user, to, from) {
+      router.replace({ name: "Profile", params: { user: user.UserAlias } })
     }
   }
   )
