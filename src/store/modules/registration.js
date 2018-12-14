@@ -32,9 +32,20 @@ const actions = {
       }
     }).then(res => {
       commit("SET_DISPLAY_LOADER", false);
-      commit("SET_DIALOG_CONFIRM", true);
-      // let message = res.headers;
-      // dispatch('displayModal', message);
+      
+      let message = res.headers,
+          detailMessages = JSON.parse(message["sap-message"]).details;
+      if(detailMessages){
+        let aError = detailMessages.find(oItem => { return oItem.severity === "error" || oItem.severity === "warning"}); //check if any error is returned
+        if(aError){
+          dispatch('displayModal', message);
+          commit("SET_DIALOG_ERROR_STATUS", true);
+        }
+      } 
+      if(!aError){
+        commit("SET_DIALOG_CONFIRM", true);
+      }
+      
     }).catch(error => {
       commit("SET_DISPLAY_LOADER", false);
       commit("SET_DIALOG_ERROR_STATUS", true);
