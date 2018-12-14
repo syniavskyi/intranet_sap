@@ -115,7 +115,6 @@ const actions = {
         delete data.EntryId;
         delete data.Order;
         delete data.TypeName;
-        // let urlD = "UserAvailabilities(UserId='" + data.UserId + "',TypeId='" + data.TypeId + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(data.DateEnd).format("YYYY-MM-DD") + "T00:00:00')",
         let url = "UserAvailabilities(UserId='" + data.UserId + "',TypeId='" + data.TypeId + "',DateStart=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(data.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00')"
         axios({
         url: url,
@@ -126,11 +125,13 @@ const actions = {
             "X-Requested-With": "XMLHttpRequest",
             "Cache-Control": "no-cache",
             "x-csrf-token": sToken
-            // "Cookie": getters.getCookie
         }
         }).then(res => {
             let message = res.headers;
             dispatch('displayModal', message);
+            dispatch('getUserAvail', data.UserId);
+            // commit("SET_PROMISE_TO_READ", ["NewToken", "Events"]);
+            //  dispatch('getData');
         }).catch(error => {
             console.log(error);
         })

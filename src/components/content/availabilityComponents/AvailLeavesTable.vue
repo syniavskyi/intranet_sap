@@ -30,21 +30,21 @@
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.from") }}</div>
-                        <p class="prof-date-label" v-if="!editMode || avail.StatusId === 'CO'"> {{ formatDate(avail.DateStart) }} </p>
-                        <v-date-picker v-if="editMode && avail.StatusId !== 'CO' && authType === '*' " class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
+                        <p class="prof-date-label" v-if="!editMode || avail.StatusId !== 'PL'"> {{ formatDate(avail.DateStart) }} </p>
+                        <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*' " class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
                             <input value="avail.DateStart"/>
                         </v-date-picker>
-                        <v-date-picker :min-date="new Date()" v-if="editMode && avail.StatusId !== 'CO' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
+                        <v-date-picker :min-date="new Date()" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
                             <input value="avail.DateStart"/>
                         </v-date-picker>
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.to") }}</div>
-                        <p class="prof-date-label" v-if="!editMode || avail.StatusId === 'CO'"> {{ formatDate(avail.DateEnd) }} </p>
-                        <v-date-picker v-if="editMode && avail.StatusId !== 'CO'  && authType === '*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
+                        <p class="prof-date-label" v-if="!editMode || avail.StatusId !== 'PL' "> {{ formatDate(avail.DateEnd) }} </p>
+                        <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
                             <input value="avail.DateEnd"/>
                         </v-date-picker>
-                        <v-date-picker :min-date="avail.DateStart" v-if="editMode && avail.StatusId !== 'CO' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
+                        <v-date-picker :min-date="avail.DateStart" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
                             <input value="avail.DateStart"/>
                         </v-date-picker>
                     </div>
@@ -54,13 +54,13 @@
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
                         </select>
                     </div>
-                    <div class="ava-tbs-item confirmButtonAvail" v-if="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || authAcc ==='*'">
-                         <button class="btn-delete-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || authAcc ==='*'" :disabled="disabledBtnToEditAvail" @click="operation({index, avail, operation: 'confirm'})">{{ $t("button.confirm") }}</button>
-                         <button class="btn-delete-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || authAcc ==='*'" :disabled="disabledBtnToEditAvail" @click="operation({index, avail, operation: 'reject'})">{{ $t("button.reject") }}</button>
+                    <div class="ava-tbs-item confirmButtonAvail" v-if="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'">
+                         <button class="btn-delete-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'confirm'})">{{ $t("button.confirm") }}</button>
+                         <button class="btn-delete-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'reject'})">{{ $t("button.reject") }}</button>
                     </div>
-                    <div class="ava-tbs-item eduButtonsAvail" v-else>
-                        <button class="btn-delete-row" v-if="editMode" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
-                        <button class="btn-delete-row" v-if="editMode" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
+                    <div class="ava-tbs-item eduButtonsAvail" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'">
+                        <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
+                        <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
                     </div>
                 </div>
             </div>
@@ -228,10 +228,10 @@ export default {
                 this._beforeEditingCache = utils.createClone(this.userAvail);
                 // document.getElementsByClassName("confirmButtonAvail")[fullData.index].children[0].disabled = true;
                 }   if(fullData.operation === "confirm") {
-                        this.userAvail[fullData.avail.EntryId].StatusId = 'CO';
+                        avail.StatusId = 'CO';
                         avail.Action = 'A';
                     } else if(fullData.operation === "reject") {
-                        this.userAvail[fullData.avail.EntryId].StatusId = 'RE';
+                        avail.StatusId = 'RE';
                         avail.Action = 'R'
                     }
          avail.DateStartToChange = this._beforeEditingCache[fullData.avail.EntryId].DateStart;
