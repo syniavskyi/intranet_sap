@@ -31,12 +31,6 @@ body {
     margin-bottom: 1rem;
 }
 
-.tile-ncnt {
-    min-height: 16rem;
-    flex-direction: column;
-    align-items: center;
-}
-
 .advItem {
     display: none;
     position: relative;
@@ -53,6 +47,20 @@ body {
     min-width: 15rem;
 }
 
+.news-adv-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+    min-height: 10rem;
+    flex-basis: 15rem;
+    box-shadow: 0 0 10px grey;
+    margin: .8rem;
+    border-radius: 4px;
+
+}
+
 .advItem >  textarea,
 .advItem >  div  {
     margin: .5rem;
@@ -67,8 +75,8 @@ body {
     font-size: 1rem;
     border-radius: 4px;
     border: 1px solid lightgrey;
-
 }
+
 .modal-advert-header {
     height: 15%;
 }
@@ -181,6 +189,24 @@ body {
     justify-content: space-between;
     display: flex;
 }
+
+.event-desc {
+    background: transparent;
+    padding: 0;
+    font: 1.5rem 'Arial';
+    align-self: flex-start;
+    font-weight: bold;
+    border: 0;
+    border-radius: 8px;
+    transition: color .2s;
+    cursor: pointer;
+}
+
+
+.event-desc:hover {
+    color: orange;
+}
+
 .target-group-btn {
     top: -.65rem;
     font-size: 1rem;
