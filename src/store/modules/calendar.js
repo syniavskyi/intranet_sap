@@ -171,7 +171,6 @@ const actions = {
         dispatch('displayModal', message);
         commit("SET_PROMISE_TO_READ", ["NewToken", "Events"]);
         dispatch('getData');
-        // location.reload();
       }).catch(error => {
         console.log(error);
     })
