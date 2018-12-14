@@ -140,17 +140,6 @@ export default {
       closed: "true"
     }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     infoFiles: "getInfoFiles",
-  //     docFiles: "getDocumentFiles",
-  //     instrFiles: "getInstructionFiles",
-  //     officeFiles: "getOfficeFiles",
-  //     systemFiles: "getSystemFiles",
-  //     displayMenu: "getShowMenu",
-  //     displayOverlay: "getShowMenuOverlay"
-  //   })
-  // },
   computed: Object.assign(
     mapGetters({
       infoFiles: "getInfoFiles",
@@ -181,13 +170,13 @@ export default {
     },
     generateLink(file) {
       let url =
-        "http://nw5.local.pl:8050/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileId='" +
+        window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileId='" +
         file +
         "',Language='" +
         "PL" +
         "',UserAlias='" +
         "" +
-        "')/$value";
+        "')/$value?c=" + this.$store.getters.getCookie;
       return url;
     },
     toggleDocTile(evt, target) {

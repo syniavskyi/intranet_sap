@@ -19,12 +19,6 @@
               </div>
               <div class="cal-filters">
                 <div class="cd-for-select">
-                  <select required class="cd-select" v-model="filters.branch">
-                    <option v-for="branch in branchList" :key="branch.Key" :value="branch.Key">{{ branch.Value }}</option>
-                  </select>
-                  <label class="cd-slabel">{{ $t("label.branch") }}</label>
-                </div>
-                <div class="cd-for-select">
                   <select required class="cd-select" v-model="filters.department">
                     <option v-for="department in departmentList" :key="department.Key" :value="department.Key">{{ department.Value }}</option>
                   </select>
@@ -109,7 +103,6 @@ export default {
   computed: Object.assign(
     mapGetters({
       departmentList: "getTargetGroup",
-      branchList: "getBranchList",
       events: "getAllEvents",
       addEvent: "getEventToChange",
       usersList: "usersList",
@@ -125,40 +118,20 @@ export default {
         aFilters = this.filters;
       let aFilteredEvents = [];
       if (
-        aFilters.branch === null &&
         aFilters.department === null &&
         aFilters.employee === null
       ) {
         return aEvents;
       } else {
         let fnFilter;
-        if (aFilters.department && aFilters.branch && aFilters.employee) {
+         if (aFilters.department && aFilters.employee) {
           fnFilter = function(oItem) {
             return (
               oItem.TargetGroup.includes(aFilters.department) &&
-              oItem.Branch.includes(aFilters.branch) &&
               oItem.Employee.includes(aFilters.employee)
             );
           };
-        } else if (aFilters.department && aFilters.branch) {
-          fnFilter = function(oItem) {
-            return (
-              oItem.TargetGroup.includes(aFilters.department) &&
-              oItem.Branch.includes(aFilters.branch)
-            );
-          };
-        } else if (aFilters.branch && aFilters.employee) {
-          fnFilter = function(oItem) {
-            return (
-              oItem.Branch.includes(aFilters.branch) &&
-              oItem.Employee.includes(aFilters.employee)
-            );
-          };
-        } else if (aFilters.branch) {
-          fnFilter = function(oItem) {
-            return oItem.Branch.includes(aFilters.branch);
-          };
-        } else if (aFilters.department) {
+        }  else if (aFilters.department) {
           fnFilter = function(oItem) {
             return oItem.TargetGroup.includes(aFilters.department);
           };
