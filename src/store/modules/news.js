@@ -183,7 +183,7 @@ const actions = {
         }
       },
     getWeatherData({commit, state}) {
-        const URL2 = 'http://api.openweathermap.org/data/2.5/weather?lat='+state.geoLoca.lat+'&lon='+state.geoLoca.len+'&appid=fd3f4877eb8823c22505c4b89a434e2b&units=metric'
+        const URL2 = 'https://api.openweathermap.org/data/2.5/weather?lat='+state.geoLoca.lat+'&lon='+state.geoLoca.len+'&appid=fd3f4877eb8823c22505c4b89a434e2b&units=metric'
          axios.get(URL2).then(res => {
          console.log(res)
          const data = res.data
