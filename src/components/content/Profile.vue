@@ -130,9 +130,9 @@
                 </div>
               </div>
               <div class="profile-tile-1-3-emp">
-                <div class="profile-tile-header">
+                <!-- <div class="profile-tile-header"> -->
                   <!-- <div class="tile-underscore"></div> -->
-                </div>
+                <!-- </div> -->
                 <div class="profile-tile-content">
                   <div class="profile-user-header">
                     <div class="profile-user-img">

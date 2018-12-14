@@ -45,6 +45,7 @@
 }
 
 .nav-title {
+    order: 1;
     width: 100%;
     font-family: 'Roboto';
     margin: 0;
@@ -58,22 +59,26 @@
 }
 
 .logout-button {
+    display: flex;
+    order: 2;
     position: relative;
     z-index: 1;
-    top: .5rem;
-    left: .7rem;
-    background: url(../images/nav3/power-20.png) no-repeat center;
-    width: 2.6rem;
-    height: 2.2rem;
+    top: .7rem;
+    right: 1rem;
+    background: url(../images/nav3/power-32.png) no-repeat center;
+    width: 2.65rem;
+    height: 1.9rem;
     border: 0;
     border-radius: 50%;
     transition: all .3s ease;
     padding:0;
+    margin: 0;
 }
 
 .logout-button:hover {
     cursor:pointer;
-    box-shadow: 0 0 10px rgb(168, 168, 168);
+    /* box-shadow: 0 0 10px rgb(168, 168, 168); */
+    box-shadow: 0 0 10px red;
 }
 
 .logout-button:hover > .logout-text {
@@ -89,11 +94,13 @@
     font-family: 'Roboto';
     position: absolute;
     top: 2.5rem;
-    left: -.5rem;
+    left: -.7rem;
     display:none;
 }
 
 .close-btn {
+    display: flex;
+    order: 0;
     font-size: 1.2rem;
     align-self: flex-start;
     margin-top: .5rem;
@@ -164,6 +171,10 @@
 .nav-user-img {
     border-radius: 50%;
     box-shadow: 0 0 15px grey;
+    max-height: 180px;
+    max-width: 200px;
+    width: auto;
+    height: auto;
 }
 
 .nav {
@@ -493,7 +504,6 @@ input:required {
     transition: box-shadow 0.25s ease;
     cursor: pointer;
     max-height: 2rem;
-    margin-top:.5rem;
 }
 
 .func-btn:hover {
@@ -702,6 +712,19 @@ input:required {
         display: flex;
         min-width: 15.7rem;
     }
+    .logout-button {
+        order: 0;
+        top: .5rem;
+        left: .7rem;
+    }
+    .close-btn {
+        order: 2;
+    }
+
+    .logout-text {
+        left: .5rem;
+    }
+
     .close-btn {
         visibility: hidden;
     }
