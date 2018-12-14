@@ -638,6 +638,7 @@ input:required {
     display: flex;
     height: 90%;
     align-self: center;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: center;
 }

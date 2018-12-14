@@ -1,118 +1,126 @@
 <template>
-<div class="plane-component">
+  <div class="plane-component">
     <div class="component-nav-and-content">
-        <app-menu v-show="displayMenu"></app-menu>
-        <div class="modal-overlay" v-show="displayOverlay"></div>
-            <div class="component-content">
-                <div class="content-header">
-                    <div class="content-header-title-and-menu">
-                        <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu"> -->
-                        <div @click="showMenu" class="content-header-menu">&#9776;</div>
-                        <p class="content-header-title">{{ $t("header.homepage") }}</p>
-                    </div>
-                </div>
-                <div class="content-body">
-                    <div class="news-tile">
-                        <div class="tile-head">
-                            <div class="tile-head-row">
-                                <h2 class="tile-head-title">{{ $t("header.messages")}}</h2>
-                                <button @click="newMessage" class="func-btn"><span class="nfb-span">&#43;</span><span class="nfbm-span">{{ $t("button.newMessage") }}</span></button>
-                            </div>
-                            <div class="tile-underscore"/>
-                        </div>
-                        <loader v-if="showAdvertsLoader"></loader>
-                        <div class="tile-content tile-ncnt">
-                            <div class="advItem" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
-                                <textarea @input="validateAdvert(advert)" :disabled="!editMode" class="n-textarea" v-model="advert.Message"/>
-                                <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
-                                <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
-                                <v-date-picker v-if="editMode" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
-                                  <!-- @input="validateAdvert(advert)" v-if="editMode"   is-expanded mode="single"  value="advert.ValidTo" -->
-                                    <!-- <input class="cd-range" v-model="advert.ValidTo" value="advert.ValidTo"/> -->
-                                    <input value="advert.ValidTo"/>
-                                </v-date-picker>
-                                <div class="advBtns" >
-                                    <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
-                                    <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid">{{ $t("button.save") }}</button>
-                                    <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode">{{ $t("button.cancel") }}</button>
-                                    <button class="oclear-btn" v-if="editMode" @click="removeAdvert(advert.AdvertId)">X</button>
-                                </div>
-                                <button v-show="isMoreThanOneAdvert" @click="nextSlide(-1)" class="advLeft">&#8249;</button>
-                                <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="advRight">&#8250;</button>
-                            </div>
-                            <button class="oclear-btn btn-s" id="halo" @click="startStopSlider">{{stop}}</button>
-                            <!-- <div class="advControls">
-                                <a class="control-button">•</a>
-                                <a class="control-button">•</a>
-                                <a class="control-button">•</a>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="api">
-                        <div class="content-event">
-                            <div class="tile-head">
-                                <div class="tile-head-row">
-                                    <h2 class="tile-head-title">{{ $t("news.upcomingEvents") }}</h2>
-                                </div>
-                                <div class="tile-underscore"/>
-                            </div>
-                            <div class="tile-content">
-                                <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
-                                    <div class="event-date">{{setDateTo(event)}}
-                                      <button v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc">?</button>
-                                    </div>
-                                    <div class="event-title">{{ event.EventName }}</div>
-                                    <div class="event-type">{{event.EventTypeName}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-weather"  :class="today.isDay ? 'weatherDay' : 'weatherNight' ">
-                            <div class="intro">
-                                <div class="town">
-                                    <p> {{weatherData.town}} </p>
-                                </div>
-                                <div class="icon">
-                                    <img :src="weatherData.icon" alt="icon" height="64px">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="weather-header"></div>
-                                <div class="temp">
-                                <!-- <img src="../../assets/images/weather/temps.png" height="46px" class="iconTemp"/> -->
-                                    <p> {{ weatherData.celcius }} <sup>o</sup>C </p>
-                                </div>
-                            </div>
-                        <!-- <div class="description">
-                                <p> {{weatherData.description}} </p>
-                        </div> -->
-                            <div class="additional">
-                                <div class="weatherDesc">
-                                    <img src="../../assets/images/weather/winds.png" class="iconWeather"/>
-                                    <p> {{weatherData.wind}} km/h</p>
-                                </div>
-                                <div class="weatherDesc">
-                                    <img src="../../assets/images/weather/clouds.png"  class="iconWeather"/>
-                                    <p> {{weatherData.clouds}}%</p>
-                                </div>
-                                <div class="weatherDesc">
-                                    <img src="../../assets/images/weather/humiditys.png" class="iconWeather"/>
-                                    <p> {{weatherData.humidity}}%</p>
-                                </div>
-                            </div>
-                            <div class="date">
-                                <p>{{ today.dayDesc }}, {{ today.today }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-news">
-                        <div id="articles"></div>
-                    </div>
-                </div>
-            </div>
+      <app-menu v-show="displayMenu"></app-menu>
+      <div class="modal-overlay" v-show="displayOverlay"></div>
+      <div class="component-content">
+        <div class="content-header">
+          <div class="content-header-title-and-menu">
+            <div @click="showMenu" class="content-header-menu">&#9776;</div>
+            <p class="content-header-title">{{ $t("header.homepage") }}</p>
+          </div>
         </div>
-        <toast ref="toast" v-if="showToast">{{sliderToast}}</toast>
-        <new-message v-if="showNewMessage"></new-message>
+        <div class="content-body">
+          <div class="news-tile">
+            <div class="tile-head">
+              <div class="tile-head-row">
+                  <h2 class="tile-head-title">{{ $t("header.messages")}}</h2>
+                  <button @click="newMessage" class="func-btn"><span class="nfb-span">&#43;</span><span class="nfbm-span">{{ $t("button.newMessage") }}</span></button>
+              </div>
+              <div class="tile-underscore"/>
+            </div>
+            <!-- <loader v-if="showAdvertsLoader"></loader> -->
+            <!-- <div class="tile-content tile-ncnt">
+              <div class="advItem" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
+                <textarea @input="validateAdvert(advert)" :disabled="!editMode" class="n-textarea" v-model="advert.Message"/>
+                <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
+                <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
+                <v-date-picker v-if="editMode" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
+                  <input value="advert.ValidTo"/>
+                </v-date-picker>
+                <div class="advBtns">
+                  <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
+                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid">{{ $t("button.save") }}</button>
+                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode">{{ $t("button.cancel") }}</button>
+                  <button class="oclear-btn" v-if="editMode" @click="removeAdvert(advert.AdvertId)">X</button>
+                </div>
+                <button v-show="isMoreThanOneAdvert" @click="nextSlide(-1)" class="advLeft">&#8249;</button>
+                <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="advRight">&#8250;</button>
+              </div>
+              <button class="oclear-btn btn-s" id="halo" @click="startStopSlider">{{stop}}</button>
+            </div> -->
+            <div class="tile-content">
+              <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
+                <textarea @input="validateAdvert(advert)" :disabled="!editMode" class="n-textarea" v-model="advert.Message"/>
+                <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
+                <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
+                <v-date-picker v-if="editMode" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
+                  <input value="advert.ValidTo"/>
+                </v-date-picker>
+                <div class="advBtns">
+                  <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
+                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid">{{ $t("button.save") }}</button>
+                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode">{{ $t("button.cancel") }}</button>
+                  <button class="oclear-btn" v-if="editMode" @click="removeAdvert(advert.AdvertId)">X</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="api">
+            <div class="content-event">
+              <div class="tile-head">
+                <div class="tile-head-row">
+                  <h2 class="tile-head-title">{{ $t("news.upcomingEvents") }}</h2>
+                </div>
+                <div class="tile-underscore"/>
+              </div>
+              <div class="tile-content">
+                <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
+                  <div class="event-date">{{setDateTo(event)}}
+                    <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc">&#8943;</button>
+                  </div>
+                  <div class="event-title">{{ event.EventName }}</div>
+                  <div class="event-type">{{event.EventTypeName}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="content-weather"  :class="today.isDay ? 'weatherDay' : 'weatherNight' ">
+              <div class="intro">
+                <div class="town">
+                  <p> {{weatherData.town}} </p>
+                </div>
+                <div class="icon">
+                  <img :src="weatherData.icon" alt="icon" height="64px">
+                </div>
+              </div>
+              <div>
+                <div class="weather-header"></div>
+                <div class="temp">
+                  <!-- <img src="../../assets/images/weather/temps.png" height="46px" class="iconTemp"/> -->
+                  <p> {{ weatherData.celcius }} <sup>o</sup>C </p>
+                </div>
+              </div>
+              <!-- <div class="description">
+              <p> {{weatherData.description}} </p>
+              </div> -->
+              <div class="additional">
+                <div class="weatherDesc">
+                  <img src="../../assets/images/weather/winds.png" class="iconWeather"/>
+                  <p> {{weatherData.wind}} km/h</p>
+                </div>
+                <div class="weatherDesc">
+                  <img src="../../assets/images/weather/clouds.png"  class="iconWeather"/>
+                  <p> {{weatherData.clouds}}%</p>
+                </div>
+                <div class="weatherDesc">
+                  <img src="../../assets/images/weather/humiditys.png" class="iconWeather"/>
+                  <p> {{weatherData.humidity}}%</p>
+                </div>
+              </div>
+              <div class="date">
+                <p>{{ today.dayDesc }}, {{ today.today }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-news">
+            <div id="articles"></div>
+          </div>
+        </div>
+      </div>
     </div>
+    <toast ref="toast" v-if="showToast">{{sliderToast}}</toast>
+    <new-message v-if="showNewMessage"></new-message>
+  </div>
 </template>
 
 <script>
@@ -148,14 +156,14 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.runCarosuel(this.slideIndex);
-      this.interval = setInterval(() => {
-        this.slideIndex += 1;
-        this.runCarosuel(this.slideIndex);
-        this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
-      }, 4000);
-    });
+    // this.$nextTick(() => {
+    //   this.runCarosuel(this.slideIndex);
+    //   this.interval = setInterval(() => {
+    //     this.slideIndex += 1;
+    //     this.runCarosuel(this.slideIndex);
+    //     this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
+    //   }, 4000);
+    // });
   },
   beforeCreate() {
     this.$store.dispatch("geoLoc");
