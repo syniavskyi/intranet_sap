@@ -610,7 +610,7 @@ input:required {
     display: flex;
     flex-direction: column;
     min-height: 3.4rem;
-    height: 10%;
+    /* height: 10%; */
 }
 
 .tile-head-title {
@@ -619,16 +619,13 @@ input:required {
     color: #333;
     margin: 0rem;
     padding: 0.5rem 1rem;
+    align-self: center;
 }
 
 .tile-head-row {
     display: flex;
     justify-content: space-between;
-}
-
-.tile-content {
-    display: flex;
-    justify-content: center;
+    align-items: flex-end;
 }
 
 .tile-underscore {
@@ -722,7 +719,7 @@ input:required {
     }
 
     .logout-text {
-        left: .5rem;
+        left: -.5rem;
     }
 
     .close-btn {

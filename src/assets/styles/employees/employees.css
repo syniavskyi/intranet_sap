@@ -75,17 +75,19 @@
 }
 
 .emp-tbody-row:hover .emp-tbody-item:first-of-type .emp-tbody-item-txt {
-    color: #FFB05C;
+    color: #eb9d4a;
     cursor: pointer;
 }
 
-.emp-tbody-row:hover .emp-tbody-item:first-of-type {
-    background-color: #FFB05C; 
+.emp-tbody-item:first-of-type:hover {
+    background-color: rgba(255, 176, 92, 0.164); 
 }
 
 .emp-tbody-item {
     display:flex;
     height: 3rem;
+    transition: background-color .2s;
+
 }
 .emp-tbody-item:first-child .emp-tbody-item-title:first-child {
     border-top-left-radius: 5px;
@@ -170,6 +172,7 @@
         height: 2.5rem;
         align-items: center;
         justify-content: center;
+        border-radius: 10px;
     }
     .emp-tbody-item-txt { 
         padding-left: 0;
