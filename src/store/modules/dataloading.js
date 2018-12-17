@@ -306,6 +306,7 @@ const actions = {
       "')/$value?c=" + getters.getCookie;
 
     let image = new Image();
+    commit("SET_SEL_USER_PHOTO_URL", "");
 
     image.src = url;
     image.crossOrigin = '*';
