@@ -117,20 +117,25 @@ body {
     background: transparent;
     font-size: 2rem;
     width: 1rem;
+    /* bottom: -10%; */
     top: calc(50% - 1rem);
     transition: filter 0.2s ease;
+    height: 70%;
+    border-radius: .5rem;
+    transition: background-color .2s;
 }
 
 .news-adv-left:hover,
 .news-adv-right:hover {
-    filter: drop-shadow(0 0 10px orange)
+    /* filter: drop-shadow(0 0 10px orange) */
+    background-color: #d3d3d3;
 }
 
 .news-adv-left {
-    left: calc(0rem - .4rem);
+    left: 0;
 }
 .news-adv-right { 
-    right: calc(0rem + .4rem);
+    right: .4rem;
 }
 
 .btn-s {
@@ -356,6 +361,20 @@ body {
   
 .weatherNight {
     background-image: url("../../../assets/images/weather/night.png")
+}
+
+.fly-item {
+    transition: all 1s;
+    /* display: inline-block; */
+    display: flex;
+    margin-right: 10px;
+}
+.fly-enter, .fly-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+.fly-leave-active {
+    position: absolute;
 }
 
 

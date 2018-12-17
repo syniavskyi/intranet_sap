@@ -1,6 +1,6 @@
 <template>
     <div> 
-        <div class="modal-backdrop"></div>
+        <div class="modal-overlay"></div>
         <div class="modal-new-s">
             <header class="modal-header-new modal-advert-header">
                 <h1 class="modal-title-new">{{ $t("label.addNewMessage") }}</h1>
