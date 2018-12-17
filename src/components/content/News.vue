@@ -151,7 +151,7 @@ export default {
       isMoreThanOneAdvert: true,
       advertLoaded: this.$store.getters.getShowAdverts,
       loading: true,
-      loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id"),
+      loginAlias: localStorage.getItem("id"),
       eventDesc: null
     };
   },

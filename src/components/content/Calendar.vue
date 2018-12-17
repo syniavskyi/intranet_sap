@@ -91,7 +91,7 @@ export default {
       selectedUser: false,
       selectedGroup: false,
       displaySaveButton: true,
-      loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id")
+      loginAlias: localStorage.getItem("id")
     };
   },
   created() {
@@ -229,7 +229,9 @@ export default {
       }
     },
     formatTime(time) {
-      return time.slice(0, 5);
+      if(time) {
+         return time.slice(0, 5);
+      }
     }
   }
   )

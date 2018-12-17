@@ -200,7 +200,7 @@ export default {
         changePage: false
       }
       
-      oStore.getters.getSelectedForCvUser ? userData.user = oStore.getters.getSelectedForCvUser : userData.user = oStore.getters.getLoginAlias;
+      oStore.getters.getSelectedForCvUser ? userData.user = oStore.getters.getSelectedForCvUser : userData.user = localStorage.getItem('id');
       oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getCvToRead);
     
      oStore.dispatch("loadData", userData);

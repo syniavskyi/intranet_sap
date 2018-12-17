@@ -128,7 +128,7 @@ export default {
             showContent: false,
             selectedType: null,
             selectedStatus: null,
-            loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id")
+            loginAlias: localStorage.getItem("id")
         }
     },
     components: {

@@ -208,9 +208,9 @@
     font-family: 'Roboto';
 }
 
-.evt-desc {
+/* .evt-desc {
     align-self: center;
-}
+} */
 
 .evt-priv {
     font-size: .8rem;
@@ -368,7 +368,7 @@
     padding-bottom: .4rem;
     padding-top: 0;
     width: 16rem;
-    height: 9.5rem;
+    height: 11rem;
     margin: .5rem;
     box-shadow: 0 0 10px grey;
     border-radius: .2rem;
@@ -378,7 +378,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 6.5rem;
+    min-height: 6.5rem;
     width: 15rem;
 }
 
@@ -403,8 +403,9 @@
     font-size: 20px;
     color: #333;
     font-weight: 480;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
+    text-align: center;
     margin: 0;
     padding: 0;
 }

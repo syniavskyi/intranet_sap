@@ -9,7 +9,7 @@
       <div class="modal-content-new">
         <div class="modal-calendar">
           <div class="cd-for-input-xl">
-            <input required class="cd-input" v-model="addEvent.EventName" @blur="$v.addEvent.EventName.$touch()">
+            <input required class="cd-input" v-model="addEvent.EventName" @blur="$v.addEvent.EventName.$touch()" :maxlength="40">
             <span class="cd-span"/>
             <label class="cd-label">{{ $t("label.eventTitle") }}</label>
           </div>
@@ -19,7 +19,7 @@
             <label class="cd-label">{{ $t("label.eventTime") }}</label>
           </div>
           <div class="cd-for-input-xl">
-            <input required class="cd-input" v-model="addEvent.Description">
+            <input required class="cd-input" v-model="addEvent.Description" :maxlength="70">
             <span class="cd-span"/>
             <label class="cd-label">{{ $t("label.eventDescription") }}</label>
           </div>
