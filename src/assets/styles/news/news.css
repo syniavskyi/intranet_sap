@@ -58,7 +58,10 @@ body {
     box-shadow: 0 0 10px grey;
     margin: .8rem;
     border-radius: 4px;
+}
 
+.new-tile-cnt {
+    position: relative;
 }
 
 .advItem >  textarea,
@@ -124,7 +127,7 @@ body {
 }
 
 .advLeft {
-    left: 0;
+    left: calc(0rem - .4rem);
 }
 .advRight { 
     right: calc(0rem + .4rem);
