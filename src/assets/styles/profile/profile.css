@@ -1140,6 +1140,7 @@
     height: 2.3rem;
     font-size: 1.3rem;
     text-align: center;
+    padding-right: 28px;
 }
 .selectDisabled {
     border: 1px solid transparent;

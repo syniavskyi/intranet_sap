@@ -66,6 +66,8 @@
     top: .7rem;
     right: 1rem;
     background: url(../images/nav3/power-32.png) no-repeat center;
+    max-width: 2.65rem;
+    max-height: 1.9rem;
     width: 2.65rem;
     height: 1.9rem;
     border: 0;
@@ -562,7 +564,7 @@ input:required {
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
-    background: radial-gradient(#b2b2b2 50%, transparent 80% );
+    /* background: radial-gradient(#b2b2b2 50%, transparent 80% ); */
 }
 .loader > div {
     width: 1rem;
