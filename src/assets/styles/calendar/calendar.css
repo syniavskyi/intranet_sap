@@ -208,9 +208,10 @@
     font-family: 'Roboto';
 }
 
-/* .evt-desc {
-    align-self: center;
-} */
+.evt-desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .evt-priv {
     font-size: .8rem;
@@ -408,6 +409,8 @@
     text-align: center;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .event-attr-header p{

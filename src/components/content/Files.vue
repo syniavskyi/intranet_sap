@@ -11,12 +11,11 @@
           </div>
         </div>
         <div class="documents-page-tiles">
-
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" aria-expanded="false" class="documents-tiles-row-header">
-              <i18n path="header.documentsCount" tag="p">
+              <i18n path="header.documentsCount">
                    <span place="number"> {{docFiles.length}} </span>
-             </i18n>
+              </i18n>
             </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in docFiles" :key="doc.FileId">
@@ -40,9 +39,9 @@
           </div>
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.systemData" tag="p">
+              <i18n path="header.systemData">
                     <span place="number"> {{systemFiles.length}} </span>
-            </i18n>
+              </i18n>
             </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in systemFiles" :key="doc.FileId">
@@ -66,9 +65,9 @@
           </div>
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.office" tag="p">
+              <i18n path="header.office">
                     <span place="number"> {{officeFiles.length}} </span>
-            </i18n>
+              </i18n>
             </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in officeFiles" :key="doc.FileId">
@@ -92,10 +91,10 @@
           </div>
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.information" tag="p">
+              <i18n path="header.information">
                     <span place="number"> {{infoFiles.length}} </span>
-            </i18n>
-              </div>
+              </i18n>
+            </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in infoFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
@@ -118,9 +117,9 @@
           </div>
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.instructions" tag="p">
+              <i18n path="header.instructions">
                     <span place="number"> {{instrFiles.length}} </span>
-            </i18n>
+              </i18n>
             </div>
             <div class="documents-tiles-row-content">
               <div class="documents-tile documents-tile-1-3" v-for="doc in instrFiles" :key="doc.FileId">
