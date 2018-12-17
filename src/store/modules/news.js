@@ -201,7 +201,7 @@ const actions = {
         }
          weather.celcius = data.main.temp.toFixed(0);
         //  weather.description = data.weather[0].description /opis po ang
-         weather.icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png"
+         weather.icon = "https://openweathermap.org/img/w/"+data.weather[0].icon+".png"
          weather.clouds = data.clouds.all
          weather.wind = ((data.wind.speed) * (3.6)).toFixed(2)
          weather.humidity = data.main.humidity
