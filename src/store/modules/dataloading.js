@@ -538,6 +538,7 @@ const actions = {
     };
     commit('SET_ADVERTS', oAdverts);
     commit('SET_SHOW_ADVERTS', true);
+    commit('SET_INITIAL_DATA_READED', true);
   },
 
   setEvents({commit, dispatch}, response){
