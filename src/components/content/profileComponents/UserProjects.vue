@@ -69,13 +69,13 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.duration") }} </div>
               <div class="prof-tbody-item-txt">
-                <p class="prof-table-p" v-if="editMode">{{ $t("label.startDate") }}</p>
+                <p class="prof-table-p" v-if="projectEditMode">{{ $t("label.startDate") }}</p>
                 <p class="table-p" v-if="!projectEditMode"> {{ formatDate(userProjects[index].DateStart) }} </p>
                <v-date-picker popoverDirection="top" :max-date="project.IsCurrent ? new Date() : project.DateEnd" v-if="projectEditMode" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateStart">
                   <input value="userProjects[index].DateStart" />
                 </v-date-picker>
                 <div class="table-p">&#8722;</div>
-                <p class="prof-table-p" v-if="editMode">{{ $t("label.endDate") }}</p>
+                <p class="prof-table-p" v-if="projectEditMode">{{ $t("label.endDate") }}</p>
                 <div name="endDateDiv" :id="formatId(index)">
                   <p class="table-p" v-if="!projectEditMode && !project.IsCurrent"> {{ formatDate(userProjects[index].DateEnd) }} </p>
                   <v-date-picker popoverDirection="top" :max-date="new Date()" :min-date="project.DateStart" v-if="projectEditMode && !project.IsCurrent" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateEnd">
