@@ -40,7 +40,7 @@
               <button class="oclear-btn btn-s" id="halo" @click="startStopSlider">{{stop}}</button>
             </div> -->
             <div class="tile-content new-tile-cnt">
-              <!-- <tranistion name="fly"> -->
+              <!-- <transition-group name="fly"> -->
                 <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
                   <textarea @input="validateAdvert(advert)" :disabled="!editMode || cc" class="n-textarea" v-model="advert.Message"/>
                   <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
@@ -59,7 +59,7 @@
                 <!-- advLeft -->
                 <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
                 <!-- advRight -->
-              <!-- </tranistion> -->
+              <!-- </transition-group> -->
             </div>
           </div>
           <div class="api">
@@ -166,10 +166,11 @@ export default {
       // this.runCarosuel(this.slideIndex);
       // if (advertsLoaded) {  
         this.runCarosuel();
+        this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
       //   this.interval = setInterval(() => {
       //     this.slideIndex += 1;
       //     this.runCarosuel(this.slideIndex);
-      //     this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
+      //     
       //   }, 4000);
         // }
     // });
@@ -276,10 +277,6 @@ export default {
       this.$store.dispatch("updateAdvert", data);
       this.beforeEditingCache = data;
       this.isAdvertValid = false;
-      // this.interval = setInterval(() => {
-      //     this.slideIndex += 1;
-      //     this.runCarosuel(this.slideIndex);
-      //   }, 4000);
     },
     removeAdvert(advertId) {
       this.$store.dispatch('removeAdvert', advertId)
@@ -342,22 +339,6 @@ export default {
         // slides[this.slideIndex - 1].style.display = "flex";
       // }
     },
-    startStopSlider(evt) {
-      if (evt.target.innerText === this.start) {
-        evt.target.innerText = this.stop;
-        this.sliderToast = i18n.t("message.startedSlider");
-        this.interval = setInterval(() => {
-          this.slideIndex += 1;
-          this.runCarosuel(this.slideIndex);
-        }, 4000);
-      } else {
-        evt.target.innerText = this.start;
-        this.sliderToast = i18n.t("message.stoppedSlider");
-        clearInterval(this.interval);
-      }
-
-      this.$store.dispatch("displayToast");
-    },
     setEventDesc(eventId) {
       this.eventDesc = this.events.find(o => o.EventId === eventId).Description;
     },
@@ -366,17 +347,4 @@ export default {
 </script>
 
 <style scoped>
-.fly-enter {
-  opacity: 0;
-  transform: translateX(10rem);
-}
-
-.fly-enter-to {
-  opacity: 0;
-  transform: translateX(0rem);
-}
-
-.fly-enter-active {
-  transition: opacity .2s, transform .2s ;
-}
 </style>
