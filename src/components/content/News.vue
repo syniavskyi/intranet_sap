@@ -41,17 +41,17 @@
             </div> -->
             <div class="tile-content">
               <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
-                <textarea @input="validateAdvert(advert)" :disabled="!editMode" class="n-textarea" v-model="advert.Message"/>
+                <textarea @input="validateAdvert(advert)" :disabled="!editMode || cc" class="n-textarea" v-model="advert.Message"/>
                 <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
                 <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
-                <v-date-picker v-if="editMode" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
+                <v-date-picker v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
                   <input value="advert.ValidTo"/>
                 </v-date-picker>
                 <div class="advBtns">
                   <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
-                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid">{{ $t("button.save") }}</button>
-                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode">{{ $t("button.cancel") }}</button>
-                  <button class="oclear-btn" v-if="editMode" @click="removeAdvert(advert.AdvertId)">X</button>
+                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy">{{ $t("button.save") }}</button>
+                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode || loginAlias !== advert.CreatedBy">{{ $t("button.cancel") }}</button>
+                  <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
                 </div>
               </div>
             </div>

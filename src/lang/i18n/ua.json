@@ -180,7 +180,7 @@
         "employees": "Працівники",
         "informations": "Інформація",
         "documents": "Документи",
-        "documentsCount": "Документи {number}",
+        "documentsCount": "Документи ({number})",
         "personalData": "Персональні дані",
         "contact": "Контактні дані",
         "employee": "Дані працівника",
@@ -212,10 +212,10 @@
         "userNotRegisteredTitle": "Користувача не створено",
         "messages": "Повідомлення",
         "homepage": "Домашня сторінка",
-        "systemData": "Системні дані",
-        "office": "Офіс",
-        "information": "Інформація",
-        "instructions": "Інструкції",
+        "systemData": "Системні дані ({number})",
+        "office": "Офіс ({number})",
+        "information": "Інформація ({number})",
+        "instructions": "Інструкції ({number})",
         "error": "Помилка"
     },
     "message": {
