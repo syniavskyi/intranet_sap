@@ -56,7 +56,7 @@ export default {
         return {
             selectedDates: null,
             disableAddNew: true,
-            loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id")
+            loginAlias: localStorage.getItem("id")
         }
     },
     computed: {

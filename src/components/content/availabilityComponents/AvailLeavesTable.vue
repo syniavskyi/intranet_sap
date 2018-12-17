@@ -79,7 +79,7 @@ export default {
             editMode: false,
             _beforeEditingCache: null,
             setFilterAllowed: true,
-            loginAlias: this.$store.getters.getLoginAlias || localStorage.getItem("id")
+            loginAlias: localStorage.getItem("id")
         }
     },
     computed: {

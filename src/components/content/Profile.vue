@@ -153,7 +153,7 @@
                 <div class="profile-tile-header">
                   <div class="profile-tile-header-row">
                     <h2 class="prof-tile-h2">{{ $t("header.employee") }}</h2>
-                    <button @click="showChangePassword" :disabled="selectedUser !== userToChangePassword" class="func-btn">
+                    <button @click="showChangePassword" :disabled="selectedUser !== loginAlias" class="func-btn">
                       <span class="prof-btn-txt">{{ $t("header.changePassword") }}</span>
                       <span class="prof-btn-icon">&#x1f513;</span>
                     </button>
@@ -292,8 +292,8 @@ export default {
       selectedCvLang: i18n.locale,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV,
       workTime: this.$store.getters.getWorkTime,
-      userToChangePassword: this.$store.getters.getLoginAlias || localStorage.getItem("id"),
-      selectedUser: this.$store.getters.getSelectedForCvUser || this.$store.getters.getLoginAlias || localStorage.getItem("id")
+      loginAlias: localStorage.getItem("id"),
+      selectedUser: this.$store.getters.getSelectedForCvUser || localStorage.getItem("id")
     };
   },
   validations: {
@@ -342,7 +342,7 @@ export default {
   created() {
     this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
     let oStore = this.$store,
-        sUserAlias = oStore.getters.getLoginAlias || localStorage.getItem("id"),
+        sUserAlias = localStorage.getItem("id"),
         sLang = localStorage.getItem("lang");
     oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getProfileToRead);
     if(oStore.getters.getCookie){
@@ -381,7 +381,6 @@ export default {
       displayOverlay: "getShowMenuOverlay",
       usersList: "usersList",
       userPhoto: "getSelectedUserPhotoUrl",
-      loginAlias: "getLoginAlias",
       disabledBtnToEdit: "getDisabledBtnToEdit",
       showLeavePageDialog: "getLeavePageDialog",
       leavePageFlag: "getLeavePageFlag"
@@ -444,12 +443,16 @@ export default {
       let profileActivityAuth = this.$store.getters.getUserAuth.ZPROF_ATCV;
       if(profileActivityAuth === '*') {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+        document.getElementById('change-user-image').disabled = false;
       } else if(profileActivityAuth === 'TEAM' && this.filteredTeamUsers.find(o => o.UserAlias === this.selectedUser)) {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+        document.getElementById('change-user-image').disabled = false;
       } else if(this.selectedUser === this.loginAlias) {
        this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+       document.getElementById('change-user-image').disabled = false;
       } else {
        this.$store.commit('SET_DISABLED_BTN_TO_EDIT', true);
+       document.getElementById('change-user-image').disabled = true;
       }
       localStorage.setItem('cvUser', this.selectedUser);
     },
@@ -602,7 +605,7 @@ export default {
         return leave
       }
       // this.$router.push({name: this.routeToGo})
-    }
+    },
   }
 };
 </script>

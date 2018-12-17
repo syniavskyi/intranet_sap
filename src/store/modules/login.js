@@ -5,7 +5,6 @@ const state = {
   loginError: false,
   sendEmailSuccess: false,
   sendEmailError: false,
-  username: null,
   urlQuery: null,
   password: null,
   hashedPassword: null,
@@ -36,9 +35,6 @@ const mutations = {
   SET_HASHED_PASSWORD(state, password) {
     state.hashedPassword = password;
   },
-  SET_LOGIN_ALIAS(state, data) {
-    state.username = data;
-  },
   SET_TOKEN(state, data) {
     state.token = data;
   },
@@ -54,7 +50,6 @@ const actions = {
     getters
   }, authData) {
     let url = `?sap-user=${authData.username}&sap-password=${authData.password}&sap-language=${authData.language}`;
-    commit('SET_LOGIN_ALIAS', authData.username.toUpperCase());
     axios({
       method: 'get',
       url: url,
@@ -147,9 +142,6 @@ const getters = {
   },
   hashedPassword(state) {
     return state.hashedPassword;
-  },
-  getLoginAlias(state) {
-    return state.username;
   },
   getToken(state) {
     return state.token;
