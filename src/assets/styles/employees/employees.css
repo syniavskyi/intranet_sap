@@ -160,7 +160,7 @@
         justify-content: center;
         height: 3rem;
         align-items: center;
-        background: rgb(192, 192, 192);
+        background: rgb(76, 74, 74);
     }
     .emp-tbody-row {
         flex-direction: row;
@@ -211,7 +211,7 @@
         background:none;
     }
     .emp-tbody-row:nth-of-type(even) {
-        background: rgb(231, 231, 231);
+        background: rgb(196, 196, 196);
     }
 }
 

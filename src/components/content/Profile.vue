@@ -481,17 +481,17 @@ export default {
       this.editMode = !this.editMode;
     },
     onSaveChanges() {
+      let data;
       this.showNoChangesAlert = false;
       this.checkIfDataChanged();
       if (this.hasDataChanged === false) {
         this.showNoChangesAlert = true;
       } else {
-        const data = utils.createClone(this.userData)
+        data = utils.createClone(this.userData)
         this.$store.dispatch("saveUserData", data);
         this.editMode = !this.editMode;
       }
       this.disableSaveBtn = true;
-      this.userData = data;
     },
     checkIfDataChanged() {
       let currentData = Object.assign({}, this.userData),
@@ -524,15 +524,15 @@ export default {
       this.invalidPhone = regex.test(value.target.value) ? false : true;
       this.checkFormFields();
     },
-    dateValidation(value) {
-      const day = parseInt(value.slice(0, 2)),
-          month = parseInt(value.slice(3, 5));
+    // dateValidation(value) {
+    //   const day = parseInt(value.slice(0, 2)),
+    //       month = parseInt(value.slice(3, 5));
 
-      this.invalidDate = day > 31 || month > 12 ? true : false;
-      this.disableSaveBtn = day > 31 || month > 12 ? true : false;
+    //   this.invalidDate = day > 31 || month > 12 ? true : false;
+    //   this.disableSaveBtn = day > 31 || month > 12 ? true : false;
 
-      this.checkFormFields();
-    },
+    //   this.checkFormFields();
+    // },
     checkFormFields() {
       if (this.invalidPhone || this.invalidDate || this.$v.userData.Email.$invalid) {
         this.disableSaveBtn = true;
@@ -541,7 +541,7 @@ export default {
         this.disableSaveBtn = this.hasDataChanged === true ? false : true;
       }
     },
-    generateCV() {},
+    // generateCV() {},
     addNewPositionForUser() {
       const userPos = this.userPositions;
       userPos.push(this.newPosition);

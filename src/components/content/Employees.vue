@@ -93,41 +93,6 @@ export default {
       oStore.dispatch('getData', null);
       utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
-  // computed: {
-  //   ...mapGetters({
-  //     usersList: "usersList",
-  //     departmentList: "getDepartmentList",
-  //     displayMenu: "getShowMenu",
-  //     displayOverlay: "getShowMenuOverlay"
-  //   }),
-  //   filteredUsers: function() {
-  //     let self = this,
-  //       aFilteredUsers = this.usersList,
-  //       aFilters = this.aFilters;
-
-  //     if (aFilters.user == "" && aFilters.department === null) {
-  //       aFilteredUsers = this.usersList;
-  //     } else {
-  //       let fnFilter;
-  //       if (aFilters.user) {
-  //         aFilteredUsers = self.usersList.filter(function(user) {
-  //           return (
-  //             user.Fullname.toLowerCase().indexOf(
-  //               aFilters.user.toLowerCase()
-  //             ) >= 0
-  //           );
-  //         });
-  //       }
-  //       if (aFilters.department) {
-  //         fnFilter = function(oItem) {
-  //           return oItem.DepartmentName === aFilters.department;
-  //         };
-  //         aFilteredUsers = aFilteredUsers.filter(fnFilter);
-  //       }
-  //     }
-  //     return aFilteredUsers;
-  //   }
-  // },
   computed: Object.assign(
     mapGetters({
       usersList: "usersList",
@@ -164,18 +129,6 @@ export default {
     }
     }
   ),
-  // methods: {
-  //   ...mapActions({
-  //     getUsersLists: "getUsersLists"
-  //   }),
-  //   clearFilters() {
-  //     this.aFilters = {};
-  //   },
-  //   showMenu(event) {
-  //     let name = { window, event };
-  //     this.$store.dispatch("setSideMenu", name);
-  //   }
-  // }
   methods: Object.assign(
     mapActions({
       getUsersLists: "getUsersLists"
