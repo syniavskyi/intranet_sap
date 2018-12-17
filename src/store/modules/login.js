@@ -10,7 +10,8 @@ const state = {
   hashedPassword: null,
   token: '',
   cookie: '',
-  dataToRead: ["Adverts", "Events"]
+  dataToRead: ["Adverts", "Events"],
+  initialDataReaded: false
 }
 
 const mutations = {
@@ -40,6 +41,9 @@ const mutations = {
   },
   SET_COOKIE(state, data) {
     state.cookie = data;
+  },
+  SET_INITIAL_DATA_READED(state, readed) {
+    state.initialDataReaded = readed
   }
 }
 
@@ -155,6 +159,9 @@ const getters = {
   },
   getDataToRead(state){
     return state.dataToRead;
+  },
+  getInitialDataReaded(state) {
+    return state.initialDataReaded
   }
 }
 

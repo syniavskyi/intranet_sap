@@ -190,12 +190,12 @@
     animation-duration: .55s;
 }
 .warning {
-    color: orangered;
-    background-color: orange;
+    color: #ffa500;
+    background-color: rgba(255, 166, 0, 0.404);
     }
 .error {
-    color: red;
-    background-color: rgb(255, 51, 0);
+    color: #D8000C;
+    background-color: rgba(255, 0, 0, 0.445);
     }
 .info{
     color: green;

@@ -107,8 +107,8 @@ body {
     color: grey;
 }
 
-.advLeft,
-.advRight {
+.news-adv-left,
+.news-adv-right {
     position: absolute;
     display: flex;
     border:0;
@@ -121,15 +121,15 @@ body {
     transition: filter 0.2s ease;
 }
 
-.advLeft:hover,
-.advRight:hover {
+.news-adv-left:hover,
+.news-adv-right:hover {
     filter: drop-shadow(0 0 10px orange)
 }
 
-.advLeft {
+.news-adv-left {
     left: calc(0rem - .4rem);
 }
-.advRight { 
+.news-adv-right { 
     right: calc(0rem + .4rem);
 }
 
