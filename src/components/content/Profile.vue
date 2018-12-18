@@ -74,7 +74,8 @@
                           <label class="prof-ainput-lbl">{{ $t("label.postalCode") }}</label>
                         </div>
                       </div>
-                      <input v-if="!editMode" :value="formatAddress" disabled class="inputProfile inputDisabled">
+                      <p v-if="!editMode" disabled class="inputProfile inputDisabled">{{ formatAddress }}</p>
+                      <!-- <input v-if="!editMode" :value="formatAddress" disabled class="inputProfile inputDisabled"> -->
                       <label v-if="!editMode" class="label-profile">{{ $t("label.address") }}</label>
                     </div>
                     <div class="prof-input">

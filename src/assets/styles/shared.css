@@ -7,7 +7,7 @@
 
 .plane-parent {
     display: flex;
-    background: lightgrey;
+    background: #d3d3d3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +20,7 @@
     height: 100%;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background: radial-gradient(ellipse 162% 190% at -1% 50%, #f7f7f7 55%, lightgray 60%, white 60.7%);
+    background: radial-gradient(ellipse 162% 190% at -1% 50%, #f7f7f7 55%, #d3d3d3 60%, #ffffff 60.7%);
     flex-direction: column;
     align-items: center;
     justify-content: center; 
@@ -80,7 +80,7 @@
 .logout-button:hover {
     cursor:pointer;
     /* box-shadow: 0 0 10px rgb(168, 168, 168); */
-    box-shadow: 0 0 10px red;
+    box-shadow: 0 0 10px #ff0000;
 }
 
 .logout-button:hover > .logout-text {
@@ -125,7 +125,7 @@
     height: 2rem;
     color: #333;
     background: #ccc;
-    box-shadow: 0 3px 3px -2px gray;
+    box-shadow: 0 3px 3px -2px #808080;
     text-transform: capitalize;
     border: 0;
     border-radius: 4px;
@@ -133,7 +133,7 @@
     justify-content: center;
     align-items: center;
     margin: .5rem;
-    outline-color: orange;
+    outline-color: #ffa500;
 }
 
 .btn-delete-row:hover {
@@ -144,21 +144,18 @@
 
 .plane-nav {
     z-index: 1600;
-    /* display: none; */
     position: absolute;
     top: 0;
     left: 0;
     flex-direction: column;
     justify-content: flex-start;
-    /* width: 15%; */
     width: 300px;
     align-items: center;
     min-width: 12rem;
     min-height: 45rem;
     height: auto;
-    /* background: url("../images/banner4.png"); */
-    background: white;
-    box-shadow: 0 0 5px 3px grey;
+    background: #ffffff;
+    box-shadow: 0 0 5px 3px #808080;
 }
 
 .nav-user {
@@ -172,16 +169,14 @@
 
 .nav-user-img {
     border-radius: 50%;
-    box-shadow: 0 0 15px grey;
+    box-shadow: 0 0 15px #808080;
     max-height: 180px;
     max-width: 200px;
     width: auto;
     height: auto;
 }
 
-.nav {
-    width: 100%;
-}
+.nav {width: 100%;}
 
 .nav-list {
     margin: 0;
@@ -198,17 +193,11 @@
     width: 100%;
 }
 
-li p {
-    transition: margin .35s ease;
-}
-/* li:hover p {
-    margin-left: 13%;
-} */
+li p {transition: margin .35s ease;}
 
 .nav-router-link {
     width: 100%;
     height: 100%;
-    /* margin: .3rem 1.2rem; */
     margin: 1.5% 10%;
     text-decoration: none;
 }
@@ -220,7 +209,6 @@ li p {
     align-items: center;
     width: 100%;
     border:0;
-   /* box-shadow: 0 -7px 9px -7px rgba(0,0,0,0.4); */
     background: transparent;
     text-decoration: none;
     padding: 0;
@@ -247,24 +235,24 @@ li p {
 .active-router-link {
     cursor: pointer;
     background: #FFB05C;
-    box-shadow: 0 16px 15px -14px gray;
+    box-shadow: 0 16px 15px -14px #808080;
     outline: none;
     border-radius: .3rem;
 }
 .nav-item:hover,
 .nav-item:focus {
     cursor: pointer;
-    background: lightgrey;
+    background: #d3d3d3;
 }
 
 
 .active-router-link p {
-    color: white;
+    color: #ffffff;
 }
 
 .nav-item:hover p,
 .nav-item:focus p {
-    color: white;
+    color: #ffffff;
 }
 /* Planes for side navigation menu */
 
@@ -324,7 +312,7 @@ li p {
     height: 2rem;
     padding: 0.2rem 0.6rem;
     border: 0px;
-    border-bottom: 2px solid grey;
+    border-bottom: 2px solid #808080;
     font-family: inherit;
     background: rgba(255,255,255, 0);
     transition: border-bottom 0.4s ease;
@@ -341,7 +329,7 @@ li p {
 .input:hover,
 .input:focus {
     cursor: text;
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid #ffa500;
 }
 
 .button {
@@ -353,7 +341,7 @@ li p {
     transition: all 0.4s ease;
     font-family: inherit;
     font-weight: 500;
-    color: white;
+    color: #ffffff;
     font-size: 1rem;
     align-self: center;
 }
@@ -429,7 +417,7 @@ li p {
     opacity: 1;
 }
 .checkbox-wrap input:checked ~ div {
-    background: orange;
+    background: #ffa500;
 }
 
 .checkbox-wrap input:checked:hover ~ div {
@@ -443,7 +431,7 @@ li p {
 
 /* WHEN CHECKBOX IS CHECKED BUT DISABLED */
 .checkbox-wrap input:disabled:checked ~ div {
-    background: orange;
+    background: #ffa500;
 }
 .checkbox-wrap input:disabled:checked:hover ~ div {
     background: rgb(243, 243, 243);
@@ -502,7 +490,7 @@ input:required {
     /* box-shadow: #a76c00 1px 1px 0,
     #a76c00 2px 2px 0,
     #a76c00 3px 3px 0; */
-    box-shadow: 0 2px 8px grey;
+    box-shadow: 0 2px 8px #808080;
     transition: box-shadow 0.25s ease;
     cursor: pointer;
     max-height: 2rem;
@@ -514,7 +502,7 @@ input:required {
 
 .clear-btn,
 .oclear-btn {
-    background-color: white;
+    background-color: #fff;
     border-radius: 4px;
     padding: .3rem .4rem;
     font-size: 1rem;
@@ -522,21 +510,21 @@ input:required {
     transition: all 0.2s ease;
 }
 .clear-btn {
-    border: 2px solid grey;
+    border: 2px solid #808080;
     color: grey;
 }
 .clear-btn:hover {
-    color:white;
+    color:#fff;
     background-color: grey
 }
 
 .oclear-btn {
-    border: 2px solid orange;
+    border: 2px solid #ffa500;
     color: orange;
 }
 .oclear-btn:hover {
-    background-color: orange;
-    color: white;
+    background-color: #ffa500;
+    color: #fff;
 }
 /* Functional Buttons */
 
@@ -570,7 +558,7 @@ input:required {
     width: 1rem;
     height: 1rem;
     margin: 4rem 0.2rem;
-    background: orange;
+    background: #ffa500;
     border-radius: 50%;
     animation: loader 0.6s infinite alternate;
 }
@@ -614,7 +602,7 @@ input:required {
     display: flex;
     max-width: 10rem;
     flex-wrap: wrap;
-    color: white;
+    color: #ffffff;
     margin-left: -4rem;
     background: rgba(0, 0, 0, 0.507);
     padding: 0.5rem 0.6rem;
@@ -631,7 +619,6 @@ input:required {
     display: flex;
     flex-direction: column;
     min-height: 3.4rem;
-    /* height: 10%; */
 }
 
 .tile-head-title {
@@ -652,7 +639,7 @@ input:required {
 .tile-underscore {
     width: 5rem;
     height: 0.5rem;
-    background: orange;
+    background: #ffa500;
 }
 
 .tile-content {
@@ -666,55 +653,53 @@ input:required {
 /* tile head */
 
 .table-p {
-    color: grey;
+    color: #808080;
     padding: 0;
     margin: 0;
 }
 
-/* background: linear-gradient(to right, #ffffff 0%,#e5e5e5 10%,#e5e5e5 90%,#ffffff 100%); */
-
-  @keyframes slide-in {
+@keyframes slide-in {
     from {
-      transform: translateY(-30px);
-      opacity: 0;
+        transform: translateY(-30px);
+        opacity: 0;
     }
     to {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes slide-in-up {
-      from {
-          transform: translateY(150px);
-          opacity: 0;
-      }
-      to {
-          transform: translateY(0);
-          opacity: 1;
-      }
-  }
-
-  @keyframes slide-out {
+ @keyframes slide-in-up {
     from {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(150px);
+        opacity: 0;
     }
     to {
-      transform: translateY(-30px);
-      opacity: 0;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
-  @keyframes slide-to-left {
-      from {
-          transform: translateX(-100px);
-          opacity:0;
-      }
-      to {
-          transform:translateX(0);
-          opacity: 1;
-      }
-  }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+@keyframes slide-to-left {
+    from {
+        transform: translateX(-100px);
+        opacity:0;
+    }
+    to {
+        transform:translateX(0);
+        opacity: 1;
+    }
+}
 
 /* media for dashboard, nav and others */
 
@@ -806,7 +791,7 @@ input:required {
     transition: color 0.3s ease;
 }
 .content-header-menu:hover {
-    color: orange;
+    color: #ffa500;
 }
 .content-header-title {
     color: #7b7777;

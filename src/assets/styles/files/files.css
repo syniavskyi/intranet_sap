@@ -18,18 +18,17 @@
     justify-content: center;
     align-self: center;
     background: #ebebeb;
-    box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px #808080;
     flex-direction: column;
     position: relative;
     margin: .5rem 0;
-    border: 1px solid lightgrey;
-    min-height: 55.2px;
+    border: 1px solid #d3d3d3;
 }
 
 .documents-tiles-row-header,
 .documents-tiles-row-header-open {
     padding: 1rem;
-    color: black;
+    color: #333;
     color: #7b7777;
     font-weight: bold;
     font-size: 1.2rem;
@@ -93,9 +92,9 @@
     width: 100%;
 }
 .documents-tile {
-    background: white;
+    background: #ffffff;
     margin: .5rem 0;
-    box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px #808080;
     transition: box-shadow 0.2s ease;
     flex-shrink:0;
 }
@@ -121,7 +120,7 @@
     display: flex;
     width: 3rem;
     height: 0.3rem;
-    background: orange;
+    background: #ffa500;
 }
 .documents-tile-content {
     height: 10rem;
@@ -166,16 +165,16 @@
 }
 .doc-file-div:hover {
     cursor: pointer;
-    box-shadow: inset 0 0 5px lightgrey;
+    box-shadow: inset 0 0 5px #d3d3d3;
 }
 .documents-tile:hover {
-    box-shadow: 0 0 20px grey;
+    box-shadow: 0 0 20px #808080;
 }
 
 .doc-file-desc {
     display: flex;
     width: 13rem;
-    color: grey;
+    color: #808080;
     margin-left: .3rem;
 }
 .doc-file-img {
@@ -225,7 +224,7 @@
     .documents-tile:hover .doc-file-img {
         animation: slide-left 0.3s;
         animation-fill-mode: forwards;
-        box-shadow: inset 0 0 10px lightgrey;
+        box-shadow: inset 0 0 10px #d3d3d3;
     }
     .doc-file-desc {
         display: none;
