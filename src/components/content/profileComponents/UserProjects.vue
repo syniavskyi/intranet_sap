@@ -1,10 +1,10 @@
 <template>
   <div class="profile-tile">
     <!-- SPi -->
-    <div class="prof-skills-hint" v-if="showHintProject.show">
+    <!-- <div class="prof-skills-hint" v-if="showHintProject.show">
       <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
       <div class="prof-hint-item">{{showSingleHint()}}</div>
-    </div>
+    </div> -->
     <!-- Spi -->
     <div class="profile-tile-header">
       <div class="profile-tile-header-row">
@@ -49,6 +49,11 @@
                 <div class="prof-tbody-item-txt">
                   <p class="table-p">{{index + 1}}</p>
                 </div>
+                <!-- SPI -->
+                  <!-- <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
+                      <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
+                      <div class="prof-hint-item">{{showSingleHint()}}</div>
+                </div> -->
               </div>
               <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.projectName") }} </div>
@@ -121,6 +126,10 @@
                 <!-- class="profile-table-textarea" -->
                 <textarea class="cd-textarea" :disabled="!projectEditMode" @input="checkFields(index)" v-model="userProjects[index].Description" />
               </div>
+           <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
+                      <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
+                      <div class="prof-hint-item">{{showSingleHint()}}</div>
+                </div>
             </div>
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> --- </div>
@@ -319,6 +328,7 @@ export default {
       this.$store.commit("SET_USER_PROJECTS_LIST", this._beforeEditingProjects);
       this.projectEditMode = false;
       this.showHintAfterSave = false;
+      this.showHintFnProject({index: '', show: false});
     },
     editProjects() {
       this.projectEditMode = true;
@@ -353,8 +363,8 @@ export default {
       this.checkFields(index);
     },
       showSingleHint() {
-        let index2 = this.showHintProject.index;
-        return this.userProjectsDfLang[index2].Description;
+        let index = this.showHintProject.index;
+        return this.userProjectsDfLang[index].Description;
       }   
   }
 };

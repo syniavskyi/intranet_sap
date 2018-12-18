@@ -1453,6 +1453,11 @@
     z-index: 5;
     border-radius: 5px;
 }
+/* SPI */
+.prof-skills-hint-project {
+    width: 25rem;
+    top: 100%;
+}
 
 .prof-hint-tt {
     display: flex;
@@ -1720,6 +1725,8 @@
         flex-direction: row;
         width: 100%;
         margin: 0;
+        /* SPI */
+        position: relative;
     }
     .prof-tbody-item {
         position: static;
@@ -1783,6 +1790,11 @@
     }
     .prof-tbody-row:nth-of-type(even) {
         background: rgb(231, 231, 231);
+    }
+    /* SPI */
+    .prof-skills-hint-project {
+        right: 25%;
+        top: 5%;
     }
 }
 
