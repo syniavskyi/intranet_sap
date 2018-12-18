@@ -137,31 +137,33 @@
     color: grey;
     border-radius: 5px;
     outline: none;
-    transition: color .2s, border-color .2s, box-shadow .2s;
+    transition: box-shadow .2s, color .2s, border .2s;
 } 
-
-.cal-back-btn:hover {
-    color: #333;
-    box-shadow: 0 0 8px #333;
-}
-
-.cal-save-btn {
-    background-color: white;
-    border: 1px solid grey;
-    box-shadow: 0 0 4px rgb(173, 168, 163);
-}
-
-.cal-save-btn:hover {
-    color: orange;
-    border-color: orange;
-    box-shadow: 0 0 8px orange;
-}
 
 .cal-back-btn {
     background-color: white;
     border: 0;
     box-shadow: 0 0 4px rgb(173, 168, 163);
 }
+
+.cal-save-btn {
+    background-color: #fff;
+    border: 1px solid #808080;
+    box-shadow: 0 0 4px #ada8a3;
+}
+
+.cal-save-btn:hover {
+    color: #ffa500;
+    border-color: #ffa500;
+    box-shadow: 0 0 8px #ffa500;
+}
+
+.cal-back-btn:hover {
+    color: #333;
+    box-shadow: 0 0 8px #333;
+}
+
+
 
 .user-list {
     height: 19rem;

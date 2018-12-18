@@ -480,6 +480,7 @@ input:required {
 .func-btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     border-radius: 4px;
     border:2px solid transparent;
     color: #f7f7f7;
@@ -487,10 +488,8 @@ input:required {
     font: 1rem 'Open Sans';
     padding: 0.25rem .4rem;
     margin-right: 1rem;
-    /* box-shadow: #a76c00 1px 1px 0,
-    #a76c00 2px 2px 0,
-    #a76c00 3px 3px 0; */
     box-shadow: 0 2px 8px #808080;
+    text-align: center;
     transition: box-shadow 0.25s ease;
     cursor: pointer;
     max-height: 2rem;
