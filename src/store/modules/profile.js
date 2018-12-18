@@ -100,9 +100,8 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
     }).catch(error => { 
-
+      console.log(error);
     }) 
-    commit('SET_USER_INFO', userData);
   },
   submitPhoto({
     commit, getters, dispatch
