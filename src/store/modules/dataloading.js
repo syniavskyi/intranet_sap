@@ -249,7 +249,7 @@ const actions = {
     commit
   }, data) {
     if (data) {
-      data.EmploymentDate = utils.dateStringToObj(data.EmploymentDate)
+      data.EmploymentDate = utils.dateStringToObj(data.EmploymentDate);
       for (let key in data) {
         if (key === "UserCvProjects" || key === "UserEducations" || key === "UserExperiences") {
           let obj = data[key].results;

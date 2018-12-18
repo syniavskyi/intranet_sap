@@ -396,8 +396,7 @@ export default {
     },
     formatDate() {
       let date = this.userData.EmploymentDate;
-
-      return date !== null && date !== undefined
+         return date !== null && date !== undefined
         ? moment(date).format("DD.MM.YYYY")
         : "-";
     },
@@ -405,7 +404,7 @@ export default {
       let oCalculateDifference = moment.preciseDiff(this.userData.EmploymentDate, new Date(), true),
           oFormatedDate;
         // if there is some differences - show work experience
-        if(oCalculateDifference){
+          if(oCalculateDifference){
           oFormatedDate = utils.setWorkExperience(oCalculateDifference);
         }
         if(oFormatedDate.day.includes('NaN')) {
@@ -489,6 +488,7 @@ export default {
         data = utils.createClone(this.userData)
         this.$store.dispatch("saveUserData", data);
         this.editMode = !this.editMode;
+        this._beforeEditingCache = data;
       }
       this.disableSaveBtn = true;
     },

@@ -48,17 +48,18 @@ export const dateStringToObj = function (date) {
 // create independent clone without date changing
 export const createClone = function (data) {
   let clone = JSON.parse(JSON.stringify(data));
+  let key;
   if (clone.constructor === Array) {
-    for (let key in clone[0]) {
+    for (key in clone[0]) {
       for (let i = 0; i < clone.length; i++) {
-        if (key.toLowerCase().includes("date")) {
+        if (key.toLowerCase().includes("date") || key.toLowerCase() == "validto") {
           clone[i][key] = new Date(clone[i][key]);
         }
       }
     }
   } else {
-    for (let key in clone) {
-      if (key.toLowerCase().includes("date")) {
+    for (key in clone) {
+      if (key.toLowerCase().includes("date") || key.toLowerCase() == "validto") {
         clone[key] = new Date(clone[key]);
       }
     }
