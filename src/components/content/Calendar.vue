@@ -31,8 +31,8 @@
                     </option>
                   </select>
                   <label class="cd-slabel">{{ $t("label.employee") }}</label>
-                  <button class="func-btn cal-btn" @click="clearFilters">{{ $t("button.clear") }}</button>
                 </div>
+                <button class="func-btn cal-btn" @click="clearFilters">{{ $t("button.clear") }}</button>
               </div>
             </div>
             <div v-if='selectedDay' class="calendar-tile">
