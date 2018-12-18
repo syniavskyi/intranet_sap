@@ -340,9 +340,9 @@
         "yearsM": " років "
     },
     "title": {
-        "download": "download",
-        "delete": "delete",
-        "save": "save",
-        "reset": "reset"
+        "download": "Cкачати",
+        "delete": "Видалити",
+        "save": "Записати",
+        "reset": "Cкинути"
     }
 }

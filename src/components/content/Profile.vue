@@ -140,7 +140,7 @@
                       </div>
                       <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
                       <p class="profile-error profile-error-image" v-if="photoUploadError">{{ $t("message.photoUploadError") }}</p>
-                      <label for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
+                      <label v-if="!disabledBtnToEdit" for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
                         <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload" id="change-user-image">
                       </label>
                     </div>
@@ -443,16 +443,12 @@ export default {
       let profileActivityAuth = this.$store.getters.getUserAuth.ZPROF_ATCV;
       if(profileActivityAuth === '*') {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
-        document.getElementById('change-user-image').disabled = false;
       } else if(profileActivityAuth === 'TEAM' && this.filteredTeamUsers.find(o => o.UserAlias === this.selectedUser)) {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
-        document.getElementById('change-user-image').disabled = false;
       } else if(this.selectedUser === this.loginAlias) {
        this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
-       document.getElementById('change-user-image').disabled = false;
       } else {
        this.$store.commit('SET_DISABLED_BTN_TO_EDIT', true);
-       document.getElementById('change-user-image').disabled = true;
       }
       localStorage.setItem('cvUser', this.selectedUser);
     },
