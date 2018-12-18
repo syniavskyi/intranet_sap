@@ -20,25 +20,6 @@
               <div class="tile-underscore"/>
             </div>
             <!-- <loader v-if="showAdvertsLoader"></loader> -->
-            <!-- <div class="tile-content tile-ncnt">
-              <div class="advItem" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
-                <textarea @input="validateAdvert(advert)" :disabled="!editMode" class="n-textarea" v-model="advert.Message"/>
-                <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
-                <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
-                <v-date-picker v-if="editMode" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
-                  <input value="advert.ValidTo"/>
-                </v-date-picker>
-                <div class="advBtns">
-                  <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
-                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid">{{ $t("button.save") }}</button>
-                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode">{{ $t("button.cancel") }}</button>
-                  <button class="oclear-btn" v-if="editMode" @click="removeAdvert(advert.AdvertId)">X</button>
-                </div>
-                <button v-show="isMoreThanOneAdvert" @click="nextSlide(-1)" class="advLeft">&#8249;</button>
-                <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="advRight">&#8250;</button>
-              </div>
-              <button class="oclear-btn btn-s" id="halo" @click="startStopSlider">{{stop}}</button>
-            </div> -->
             <div class="tile-content new-tile-cnt">
               <!-- <transition-group name="fly"> -->
                 <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
@@ -56,9 +37,7 @@
                   </div>
                 </div>
                 <button v-show="isMoreThanOneAdvert" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-                <!-- advLeft -->
                 <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
-                <!-- advRight -->
               <!-- </transition-group> -->
             </div>
           </div>
@@ -92,13 +71,9 @@
               <div>
                 <div class="weather-header"></div>
                 <div class="temp">
-                  <!-- <img src="../../assets/images/weather/temps.png" height="46px" class="iconTemp"/> -->
                   <p> {{ weatherData.celcius }} <sup>o</sup>C </p>
                 </div>
               </div>
-              <!-- <div class="description">
-              <p> {{weatherData.description}} </p>
-              </div> -->
               <div class="additional">
                 <div class="weatherDesc">
                   <img src="../../assets/images/weather/winds.png" class="iconWeather"/>
@@ -147,7 +122,6 @@ export default {
       newAdvert: null,
       slideIndex: 5,
       repeatSlider: true,
-      interval: "",
       editMode: false,
       beforeEditingCache: null,
       stop: i18n.t("button.stopSlider"),
@@ -162,18 +136,8 @@ export default {
     };
   },
   updated() {
-    // this.$nextTick(() => {
-      // this.runCarosuel(this.slideIndex);
-      // if (advertsLoaded) {  
-        this.runCarosuel();
-        this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
-      //   this.interval = setInterval(() => {
-      //     this.slideIndex += 1;
-      //     this.runCarosuel(this.slideIndex);
-      //     
-      //   }, 4000);
-        // }
-    // });
+    this.runCarosuel();
+    this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
   },
   beforeCreate() {
     this.$store.dispatch("geoLoc");
@@ -196,8 +160,7 @@ export default {
     "new-message": NewMessageDialog,
     "modal": Modal
   },
-  computed: Object.assign(
-    mapGetters({
+  computed: {...mapGetters({
       geoLocation2: "geoLocation2",
       weatherData: "weatherData",
       today: "today",
@@ -214,30 +177,27 @@ export default {
       getShowAdverts: "getShowAdverts",
       showAdvertsLoader: "getAdvertsLoader",
       advertsLoaded: "getInitialDataReaded"
-    }), {
-      eventsSrt: function() {
-        this.events.sort((a,b) => (a.DateFrom > b.DateFrom) ? 1 : ((b.DateFrom > a.DateFrom) ? -1 : 0)); 
-
-        let addDays = function(date, days) {
+    }),
+    eventsSrt() {
+      this.events.sort((a,b) => (a.DateFrom > b.DateFrom) ? 1 : ((b.DateFrom > a.DateFrom) ? -1 : 0));
+      let addDays = function(date, days) {
           let result = new Date(date);
           result.setDate(result.getDate() + days);
           return result;
         }
-     let substructDays = function(date, days) {
-        let result = new Date(date);
-        result.setDate(result.getDate() - days);
-        return result;
-          }    
-  
-    let filteredEvents = this.events.filter(function(oItem){
-      let eventDays = (oItem.DateTo - oItem.DateFrom) / 86400000;
-        return oItem.DateFrom > substructDays(new Date(), 1) && oItem.DateFrom < addDays(new Date(), 7)
+      let substructDays = function(date, days) {
+          let result = new Date(date);
+          result.setDate(result.getDate() - days);
+          return result;
+        }
+      let filteredEvents = this.events.filter(function(oItem) {
+          let eventDays = (oItem.DateTo - oItem.DateFrom) / 86400000;
+          return oItem.DateFrom > substructDays(new Date(), 1) && oItem.DateFrom < addDays(new Date(), 7)
             || new Date() > substructDays(new Date(), eventDays) && oItem.DateFrom < new Date() && oItem.DateTo > new Date()
-      });
-    return filteredEvents;
+        });
+      return filteredEvents;
     }
-    }
-  ),
+  },
   methods: {
     ...mapActions([
       "geoLoc",
@@ -280,8 +240,7 @@ export default {
     },
     removeAdvert(advertId) {
       this.$store.dispatch('removeAdvert', advertId)
-      // this.advertsList.splice(index, 1);
-       this.editMode = false;
+      this.editMode = false;
     },
     cancelEditing(index) {
       this.advertsList[index] = this.beforeEditingCache;
@@ -289,8 +248,7 @@ export default {
       this.editMode = false;
     },
     validateAdvert(advert) {
-      this.isAdvertValid =
-        advert.Message === "" || advert.ValidTo === null ? false : true;
+      this.isAdvertValid = advert.Message === "" || advert.ValidTo === null ? false : true;
     },
     formatDate(date) {
       return date !== null && date !== undefined
@@ -341,7 +299,7 @@ export default {
     },
     setEventDesc(eventId) {
       this.eventDesc = this.events.find(o => o.EventId === eventId).Description;
-    },
+    }
   }
 };
 </script>
