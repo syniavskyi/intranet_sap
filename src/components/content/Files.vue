@@ -14,7 +14,7 @@
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" aria-expanded="false" class="documents-tiles-row-header">
               <i18n path="header.documentsCount">
-                   <span place="number"> {{docFiles.length}} </span>
+                <span place="number"> {{docFiles.length}} </span>
               </i18n>
             </div>
             <div class="documents-tiles-row-content">
@@ -40,7 +40,7 @@
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
               <i18n path="header.systemData">
-                    <span place="number"> {{systemFiles.length}} </span>
+                <span place="number">{{ systemFiles.length }}</span>
               </i18n>
             </div>
             <div class="documents-tiles-row-content">
@@ -66,7 +66,7 @@
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
               <i18n path="header.office">
-                    <span place="number"> {{officeFiles.length}} </span>
+                <span place="number">{{ officeFiles.length }}</span>
               </i18n>
             </div>
             <div class="documents-tiles-row-content">
@@ -92,7 +92,7 @@
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
               <i18n path="header.information">
-                    <span place="number"> {{infoFiles.length}} </span>
+                <span place="number">{{ infoFiles.length }}</span>
               </i18n>
             </div>
             <div class="documents-tiles-row-content">
@@ -118,7 +118,7 @@
           <div class="documents-tiles-row">
             <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
               <i18n path="header.instructions">
-                    <span place="number"> {{instrFiles.length}} </span>
+                <span place="number">{{ instrFiles.length }}</span>
               </i18n>
             </div>
             <div class="documents-tiles-row-content">
@@ -177,7 +177,7 @@ export default {
         utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
   mounted() {
-    this.$nextTick(this.calcDocsHeight().then(height => {}));
+    this.$nextTick(this.calcDocsHeight()).then(height => {});
   },
   methods: {
     showMenu(event) {
