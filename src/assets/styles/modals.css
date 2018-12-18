@@ -22,7 +22,7 @@
     max-width: 100%;
     max-height: 100%;
     z-index: 1700;
-    background: white;
+    background: #ffffff;
     border-radius: .5rem;
     box-shadow: 0 0 50px 1px #333;
 }
@@ -91,7 +91,7 @@
     border: 0;
     border-top-left-radius: .46rem;
     border-top-right-radius: .46rem;
-    color: white;
+    color: #ffffff;
     margin:0rem;
     display: flex;
     justify-content: space-between;
@@ -120,13 +120,13 @@
     align-self: center;
     height: 50%;
     justify-content: center;
-    color: grey;
+    color: #808080;
 }
 
 .modal-label {
     display: flex;
     justify-content: center;
-    color: grey;
+    color: #808080;
     font: 1.4rem 'Roboto';
 }
 
@@ -137,7 +137,7 @@
 .p-modal-txt {
     align-self: center;
     font-family: inherit;
-    color: grey;
+    color: #808080;
 }
 
 /* MODAL LOGIN */
@@ -161,7 +161,7 @@
 }
 
 .btn-close {  
-    color: white;
+    color: #ffffff;
     background: #22100f;
     border: 1px solid #211472;
     border-radius: 2px;
@@ -181,7 +181,7 @@
 }
   
 .modal-close:hover {
-    color: grey;
+    color: #808080;
 }
 /* ERROR MODAL */
 
@@ -198,17 +198,17 @@
     background-color: rgba(255, 0, 0, 0.445);
     }
 .info{
-    color: green;
+    color: #008000;
     background-color: #0dff005b;
     } 
 .modal-header-war {
-    background-color: orangered;
+    background-color: #ff4500;
     }
 .modal-header-err {
-       background-color: red;
+       background-color: #ff0000;
     }
 .modal-header-info {
-     background-color: green;
+     background-color: #008000;
     } 
 
 @keyframes modal-trans {

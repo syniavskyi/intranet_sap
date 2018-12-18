@@ -27,8 +27,8 @@
     width: 100%;
     height: 88%;
     align-self: center;
-    background: white;
-    box-shadow: 0 0 10px grey;
+    background: #ffffff;
+    box-shadow: 0 0 10px #808080;
     margin-bottom: 1rem;
 }
 .starter-page-list-header {
@@ -39,7 +39,7 @@
 .starter-page-list-title {
     display: flex;
     justify-content: center;
-    color: grey;
+    color: #808080;
     margin: 0.5rem;
 }
 
@@ -52,7 +52,7 @@
 .starter-page-item {
     display: flex;
     border-bottom: 1px solid rgba(128, 128, 128, 0.28);
-    color: darkslategray;
+    color: #2f4f4f;
     justify-content: space-between;
     /* transition: background, height .5s ease; */
     transition: all .5s ease;
@@ -82,16 +82,16 @@
     border-radius: 50%;
     border: 1px solid #c3c3c3;
     transition: all .3s ease;
-    background: white;
+    background: #fff;
     margin: 0 1rem;
     margin-right: 0;
     outline: none;
 }
 
 .starter-page-file-btn:hover {
-    border: 1px solid orange;
-    box-shadow: 0 0 10px orange;
-    color: orange;
+    border: 1px solid #ffa500;
+    box-shadow: 0 0 10px #ffa500;
+    color: #ffa500;
     cursor: pointer;
 }
 
@@ -103,7 +103,7 @@
     transition: background .3s ease;
     display: none;
     margin: .5rem;
-    color: white;
+    color: #ffffff;
 }
 .starter-page-pdf {
     background: rgb(255, 114, 114);
@@ -142,10 +142,9 @@
     position: absolute;
     background: #7c7c7c;
     border-radius: .5rem;
-    color: white;
+    color: #fff;
     font-size: .8rem;
     top: -3.7rem;
-    /* left: 0%; */ 
     left: 53%;
     transform: translateX(-55%);
     -webkit-transform: translateX(-55%);
@@ -154,7 +153,6 @@
     -o-transform:  translateX(-55%);
     width: 18rem;
     height: 3rem;
-    /* text-align: center; */
     justify-content: center;
     align-items: center;
 }
@@ -188,9 +186,6 @@
 }
 
 @media (min-width: 30rem) {
-    /* .plane-nav {
-        min-height: 100vh;
-    } */
     .starter-header-menu {
         display: none;
     }
@@ -200,31 +195,16 @@
     .starter-page-list-item-wrapper {
         margin-right: 2rem;
     }
-    /* .starter-list-item-popover {
-        top: -1.62rem;
-        left: 105%;
-        transform: translateX(0%);
-        -webkit-transform: translateX(0%);
-        -moz-transform:  translateX(0%);
-        -ms-transform: translateX(0%);
-        -o-transform:  translateX(0%);
-    } */
     .starter-list-item-popover {
         top: -4.9rem;
     }
     .starter-page-item {
         position: static;
-        /* height: 2.4rem; */
     }
     
     .starter-page-item-text {
         position: relative;
     }
-    /* .starter-list-item-popover::after {
-        top: 35%;
-        right: 100%;
-        transform: rotate(90deg);
-    } */
     .starter-page-pdf,
     .starter-page-docx {
         display: flex;

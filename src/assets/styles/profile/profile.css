@@ -65,7 +65,7 @@
 }
 
 .profile-header-button {
-    color: grey;
+    color: #808080;
     padding: 0.5rem;
     background: transparent;
     font-family: 'Raleway';
@@ -131,8 +131,8 @@
     display:flex;
     flex-direction: column;
     align-self: center;
-    box-shadow: 0 0 10px grey;
-    background: white;
+    box-shadow: 0 0 10px #808080;
+    background: #ffffff;
     flex-grow: 0;
     margin: 0.5rem 0;
     transition: box-shadow 0.25s ease;
@@ -194,7 +194,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: grey;
+    color: #808080;
     font-family: 'Open Sans';
     font-size: 1rem;
     transition: all .2s ease;
@@ -299,7 +299,7 @@
 }
 
 .prof-skills-delete:hover {
-    color: red;
+    color: #ff0000;
 }
 
 .prof-tile-column {
@@ -330,7 +330,7 @@
     color: rgb(255, 145, 0);
     padding: 0 .2rem;
     position: absolute;
-    background: white;
+    background: #ffffff;
 }
 
 .prof-input-date input {
@@ -407,7 +407,7 @@
     width: 4rem;
     height: 2rem;
     cursor: pointer;
-    color: white;
+    color: #ffffff;
     border-radius: 4px;
     transition: all 0.2s ease;
     justify-content: center;
@@ -440,7 +440,7 @@
     position: relative;
     border-radius: 1rem;
     background: #FFB05C;
-    color: white;
+    color: #ffffff;
     padding: .3rem .7rem;
     margin: 0;
     /* padding: 0; */
@@ -481,7 +481,7 @@
 .profile-tile-inputs > div {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.6rem;
+    margin-bottom: 2rem;
     position: relative;
 }
 .prof-input {
@@ -605,17 +605,17 @@
     border-radius: .3rem;
     z-index: 100;
     text-align: center;
-    color: white;
+    color: #ffffff;
     background: rgba(255, 114, 114);
     box-shadow: 0 0 6px rgba(235, 1, 1, 0.55); 
 }
 
 .prof-error {
     position: absolute;
-    bottom: -1.65rem;
+    bottom: -1.1rem;
     left: .1rem;
     font-size: 0.75rem;
-    color: red;
+    color: #ff0000;
 }
 
 .profile-error::after {
@@ -736,7 +736,7 @@
     margin:0;
     margin-bottom: .5rem;
     font-size: 1.3rem;
-    color: grey;
+    color: #808080;
 }
 .button-cv {
     position: relative;
@@ -777,7 +777,7 @@
     border-radius: 50%;
     border: 1px solid #c3c3c3;
     transition: all .3s ease;
-    background: white;
+    background: #ffffff;
 }
 #add-docx-pl,
 #add-pdf-pl,
@@ -827,12 +827,12 @@
 .docx {
     position: relative;
     background: rgba(43, 87, 151, 0.81);
-    color: white;
+    color: #ffffff;
 }
 .pdf {
     position: relative;
     background: rgba(227, 30, 36, 0.76);
-    color: white;
+    color: #ffffff;
 }
 
 .button-circle {
@@ -846,11 +846,11 @@
     bottom: .2rem;
     left: -2.2rem;
     color: #c3c3c3;
-    box-shadow: 0 0 8px grey;
+    box-shadow: 0 0 8px #808080;
     border-radius: 2.5rem;
     width: 3rem;
     height: 2rem;
-    background: white;
+    background: #ffffff;
     transition: all .3s ease;
 }
 
@@ -897,13 +897,13 @@
 .label-profile {
     top: .4rem;
     left: .2rem;
-    background: white;
+    background: #ffffff;
     font-size: 1.2rem;
 }
 .label-select-profile {
     top: .5rem;
     left: .05rem;
-    background: white;
+    background: #ffffff;
     font-size: 1.2rem;
 }
 
@@ -994,7 +994,7 @@
     height: 2.2rem;
     border: 0;
     margin:0;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #808080;
     width: 100%;
     text-align: center;
 }
@@ -1088,7 +1088,7 @@
     background: transparent;
     height: 2rem;
     /* width: 14rem; */
-    border: 1px solid lightgrey;
+    border: 1px solid #d3d3d3;
     color: black;
     border-radius: 3px;
     appearance: none;
@@ -1173,22 +1173,22 @@
     cursor: pointer;
 }
 .save-btn {
-    border: 0.1rem solid green;
+    border: 0.1rem solid #008000;
     margin-right: .3rem;
-    color: green;
+    color: #008000;
 }
 .reject-btn {
-    border: 0.1rem solid red;
-    color: red;
+    border: 0.1rem solid #ff0000;
+    color: #ff0000;
     margin-right: .5rem;
 }
 
 .save-btn:hover {
-    box-shadow: 0 0 10px green;
+    box-shadow: 0 0 10px #008000;
 }
 
 .reject-btn:hover {
-    box-shadow: 0 0 10px red;
+    box-shadow: 0 0 10px #ff0000;
 }
 
 .profile-table-input {
@@ -1198,7 +1198,7 @@
     font-size: 1rem;
     height: 1.6rem;
     border: 0;
-    border-bottom: 2px solid grey;
+    border-bottom: 2px solid #808080;
     transition: border .3s ease;
     width: 8.5rem;
     text-align: center;
@@ -1208,7 +1208,7 @@
     text-indent: 0.2rem;
     background: transparent;
     height: 2rem;
-    border: 1px solid lightgrey;
+    border: 1px solid #d3d3d3;
     color: black;
     border-radius: 3px;
     appearance: none;
@@ -1223,7 +1223,7 @@
 }
 
 .prof-table-p {
-    color: grey;
+    color: #808080;
     padding: 0;
     margin: 0;
 }
@@ -1306,8 +1306,8 @@
     width: 98%;
     height: 100%;
     align-self: center;
-    background: white;
-    box-shadow: 0 0 10px grey;
+    background: #ffffff;
+    box-shadow: 0 0 10px #808080;
     border-radius: 5px;
 }
 
@@ -1384,7 +1384,7 @@
     height: 2rem;
     color: #333;
     background: #ccc;
-    box-shadow: 0 3px 3px -2px grey;
+    box-shadow: 0 3px 3px -2px #808080;
     text-transform: capitalize;
     border: 0;
     border-radius: 4px;
@@ -1407,14 +1407,14 @@
     align-self: center;
     justify-content: center;
     background: transparent;
-    box-shadow: 0 0 4px grey;
-    border: 1px solid grey;
+    box-shadow: 0 0 4px #808080;
+    border: 1px solid #808080;
     cursor: pointer;
     border-radius: 50%;
     font-weight: 500;
     height: 29px;
     width: 29px;
-    color: grey;
+    color: #808080;
     transition: box-shadow .3s, border .3s, color .3s;
     margin:0;
 }
@@ -1447,8 +1447,8 @@
     position: absolute;
     right: 2rem;
     top: 2rem;
-    box-shadow: 0 0 4px grey;
-    background-color: white;
+    box-shadow: 0 0 4px #808080;
+    background-color: #ffffff;
     padding: .5rem;
     z-index: 5;
     border-radius: 5px;
@@ -1475,7 +1475,7 @@
     align-items: center;
     padding: .1rem .25rem;
     border: 0;
-    color: grey;
+    color: #808080;
     font-weight: bold;
     cursor: pointer;
     background: transparent;
@@ -1622,11 +1622,14 @@
         width: 100%;
         justify-content: space-between;
     }
-    .profile-tile-1-3 {
-        width: 35%;
+    .profile-tile-1-3:nth-of-type(1) {
+        width: 40%;
+    }
+    .profile-tile-1-3:nth-of-type(2) {
+        width: 33%;
     }
     .profile-tile-1-3-emp {
-        width: 28%;
+        width: 25%;
     }
     .profile-tile-1-2:nth-of-type(1) {
         width: 55%;
@@ -1751,6 +1754,8 @@
     .prof-tbody-item:nth-of-type(1),
     .prof-thead-item:nth-of-type(1) {
         width: 4%;
+        border-top-left-radius: .4rem;
+        border-bottom-left-radius: .4rem;
     }
     .prof-tbody-item:nth-of-type(2),
     .prof-thead-item:nth-of-type(2),
@@ -1772,6 +1777,8 @@
     .prof-tbody-item:nth-of-type(8),
     .prof-thead-item:nth-of-type(8) {
         width: 6%;
+        border-top-right-radius: .4rem;
+        border-bottom-right-radius: .4rem;
     }
     .profile-table-select-contractor {
         width: 7rem;
@@ -1860,7 +1867,7 @@
     color: #FFB05C;
     top: -0.4rem;
     left: 0.2rem;
-    background: white;
+    background: #ffffff;
     /* padding:.2rem; */
   }
   
