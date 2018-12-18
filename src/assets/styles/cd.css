@@ -210,7 +210,9 @@
     width: 50%;
 }
 
-.cd-range,
+/* COOL (CONTET) DIV DATE PICKER INPUT */
+
+/* .cd-range,
 .cd-range input {
     font-size: 1rem;
     width: 100%;
@@ -223,7 +225,38 @@
     text-align: center;
     border-radius: 4px;
     height: 1.9rem;
+} */
+
+.cd-range ~ label {
+    top: -.65rem;
+    font-size: .9rem;
+    color: rgb(255, 145, 0);
+    padding: 0 .2rem;
 }
+
+.cd-range {
+    width: 8rem;
+    text-align: center;
+    border: 0;
+    display:flex;
+    align-items:center;
+}
+.cd-range input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14rem;
+    text-align: center;
+    outline-color: orange;
+    height: 1.8rem;
+    border:0;
+    border-radius: 4px;
+    background: transparent;
+    font-size: 1rem; 
+    border: 1px solid rgb(207, 207, 207);
+}
+
+/* COOL (CONTET) DIV DATE PICKER INPUT */
 
 /* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA  - end */
 

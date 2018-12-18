@@ -39,21 +39,27 @@
               </div>
               <button class="oclear-btn btn-s" id="halo" @click="startStopSlider">{{stop}}</button>
             </div> -->
-            <div class="tile-content">
-              <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
-                <textarea @input="validateAdvert(advert)" :disabled="!editMode || cc" class="n-textarea" v-model="advert.Message"/>
-                <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
-                <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
-                <v-date-picker v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
-                  <input value="advert.ValidTo"/>
-                </v-date-picker>
-                <div class="advBtns">
-                  <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
-                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy">{{ $t("button.save") }}</button>
-                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode || loginAlias !== advert.CreatedBy">{{ $t("button.cancel") }}</button>
-                  <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
+            <div class="tile-content new-tile-cnt">
+              <!-- <transition-group name="fly"> -->
+                <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
+                  <textarea @input="validateAdvert(advert)" :disabled="!editMode || cc" class="n-textarea" v-model="advert.Message"/>
+                  <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
+                  <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
+                  <v-date-picker v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
+                    <input value="advert.ValidTo"/>
+                  </v-date-picker>
+                  <div class="advBtns">
+                    <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
+                    <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy">{{ $t("button.save") }}</button>
+                    <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode || loginAlias !== advert.CreatedBy">{{ $t("button.cancel") }}</button>
+                    <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
+                  </div>
                 </div>
-              </div>
+                <button v-show="isMoreThanOneAdvert" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
+                <!-- advLeft -->
+                <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+                <!-- advRight -->
+              <!-- </transition-group> -->
             </div>
           </div>
           <div class="api">
@@ -139,7 +145,7 @@ export default {
   data() {
     return {
       newAdvert: null,
-      slideIndex: 1,
+      slideIndex: 5,
       repeatSlider: true,
       interval: "",
       editMode: false,
@@ -155,14 +161,18 @@ export default {
       eventDesc: null
     };
   },
-  mounted() {
+  updated() {
     // this.$nextTick(() => {
-    //   this.runCarosuel(this.slideIndex);
-    //   this.interval = setInterval(() => {
-    //     this.slideIndex += 1;
-    //     this.runCarosuel(this.slideIndex);
-    //     this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
-    //   }, 4000);
+      // this.runCarosuel(this.slideIndex);
+      // if (advertsLoaded) {  
+        this.runCarosuel();
+        this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
+      //   this.interval = setInterval(() => {
+      //     this.slideIndex += 1;
+      //     this.runCarosuel(this.slideIndex);
+      //     
+      //   }, 4000);
+        // }
     // });
   },
   beforeCreate() {
@@ -202,7 +212,8 @@ export default {
       advertsList: "getAdverts",
       usersList: "usersList",
       getShowAdverts: "getShowAdverts",
-      showAdvertsLoader: "getAdvertsLoader"
+      showAdvertsLoader: "getAdvertsLoader",
+      advertsLoaded: "getInitialDataReaded"
     }), {
       eventsSrt: function() {
         this.events.sort((a,b) => (a.DateFrom > b.DateFrom) ? 1 : ((b.DateFrom > a.DateFrom) ? -1 : 0)); 
@@ -266,10 +277,6 @@ export default {
       this.$store.dispatch("updateAdvert", data);
       this.beforeEditingCache = data;
       this.isAdvertValid = false;
-      this.interval = setInterval(() => {
-          this.slideIndex += 1;
-          this.runCarosuel(this.slideIndex);
-        }, 4000);
     },
     removeAdvert(advertId) {
       this.$store.dispatch('removeAdvert', advertId)
@@ -306,41 +313,31 @@ export default {
       this.editMode = false;
       this.runCarosuel((this.slideIndex += n));
     },
-    currentSlide(n) {
-      this.runCarosuel((this.slideIndex = n));
-    },
+    // currentSlide(n) {
+    //   this.runCarosuel((this.slideIndex = n));
+    // },
     runCarosuel(n) {
-      var slides = document.getElementsByClassName("advItem");
-
-      if (n > slides.length) {
-        this.slideIndex = 1;
-      }
-      if (n < 1) {
-        this.slideIndex = slides.length;
+      var slides = document.getElementsByClassName("news-adv-item");
+      if (n < 5 || n > slides.length || slides.length === 0 ) {
+        if (n < 5 ) this.slideIndex = 5
+        return
       }
       for (var i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
+      }  
+      if (!n) n = 5
+      if (n > 5) {
+        for (var j = 0; j < (n-5); j++) {
+          slides[j].style.display = "none";
+        }
       }
-      if(slides.length > 0){
-        this.$store.commit('SET_ADVERTS_LOADER', false);
-        slides[this.slideIndex - 1].style.display = "flex";
+      for (var i = n -5 ; i < n; i++) {
+        slides[i].style.display = "flex";
       }
-    },
-    startStopSlider(evt) {
-      if (evt.target.innerText === this.start) {
-        evt.target.innerText = this.stop;
-        this.sliderToast = i18n.t("message.startedSlider");
-        this.interval = setInterval(() => {
-          this.slideIndex += 1;
-          this.runCarosuel(this.slideIndex);
-        }, 4000);
-      } else {
-        evt.target.innerText = this.start;
-        this.sliderToast = i18n.t("message.stoppedSlider");
-        clearInterval(this.interval);
-      }
-
-      this.$store.dispatch("displayToast");
+      // if(slides.length > 0){
+      //   this.$store.commit('SET_ADVERTS_LOADER', false);
+        // slides[this.slideIndex - 1].style.display = "flex";
+      // }
     },
     setEventDesc(eventId) {
       this.eventDesc = this.events.find(o => o.EventId === eventId).Description;
