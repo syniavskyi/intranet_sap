@@ -439,6 +439,14 @@ const actions = {
                 aPromises.push(documentPromise);
           }
           break;
+        case "Availabilities":
+          let availabilityPromise = dispatch("getUserAvail", userData.user).then(res => ({res: res, promise: "Availabilities"}));
+          aPromises.push(availabilityPromise);
+        break;
+        case "AvailProjects":
+          let availProjectsPromise = dispatch("getUserProjects", userData.user).then(res => ({res: res, promise: "AvailProjects"}));
+          aPromises.push(availProjectsPromise);
+          break;
       }
       commit("SET_PROMISE_LIST", aPromises);
     }
@@ -506,6 +514,14 @@ const actions = {
           break;
         case "UserPhoto":
           break;
+        case "Availabilities":
+         commit("SET_USER_AVAIL", aResults);
+         dispatch('formatUserLeaves', aResults);
+        break;
+        case "AvailProjects":
+         commit("SET_USER_PROJECTS", aResults);
+         dispatch('formatUserProjects', aResults);
+        break;
         default:
           let bEndFunction = false;
           for(let k = 0; k < state.sapDomains.length; k++){

@@ -23,7 +23,7 @@
             <div class="tile-content new-tile-cnt">
               <!-- <transition-group name="fly"> -->
                 <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
-                  <textarea @input="validateAdvert(advert)" :disabled="!editMode || cc" class="n-textarea" v-model="advert.Message"/>
+                  <textarea @input="validateAdvert(advert)" :disabled="!editMode || loginAlias !== advert.CreatedBy" class="n-textarea" v-model="advert.Message"/>
                   <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
                   <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
                   <v-date-picker v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
