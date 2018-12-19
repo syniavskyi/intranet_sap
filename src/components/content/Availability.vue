@@ -265,8 +265,11 @@ export default {
         },
         loadUserProjects(userId) {
             this.$store.commit('SET_DISPLAY_LOADER', true)
-            this.$store.dispatch('getUserProjects', userId)
-            this.$store.dispatch('getUserAvail', userId)
+            this.$store.commit('SET_PROMISE_TO_READ', this.$store.getters.getAvailabilityToRead);
+            let userData = {
+                user: this.selectedUser.UserAlias
+            }
+            this.$store.dispatch('getData', userData);  
         }
     }
 }

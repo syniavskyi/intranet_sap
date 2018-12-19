@@ -129,7 +129,7 @@ const actions = {
         }
         dispatch("displayToast");
     },
-    removeAdvert({getters, dispatch}, advertId) {
+    removeAdvert({getters, commit, dispatch}, advertId) {
         const URL = 'Adverts' + '(' + "AdvertId='" + advertId + "')"
         axios({
             url: URL,

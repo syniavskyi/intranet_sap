@@ -28,19 +28,14 @@ const mutations = {
 };
 
 const actions = {
-  getUserProjects({
-    commit,
-    dispatch,
-    getters
-  }, userId) {
+   getUserProjects({}, userId) {
     //get user availability for calendar and editing availability 
-    const URL = "UserProjects?$filter=UserAlias eq '" + userId + "'"
-    axios.get(URL).then(res => {
-      console.log(res)
-      dispatch('formatUserProjects', res.data.d.results)
-      // dispatch('setUserAvails', userAvail)
-    }).catch(error => {
-      console.log(error)
+    return axios({
+      method: 'GET',
+      url: "UserProjects?$filter=UserAlias eq '" + userId + "'",
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+      }
     });
   },
   formatUserProjects({
@@ -89,7 +84,8 @@ const actions = {
         // "Cookie": cookie
       }
     }).then(res => {
-      dispatch('getUserProjects', data.UserAlias)
+      commit("SET_PROMISE_TO_READ", ["NewToken", "AvailProjects"]);
+      dispatch('getData');
       commit('SET_NEW_PROJECT_FOR_USER', {
         UserAlias: null,
         ProjectId: null,
@@ -136,7 +132,8 @@ const actions = {
         // commit('SET_EDIT_ERROR', false)
         // commit('SET_SAVE_DATA_SUCCESS', true)
         // commit('SET_PROJECT_TO_EDIT', {})
-        dispatch('getUserProjects', data.UserAlias);
+        commit("SET_PROMISE_TO_READ", ["NewToken", "AvailProjects"]);
+        dispatch('getData');
         let message = res.headers;
         dispatch('displayModal', message);
 
@@ -170,7 +167,8 @@ const actions = {
         // commit('SET_EDIT_ERROR', false)
         // commit('SET_SAVE_DATA_SUCCESS', true)
         // commit('SET_PROJECT_TO_EDIT', {})
-        dispatch('getUserProjects', data.UserAlias);
+        commit("SET_PROMISE_TO_READ", ["NewToken", "AvailProjects"]);
+        dispatch('getData');
         let message = res.headers;
         dispatch('displayModal', message);
 

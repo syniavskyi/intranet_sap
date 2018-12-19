@@ -31,20 +31,20 @@
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.from") }}</div>
                         <p class="prof-date-label" v-if="!editMode || avail.StatusId !== 'PL'"> {{ formatDate(avail.DateStart) }} </p>
-                        <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*' " class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
+                        <v-date-picker :max-date="avail.DateEnd" v-if="editMode && avail.StatusId === 'PL' && authType === '*' " class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
                             <input value="avail.DateStart"/>
                         </v-date-picker>
-                        <v-date-picker :min-date="new Date()" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
+                        <v-date-picker :min-date="new Date()" :max-date="avail.DateEnd" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
                             <input value="avail.DateStart"/>
                         </v-date-picker>
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.to") }}</div>
                         <p class="prof-date-label" v-if="!editMode || avail.StatusId !== 'PL' "> {{ formatDate(avail.DateEnd) }} </p>
-                        <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
+                        <!-- <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
                             <input value="avail.DateEnd"/>
-                        </v-date-picker>
-                        <v-date-picker :min-date="avail.DateStart" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
+                        </v-date-picker> -->
+                        <v-date-picker :min-date="avail.DateStart" v-if="editMode && avail.StatusId === 'PL'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
                             <input value="avail.DateStart"/>
                         </v-date-picker>
                     </div>
@@ -223,6 +223,7 @@ export default {
            let avail = utils.createClone(fullData.avail);
                 if(fullData.operation === 'save') {
                 this.userAvail[fullData.avail.EntryId].Filter = false;
+                avail.Action = 'U';
                 // document.getElementsByClassName("eduButtonsAvail")[fullData.index].children[0].disabled = true;
             } else if(fullData.operation === 'confirm' || fullData.operation === 'reject') {
                 this._beforeEditingCache = utils.createClone(this.userAvail);
