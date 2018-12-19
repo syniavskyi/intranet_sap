@@ -195,8 +195,8 @@ body {
 .none-event {
     width: 100%;
     height: .3rem;
-    border-bottom-left-radius: .2rem;
-    border-bottom-right-radius: .2rem;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
 }
 
 .homeoffice-event {
