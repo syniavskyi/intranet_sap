@@ -36,8 +36,10 @@
                     <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
                   </div>
                 </div>
-                <button v-show="isMoreThanOneAdvert" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-                <button v-show="isMoreThanOneAdvert" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+                <button  @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
+                <!-- v-show="isMoreThanFiveAdverts" -->
+                <button  @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+                <!-- v-show="isMoreThanFiveAdverts" -->
               <!-- </transition-group> -->
             </div>
           </div>
@@ -128,7 +130,7 @@ export default {
       start: i18n.t("button.startSlider"),
       sliderToast: i18n.t("message.stoppedSlider"),
       isAdvertValid: false,
-      isMoreThanOneAdvert: true,
+      isMoreThanFiveAdverts: true,
       advertLoaded: this.$store.getters.getShowAdverts,
       loading: true,
       loginAlias: localStorage.getItem("id"),
@@ -137,7 +139,7 @@ export default {
   },
   updated() {
     this.runCarosuel();
-    this.isMoreThanOneAdvert = this.advertsList.length > 1 ? true : false;
+    this.isMoreThanFiveAdverts = this.advertsList.length > 5 ? true : false;
   },
   beforeCreate() {
     this.$store.dispatch("geoLoc");
@@ -289,8 +291,14 @@ export default {
           slides[j].style.display = "none";
         }
       }
-      for (var i = n -5 ; i < n; i++) {
-        slides[i].style.display = "flex";
+      if (slides.length < n) {
+        for (var i = 0; i < slides.length; i++) {
+          slides[i].style.display = "flex";
+        }
+      } else {
+        for (var i = n -5 ; i < n; i++) {
+          slides[i].style.display = "flex";
+        }
       }
       // if(slides.length > 0){
       //   this.$store.commit('SET_ADVERTS_LOADER', false);

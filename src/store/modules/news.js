@@ -111,6 +111,7 @@ const actions = {
               console.log(res);
               let message = res.headers;
               dispatch('displayModal', message);
+              
             }).catch(error => {
               console.log(error);
           })
