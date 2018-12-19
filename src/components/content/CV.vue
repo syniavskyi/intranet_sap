@@ -234,6 +234,10 @@ export default {
     },
     generateDocx() {
       let userData = this.userInfo;
+      let oTimeStampOld = new Date().toLocaleString(),
+            oTimeStamp = oTimeStampOld.replace(/:\s*/g, "-"),
+            sLanguage = this.cvElements.language.toUpperCase(),
+            fileNameAndFormat = `CV ${userData.Fullname},${sLanguage}(${oTimeStamp}).docx`;
       if (this.cvElements.photo) {this.convertImagesToBase64();}
       const preHtml = "<html xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns:m='http://schemas.microsoft.com/office/2004/12/omml' xmlns='http://www.w3.org/TR/REC-html40'> <head><meta http-equiv=Content-Type content='text/html; charset=utf-8'></head> <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]--><body>",
         postHtml = "</body></html>";
@@ -254,10 +258,10 @@ export default {
       zip.folder('word').file("document.xml", this.xmlDocumentCreation()).file('afchunk.mht', this.convertToMhtandAddMimeType(content)).folder('_rels').file('document.xml.rels', Buffer("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxSZWxhdGlvbnNoaXBzIHhtbG5zPSJodHRwOi8vc2NoZW1hcy5vcGVueG1sZm9ybWF0cy5vcmcvcGFja2FnZS8yMDA2L3JlbGF0aW9uc2hpcHMiPjxSZWxhdGlvbnNoaXAgSWQ9Imh0bWxDaHVuayIgVGFyZ2V0PSIvd29yZC9hZmNodW5rLm1odCIgVHlwZT0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL29mZmljZURvY3VtZW50LzIwMDYvcmVsYXRpb25zaGlwcy9hRkNodW5rIi8+PFJlbGF0aW9uc2hpcCBUYXJnZXQ9Ii9kb2NQcm9wcy9jb3JlLnhtbCIgVHlwZT0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL3BhY2thZ2UvMjAwNi9yZWxhdGlvbnNoaXBzL21ldGFkYXRhL2NvcmUtcHJvcGVydGllcyIgSWQ9InJJZDIiLz48UmVsYXRpb25zaGlwIFRhcmdldD0iZG9jUHJvcHMvYXBwLnhtbCIgVHlwZT0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL29mZmljZURvY3VtZW50LzIwMDYvcmVsYXRpb25zaGlwcy9leHRlbmRlZC1wcm9wZXJ0aWVzIiBJZD0icklkMyIvPjxSZWxhdGlvbnNoaXAgVGFyZ2V0PSJmb290ZXIxLnhtbCIgVHlwZT0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL29mZmljZURvY3VtZW50LzIwMDYvcmVsYXRpb25zaGlwcy9mb290ZXIiIElkPSJySWQ2Ii8+PC9SZWxhdGlvbnNoaXBzPg==","base64"));   
       zip.folder('word').file("footer1.xml", Buffer("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8dzpmdHIgeG1sbnM6d3BjPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL29mZmljZS93b3JkLzIwMTAvd29yZHByb2Nlc3NpbmdDYW52YXMiIHhtbG5zOm1jPSJodHRwOi8vc2NoZW1hcy5vcGVueG1sZm9ybWF0cy5vcmcvbWFya3VwLWNvbXBhdGliaWxpdHkvMjAwNiIgeG1sbnM6YWluaz0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9vZmZpY2UvZHJhd2luZy8yMDE2L2luayIgeG1sbnM6YW0zZD0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9vZmZpY2UvZHJhd2luZy8yMDE3L21vZGVsM2QiIHhtbG5zOm89InVybjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6cj0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL29mZmljZURvY3VtZW50LzIwMDYvcmVsYXRpb25zaGlwcyIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL29mZmljZURvY3VtZW50LzIwMDYvbWF0aCIgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOndwMTQ9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vb2ZmaWNlL3dvcmQvMjAxMC93b3JkcHJvY2Vzc2luZ0RyYXdpbmciIHhtbG5zOndwPSJodHRwOi8vc2NoZW1hcy5vcGVueG1sZm9ybWF0cy5vcmcvZHJhd2luZ21sLzIwMDYvd29yZHByb2Nlc3NpbmdEcmF3aW5nIiB4bWxuczp3MTA9InVybjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOndvcmQiIHhtbG5zOnc9Imh0dHA6Ly9zY2hlbWFzLm9wZW54bWxmb3JtYXRzLm9yZy93b3JkcHJvY2Vzc2luZ21sLzIwMDYvbWFpbiIgeG1sbnM6dzE0PSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL29mZmljZS93b3JkLzIwMTAvd29yZG1sIiB4bWxuczp3MTU9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vb2ZmaWNlL3dvcmQvMjAxMi93b3JkbWwiICBtYzpJZ25vcmFibGU9IncxNCB3MTUiPjx3OnAgdzE0OnBhcmFJZD0iNjBDMjAxNzQiIHcxNDp0ZXh0SWQ9IjM0MzlGRjZDIiB3OnJzaWRSPSIwMDM2NTZDMCIgdzpyc2lkUkRlZmF1bHQ9IjAwMzY1NkMwIj48dzpwUHI+PHc6cEJkcj48dzp0b3Agdzp2YWw9InNpbmdsZSIgdzpzej0iNCIgdzpzcGFjZT0iMSIgdzpjb2xvcj0iYXV0byIvPjwvdzpwQmRyPjx3OnNwYWNpbmcgdzphZnRlcj0iMCIvPjx3OmluZCB3OnJpZ2h0PSItMiIvPjx3OmpjIHc6dmFsPSJjZW50ZXIiLz48dzpyUHI+PHc6bGFuZyB3OnZhbD0iZW4tVVMiLz48L3c6clByPjwvdzpwUHI+PHc6cHJvb2ZFcnIgdzp0eXBlPSJzcGVsbFN0YXJ0Ii8+PHc6cj48dzp0PkJUZWNoPC93OnQ+PC93OnI+PHc6cHJvb2ZFcnIgdzp0eXBlPSJzcGVsbEVuZCIvPjx3OnI+PHc6dCB4bWw6c3BhY2U9InByZXNlcnZlIj4gU3AuIHogby4gby4sIFBMIDU0LTI8L3c6dD48L3c6cj48dzpyIHc6cnNpZFI9IjAwNTYwMTk5Ij48dzp0PjAzPC93OnQ+PC93OnI+PHc6cj48dzp0IHhtbDpzcGFjZT0icHJlc2VydmUiPiBXcm9jPC93OnQ+PC93OnI+PHc6ciB3OnJzaWRSPSIwMDNFNTU0RiI+PHc6dD7Fgjwvdzp0PjwvdzpyPjx3OnI+PHc6dCB4bWw6c3BhY2U9InByZXNlcnZlIj5hdywgdWwuIDwvdzp0PjwvdzpyPjx3OnByb29mRXJyIHc6dHlwZT0ic3BlbGxTdGFydCIvPjx3OnIgdzpyc2lkUj0iMDA1NjAxOTkiIHc6cnNpZFJQcj0iMDAzRTU1NEYiPjx3OnJQcj48dzpsYW5nIHc6dmFsPSJlbi1VUyIvPjwvdzpyUHI+PHc6dD5MZWduaWNrYTwvdzp0PjwvdzpyPjx3OnByb29mRXJyIHc6dHlwZT0ic3BlbGxFbmQiLz48dzpyIHc6cnNpZFI9IjAwNTYwMTk5IiB3OnJzaWRSUHI9IjAwM0U1NTRGIj48dzpyUHI+PHc6bGFuZyB3OnZhbD0iZW4tVVMiLz48L3c6clByPjx3OnQgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+IDU3RCA8L3c6dD48L3c6cj48dzpwcm9vZkVyciB3OnR5cGU9InNwZWxsU3RhcnQiLz48dzpyIHc6cnNpZFI9IjAwNTYwMTk5IiB3OnJzaWRSUHI9IjAwM0U1NTRGIj48dzpyUHI+PHc6bGFuZyB3OnZhbD0iZW4tVVMiLz48L3c6clByPjx3OnQ+bG9rPC93OnQ+PC93OnI+PHc6cHJvb2ZFcnIgdzp0eXBlPSJzcGVsbEVuZCIvPjx3OnIgdzpyc2lkUj0iMDA1NjAxOTkiIHc6cnNpZFJQcj0iMDAzRTU1NEYiPjx3OnJQcj48dzpsYW5nIHc6dmFsPSJlbi1VUyIvPjwvdzpyUHI+PHc6dD4uIEIvQTwvdzp0PjwvdzpyPjwvdzpwPjx3OnAgdzpyc2lkUj0iMDA5MDAzRUEiIHc6cnNpZFJQcj0iMDAxMjY4QzEiIHc6cnNpZFJEZWZhdWx0PSIwMDkwMDNFQSIgdzpyc2lkUD0iMDA5MDAzRUEiPjx3OnBQcj48dzpwQmRyPjx3OnRvcCB3OnZhbD0ic2luZ2xlIiB3OnN6PSI0IiB3OnNwYWNlPSIxIiB3OmNvbG9yPSJhdXRvIi8+PC93OnBCZHI+PHc6c3BhY2luZyB3OmFmdGVyPSIwIi8+PHc6aW5kIHc6cmlnaHQ9Ii0yIi8+PHc6amMgdzp2YWw9ImNlbnRlciIvPjx3OnJQcj48dzpsYW5nIHc6dmFsPSJlbi1VUyIvPjwvdzpyUHI+PC93OnBQcj48dzpyIHc6cnNpZFJQcj0iMDAxMjY4QzEiPjx3OnJQcj48dzpsYW5nIHc6dmFsPSJlbi1VUyIvPjwvdzpyUHI+PHc6dCB4bWw6c3BhY2U9InByZXNlcnZlIj5EaXN0cmljdCBDb3VydCBmb3IgV3JvY2xhdyAtIDwvdzp0PjwvdzpyPjx3OnByb29mRXJyIHc6dHlwZT0ic3BlbGxTdGFydCIvPjx3OnIgdzpyc2lkUlByPSIwMDEyNjhDMSI+PHc6clByPjx3Omxhbmcgdzp2YWw9ImVuLVVTIi8+PC93OnJQcj48dzp0PkZhYnJ5Y3puYTwvdzp0PjwvdzpyPjx3OnByb29mRXJyIHc6dHlwZT0ic3BlbGxFbmQiLz48dzpyIHc6cnNpZFJQcj0iMDAxMjY4QzEiPjx3OnJQcj48dzpsYW5nIHc6dmFsPSJlbi1VUyIvPjwvdzpyUHI+PHc6dD4sIE5hdGlvbmFsIENvdXJ0IFJlZ2lzdHJhdGlvbiBOdW1iZXIgS1JTOiAwMDAwMjg0MjU3PC93OnQ+PC93OnI+PC93OnA+PHc6cCB3OnJzaWRSPSIwMDI4NjU4NiIgdzpyc2lkUlByPSIwMDEyNjhDMSIgdzpyc2lkUkRlZmF1bHQ9IjAwOTAwM0VBIiB3OnJzaWRQPSIwMDkwMDNFQSI+PHc6cFByPjx3OnNwYWNpbmcgdzphZnRlcj0iMCIvPjx3OmluZCB3OnJpZ2h0PSItMiIvPjx3OmpjIHc6dmFsPSJjZW50ZXIiLz48dzpyUHI+PHc6bGFuZyB3OnZhbD0iZW4tVVMiLz48L3c6clByPjwvdzpwUHI+PHc6ciB3OnJzaWRSUHI9IjAwMTI2OEMxIj48dzpyUHI+PHc6bGFuZyB3OnZhbD0iZW4tVVMiLz48L3c6clByPjx3OnQ+VGF4IElkZW50aWZpY2F0aW9uIE51bWJlciBOSVA6IDg5NC0yOTAtODktODUsIFZBVC1JRDogUEw4OTQyOTA4OTg1LCBSRUdPTjogMDIwNTUwNzA8L3c6dD48L3c6cj48L3c6cD48L3c6ZnRyPg==","base64"));
       zip.generateAsync({type: "blob", mimetype: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}).then((outputDoc) => {
-        let oTimeStampOld = new Date().toLocaleString(),
-            oTimeStamp = oTimeStampOld.replace(/:\s*/g, "-"),
-            sLanguage = this.schoolDesc[0].Language.toUpperCase(),
-            fileNameAndFormat = `CV ${userData.Fullname},${sLanguage}(${oTimeStamp}).docx`;
+    // let oTimeStampOld = new Date().toLocaleString(),
+    //         oTimeStamp = oTimeStampOld.replace(/:\s*/g, "-"),
+    //         sLanguage = this.schoolDesc[0].Language.toUpperCase() || this.cvElements.language,
+    //         fileNameAndFormat = `CV ${userData.Fullname},${sLanguage}(${oTimeStamp}).docx`;
         saveAs(outputDoc, fileNameAndFormat);
       })
 
@@ -358,25 +362,7 @@ export default {
       });
     }
   }
-  // },
   ),
-  // computed: {
-  //   ...mapGetters({
-  //     userEducation: "getUserEducation",
-  //     userProjects: "getUserProjectsList",
-  //     userExperience: "getUserExperience",
-  //     userData: "userData",
-  //     cvElements: "getCvElements",
-  //     userInfo: "getUserInfo",
-  //     userLangs: "getUserLanguages",
-  //     userSkills: "getUserSkills",
-  //     schoolDesc: 'getSchoolDescList',
-  //     fieldOfStudyDesc: 'getFieldOfStudyDescList',
-  //     workPositions: 'getWorkPositions',
-  //     fullLanguageList: 'getFullLanguageList',
-  //     langLevels: 'getLangLevels'
-  //   })
-  // }
   computed: Object.assign(
     mapGetters({
       userEducation: "getUserEducation",
