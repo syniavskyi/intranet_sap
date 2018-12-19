@@ -21,9 +21,9 @@
             </div>
             <!-- <loader v-if="showAdvertsLoader"></loader> -->
             <div class="tile-content new-tile-cnt">
-              <!-- <transition-group name="fly" mode="in-out"> -->
-                <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
-                  <textarea @input="validateAdvert(advert)" :disabled="!editMode || loginAlias !== advert.CreatedBy" class="n-textarea" v-model="advert.Message"/>
+              <!-- <transition-group name="fly" tag="div"> -->
+                <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.AdvertId" :id="advert.AdvertId">
+                  <textarea @input="validateAdvert(advert)" :disabled="!editMode || loginAlias !== advert.CreatedBy"" class="n-textarea" v-model="advert.Message"/>
                   <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
                   <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
                   <v-date-picker v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
@@ -37,8 +37,8 @@
                   </div>
                 </div>
               <!-- </transition-group> -->
-              <button v-show="isMoreThanFiveAdverts" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-              <button v-show="isMoreThanFiveAdverts" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex !== 5" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
             </div>
           </div>
           <div class="api">
