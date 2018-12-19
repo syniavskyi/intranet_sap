@@ -21,7 +21,7 @@
             </div>
             <!-- <loader v-if="showAdvertsLoader"></loader> -->
             <div class="tile-content new-tile-cnt">
-              <!-- <transition-group name="fly"> -->
+              <!-- <transition-group name="fly" mode="in-out"> -->
                 <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.Id" :id="advert.Id">
                   <textarea @input="validateAdvert(advert)" :disabled="!editMode || cc" class="n-textarea" v-model="advert.Message"/>
                   <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
@@ -36,11 +36,9 @@
                     <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
                   </div>
                 </div>
-                <button  @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-                <!-- v-show="isMoreThanFiveAdverts" -->
-                <button  @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
-                <!-- v-show="isMoreThanFiveAdverts" -->
               <!-- </transition-group> -->
+              <button v-show="isMoreThanFiveAdverts" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
+              <button v-show="isMoreThanFiveAdverts" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
             </div>
           </div>
           <div class="api">
@@ -53,11 +51,21 @@
               </div>
               <div class="tile-content">
                 <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
-                  <div class="event-date">{{setDateTo(event)}}
-                    <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc">&#8943;</button>
+                  <div class="low-prio-event" v-if="event.Priority=='L'"> </div>
+                  <div class="medium-prio-event" v-if="event.Priority=='M'"> </div>
+                  <div class="high-prio-event" v-if="event.Priority=='H'"> </div>
+                  <div class="news-evt-attr">
+                    <div class="event-date">{{setDateTo(event)}}
+                      <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc">&#8943;</button>
+                    </div>
+                    <div class="event-title">{{ event.EventName }}</div>
+                    <div class="event-type">{{event.EventTypeName}}</div>
                   </div>
-                  <div class="event-title">{{ event.EventName }}</div>
-                  <div class="event-type">{{event.EventTypeName}}</div>
+                  <div class="homeoffice-event" v-if="event.EventTypeName=='Home Office'"/>
+                  <div class="party-event" v-if="event.EventTypeName=='Party'"/>
+                  <div class="leave-event" v-if="event.EventTypeName=='Leave'"/>
+                  <div class="training-event" v-if="event.EventTypeName=='Training'"/>
+                  <div class="none-event" v-if="event.EventTypeName==''"/>
                 </div>
               </div>
             </div>
