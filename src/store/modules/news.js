@@ -142,7 +142,8 @@ const actions = {
                 "x-csrf-token": getters.getToken
             }
         }).then(res => {
-            dispatch('getAdverts');
+            commit("SET_PROMISE_TO_READ", ["NewToken", "Adverts"]);
+            dispatch('getData');
         }).catch(error => {
             console.log(error)
         })
@@ -168,6 +169,8 @@ const actions = {
               commit("SET_SHOW_NEW_MESSAGE_DIALOG", false);
               let message = res.headers;
               dispatch('displayModal', message);
+              commit("SET_PROMISE_TO_READ", ["NewToken", "Adverts"]);
+              dispatch('getData');
             }).catch(error => {
               console.log(error);
           })
