@@ -128,13 +128,23 @@ const actions = {
         }
         dispatch("displayToast");
     },
-    removeAdvert({commit, getters, dispatch}, advertId) {
+    removeAdvert({getters, dispatch}, advertId) {
         const URL = 'Adverts' + '(' + "AdvertId='" + advertId + "')"
-        axios.delete(URL).then(res => {
-            console.log(res)
+        axios({
+            url: URL,
+            method: 'delete',
+            data: advertId,
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "Cache-Control": "no-cache",
+                "x-csrf-token": getters.getToken
+            }
+        }).then(res => {
+            dispatch('getAdverts');
         }).catch(error => {
-           console.log(error)
-       });
+            console.log(error)
+        })
     },
     addNewAdvert({getters, commit, dispatch}, data2){
         const url = 'Adverts';
