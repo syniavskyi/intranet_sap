@@ -294,25 +294,10 @@ export default {
       for (var i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }  
-      if (!n) n = 5
-      if (n > 5) {
-        for (var j = 0; j < (n-5); j++) {
-          slides[j].style.display = "none";
-        }
+      if (!n) n = this.slideIndex
+      for (var j = n - 5; j < this.slideIndex; j++) {
+        slides[j].style.display = "flex";
       }
-      if (slides.length < n) {
-        for (var i = 0; i < slides.length; i++) {
-          slides[i].style.display = "flex";
-        }
-      } else {
-        for (var i = n -5 ; i < n; i++) {
-          slides[i].style.display = "flex";
-        }
-      }
-      // if(slides.length > 0){
-      //   this.$store.commit('SET_ADVERTS_LOADER', false);
-        // slides[this.slideIndex - 1].style.display = "flex";
-      // }
     },
     setEventDesc(eventId) {
       this.eventDesc = this.events.find(o => o.EventId === eventId).Description;
