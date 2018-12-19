@@ -29,7 +29,7 @@ const state = {
   aPriority: [],
   aEventType: [],
   editedData: {},
-  dataToRead: ["Domains", "Industries", "UserData", "UserList", "Events"],
+  dataToRead: ["NewToken", "Domains", "Industries", "UserData", "UserList", "Events"],
   calendarAuth: "",
   dialogEvent: false
 };
