@@ -541,7 +541,6 @@ export default {
         this.disableSaveBtn = this.hasDataChanged === true ? false : true;
       }
     },
-    // generateCV() {},
     addNewPositionForUser() {
       const userPos = this.userPositions;
       userPos.push(this.newPosition);

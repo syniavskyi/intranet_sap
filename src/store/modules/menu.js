@@ -14,45 +14,21 @@ const mutations = {
     SET_MENU_OVERLAY (state, show) {
         state.showMenuOverlay = show
     },
-    CLEAR_AUTH_DATA() {
-        localStorage.clear();
-        var cookies = document.cookie.split(";");
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var eqPos = cookie.indexOf("=");
-            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-
-    },
     SET_MENU_AUTH(state, oAuth) {
         state.menuAuth = oAuth;
     }
 };
 
 const actions = {
-    logout({commit}){
-        // let URL2 = "?sap-user=''&sap-password=''&sap-language=''"
+    logout({dispatch}){
         var URL1 = window.location.origin + "/api/sap/public/bc/icf/logoff"
         axios.get(URL1).then(res => {
-            // axios({
-            //     method: 'get',
-            //     url: URL2,
-            //     statusCode: { 401: function() {
-            //         //This empty handler function will prevent authentication pop-up in chrome/firefox
-            //     } }
-            //   }).then(res => {
-            //     console.log(res)
-            //     commit('CLEAR_AUTH_DATA');
-            //   }).catch(error => {
-            //     console.log(error)
-            // })
-            commit('CLEAR_AUTH_DATA');
+            dispatch('clearAuthData');
             localStorage.setItem('authorized', "false")
             router.replace('/');
         }).catch(error => {
             localStorage.setItem('authorized', "false");
-            commit('CLEAR_AUTH_DATA');
+            dispatch('clearAuthData');
             router.replace('/');
             console.log(error)
         })
@@ -77,8 +53,16 @@ const actions = {
             state.showMenu = true
             state.showMenuOverlay = true
         } 
+    }, clearAuthData() {
+        localStorage.clear();
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
     }
-    
 };
 
 const getters = {
