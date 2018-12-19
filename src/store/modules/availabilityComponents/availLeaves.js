@@ -20,14 +20,14 @@ const mutations = {
 };
 
 const actions = {
-    getUserAvail({commit, dispatch, getters}, userId) {
-        //get user availability for calendar and editing availability 
-            const URL = "UserAvailabilities?$filter=UserId eq '" + userId + "'"
-             axios.get(URL).then(res => {
-                dispatch('formatUserLeaves', res.data.d.results)
-            }).catch(error => {
-                console.log(error)
-                commit('SET_DISPLAY_LOADER', false)
+    getUserAvail({commit, dispatch, getters}, userId) { 
+     //get user availability for calendar and editing availability 
+            return axios({
+              method: 'GET',
+              url: "UserAvailabilities?$filter=UserId eq '" + userId + "'",
+              headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+              }
             });
     },
     formatUserLeaves({commit, getters}, userAvail){
@@ -101,6 +101,8 @@ const actions = {
             getters.getUserAvail.push(data);
             let message = res.headers;
             dispatch('displayModal', message);
+            commit("SET_PROMISE_TO_READ", ["NewToken", "Availabilities"]);
+            dispatch('getData');
           }).catch(error => {
             console.log(error);
         })
@@ -129,9 +131,8 @@ const actions = {
         }).then(res => {
             let message = res.headers;
             dispatch('displayModal', message);
-            dispatch('getUserAvail', data.UserId);
-            // commit("SET_PROMISE_TO_READ", ["NewToken", "Events"]);
-            //  dispatch('getData');
+            commit("SET_PROMISE_TO_READ", ["NewToken", "Availabilities"]);
+            dispatch('getData');
         }).catch(error => {
             console.log(error);
         })
