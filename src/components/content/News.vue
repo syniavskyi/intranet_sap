@@ -287,7 +287,8 @@ export default {
     runCarosuel(n) {
       var slides = document.getElementsByClassName("news-adv-item");
       if (n < 5 || n > slides.length || slides.length === 0 ) {
-        if (n < 5 ) this.slideIndex = 5
+        if (n < 5 ) {this.slideIndex = 5}
+        else if (n > slides.length) {this.slideIndex = slides.length}
         return
       }
       for (var i = 0; i < slides.length; i++) {
