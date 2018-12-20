@@ -38,7 +38,7 @@
             <!-- DEPARTMENT -->
             <div class="cd-for-select">
               <select required class="cd-select" v-model="registerData.DepartmentId" @change="checkToBackOffice(registerData.DepartmentId)">
-                <option v-for="DepartmentId in departmentList" :key="DepartmentId.Key" :value="DepartmentId.Key">{{ DepartmentId.Value }}</option>
+                <option v-for="DepartmentId in departmentList" :key="DepartmentId.Value" :value="DepartmentId.Key">{{ DepartmentId.Value }}</option>
               </select>
               <label class="cd-slabel" for="DepartmentId">{{ $t("label.department") }}</label>
             </div>
@@ -51,8 +51,8 @@
             </div>
             <!-- ROLE -->
             <div class="cd-for-select">
-              <select required :disabled="backOfficeClicked" class="cd-select" v-model="registerData.Role" @change="checkToBackOffice(registerData.DepartmentId)">
-                <option v-for="Role in roleList" :value="Role.Value" :key="Role.Key">{{ Role.Key }}</option>
+              <select required :disabled="backOfficeClicked" class="cd-select" :class="backOfficeClicked ? 'cd-dselect' : 'cd-select'" v-model="registerData.Role" @change="checkToBackOffice(registerData.DepartmentId)">
+                <option v-for="Role in roleList" :value="Role.Key" :key="Role.Key">{{ Role.Value }}</option>
                 <!-- <option v-for="Role in roleList" :value="Role.Value" :key="Role.Key">{{ Role.Key }}</option> -->
               </select>
               <label class="cd-slabel" for="Role">{{ $t("label.role") }}</label>
@@ -142,7 +142,7 @@ export default {
   methods: {
     checkToBackOffice(passedValue) {
       if(passedValue === "BACKO") {
-        this.registerData.Role = "ZINTRANET_BACK_OFFICE";
+        this.registerData.Role = "BACKO";
         this.backOfficeClicked = true;
       } else {
         this.backOfficeClicked = false;

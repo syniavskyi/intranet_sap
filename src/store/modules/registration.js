@@ -67,7 +67,7 @@ const mutations = {
       state.registerData = {
         Fullname: "",
         Email: "",
-        Role: "ZINTRANET_BTECH_ALL",
+        Role: "BTECH",
         DepartmentId: "",
         BranchId: "WRO",
         Language: "PL"
