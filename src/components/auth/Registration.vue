@@ -35,27 +35,27 @@
               <span class="cd-span"></span>
               <label for="Email" class="cd-label">{{ $t("label.email") }}</label>
             </div>
+            <!-- DEPARTMENT -->
+            <div class="cd-for-select">
+              <select required class="cd-select" v-model="registerData.DepartmentId" @change="checkToBackOffice(registerData.DepartmentId)">
+                <option v-for="DepartmentId in departmentList" :key="DepartmentId.Key" :value="DepartmentId.Key">{{ DepartmentId.Value }}</option>
+              </select>
+              <label class="cd-slabel" for="DepartmentId">{{ $t("label.department") }}</label>
+            </div>
+            <!-- BRANCH -->
+            <div class="cd-for-select">
+              <select required class="cd-select" v-model="registerData.BranchId" @change="checkToBackOffice(registerData.DepartmentId)">
+                <option v-for="BranchId in branchList" :key="BranchId.Key" :value="BranchId.Key">{{ BranchId.Value }}</option>
+              </select>
+              <label class="cd-slabel" for="BranchId">{{ $t("label.branch") }}</label>
+            </div>
             <!-- ROLE -->
             <div class="cd-for-select">
-              <select required class="cd-select" v-model="registerData.Role">
+              <select required :disabled="backOfficeClicked" class="cd-select" v-model="registerData.Role" @change="checkToBackOffice(registerData.DepartmentId)">
                 <option v-for="Role in roleList" :value="Role.Value" :key="Role.Key">{{ Role.Key }}</option>
                 <!-- <option v-for="Role in roleList" :value="Role.Value" :key="Role.Key">{{ Role.Key }}</option> -->
               </select>
               <label class="cd-slabel" for="Role">{{ $t("label.role") }}</label>
-            </div>
-            <!-- BRANCH -->
-            <div class="cd-for-select">
-              <select required class="cd-select" v-model="registerData.BranchId">
-                <option v-for="BranchId in branchList" :key="BranchId.Key" :value="BranchId.Key">{{ BranchId.Value }}</option>
-              </select>
-              <label class="cd-slabel" for="BranchId">{{ $t("label.branch") }}</label>
-            </div>          
-            <!-- DEPARTMENT -->
-            <div class="cd-for-select">
-              <select required class="cd-select" v-model="registerData.DepartmentId">
-                <option v-for="DepartmentId in departmentList" :key="DepartmentId.Key" :value="DepartmentId.Key">{{ DepartmentId.Value }}</option>
-              </select>
-              <label class="cd-slabel" for="DepartmentId">{{ $t("label.department") }}</label>
             </div>
             <!-- LANGUAGE -->
             <div class="cd-for-select">
@@ -97,7 +97,8 @@ export default {
       Language: "PL",
       showSuccessDialog: false,
       showFailDialog: false,
-      isLoading: false
+      isLoading: false,
+      backOfficeClicked: false
     };
   },
   created() {
@@ -139,6 +140,14 @@ export default {
     "modal": Modal
   },
   methods: {
+    checkToBackOffice(passedValue) {
+      if(passedValue === "BACKO") {
+        this.registerData.Role = "ZINTRANET_BACK_OFFICE";
+        this.backOfficeClicked = true;
+      } else {
+        this.backOfficeClicked = false;
+      }
+    },
     showMenu(event) {
       let obj = { window, event };
       this.$store.dispatch("setSideMenu", obj);
