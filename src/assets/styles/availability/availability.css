@@ -113,7 +113,7 @@
 .avail-error {
     position: absolute;
     top: 3rem;
-    right: .8rem;
+    /* right: .8rem; */
     font-size: 0.75rem;
     color: #ff0000;
 }
@@ -370,6 +370,7 @@
 .ava-div-buttons {
     display:flex;
     justify-content: space-around;
+    position: relative;
 }
 
 .availability-calendar {
@@ -393,11 +394,13 @@
 }
 
 .ava-button {
+    align-self: center;
     background: transparent;
     border: 0;
     padding: .5rem;
     border-radius: 1rem;
     transition: all .3s ease;
+    box-shadow: 0 0 10px #d3d3d3;
     color: #808080;
 }
 

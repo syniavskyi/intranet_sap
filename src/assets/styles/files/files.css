@@ -114,7 +114,7 @@
     font: 1.1rem 'Roboto';
     color: #7b7777;
     margin: 0;
-    padding: 0;
+    padding: .35rem;
 }
 .documents-tile-underscore {
     display: flex;
