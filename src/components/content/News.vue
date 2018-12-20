@@ -61,11 +61,11 @@
                     <div class="event-title">{{ event.EventName }}</div>
                     <div class="event-type">{{event.EventTypeName}}</div>
                   </div>
-                  <div class="homeoffice-event" v-if="event.EventTypeName=='Home Office'"/>
-                  <div class="party-event" v-if="event.EventTypeName=='Integration Party'"/>
-                  <div class="leave-event" v-if="event.EventTypeName=='Leave'"/>
-                  <div class="training-event" v-if="event.EventTypeName=='Training'"/>
-                  <div class="none-event" v-if="event.EventTypeName==''"/>
+                  <div class="homeoffice-event" v-if="event.EventType=='HOF'"/>
+                  <div class="party-event" v-if="event.EventType=='IPT'"/>
+                  <div class="leave-event" v-if="event.EventType=='LEV'"/>
+                  <div class="training-event" v-if="event.EventType=='TRN'"/>
+                  <div class="none-event" v-if="event.EventType==''"/>
                 </div>
               </div>
             </div>
