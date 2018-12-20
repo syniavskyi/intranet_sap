@@ -64,6 +64,7 @@
 .cd-textarea:disabled {background-color: transparent;}
 
 .cd-select,
+.cd-dselect,
 .cd-tselect {
     display: flex;
     width: 100%;
@@ -158,6 +159,7 @@
 .cd-select:valid ~ label,
 .cd-textarea:focus ~ label,
 .cd-textarea:valid ~ label,
+.cd-dselect ~ label,
 .cd-date ~ label {
     top: -.65rem;
     font-size: .9rem;
