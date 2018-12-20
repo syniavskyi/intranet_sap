@@ -37,8 +37,8 @@
                   </div>
                 </div>
               <!-- </transition-group> -->
-              <button v-show="isMoreThanFiveAdverts && slideIndex !== 5" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex > 5" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length <= 5" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
             </div>
           </div>
           <div class="api">
@@ -62,7 +62,7 @@
                     <div class="event-type">{{event.EventTypeName}}</div>
                   </div>
                   <div class="homeoffice-event" v-if="event.EventTypeName=='Home Office'"/>
-                  <div class="party-event" v-if="event.EventTypeName=='Party'"/>
+                  <div class="party-event" v-if="event.EventTypeName=='Integration Party'"/>
                   <div class="leave-event" v-if="event.EventTypeName=='Leave'"/>
                   <div class="training-event" v-if="event.EventTypeName=='Training'"/>
                   <div class="none-event" v-if="event.EventTypeName==''"/>
@@ -286,7 +286,7 @@ export default {
     // },
     runCarosuel(n) {
       var slides = document.getElementsByClassName("news-adv-item");
-      if (n < 5 || n > slides.length || slides.length === 0 ) {
+      if (n < 5 || n > slides.length || slides.length === 0 || slides.length <= 5 ) {
         if (n < 5 ) {this.slideIndex = 5}
         else if (n > slides.length) {this.slideIndex = slides.length}
         return
