@@ -10,7 +10,7 @@ const state = {
   hashedPassword: null,
   token: '',
   cookie: '',
-  dataToRead: ["Adverts", "Events"],
+  dataToRead: ["Adverts", "Events", "UserData"],
   initialDataReaded: false
 }
 
@@ -76,9 +76,8 @@ const actions = {
       commit('SET_PROMISE_TO_READ', getters.getDataToRead );
 
       let userData = {
-          // user: authData.username,
-          // lang: authData.language,
-          changePage: true
+          changePage: true,
+          login: true
       };
       dispatch('getData', userData);
     }).catch(error => {

@@ -108,12 +108,10 @@ const actions = {
                 // "Cookie": getters.getCookie
             }
           }).then(res => {
-              console.log(res);
               let message = res.headers;
               dispatch('displayModal', message);
               
             }).catch(error => {
-              console.log(error);
           })
     },
     startStopSlider({dispatch}, evt) {
@@ -145,7 +143,6 @@ const actions = {
             commit("SET_PROMISE_TO_READ", ["NewToken", "Adverts"]);
             dispatch('getData');
         }).catch(error => {
-            console.log(error)
         })
     },
     addNewAdvert({getters, commit, dispatch}, data2){
@@ -165,14 +162,12 @@ const actions = {
                 // "Cookie": getters.getCookie
             }
           }).then(res => {
-              console.log(res);
               commit("SET_SHOW_NEW_MESSAGE_DIALOG", false);
               let message = res.headers;
               dispatch('displayModal', message);
               commit("SET_PROMISE_TO_READ", ["NewToken", "Adverts"]);
               dispatch('getData');
             }).catch(error => {
-              console.log(error);
           })
     },
     // take location
@@ -199,7 +194,6 @@ const actions = {
     getWeatherData({commit, state}) {
         const URL2 = 'https://api.openweathermap.org/data/2.5/weather?lat='+state.geoLoca.lat+'&lon='+state.geoLoca.len+'&appid=fd3f4877eb8823c22505c4b89a434e2b&units=metric'
          axios.get(URL2).then(res => {
-         console.log(res)
          const data = res.data
          const weather = {}
          weather.lon = data.coord.lon
@@ -256,16 +250,13 @@ const actions = {
 
       getNews({commit, dispatch}) {
           // get news from RSS -> XML
-        axios.get('https://fakty.interia.pl/ciekawostki/feed')
-        .then(res => {
-          console.log(res)
-          const news = res.data
-          commit('ADD_NEWS', news)
-          dispatch("xmlToJson")
-        })
-        .catch(function(error) {
-          console.log(error)
-        });
+          const proxyurl = "https://cors-anywhere.herokuapp.com/";
+            const url = "https://fakty.interia.pl/ciekawostki/feed"; // site that doesn’t send Access-Control-*
+            fetch(proxyurl + url)
+            .then(response => response.text())
+            .then(contents => commit('ADD_NEWS', contents))
+            .then(() => dispatch("xmlToJson"))
+            .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
     },
      xmlToJson({commit, state, dispatch}) {
          // parse XML to JSON
@@ -273,7 +264,6 @@ const actions = {
         const convert = require('xml-to-json-promise')
          convert.xmlDataToJSON(xmlTxt).then(json => {
              xmlTxt = json.rss.channel[0].item
-             console.log(xmlTxt)
              commit('ADD_JSON_NEWS', xmlTxt)
              dispatch("getArticles")
          })
@@ -285,7 +275,6 @@ const actions = {
           for(let i = 0; i < (allArticles.length); i++) {
             let article = document.createRange().createContextualFragment(allArticles[i].description[0]),
             a,  p, link,
-            titleAlt = allArticles[i].title[0],
             title = document.createTextNode(allArticles[i].title[0]),
             param = document.createElement('p'),
             ahref = document.createElement('a'),
@@ -299,7 +288,7 @@ const actions = {
             ahref.appendChild(head)
             link = allArticles[i].link[0]
             ahref.href = link
-
+            ahref.target = "_blank"
             headDiv.appendChild(ahref)
             headDiv.className = "artTitle"
             if(article.childNodes[0].childNodes[0].nodeType == 1) {
