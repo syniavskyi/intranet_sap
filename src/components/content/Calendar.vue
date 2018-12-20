@@ -64,7 +64,7 @@
                 </ul>
               </div>
               <!-- Modal for add event -->
-            <event-form v-if="dialogEvent" :selected-value="selectedValue" :display-save-button="displaySaveButton"></event-form>
+              <event-form v-if="dialogEvent" :selected-value="selectedValue" :display-save-button="displaySaveButton"></event-form>
             </div>
           </div>
         </div>
@@ -196,6 +196,7 @@ export default {
     },
     // day cklicked on v-calendar
     dayClicked(day) {
+      if (day.attributes[0].key === "disabled") return
       this.selectedDay = day;
     },
     // modal for new event
