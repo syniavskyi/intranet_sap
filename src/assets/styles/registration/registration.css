@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
-@impo\rt url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 
 
 .modal-text {
@@ -36,62 +36,6 @@
 
 .registration-credentials > div {
     margin: 1rem;
-}
-
-.checkbox-absolute {
-    position: absolute;
-    right: -1.7rem;
-    top: .45rem;
-}
-
-.div-pass {
-    display: flex;
-    flex-direction: row;
-}
-
-.reg-pass-input {
-    width: 9.7rem;
-    order: 0;
-    font-family:Verdana,sans-serif;
-}
-
-.gen-pass {
-    font-size: 0.8rem;
-    font-family: 'Raleway';
-    align-self: flex-start;
-    order: 1;
-    height: 2.525rem;
-    width: 5rem;
-    z-index: 100;
-    background: transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
-    border-top: 2px solid transparent;
-    transition: border 0.5s ease;
-}
-
-.gen-pass:hover {
-    cursor: pointer;
-    border: 2px solid orange;
-}
-
-.gen-pass:focus {
-    outline: none;
-}
-
-.div-select {
-    width: 80%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
- }
-
-.div-select + .div-select {
-    margin-top: 1rem;
-}
-
-.div-select + .button {
-    margin-top: 2rem;
 }
 
 .select {
