@@ -50,7 +50,8 @@
                     <tr>
                       <td>
                         <!-- v-if="cvElements.photo" -->
-                        <img  id="cv-img" class="img-user-class" src="../../assets/images/hd.jpg"  width="150px">
+                        <!-- <img  id="cv-img" class="img-user-class" src="../../assets/images/hd.jpg"  width="150px"> -->
+                        <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
                       </td>
                     </tr>
                   </table>
@@ -381,7 +382,8 @@ export default {
       getToken: 'getToken',
       getCookie: 'getCookie',
       messageLog: "getMessageLog",
-      showModal: "getShowModal"
+      showModal: "getShowModal",
+      userPhoto: "getSelectedUserPhotoUrl"
     })
   )
 };
