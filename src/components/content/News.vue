@@ -38,7 +38,7 @@
                 </div>
               <!-- </transition-group> -->
               <button v-show="isMoreThanFiveAdverts && slideIndex > 5" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length <= 5" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length < 5" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
             </div>
           </div>
           <div class="api">

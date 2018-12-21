@@ -135,22 +135,21 @@
     justify-content: center;
     font: .9rem 'Roboto';
     cursor: pointer;
-    color: grey;
+    color: #808080;
     border-radius: 5px;
+    box-shadow: 0 0 4px #ada8a3;
     outline: none;
     transition: box-shadow .2s, color .2s, border .2s;
-} 
+}
 
 .cal-back-btn {
-    background-color: #fff;
+    background-color: #ffffff;
     border: 1px solid transparent;
-    box-shadow: 0 0 4px rgb(173, 168, 163);
 }
 
 .cal-save-btn {
-    background-color: #fff;
+    background-color: #ffffff;
     border: 1px solid #808080;
-    box-shadow: 0 0 4px #ada8a3;
 }
 
 .cal-save-btn:hover {
@@ -160,11 +159,9 @@
 }
 
 .cal-back-btn:hover {
-    color: #333;
-    box-shadow: 0 0 8px #333;
+    color: #333333;
+    box-shadow: 0 0 8px #333333;
 }
-
-
 
 .user-list {
     height: 19rem;
