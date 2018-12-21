@@ -199,7 +199,7 @@
                       </select>
                       <!-- <select v-model="userData.state" @change="checkFormFields" class="selectProfile" :class="editMode ? 'selectEdit' : 'selectDisabled'" :disabled="!editMode"> -->
                       <!-- <p v-if="!editMode" class="inputDisabled">{{ userData.state }}</p> -->
-                      <select disabled v-if="!editMode" v-model="userData.WorkTime" @change="checkFormFields" class="selectProfile selectDisabled">
+                      <select disabled v-if="!editMode" v-model="userData.WorkTime" @change="checkFormFields" class="selectProfile selectDisabledh4">
                         <option v-bind:key="key" v-for="(value,key) in workTime" :value="key">{{value}}</option>
                       </select>
                       <label class="label-profile">{{ $t("label.worktime") }}</label>

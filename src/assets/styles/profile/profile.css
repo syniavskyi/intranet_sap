@@ -962,6 +962,7 @@
 .inputEdit:focus ~ label,
 .inputDisabled ~ label,
 .selectDisabled ~ label,
+.selectDisabledh4 ~ label,
 .inputEdit:valid ~ label,
 .selectEdit:focus ~ label,
 .selectEdit:valid ~ label,
@@ -1148,6 +1149,16 @@
     font-size: 1.2rem;
     background-image: none;
 }
+
+.selectDisabledh4 {
+    font-weight: normal;
+    border: 1px solid transparent;
+    background-image: none;
+    height: 2.3rem;
+    font-size: 1.2rem;
+    text-indent: calc(50% - 2rem);
+}
+
 .inputEdit:hover,
 .inputEdit:focus {
     /* border-bottom: 2px solid orange; */
@@ -1209,6 +1220,7 @@
     background: transparent;
     height: 2rem;
     border: 1px solid #d3d3d3;
+    padding-right: 26px;
     color: black;
     border-radius: 3px;
     appearance: none;
