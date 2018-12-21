@@ -282,6 +282,7 @@ export default {
         this.saveUserLangs(newData);
       }
       this._beforeEditingCacheLangs = utils.createClone(this.userLangs);
+      document.getElementsByClassName("prof-skills-save")[index].disabled = true;
     },
     addModule(value) {
       const moduleId = value.target.value;

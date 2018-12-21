@@ -440,6 +440,9 @@ export default {
   // },
   watch: {
     selectedUser(value) {
+      if(!value) {
+        this.selectedUser = localStorage.getItem('id');
+      }
       let profileActivityAuth = this.$store.getters.getUserAuth.ZPROF_ATCV;
       if(profileActivityAuth === '*') {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
