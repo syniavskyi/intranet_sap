@@ -1,7 +1,7 @@
 <template>
 <div class="content">
-   <button @click="generate" class="cv-modal-btn-bclear center-btn">{{ $t("button.confirmGenerate") }}</button>
-<div id="content">
+  <button @click="generate" class="cv-modal-btn-bclear center-btn">{{ $t("button.confirmGenerate") }}</button>
+  <div id="content">
     <div class="Section1" >
     <!-- header with name and position-->
       <table id="main-table" width="100%">
@@ -51,7 +51,7 @@
                       <td>
                         <!-- v-if="cvElements.photo" -->
                         <!-- <img  id="cv-img" class="img-user-class" src="../../assets/images/hd.jpg"  width="150px"> -->
-                        <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
+                        <img class="img-user-class" id="cv-img" :src="userPhoto" width="150px">
                       </td>
                     </tr>
                   </table>
