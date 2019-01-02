@@ -63,9 +63,7 @@ const actions = {
     }
   },
   // get docs for new user
-  getNewDocs({
-    getters,
-  }) {
+  getNewDocs({}) {
     let user = localStorage.getItem("id");
     return axios({
       method: 'GET',
@@ -77,9 +75,7 @@ const actions = {
     })
   },
   // get informational docs
-  getInfoDocs({
-    getters,
-  }) {
+  getInfoDocs({}) {
     let user = localStorage.getItem("id");
     return axios({
       method: 'GET',
@@ -95,10 +91,8 @@ const actions = {
     let cookie = getters.getCookie;
     const editData = {
       FileId: data.FileId,
-      // Language: getters.getLoginLanguage,
-      // UserAlias: getters.getLoginAlias,
       Language: 'PL',
-      UserAlias: 'UIO',
+      UserAlias: localStorage.getItem("id"),
       Status: data.Status ? 'X' : '-'
     }
     let url = "UserFiles(UserAlias='" + editData.UserAlias + "',Language='" + editData.Language + "',FileId='" + editData.FileId + "')";
@@ -114,7 +108,6 @@ const actions = {
           // "Cookie": cookie
       }
     }).then(res => {
-        console.log(res);
         let message = res.headers;
         dispatch('displayModal', message);
       }).catch(error => {
@@ -136,7 +129,6 @@ const actions = {
             // "Cookie": getters.getCookie
         }
         }).then(res => {
-            console.log(res);
             let message = res.headers;
             dispatch('displayModal', message);
         }).catch(error => {
@@ -158,7 +150,6 @@ const actions = {
         // "Cookie": getters.getCookie
     }
     }).then(res => {
-        console.log(res);
         let message = res.headers;
         dispatch('displayModal', message);
     }).catch(error => {

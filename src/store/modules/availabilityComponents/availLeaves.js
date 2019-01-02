@@ -17,16 +17,18 @@ const state = {
 };
 
 const mutations = {
+    // set list with user availability
     SET_USER_AVAIL(state, userAvail) {
         state.userAvail = userAvail
     },
+    // set data to holiday request
     SET_NEW_HOLIDAY(state, data) {
         state.newHoliday = data
     }
 };
 
 const actions = {
-    getUserAvail({commit, dispatch, getters}, userId) { 
+    getUserAvail({}, userId) { 
      //get user availability for calendar and editing availability 
             return axios({
               method: 'GET',
@@ -69,7 +71,6 @@ const actions = {
             "X-Requested-With": "XMLHttpRequest",
             "Cache-Control": "no-cache",
             "x-csrf-token": sToken
-            // "Cookie": getters.getCookie
         }
         }).then(res => {
             dispatch('hideAllMessages')
@@ -90,8 +91,7 @@ const actions = {
         }
         let data  = JSON.parse(JSON.stringify(getters.getNewLeaveForUser)),
              url = 'UserAvailabilities',
-             sToken = getters.getToken,
-            cookie = getters.getCookie;
+             sToken = getters.getToken;
         axios({
           url: url,
           method: 'post',
@@ -101,7 +101,6 @@ const actions = {
               "X-Requested-With": "XMLHttpRequest",
               "Cache-Control": "no-cache",
               "x-csrf-token": sToken
-            //   "Cookie": cookie
           }
         }).then(res => {
             getters.getUserAvail.push(data);

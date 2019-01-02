@@ -38,7 +38,8 @@
         "newMessage": "Нове повідомлення",
         "stopSlider": "Зупинити слайдер",
         "startSlider": "Запустити слайдер",
-        "confirmGenerate": "Підтвердити і вигенерувати"
+        "confirmGenerate": "Підтвердити і вигенерувати",
+        "logout": "logout"
     },
     "label": {
         "nationality": "Національність",

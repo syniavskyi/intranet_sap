@@ -101,11 +101,6 @@ import i18n from "../../../lang/lang";
 import moment from "moment";
 export default {
     name: 'holidayRequestTemplate',
-     data () {
-        return {
-            requestData: this.$store.getters.getHoliday
-        }
-     },
      created() {
          this.countDays(this.$store.getters.getHoliday);
     },

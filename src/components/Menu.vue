@@ -3,7 +3,7 @@
         <!-- <div class="modal-overlay-menu"></div> -->
         <div class="nav-header">
             <button class="logout-button" @click="logout">
-                <span class="logout-text">wyloguj</span>
+                <span class="logout-text">{{$t("button.logout")}}</span>
             </button> 
             <p class="nav-title">BTech</p>
             <button @click="closeMenu" class="close-btn">&#10006;</button>

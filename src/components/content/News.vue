@@ -171,7 +171,6 @@ export default {
     "modal": Modal
   },
   computed: {...mapGetters({
-      geoLocation2: "geoLocation2",
       weatherData: "weatherData",
       today: "today",
       articlesRaw: "articlesRaw",

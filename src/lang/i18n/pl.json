@@ -38,7 +38,8 @@
         "newMessage": "Nowa wiadomość",
         "stopSlider": "Zatrzymaj slider",
         "startSlider": "Uruchom slider",
-        "confirmGenerate": "Zatwierdź i generuj"
+        "confirmGenerate": "Zatwierdź i generuj",
+        "logout": "Wyloguj"
      },
     "label": {
         "nationality": "Narodowość",

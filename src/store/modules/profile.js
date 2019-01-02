@@ -155,7 +155,6 @@ const actions = {
           "Cookie": getters.getCookie
       }
     }).then(res => {
-        console.log(res);
         let message = res.headers;
         dispatch('displayModal', message);
       }).catch(error => {

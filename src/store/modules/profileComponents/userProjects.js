@@ -9,7 +9,6 @@ const state = {
   errorProjectNo: null,
   ifModuleExist: null,
   ifIndustryExist: null,
-  beforeEditingProjects: null,
   industryList: [],
   userProjectsList: [],
   object: {},
@@ -32,9 +31,6 @@ const mutations = {
   },
   SET_ERROR_PROJECT_NO(state, number) {
     state.errorProjectNo = number
-  },
-  SET_BEFORE_EDITING_PROJECTS(state, projects) {
-    state.beforeEditingProjects = projects
   },
   SET_INDUSTRY_DESC_LIST(state, data) {
     state.industryList = data;
@@ -90,7 +86,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": getters.getCookie
       }
     }).then(res => {
       let message = res.headers;
@@ -113,7 +108,6 @@ const actions = {
     delete dataToSend.User;
     dispatch('formatProjectToString', dataToSend);
     let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00,ProjectName='${dataToSend.ProjectName},Language='${dataToSend.Language}')`;
-    // "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStart).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(dataToSend.DateEnd).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" + dataToSend.ProjectName + "',Language='" + dataToSend.Language + "')";
     let urlU = "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(dataToSend.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" + dataToSend.ProjectName + "',Language='" + dataToSend.Language + "')";
     let sToken = getters.getToken;
     axios({
@@ -125,7 +119,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": getters.getCookie
       }
     }).then(res => {
         let message = res.headers;
@@ -283,6 +276,7 @@ const actions = {
   getIndustries({
     getters
   }, userData) {
+    //set hint in diffrent languge to help filling data in profile
     let lang;
     if(getters.getDataForHint) {
       lang = localStorage.getItem('lang').toUpperCase() === 'PL' ? lang = "EN" : lang = "PL";
@@ -298,7 +292,6 @@ const actions = {
       url: `Industries?$filter=Lang eq '${lang}'`, 
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -415,9 +408,6 @@ const getters = {
   },
   getErrorProjectNo(state) {
     return state.errorProjectNo
-  },
-  getBeforeEditingProjects(state) {
-    return state.beforeEditingProjects
   },
   getObject(state) {
     return state.object;
