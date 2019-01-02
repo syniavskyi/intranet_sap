@@ -364,7 +364,7 @@ export default {
     }
   }
   ),
-  computed: Object.assign(
+  computed: (
     mapGetters({
       userEducation: "getUserEducation",
       userProjects: "getUserProjectsList",
@@ -422,7 +422,6 @@ export default {
   text-align: left;
   background-color: lightgray;
 }
-
 .cv-modal-btn,
 .cv-modal-btn-clear,
 .cv-modal-btn-bclear {
@@ -449,10 +448,5 @@ export default {
   box-shadow: 0 0 8px #333;
   background: #333;
   color: white;
-}
-.center-btn {
-  margin: 10px auto auto;
-  background: white;
-  height: 30px;
 }
 </style>

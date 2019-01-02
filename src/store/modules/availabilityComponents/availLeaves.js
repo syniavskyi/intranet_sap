@@ -10,13 +10,19 @@ const state = {
        StatusId: null,
        DateStart: null,
        DateEnd: null
-   }
+   },
+   newHoliday: {},
+   cityToHolidayRequest: ['Dąbrowa Górnicza', 'Katowice', "Warszawa", "Wrocław"],
+   typesToHolidayRequest: ["Bezpłatny", "Okolicznościowy", "Opieka nad dzieckiem", "Wypoczynkowy", "Za inny dzień"]
 };
 
 const mutations = {
     SET_USER_AVAIL(state, userAvail) {
         state.userAvail = userAvail
     },
+    SET_NEW_HOLIDAY(state, data) {
+        state.newHoliday = data
+    }
 };
 
 const actions = {
@@ -145,6 +151,15 @@ const getters = {
     },
     getNewLeaveForUser(state){
         return state.newLeaveForUser
+    },
+    getCityToHolidayRequest(state) {
+        return state.cityToHolidayRequest;
+    },
+    getTypesToHolidayRequest(state) {
+        return state.typesToHolidayRequest;
+    },
+    getHoliday(state) {
+        return state.newHoliday;
     }
 };
 
