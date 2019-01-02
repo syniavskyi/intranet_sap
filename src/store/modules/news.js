@@ -100,12 +100,10 @@ const actions = {
             method: 'put',
             data: data,
             headers: {
-                // "Content-Type": "application/x-www-form-urlencoded",//"application/atom+xml; type=entry; charset=utf-8",
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
                 "Cache-Control": "no-cache",
                 "x-csrf-token": sToken
-                // "Cookie": getters.getCookie
             }
           }).then(res => {
               let message = res.headers;
@@ -159,7 +157,6 @@ const actions = {
                 "X-Requested-With": "XMLHttpRequest",
                 "Cache-Control": "no-cache",
                 "x-csrf-token": getters.getToken
-                // "Cookie": getters.getCookie
             }
           }).then(res => {
               commit("SET_SHOW_NEW_MESSAGE_DIALOG", false);
@@ -171,7 +168,7 @@ const actions = {
           })
     },
     // take location
-    geoLoc({commit, state, dispatch}) {
+    geoLoc({commit, dispatch}) {
         var geoLocat = {}
         var geo = navigator.geolocation;
         if(geo) {
@@ -326,7 +323,7 @@ const actions = {
 }
 
 const getters = {
-    geoLocation2: state => {
+    getGeoLocation: state => {
         return state.geoLoca
     },
      weatherData: state => {

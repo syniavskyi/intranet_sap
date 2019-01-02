@@ -68,8 +68,7 @@ const actions = {
   }) {
     let data = getters.getNewProjectForUser,
       url = 'UserProjects',
-      sToken = getters.getToken,
-      cookie = getters.getCookie;
+      sToken = getters.getToken;
 
     data.Engag = parseInt(data.Engag)
     axios({
@@ -81,7 +80,6 @@ const actions = {
         "X-Requested-With": "XMLHttpRequest",
         "Cache-Control": "no-cache",
         "x-csrf-token": sToken
-        // "Cookie": cookie
       }
     }).then(res => {
       commit("SET_PROMISE_TO_READ", ["NewToken", "AvailProjects"]);
@@ -125,7 +123,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": getters.getCookie
         }
       }).then(res => {
         // dispatch('hideAllMessages')
@@ -160,7 +157,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": getters.getCookie
         }
       }).then(res => {
         // dispatch('hideAllMessages')

@@ -26,7 +26,7 @@ const mutations = {
         state.showSelectCvDialog = show
     },
     SET_CV_DATA(state, data){
-        state.cvData = state;
+        state.cvData = data;
     }
 };
 
@@ -68,9 +68,7 @@ const actions = {
         }
         commit('SET_CV_ELEMENTS', elements);
     },
-    submitCv({
-        commit, dispatch, getters
-      }, data) {
+    submitCv({dispatch}, data) {
         let slugHeader = data.file.name + ';' + data.type + ';' + data.language + ';' + data.userId + ';' +  data.file.type
     
         axios({
@@ -83,7 +81,6 @@ const actions = {
             "Slug": slugHeader
           }
         }).then(res => {
-          console.log(res);
           dispatch('getUserFilesData');
           let message = res.headers;
           dispatch('displayModal', message);
@@ -91,9 +88,7 @@ const actions = {
           console.log(error);
         })
       },
-      updateCv({
-        commit, dispatch, getters
-      }, data) {
+      updateCv({dispatch}, data) {
         let slugHeader = data.file.name + ';' + data.type + ';' + data.language + ';' + data.userId + ';' +  data.file.type;
         let url = "AttachmentMedias(FileType='" + data.type + "',Language='" + data.language + "',UserAlias='" + data.userId + "')/$value";
     
@@ -107,7 +102,6 @@ const actions = {
             "Slug": slugHeader
           }
         }).then(res => {
-          console.log(res);
           dispatch('getUserFilesData')
           let message = res.headers;
           dispatch('displayModal', message);

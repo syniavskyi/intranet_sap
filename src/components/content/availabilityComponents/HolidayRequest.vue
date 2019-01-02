@@ -46,10 +46,6 @@ export default {
                     doc.addImage(img, 'JPEG', 10, 10, imgWidth, imgHeight);
                     doc.save(pdfName + '.pdf');
             }) 
-            // }
-            // doc.fromHTML($('content').get(0), 20, 20, {
-            //     'width': 1200 })
-            // doc.save(pdfName + '.pdf');
         },
     }
 }

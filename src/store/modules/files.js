@@ -33,8 +33,7 @@ const mutations = {
 
 const actions = {
   getUserFilesData({
-    commit,
-    getters
+    commit
   }) {
     let userId = localStorage.getItem('id');
     axios({
@@ -49,22 +48,16 @@ const actions = {
       console.log(error)
     })
   },
-  getDocuments({
-    commit,
-    getters
-  }, fileType) {
+  getDocuments({}, fileType) {
     return axios({
       method: 'GET',
       url: "Attachments?$filter=FileId eq '" + fileType + "'",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
-  toggleDocTile({
-    dispatch
-  }, element) {
+  toggleDocTile({}, element) {
     let height = 0,
       length = element.elChild.childNodes.length / 3;
     for (var i = 0; i < length; i++) {
@@ -81,9 +74,7 @@ const actions = {
       element.el.style.opacity = "0";
     }
   },
-  calcDocsHeight({
-    dispatch
-  }, tiles) {
+  calcDocsHeight({}, tiles) {
     let height = 0;
     for (var i = 0; i < tiles.length; i++) {
       height = tiles[i].firstElementChild.offsetHeight

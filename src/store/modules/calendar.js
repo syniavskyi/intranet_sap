@@ -38,9 +38,6 @@ const mutations = {
   SET_COLOR_PRIORITY(state, data) {
     state.priorityColor = data;
   },
-  //   SET_EVENT(state, data) {
-  //     state.event = data;
-  // },
   SET_EVENTS(state, data) {
     state.aEvents = data;
   },
@@ -91,15 +88,12 @@ const actions = {
     }
     commit('SET_COLOR_PRIORITY', color);
   },
-  getEvents({
-    getters
-  }) {
+  getEvents({}) {
     return axios({
       method: 'GET',
       url: 'Events',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -157,10 +151,8 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": getters.getToken
-          // "Cookie": getters.getCookie
       }
     }).then(res => {
-        console.log(res)
         data.EventId = res.data.d.EventId;
         dispatch('setColorPriority');
         state.addEvent.color = state.priorityColor
@@ -189,7 +181,6 @@ const actions = {
     delete eventData.color;
     const url = 'Events' + '(' + "EventId='" + eventData.EventId + "')";
       let sToken = getters.getToken;
-      let cookie = getters.getCookie;
       axios({
         url: url,
         method: 'put',
@@ -199,10 +190,8 @@ const actions = {
             "X-Requested-With": "XMLHttpRequest",
             "Cache-Control": "no-cache",
             "x-csrf-token": sToken
-            // "Cookie": cookie
         }
       }).then(res => {
-          console.log(res);
           let aEvents = getters.getAllEvents;
           let pos = aEvents.findIndex(x => x.EventId === eventData.EventId);
          if (data.Action === 'U') {

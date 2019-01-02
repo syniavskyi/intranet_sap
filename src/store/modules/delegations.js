@@ -103,7 +103,6 @@ const actions = {
   },
   countAllowance({
     getters,
-    commit,
     dispatch
   }) {
     const newDelegation = getters.getNewDelegation,
@@ -221,7 +220,7 @@ const actions = {
         }
       }
   },
- countAllCosts({getters, commit, dispatch}){
+ countAllCosts({getters, dispatch}){
     const accCosts = getters.getAccomodationCostData,
           otherCosts = getters.getOtherCostData,
           trvCosts = getters.getTravelCostData,
@@ -238,25 +237,22 @@ const actions = {
       totalCostsInCurr.amount =  0
       totalCostsInCurr.amount =  totalCostsInCurr.travel + totalCostsInCurr.accomodation + totalCostsInCurr.others - allDeduction
     },
-    getDelegationNumber({commit, getters}, data) {
+    getDelegationNumber({commit}, data) {
       let url = "Delegations(DelegDate=" + data.DelegDate + ",UserId='" + data.UserAlias + "')"
       axios({
         method: 'GET',
         url: url,
         headers: {
           "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-          // "Cookie": getters.getCookie
         }
       }).then(res => {
         commit('SET_NEW_DELEG_NO', res.data.d.DelegNo)
-        console.log(res.data.d);
       }).catch(error => {
         console.log(error);
       })
     },
     saveDelegationNumber({commit, dispatch, getters}){
         const oDelegation = getters.getNewDelegation
-        let urlQuery = getters.getUrlQuery
         let data = {
             UserId: oDelegation.userId,
             DelegDate: utils.formatDateForBackend(oDelegation.dates.start),
@@ -264,7 +260,6 @@ const actions = {
         }
         let sToken = getters.getToken;
         axios.defaults.withCredentials = true
-        let cookie = getters.getCookie;
         axios({
           method: 'POST',
           url: 'Delegations',
@@ -274,7 +269,6 @@ const actions = {
               "X-Requested-With": "XMLHttpRequest",
               "Cache-Control": "no-cache",
               "x-csrf-token": sToken
-              // "Cookie": cookie
           }
         }).then(res => {
           commit('SET_CREATE_DELEG_SUCCESS',true)
@@ -406,9 +400,6 @@ const actions = {
       commit('SET_NEW_DELEG_NO', null)
       commit('SET_CREATE_DELEG_SUCCESS', null)
      }
-
-
-  
 };
 
 

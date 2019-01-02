@@ -186,9 +186,7 @@ const actions = {
     });
   },
 
-  getDomainValues({
-    getters
-  }, domainData) {
+  getDomainValues({}, domainData) {
     if (domainData.lang === undefined) {
       domainData.lang = "PL"
     }
@@ -197,19 +195,15 @@ const actions = {
       url: "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     });
   },
-  getProjectsList({
-    getters
-  }) {
+  getProjectsList({}) {
     return axios({
       method: 'GET',
       url: 'Projects',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -226,8 +220,7 @@ const actions = {
   getUserData({
     getters,
   }, userData) {
-    let sCookie = getters.getCookie,
-    url;
+    let url;
     let sUserAlias = userData.user || localStorage.getItem("id"),
         sLang = userData.lang || localStorage.getItem("lang");
     if(!sUserAlias){
@@ -236,6 +229,7 @@ const actions = {
     if(!sLang){
       sLang = userData.lang;
     }
+    // check if showing hint button was clicked
     getters.getDataForHint ? url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserSkills,UserAuth,UserCvProjects' :
                              url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang,UserFiles,UserAuth'
     return axios({
@@ -243,7 +237,6 @@ const actions = {
       url: url,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": sCookie
       }
     })
   },
@@ -270,13 +263,11 @@ const actions = {
     }
   },
   getUsersLists({}) {
-    let sCookie = document.cookie;
     return axios({
       method: 'GET',
       url: 'Users',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": sCookie
       }
     })
   },
@@ -295,7 +286,7 @@ const actions = {
     commit, getters
   }, userAlias) {
     const sUserId = userAlias,
-      sLoggedUser =  localStorage.getItem("id"), //
+      sLoggedUser =  localStorage.getItem("id"),
       sLanguage = 'PL',
       sFileType = "USER-PHOTO";
     const url =
@@ -327,9 +318,7 @@ const actions = {
       } 
       commit('SET_SEL_USER_PHOTO_URL', dataURL);
       
-      
-
-      // localStorage.setItem("image", dataURL)
+   // localStorage.setItem("image", dataURL)
     }, false);
     image.addEventListener("error", function () {
       if(sLoggedUser === sUserId){
@@ -338,9 +327,8 @@ const actions = {
       commit('SET_SEL_USER_PHOTO_URL', "");
     });
 
-
-
   },
+  //check if user is new in intranet and display starter page with documents to fills or news
   checkPageToDisplay({}, userData) {
    if(userData.changePage && userData.login) {
     router.replace('/news');
@@ -349,15 +337,12 @@ const actions = {
    }
     userData.login = false;
   },
-  getAdverts({
-    getters
-  }) {
+  getAdverts({}) {
     return axios({
       method: 'GET',
       url: "Adverts",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -625,8 +610,7 @@ const actions = {
 
     if(sCommitName.length > 0){
       commit(sCommitName, aResults);
-    }
-    
+    }  
   },
 
   setDocumentList({commit}, passedData){
@@ -702,8 +686,6 @@ const actions = {
       }
       commit('SET_DATA_LOADED', true);
       commit('SET_DATA_FOR_HINT', false);
-
-      // dispatch('checkPageToDisplay', userData.changePage) //TEMP
   },
 
   _setAuthorizations({commit}, aAuth){

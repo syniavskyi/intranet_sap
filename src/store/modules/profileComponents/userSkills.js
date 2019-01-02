@@ -128,7 +128,6 @@ const actions = {
     getters.getSelectedForCvUser ? newSkills.UserAlias = getters.getSelectedForCvUser : newSkills.UserAlias = localStorage.getItem("id");
     let url = "UserSkills(UserAlias='" + newSkills.UserAlias + "',Language='" + newSkills.Language + "')";
     let sToken = getters.getToken;
-    let cookie = getters.getCookie; 
     axios({
         url: url,
         method: 'put',
@@ -138,7 +137,6 @@ const actions = {
             "X-Requested-With": "XMLHttpRequest",
             "Cache-Control": "no-cache",
             "x-csrf-token": sToken
-            // "Cookie": cookie
         }
       }).then(res => {
           let message = res.headers;
@@ -149,7 +147,6 @@ const actions = {
   },
   saveUserLangs({getters, dispatch}, data) {
     let sToken = getters.getToken;
-    let cookie = getters.getCookie;
     getters.getSelectedCvLang ? data.Lang = getters.getSelectedCvLang.toUpperCase() : data.Lang = localStorage.getItem("lang");
     getters.getSelectedForCvUser ? data.UserId = getters.getSelectedForCvUser : data.UserId = localStorage.getItem("id");
     let url = 'UserLang';
@@ -162,7 +159,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": cookie
       }
     }).then(res => {
       let message = res.headers;
@@ -186,7 +182,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": getters.getCookie
       }
     }).then(res => {
         let message = res.headers;
@@ -215,19 +210,17 @@ const actions = {
     commit('SET_USER_LANGS', langList)
   },
   // get list of languages
-  getAllLanguages({
-    getters
-  }, userData) {
+  getAllLanguages({}, userData) {
     return axios({
       method: 'GET',
       url: `Languages?$filter=LanguageId eq '${userData.cvLang}'`,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
   getNewDataForHint({commit, dispatch}){
+    // get data in different language to help with filling data in cv
       let lang = localStorage.getItem('lang').toUpperCase() === 'PL' ? lang = "EN" : lang = "PL";
       commit('SET_DATA_FOR_HINT', true);
       let dataToSend = {
@@ -239,6 +232,7 @@ const actions = {
       dispatch('getData', dataToSend);   
   },
   showHintFn({commit}, data) {
+    // set proper skill to show in hint
     let oData = {
       show: data.show,
       name: data.name

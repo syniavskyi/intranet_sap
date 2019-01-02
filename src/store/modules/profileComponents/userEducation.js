@@ -56,7 +56,6 @@ const actions = {
     const urlU = "UsersEducation(UserAlias='" + data.UserAlias + "',University='" + data.UniversityToChange + "',AcademicTitle='" + data.AcademicTitleToChange + "',FieldOfStudy='" + data.FieldOfStudyToChange + "',Language='" + data.Language + "')",
     urlD = "UsersEducation(UserAlias='" + data.UserAlias + "',University='" + data.University + "',AcademicTitle='" + data.AcademicTitle + "',FieldOfStudy='" + data.FieldOfStudy + "',Language='" + data.Language + "')"
     let sToken = getters.getToken;
-    let cookie = getters.getCookie;
     axios({
       url: data.Action === 'D' ? urlD : urlU,
       method: 'put',
@@ -66,7 +65,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": cookie
       }
     }).then(res => {
       let message = res.headers;
@@ -93,7 +91,6 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": getters.getToken
-          // "Cookie": getters.getCookie
       }
     }).then(res => {
       let message = res.headers;
@@ -103,10 +100,7 @@ const actions = {
     })
   },
   // get description for school from text table
-  getSchoolDesc({
-    commit,
-    getters
-  }, lang) {
+  getSchoolDesc({}, lang) {
     if (lang === undefined) {
       lang = "PL"
     }
@@ -115,15 +109,11 @@ const actions = {
       url: `SchoolDesc?$filter=Language eq '${lang}'`,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
   // get description for field of study from text table
-  getFieldOfStudyDesc({
-    commit,
-    getters
-  }, lang) {
+  getFieldOfStudyDesc({}, lang) {
     if (lang === undefined) {
       lang = "PL"
     }
@@ -132,7 +122,6 @@ const actions = {
       url: `FieldOfStudyDesc?$filter=Language eq '${lang}'`, 
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   }
