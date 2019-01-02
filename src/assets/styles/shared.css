@@ -657,7 +657,13 @@ input:required {
     margin: 0;
     text-align: center;
 }
-
+/* SPi */
+.center-btn {
+  margin: 10px auto 10px auto;
+  background: white;
+  display: flex;
+}
+/* SPI */
 @keyframes slide-in {
     from {
         transform: translateY(-30px);

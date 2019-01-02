@@ -16,6 +16,7 @@ import Availability from '@/components/content/Availability'
 import StarterPage from '@/components/content/StarterPage'
 import CV from '@/components/content/CV'
 import Delegations from '@/components/content/Delegations'
+import HolidayRequest from '@/components/content/availabilityComponents/HolidayRequest'
 
 import AuthGuard from './auth-guard'
 
@@ -92,6 +93,12 @@ export default new Router({
         path: '/cv',
         name: 'CV',
         component: CV,
+        beforeEnter: AuthGuard
+    },
+    {
+        path: '/holidayrequest',
+        name: 'HolidayRequest',
+        component: HolidayRequest,
         beforeEnter: AuthGuard
     }
 ],

@@ -168,7 +168,16 @@
         "shortTime": "час:",
         "editProject": "Ви не маєте прав на редагування",
         "selectInfo" : "Натисніть Ctrl (CMD), щоб вибрати більше варіанти",
-        "selected": "вибрано"
+        "selected": "вибрано",
+        "citySelect": "(city)",
+        "dateSelect": "(date)",
+        "requestTypeSelect": "(rodzaj)",
+        "yearSelect": "(za rok)",
+        "dayFromSelect": "(od dnia)",
+        "dayToSelect": "(do dnia)",
+        "daysCountSelect": "(liczba dni)",
+        "forDay": "Za dzień:",
+        "comments": "(uwagi)"
     },
     "header": {
         "login": "Увійдіть до Інтранету",
@@ -343,6 +352,7 @@
         "download": "Cкачати",
         "delete": "Видалити",
         "save": "Записати",
-        "reset": "Cкинути"
+        "reset": "Cкинути",
+        "openHoliday": "click to create new holiday request"
     }
 }

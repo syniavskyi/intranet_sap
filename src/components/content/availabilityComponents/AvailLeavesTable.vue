@@ -2,7 +2,13 @@
     <div class="availability-tile ava-tile-3">
         <div class="availability-tile-header">
             <div class="ava-tile-header-title">
-                <h2>{{ $t("label.availabilityOverview") }}</h2>
+               <h2>{{ $t("label.availabilityOverview") }}
+                  <!-- <router-link target="_blank" to="/holidayrequest">
+                    <button class="holiday-button" @click="openHoliday=true" :title="$t('title.openHoliday')">
+                        <img src="../../../assets/images/island.png">
+                    </button>
+                  </router-link> -->
+                </h2>
                 <div class="availability-tile-underscore"></div>
             </div>
              <button class="profile-edit-btn" v-if="!editMode" :disabled="disabledBtnToEditAvail" @click="edit">{{ $t("button.edit") }}</button>
@@ -62,6 +68,12 @@
                         <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
                         <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
                     </div>
+                      <!-- <router-link target="_blank" :to="{name: 'HolidayRequest', params: {holiday: {dateStart: avail.DateStart, dateEnd: avail.DateEnd, user: avail.UserAlias}}}"> -->
+                        <!-- <router-link target="_blank" :to="{name: 'HolidayRequest'}"> -->
+                            <button v-if="avail.TypeId !== 'WR'" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
+                                <img src="../../../assets/images/island.png">
+                            </button>
+                      <!-- </router-link> -->
                 </div>
             </div>
         </div>
@@ -90,7 +102,8 @@ export default {
             newLeave: "getNewLeaveForUser",
             authAcc: 'getAvailAcceptAuth',
             filteredTeamUsers: 'getFilteredTeamUsers',
-            disabledBtnToEditAvail: "getDisabledBtnToEditAvail"
+            disabledBtnToEditAvail: "getDisabledBtnToEditAvail",
+            userData: "getUserInfo"
         }),
         filteredUserAvail() {
             let aFilteredAvail = this.userAvail,
@@ -239,7 +252,27 @@ export default {
          avail.DateEndToChange = this._beforeEditingCache[fullData.avail.EntryId].DateEnd;
          this._beforeEditingCache[fullData.avail.EntryId] = fullData.avail;
          this.updateUserAvail(avail);
-       } 
+       },
+       setDataToLeave(avail){
+           let address = this.userData.Street + ' ' + this.userData.BuildingNumber + '/' + this.userData.ApartmentNumber + ' ' + this.userData.PostalCode;
+           let holiday = {
+               dateStart: moment(avail.DateStart).format("YYYY-MM-DD"),
+               dateEnd: moment(avail.DateEnd).format("YYYY-MM-DD"),
+               userAlias: avail.UserId,
+               today: moment(new Date()).format("YYYY-MM-DD"),
+               year: moment(new Date()).format("YYYY-MM-DD").slice(0,4),
+               city: this.userData.BranchName,
+               type: 'Wypoczynkowy',
+               fullname: this.userData.Fullname,
+               address: address,
+               phone: this.userData.Telephone,
+               email: this.userData.Email,
+               forDay: '',
+               countedDays: null
+           }
+           this.$store.commit('SET_NEW_HOLIDAY', holiday);
+           this.$router.push({ name: "HolidayRequest"});
+       }
     }
 }
 </script>

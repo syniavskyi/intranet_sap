@@ -168,7 +168,16 @@
         "shortTime": "time:",
         "editProject": "You are not authorizied to edit",
         "selectInfo" : "Press ctrl to select more variants",
-        "selected": "selected"
+        "selected": "selected",
+        "citySelect": "(city)",
+        "dateSelect": "(date)",
+        "requestTypeSelect": "(rodzaj)",
+        "yearSelect": "(za rok)",
+        "dayFromSelect": "(od dnia)",
+        "dayToSelect": "(do dnia)",
+        "daysCountSelect": "(liczba dni)",
+        "forDay": "Za dzień:",
+        "comments": "(uwagi)"
     },
     "header": {
         "login": "Log in to Intranet",
@@ -345,6 +354,7 @@
         "download": "download",
         "delete": "delete",
         "save": "save",
-        "reset": "reset"
+        "reset": "reset",
+        "openHoliday": "click to create new holiday request"
     }
 }

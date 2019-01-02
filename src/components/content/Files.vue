@@ -25,7 +25,7 @@
                 </div>
                 <div class="documents-tile-content">
                   <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
+                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_" :title="$t('title.download')">
                       <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
                       <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
                       <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>

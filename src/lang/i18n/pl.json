@@ -167,7 +167,16 @@
         "shortTime": "godz.",
         "editProject": "Nie posiadasz uprawnień do edycji",
         "selectInfo" : "Przytrzymaj ctrl, żeby zaznaczyć więcej wariantów i kliknij przycisk 'Zapisz'",
-        "selected": "wybrano"
+        "selected": "wybrano",
+        "citySelect": "(miejscowość)",
+        "dateSelect": "(data)",
+        "requestTypeSelect": "(rodzaj)",
+        "yearSelect": "(za rok)",
+        "dayFromSelect": "(od dnia)",
+        "dayToSelect": "(do dnia)",
+        "daysCountSelect": "(liczba dni)",
+        "forDay": "Za dzień:",
+        "comments": "(uwagi)"
     },
     "header": {
         "login": "Zaloguj się do Intranetu",
@@ -344,6 +353,7 @@
         "download": "pobierz",
         "delete": "usuń",
         "save": "zapisz",
-        "reset": "resetuj"
+        "reset": "resetuj",
+        "openHoliday": "click to create new holiday request"
     }
 }
