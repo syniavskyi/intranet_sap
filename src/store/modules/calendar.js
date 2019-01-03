@@ -1,5 +1,4 @@
 import axios from 'axios'
-import odata from 'odata';
 
 let utils = require('../../utils');
 
@@ -164,7 +163,6 @@ const actions = {
         commit("SET_PROMISE_TO_READ", ["NewToken", "Events"]);
         dispatch('getData');
       }).catch(error => {
-        console.log(error);
     })
   },
   editEvent({
@@ -207,7 +205,6 @@ const actions = {
           commit("SET_PROMISE_TO_READ", ["NewToken", "Events"]);
           dispatch('getData');
         }).catch(error => {
-          console.log(error);
       })
   },
   clearForm({

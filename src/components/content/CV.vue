@@ -356,7 +356,6 @@ export default {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": this.getToken
-          // "Cookie": this.getCookie
         }
       }).catch(error => {
             console.log(error);

@@ -1,5 +1,4 @@
 import moment from 'moment'
-import odata from 'odata'
 import axios from 'axios'
 
 let utils = require('../../../utils')
@@ -64,7 +63,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
   updateUserExp({
@@ -93,7 +91,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
 }

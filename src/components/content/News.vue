@@ -153,8 +153,8 @@ export default {
     this.$store.dispatch("geoLoc");
   },
   created() {
-    this.getToday();
-    this.getNews();
+    this.getTodayFn();
+    this.getNewsFn();
     this.$store.commit('SET_PROMISE_TO_READ', this.$store.getters.getNewsToRead);
     this.$store.dispatch('getData', null);
     this.$store.commit('SET_ADVERTS_LOADER', true);
@@ -171,11 +171,8 @@ export default {
     "modal": Modal
   },
   computed: {...mapGetters({
-      weatherData: "weatherData",
-      today: "today",
-      articlesRaw: "articlesRaw",
-      articlesJson: "articlesJson",
-      rticles: "articles",
+      weatherData: "getWeatherData",
+      today: "getToday",
       displayMenu: "getShowMenu",
       displayOverlay: "getShowMenuOverlay",
       events: "getAllEvents",
@@ -210,11 +207,8 @@ export default {
   methods: {
     ...mapActions([
       "geoLoc",
-      "getWeatherData",
-      "getToday",
-      "getNews",
-      "xmlToJson",
-      "getArticles",
+      "getTodayFn",
+      "getNewsFn",
       "updateAdvert"
     ]),
     setDateTo(event) {

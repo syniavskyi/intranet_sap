@@ -110,8 +110,6 @@ const actions = {
         row.delegationCurrRate  = (newDelegationCurr !== 'PLN') ? currRates.find(o => o.code === newDelegationCurr).mid : 1.00
         dispatch('updateAdvance')
       }).catch(error => {
-        alert(error)
-        console.log(error)
       })  
     } else if (row.date && row.currency == "PLN"){
       row.currencyRate = 1 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import router from '@/router/index.js'
+import moment from "moment"
 import i18n from '../../lang/lang'
 
 let utils = require('../../utils')
@@ -9,22 +9,8 @@ const state = {
         lat: null,
         len: null
     },
-    weather: {
-        lat: '',
-        lon: '',
-        town: '',
-        celcius: '',
-        description: '',
-        icon: '',
-        clouds: '',
-        wind: '',
-        humidity: ''
-    },
-    todayDate: {
-        today: null,
-        dayDesc: null,
-        isDay: null,
-    },
+    weather: {},
+    todayDate: {},
     slider: {
         slideIndex: 1,
         interval: "",
@@ -45,19 +31,19 @@ const mutations = {
     SET_LOCATION(state, data) {
         state.geoLoca = data
     },
-    ADD_WEATHER_DATA(state, data) {
+    SET_WEATHER_DATA(state, data) {
         state.weather = data
     },
-    ADD_TODAY(state, data) {
+    SET_TODAY(state, data) {
         state.todayDate = data
     },
-    ADD_NEWS(state, data) {
+    SET_NEWS(state, data) {
         state.news = data
     },
-    ADD_JSON_NEWS(state, data) {
+    SET_JSON_NEWS(state, data) {
         state.newsJson = data
     },
-    ADD_ARTICLES(state, data) {
+    SET_ARTICLES(state, data) {
         state.articles = data
     },
     SET_SHOW_NEW_MESSAGE_DIALOG(state, show) {
@@ -177,7 +163,7 @@ const actions = {
             geoLocat.lat = (location.coords.latitude.toFixed(2));
             geoLocat.len = (location.coords.longitude.toFixed(2));
             commit('SET_LOCATION', geoLocat);
-            dispatch("getWeatherData");
+            dispatch("getWeatherDataFn");
           })   
         } 
         if(!geoLocat.lat || !geoLocat.Len) {
@@ -185,10 +171,10 @@ const actions = {
         geoLocat.lat = 51.1;
         geoLocat.len = 17.03;
         commit('SET_LOCATION', geoLocat);
-        dispatch("getWeatherData");
+        dispatch("getWeatherDataFn");
         }
       },
-    getWeatherData({commit, state}) {
+    getWeatherDataFn({commit, state}) {
         const URL2 = 'https://api.openweathermap.org/data/2.5/weather?lat='+state.geoLoca.lat+'&lon='+state.geoLoca.len+'&appid=fd3f4877eb8823c22505c4b89a434e2b&units=metric'
          axios.get(URL2).then(res => {
          const data = res.data
@@ -210,24 +196,19 @@ const actions = {
          weather.clouds = data.clouds.all
          weather.wind = ((data.wind.speed) * (3.6)).toFixed(2)
          weather.humidity = data.main.humidity
-         commit('ADD_WEATHER_DATA', weather)
+         commit('SET_WEATHER_DATA', weather)
          })
       },
 
-      getToday({commit}){
+      getTodayFn({commit}){
           //day of the week
-          const todayDate= {}
-          todayDate.today = new Date()
-          const today3 = todayDate.today.getDate()
-          let month = (todayDate.today.getMonth() + 1)
-          if(month<10){
-              month = "0"+ month
-          }
-          const year = todayDate.today.getFullYear(),
-           today2 = todayDate.today.getDay(),
-           hour = todayDate.today.getHours()
+          const todayDate= {},
+          todayObject = new Date(),
+          dayOfTheWeek = todayObject.getDay(),
+          hour = todayObject.getHours();
+          todayDate.today = moment(new Date()).format("DD.MM.YYYY");
           todayDate.dayDesc = ""
-          switch(today2) {
+          switch(dayOfTheWeek) {
               case 0: todayDate.dayDesc = i18n.t("news.sunday"); break
               case 1: todayDate.dayDesc = i18n.t("news.monday"); break
               case 2: todayDate.dayDesc = i18n.t("news.tuesday"); break
@@ -236,38 +217,37 @@ const actions = {
               case 5: todayDate.dayDesc = i18n.t("news.friday"); break
               case 6: todayDate.dayDesc = i18n.t("news.saturday"); break
           }
-          todayDate.today = today3+"."+month+"."+year
           if(hour > 6 && hour < 21) {
               todayDate.isDay = true
           } else {
               todayDate.isDay = false
           }
-          commit('ADD_TODAY', todayDate)
+          commit('SET_TODAY', todayDate)
       },
 
-      getNews({commit, dispatch}) {
+      getNewsFn({commit, dispatch}) {
           // get news from RSS -> XML
           const proxyurl = "https://cors-anywhere.herokuapp.com/";
             const url = "https://fakty.interia.pl/ciekawostki/feed"; // site that doesn’t send Access-Control-*
             fetch(proxyurl + url)
             .then(response => response.text())
-            .then(contents => commit('ADD_NEWS', contents))
+            .then(contents => commit('SET_NEWS', contents))
             .then(() => dispatch("xmlToJson"))
             .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
     },
-     xmlToJson({commit, state, dispatch}) {
+     xmlToJson({commit, getters, dispatch}) {
          // parse XML to JSON
-        let xmlTxt = state.news
+        let xmlTxt = getters.getArticlesRaw;
         const convert = require('xml-to-json-promise')
          convert.xmlDataToJSON(xmlTxt).then(json => {
              xmlTxt = json.rss.channel[0].item
-             commit('ADD_JSON_NEWS', xmlTxt)
-             dispatch("getArticles")
+             commit('SET_JSON_NEWS', xmlTxt)
+             dispatch("getArticlesFn")
          })
       },
-      getArticles({commit, state}) {
+      getArticlesFn({commit, getters}) {
           // make html object
-          let allArticles = state.newsJson,
+          let allArticles = getters.getArticlesJson,
           articles = []
           for(let i = 0; i < (allArticles.length); i++) {
             let article = document.createRange().createContextualFragment(allArticles[i].description[0]),
@@ -317,28 +297,27 @@ const actions = {
             document.getElementById('articles').appendChild(art)
             articles.push(art)
           }
-          commit('ADD_ARTICLES', articles)
-      }
-    
+          commit('SET_ARTICLES', articles)
+      } 
 }
 
 const getters = {
-    getGeoLocation: state => {
+    getGeoLocation() {
         return state.geoLoca
     },
-     weatherData: state => {
+     getWeatherData() {
          return state.weather
      },
-     today: state => {
+     getToday() {
         return state.todayDate
      },
-     articlesRaw: state => {
+     getArticlesRaw() {
          return state.news
      },
-     articlesJson: state => {
+     getArticlesJson() {
          return state.newsJson
      },
-     articles: state => {
+     getArticles() {
          return state.articles
      },
     getShowNewMessageDialog() {

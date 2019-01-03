@@ -95,7 +95,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
     }).catch(error => {
-      console.log(error);
     })
   },
   updateUserProject({
@@ -136,7 +135,6 @@ const actions = {
 
       })
       .catch(error => {
-        console.log(error);
         // dispatch('hideAllMessages')
         // commit('SET_EDIT_ERROR', true)
         // commit('SET_SAVE_DATA_SUCCESS', false)
@@ -170,7 +168,6 @@ const actions = {
 
       })
       .catch(error => {
-        console.log(error);
         // dispatch('hideAllMessages')
         // commit('SET_EDIT_ERROR', true)
         // commit('SET_SAVE_DATA_SUCCESS', false)

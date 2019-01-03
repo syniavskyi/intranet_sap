@@ -1,6 +1,5 @@
 import axios from 'axios'
 import i18n from '../../lang/lang'
-import odata from 'odata'
 
 let utils = require('../../utils')
 
@@ -100,7 +99,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
     }).catch(error => { 
-      console.log(error);
     }) 
   },
   submitPhoto({
@@ -123,7 +121,6 @@ const actions = {
       dispatch('displayModal', message);
       dispatch('loadUserPhoto', data.userId);
     }).catch(error => {
-      console.log(error);
     })
   },
 
@@ -158,7 +155,6 @@ const actions = {
         let message = res.headers;
         dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
 
   },

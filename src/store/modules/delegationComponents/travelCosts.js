@@ -172,8 +172,6 @@ const actions = {
         row.delegationCurrRate  = (newDelegationCurr !== 'PLN') ? currRates.find(o => o.code === newDelegationCurr).mid : 1.00
        dispatch('countTravelCosts')
       }).catch(error => {
-        alert(error)
-        console.log(error)
       })  
     } else if (row.rateDate && row.currency == "PLN"){
       row.currencyRate = 1 

@@ -12,7 +12,6 @@ import i18n from './lang/lang'
 import store from './store/store'
 import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
-import odata from 'odata'
 
 Vue.use(Vuelidate)
 Vue.use(Vuex)

@@ -98,7 +98,6 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import i18n from "../../../lang/lang";
-import moment from "moment";
 export default {
     name: 'holidayRequestTemplate',
      created() {
