@@ -1,5 +1,4 @@
 import axios from 'axios'
-import odata from 'odata'
 
 const state = {
     cvElements: {
@@ -85,7 +84,6 @@ const actions = {
           let message = res.headers;
           dispatch('displayModal', message);
         }).catch(error => { 
-          console.log(error);
         })
       },
       updateCv({dispatch}, data) {
@@ -105,21 +103,26 @@ const actions = {
           dispatch('getUserFilesData')
           let message = res.headers;
           dispatch('displayModal', message);
-        }).catch(error => { 
-          console.log(error);
+        }).catch(error => {
         })
         },
       deleteCv({commit, dispatch, getters}, data){
-        let urlQuery = getters.getUrlQuery
-        let url = "AttachmentMedias(FileType='" + data.type + "',Language='" + data.language + "',UserAlias='" + data.userId + "')"  + "/$value"  + urlQuery
-        odata(url).remove().save(function (data) {
-            console.log("removed");
+        let url = "AttachmentMedias(FileType='" + data.type + "',Language='" + data.language + "',UserAlias='" + data.userId + "')"  + "/$value";    
+        let sToken = getters.getToken;
+        axios({
+        url: url,
+        method: 'delete',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "Cache-Control": "no-cache",
+            "x-csrf-token": sToken
+        }
+        }).then(res => {
             dispatch('getUserFilesData')
-          }, function (status) {
-            console.error(status); 
-          });
-      }
-    
+        }).catch(error => {
+        })
+      } 
 };
 
 const getters = {

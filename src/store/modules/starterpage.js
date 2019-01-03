@@ -70,7 +70,6 @@ const actions = {
       url: "Attachments?$filter=FileId eq 'new' and UserAlias eq '" + user + "'",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -82,13 +81,11 @@ const actions = {
       url: "Attachments?$filter=FileId eq 'info' and UserAlias eq '" + user + "'",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
   editSingleNewDoc({getters, dispatch}, data) {
     let sToken = getters.getToken;
-    let cookie = getters.getCookie;
     const editData = {
       FileId: data.FileId,
       Language: 'PL',
@@ -105,13 +102,11 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken
-          // "Cookie": cookie
       }
     }).then(res => {
         let message = res.headers;
         dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
   deleteNewFile({getters, dispatch}) {
@@ -126,13 +121,11 @@ const actions = {
             "X-Requested-With": "XMLHttpRequest",
             "Cache-Control": "no-cache",
             "x-csrf-token": sToken
-            // "Cookie": getters.getCookie
         }
         }).then(res => {
             let message = res.headers;
             dispatch('displayModal', message);
         }).catch(error => {
-            console.log(error);
         })
   },
   deleteInfoFile({getters, dispatch}) {
@@ -147,13 +140,11 @@ const actions = {
         "X-Requested-With": "XMLHttpRequest",
         "Cache-Control": "no-cache",
         "x-csrf-token": sToken
-        // "Cookie": getters.getCookie
     }
     }).then(res => {
         let message = res.headers;
         dispatch('displayModal', message);
     }).catch(error => {
-        console.log(error);
     })
   }
 }

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import moment from 'moment'
-import odata from 'odata'
 
 let utils = require('../../../utils')
 
@@ -91,7 +90,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
   updateUserProjectsPosition({getters,
@@ -124,7 +122,6 @@ const actions = {
         let message = res.headers;
         dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
   // format project from array with objects to string

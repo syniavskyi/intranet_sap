@@ -1,5 +1,4 @@
 
-import odata from 'odata'
 import axios from 'axios'
 
 let utils = require('../../utils')
@@ -248,7 +247,6 @@ const actions = {
       }).then(res => {
         commit('SET_NEW_DELEG_NO', res.data.d.DelegNo)
       }).catch(error => {
-        console.log(error);
       })
     },
     saveDelegationNumber({commit, dispatch, getters}){
@@ -276,7 +274,6 @@ const actions = {
           let message = res.headers;
           dispatch('displayModal', message);
         }).catch(error => { 
-          console.log(error);
           commit('SET_CREATE_DELEG_SUCCESS',false)
         })
       

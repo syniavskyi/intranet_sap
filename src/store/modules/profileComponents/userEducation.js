@@ -70,7 +70,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
   addUserEducation({
@@ -96,7 +95,6 @@ const actions = {
       let message = res.headers;
       dispatch('displayModal', message);
       }).catch(error => {
-        console.log(error);
     })
   },
   // get description for school from text table

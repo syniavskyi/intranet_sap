@@ -81,7 +81,6 @@ const actions = {
       };
       dispatch('getData', userData);
     }).catch(error => {
-      console.log(error);
       commit('SET_LOGIN_ERROR', true);
       commit('SET_DISPLAY_LOADER', false);
     })

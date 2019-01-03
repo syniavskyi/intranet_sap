@@ -45,7 +45,6 @@ const actions = {
     }).then(res => {
       commit('SET_USER_FILES_LIST', res.data.d.results);
     }).catch(error => {
-      console.log(error)
     })
   },
   getDocuments({}, fileType) {

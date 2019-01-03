@@ -79,7 +79,6 @@ const actions = {
             let message = res.headers;
             dispatch('displayModal', message);
         }).catch(error => {
-            console.log(error);
             dispatch('hideAllMessages');
             commit('SET_REMOVE_ERROR', true)
             commit('SET_REMOVE_SUCCESS', false)
@@ -109,7 +108,6 @@ const actions = {
             commit("SET_PROMISE_TO_READ", ["NewToken", "Availabilities"]);
             dispatch('getData');
           }).catch(error => {
-            console.log(error);
         })
     },
     updateUserAvail({commit, getters, dispatch}, data) {
@@ -139,7 +137,6 @@ const actions = {
             commit("SET_PROMISE_TO_READ", ["NewToken", "Availabilities"]);
             dispatch('getData');
         }).catch(error => {
-            console.log(error);
         })
         }
 };
