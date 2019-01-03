@@ -100,9 +100,7 @@ import { app } from "../../../main";
 
 export default {
   data() {
-    return {
-      
-    };
+    return {};
   },
   computed: {
     ...mapGetters({

@@ -14,18 +14,18 @@
             <div class="delegations-tiles">
                 <div class="delegations-tile delegations-inputs">
                     <div class="delegations-tile-header">
-                        <div class="delegations-tile-title"> 
+                        <div class="delegations-tile-title">
                             <p  v-if="authType==='OWN'">{{userData.Fullname}}</p>
                             <div class="cd-for-select" v-if="authType==='*'">
                                 <select required class="cd-select" v-model="newDelegation.userId" @change="setUsername">
                                     <option v-for="user in usersList" :key="user.UserAlias" :value="user.UserAlias">{{ user.Fullname }}</option>
-                                </select> 
+                                </select>
                                 <label class="cd-slabel">{{ $t("label.selectEmployee") }}</label>
                             </div>
                             <div v-if="authType==='TEAM'" class="cd-for-select">
                                 <select required class="cd-select" v-model="newDelegation.userId" @change="setUsername">
                                     <option v-for="user in filteredTeamUsers" :key="user.UserAlias" :value="user.UserAlias">{{ user.Fullname }}</option>
-                                </select> 
+                                </select>
                                 <label class="cd-slabel">{{ $t("label.selectTeamMember") }}</label>
                             </div>
                             <button class="func-btn" @click="generatePdf">{{ $t("button.generatePDF") }}</button>
@@ -206,7 +206,7 @@ export default {
                 }
                 this.$store.dispatch('getDelegationNumber', data)
                 this.countAllowance()
-            } 
+            }
         },
         setUsername(){
             this.delegationUsername = this.newDelegation.userId;

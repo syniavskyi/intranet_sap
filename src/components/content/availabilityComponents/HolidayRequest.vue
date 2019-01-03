@@ -45,7 +45,7 @@ export default {
                     doc = new jsPDF('', 'pt', 'a4');
                     doc.addImage(img, 'JPEG', 10, 10, imgWidth, imgHeight);
                     doc.save(pdfName + '.pdf');
-            }) 
+            })
         },
     }
 }

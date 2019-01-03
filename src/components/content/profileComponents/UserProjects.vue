@@ -65,7 +65,7 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
-              <!-- <select :disabled="!projectEditMode" class="profile-table-select profile-table-select-contractor" v-model="userProjects[index].ContractorId"> 
+              <!-- <select :disabled="!projectEditMode" class="profile-table-select profile-table-select-contractor" v-model="userProjects[index].ContractorId">
               <option v-for="contractor in contractorsList" :key="contractor.id" :value="contractor.id"> {{ contractor.name }}</option>
               </select> -->
                 <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" />
@@ -365,7 +365,7 @@ export default {
       showSingleHint() {
         let index = this.showHintProject.index;
         return this.userProjectsDfLang[index].Description;
-      }   
+      }
   }
 };
 </script>

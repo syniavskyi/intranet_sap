@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="del-tfoot2">&nbsp;</div>
-                        </div> 
+                        </div>
                         <div class="del-tbody2-item-scost">
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
                             <div class="del-tbody2-item-txt">{{cost.totalAmountCurr}}</div>
@@ -117,7 +117,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-           
+
         }
     },
     computed: {
@@ -134,7 +134,7 @@ export default {
                 this.$el.lastChild.style.height = height
                 this.$el.lastChild.style.opacity = "1"
             })
-        })  
+        })
     },
     mounted() {
         this.$nextTick(function() {
@@ -174,7 +174,7 @@ export default {
         addCostRow() {
             let el = this.$el.lastChild.style.height
             !el || el ? el = "auto" : ""
-            this.$store.dispatch('addOtherCostRow')    
+            this.$store.dispatch('addOtherCostRow')
         },
         removeCostRow() {
             this.$el.lastChild.style.height = "auto"

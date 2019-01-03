@@ -40,7 +40,7 @@
                 <div class="checkbox-in"></div>
                 <p style="padding:0;margin:0;">{{ $t("label.present") }}</p>
               </label>
-            </div>       
+            </div>
             <!-- SPI wywalić? <div class="prof-row-btns">
               <button class="prof-row-btn" :disabled="true" v-if="editMode" @click="save(index)">&#x2714;</button>
               <button class="prof-row-btn" v-if="editMode" @click="remove(index)">X</button>
@@ -180,7 +180,6 @@ export default {
         bDateChange
           ? true
           : false;
-          
       }   else {
             bChanged = true;
       }

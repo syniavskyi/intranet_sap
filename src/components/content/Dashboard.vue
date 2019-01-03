@@ -24,7 +24,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="dashboard-content-row">
                                 <div class="dashboard-incoming-events dashboard-tile">
                                     <div class="dashboard-tile-header">
@@ -36,7 +36,7 @@
                                 <div class="dashboard-weather dashboard-tile">
                                     <div class="dashboard-tile-header">
                                         <p class="dash-tile-title">Pogoda</p>
-                                        
+
     <!--                                    <p class="dash-tile-exit">&#10006;</p>-->
                                         <!-- <img class="dash-title-exit" height="20px" src="../../images/nav/if_Collapse.png"> -->
                                     </div>
@@ -60,7 +60,7 @@ import Menu from '../Menu.vue'
 	export default {
     data() {
       return {
- 
+
       }
     },
     components: {
@@ -91,7 +91,6 @@ import Menu from '../Menu.vue'
       goToNews() {
           router.replace("/news")
       }
-      
     }
   }
 </script>

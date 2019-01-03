@@ -69,7 +69,7 @@ const actions = {
     },
     submitCv({dispatch}, data) {
         let slugHeader = data.file.name + ';' + data.type + ';' + data.language + ';' + data.userId + ';' +  data.file.type
-    
+
         axios({
           method: 'POST',
           url: 'AttachmentMedias',
@@ -83,13 +83,13 @@ const actions = {
           dispatch('getUserFilesData');
           let message = res.headers;
           dispatch('displayModal', message);
-        }).catch(error => { 
+        }).catch(error => {
         })
       },
       updateCv({dispatch}, data) {
         let slugHeader = data.file.name + ';' + data.type + ';' + data.language + ';' + data.userId + ';' +  data.file.type;
         let url = "AttachmentMedias(FileType='" + data.type + "',Language='" + data.language + "',UserAlias='" + data.userId + "')/$value";
-    
+
         axios({
           method: 'PUT',
           url: url,
@@ -107,7 +107,7 @@ const actions = {
         })
         },
       deleteCv({commit, dispatch, getters}, data){
-        let url = "AttachmentMedias(FileType='" + data.type + "',Language='" + data.language + "',UserAlias='" + data.userId + "')"  + "/$value";    
+        let url = "AttachmentMedias(FileType='" + data.type + "',Language='" + data.language + "',UserAlias='" + data.userId + "')"  + "/$value";
         let sToken = getters.getToken;
         axios({
         url: url,
@@ -122,7 +122,7 @@ const actions = {
             dispatch('getUserFilesData')
         }).catch(error => {
         })
-      } 
+      }
 };
 
 const getters = {

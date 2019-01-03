@@ -7,7 +7,7 @@
             </div>
         </div>
     <p class="notAuthToAddProject">{{ $t("message.notAuthToAddProject") }}</p>
-  </div> 
+  </div>
 </template>
 <script>
 export default {

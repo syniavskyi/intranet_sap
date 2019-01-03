@@ -286,7 +286,7 @@ export default {
       }
       for (var i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
-      }  
+      }
       if (!n) n = this.slideIndex
       for (var j = n - 5; j < this.slideIndex; j++) {
         slides[j].style.display = "flex";

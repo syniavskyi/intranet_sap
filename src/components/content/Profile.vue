@@ -324,7 +324,7 @@ export default {
         } else {
           next()
         }
-      }      
+      }
     } else {
       next()
     }
@@ -349,7 +349,7 @@ export default {
     if(oStore.getters.getCookie){
       if(oStore.getters.getGoFromCv && oStore.getters.getRoleList.length > 0){ // if go from CV - do not read data
         oStore.commit("SET_GO_FROM_CV", false);
-      } else {   
+      } else {
         oStore.dispatch('getData', null);
       }
     }
@@ -412,7 +412,7 @@ export default {
           return i18n.t("message.lackOfData");
         } else {
           return oFormatedDate.year + oFormatedDate.month + oFormatedDate.day;
-        }  
+        }
     },
     filteredTeamUsers() {
       let aFilteredUsers = this.usersList,
@@ -433,7 +433,7 @@ export default {
   //       } else {
   //         next()
   //       }
-  //     }      
+  //     }
   //   } else {
   //     next()
   //   }
@@ -577,7 +577,7 @@ export default {
       this.$store.commit("SET_PROMISE_TO_READ", this.$store.getters.getProfileToRead);
       this.$store.dispatch('getData', userData);
       this.$store.commit("SET_WORK_TIME");
-      
+
     },
     onHover() {
       let mainEdits = document.querySelectorAll(".profile-main-edit");

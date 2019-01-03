@@ -22,7 +22,7 @@ const mutations = {
   },
   SET_ADVANCE_VALIDATED(state, isValidated) {
     state.advanceTableValidated = isValidated
-  }  
+  }
 };
 
 const actions = {
@@ -73,16 +73,16 @@ const actions = {
         totalCosts = getters.getTotalCosts,
         delegationRate = getters.getNewDelegation.currency,
         totalCostsInCurr = getters.getTotalCostsInCurr
-    
+
     totalCosts.advance = 0
     totalCostsInCurr.advance = 0
- 
+
         for(let i=0; i<advanceData.length; i++) {
             let amount = advanceData[i].amount,
                 rate = parseFloat(advanceData[i].currencyRate).toFixed(2)
-            
+
            amount = (amount === "") ? 0 : parseFloat(amount)
-           
+
           advanceData[i].totalAmount = parseFloat(amount * rate)
           advanceData[i].totalAmountCurr = parseFloat(advanceData[i].totalAmount / advanceData[i].delegationCurrRate).toFixed(2)
 
@@ -97,11 +97,11 @@ const actions = {
 
      let row = data[index],
      rateDate = row.date
-          
+
     rateDate = createRateDate(rateDate)
     row.rateDate = rateDate
-    
-    if (row.date && row.currency && row.currency !== "PLN") { 
+
+    if (row.date && row.currency && row.currency !== "PLN") {
       const date = moment(rateDate).format('YYYY-MM-DD')
       const URL = 'http://api.nbp.pl/api/exchangerates/tables/a/' + date +'/'
       axios.get(URL).then(res => {
@@ -110,12 +110,12 @@ const actions = {
         row.delegationCurrRate  = (newDelegationCurr !== 'PLN') ? currRates.find(o => o.code === newDelegationCurr).mid : 1.00
         dispatch('updateAdvance')
       }).catch(error => {
-      })  
+      })
     } else if (row.date && row.currency == "PLN"){
-      row.currencyRate = 1 
+      row.currencyRate = 1
       row.delegationCurrRate = 1
       dispatch('updateAdvance')
-    } 
+    }
   },
   countAdvanceInCurr({commit, dispatch, getters}) {
 

@@ -56,7 +56,7 @@ const mutations = {
         clearInterval(state.slider.interval)
     },
     SET_TOAST_TEXT(state, txt) {
-        state.slider.sliderToast = txt 
+        state.slider.sliderToast = txt
     },
     SET_SHOW_ADVERTS(state, isShow){
         state.showAdverts = isShow;
@@ -65,15 +65,15 @@ const mutations = {
 
 const actions = {
     setSliderInterval({dispatch}) {
-        state.slider.interval = setInterval(() => {state.slider.slideIndex+=1; dispatch("runCarosuel", state.slider.slideIndex)}, 4000) 
+        state.slider.interval = setInterval(() => {state.slider.slideIndex+=1; dispatch("runCarosuel", state.slider.slideIndex)}, 4000)
     },
     runCarosuel({dispatch, commit}, n) {
-        var slides = document.getElementsByClassName("advItem");  
+        var slides = document.getElementsByClassName("advItem");
             if (n > slides.length) { commit("SET_SLIDE_INDEX", 1) }
-            if (n < 1) { commit("SET_SLIDE_INDEX", slides.length) } 
+            if (n < 1) { commit("SET_SLIDE_INDEX", slides.length) }
             for (var i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none"; 
-            }  
+                slides[i].style.display = "none";
+            }
             slides[state.slider.slideIndex - 1].style.display = "flex";
     },
     updateAdvert({commit, state, dispatch, getters}, index){
@@ -94,17 +94,17 @@ const actions = {
           }).then(res => {
               let message = res.headers;
               dispatch('displayModal', message);
-              
+
             }).catch(error => {
           })
     },
     startStopSlider({dispatch}, evt) {
         // this.repeatSlider = false;
-        if (evt.target.innerText === state.slider.start) { 
+        if (evt.target.innerText === state.slider.start) {
             evt.target.innerText = state.slider.stop
             state.slider.sliderToast = i18n.t("message.startedSlider")
             state.slider.interval = setInterval(() => {state.slider.slideIndex+=1; dispatch("runCarosuel", state.slider.slideIndex)}, 4000)
-        } else { 
+        } else {
             evt.target.innerText = state.slider.start
             state.slider.sliderToast = i18n.t("message.stoppedSlider")
             clearInterval(state.slider.interval)
@@ -164,8 +164,8 @@ const actions = {
             geoLocat.len = (location.coords.longitude.toFixed(2));
             commit('SET_LOCATION', geoLocat);
             dispatch("getWeatherDataFn");
-          })   
-        } 
+          })
+        }
         if(!geoLocat.lat || !geoLocat.Len) {
    // set Wrocław to default localisation
         geoLocat.lat = 51.1;
@@ -292,13 +292,13 @@ const actions = {
             div.appendChild(contentDiv)
             }
             div.className = "artAll"
-            
+
             let art = div
             document.getElementById('articles').appendChild(art)
             articles.push(art)
           }
           commit('SET_ARTICLES', articles)
-      } 
+      }
 }
 
 const getters = {

@@ -9,9 +9,11 @@
             <button @click="closeModal" class="modal-close">&#10006;</button>
           </header>
           <div class="modal-content-list">
-            <section v-if="messageLog.length > 1" :class="message.severity" class="modal-item" v-for="(message, index) in messageLog" :key="index">
-              {{index+1}}. {{message.message}}
-            </section>
+            <div v-if="messageLog.length > 1">
+               <section :class="message.severity" class="modal-item" v-for="(message, index) in messageLog" :key="index">
+                   {{index+1}}. {{message.message}}
+               </section>
+            </div>
             <section v-if="messageLog[0]" :class="messageLog[0].severity" class="modal-item">
                 {{messageLog[0].message}}
             </section>
@@ -32,7 +34,7 @@ export default {
         showModal: "getShowModal",
         headerClass: "getHeaderModalClass"}),
     },
-    methods:  { 
+    methods:  {
       ...mapActions(["closeModal"]),
       formatHeader(header) {
         return i18n.t("header.info");

@@ -172,27 +172,13 @@ export default {
     //   }
     // }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     displayMenu: "getShowMenu",
-  //     displayMenuOverlay: "getShowMenuOverlay",
-  //     isError: "getDialogErrorStatus",
-  //     roleList: "getRoleList",
-  //     departmentList: "getDepartmentList",
-  //     cvLanguageList: "getCvLanguageList", 
-  //     showDialog: "getDisplayConfirmDialog",
-  //     branchList: "getBranchList",
-  //     registerData: "getRegistratinData",
-  //     menuAuth: "getMenuAuth"
-  //   })
-  // }
   computed: Object.assign(mapGetters({
       displayMenu: "getShowMenu",
       displayMenuOverlay: "getShowMenuOverlay",
       isError: "getDialogErrorStatus",
       roleList: "getRoleList",
       departmentList: "getDepartmentList",
-      cvLanguageList: "getCvLanguageList", 
+      cvLanguageList: "getCvLanguageList",
       showDialog: "getDisplayConfirmDialog",
       branchList: "getBranchList",
       registerData: "getRegistratinData",

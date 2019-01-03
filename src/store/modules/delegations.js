@@ -66,7 +66,7 @@ const mutations = {
   },
   SET_NEW_DELEGATION(state, delegation) {
     state.newDelegation = delegation
-  },  
+  },
   SET_TOTAL_COST_CURR_DATA(state, list) {
     state.totalCostsInCurr = list
   },
@@ -147,15 +147,15 @@ const actions = {
     let height;
     if (element.elChild.className === "delegations-table-wrapper") {
       let tableHeight = Array.prototype.reduce.call(element.elChild.firstElementChild.childNodes, function(p, c) {
-        return p + (c.offsetHeight || 0); 
+        return p + (c.offsetHeight || 0);
       }, 0),
       footerHeight = Array.prototype.reduce.call(element.elChild.lastElementChild.childNodes, function(p, c) {
         return p + (c.offsetHeight || 0)
       }, 0)
       height = (footerHeight + tableHeight)
     } else {
-      height = Array.prototype.reduce.call(element.elChild.childNodes, 
-        function(p, c) { 
+      height = Array.prototype.reduce.call(element.elChild.childNodes,
+        function(p, c) {
           return p + (c.offsetHeight || 0);
         }, 0)
     }
@@ -184,15 +184,15 @@ const actions = {
     let height;
     if (element.elChild.className === "delegations-table-wrapper") {
       let tableHeight = Array.prototype.reduce.call(element.elChild.firstElementChild.childNodes, function(p, c) {
-        return p + (c.offsetHeight || 0); 
+        return p + (c.offsetHeight || 0);
       }, 0),
       footerHeight = Array.prototype.reduce.call(element.elChild.lastElementChild.childNodes, function(p, c) {
         return p + (c.offsetHeight || 0)
       }, 0)
       height = (footerHeight + tableHeight)
     } else {
-      height = Array.prototype.reduce.call(element.elChild.childNodes, 
-        function(p, c) { 
+      height = Array.prototype.reduce.call(element.elChild.childNodes,
+        function(p, c) {
           return p + (c.offsetHeight || 0);
         }, 0)
     }
@@ -224,7 +224,7 @@ const actions = {
           otherCosts = getters.getOtherCostData,
           trvCosts = getters.getTravelCostData,
           advanceData = getters.getAdvanceData
- 
+
     for (let i =0; i<accCosts.length; i++) {dispatch('getAccCostRate', i)}
     for (let i =0; i<otherCosts.length; i++) {dispatch('getOtherCostRate', i)}
     for (let i =0; i<trvCosts.length; i++) {dispatch('getTravelRate', i)}
@@ -273,10 +273,10 @@ const actions = {
           dispatch('clearDelegationForm')
           let message = res.headers;
           dispatch('displayModal', message);
-        }).catch(error => { 
+        }).catch(error => {
           commit('SET_CREATE_DELEG_SUCCESS',false)
         })
-      
+
      },
      clearDelegationForm({commit}){
       const totalCosts= {
@@ -305,7 +305,7 @@ const actions = {
         advance: 0
       }
       commit('SET_TOTAL_COST_CURR_DATA', totalCostsInCurr)
-      
+
       const newDelegation = {
         number: null,
         userId: null,
@@ -320,7 +320,7 @@ const actions = {
         allowanceDeduction: 0
       }
       commit('SET_NEW_DELEGATION', newDelegation)
-      commit('SET_NEW_DELEGATION_VALIDATED', false) 
+      commit('SET_NEW_DELEGATION_VALIDATED', false)
 
       const costAccomodationData = [{
         docDate: null,
@@ -393,7 +393,7 @@ const actions = {
       commit('SET_TRV_COSTS_VALIDATED', false)
       commit('SET_DEFAULT_COST_DATA', {})
       commit('SET_DELEG_COST_LIST', [])
-      commit('SET_DELEGATION_TABLE_VALIDATED', false) 
+      commit('SET_DELEGATION_TABLE_VALIDATED', false)
       commit('SET_NEW_DELEG_NO', null)
       commit('SET_CREATE_DELEG_SUCCESS', null)
      }

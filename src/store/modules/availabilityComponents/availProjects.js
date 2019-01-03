@@ -29,7 +29,7 @@ const mutations = {
 
 const actions = {
    getUserProjects({}, userId) {
-    //get user availability for calendar and editing availability 
+    //get user availability for calendar and editing availability
     return axios({
       method: 'GET',
       url: "UserProjects?$filter=UserAlias eq '" + userId + "'",
@@ -42,7 +42,7 @@ const actions = {
     commit,
     getters
   }, userProjects) {
-    // set projects data with props for calendar 
+    // set projects data with props for calendar
     const projectsList = getters.projectsList
     for (let i = 0; i < userProjects.length; i++) {
       for (let j = 0; j < projectsList.length; j++) {

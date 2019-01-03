@@ -59,7 +59,7 @@ const actions = {
       engineCapacity: null,
       kilometers: null,
       currencyRate: 1,
-      rateDate: null, 
+      rateDate: null,
       totalAmountCurr: 0,
       delegationCurrRate: 1
     })
@@ -88,7 +88,7 @@ const actions = {
       allDeduction = getters.getNewDelegation.allowanceDeduction
 
       totalCostsInCurr.amount = totalCosts.travel = totalCosts.trvPayback =  totalCosts.totalPayback = totalCostsInCurr.travel = totalCostsInCurr.trvPayback = totalCostsInCurr.totalPayback = 0
-    
+
     for (let i = 0; i < data.length; i++) {
       let rate = parseFloat(data[i].currencyRate).toFixed(2),
           transport = data[i].transport,
@@ -122,10 +122,10 @@ const actions = {
       if (data[i].payback === true) {
         totalCosts.trvPayback = totalCosts.trvPayback + totalAmount
         totalCostsInCurr.trvPayback = totalCostsInCurr.trvPayback + parseFloat(data[i].totalAmountCurr)
-      } 
+      }
       totalCosts.totalPayback = totalCosts.trvPayback + totalCosts.accPayback + totalCosts.othPayback
       totalCostsInCurr.totalPayback = totalCostsInCurr.trvPayback + totalCostsInCurr.accPayback + totalCostsInCurr.othPayback - totalCostsInCurr.advance
-      
+
       totalCosts.travel = totalCosts.travel + totalAmount
       totalCostsInCurr.travel = totalCostsInCurr.travel + parseFloat(data[i].totalAmountCurr)
       totalCostsInCurr.amount =  totalCostsInCurr.travel + totalCostsInCurr.accomodation + totalCostsInCurr.others - allDeduction
@@ -163,7 +163,7 @@ const actions = {
     rateDate = createRateDate(rateDate)
     row.rateDate = rateDate
 
-    if (row.rateDate && row.currency && row.currency !== "PLN") { 
+    if (row.rateDate && row.currency && row.currency !== "PLN") {
       const date = moment(rateDate).format('YYYY-MM-DD')
       const URL = 'http://api.nbp.pl/api/exchangerates/tables/a/' + date +'/'
        axios.get(URL).then(res => {
@@ -172,12 +172,12 @@ const actions = {
         row.delegationCurrRate  = (newDelegationCurr !== 'PLN') ? currRates.find(o => o.code === newDelegationCurr).mid : 1.00
        dispatch('countTravelCosts')
       }).catch(error => {
-      })  
+      })
     } else if (row.rateDate && row.currency == "PLN"){
-      row.currencyRate = 1 
+      row.currencyRate = 1
       row.delegationCurrRate = 1
       dispatch('countTravelCosts')
-    } 
+    }
   },
 };
 

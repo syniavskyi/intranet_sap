@@ -198,7 +198,7 @@ const actions = {
          } else {
           aEvents.splice(pos, 1);
           commit('SET_EVENTS', aEvents);
-         }        
+         }
           commit('SET_EVENTS', aEvents);
           let message = res.headers;
           dispatch('displayModal', message);

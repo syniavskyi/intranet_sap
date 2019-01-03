@@ -62,19 +62,19 @@ const actions = {
         totalCosts = getters.getTotalCosts,
         totalCostsInCurr = getters.getTotalCostsInCurr,
         allDeduction = getters.getNewDelegation.allowanceDeduction
-            
+
         totalCosts.accPayback = totalCosts.accomodation = totalCosts.totalPayback = 0
         totalCostsInCurr.amount = totalCostsInCurr.accPayback = totalCostsInCurr.accomodation = totalCostsInCurr.totalPayback = 0
 
         for(let i=0; i<accCostData.length; i++) {
             let amount = accCostData[i].amount,
                 rate = accCostData[i].currencyRate
-            
+
            amount = (amount === "") ? 0 : parseFloat(amount)
 
            accCostData[i].totalAmount = amount * rate
            accCostData[i].totalAmountInCurr = parseFloat(accCostData[i].totalAmount / accCostData[i].delegationCurrRate).toFixed(2)
-            
+
             if(accCostData[i].payback === true ) {
                 totalCosts.accPayback = totalCosts.accPayback + accCostData[i].totalAmount
                 totalCostsInCurr.accPayback = totalCostsInCurr.accPayback + parseFloat(accCostData[i].totalAmountInCurr)
@@ -87,7 +87,7 @@ const actions = {
             totalCostsInCurr.amount =  totalCostsInCurr.travel + totalCostsInCurr.accomodation + totalCostsInCurr.others - allDeduction
         }
         dispatch('checkAccomodationFields')
-    
+
     },
     checkAccomodationFields({getters, commit}) {
         const costs = getters.getAccomodationCostData
@@ -112,24 +112,24 @@ const actions = {
               dailyAll = getters.getDailyAllowance,
               delegationCurr = getters.getNewDelegation.currency,
               cost =  costs[index]
-        
+
               cost.currency = delegationCurr
-              cost.amount = 1.5 * cost.flatRateDays * dailyAll 
-              cost.totalAmount = 1.5 * cost.flatRateDays * dailyAll 
+              cost.amount = 1.5 * cost.flatRateDays * dailyAll
+              cost.totalAmount = 1.5 * cost.flatRateDays * dailyAll
     },
     getAccCostRate({commit, dispatch, getters}, index) {
         const data = getters.getAccomodationCostData,
               newDelegationCurr = getters.getNewDelegation.currency
-              
+
         let row = data[index],
             rateDate = createRateDate(row.docDate)
-            
+
         row.rateDate = rateDate
 
-        if (row.docDate && row.currency && row.currency !== "PLN") { 
+        if (row.docDate && row.currency && row.currency !== "PLN") {
           const date = moment(rateDate).format('YYYY-MM-DD')
           const URL = 'http://api.nbp.pl/api/exchangerates/tables/a/' + date +'/'
-          
+
           axios.get(URL).then(res => {
             let currRates = res.data[0].rates
             row.currencyRate = currRates.find(o => o.code === row.currency).mid
@@ -137,12 +137,12 @@ const actions = {
             dispatch('countAccomodationCosts')
           }).catch(error => {
             alert(error)
-          })  
+          })
 
         } else if (row.docDate && row.currency == "PLN"){
-            row.currencyRate = row.delegationCurrRate = 1 
+            row.currencyRate = row.delegationCurrRate = 1
           dispatch('countAccomodationCosts')
-        } 
+        }
       }
 };
 

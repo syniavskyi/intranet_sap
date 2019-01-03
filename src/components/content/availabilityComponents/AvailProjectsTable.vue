@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-    </div>                
+    </div>
 </template>
 <script>
 import {mapGetters, mapActions} from 'vuex';
@@ -92,7 +92,7 @@ export default {
         return {
             invalidDates: false,
             editMode: false,
-            _beforeEditingCache: null     
+            _beforeEditingCache: null
         }
     },
     computed: {
@@ -112,8 +112,8 @@ export default {
         },
         filteredUserProjects() {
             let aFilteredProjets = this.userProjects,
-                sStatus = this.selectedStatus;            
-           
+                sStatus = this.selectedStatus;
+
            if(sStatus === null){
                return aFilteredProjets
            } else {
@@ -122,7 +122,7 @@ export default {
               })
             return aFilteredProjets
             }
-            
+
         }
     },
     methods: {
@@ -140,7 +140,7 @@ export default {
             const dataToChange = this._beforeEditingCache[index],
                 newData = utils.createClone(this.userProjects[index]);
                 newData.Action ='U';
-            
+
                 newData.StartDateToChange = dataToChange.StartDate;
                 newData.EndDateToChange = dataToChange.EndDate;
                 newData.ProjectIdToChange = dataToChange.ProjectId;
@@ -196,7 +196,7 @@ export default {
 
 // if data was changed set boolean variable to true
         bChanged = bEnd || bStart || bType || bStatus || bEngag || bDesc ? true : false;
-        
+
 // check if data are not empty and was changed and set button to disabled or not
             if(this.filteredUserProjects.length > 0) {
                if( bChanged &&
@@ -208,7 +208,7 @@ export default {
                }    else {
                     document.getElementsByClassName("eduButtonsProj")[index].children[1].disabled = true;
                }
-            }    
+            }
         },
 
     }

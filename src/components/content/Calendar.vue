@@ -155,7 +155,7 @@ export default {
         fnFilter = function(oItem) {
             return oItem.DateFrom <= day.setHours(1) && day.setHours(1) <= oItem.DateTo;
           };
-      return aEvents = aEvents.filter(fnFilter)   
+      return aEvents = aEvents.filter(fnFilter)
     },
     // calendar attributes
     attributes() {

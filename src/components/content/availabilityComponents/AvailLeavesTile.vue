@@ -13,7 +13,7 @@
             <div id="add-project-dialog">
                 <div class="ava-add">
                     <p class="ava-content-header" v-if="newLeave.TypeId === null">{{ $t("message.selectTypeToAddEntry") }}</p>
-                    <p class="ava-content-header" v-if="newLeave.TypeId !== null">{{ $t("label.entryType") }}: 
+                    <p class="ava-content-header" v-if="newLeave.TypeId !== null">{{ $t("label.entryType") }}:
                         <span class="ava-tile-entry">&nbsp;{{formattedType}}</span>
                     </p>
                     <div class="ava-div-select-cool">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
@@ -118,7 +118,6 @@ export default {
                 }
             }
         },
-        
     }
 };
 </script>

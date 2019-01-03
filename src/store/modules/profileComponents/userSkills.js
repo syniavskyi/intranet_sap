@@ -45,7 +45,7 @@ const actions = {
     let skillsList = getters.getUserSkills,
     modules = skillsList.SapModules;
     let moduleExist = null;
-    
+
     if (modules.length !== 0) {
       for(let items of modules){
         if (items === moduleId) {
@@ -225,7 +225,7 @@ const actions = {
         changePage: false
       }
       commit("SET_PROMISE_TO_READ", ["Industries", "UserData"]);
-      dispatch('getData', dataToSend);   
+      dispatch('getData', dataToSend);
   },
   showHintFn({commit}, data) {
     // set proper skill to show in hint

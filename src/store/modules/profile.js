@@ -98,8 +98,8 @@ const actions = {
     }).then(res => {
       let message = res.headers;
       dispatch('displayModal', message);
-    }).catch(error => { 
-    }) 
+    }).catch(error => {
+    })
   },
   submitPhoto({
     commit, getters, dispatch
