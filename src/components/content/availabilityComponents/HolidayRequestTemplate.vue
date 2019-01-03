@@ -47,7 +47,7 @@
             <tr>
                 <td> <select v-model="newHoliday.type" class="request-ipnut personal-data-select">
                         <option v-for="type in types" :key="type" :value="type">{{type}}</option>
-                    </select> 
+                    </select>
                 </td>
                 <td> <input v-model="newHoliday.year" type="text" class="request-ipnut"> </td>
                 <td> <input v-model="newHoliday.dateStart" type="date" class="request-ipnut" @input="countDays(newHoliday)"> </td>
@@ -92,7 +92,7 @@
        <div>
            <p class="request-footer">BTech Sp. z o. o., 54-203 Wrocław, ul. Legnicka 57D lokal B/A, NIP 8942908985</p>
        </div>
- </div>   
+ </div>
 </template>
 
 <script>

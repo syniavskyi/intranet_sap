@@ -44,14 +44,14 @@ const actions = {
                 state.showMenuOverlay = false
             /* If user uses app on large screen device: MENU must always be visible and OVERLAY must never be visible  */
             } else  {
-                state.showMenu = true; 
+                state.showMenu = true;
                 state.showMenuOverlay = false;
             }
-        /* On start of application on small screen device: display MENU and OVERLAY */ 
+        /* On start of application on small screen device: display MENU and OVERLAY */
         } else if (obj.window.matchMedia("(max-width:40rem)").matches) {
             state.showMenu = true
             state.showMenuOverlay = true
-        } 
+        }
     }, clearAuthData() {
         localStorage.clear();
         var cookies = document.cookie.split(";");

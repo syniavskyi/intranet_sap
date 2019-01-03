@@ -60,7 +60,7 @@
                                 <div class="del-tbody2-item-title">{{ $t("table.delegations.docNo") }}</div>
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
-                                        <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" @input="checkAccomodationFields" v-model="cost.docNo" /> 
+                                        <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" @input="checkAccomodationFields" v-model="cost.docNo" />
                                         <span class="del-div-bar"></span>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-           
+
         }
     },
     computed: {
@@ -142,14 +142,14 @@ export default {
             totalCosts: 'getTotalCosts',
             newDelegation: 'getNewDelegation',
             totalCostsInCurr: 'getTotalCostsInCurr'
-           
+
         })
     },
     updated() {
         this.$nextTick(() => {this.calcHeight(this.$el.lastChild, this.$el.lastChild.firstChild).then(height => {
                     this.$el.lastChild.style.height = height
                     this.$el.lastChild.style.opacity = "1"
-                })})  
+                })})
     },
     mounted() {
         this.$nextTick(function() {
@@ -167,7 +167,7 @@ export default {
             updateAccCosts: 'countAccomodationCosts'
 
         }),
-        hideAccFields: cost => { return (cost.flatRate == false) ? false : true }, 
+        hideAccFields: cost => { return (cost.flatRate == false) ? false : true },
         /* Adding and hiding overflow of tile content to display datepicker  */
         setOverflow() {
             this.$store.dispatch("setVisibleOverflow", this.$el)
@@ -192,7 +192,7 @@ export default {
         addCostRow() {
             let el = this.$el.lastChild.style.height
             !el || el ? el = "auto" : ""
-            this.$store.dispatch('addAccCostRow')    
+            this.$store.dispatch('addAccCostRow')
         },
 
         removeCostRow() {

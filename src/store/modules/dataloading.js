@@ -170,6 +170,7 @@ const actions = {
       dispatch("setDataInResponse", { res, userData }); // set data from responses
     }).catch(error => {
       console.log(error); // catch error 
+      dispatch('logout')
     });
   },
 

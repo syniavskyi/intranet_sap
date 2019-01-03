@@ -28,8 +28,8 @@ const mutations = {
 };
 
 const actions = {
-    getUserAvail({}, userId) { 
-     //get user availability for calendar and editing availability 
+    getUserAvail({}, userId) {
+     //get user availability for calendar and editing availability
             return axios({
               method: 'GET',
               url: "UserAvailabilities?$filter=UserId eq '" + userId + "'",
@@ -39,13 +39,13 @@ const actions = {
             });
     },
     formatUserLeaves({commit, getters}, userAvail){
-        // set projects data with props for calendar 
+        // set projects data with props for calendar
             const typesList = getters.getAvailType
                 for (let i=0; i<userAvail.length; i++) {
                     for (let j=0; j<typesList.length; j++){
                         if (userAvail[i].TypeId === typesList[j].Key) {
                             userAvail[i].TypeName = typesList[j].Value
-                        } 
+                        }
                     }
                 }
                 for (let i=0; i<userAvail.length; i++) {
@@ -61,7 +61,7 @@ const actions = {
 
         },
     removeUserAvail({commit, getters, dispatch}, data) {
-    let sToken = getters.getToken;    
+    let sToken = getters.getToken;
         let url = "UserAvailabilities(UserId='" + data.UserId + "',TypeId='" + data.TypeId + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(data.DateEnd).format("YYYY-MM-DD") + "T00:00:00')";
         axios({
         url: url,

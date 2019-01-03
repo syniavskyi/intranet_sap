@@ -177,8 +177,8 @@ export const setWorkExperience = function (date) {
 
 // format time from backend type to HH:mm:ss
 export const formatTimeForCalendar = function(data) {
-  let format = data.slice(2, 4) + data.slice(5, 7) + data.slice(8, 10); 
-  return data = moment(format, "hmm").format('HH:mm:ss'); 
+  let format = data.slice(2, 4) + data.slice(5, 7) + data.slice(8, 10);
+  return data = moment(format, "hmm").format('HH:mm:ss');
 }
 
 export const formatTimeForBackend = function (data) {
@@ -187,7 +187,7 @@ export const formatTimeForBackend = function (data) {
 
 // check user role
 export const checkRole = function(data) {
-  // const roles = data.roles; 
+  // const roles = data.roles;
   const aRoles = data; //get all roles
   let aMaxRoles = { "ZMENU": {
     home: false,
@@ -214,7 +214,7 @@ export const checkRole = function(data) {
           break;
         case "CALENDAR":
           aMaxRoles["ZMENU"].calendar = true;
-          break; 
+          break;
         case "EMPL":
           aMaxRoles["ZMENU"].employees = true;
           break;
@@ -231,7 +231,7 @@ export const checkRole = function(data) {
           aMaxRoles["ZMENU"].registration = true;
           break;
       }
-      
+
     } else if(!oRoleByKey){ // if there is no key, push it
       aMaxRoles[oRole.Key] = oRole.Value;
     } else if(oRoleByKey){ // if author. object already in, get more significant
@@ -243,16 +243,16 @@ export const checkRole = function(data) {
           break;
         case "TEAM":
           if(sValueWas !== "*"){
-            aMaxRoles[oRole.Key] = sValue; 
+            aMaxRoles[oRole.Key] = sValue;
           }
           break;
         case "OWN":
           if(sValueWas !== "*" || sValueWas !== "TEAM" ){
-            aMaxRoles[oRole.Key] = sValue; 
+            aMaxRoles[oRole.Key] = sValue;
           }
           break;
       }
-    } 
+    }
   }
   return aMaxRoles;
   }
@@ -261,8 +261,8 @@ export const checkRole = function(data) {
    let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDay());
    let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDay());
    return a.getTime() !== b.getTime();
- } 
- //add one day to data send to backend 
+ }
+ //add one day to data send to backend
  export const formatTimeZone = function(oDate) {
   var nUserOffset;
   if (oDate) {

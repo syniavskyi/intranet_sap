@@ -50,7 +50,7 @@ const actions = {
         const otherCostData = getters.getOtherCostData
         otherCostData.splice(index, 1)
         dispatch('countOtherCosts')
-        dispatch('checkOtherCostsFields')        
+        dispatch('checkOtherCostsFields')
     },
     countOtherCosts({getters, commit, dispatch}) {
         const otherCostData = getters.getOtherCostData,
@@ -64,26 +64,26 @@ const actions = {
         for(let i=0; i<otherCostData.length; i++) {
             let amount = otherCostData[i].amount,
                 rate = otherCostData[i].currencyRate
-           
+
                 amount = (amount === "") ? 0 : parseFloat(amount)
 
             otherCostData[i].totalAmount = amount * rate
             otherCostData[i].totalAmountCurr = parseFloat(otherCostData[i].totalAmount / otherCostData[i].delegationCurrRate).toFixed(2)
 
-            
+
            if(otherCostData[i].payback === true ) {
                 totalCosts.othPayback = totalCosts.othPayback + otherCostData[i].totalAmount
                 totalCostsInCurr.othPayback = totalCostsInCurr.othPayback + parseFloat(otherCostData[i].totalAmountCurr)
             }
             totalCosts.others = totalCosts.others + otherCostData[i].totalAmount
             totalCostsInCurr.others = totalCostsInCurr.others + parseFloat(otherCostData[i].totalAmountCurr)
-            
+
             totalCosts.totalPayback = totalCosts.trvPayback + totalCosts.accPayback + totalCosts.othPayback
             totalCostsInCurr.totalPayback = totalCostsInCurr.trvPayback + totalCostsInCurr.accPayback + totalCostsInCurr.othPayback - totalCostsInCurr.advance
             totalCostsInCurr.amount =  totalCostsInCurr.travel + totalCostsInCurr.accomodation + totalCostsInCurr.others - allDeduction
         }
         dispatch('checkOtherCostsFields')
-    
+
     },
     checkOtherCostsFields({getters, commit}) {
         const costs = getters.getOtherCostData
@@ -111,21 +111,21 @@ const actions = {
 
       row.rateDate = rateDate
 
-      if (row.docDate && row.currency && row.currency !== "PLN") { 
+      if (row.docDate && row.currency && row.currency !== "PLN") {
         const date = moment(rateDate).format('YYYY-MM-DD'),
               URL = 'http://api.nbp.pl/api/exchangerates/tables/a/' + date +'/'
         axios.get(URL).then(res => {
           let currRates = res.data[0].rates
           row.currencyRate = currRates.find(o => o.code === row.currency).mid
-          row.delegationCurrRate = (newDelegationCurr !== 'PLN') ? currRates.find(o => o.code === newDelegationCurr).mid : 1.00 
+          row.delegationCurrRate = (newDelegationCurr !== 'PLN') ? currRates.find(o => o.code === newDelegationCurr).mid : 1.00
             dispatch('countOtherCosts')
         }).catch(error => {
           alert(error)
-        })  
+        })
       } else if (row.docDate && row.currency == "PLN"){
-        row.currencyRate = row.delegationCurrRate = 1 
+        row.currencyRate = row.delegationCurrRate = 1
         dispatch('countOtherCosts')
-      } 
+      }
     }
 };
 

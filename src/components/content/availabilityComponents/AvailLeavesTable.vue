@@ -3,11 +3,6 @@
         <div class="availability-tile-header">
             <div class="ava-tile-header-title">
                <h2>{{ $t("label.availabilityOverview") }}
-                  <!-- <router-link target="_blank" to="/holidayrequest">
-                    <button class="holiday-button" @click="openHoliday=true" :title="$t('title.openHoliday')">
-                        <img src="../../../assets/images/island.png">
-                    </button>
-                  </router-link> -->
                 </h2>
                 <div class="availability-tile-underscore"></div>
             </div>
@@ -68,16 +63,13 @@
                         <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
                         <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
                     </div>
-                      <!-- <router-link target="_blank" :to="{name: 'HolidayRequest', params: {holiday: {dateStart: avail.DateStart, dateEnd: avail.DateEnd, user: avail.UserAlias}}}"> -->
-                        <!-- <router-link target="_blank" :to="{name: 'HolidayRequest'}"> -->
                             <button v-if="avail.TypeId !== 'WR'" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
                                 <img src="../../../assets/images/island.png">
                             </button>
-                      <!-- </router-link> -->
                 </div>
             </div>
         </div>
-    </div>                
+    </div>
 </template>
 <script>
 import {mapGetters, mapActions} from 'vuex'
@@ -109,21 +101,21 @@ export default {
             let aFilteredAvail = this.userAvail,
                 sType = this.selectedType,
                 sStatus = this.selectedStatus,
-                checkFilter, 
+                checkFilter,
                 fnFilter;
-                
+
 // checkFilter checks if data are during editing and does not allow to filter by type
                 checkFilter = aFilteredAvail.find(o => o.Filter === true);
-            
+
            if(sType === null && sStatus === null){
                return aFilteredAvail
            } else {
-               if(sType && sStatus && checkFilter){ 
+               if(sType && sStatus && checkFilter){
                     fnFilter = function(oItem){
                         return oItem.TypeId === sType && oItem.StatusId === sStatus || oItem.Filter === true;
                     }
                 }
-                else if(sType && sStatus){ 
+                else if(sType && sStatus){
                     fnFilter = function(oItem){
                         return oItem.TypeId === sType && oItem.StatusId === sStatus;
                     }
@@ -143,9 +135,9 @@ export default {
                     }
                }
                 aFilteredAvail = aFilteredAvail.filter(fnFilter);
-                
+
                 return aFilteredAvail
-           }          
+           }
         },
         noAvailEntries() {
             if (this.filteredUserAvail.length === 0) {
@@ -218,8 +210,8 @@ export default {
 // if data was changed set boolean variable to true
        bChanged = bEnd || bStart || bType || bStatus ? true : false
 
-// check if data are not empty and was changed and set button to disabled or not    
-// do not allow to filter by type when data are during changing 
+// check if data are not empty and was changed and set button to disabled or not
+// do not allow to filter by type when data are during changing
          if( bChanged &&
              userEntryId.TypeName &&
              userEntryId.DateStart &&

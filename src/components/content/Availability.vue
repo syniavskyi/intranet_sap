@@ -32,7 +32,7 @@
                                 <div class="availability-select-options">
                                     <div class="ava-div-select-cool">
                                         <select required class="ava-select-cool" v-model="selectedBranch">
-                                                 <option v-for="branch in branchList" :key="branch.Key" :value="branch.Key">{{ branch.Value }}</option> 
+                                                 <option v-for="branch in branchList" :key="branch.Key" :value="branch.Key">{{ branch.Value }}</option>
                                         </select>
                                         <label class="ava-select-label-cool">{{ $t("label.department") }}</label>
                                     </div>
@@ -169,7 +169,7 @@ export default {
             let aFilteredUsers = this.usersList,
                 selectedDep = this.selectedDepartment,
                 selectedBranch = this.selectedBranch;
-                aFilteredUsers = aFilteredUsers.filter(function(oData){ 
+                aFilteredUsers = aFilteredUsers.filter(function(oData){
                   return oData.DepartmentId === selectedDep && oData.BranchId === selectedBranch;
                 });
               return aFilteredUsers;
@@ -188,7 +188,7 @@ export default {
                     end: t.DateEnd
                 },
                 popover: {
-                    label: t.TypeName 
+                    label: t.TypeName
                 },
                 customData: t
             }))
@@ -216,7 +216,7 @@ export default {
     created() {
       let oStore = this.$store;
       oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getAvailabilityToRead);
-      oStore.dispatch('getData', null);  
+      oStore.dispatch('getData', null);
       utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
     },
     watch: {
@@ -236,7 +236,7 @@ export default {
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
             } else if(this.authType === 'OWN' && this.selectedUser.UserAlias === this.loginAlias) {
                 this.$store.commit('SET_DISABLED_BTN_TO_EDIT_PROJECT', true);
-            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false); 
+            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
             } else {
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_PROJECT', true);
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', true);
@@ -246,10 +246,10 @@ export default {
     //   filter users to make possibility to edit or accept avails
             let aFilteredUsers = this.usersList,
             idTeam = this.userData.DepartmentId;
-            aFilteredUsers = aFilteredUsers.filter(function(oData){ 
+            aFilteredUsers = aFilteredUsers.filter(function(oData){
                 return oData.DepartmentId === idTeam;
             });
-            this.$store.commit('SET_FILTERED_TEAM_USERS', aFilteredUsers); 
+            this.$store.commit('SET_FILTERED_TEAM_USERS', aFilteredUsers);
         }
     },
     methods: {
@@ -269,7 +269,7 @@ export default {
             let userData = {
                 user: this.selectedUser.UserAlias
             }
-            this.$store.dispatch('getData', userData);  
+            this.$store.dispatch('getData', userData);
         }
     }
 }

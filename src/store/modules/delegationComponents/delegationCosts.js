@@ -1,7 +1,7 @@
 const state = {
   delegationCostsList: [],
   delegationTableValidated: false,
-// default costs are two first rows of delegation costs table   
+// default costs are two first rows of delegation costs table
   defaultCostsData: {}
 };
 

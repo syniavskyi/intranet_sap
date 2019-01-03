@@ -4,7 +4,7 @@
         <div class="nav-header">
             <button class="logout-button" @click="logout">
                 <span class="logout-text">{{$t("button.logout")}}</span>
-            </button> 
+            </button>
             <p class="nav-title">BTech</p>
             <button @click="closeMenu" class="close-btn">&#10006;</button>
         </div>
@@ -96,7 +96,7 @@
                     </router-link>
                 </li>
             </ul>
-        </nav>        
+        </nav>
     </div>
 </template>
 

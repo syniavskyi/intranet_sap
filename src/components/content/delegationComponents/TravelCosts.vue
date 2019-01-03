@@ -191,7 +191,7 @@ export default {
         this.$nextTick(() => {this.calcHeight(this.$el.lastChild, this.$el.lastChild.firstChild).then(height => {
                     this.$el.lastChild.style.height = height
                     this.$el.lastChild.style.opacity = "1"
-                })})  
+                })})
     },
     mounted() {
         this.$nextTick(function() {
@@ -262,7 +262,7 @@ export default {
         toggleTile() {
             let el = this.$el.lastChild,
                 elChild = el.firstChild
-            
+
            const name = {el, elChild}
            this.$store.dispatch('toggleTile', name)
         },
@@ -276,7 +276,7 @@ export default {
         addCostRow() {
             let el = this.$el.lastChild.style.height
             !el || el ? el = "auto" : ""
-            this.$store.dispatch('addTravelCostRow')    
+            this.$store.dispatch('addTravelCostRow')
         },
 
         removeCostRow() {

@@ -97,7 +97,7 @@ export default {
         this.$nextTick(() => {this.calcHeight(this.$el.lastChild, this.$el.lastChild.firstChild).then(height => {
                     this.$el.lastChild.style.height = height
                     this.$el.lastChild.style.opacity = "1"
-                })})  
+                })})
     },
     mounted() {
         this.$nextTick(function() {
@@ -134,7 +134,7 @@ export default {
         addAdvanceRow() {
             let el = this.$el.lastChild.style.height
             !el || el ? el = "auto" : ""
-            this.$store.dispatch('addAdvanceRow')    
+            this.$store.dispatch('addAdvanceRow')
         },
 
         removeAdvanceRow() {

@@ -1,5 +1,5 @@
 <template>
-    <div> 
+    <div>
         <div class="modal-overlay"></div>
         <div class="modal-new-s">
             <header class="modal-header-new modal-advert-header">
@@ -37,7 +37,7 @@ export default {
                 Message: null,
                 ValidTo: null
             }
-        } 
+        }
     },
     methods: {
       ...mapActions([

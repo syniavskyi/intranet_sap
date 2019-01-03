@@ -32,7 +32,7 @@
             <button class="prof-skills-btn" @click="addLanguageSkillsRow" v-if="editMode">+</button>
             <div class="prof-div-skills" v-for="(lang, index) in userLangs" :id="index" :key="index">
               <div class="prof-div-slang">
-                <select v-if="editMode" class="selectProfileSkills selectEdit" v-model="lang.LanguageId" @change="checkFieldsLangs(index)" :id="index"> 
+                <select v-if="editMode" class="selectProfileSkills selectEdit" v-model="lang.LanguageId" @change="checkFieldsLangs(index)" :id="index">
                   <option v-for="fullLang in fullLanguageList" :value="fullLang.LanguageId" :key="fullLang.LanguageId">{{fullLang.LangName}}</option>
                 </select>
                 <select v-if="!editMode" class="selectProfileSkills selectDisabled" v-model="lang.LanguageId">
@@ -206,7 +206,6 @@ export default {
     },
     // validate fields
     checkFieldsLangs(index) {
-      // if (this._beforeEditingCacheLangs[index]!==undefined) {
         if (this._beforeEditingCacheLangs[index]===undefined ||
           this._beforeEditingCacheLangs[index].LanguageId !==
             this.userLangs[index].LanguageId ||
@@ -220,8 +219,7 @@ export default {
           ].disabled = false;
         } else {
           document.getElementsByClassName("prof-skills-save")[index].disabled = true;
-        }
-      // }  
+        }s
     },
     // check fields for skills
     checkFieldsSkills(event) {
@@ -255,7 +253,7 @@ export default {
     } else {
       this.checkSkillKey(skillKey, true);
     }
-      
+
       this.checkFieldsSkills();
     },
     checkSkillKey(skillKey, bBool) {
@@ -372,7 +370,7 @@ export default {
     showSingleHint(data) {
       let name = this.showHint.name;
       return data[name];
-    }    
+    }
   }
 };
 </script>

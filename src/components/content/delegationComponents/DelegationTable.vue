@@ -202,8 +202,8 @@
                     </div>
                 </div>
             </div>
-        </div>  
-    </div>    
+        </div>
+    </div>
 </template>
 <script>
 import VueGoogleAutocomplete from "vue-google-autocomplete";

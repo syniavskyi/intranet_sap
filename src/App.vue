@@ -24,7 +24,7 @@ export default {
     'modal': Modal,
     'warning-dialog': WarningDialog
   },
-  
+
 
   created() {
     window.addEventListener("resize", this.showMenu)
@@ -43,11 +43,6 @@ export default {
       this.$store.dispatch("setSideMenu", obj);
     }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     showLoader: 'getDisplayLoader'
-  //   })
-  // }
   computed: Object.assign(
     mapGetters({
       showLoader: 'getDisplayLoader',
@@ -73,13 +68,13 @@ export default {
 .slide-top-leave-active {
   transition: all .2s ease;
 }
-.slide-top-enter { 
+.slide-top-enter {
   transform: translateY(-50px);
   opacity: 0;
 }
 .slide-top-leave-to {
  transform: translateY(-50px);
-  opacity: 0; 
+  opacity: 0;
 }
 
 .menu-popover-enter,
