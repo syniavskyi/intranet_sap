@@ -448,4 +448,9 @@ export default {
   background: #333;
   color: white;
 }
+.center-btn {
+  margin: 10px auto 10px auto;
+  background: white;
+  display: flex;
+}
 </style>
