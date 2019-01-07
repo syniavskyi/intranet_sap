@@ -32,7 +32,8 @@ const state = {
   promiseList: [],
   goFromCv: false, //default
   transportList: [],
-  messageLog: []
+  messageLog: [],
+  resFromBatch: []
 };
 
 const mutations = {
@@ -121,39 +122,40 @@ const mutations = {
   },
   SET_MESSAGE_LOG(state, data) {
     state.messageLog = data;
+  },
+  SET_BATCH_RES(state, data) {
+    state.resFromBatch = data
   }
 };
 
 const actions = {
   getData({getters, dispatch, commit}, passedData){
-    let passedUserId, passedLang, bChangePage, bLogin,
+    let passedUserId, passedLang, bChangePage,
         aRoles = getters.getRoleList,
         sFirsLang;
     // check and assign passed data
     if(passedData){
       passedUserId = passedData.user;
       passedLang = passedData.lang;
-      bChangePage = passedData.changePage;
-      bLogin = passedData.login
+      bChangePage = passedData.changePage
     }
     // set user data - passed or saved in storage (for refresh reason)
     let userData = {
       user: passedUserId || localStorage.getItem("id"),
       lang: passedLang || localStorage.getItem("lang"),
       cvLang: getters.getSelectedCvLang || localStorage.getItem("lang"),
-      changePage: bChangePage || false,
-      login: bLogin || false
+      changePage: bChangePage || false
     };
     // check if domains are read - if it has been read, get language of get domains by roles
-    if(aRoles.length !== 0){
+    if(aRoles.length > 0){
       sFirsLang = aRoles[0].Language.toUpperCase();
     }
     // if read language equals user language - do not read domains again
     if(sFirsLang === userData.lang){
       commit('SET_TO_READ_EXCLUDED', getters.getPromisesToRead);
-    }
+    } 
     // finally read data
-    dispatch("loadData", userData);
+    dispatch("loadData", userData);  
   },
 
   loadData({
@@ -169,11 +171,7 @@ const actions = {
     axios.all(aPromises).then(res => { // send promise
       dispatch("setDataInResponse", { res, userData }); // set data from responses
     }).catch(error => {
-      console.log(error); // catch error
-      if(error.response.status === 401) {
-        dispatch('logout');
-        location.reload();
-      }
+      console.log(error); // catch error 
     });
   },
 
@@ -190,25 +188,65 @@ const actions = {
     });
   },
 
-  getDomainValues({}, domainData) {
-    if (domainData.lang === undefined) {
-      domainData.lang = "PL"
+  getDomainValues({
+    getters,
+    commit
+  }, domainData) {
+    // if (domainData.lang === undefined) {
+    //   domainData.lang = "PL"
+    // }
+    var aRequests = [],
+        sUrl;
+
+    // var aRequests = [
+    //   // "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
+    //   "Dictionaries?$filter=Name eq 'ZINTRANET_TARGET_GROUP' and Language eq '" + lang + "'",
+    //   "Dictionaries?$filter=Name eq 'ZINTRANET_ROLES' and Language eq '" + lang + "'"
+    // ];
+    for(let keys in domainData) {
+      sUrl = "Dictionaries" + "?$filter=Name eq '" + domainData[keys].name + "' and Language eq '" + domainData[keys].lang + "'"
+      aRequests.push(sUrl);
     }
 
-    return axios({
-      method: 'GET',
-      url: "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
+    // return axios({
+    //   method: 'POST',
+    //   url: "/$batch",
+    //   headers: {
+    //     "Content-type": "multipart/mixed; boundary=batch"
+    //   },
+    //   data: aRequests
+    // })
+    axios({
+      method: 'post',
+      url: "/$batch",
       headers: {
-        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-      }
-    });
+        "Content-type": "multipart/mixed; boundary=batch"
+      },
+      data: aRequests
+    }).then(res => {
+      commit('SET_BATCH_RES', res)
+    }).catch(error => {
+      console.log(error)
+    })
+    // return axios({
+    //   method: 'GET',
+    //   url: "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
+    //   headers: {
+    //     // "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+    //     "Content-type": "multipart/mixed; boundary=batch"
+    //     // "Cookie": getters.getCookie
+    //   }
+    // });
   },
-  getProjectsList({}) {
+  getProjectsList({
+    getters
+  }) {
     return axios({
       method: 'GET',
       url: 'Projects',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        // "Cookie": getters.getCookie
       }
     })
   },
@@ -221,20 +259,20 @@ const actions = {
       }
     })
   },
-
+ 
   getUserData({
     getters,
   }, userData) {
-    let url;
+    let sCookie = getters.getCookie,
+    url;
     let sUserAlias = userData.user || localStorage.getItem("id"),
         sLang = userData.lang || localStorage.getItem("lang");
     if(!sUserAlias){
       sUserAlias = userData.user;
-    }
+    } 
     if(!sLang){
       sLang = userData.lang;
     }
-    // check if showing hint button was clicked
     getters.getDataForHint ? url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserSkills,UserAuth,UserCvProjects' :
                              url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang,UserFiles,UserAuth'
     return axios({
@@ -242,6 +280,7 @@ const actions = {
       url: url,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        // "Cookie": sCookie
       }
     })
   },
@@ -268,11 +307,13 @@ const actions = {
     }
   },
   getUsersLists({}) {
+    let sCookie = document.cookie;
     return axios({
       method: 'GET',
       url: 'Users',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        // "Cookie": sCookie
       }
     })
   },
@@ -291,7 +332,7 @@ const actions = {
     commit, getters
   }, userAlias) {
     const sUserId = userAlias,
-      sLoggedUser =  localStorage.getItem("id"),
+      sLoggedUser =  localStorage.getItem("id"), //
       sLanguage = 'PL',
       sFileType = "USER-PHOTO";
     const url =
@@ -320,34 +361,37 @@ const actions = {
       let dataURL = imgCanvas.toDataURL("image/png");
       if(sLoggedUser === sUserId){
         commit('SET_USER_PHOTO_URL', dataURL);
-      }
+      } 
       commit('SET_SEL_USER_PHOTO_URL', dataURL);
+      
+      
 
-   // localStorage.setItem("image", dataURL)
+      // localStorage.setItem("image", dataURL)
     }, false);
     image.addEventListener("error", function () {
       if(sLoggedUser === sUserId){
         commit('SET_USER_PHOTO_URL', "");
-      }
+      } 
       commit('SET_SEL_USER_PHOTO_URL', "");
     });
 
+
+
   },
-  //check if user is new in intranet and display starter page with documents to fills or news
-  checkPageToDisplay({}, userData) {
-   if(userData.changePage && userData.login) {
-    router.replace('/news');
-   } else if(!userData.changePage && userData.login)  {
-    router.replace('/starterpage');
-   }
-    userData.login = false;
+  checkPageToDisplay({}, changePage) {
+    if (changePage) {
+      router.replace('/news')
+    }
   },
-  getAdverts({}) {
+  getAdverts({
+    getters
+  }) {
     return axios({
       method: 'GET',
       url: "Adverts",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        // "Cookie": getters.getCookie
       }
     })
   },
@@ -406,7 +450,7 @@ const actions = {
         case "StarterDocsNew":
           const starterDocsPromiseNew = dispatch('getNewDocs', userData).then(res => ( { res: res, promise: "StarterDocsNew" } ));
           aPromises.push(starterDocsPromiseNew);
-          break;
+          break;  
         case "NewToken":
           const newTokenPromise = dispatch('getNewToken').then(res => ( { res: res, promise: "NewToken" } ));
           aPromises.push(newTokenPromise);
@@ -416,15 +460,34 @@ const actions = {
           aPromises.push(userPhotoPromise);
           break;
         case "Domains":
-          let domainPromise;
-          for (let i = 0; i < state.sapDomains.length; i++) {
+          let domainPromise,
+              arrDomain = [];
+              // domainData = {};
+          // for (let i = 0; i < state.sapDomains.length; i++) {
+          for(let value of state.sapDomains) {
             let domainData = {
-              name: state.sapDomains[i],
+              // domainData.name = state.sapDomains[i],
+              name: value,
+              // domainData.lang = userData.lang
               lang: userData.lang
             };
-            domainPromise = dispatch('getDomainValues', domainData).then(res => ( { res: res, promise: domainData.name}));
-            aPromises.push(domainPromise);
+            arrDomain.push(domainData)
+            // domainPromise = dispatch('getDomainValues', domainData).then(res => ( { res: res, promise: domainData.name})); //wywołanie zapytań
+            // aPromises.push(domainPromise);
           }
+          // const batchReq = dispatch('getDomainValues', arrDomain).then(res => ({ res: res, promise: arrDomain.name }));
+          dispatch('getDomainValues', arrDomain);
+          // aPromises.push(batchReq);
+          // aPromises = batchReq;
+          let res = []
+          for(let values of state.sapDomains) {
+            res.push({
+              promise: values,
+              res: getters.getBatchRes
+            })
+          }
+          // aPromises.push(res);
+          aPromises = res;
           break;
         case "Documents":
           let documentPromise;
@@ -459,11 +522,11 @@ const actions = {
           aResponse = response[j].res;
       if(aResponse.data.d){
         aResults = aResponse.data.d.results;
-      }
+      }   
       // get logs from backend
       let message = response[j].res.headers;
       dispatch('displayModal', message);
-
+      
       switch(sPromiseName){
         case "Adverts":
           dispatch("setAdvertList", aResponse);
@@ -473,9 +536,6 @@ const actions = {
           break;
         case "UserData":
           dispatch("setUserData", aResponse);
-          if(aResponse.data.d.UserFiles.results.length !== 0) {
-            userData.changePage = false;
-           }
           break;
         case "Contractors":
           commit('SET_CONTRACTORS_LIST', aResults);
@@ -505,7 +565,7 @@ const actions = {
         case "StarterDocsNew":
           commit('SET_DOC_LIST_NEW', aResults);
           dispatch('checkStatus', aResults);
-          break;
+          break;  
         case "NewToken":
           let sToken = aResponse.request.getResponseHeader('x-csrf-token');
           commit('SET_TOKEN', sToken);
@@ -540,7 +600,7 @@ const actions = {
       }
     }
     commit("SET_DISPLAY_LOADER", false);
-    dispatch('checkPageToDisplay', userData);
+    dispatch('checkPageToDisplay', userData.changePage);
   },
 
   setAdvertList({commit}, response){
@@ -575,7 +635,7 @@ const actions = {
       case 'ZINTRANET_BRANCH':
         sCommitName = 'SET_BRANCH_LIST';
         break;
-      case 'ZINTRANET_STUDIES_TYPES':
+      case 'ZINTRANET_STUDIES_TYPES': 
         sCommitName = 'SET_STUDY_TYPES_LIST';
         break;
       case 'ZINTANET_ACADEMIC_TITLES':
@@ -616,6 +676,7 @@ const actions = {
     if(sCommitName.length > 0){
       commit(sCommitName, aResults);
     }
+    
   },
 
   setDocumentList({commit}, passedData){
@@ -643,7 +704,7 @@ const actions = {
       commit(sCommitName, aResults);
   },
 
-  setUserData({dispatch, commit, getters}, response){
+  setUserData({dispatch, commit, getters}, response, userData){
       //skillSet is name of commit
       let skillSet;
       dispatch('formatUserData', response.data.d); // format dates for date pickers and "is current" fields
@@ -655,14 +716,14 @@ const actions = {
           dispatch('loadUserPhoto', oData.UserAlias); //load user's photo for menu and profile TO BE READ
           let aAuth = utils.checkRole(oData.UserAuth.results);
           dispatch("_setAuthorizations", aAuth);
-          //set authorization for all objects - to optimize
+          //set authorization for all objects - to optimize      
           commit('SET_USER_EDUCATION', oData.UserEducations.results); //set user education data for profile and cv
           commit('SET_USER_EXPERIENCE', oData.UserExperiences.results); //set user experience data for profile and cv
-
+    
           commit('SET_USER_LANGS', oData.UserLang.results);
-
-          commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
-
+    
+          commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user 
+          
           commit('SET_USER_PROJECTS_LIST', oData.UserCvProjects.results); //set user projects data for profile and cv
           dispatch('adjustProjects');
         } else {
@@ -691,6 +752,8 @@ const actions = {
       }
       commit('SET_DATA_LOADED', true);
       commit('SET_DATA_FOR_HINT', false);
+
+      // dispatch('checkPageToDisplay', userData.changePage) //TEMP
   },
 
   _setAuthorizations({commit}, aAuth){
@@ -787,6 +850,9 @@ const getters = {
   },
   getMessageLog(state) {
     return state.messageLog;
+  },
+  getBatchRes(state) {
+    return state.resFromBatch;
   }
 };
 
