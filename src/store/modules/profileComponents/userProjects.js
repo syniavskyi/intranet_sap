@@ -286,13 +286,13 @@ const actions = {
 
     return axios({
       method: 'GET',
-      url: `Industries?$filter=Lang eq '${lang}'`, 
+      url: `Industries?$filter=Lang eq '${lang}'`,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
       }
     })
   },
-  // format project from string to array with objects, adding industry description 
+  // format project from string to array with objects, adding industry description
   adjustProjects({
     commit,
     dispatch
@@ -363,20 +363,23 @@ const actions = {
     let modulesList = this.getters.getModulesList;
     let industryList = this.getters.getIndustryList;
     let obj;
-
-    if ([key] == "Industries") {
-      if(industryList.length > 0){
-        obj = industryList.find(o => o.IndustryId === object.id)
-        object.name = obj.IndustryName;
+    if (industryList) {
+      if ([key] == "Industries") {
+        if(industryList.length > 0){
+          obj = industryList.find(o => o.IndustryId === object.id)
+          object.name = obj.IndustryName;
+        }
       }
     }
-    if ([key] == "Modules") {
-      if(modulesList.length > 0){
-        obj = modulesList.find(o => o.Key === object.id)
-        object.name = obj.Value;
+    if(modulesList) {
+      if ([key] == "Modules") {
+        if(modulesList.length > 0){
+          obj = modulesList.find(o => o.Key === object.id)
+          object.name = obj.Value;
+        }
       }
     }
-    commit('SET_OBJECT', object);
+      commit('SET_OBJECT', object);
   },
     showHintFnProject({commit}, data) {
       let oData = {

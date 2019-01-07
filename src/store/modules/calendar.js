@@ -101,10 +101,10 @@ const actions = {
     commit
   }) {
     let oEvents = getters.getAllEvents;
-    for (let i = 0; i < oEvents.length; i++) {
-      oEvents[i].DateFrom = utils.dateStringToObj(oEvents[i].DateFrom);
-      oEvents[i].DateTo = oEvents[i].DateTo ? utils.dateStringToObj(oEvents[i].DateTo) : oEvents[i].DateFrom
-      oEvents[i].EventTime = utils.formatTimeForCalendar(oEvents[i].EventTime);
+    for (let event of oEvents) {
+      event.DateFrom = utils.dateStringToObj(event.DateFrom);
+      event.DateTo = event.DateTo ? utils.dateStringToObj(event.DateTo) : event.DateFrom
+      event.EventTime = utils.formatTimeForCalendar(event.EventTime);
     }
     commit('SET_EVENTS', oEvents);
   },
@@ -114,13 +114,13 @@ const actions = {
     getters
   }) {
     const aEvents = getters.getAllEvents;
-    for (let i = 0; i < aEvents.length; i++) {
-      if (aEvents[i].Priority == "L") {
-        aEvents[i].color = '#fde997';
-      } else if (aEvents[i].Priority == "M") {
-        aEvents[i].color = '#fc9354';
+    for (let event of aEvents) {
+      if (event.Priority == "L") {
+        event.color = '#fde997';
+      } else if (event.Priority == "M") {
+        event.color = '#fc9354';
       } else {
-        aEvents[i].color = '#ff6666';
+        event.color = '#ff6666';
       }
     }
     commit('SET_EVENTS', aEvents);

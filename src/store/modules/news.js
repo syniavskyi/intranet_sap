@@ -247,57 +247,62 @@ const actions = {
       },
       getArticlesFn({commit, getters}) {
           // make html object
-          let allArticles = getters.getArticlesJson,
+          if(getters.getArticles.length === 0) {
+            let allArticles = getters.getArticlesJson,
           articles = []
-          for(let i = 0; i < (allArticles.length); i++) {
-            let article = document.createRange().createContextualFragment(allArticles[i].description[0]),
-            a,  p, link,
-            title = document.createTextNode(allArticles[i].title[0]),
-            param = document.createElement('p'),
-            ahref = document.createElement('a'),
-            ahrefImg = document.createElement('a'),
-            div = document.createElement('div'),
-            img = document.createElement('img'),
-            headDiv = document.createElement('div'),
-            contentDiv = document.createElement('div'),
-            head = document.createElement('h1')
-            head.appendChild(title)
-            ahref.appendChild(head)
-            link = allArticles[i].link[0]
-            ahref.href = link
-            ahref.target = "_blank"
-            headDiv.appendChild(ahref)
-            headDiv.className = "artTitle"
-            if(article.childNodes[0].childNodes[0].nodeType == 1) {
-                a = article.childNodes[0].childNodes[0];
-                p = article.childNodes[0].childNodes[1];
-                param.appendChild(p);
-            } else {
-                img.id = "img"+[i]
-                ahrefImg.className = "articleImg"
-                ahrefImg.appendChild(img);
-                ahrefImg.href = link;
-                p = article.childNodes[0].childNodes[0];
-                param.appendChild(p);
-            }
-            div.appendChild(headDiv)
-            contentDiv.className = "artContent"
-            if(a) {
-            contentDiv.appendChild(a)
-            contentDiv.appendChild(param)
-            div.appendChild(contentDiv)
-            } else {
-            contentDiv.appendChild(ahrefImg)
-            contentDiv.appendChild(param)
-            div.appendChild(contentDiv)
-            }
-            div.className = "artAll"
+            for(let i in allArticles) {
+                let article = document.createRange().createContextualFragment(allArticles[i].description[0]),
+                a,  p, link,
+                title = document.createTextNode(allArticles[i].title[0]),
+                param = document.createElement('p'),
+                ahref = document.createElement('a'),
+                ahrefImg = document.createElement('a'),
+                div = document.createElement('div'),
+                img = document.createElement('img'),
+                headDiv = document.createElement('div'),
+                contentDiv = document.createElement('div'),
+                head = document.createElement('h1')
+                head.appendChild(title)
+                ahref.appendChild(head)
+                link = allArticles[i].link[0]
+                ahref.href = link
+                ahref.target = "_blank"
+                headDiv.appendChild(ahref)
+                headDiv.className = "artTitle"
+                if(article.childNodes[0].childNodes[0].nodeType == 1) {
+                    a = article.childNodes[0].childNodes[0];
+                    p = article.childNodes[0].childNodes[1];
+                    param.appendChild(p);
+                } else {
+                    img.id = "img"+[i]
+                    ahrefImg.className = "articleImg"
+                    ahrefImg.appendChild(img);
+                    ahrefImg.href = link;
+                    p = article.childNodes[0].childNodes[0];
+                    param.appendChild(p);
+                }
+                div.appendChild(headDiv)
+                contentDiv.className = "artContent"
+                if(a) {
+                contentDiv.appendChild(a)
+                contentDiv.appendChild(param)
+                div.appendChild(contentDiv)
+                } else {
+                contentDiv.appendChild(ahrefImg)
+                contentDiv.appendChild(param)
+                div.appendChild(contentDiv)
+                }
+                div.className = "artAll"
 
-            let art = div
-            document.getElementById('articles').appendChild(art)
-            articles.push(art)
+                document.getElementById('articles').appendChild(div)
+                articles.push(div)
           }
           commit('SET_ARTICLES', articles)
+          } else {
+              for(let val of getters.getArticles) {
+                document.getElementById('articles').appendChild(val)
+              }
+          }
       }
 }
 
