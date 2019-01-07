@@ -141,7 +141,8 @@
                       </div>
                       <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
                       <p class="profile-error profile-error-image" v-if="photoUploadError">{{ $t("message.photoUploadError") }}</p>
-                      <label v-if="!disabledBtnToEdit" for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
+                      <label for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
+                       <!-- v-if="!disabledBtnToEdit" -->
                         <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload" id="change-user-image">
                       </label>
                     </div>

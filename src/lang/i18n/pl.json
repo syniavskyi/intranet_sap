@@ -265,7 +265,11 @@
         "notAuthToAddProject": "Nie posiadasz autoryzacji do dodawania nowego projektu",
         "hintReminder": "Pamiętaj, aby wprowadzić dane w innym języku",
         "hintInfoSkill": "Kliknij na znak zapytania po Twojej lewej stronie, a następnie kliknij na znak zapytania obok umiejętności, którą chcesz zobaczyć w innym języku",
-        "hintInfoProject": "Kliknij na znak zapytania po Twojej lewej stronie, a następnie kliknij na znak zapytania obok opisu projektu, który chcesz zobaczyć w innym języku"
+        "hintInfoProject": "Kliknij na znak zapytania po Twojej lewej stronie, a następnie kliknij na znak zapytania obok opisu projektu, który chcesz zobaczyć w innym języku",
+        "employeesSignature": "Podpis pracownika",
+        "requestPermission": "Wyrażam zgodę na urlop we wskazanym terminie",
+        "authPersonSignature": "Podpis osoby upoważnionej",
+        "leaveRequest": "Proszę o udzieleie urlopu"
     },
     "select": {
         "language": {

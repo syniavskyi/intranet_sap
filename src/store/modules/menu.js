@@ -31,6 +31,9 @@ const actions = {
             dispatch('clearAuthData');
             router.replace('/');
         })
+        localStorage.setItem('authorized', "false");
+            dispatch('clearAuthData');
+            router.replace('/');
     },
     setSideMenu({}, obj) {
         if(obj.event) {
