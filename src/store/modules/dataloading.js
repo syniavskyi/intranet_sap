@@ -145,7 +145,7 @@ const actions = {
       login: bLogin || false
     };
     // check if domains are read - if it has been read, get language of get domains by roles
-    if(aRoles.length > 0){
+    if(aRoles.length !== 0){
       sFirsLang = aRoles[0].Language.toUpperCase();
     }
     // if read language equals user language - do not read domains again
@@ -170,8 +170,10 @@ const actions = {
       dispatch("setDataInResponse", { res, userData }); // set data from responses
     }).catch(error => {
       console.log(error); // catch error
-      dispatch('logout');
-      location.reload();
+      if(error.response.status === 401) {
+        dispatch('logout');
+        location.reload();
+      }
     });
   },
 
@@ -192,6 +194,7 @@ const actions = {
     if (domainData.lang === undefined) {
       domainData.lang = "PL"
     }
+
     return axios({
       method: 'GET',
       url: "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
