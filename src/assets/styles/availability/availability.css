@@ -5,7 +5,9 @@
     padding:0; */
     /* max-width: 100%; */
 /* } */
-
+:root {
+    --request-input-color: #e8eef4;
+}
 .ava-error-header {
     display: flex;
     position: fixed;
@@ -14,7 +16,7 @@
     min-height: 1.2rem;
     padding: .3rem;
     border-radius: .5rem;
-    animation: display-grow; 
+    animation: display-grow;
     color: #ffffff;
     top: 100px;
     right: 10px;
@@ -141,7 +143,7 @@
     flex-direction: column;
     align-self: center;
     flex-grow: 2;
-    transition: flex-grow 0.5s ease; 
+    transition: flex-grow 0.5s ease;
     justify-content: center;
     align-items: center;
 }
@@ -155,15 +157,16 @@
 }
 .personal-data-table{
     width:100%;
+    line-height: 0;
 }
 .request-header {
     display: flex;
     justify-content: center;
-    font-size: 30px;
+    font-size: 34px;
     padding-bottom: 10px;
 }
 .request-info {
-    font-size: 18px;
+    font-size: 20px;
     margin: 1rem;
     font-weight: normal;
 }
@@ -174,16 +177,26 @@
     background: transparent;
     border: none;
 }
-.request-ipnut {
+.request-input {
     border: none;
-    background-color: #e8eef4;
+    background-color: var(--request-input-color);
     width: 180px;
     height: 30px;
     padding: 1px 0;
     text-indent: 5px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Roboto';
 }
+/* .request-input-generate {
+    background-color: white;
+} */
+/* .request-input-date {
+    text-align: right;
+} */
 .request-personal-data {
     width: 300px;
+    text-align: left;
 }
 .personal-data-select {
     height: 32px;
@@ -192,6 +205,7 @@
     margin: 0px;
     width: 100%;
     height: 100px;
+    text-align: left;
 }
 .request-signature {
     border-top: 1px solid black;
@@ -225,7 +239,7 @@
     flex-direction: column;
     align-self: center;
     align-items: center;
-    min-width: 15rem; 
+    min-width: 15rem;
 }
 .ava-select-reset {
     position: absolute;
@@ -288,7 +302,7 @@
 }
 .ava-select-label-cool,
 .ava-input-label-cool {
-    color:#999999; 
+    color:#999999;
     font-size:1.2rem;
     font-kerning: 1rem;
     position:absolute;
@@ -297,7 +311,7 @@
     left:0.3rem;
     top:0.35rem;
     transition:0.3s ease all;
-    padding: 0 .2rem; 
+    padding: 0 .2rem;
 }
 .ava-textarea {
     max-width: 95%;
@@ -333,7 +347,7 @@
     color: #333;
     border-radius: 3px;
     appearance: none;
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
     -moz-appearance: none;
     font-size: 1rem;
     background-image: url("../../images/expand2.png");
@@ -392,24 +406,24 @@
     border-bottom: 1px solid #d3d3d3;
 }
 
-.ava-div-bar:before, 
+.ava-div-bar:before,
 .ava-div-bar:after {
     content:'';
-    height:2px; 
+    height:2px;
     width:0;
-    bottom:0; 
+    bottom:0;
     position:absolute;
-    background:rgb(255, 145, 0); 
-    transition:0.5s ease all; 
-    -moz-transition:0.5s ease all; 
+    background:rgb(255, 145, 0);
+    transition:0.5s ease all;
+    -moz-transition:0.5s ease all;
     -webkit-transition:0.5s ease all;
 }
 .ava-div-bar:before {
     left:50%;
 }
 .ava-div-bar:after {
-    right:50%; 
-} 
+    right:50%;
+}
 /* active state */
 .ava-input-range-perc:focus ~ span:before, .ava-input-range-perc:focus ~ span:after {
     width:50%;
@@ -514,7 +528,7 @@
     bottom: -1rem;
     left: -1.15rem;
     width: 100%;
-    font-size: .85rem; 
+    font-size: .85rem;
     z-index: 1;
     text-align: center;
     color: #ff0000;
@@ -714,7 +728,7 @@
         display: none;
     }
 
-    .ava-thproj-item, 
+    .ava-thproj-item,
     .ava-tbproj-item,
     .ava-tbproj-itxt,
     .ava-ths-item,

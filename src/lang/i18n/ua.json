@@ -264,7 +264,11 @@
         "notAuthToAddProject": "У вас немає прав для доданя нового проекту",
         "hintReminder": "Памя'ятайте ввести дані в інших мовах",
         "hintInfoSkill": "Клацніть на знак запитання ліворуч, після чого натисніть знак запитання біля майстерності, яку ви хочете побачити в іншій мові",
-        "hintInfoProject": "Клацніть на знак запитання ліворуч, після чого натисніть знак запитання біля опису проекту, який ви хочете побачити іншою мовою"
+        "hintInfoProject": "Клацніть на знак запитання ліворуч, після чого натисніть знак запитання біля опису проекту, який ви хочете побачити іншою мовою",
+        "employeesSignature": "Podpis pracownika",
+        "requestPermission": "Wyrażam zgodę na urlop we wskazanym terminie",
+        "authPersonSignature": "Podpis osoby upoważnionej",
+        "leaveRequest": "Proszę o udzieleie urlopu"
     },
     "select": {
         "language": {

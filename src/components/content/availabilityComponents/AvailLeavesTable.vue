@@ -28,6 +28,9 @@
                         <select v-if="editMode && avail.StatusId !== 'CO'" class="selectProfile selectEdit" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
                             <option v-for="type in filteredAvailTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select>
+                        <button v-if="avail.TypeId !== 'WR' && !editMode" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
+                                <img src="../../../assets/images/island.png">
+                        </button>
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.from") }}</div>
@@ -63,9 +66,6 @@
                         <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
                         <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
                     </div>
-                            <button v-if="avail.TypeId !== 'WR'" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
-                                <img src="../../../assets/images/island.png">
-                            </button>
                 </div>
             </div>
         </div>

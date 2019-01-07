@@ -4,34 +4,34 @@
              <table class="personal-data-table">
             <tr>
                 <td class="request-fullname">
-                    <input v-model="newHoliday.fullname" type="text" class="request-ipnut request-personal-data" :placeholder="$t('label.fullName')">
+                    <input v-model="newHoliday.fullname" type="text" class="request-input request-personal-data" :placeholder="$t('label.fullName')">
                 </td>
                 <td>
-                    <select v-model="newHoliday.city" class="request-ipnut personal-data-select">
+                    <select v-model="newHoliday.city" class="request-input personal-data-select">
                         <option v-for="city in cities" :key="city" :value="city">{{city}}</option>
                     </select>
                 </td>
                 <td>
-                    <input type="date" v-model="newHoliday.today" class="request-ipnut">
+                    <input type="date" id="date1" v-model="newHoliday.today" class="request-input request-input-date">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input v-model="newHoliday.address" type="text" class="request-ipnut request-personal-data" :placeholder="$t('label.address')">
+                    <input v-model="newHoliday.address" type="text" class="request-input request-personal-data" :placeholder="$t('label.address')">
                 </td>
                 <td> <p class="request-label"> {{ $t("label.citySelect") }} </p></td>
                 <td> <p class="request-label"> {{ $t("label.dateSelect") }} </p></td>
             </tr>
             <tr>
                 <td>
-                    <input v-model="newHoliday.phone" type="text" class="request-ipnut request-personal-data" :placeholder="$t('label.phone')">
+                    <input v-model="newHoliday.phone" type="text" class="request-input request-personal-data" :placeholder="$t('label.phone')">
                 </td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td>
-                    <input v-model="newHoliday.email" type="text" class="request-ipnut request-personal-data" :placeholder="$t('label.email')">
+                    <input v-model="newHoliday.email" type="text" class="request-input request-personal-data" :placeholder="$t('label.email')">
                 </td>
                 <td></td>
                 <td></td>
@@ -39,20 +39,20 @@
         </table>
         </div>
        <div>
-           <h4 class="request-header">{{ $t("label.holidayRequest") }}</h4>
-           <h6 class="request-info">Proszę o udzielenie urlopu:</h6>
+           <h4 class="request-header">{{ $t("label.holidayRequest").toUpperCase() }}</h4>
+           <h6 class="request-info">{{ $t("message.leaveRequest") }}</h6>
        </div>
        <div>
            <table> <!-- second table -->
             <tr>
-                <td> <select v-model="newHoliday.type" class="request-ipnut personal-data-select">
+                <td> <select v-model="newHoliday.type" class="request-input personal-data-select">
                         <option v-for="type in types" :key="type" :value="type">{{type}}</option>
                     </select>
                 </td>
-                <td> <input v-model="newHoliday.year" type="text" class="request-ipnut"> </td>
-                <td> <input v-model="newHoliday.dateStart" type="date" class="request-ipnut" @input="countDays(newHoliday)"> </td>
-                <td> <input v-model="newHoliday.dateEnd" type="date" class="request-ipnut" @input="countDays(newHoliday)"> </td>
-                <td> <input v-model="newHoliday.countedDays" type="text" class="request-ipnut"> </td>
+                <td> <input v-model="newHoliday.year" type="text" class="request-input"> </td>
+                <td> <input v-model="newHoliday.dateStart" type="date" id="date2" class="request-input request-input-date" @input="countDays(newHoliday)"> </td>
+                <td> <input v-model="newHoliday.dateEnd" type="date" id="date3" class="request-input request-input-date" @input="countDays(newHoliday)"> </td>
+                <td> <input v-model="newHoliday.countedDays" type="text" class="request-input"> </td>
             </tr>
             <tr>
                 <td> <p class="request-label"> {{ $t("label.requestTypeSelect") }}</p> </td>
@@ -64,7 +64,7 @@
             <tr>
                 <td colspan="2">
                     <div class="request-for-day">{{ $t("label.forDay") }}
-                         <input type="text" class="request-ipnut">
+                         <input type="text" class="request-input">
                     </div>
                 </td>
                 <td></td>
@@ -73,18 +73,18 @@
             </tr>
             <tr rowspan="2">
                 <td colspan="3">
-                    <textarea class="request-ipnut request-comments" :placeholder="$t('label.comments')" cols="30" rows="10"></textarea>
+                    <textarea class="request-input request-comments" :placeholder="$t('label.comments')" cols="30" rows="10"></textarea>
                 </td>
                 <td colspan="2">
-                    <p class="request-signature">Podpis pracownika</p>
+                    <p class="request-signature">{{ $t("message.employeesSignature") }}</p>
                 </td>
             </tr>
             <tr>
                 <td colspan="3">
-                    Wyrażam zgodę na urlop we wskazanym terminie
+                    {{ $t("message.requestPermission") }}
                 </td>
                 <td colspan="2">
-                    <p class="request-signature">Podpis osoby upoważnionej</p>
+                    <p class="request-signature">{{ $t("message.authPersonSignature") }}</p>
                 </td>
             </tr>
         </table>
