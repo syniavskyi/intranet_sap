@@ -192,94 +192,20 @@ const actions = {
     getters,
     commit
   }, domainData) {
-    // if (domainData.lang === undefined) {
-    //   domainData.lang = "PL"
-    // }
-    var aRequests = [],
-        oRequests = {},
-        contentType,
-        ContentTransfer,
-        accept,
-        sUrl;
+     let sData  = utils.packBatchForDomains(domainData, getters.getToken)
 
-    // var aRequests = [
-    //   // "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
-    //   "Dictionaries?$filter=Name eq 'ZINTRANET_TARGET_GROUP' and Language eq '" + lang + "'",
-    //   "Dictionaries?$filter=Name eq 'ZINTRANET_ROLES' and Language eq '" + lang + "'"
-    // ];
-    for(let keys in domainData) {
-      // contentType = {
-      //   "Content-Type": "application/http"
-      // }
-      // ContentTransfer = {
-      //   "Content-Transfer-Encoding": "binary"
-      // }
-      // accept = {
-      //   "Accept": "application/xml"
-      // }
-      // sUrl = {
-      //   "GET": "GET Dictionaries" + "?$filter=Name eq '" + domainData[keys].name + "' and Language eq '" + domainData[keys].lang + "'" + "HTTP/1.1"
-      // }
-      // "GET Dictionaries" + "?$filter=Name eq '" + domainData[keys].name + "' and Language eq '" + domainData[keys].lang + "'" + "HTTP/1.1"
-      // "Dictionaries" + "?$filter=Name eq '" + domainData[keys].name + "' and Language eq '" + domainData[keys].lang + "'"
-      sUrl = "--batch\n" +
-      'Content-Type: application/http' + "\n" +
-      'Content-Transfer-Encoding: binary' + "\n\n" +
-      "GET Dictionaries?$filter=Name%20eq%20'ZINTRANET_DEPARTMENT'%20and%20Language%20eq%20'PL' HTTP/1.1\n" +
-      "Accept: application/json\n" +
-      "Accept-Language: pl\n" +
-      "x-csrf-token: " + getters.getToken + "\n\n\n" +
-      "--batch\n" +
-      'Content-Type: application/http' + "\n" +
-      'Content-Transfer-Encoding: binary' + "\n\n" +
-      "GET Dictionaries?$filter=Name%20eq%20'ZINTRANET_AVAIL_STATUS'%20and%20Language%20eq%20'PL' HTTP/1.1\n" + 
-      "Accept: application/json\n" +
-      "Accept-Language: pl\n" +
-      "x-csrf-token: " + getters.getToken + "\n\n\n" +
-      "--batch--"
-      // "GET Dictionaries" + "?$filter=Name eq '" + domainData[keys].name + "' and Language eq '" + domainData[keys].lang + "'" + "HTTP/1.1\n\n\n"
-      // aRequests.push(sUrl);
-      // Object.assign(oRequests, contentType, ContentTransfer, accept, sUrl)
-      // aRequests.push(oRequests)
-    }
-
-    // return axios({
-    //   method: 'POST',
-    //   url: "/$batch",
-    //   headers: {
-    //     "Content-type": "multipart/mixed; boundary=batch"
-    //   },
-    //   data: aRequests
-    // })
-
-    let sToken = getters.getToken;
     axios({
       method: 'post',
       url: "/$batch",
       headers: {
         "Content-type": "multipart/mixed; boundary=batch"
       },
-      // "x-csrf-token": sToken,
-      data: sUrl
-      // data: {
-        // "Content-Type": "application/http",
-        // "Content-Transfer-Encoding": "binary",
-        // aRequests
-      // }
+      data: sData
     }).then(res => {
       commit('SET_BATCH_RES', res)
     }).catch(error => {
       console.log(error)
     })
-    // return axios({
-    //   method: 'GET',
-    //   url: "Dictionaries" + "?$filter=Name eq '" + domainData.name + "' and Language eq '" + domainData.lang + "'",
-    //   headers: {
-    //     // "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-    //     "Content-type": "multipart/mixed; boundary=batch"
-    //     // "Cookie": getters.getCookie
-    //   }
-    // });
   },
   getProjectsList({
     getters
