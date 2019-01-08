@@ -35,14 +35,11 @@ export default {
     methods: {
         generatePDF() {
             let pdfName;
-                // document.getElementById("date1").type="text";
-                // document.getElementById("date2").type="text";
-                // document.getElementById("date3").type="text";
 
-        let helps = document.getElementsByClassName('request-input-date');
-        for(let help of helps) {
-            help.type = "text";
-        }
+            let helps = document.getElementsByClassName('request-input-date');
+            for(let help of helps) {
+                help.type = "text";
+            }
 
            let elements = document.getElementsByClassName('request-input');
             for(let element of elements) {
