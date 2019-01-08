@@ -38,7 +38,7 @@
             <div class="emp-thead-item">{{ $t("label.email") }}</div>
           </div>
           <div class="emp-tbody">
-            <div class="emp-tbody-row" title="Przejdź do profilu pracownika wybierając jego imie i nazwisko" v-for="user in filteredUsers" :key="user.PersonNumber">
+            <div class="emp-tbody-row" :title="$t('message.goToUserByFullname')" v-for="user in filteredUsers" :key="user.PersonNumber">
               <div class="emp-tbody-item">
                 <div class="emp-tbody-item-title"> {{ $t("label.fullName") }} </div>
                 <div  class="emp-tbody-item-txt"  @click="navigateToProfile(user)"> {{ user.Fullname }} </div>

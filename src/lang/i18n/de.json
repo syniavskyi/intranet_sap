@@ -267,10 +267,11 @@
         "hintReminder": "Denken Sie daran, Daten in einer anderen Sprache einzugeben",
         "hintInfoSkill": "Klicken Sie auf das Fragezeichen auf der linken Seite und dann auf das Fragezeichen neben der Fähigkeit, die Sie in einer anderen Sprache sehen möchten.",
         "hintInfoProject": "Klicken Sie auf das Fragezeichen auf der linken Seite und dann auf das Fragezeichen neben dem Projekt, das Sie in einer anderen Sprache sehen möchten",
-        "employeesSignature": "Podpis pracownika",
-        "requestPermission": "Wyrażam zgodę na urlop we wskazanym terminie",
-        "authPersonSignature": "Podpis osoby upoważnionej",
-        "leaveRequest": "Proszę o udzieleie urlopu"
+        "employeesSignature": "Unterschrift des Mitarbeiters",
+        "requestPermission": "Ich stimme dem Urlaub zur angegebenen Zeit zu",
+        "authPersonSignature": "Unterschrift der berechtigten Person",
+        "leaveRequest": "Ich bitte um einen Urlaub",
+        "goToUserByFullname": "Gehen Sie zum Profil, basierend auf seinem Vor- und Nachnamen"
     },
     "select": {
         "language": {
