@@ -364,7 +364,11 @@ export default {
     },
       showSingleHint() {
         let index = this.showHintProject.index;
-        return this.userProjectsDfLang[index].Description;
+        if (this.userProjectsDfLang.length !== 0 ) {
+          return this.userProjectsDfLang[index].Description;
+        } else {
+          return
+        }
       }
   }
 };
