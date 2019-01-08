@@ -279,4 +279,20 @@ export const checkRole = function(data) {
       }
     }
   }
+    //prepare batch request body
+    export const packBatchForDomains = function(aDomains, sToken){
+      let aBody = [];
+      
+      aDomains.forEach(function(oDomain){
+        aBody.push('--batch');
+        aBody.push('Content-type: application/http');
+        aBody.push('Content-Transfer-Encoding: binary','');
+        aBody.push(`GET Dictionaries?$filter=Name%20eq%20'${oDomain.name}'%20and%20Language%20eq%20'${oDomain.lang}' HTTP/1.1`)
+        aBody.push('Accept: application/json');
+        aBody.push('Accept-Language: pl');
+        aBody.push(`x-csrf-token: ${sToken}`, '', '');
+      })
+      aBody.push('--batch--');
+      return aBody.join('\r\n')
+    }
 const actions = {};
