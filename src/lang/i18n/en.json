@@ -267,10 +267,11 @@
         "hintReminder": "Remember to enter data in another language",
         "hintInfoSkill": "Click the question mark on your left and after that click the question mark near the skill that you want to see in another language",
         "hintInfoProject": "Click the question mark on your left and after that click the question mark near the project description that you want to see in another language",
-        "employeesSignature": "Podpis pracownika",
-        "requestPermission": "Wyrażam zgodę na urlop we wskazanym terminie",
-        "authPersonSignature": "Podpis osoby upoważnionej",
-        "leaveRequest": "Proszę o udzieleie urlopu"
+        "employeesSignature": "Employee signature",
+        "requestPermission": "I agree to the leave at the indicated time",
+        "authPersonSignature": "Signature of an authorized person",
+        "leaveRequest": "I am asking for a leave",
+        "goToUserByFullname": "Go to the employee's profile by choosing the name and surname"
     },
     "select": {
         "language": {
