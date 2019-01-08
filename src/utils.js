@@ -282,7 +282,6 @@ export const checkRole = function(data) {
     //prepare batch request body
     export const packBatch = function(aLinks, sToken){
       let aBody = [];
-      
       aLinks.forEach(function(sLink){
         aBody.push('--batch');
         aBody.push('Content-type: application/http');
@@ -295,4 +294,27 @@ export const checkRole = function(data) {
       aBody.push('--batch--');
       return aBody.join('\r\n')
     }
-const actions = {};
+    //get data from batch response
+    export const parseBatchResponse = function(sResponse){
+      let aResponse = sResponse.data.split('\r\n'),
+          aData = []
+      aResponse.filter(function(sRes){
+        return sRes.substring(0, 16) == '{"d":{"results":'
+      }).forEach(function(sRes){
+          let aResult = JSON.parse(sRes),
+              sLink, sService, iLength, iStart, sSet
+          aResult  = aResult.d.results
+          //add set name 
+          sLink    = aResult[0].__metadata.id
+          sService = '/ZGW_INTRANET_SRV/'
+          iLength  = sService.length
+          iStart   = sLink.search(sService) + iLength
+          sSet     = sLink.slice(iStart, sLink.length)
+          sSet     = sSet.split('(')[0]
+          aResult.Set = sSet
+          aData.push(aResult)
+      })
+    return aData
+   }
+
+

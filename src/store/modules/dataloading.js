@@ -196,8 +196,8 @@ const actions = {
     domainData.forEach(function(oDomain){
       aLinks.push(`GET Dictionaries?$filter=Name%20eq%20'${oDomain.name}'%20and%20Language%20eq%20'${oDomain.lang}' HTTP/1.1`)
     })
-     let sData  = utils.packBatch(aLinks, getters.getToken)
 
+    let sData  = utils.packBatch(aLinks, getters.getToken)
     axios({
       method: 'post',
       url: "/$batch",
@@ -206,7 +206,8 @@ const actions = {
       },
       data: sData
     }).then(res => {
-      commit('SET_BATCH_RES', res)
+      let oParsedData = utils.parseBatchResponse(res)
+      commit('SET_BATCH_RES', oParsedData)
     }).catch(error => {
       console.log(error)
     })
@@ -435,32 +436,26 @@ const actions = {
         case "Domains":
           let domainPromise,
               arrDomain = [];
-              // domainData = {};
-          // for (let i = 0; i < state.sapDomains.length; i++) {
           for(let value of state.sapDomains) {
             let domainData = {
-              // domainData.name = state.sapDomains[i],
               name: value,
-              // domainData.lang = userData.lang
               lang: userData.lang
             };
             arrDomain.push(domainData)
-            // domainPromise = dispatch('getDomainValues', domainData).then(res => ( { res: res, promise: domainData.name})); //wywołanie zapytań
-            // aPromises.push(domainPromise);
           }
-          // const batchReq = dispatch('getDomainValues', arrDomain).then(res => ({ res: res, promise: arrDomain.name }));
           dispatch('getDomainValues', arrDomain);
-          // aPromises.push(batchReq);
-          // aPromises = batchReq;
-          let res = []
-          for(let values of state.sapDomains) {
-            res.push({
-              promise: values,
-              res: getters.getBatchRes
-            })
-          }
-          // aPromises.push(res);
-          aPromises = res;
+          let aRes = [],
+              aBatchRes = getters.getBatchRes
+          
+          aBatchRes.filter(function(element){
+            return element.Set = 'Dictionaries'
+          }).forEach(function(element){
+                aRes.push({
+                  promise: element[0].Name,
+                  res: element
+                })
+          })
+          aPromises = aRes;
           break;
         case "Documents":
           let documentPromise;
@@ -493,12 +488,18 @@ const actions = {
     for(let j = 0; j < response.length; j++){
           sPromiseName = response[j].promise;
           aResponse = response[j].res;
-      if(aResponse.data.d){
-        aResults = aResponse.data.d.results;
-      }   
+      if(aResponse.data){
+        if(aResponse.data.d){
+          aResults = aResponse.data.d.results;
+        }
+      }else{
+        aResults = aResponse
+      }
       // get logs from backend
       let message = response[j].res.headers;
-      dispatch('displayModal', message);
+      if(message){
+       dispatch('displayModal', message);
+      }
       
       switch(sPromiseName){
         case "Adverts":
