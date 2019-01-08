@@ -192,7 +192,11 @@ const actions = {
     getters,
     commit
   }, domainData) {
-     let sData  = utils.packBatchForDomains(domainData, getters.getToken)
+    let aLinks = [];
+    domainData.forEach(function(oDomain){
+      aLinks.push(`GET Dictionaries?$filter=Name%20eq%20'${oDomain.name}'%20and%20Language%20eq%20'${oDomain.lang}' HTTP/1.1`)
+    })
+     let sData  = utils.packBatch(aLinks, getters.getToken)
 
     axios({
       method: 'post',
