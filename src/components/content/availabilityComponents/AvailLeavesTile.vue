@@ -56,7 +56,8 @@ export default {
         return {
             selectedDates: null,
             disableAddNew: true,
-            loginAlias: localStorage.getItem("id")
+            loginAlias: localStorage.getItem("id"),
+            selectedType: false
         }
     },
     computed: {
@@ -96,6 +97,7 @@ export default {
                 this.checkFields();
             } else {
                 this.disableAddNew = true;
+                this.selectedType = false;
             }
         }
     },
@@ -104,7 +106,7 @@ export default {
         checkFields() {
             let obj = this.newLeave;
             if(this.disabledBtnToEditAvail===false) {
-                if(this.selectedUser === this.loginAlias && this.authType !== '*' && obj.DateStart && obj.DateEnd) {
+                if(this.selectedUser === this.loginAlias && this.authType !== '*' && obj.DateStart && obj.DateEnd && this.selectedType !== false) {
                     this.disableAddNew = false;
                 } else {
                     for (let key in obj) {
