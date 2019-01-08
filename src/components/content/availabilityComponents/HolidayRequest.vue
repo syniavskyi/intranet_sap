@@ -16,7 +16,6 @@ import HolidayRequestTemplate from './HolidayRequestTemplate';
 import { mapGetters, mapActions } from "vuex";
 import i18n from "../../../lang/lang";
 import html2canvas from 'html2canvas';
-import jsPDF from "jsPdf";
 export default {
     name: 'holidayRequest',
     components: {
