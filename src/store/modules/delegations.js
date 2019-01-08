@@ -256,21 +256,21 @@ const actions = {
             DelegDate: utils.formatDateForBackend(oDelegation.dates.start),
             DelegNo: getters.getNewDelegationNumber
         }
-        let sToken = getters.getToken;
-        axios.defaults.withCredentials = true
+
         axios({
           method: 'POST',
           url: 'Delegations',
           data: data,
           headers: {
-            "Content-Type": "application/json",
+              "Content-Type": "application/json",
               "X-Requested-With": "XMLHttpRequest",
               "Cache-Control": "no-cache",
-              "x-csrf-token": sToken
+              "x-csrf-token": getters.getToken
           }
         }).then(res => {
           commit('SET_CREATE_DELEG_SUCCESS',true)
           dispatch('clearDelegationForm')
+          commit('SET_SHOW_CONFIRM_DELEG', false)
           let message = res.headers;
           dispatch('displayModal', message);
         }).catch(error => {

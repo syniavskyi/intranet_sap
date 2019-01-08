@@ -219,7 +219,7 @@ export default {
           ].disabled = false;
         } else {
           document.getElementsByClassName("prof-skills-save")[index].disabled = true;
-        }s
+        }
     },
     // check fields for skills
     checkFieldsSkills(event) {
