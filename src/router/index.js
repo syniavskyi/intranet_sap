@@ -23,7 +23,7 @@ import AuthGuard from './auth-guard'
 Vue.use(Router)
 
 export default new Router({
-    // mode: 'history',
+    mode: 'history',
     routes: [{
         path: '/',
         name: 'Login',
@@ -100,6 +100,11 @@ export default new Router({
         name: 'HolidayRequest',
         component: HolidayRequest,
         beforeEnter: AuthGuard
+    },
+    {
+        path: '*',
+        name: 'Default',
+        redirect: '/news'
     }
 ],
 linkExactActiveClass: 'active-router-link'
