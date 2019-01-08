@@ -28,7 +28,7 @@
                                 </select>
                                 <label class="cd-slabel">{{ $t("label.selectTeamMember") }}</label>
                             </div>
-                            <button class="func-btn" @click="generatePdf">{{ $t("button.generatePDF") }}</button>
+                            <button class="func-btn" :disabled="disableGenerating" @click="generatePdf">{{ $t("button.generatePDF") }}</button>
                         </div>
                         <div class="delegations-tile-underscore"></div>
                     </div>
@@ -181,6 +181,9 @@ export default {
         }), {
             disableSaveBtn() {
                 return (this.newDelegationValidated && this.delegationTableValidated && this.accCostValidated) ? false : true
+            },
+            disableGenerating(){
+                return (this.newDelegation.dates && this.delegationUsername) ? false : true
             },
             filteredTeamUsers() {
                 let aFilteredUsers = this.usersList,
