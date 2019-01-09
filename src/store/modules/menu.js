@@ -43,8 +43,8 @@ const actions = {
                 state.showMenuOverlay = true
             /* If user resizes app window: MENU and OVERLAY are automatically hidden for very small screen devices */
             } else if (obj.window.matchMedia("(max-width:40rem)").matches && obj.event.type === "resize") {
-                state.showMenu =  false
-                state.showMenuOverlay = false
+                state.showMenu =  true
+                state.showMenuOverlay = true
             /* If user uses app on large screen device: MENU must always be visible and OVERLAY must never be visible  */
             } else  {
                 state.showMenu = true;
