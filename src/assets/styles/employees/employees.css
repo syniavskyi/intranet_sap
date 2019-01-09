@@ -46,6 +46,8 @@
     box-shadow: 0 0 10px #808080;
     border-radius: 5px;
     margin-bottom: 1rem;
+    border-bottom-left-radius: .75rem;
+    border-bottom-right-radius: .75rem;
 }
 
 .emp-thead {

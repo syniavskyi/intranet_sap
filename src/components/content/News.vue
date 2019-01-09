@@ -56,7 +56,8 @@
                   <div class="high-prio-event" v-if="event.Priority=='H'"> </div>
                   <div class="news-evt-attr">
                     <div class="event-date">{{setDateTo(event)}}
-                      <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc">&#8943;</button>
+                      <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc"></button>
+                      <!-- &#8943; -->
                     </div>
                     <div class="event-title">{{ event.EventName }}</div>
                     <div class="event-type">{{event.EventTypeName}}</div>
