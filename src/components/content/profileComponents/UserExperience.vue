@@ -156,6 +156,7 @@ export default {
     remove(index) {
       let newData = utils.createClone(this.userExperience[index]);
       newData.Action = 'D';
+      newData.Language = "PL"; //temp
       this.updateUserExp(newData);
       this.userExperience.splice(index, 1);
       this._beforeEditingCache = utils.createClone(this.userExperience);
@@ -164,7 +165,7 @@ export default {
     save(index) {
       const dataToChange = this._beforeEditingCache[index],
       newData = utils.createClone(this.userExperience[index]);
-      newData.Language = "PL";
+      newData.Language = "PL"; //temp
       newData.Action = 'U';
       if (dataToChange) {
         newData.WorkPosToChange = dataToChange.WorkPos;

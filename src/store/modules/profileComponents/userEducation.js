@@ -78,10 +78,11 @@ const actions = {
     getters, dispatch
   }, data) {
     getters.getSelectedForCvUser ? data.UserAlias = getters.getSelectedForCvUser : data.UserAlias = localStorage.getItem("id");
-    getters.getSelectedCvLang ?  data.Language = getters.getSelectedCvLang.toUpperCase() : data.Language = localStorage.getItem("lang");
+    getters.getSelectedCvLang ? data.Language = getters.getSelectedCvLang.toUpperCase() : data.Language = localStorage.getItem("lang");
     data.DateStart = utils.formatDateForBackend(data.DateStart)
     data.DateEnd = utils.formatDateForBackend(data.DateEnd)
     data.IsCurrent = data.IsCurrent ? 'X' : '-'
+    data.Action = 'A'
     let url = 'UsersEducation';
     axios({
       url: url,
@@ -119,7 +120,7 @@ const actions = {
     }
     return axios({
       method: 'GET',
-      url: `FieldOfStudyDesc?$filter=Language eq '${lang}'`, 
+      url: `FieldOfStudyDesc?$filter=Language eq '${lang}'`,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
       }

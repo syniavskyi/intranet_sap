@@ -73,7 +73,7 @@ const actions = {
     data.DateEnd = utils.formatDateForBackend(data.DateEnd);
     data.IsCurrent = data.IsCurrent ? 'X' : '-';
     const urlU = "UserExperiences(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPosToChange + "',Employer='" + data.EmployerToChange + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00')";
-    const urlD = "UserExperiences(UserAlias='" + data.UserAlias + "',Language='" + data.Language + "',WorkPos='" + data.WorkPos + "',Employer='" + data.Employer + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
+    const urlD = "UserExperiences(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPos + "',Employer='" + data.Employer + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
     data.DateStartToChange = utils.formatDateForBackend(data.DateStartToChange);
     data.DateEndToChange = utils.formatDateForBackend(data.DateEndToChange);
     let sToken = getters.getToken;
