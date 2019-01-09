@@ -254,8 +254,14 @@ body {
     border: 0;
     border-radius: 8px;
     transition: color .2s;
+    height: 1.5rem;
+    width: 1.5rem;
     cursor: pointer;
+    background-image: url('../../images/iconfinder_info-alt.png');
+    background-repeat: no-repeat;
+    transform: scale(.9);
 }
+
 
 .event-desc:hover {
     color: #ffa500;
