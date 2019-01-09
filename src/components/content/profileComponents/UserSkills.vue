@@ -32,19 +32,19 @@
             <button class="prof-skills-btn" @click="addLanguageSkillsRow" v-if="editMode">+</button>
             <div class="prof-div-skills" v-for="(lang, index) in userLangs" :id="index" :key="index">
               <div class="prof-div-slang">
-                <select v-if="editMode" class="selectProfileSkills selectEdit" v-model="lang.LanguageId" @change="checkFieldsLangs(index)" :id="index">
+                <select v-if="editMode" class="selectProfileSkills selectEdit" v-model="lang.LanguageId" :disabled="!editMode" @change="checkFieldsLangs(index)" :id="index">
                   <option v-for="fullLang in fullLanguageList" :value="fullLang.LanguageId" :key="fullLang.LanguageId">{{fullLang.LangName}}</option>
                 </select>
-                <select v-if="!editMode" class="selectProfileSkills selectDisabled" v-model="lang.LanguageId">
+                <select v-if="!editMode" class="selectProfileSkills selectDisabled" v-model="lang.LanguageId" :disabled="!editMode">
                   <option v-for="fullLang in fullLanguageList" :value="fullLang.LanguageId" :key="fullLang.LanguageId">{{fullLang.LangName}}</option>
                 </select>
                 <label class="label-select-profile">{{ $t("label.language") }}</label>
               </div>
               <div class="prof-div-slang">
-                <select v-if="editMode" class="selectProfileSkills selectEdit" v-model="lang.LangLevel" @change="checkFieldsLangs(index)" :id="index">
+                <select v-if="editMode" class="selectProfileSkills selectEdit" v-model="lang.LangLevel" :disabled="!editMode" @change="checkFieldsLangs(index)" :id="index">
                   <option v-for="level in langLevels" :value="level.Key" :key="level.Key">{{level.Value}}</option>
                 </select>
-                <select v-if="!editMode" class="selectProfileSkills selectDisabled" v-model="lang.LangLevel">
+                <select v-if="!editMode" class="selectProfileSkills selectDisabled" v-model="lang.LangLevel" :disabled="!editMode">
                   <option v-for="level in langLevels" :value="level.Key" :key="level.Key">{{level.Value}}</option>
                 </select>
                 <label class="label-select-profile">{{ $t("label.level") }}</label>

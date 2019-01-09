@@ -83,7 +83,7 @@
         "to": "To",
         "target": "In order to",
         "transport": "Transport",
-        "registrationNo": "Registration number",
+        "registrationNo": "Reg. no.",
         "emplProjects": "Employee projects",
         "engag": "Engagement",
         "startDate": "Start date",
@@ -331,7 +331,7 @@
             "advanceDate": "Advance Date",
             "advanceCurrency": "Advance currency",
             "advanceAmount": "Advance amount",
-            "days": "Number of days"
+            "days": "No. of days"
         },
         "addModule": "Select module",
         "addIndustry": "Select industry"

@@ -126,10 +126,10 @@
                 <!-- class="profile-table-textarea" -->
                 <textarea class="cd-textarea" :disabled="!projectEditMode" @input="checkFields(index)" v-model="userProjects[index].Description" />
               </div>
-           <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
-                      <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
-                      <div class="prof-hint-item">{{showSingleHint()}}</div>
-                </div>
+              <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
+                <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
+                <div class="prof-hint-item">{{showSingleHint()}}</div>
+              </div>
             </div>
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> --- </div>
