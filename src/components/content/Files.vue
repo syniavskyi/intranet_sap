@@ -21,6 +21,7 @@
               <div class="documents-tile documents-tile-1-3" v-for="doc in docFiles" :key="doc.FileId">
                 <div class="documents-tile-header">
                   <p class="documents-tile-header-title">{{ doc.Filename }}</p>
+                  <!-- documents-tile-header-title -->
                   <div class="documents-tile-underscore"></div>
                 </div>
                 <div class="documents-tile-content">
@@ -177,7 +178,11 @@ export default {
         utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
   mounted() {
-    this.$nextTick(this.calcDocsHeight()).then(height => {});
+    this.$nextTick(() => {
+       // calculating doucument title height to change class that will suffice lack of support for property : -webkit-line-clamp and -webkit-box in Firefox
+      this.calcDocsHeight()
+      // this.calcDocumentTitleHeight()
+    });
   },
   methods: {
     showMenu(event) {
@@ -198,7 +203,7 @@ export default {
         "')/$value?c=" + this.$store.getters.getCookie;
       return url;
     },
-    toggleDocTile(evt, target) {
+    toggleDocTile(evt) {
       if (evt.target.getAttribute("aria-expanded") === "false") {
         evt.target.setAttribute("aria-expanded", true);
         this.closed = true;
