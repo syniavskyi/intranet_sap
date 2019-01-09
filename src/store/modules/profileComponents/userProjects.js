@@ -70,6 +70,10 @@ const actions = {
     getters.getSelectedForCvUser ? data.UserAlias = getters.getSelectedForCvUser : data.UserAlias = localStorage.getItem("id");
     data.DateStart = utils.formatDateForBackend(data.DateStart);
     data.DateEnd = utils.formatDateForBackend(data.DateEnd);
+    data.DateEndToChange = null;
+    data.DateStartToChange = null;
+    data.ProjectNameToChange = null;
+    data.Duplicated = null;
     dispatch('formatProjectToString', data);
     data.IsCurrent = data.IsCurrent ? 'X' : '-';
     data.Language = localStorage.getItem('lang');
@@ -105,7 +109,7 @@ const actions = {
     dataToSend.Language = localStorage.getItem('lang');
     delete dataToSend.User;
     dispatch('formatProjectToString', dataToSend);
-    let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00,ProjectName='${dataToSend.ProjectName},Language='${dataToSend.Language}')`;
+    let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00',ProjectName='${dataToSend.ProjectName}',Language='${dataToSend.Language}')`;
     let urlU = "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(dataToSend.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" + dataToSend.ProjectName + "',Language='" + dataToSend.Language + "')";
     let sToken = getters.getToken;
     axios({

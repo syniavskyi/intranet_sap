@@ -194,6 +194,7 @@ export default {
       const dataToChange = this._beforeEditingProjects[index],
         newData = utils.createClone(this.userProjects[index]);
         newData.Action ='U';
+        newData.Language = localStorage.getItem('lang') //temp
       if (dataToChange) {
         newData.DateStartToChange = dataToChange.DateStart;
         newData.DateEndToChange = dataToChange.DateEnd;
@@ -201,6 +202,7 @@ export default {
         this.$store.dispatch("updateUserProjectsPosition", newData);
       } else {
         this.$store.dispatch("saveUserProjectsPosition", newData);
+        // newData.Action ='A';
       }
       this._beforeEditingProjects = utils.createClone(this.userProjects);
       document.getElementsByClassName("projSaveButton")[

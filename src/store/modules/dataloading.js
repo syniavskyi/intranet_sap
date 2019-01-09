@@ -147,15 +147,15 @@ const actions = {
       changePage: bChangePage || false
     };
     // check if domains are read - if it has been read, get language of get domains by roles
-    if(aRoles.length > 0){
+    if(aRoles.length !== 0){
       sFirsLang = aRoles[0].Language.toUpperCase();
     }
     // if read language equals user language - do not read domains again
     if(sFirsLang === userData.lang){
       commit('SET_TO_READ_EXCLUDED', getters.getPromisesToRead);
-    } 
+    }
     // finally read data
-    dispatch("loadData", userData);  
+    dispatch("loadData", userData);
   },
 
   loadData({
@@ -170,8 +170,11 @@ const actions = {
    commit("SET_DISPLAY_LOADER", true); // set loader
     axios.all(aPromises).then(res => { // send promise
       dispatch("setDataInResponse", { res, userData }); // set data from responses
-    }).catch(error => {
-      console.log(error); // catch error 
+    }).catch(error => {  // catch error
+      if(error.response.status === 401) {
+        dispatch('logout');
+        location.reload();
+      }
     });
   },
 
@@ -233,7 +236,7 @@ const actions = {
       }
     })
   },
- 
+
   getUserData({
     getters,
   }, userData) {
@@ -243,7 +246,7 @@ const actions = {
         sLang = userData.lang || localStorage.getItem("lang");
     if(!sUserAlias){
       sUserAlias = userData.user;
-    } 
+    }
     if(!sLang){
       sLang = userData.lang;
     }
@@ -335,17 +338,17 @@ const actions = {
       let dataURL = imgCanvas.toDataURL("image/png");
       if(sLoggedUser === sUserId){
         commit('SET_USER_PHOTO_URL', dataURL);
-      } 
+      }
       commit('SET_SEL_USER_PHOTO_URL', dataURL);
-      
-      
+
+
 
       // localStorage.setItem("image", dataURL)
     }, false);
     image.addEventListener("error", function () {
       if(sLoggedUser === sUserId){
         commit('SET_USER_PHOTO_URL', "");
-      } 
+      }
       commit('SET_SEL_USER_PHOTO_URL', "");
     });
 
@@ -424,7 +427,7 @@ const actions = {
         case "StarterDocsNew":
           const starterDocsPromiseNew = dispatch('getNewDocs', userData).then(res => ( { res: res, promise: "StarterDocsNew" } ));
           aPromises.push(starterDocsPromiseNew);
-          break;  
+          break;
         case "NewToken":
           const newTokenPromise = dispatch('getNewToken').then(res => ( { res: res, promise: "NewToken" } ));
           aPromises.push(newTokenPromise);
@@ -446,7 +449,7 @@ const actions = {
           dispatch('getDomainValues', arrDomain);
           let aRes = [],
               aBatchRes = getters.getBatchRes
-          
+
           aBatchRes.filter(function(element){
             return element.Set = 'Dictionaries'
           }).forEach(function(element){
@@ -500,7 +503,7 @@ const actions = {
       if(message){
        dispatch('displayModal', message);
       }
-      
+
       switch(sPromiseName){
         case "Adverts":
           dispatch("setAdvertList", aResponse);
@@ -539,7 +542,7 @@ const actions = {
         case "StarterDocsNew":
           commit('SET_DOC_LIST_NEW', aResults);
           dispatch('checkStatus', aResults);
-          break;  
+          break;
         case "NewToken":
           let sToken = aResponse.request.getResponseHeader('x-csrf-token');
           commit('SET_TOKEN', sToken);
@@ -609,7 +612,7 @@ const actions = {
       case 'ZINTRANET_BRANCH':
         sCommitName = 'SET_BRANCH_LIST';
         break;
-      case 'ZINTRANET_STUDIES_TYPES': 
+      case 'ZINTRANET_STUDIES_TYPES':
         sCommitName = 'SET_STUDY_TYPES_LIST';
         break;
       case 'ZINTANET_ACADEMIC_TITLES':
@@ -650,7 +653,7 @@ const actions = {
     if(sCommitName.length > 0){
       commit(sCommitName, aResults);
     }
-    
+
   },
 
   setDocumentList({commit}, passedData){
@@ -690,14 +693,14 @@ const actions = {
           dispatch('loadUserPhoto', oData.UserAlias); //load user's photo for menu and profile TO BE READ
           let aAuth = utils.checkRole(oData.UserAuth.results);
           dispatch("_setAuthorizations", aAuth);
-          //set authorization for all objects - to optimize      
+          //set authorization for all objects - to optimize
           commit('SET_USER_EDUCATION', oData.UserEducations.results); //set user education data for profile and cv
           commit('SET_USER_EXPERIENCE', oData.UserExperiences.results); //set user experience data for profile and cv
-    
+
           commit('SET_USER_LANGS', oData.UserLang.results);
-    
-          commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user 
-          
+
+          commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
+
           commit('SET_USER_PROJECTS_LIST', oData.UserCvProjects.results); //set user projects data for profile and cv
           dispatch('adjustProjects');
         } else {
