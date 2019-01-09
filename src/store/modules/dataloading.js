@@ -477,8 +477,8 @@ const actions = {
           aPromises.push(availProjectsPromise);
           break;
       }
-      commit("SET_PROMISE_LIST", aPromises);
     }
+    commit("SET_PROMISE_LIST", aPromises);
    }
   },
 
