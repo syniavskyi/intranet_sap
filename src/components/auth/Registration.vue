@@ -37,21 +37,21 @@
             </div>
             <!-- DEPARTMENT -->
             <div class="cd-for-select">
-              <select required class="cd-select" v-model="registerData.DepartmentId" @change="checkToBackOffice(registerData.DepartmentId)">
+              <select required class="cd-select" v-model="registerData.DepartmentId" @change="checkAndChangeRole(registerData.DepartmentId)">
                 <option v-for="DepartmentId in departmentList" :key="DepartmentId.Value" :value="DepartmentId.Key">{{ DepartmentId.Value }}</option>
               </select>
               <label class="cd-slabel" for="DepartmentId">{{ $t("label.department") }}</label>
             </div>
             <!-- BRANCH -->
             <div class="cd-for-select">
-              <select required class="cd-select" v-model="registerData.BranchId" @change="checkToBackOffice(registerData.DepartmentId)">
+              <select required class="cd-select" v-model="registerData.BranchId" @change="checkAndChangeRole(registerData.DepartmentId)">
                 <option v-for="BranchId in branchList" :key="BranchId.Key" :value="BranchId.Key">{{ BranchId.Value }}</option>
               </select>
               <label class="cd-slabel" for="BranchId">{{ $t("label.branch") }}</label>
             </div>
             <!-- ROLE -->
             <div class="cd-for-select">
-              <select required :disabled="backOfficeClicked" class="cd-select" :class="backOfficeClicked ? 'cd-dselect' : 'cd-select'" v-model="registerData.Role" @change="checkToBackOffice(registerData.DepartmentId)">
+              <select required :disabled="lockRoleChange" class="cd-select" :class="lockRoleChange ? 'cd-dselect' : 'cd-select'" v-model="registerData.Role" @change="checkAndChangeRole(registerData.DepartmentId)">
                 <option v-for="Role in roleList" :value="Role.Key" :key="Role.Key">{{ Role.Value }}</option>
                 <!-- <option v-for="Role in roleList" :value="Role.Value" :key="Role.Key">{{ Role.Key }}</option> -->
               </select>
@@ -98,7 +98,7 @@ export default {
       showSuccessDialog: false,
       showFailDialog: false,
       isLoading: false,
-      backOfficeClicked: false
+      lockRoleChange: false
     };
   },
   created() {
@@ -140,12 +140,17 @@ export default {
     "modal": Modal
   },
   methods: {
-    checkToBackOffice(passedValue) {
+    checkAndChangeRole(passedValue) {
       if(passedValue === "BACKO") {
         this.registerData.Role = "BACKO";
-        this.backOfficeClicked = true;
+        this.lockRoleChange = true;
+      }
+      else if(passedValue === "MNGMT"){
+        this.registerData.Role = "MNGMT";
+        this.lockRoleChange = true;
       } else {
-        this.backOfficeClicked = false;
+        this.registerData.Role = "BTECH";
+        this.lockRoleChange = false;
       }
     },
     showMenu(event) {
