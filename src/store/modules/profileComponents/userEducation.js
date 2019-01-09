@@ -42,12 +42,14 @@ const actions = {
       FieldOfStudyToChange: null,
       AcademicTitleToChange: null,
       FieldOfStudyDescription: null,
-      Language: 'PL'
+      Language: 'PL',
+      newRow: true
     })
   },
   editUserEducation({
     getters, dispatch
   }, data) {
+    const a = this.userEducation;
     getters.getSelectedForCvUser ? data.UserAlias = getters.getSelectedForCvUser : data.UserAlias = localStorage.getItem("id");
     getters.getSelectedCvLang ?  data.Language = getters.getSelectedCvLang.toUpperCase() : data.Language = localStorage.getItem("lang");
     data.DateStart = utils.formatDateForBackend(data.DateStart);

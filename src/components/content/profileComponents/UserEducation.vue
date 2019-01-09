@@ -205,11 +205,16 @@ export default {
     },
     remove(index) {
       let newData = utils.createClone(this.userEducation[index]);
-      newData.Action = 'D';
-      this.editUserEducation(newData);
-      this.userEducation.splice(index, 1);
-      this._beforeEditingCache = utils.createClone(this.userEducation)
-      },
+          newData.Action = 'D';
+
+      if(this.userEducation[index].newRow) {
+        return this.userEducation.splice(index, 1)
+      } else {
+        this.editUserEducation(newData);
+        this.userEducation.splice(index, 1);
+        this._beforeEditingCache = utils.createClone(this.userEducation)
+      }
+    },
     //undo changes
     cancel() {
       this.onHoverOut(this.$el);
@@ -219,6 +224,8 @@ export default {
     },
     // check if new data should be updated or created
     save(index) {
+      delete this.userEducation[index].newRow;
+
       const dataToChange = this._beforeEditingCache[index],
         newData = utils.createClone(this.userEducation[index]);
         newData.Action = 'U';
