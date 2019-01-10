@@ -6,8 +6,12 @@
                 </h2>
                 <div class="availability-tile-underscore"></div>
             </div>
-             <button class="profile-edit-btn" v-if="!editMode" :disabled="disabledBtnToEditAvail" @click="edit">{{ $t("button.edit") }}</button>
-             <button class="profile-edit-btn-e" v-if="editMode" @click="cancel"><span class="prof-btn-txt">{{ $t("button.finishEdit") }}</span><span class="prof-btn-icon">&#10004;</span></button>
+            <button class="holiday-button-static" >
+                <img src="../../../assets/images/island.png">
+                <p>{{$t('title.openHoliday')}}</p>
+            </button>
+            <button class="profile-edit-btn" v-if="!editMode" :disabled="disabledBtnToEditAvail" @click="edit">{{ $t("button.edit") }}</button>
+            <button class="profile-edit-btn-e" v-if="editMode" @click="cancel"><span class="prof-btn-txt">{{ $t("button.finishEdit") }}</span><span class="prof-btn-icon">&#10004;</span></button>
         </div>
         <p class="ava-content-header" v-if="noAvailEntries">{{ $t("message.noEntriesForParameters") }}</p>
         <div class="availability-tile-content" v-if="!noAvailEntries">
@@ -29,7 +33,7 @@
                             <option v-for="type in filteredAvailTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select>
                         <button v-if="avail.TypeId !== 'WR' && !editMode" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
-                                <img src="../../../assets/images/island.png">
+                            <img src="../../../assets/images/island.png">
                         </button>
                     </div>
                     <div class="ava-tbs-item">

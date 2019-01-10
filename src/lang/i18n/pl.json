@@ -360,6 +360,6 @@
         "delete": "usuń",
         "save": "zapisz",
         "reset": "resetuj",
-        "openHoliday": "click to create new holiday request"
+        "openHoliday": "Kliknij aby wygenerować wniosek urlopowy"
     }
 }

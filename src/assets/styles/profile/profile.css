@@ -1160,6 +1160,14 @@
     background-image: none;
 }
 
+.selectDisabled {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-align-last: center;
+}
+
 .selectDisabledh4 {
     font-weight: normal;
     border: 1px solid transparent;
