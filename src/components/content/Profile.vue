@@ -309,7 +309,8 @@ export default {
   },
   // set login language
   beforeRouteLeave(to, from, next) {
-    let lang = this.loginLanguage.toLowerCase();
+    let lang = this.loginLanguage.toLowerCase(),
+    path = ""
     if (lang == "") {
       lang = "pl";
     }
@@ -319,14 +320,13 @@ export default {
     }
 
     if (this.editMode && this.hasDataChanged) {
+      this.$store.commit('SET_NEXT_PATH', to.path)
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
-      if (this.leavePageFlag !== null) {
-        if (this.leavePageFlag === false) {
-          return
-        } else {
+      if (this.leavePageFlag === false) {
+      } else {
+          this.$store.commit('SET_LEAVE_PAGE_DIALOG', false)
           next()
         }
-      }
     } else {
       next()
     }

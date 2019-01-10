@@ -89,6 +89,9 @@ body {
     border-radius: 4px;
     border: 1px solid lightgrey;
 }
+.n-textarea:disabled {
+    background-color: #fff2e0
+}
 
 .modal-advert-header {
     height: 15%;
@@ -144,14 +147,14 @@ body {
 .news-adv-left {
     left: .1rem;
 }
-.news-adv-right { 
+.news-adv-right {
     right: .1rem;
 }
 
 .btn-s {
     width: 10rem;
     margin-bottom: 1rem;
-} 
+}
 
 .content-event {
     display: flex;
@@ -320,7 +323,7 @@ body {
 }
 .description {
     display: flex;
-    justify-content: center;  
+    justify-content: center;
     font-size: 1.2rem;
 }
 .additional {
@@ -398,7 +401,7 @@ body {
     font-size: 1.2rem;
     justify-content: end;
     padding: .2rem;
-    font-family: 'IBM Plex Sans', serif; 
+    font-family: 'IBM Plex Sans', serif;
 }
 
 #articles p {
@@ -410,7 +413,7 @@ body {
 .weatherDay {
     background-image: url("../../../assets/images/weather/day.png")
 }
-  
+
 .weatherNight {
     background-image: url("../../../assets/images/weather/night.png")
 }
@@ -459,7 +462,7 @@ body {
         width: 100%;
         display: flex;
         flex-direction: row;
-        box-sizing: border-box;       
+        box-sizing: border-box;
     }
     #articles{
         display: flex;
@@ -506,7 +509,7 @@ body {
 @media (min-width: 40rem) and (max-width: 69rem) {
     .temp {
         font-size: 2.3rem;
-    } 
+    }
 
     .content-weather {
         width: 40%;
