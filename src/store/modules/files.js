@@ -1,4 +1,6 @@
 import axios from 'axios'
+const utils = require('../../utils.js')
+
 const state = {
   userFiles: [],
   documentFiles: [],
@@ -47,13 +49,23 @@ const actions = {
     }).catch(error => {
     })
   },
-  getDocuments({}, fileType) {
+  getDocuments({commit}, fileTypes) {
+    // return axios({
+    let arrReqs = [],
+        link, sData
+    fileTypes.forEach(function (fileType) {
+    link = `GET Attachments?$filter=FileId%20eq%20'${fileType}' HTTP/1.1`
+        // "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+      arrReqs.push(link)
+    })
+    sData = utils.packBatch(arrReqs, getters.getToken)
     return axios({
-      method: 'GET',
-      url: "Attachments?$filter=FileId eq '" + fileType + "'",
+      method: 'post',
+      url: "/$batch",
       headers: {
-        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-      }
+        "Content-type": "multipart/mixed; boundary=batch"
+      },
+      data: sData
     })
   },
   toggleDocTile({}, element) {
