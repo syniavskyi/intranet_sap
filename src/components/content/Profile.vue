@@ -141,8 +141,7 @@
                       </div>
                       <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
                       <p class="profile-error profile-error-image" v-if="photoUploadError">{{ $t("message.photoUploadError") }}</p>
-                      <label for="change-user-image" class="profile-edit-btn">{{ $t("button.changePhoto") }}
-                       <!-- v-if="!disabledBtnToEdit" -->
+                      <label for="change-user-image" class="profile-edit-btn" v-if="!disabledBtnToEdit">{{ $t("button.changePhoto") }}
                         <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload" id="change-user-image">
                       </label>
                     </div>
@@ -315,7 +314,9 @@ export default {
       lang = "pl";
     }
     this.$store.commit("SET_LANG", lang);
-    this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
+    if(to.path !== '/cv') {
+      this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
+    }
 
     if (this.editMode && this.hasDataChanged) {
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
@@ -329,7 +330,6 @@ export default {
     } else {
       next()
     }
-    // next();
   },
   beforeRouteEnter(to, from, next) {
     if(from.name  ===  "Employees") {
@@ -354,6 +354,7 @@ export default {
         oStore.dispatch('getData', null);
       }
     }
+    oStore.commit('SET_SHOW_CV_DIALOG', false);
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
   components: {
@@ -443,6 +444,7 @@ export default {
     selectedUser(value) {
       if(!value) {
         this.selectedUser = localStorage.getItem('id');
+        localStorage.setItem('cvUser', this.selectedUser);
       }
       let profileActivityAuth = this.$store.getters.getUserAuth.ZPROF_ATCV;
       if(profileActivityAuth === '*') {

@@ -271,7 +271,8 @@
         "requestPermission": "Ich stimme dem Urlaub zur angegebenen Zeit zu",
         "authPersonSignature": "Unterschrift der berechtigten Person",
         "leaveRequest": "Ich bitte um einen Urlaub",
-        "goToUserByFullname": "Gehen Sie zum Profil, basierend auf seinem Vor- und Nachnamen"
+        "goToUserByFullname": "Gehen Sie zum Profil, basierend auf seinem Vor- und Nachnamen",
+        "requiredField": "Field is required"
     },
     "select": {
         "language": {

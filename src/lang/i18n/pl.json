@@ -253,7 +253,7 @@
         "selectTypeToAddEntry": "Aby dodać wpis, Wybierz jego rodzaj po lewej stronie",
         "addEntryforUser": "Dodaj wpis dla użytkownika {user}",
         "addProjectforUser": "Dodaj projekt dla użytkownika {user}",
-        "confirmPageLeaving": "Potwierdź opuszcenie strony",
+        "confirmPageLeaving": "Potwierdź opuszczenie strony",
         "unsavedData": "Wprowadzone dane nie zostaną zapisane. Czy na pewno chcesz opuścić stronę?",
         "delegationConfirmQuestion": "Czy chcesz zatwierdzić delegację? Upewnij się, że wprowadzone dane są prawidłowe.",
         "failedToSaveDelegation": "Niepowodzenie podczas zapisu numeru delegacji",
@@ -270,7 +270,8 @@
         "requestPermission": "Wyrażam zgodę na urlop we wskazanym terminie",
         "authPersonSignature": "Podpis osoby upoważnionej",
         "leaveRequest": "Proszę o udzielenie urlopu",
-        "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko"
+        "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
+        "requiredField": "Pole jest obowiązkowe"
     },
     "select": {
         "language": {
