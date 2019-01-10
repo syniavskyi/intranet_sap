@@ -173,10 +173,28 @@
 .request-fullname {
     width: 550px;
 }
-.holiday-button {
+.holiday-button,
+.holiday-button-static {
+    display: none;
+    align-items: center;
     background: transparent;
     border: none;
+    bottom: 0.1rem;
+    right: 0;
+    justify-content: space-between;
 }
+
+.holiday-button-static p {
+    color: #808080;
+    font: 1.2rem 'Arial';
+}
+
+.holiday-button {
+    display: flex;
+    position: absolute;
+    cursor: pointer;
+}
+
 .request-input {
     border: none;
     background-color: var(--request-input-color);
@@ -694,6 +712,9 @@
 }
 
 @media (min-width: 35rem) {
+    .holiday-button-static {
+        display : flex;
+    }
     .availability-tiles {
         width: 95%;
     }
@@ -743,7 +764,7 @@
     }
     .ava-ths-item,
     .ava-tbs-item {
-        width:25%
+        width:20%
     }
     .ava-thproj-item:last-of-type,
     .ava-tbproj-item:last-of-type {
