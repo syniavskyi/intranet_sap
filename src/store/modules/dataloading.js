@@ -304,7 +304,7 @@ const actions = {
     commit, getters
   }, userAlias) {
     const sUserId = userAlias,
-      sLoggedUser =  localStorage.getItem("id"), //
+      sLoggedUser =  localStorage.getItem("id"),
       sLanguage = 'PL',
       sFileType = "USER-PHOTO";
     const url =
@@ -456,12 +456,30 @@ const actions = {
           aPromises = aRes;
           break;
         case "Documents":
-          let documentPromise;
-          for (let j = 0; j < getters.getFileTypes.length; j++) {
-            let fileType = getters.getFileTypes[j];
-                documentPromise = dispatch('getDocuments', fileType).then(res => ({ res: res, promise: fileType }));
-                aPromises.push(documentPromise);
-          }
+          let documentPromises,
+              sData;
+          // for (let j = 0; j < getters.getFileTypes.length; j++) {
+            let fileTypes = getters.getFileTypes
+            let aResponse = dispatch('getDocuments', fileTypes).then(res => {
+              let oParsedData = utils.parseBatchResponse(res)
+              commit('SET_BATCH_RES', oParsedData)
+              let aRes = [],
+              aBatchRes = getters.getBatchRes
+
+              aBatchRes.filter(function(element){
+                return element.Set = 'Attachements'
+              }).forEach(function(element){
+                let obj = { aResults: element,
+                        documentType: element[0].FileId.split('-')[0]
+                    }
+                  dispatch('setDocumentList', obj)
+                  aRes.push({obj})
+              })
+
+            }).catch(error => {
+              console.log(error)
+            })
+
           break;
         case "Availabilities":
           let availabilityPromise = dispatch("getUserAvail", userData.user).then(res => ({res: res, promise: "Availabilities"}));

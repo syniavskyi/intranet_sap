@@ -181,7 +181,6 @@ export default {
     this.$nextTick(() => {
        // calculating doucument title height to change class that will suffice lack of support for property : -webkit-line-clamp and -webkit-box in Firefox
       this.calcDocsHeight()
-      // this.calcDocumentTitleHeight()
     });
   },
   methods: {
