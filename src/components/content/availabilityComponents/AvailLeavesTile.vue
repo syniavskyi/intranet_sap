@@ -56,8 +56,7 @@ export default {
         return {
             selectedDates: null,
             disableAddNew: true,
-            loginAlias: localStorage.getItem("id"),
-            selectedType: false
+            loginAlias: localStorage.getItem("id")
         }
     },
     computed: {
