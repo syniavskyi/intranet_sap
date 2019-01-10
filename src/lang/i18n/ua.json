@@ -269,7 +269,8 @@
         "requestPermission": "Wyrażam zgodę na urlop we wskazanym terminie",
         "authPersonSignature": "Podpis osoby upoważnionej",
         "leaveRequest": "Proszę o udzieleie urlopu",
-        "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko"
+        "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
+        "requiredField": "Field is required"
     },
     "select": {
         "language": {

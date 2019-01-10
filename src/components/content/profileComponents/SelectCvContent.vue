@@ -1,6 +1,5 @@
 <template>
   <div class="modal-new">
-    <!-- <div class="modal-content-new"> -->
       <header class="modal-header-new">
         <h1 class="cv-modal-h1">{{ $t("header.generateCV") }}</h1>
         <button class="modal-close" @click="close">&#10006;</button>
@@ -49,34 +48,23 @@
         <div class="cv-modal-selects">
           <div class="cv-modal-div-s">
           <!-- Wybierz język -->
-            <select required class="cv-modal-select" v-model="cvElements.language">
-              <option v-for="language in languageList" :key="language.id" :value="language.id"> {{language.description}}</option>
+            <select required class="cv-modal-select" v-model="cvElements.language" @blur="$v.cvElements.language.$touch()">
+              <option v-for="language in languageList" :key="language.id" :value="language.id.toUpperCase()"> {{language.description}}</option>
             </select>
             <label class="cv-modal-label">{{ $t("label.selectLanguage") }}</label>
           </div>
           <div class="cv-modal-div">
             <!-- Wybierz format -->
-            <select required class="cv-modal-select" v-model="cvElements.format">
-              <option value="DOCX"> DOCX </option>
-              <option value="PDF"> PDF </option>
+            <select required class="cv-modal-select" v-model="cvElements.format" @blur="$v.cvElements.format.$touch()">
+              <option v-for="format in formats" :value="format" :key="format"> "{{format}}" </option>
             </select>
             <label class="cv-modal-label">{{ $t("label.selectFormat") }}</label>
           </div>
-          <!-- <div class="cv-modal-div-l">
-            <select required class="cv-modal-select" v-model="cvElements.position">
-              <option v-for="position in userData.JobPosition" :key="position" :value="position"> {{position}}</option>
-            </select>
-            <label class="cv-modal-label">{{ $t("label.selectPosition") }}</label>
-          </div> -->
-          <!-- <div class="cv-modal-div-s">
-            <input required class="cv-modal-input" v-model="userData.JobPosition">
-            <span class="imodal-div-bar"></span>
-            <label v-if="userData.JobPosition === ''" class="cv-modal-label">{{ $t("label.selectPosition") }}</label>
-          </div> -->
           <div class="cv-modal-div-s">
-            <input required class="cv-modal-input" v-model="cvElements.position">
+            <input required class="cv-modal-input" v-model="cvElements.position" @blur="$v.cvElements.position.$touch()">
             <span class="imodal-div-bar"></span>
             <label class="cv-modal-label">{{ $t("label.position") }}</label>
+            <p v-if='!cvElements.position' class="avail-error p-error"> {{ $t("message.requiredField") }} </p>
           </div>
           <div class="cv-modal-div-s">
             <input required class="cv-modal-input" v-model="cvElements.entity">
@@ -86,10 +74,9 @@
         </div>
       </div>
       <div class="cv-modal-bbuttons">
-        <button class="cv-modal-btn" @click="showCv">{{ $t("button.seePreview") }}</button>
+        <button :disabled="$v.$invalid" class="cv-modal-btn" @click="showCv">{{ $t("button.seePreview") }}</button>
         <button class="cv-modal-btn-clear" @click="close">{{ $t("button.close") }}</button>
       </div>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -97,6 +84,7 @@
 import { mapActions, mapGetters } from "vuex";
 import i18n from "../../../lang/lang";
 import { app } from "../../../main";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -108,11 +96,23 @@ export default {
       languageList: "getLanguageList",
       industryList: "getIndustryList",
       getSelectedCvLang: "getSelectedCvLang",
-      userData: "getUserInfo"
-      // userPositions: "getUserJobPositions"
+      userData: "getUserInfo",
+      formats: "getCvFormats"
     })
   },
-
+  validations: {
+      cvElements: {
+        language: {
+          required
+        },
+        format: {
+          required
+        },
+        position: {
+          required
+        }
+      }
+  },
   methods: {
     ...mapActions([
       "selectAllCvElements",

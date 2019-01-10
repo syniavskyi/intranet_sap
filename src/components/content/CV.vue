@@ -161,16 +161,12 @@
       </table>
     </div>
   </div>
-   <!-- <div v-if="showModal" v-for="message in messageLog" :value="message.message" :key="message.message">
-      <modal v-show="message.showModal" :message="{message}"/>
-  </div> -->
 </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-// import jsPDF from "jsPdf";
 import jszip from "jszip";
 import htmlDocx from "html-docx-js/dist/html-docx";
 import { saveAs } from "file-saver";

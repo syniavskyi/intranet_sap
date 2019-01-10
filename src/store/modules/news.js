@@ -247,7 +247,7 @@ const actions = {
       },
       getArticlesFn({commit, getters}) {
           // make html object
-          if(getters.getArticles.length === 0) {
+          if(getters.getArticles.length !== 10) {
             let allArticles = getters.getArticlesJson,
           articles = []
             for(let i in allArticles) {
@@ -293,14 +293,17 @@ const actions = {
                 div.appendChild(contentDiv)
                 }
                 div.className = "artAll"
-
-                document.getElementById('articles').appendChild(div)
-                articles.push(div)
+                if(div !== null) {
+                    document.getElementById('articles').appendChild(div)
+                    articles.push(div)
+                }
           }
           commit('SET_ARTICLES', articles)
           } else {
               for(let val of getters.getArticles) {
-                document.getElementById('articles').appendChild(val)
+                  if(val!== null) {
+                    document.getElementById('articles').appendChild(val)
+                  }
               }
           }
       }

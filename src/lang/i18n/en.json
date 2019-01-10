@@ -271,7 +271,8 @@
         "requestPermission": "I agree to the leave at the indicated time",
         "authPersonSignature": "Signature of an authorized person",
         "leaveRequest": "I am asking for a leave",
-        "goToUserByFullname": "Go to the employee's profile by choosing the name and surname"
+        "goToUserByFullname": "Go to the employee's profile by choosing the name and surname",
+        "requiredField": "Field is required"
     },
     "select": {
         "language": {

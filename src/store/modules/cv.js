@@ -7,12 +7,12 @@ const state = {
         phone: true,
         date:true,
         name: true,
-        language: null,
-        format: "",
+        language: localStorage.getItem('lang'),
+        format: "DOCX",
         contractor: true,
         position: ""
     },
-    cvFormats: ["DOCX", "DOC", "PDF"],
+    cvFormats: ["DOCX"],
     showSelectCvDialog: false,
     dataToRead: ["NewToken", "Domains", "Industries", "UserData", "UserList", "Contractors", "Projects", "Languages", "SchoolDesc", "FieldOfStudy"]
 };

@@ -130,21 +130,23 @@ const mutations = {
 
 const actions = {
   getData({getters, dispatch, commit}, passedData){
-    let passedUserId, passedLang, bChangePage,
+    let passedUserId, passedLang, bChangePage, bLogin,
         aRoles = getters.getRoleList,
         sFirsLang;
     // check and assign passed data
     if(passedData){
       passedUserId = passedData.user;
       passedLang = passedData.lang;
-      bChangePage = passedData.changePage
+      bChangePage = passedData.changePage;
+      bLogin = passedData.login;
     }
     // set user data - passed or saved in storage (for refresh reason)
     let userData = {
       user: passedUserId || localStorage.getItem("id"),
       lang: passedLang || localStorage.getItem("lang"),
       cvLang: getters.getSelectedCvLang || localStorage.getItem("lang"),
-      changePage: bChangePage || false
+      changePage: bChangePage || false,
+      login: bLogin || false
     };
     // check if domains are read - if it has been read, get language of get domains by roles
     if(aRoles.length !== 0){
@@ -215,15 +217,12 @@ const actions = {
       console.log(error)
     })
   },
-  getProjectsList({
-    getters
-  }) {
+  getProjectsList({}) {
     return axios({
       method: 'GET',
       url: 'Projects',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -240,8 +239,7 @@ const actions = {
   getUserData({
     getters,
   }, userData) {
-    let sCookie = getters.getCookie,
-    url;
+    let url;
     let sUserAlias = userData.user || localStorage.getItem("id"),
         sLang = userData.lang || localStorage.getItem("lang");
     if(!sUserAlias){
@@ -257,7 +255,6 @@ const actions = {
       url: url,
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": sCookie
       }
     })
   },
@@ -284,13 +281,11 @@ const actions = {
     }
   },
   getUsersLists({}) {
-    let sCookie = document.cookie;
     return axios({
       method: 'GET',
       url: 'Users',
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": sCookie
       }
     })
   },
@@ -355,20 +350,20 @@ const actions = {
 
 
   },
-  checkPageToDisplay({}, changePage) {
-    if (changePage) {
-      router.replace('/news')
-    }
+  checkPageToDisplay({}, userData) {
+    if(userData.changePage && userData.login) {
+      router.replace('/news');
+     } else if(!userData.changePage && userData.login) {
+      router.replace('/starterpage');
+     }
+      userData.login = false;
   },
-  getAdverts({
-    getters
-  }) {
+  getAdverts({}) {
     return axios({
       method: 'GET',
       url: "Adverts",
       headers: {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        // "Cookie": getters.getCookie
       }
     })
   },
@@ -513,6 +508,9 @@ const actions = {
           break;
         case "UserData":
           dispatch("setUserData", aResponse);
+          if(aResponse.data.d.UserFiles.results.length !== 0) {
+            userData.changePage = false;
+           }
           break;
         case "Contractors":
           commit('SET_CONTRACTORS_LIST', aResults);
@@ -577,7 +575,7 @@ const actions = {
       }
     }
     commit("SET_DISPLAY_LOADER", false);
-    dispatch('checkPageToDisplay', userData.changePage);
+    dispatch('checkPageToDisplay', userData);
   },
 
   setAdvertList({commit}, response){
@@ -681,7 +679,7 @@ const actions = {
       commit(sCommitName, aResults);
   },
 
-  setUserData({dispatch, commit, getters}, response, userData){
+  setUserData({dispatch, commit, getters}, response){
       //skillSet is name of commit
       let skillSet;
       dispatch('formatUserData', response.data.d); // format dates for date pickers and "is current" fields
