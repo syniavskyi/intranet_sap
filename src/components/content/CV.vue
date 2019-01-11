@@ -407,7 +407,7 @@ export default {
   flex-direction: column;
   margin: 1rem auto;
   margin-bottom: 0.5cm;
-  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 0.5cm rgba(0, 0, 0, 0.5);
   width: 50%;
   height: 100%;
   padding: 6rem;
@@ -440,7 +440,7 @@ export default {
   /* padding: .6rem .8rem; */
 }
 .cv-modal-btn-bclear:hover {
-  box-shadow: 0 0 8px #333;
+  box-shadow: 0px 0px 8px #333;
   background: #333;
   color: white;
 }

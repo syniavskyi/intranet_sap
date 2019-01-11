@@ -254,7 +254,7 @@
 
 .cd-rbtn:checked {
     border: 8px solid #ffa500;
-    box-shadow: 0 0 10px #ffa500;
+    box-shadow: 0px 0px 10px #ffa500;
 }
 
 .cd-rbtn:checked + label {

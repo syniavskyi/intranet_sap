@@ -320,7 +320,7 @@ export default {
 }
 
 .cv-modal-btn-bclear:hover {
-  box-shadow: 0 0 8px #333;
+  box-shadow: 0px 0px 8px #333;
   background: #333;
   color: white;
 }

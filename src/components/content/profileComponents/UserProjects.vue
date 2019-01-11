@@ -1,11 +1,5 @@
 <template>
   <div class="profile-tile">
-    <!-- SPi -->
-    <!-- <div class="prof-skills-hint" v-if="showHintProject.show">
-      <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
-      <div class="prof-hint-item">{{showSingleHint()}}</div>
-    </div> -->
-    <!-- Spi -->
     <div class="profile-tile-header">
       <div class="profile-tile-header-row">
         <h2 class="profile-tile-title">{{ $t("header.projects") }}</h2>
@@ -42,22 +36,14 @@
           </div>
           <div class="prof-tbody">
             <div class="prof-tbody-row" v-for="(project, index) in userProjects" :key="index">
-            <!-- class="prof-tbody-item" -->
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("label.eg") }}</div>
-                <!-- class="prof-tbody-item-txt" -->
                 <div class="prof-tbody-item-txt">
                   <p class="table-p">{{index + 1}}</p>
                 </div>
-                <!-- SPI -->
-                  <!-- <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
-                      <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
-                      <div class="prof-hint-item">{{showSingleHint()}}</div>
-                </div> -->
               </div>
               <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.projectName") }} </div>
-              <!-- class="prof-tbody-item-txt" -->
               <div class="prof-tbody-item-txt">
                 <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ProjectName" />
               </div>
@@ -65,9 +51,6 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
-              <!-- <select :disabled="!projectEditMode" class="profile-table-select profile-table-select-contractor" v-model="userProjects[index].ContractorId">
-              <option v-for="contractor in contractorsList" :key="contractor.id" :value="contractor.id"> {{ contractor.name }}</option>
-              </select> -->
                 <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" />
               </div>
             </div>
@@ -112,7 +95,6 @@
                 <div class="prof-table-btns sapModule">
                   <button :disabled="!projectEditMode" class="profile-table-module-button" @click="removeModule" :name="index" v-for="sapModule in userProjects[index].Modules" :key="sapModule.id" :value="sapModule.id"> {{ sapModule.id }} </button>
                 </div>
-                <!-- <div id="addButtons"></div> -->
                 <select v-if="projectEditMode" class="profile-table-select profile-table-select-modules" @change="addModule" :id="index">
                   <option disabled selected value>{{ $t("table.addModule") }}:</option>
                   <option v-for="sapModule in modulesList" :key="sapModule.Key" :value="sapModule.Key"> {{ sapModule.Value }}</option>
@@ -123,7 +105,6 @@
               <div class="prof-tbody-item-title">{{ $t("table.Descr") }} </div>
               <button class="btn-hint-item" v-if="projectEditMode" @click="showHintFnProject({show: true, index: index})">?</button>
               <div class="prof-tbody-item-txt">
-                <!-- class="profile-table-textarea" -->
                 <textarea class="cd-textarea" :disabled="!projectEditMode" @input="checkFields(index)" v-model="userProjects[index].Description" />
               </div>
               <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
