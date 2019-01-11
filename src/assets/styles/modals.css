@@ -24,7 +24,7 @@
     z-index: 1700;
     background: #ffffff;
     border-radius: .5rem;
-    box-shadow: 0 0 50px 1px #333;
+    box-shadow: 0px 0px 50px 1px #333;
 }
 
 .modal-new-stretch {
@@ -150,7 +150,7 @@
     background: #FFBABA;
     padding: 25px;
     color: #D8000C;
-    /* box-shadow: 0 0 10px grey; */
+    /* box-shadow: 0px 0px 10px grey; */
     border-bottom: 1px solid #D8000C;
 }
 

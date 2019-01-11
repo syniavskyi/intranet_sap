@@ -42,7 +42,7 @@
 }
 
 .cal-and-fils {
-    box-shadow: 0 0 10px grey;
+    box-shadow: 0px 0px 10px grey;
 }
 
 .calendar-tile {
@@ -52,7 +52,7 @@
     background: #ffffff;
     height: auto;
     border-radius: 4px;
-    box-shadow: 0 0 10px #808080;
+    box-shadow: 0px 0px 10px #808080;
     margin-top: 1rem;
 }
 .add-event-content {
@@ -98,7 +98,7 @@
     position: absolute;
     right: 2rem;
     bottom: 2rem;
-    box-shadow: 0 0 10px #808080;
+    box-shadow: 0px 0px 10px #808080;
     border-radius: 8px;
     background-color: #ffffff;
     padding: .2rem;
@@ -137,7 +137,7 @@
     cursor: pointer;
     color: #808080;
     border-radius: 5px;
-    box-shadow: 0 0 4px #ada8a3;
+    box-shadow: 0px 0px 4px #ada8a3;
     outline: none;
     transition: box-shadow .2s, color .2s, border .2s;
 }
@@ -155,12 +155,12 @@
 .cal-save-btn:hover {
     color: #ffa500;
     border-color: #ffa500;
-    box-shadow: 0 0 8px #ffa500;
+    box-shadow: 0px 0px 8px #ffa500;
 }
 
 .cal-back-btn:hover {
     color: #333333;
-    box-shadow: 0 0 8px #333333;
+    box-shadow: 0px 0px 8px #333333;
 }
 
 .user-list {
@@ -189,7 +189,7 @@
     border-radius: 3px;
     height: 2.2rem;
     width: 20.5rem;
-    box-shadow: 0 0 10px transparent;
+    box-shadow: 0px 0px 10px transparent;
     transition: box-shadow .2s, border .2s;
 }
 
@@ -197,7 +197,7 @@
 .privacy-button:focus {
     cursor: pointer;
     outline: none;
-    box-shadow: 0 0 8px rgb(241, 153, 51);
+    box-shadow: 0px 0px 8px rgb(241, 153, 51);
 }
 
 .evt-desc,
@@ -371,7 +371,7 @@
     width: 16rem;
     height: 11rem;
     margin: .5rem;
-    box-shadow: 0 0 10px #808080;
+    box-shadow: 0px 0px 10px #808080;
     border-radius: .2rem;
 }
 

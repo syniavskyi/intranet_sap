@@ -585,13 +585,13 @@ export default {
     onHover() {
       let mainEdits = document.querySelectorAll(".profile-main-edit");
       for (let i = 0; i < mainEdits.length; i++) {
-        mainEdits[i].style.boxShadow = "0 0 20px orange";
+        mainEdits[i].style.boxShadow = "0px 0px 20px orange";
       }
     },
     onHoverOut() {
       let mainEdits = document.querySelectorAll(".profile-main-edit");
       for (let i = 0; i < mainEdits.length; i++) {
-        mainEdits[i].style.boxShadow = "0 0 10px grey";
+        mainEdits[i].style.boxShadow = "0px 0px 10px grey";
       }
     },
     setUserCity: function (addressData, placeResultData, id) {

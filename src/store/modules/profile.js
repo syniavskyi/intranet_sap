@@ -160,13 +160,13 @@ const actions = {
   },
 
   onLightUp({}, el) {
-    const shadow = "0 0 20px orange";
+    const shadow = "0px 0px 20px orange";
     if (el.style) {
       el.style.boxShadow = shadow;
     }
   },
   onLightOut({}, el) {
-    const shadow = "0 0 10px grey";
+    const shadow = "0px 0px 10px grey";
     if (el.style) {
       el.style.boxShadow = shadow;
     }

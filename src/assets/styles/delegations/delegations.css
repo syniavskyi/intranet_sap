@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: column;
     width: 95%;
-    box-shadow: 0 0 10px #808080;
+    box-shadow: 0px 0px 10px #808080;
     background: #ffffff;
     align-self: center;
     border-radius: 4px;
@@ -125,7 +125,7 @@
     width: 17rem;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 10px #ccc;
+    box-shadow: 0px 0px 10px #ccc;
     padding-top: 1.5rem;
     position: relative;
     border-radius: 3px;
@@ -147,7 +147,7 @@
 
 .delegations-inputs-section:hover,
 .delegations-inputs-section:focus-within {
-    box-shadow: 0 0 30px rgba(255, 178, 78, 0.616);
+    box-shadow: 0px 0px 30px rgba(255, 178, 78, 0.616);
 }
 .delegations-inputs-section:hover .del-inputs-header,
 .delegations-inputs-section:focus-within .del-inputs-header {
@@ -627,7 +627,7 @@
     width: 95%;
     margin: .5rem 0;
     border-radius: 4px;
-    box-shadow: 0 0 10px #808080;
+    box-shadow: 0px 0px 10px #808080;
 }
 
 .del-thead-1,
@@ -784,7 +784,7 @@
     width: 95%;
     height: 100%;
     /* min-height: 10rem; */
-    box-shadow: 0 0 10px rgb(136, 136, 136);
+    box-shadow: 0px 0px 10px rgb(136, 136, 136);
     border-radius: 4px;
     margin: .5rem 0 ;
 }
@@ -803,7 +803,7 @@
 }
 
 .del-add-row:hover {
-    box-shadow: 0 0 10px orange;
+    box-shadow: 0px 0px 10px orange;
     cursor: pointer;
 }
 
