@@ -75,7 +75,7 @@
                         </div>
                       </div>
                       <p v-if="!editMode && !disabledBtnToEdit" disabled class="inputProfile inputDisabled">{{ formatAddress }}</p>
-                      <p v-else class="inputProfile inputDisabled"> {{ $t("label.hiddenData") }} </p>
+                      <p v-if="!editMode && disabledBtnToEdit" class="inputProfile inputDisabled"> {{ $t("label.hiddenData") }} </p>
                       <!-- <input v-if="!editMode" :value="formatAddress" disabled class="inputProfile inputDisabled"> -->
                       <label v-if="!editMode" class="label-profile">{{ $t("label.address") }}</label>
                     </div>
@@ -92,7 +92,8 @@
                     </div>
                     <div class="prof-input">
                       <!-- <input class="inputProfile" :class="editMode ? 'inputEdit' : 'inputDisabled'" :disabled="!editMode" v-model="userData.phone" @input="phoneValidation"> -->
-                      <input required v-if="editMode" class="inputEdit inputProfile" v-model="userData.Telephone" @input="phoneValidation">
+                      <masked-input required v-if="editMode" class="inputEdit inputProfile" mask="\+11 111 111 111" type="text" v-model="userData.Telephone" @input="phoneValidation"></masked-input>
+                      <!-- <input required v-if="editMode" class="inputEdit inputProfile" v-model="userData.Telephone" @input="phoneValidation"> -->
                       <input v-if="!editMode" disabled class="inputDisabled inputProfile" v-model="userData.Telephone">
                       <span class="prof-div-bar"></span>
                       <label class="label-profile">{{ $t("label.phone") }}</label>
@@ -527,8 +528,8 @@ export default {
       this.$store.dispatch("submitPhoto", data);
     },
     phoneValidation(value) {
-      const regex = new RegExp("^(?=.*[0-9])[- +()0-9]+$");
-      this.invalidPhone = regex.test(value.target.value) ? false : true;
+      // const regex = new RegExp("^(?=.*[0-9])[- +()0-9]+$");
+      // this.invalidPhone = regex.test(value) ? false : true; //.target.value) ? false : true;
       this.checkFormFields();
     },
     // dateValidation(value) {
