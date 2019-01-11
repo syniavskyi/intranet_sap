@@ -234,7 +234,7 @@ export default {
             } else if(this.authAcc === 'TEAM' && this.filteredUsers.find(o => o.UserAlias === this.selectedUser.UserAlias)) {
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_PROJECT', false);
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
-            } else if(this.authAcc === 'OWN' && this.selectedUser.UserAlias === this.loginAlias) {
+            } else if(this.authType === 'OWN' && this.selectedUser.UserAlias === this.loginAlias) {
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_PROJECT', true);
             this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
             } else {
