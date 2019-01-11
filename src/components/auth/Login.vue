@@ -9,7 +9,7 @@
         <input class="input input-login-email" v-model="username" @blur="$v.username.$touch()">
         <label class="label label-login-email"> {{ $t("label.user") }}</label>
         <div class="login-pass-div">
-          <input :type="passwordFieldType" @keyup.enter="onSubmit" class="input input-login-pass" v-model="password" @blur="$v.password.$touch()" autocomplete="new-password">
+          <input :type="passwordFieldType" @keyup.enter="onSubmit" class="input input-login-pass" v-model="password" @blur="$v.password.$touch()" :trim="password" autocomplete="new-password">
           <button class="show-pass-eye"  @click="switchPasswordVisibility"><icon :name="eyeType"></icon></button>
         </div>
         <label for="password" class="label label-login-pass">{{ $t("label.password") }}</label>
