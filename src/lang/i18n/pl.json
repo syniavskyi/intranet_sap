@@ -335,7 +335,8 @@
             "days": "Liczba dni"
         },
         "addModule": "Wybierz moduł z listy",
-        "addIndustry": "Wybierz branżę z listy"
+        "addIndustry": "Wybierz branżę z listy",
+        "addContractor": "Wybierz kontraktora z listy"
     },
     "news": {
         "monday": "Poniedziałek",
@@ -345,7 +346,8 @@
         "friday": "Piątek",
         "saturday": "Sobota",
         "sunday": "Niedziela",
-        "upcomingEvents": "Nadchodzące wydarzenia:"
+        "upcomingEvents": "Nadchodzące wydarzenia:",
+        "emptyEvents": "Brak wydarzeń w najbliższym czasie"
     },
     "dates": {
         "day": "dzień ",

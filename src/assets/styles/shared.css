@@ -608,7 +608,7 @@ input:required {
     border-radius: 4px;
     animation: slide-in-up 0.3s;
     word-break: break-word;
-    box-shadow: 0 0 8px #333;
+    box-shadow: 0px 0px 8px #333;
     z-index: 1450;
 }
 /* MESSAGE TOAST */

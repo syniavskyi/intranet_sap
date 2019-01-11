@@ -16,12 +16,12 @@
     </div>
     <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
-        <i18n path="message.incompleteData" tag="p" class="profile-error" name="error" v-if="showProjectError">
-          <span place="errorProNo"> {{ errorProjectNo }} </span>
-        </i18n>
+      <i18n path="message.incompleteData" tag="p" class="profile-error" name="error" v-if="showProjectError">
+        <span place="errorProNo"> {{ errorProjectNo }} </span>
+      </i18n>
       <i18n path="message.invalidDate" tag="p" class="profile-error" name="error" v-if="invalidDates">
-          <span place="invalid"> {{invalidDatePos}} </span>
-        </i18n>
+        <span place="invalid"> {{invalidDatePos}} </span>
+      </i18n>
       <div class="profile-table-wrapper">
         <div class="profile-table">
           <div class="prof-thead">
@@ -51,7 +51,11 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
-                <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" />
+                <select class="profile-table-select profile-table-select-industry" :id="index" @change="selectContractor" >
+                  <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
+                  <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
+                </select>
+                <!-- <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" /> -->
               </div>
             </div>
             <div class="prof-tbody-item">
@@ -59,7 +63,7 @@
               <div class="prof-tbody-item-txt">
                 <p class="prof-table-p" v-if="projectEditMode">{{ $t("label.startDate") }}</p>
                 <p class="table-p" v-if="!projectEditMode"> {{ formatDate(userProjects[index].DateStart) }} </p>
-               <v-date-picker popoverDirection="top" :max-date="project.IsCurrent ? new Date() : project.DateEnd" v-if="projectEditMode" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateStart">
+                <v-date-picker popoverDirection="top" :max-date="project.IsCurrent ? new Date() : project.DateEnd" v-if="projectEditMode" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateStart">
                   <input value="userProjects[index].DateStart" />
                 </v-date-picker>
                 <div class="table-p">&#8722;</div>
@@ -85,7 +89,7 @@
                 </div>
                 <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="addIndustry" :id="index" >
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
-                  <option v-for="industry in industryList" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option>
+                  <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option>
                 </select>
               </div>
             </div>
@@ -140,7 +144,8 @@ export default {
       invalidDatePos: null,
       showEndInput: true,
       _beforeEditingProjects: null,
-      showHintAfterSave: false
+      showHintAfterSave: false,
+      contractorIndustries: []
     };
   },
   computed: {
@@ -154,7 +159,8 @@ export default {
       errorProjectNo: "getErrorProjectNo",
       disabledBtnToEdit: "getDisabledBtnToEdit",
       userProjectsDfLang: "getUserProjectsListDfLang",
-      showHintProject: "getShowHintProject"
+      showHintProject: "getShowHintProject",
+      contractorsBranches: "getContractorsBranches"
     })
   },
   methods: {
@@ -164,6 +170,26 @@ export default {
       getNewDataForHint: "getNewDataForHint",
       showHintFnProject: "showHintFnProject"
     }),
+    selectContractor(evt) {
+      let contractorId = evt.target.value,
+          contractorsBranches = this.contractorsBranches,
+          industriesList = this.industryList,
+          arr = [],
+          index;
+         
+      for (var i = 0; i < contractorsBranches.length; i++) {
+        if (contractorId === contractorsBranches[i].ContractorId) {
+          index = industriesList.map(industry => {
+            return industry.IndustryId
+          }).indexOf(contractorsBranches[i].IndustryId)
+          arr.push({
+            IndustryId: industriesList[index].IndustryId,
+            IndustryName: industriesList[index].IndustryName
+          })
+        }
+      }
+      this.contractorIndustries = arr
+    },
     remove(index) {
       let newData = utils.createClone(this.userProjects[index]);
       newData.Action = 'D';

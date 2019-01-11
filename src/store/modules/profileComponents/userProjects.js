@@ -296,6 +296,15 @@ const actions = {
       }
     })
   },
+  getContractorsBranches({getters}) {
+    return axios({
+      method: 'GET',
+      url: 'ContractorsBranchesSet',
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+      }
+    })
+  },
   // format project from string to array with objects, adding industry description
   adjustProjects({
     commit,

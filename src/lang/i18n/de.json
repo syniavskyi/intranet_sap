@@ -335,7 +335,8 @@
             "days": "Anzahl der Tage"
         },
         "addModule": "Modul wählen",
-        "addIndustry": "Industrie auswählen"
+        "addIndustry": "Industrie auswählen",
+        "addContractor": "Auftragnehmer auswählen"
     },
     "news": {
         "monday": "Montag",
@@ -345,7 +346,8 @@
         "friday": "Freitag",
         "saturday": "Samstag",
         "sunday": "Sonntag",
-        "upcomingEvents": "Kommende Veranstaltungen:"
+        "upcomingEvents": "Kommende Veranstaltungen:",
+        "emptyEvents": "No upcoming events"
     },
     "dates": {
         "day": "Tag ",

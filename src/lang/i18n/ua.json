@@ -334,7 +334,8 @@
             "days": "Кількість днів"
         },
         "addModule": "Вибрати модул",
-        "addIndustry": "Вибрати індустрію"
+        "addIndustry": "Вибрати індустрію",
+        "addContractor": "Вибрати індустрію"
     },
     "news": {
         "monday": "Понеділок",
@@ -344,7 +345,8 @@
         "friday": "П'ятниця",
         "saturday": "Субота",
         "sunday": "Неділя",
-        "upcomingEvents": "Майбутні події:"
+        "upcomingEvents": "Майбутні події:",
+        "emptyEvents": "No upcoming events"
     },
     "dates": {
         "day": "день ",

@@ -50,23 +50,28 @@
                 <div class="tile-underscore"/>
               </div>
               <div class="tile-content">
-                <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
-                  <div class="low-prio-event" v-if="event.Priority=='L'"> </div>
-                  <div class="medium-prio-event" v-if="event.Priority=='M'"> </div>
-                  <div class="high-prio-event" v-if="event.Priority=='H'"> </div>
-                  <div class="news-evt-attr">
-                    <div class="event-date">{{setDateTo(event)}}
-                      <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc"></button>
-                      <!-- &#8943; -->
+                <div v-if="eventsSrt.length > 0" class="news-events-wrap">
+                  <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
+                    <div class="low-prio-event" v-if="event.Priority=='L'"> </div>
+                    <div class="medium-prio-event" v-if="event.Priority=='M'"> </div>
+                    <div class="high-prio-event" v-if="event.Priority=='H'"> </div>
+                    <div class="news-evt-attr">
+                      <div class="event-date">{{setDateTo(event)}}
+                        <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc"></button>
+                        <!-- &#8943; -->
+                      </div>
+                      <div class="event-title">{{ event.EventName }}</div>
+                      <div class="event-type">{{event.EventTypeName}}</div>
                     </div>
-                    <div class="event-title">{{ event.EventName }}</div>
-                    <div class="event-type">{{event.EventTypeName}}</div>
+                    <div class="homeoffice-event" v-if="event.EventType=='HOF'"/>
+                    <div class="party-event" v-if="event.EventType=='IPT'"/>
+                    <div class="leave-event" v-if="event.EventType=='LEV'"/>
+                    <div class="training-event" v-if="event.EventType=='TRN'"/>
+                    <div class="none-event" v-if="event.EventType==''"/>
                   </div>
-                  <div class="homeoffice-event" v-if="event.EventType=='HOF'"/>
-                  <div class="party-event" v-if="event.EventType=='IPT'"/>
-                  <div class="leave-event" v-if="event.EventType=='LEV'"/>
-                  <div class="training-event" v-if="event.EventType=='TRN'"/>
-                  <div class="none-event" v-if="event.EventType==''"/>
+                </div>
+                <div v-else class="news-events-wrap">
+                  <h1>{{$t('news.emptyEvents')}}</h1>
                 </div>
               </div>
             </div>

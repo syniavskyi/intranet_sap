@@ -26,7 +26,7 @@ const state = {
   ],
   showChangePasswordDialog: false,
   disabledBtnToEdit: false,
-  dataToRead: ["NewToken", "Domains", "FieldOfStudy", "SchoolDesc", "Industries", "UserData", "UserList", "Contractors", "Projects", "Languages"],
+  dataToRead: ["NewToken", "Domains", "FieldOfStudy", "SchoolDesc", "Industries", "UserData", "UserList", "Contractors", "Projects", "Languages", "ContractorsBranchesSet"],
   workTime: {
     "Full": i18n.t("label.fulltime"),
     "1/2": "1/2",
