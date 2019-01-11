@@ -177,7 +177,8 @@
         "dayToSelect": "(do dnia)",
         "daysCountSelect": "(liczba dni)",
         "forDay": "Za dzień:",
-        "comments": "(uwagi)"
+        "comments": "(uwagi)",
+        "hiddenData": "Dane są ukryte"
     },
     "header": {
         "login": "Zaloguj się do Intranetu",

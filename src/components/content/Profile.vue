@@ -74,7 +74,8 @@
                           <label class="prof-ainput-lbl">{{ $t("label.postalCode") }}</label>
                         </div>
                       </div>
-                      <p v-if="!editMode" disabled class="inputProfile inputDisabled">{{ formatAddress }}</p>
+                      <p v-if="!editMode && !disabledBtnToEdit" disabled class="inputProfile inputDisabled">{{ formatAddress }}</p>
+                      <p v-else class="inputProfile inputDisabled"> {{ $t("label.hiddenData") }} </p>
                       <!-- <input v-if="!editMode" :value="formatAddress" disabled class="inputProfile inputDisabled"> -->
                       <label v-if="!editMode" class="label-profile">{{ $t("label.address") }}</label>
                     </div>

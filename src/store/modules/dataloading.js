@@ -526,9 +526,11 @@ const actions = {
           break;
         case "UserData":
           dispatch("setUserData", aResponse);
-          if(aResponse.data.d.UserFiles.results.length !== 0) {
-            userData.changePage = false;
-           }
+          if(aResponse.data.d.UserFiles.results) {
+            if(aResponse.data.d.UserFiles.results.length !== 0) {
+              userData.changePage = false;
+             }
+          }
           break;
         case "Contractors":
           commit('SET_CONTRACTORS_LIST', aResults);
