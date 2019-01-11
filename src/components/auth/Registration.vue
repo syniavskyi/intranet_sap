@@ -149,7 +149,6 @@ export default {
         this.registerData.Role = "MNGMT";
         this.lockRoleChange = true;
       } else {
-        this.registerData.Role = "BTECH";
         this.lockRoleChange = false;
       }
     },
