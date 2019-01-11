@@ -33,7 +33,8 @@ const state = {
   goFromCv: false, //default
   transportList: [],
   messageLog: [],
-  resFromBatch: []
+  resFromBatch: [],
+  contractorsBranches: []
 };
 
 const mutations = {
@@ -51,6 +52,9 @@ const mutations = {
   },
   SET_CONTRACTORS_LIST(state, data) {
     state.contractorsList = data;
+  },
+  SET_CONTRACTORS_BRANCHES(state, data) {
+    state.contractorsBranches = data;
   },
   SET_PROJECTS_LIST(state, data) {
     state.projectsList = data;
@@ -489,6 +493,10 @@ const actions = {
           let availProjectsPromise = dispatch("getUserProjects", userData.user).then(res => ({res: res, promise: "AvailProjects"}));
           aPromises.push(availProjectsPromise);
           break;
+        case "ContractorsBranchesSet": {
+          let projectsContractors = dispatch('getContractorsBranches', userData).then(res => ({ res: res, promise: "ContractorsBranchesSet" }));
+          aPromises.push(projectsContractors);
+        }
       }
     }
     commit("SET_PROMISE_LIST", aPromises);
@@ -574,6 +582,9 @@ const actions = {
         case "AvailProjects":
          commit("SET_USER_PROJECTS", aResults);
          dispatch('formatUserProjects', aResults);
+        break;
+        case "ContractorsBranchesSet": 
+          commit("SET_CONTRACTORS_BRANCHES", aResults)
         break;
         default:
           let bEndFunction = false;
@@ -667,7 +678,6 @@ const actions = {
         sCommitName = 'SET_TRANSPORT';
       break;
     }
-
     if(sCommitName.length > 0){
       commit(sCommitName, aResults);
     }
@@ -776,6 +786,9 @@ const getters = {
   },
   getContractorsList(state) {
     return state.contractorsList;
+  },
+  getContractorsBranches(state) {
+    return state.contractorsBranches;
   },
   isDataLoaded(state) {
     return state.isLoaded;

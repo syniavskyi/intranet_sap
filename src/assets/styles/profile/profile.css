@@ -1373,7 +1373,6 @@
 .prof-tbody-item {
     position: relative;
     display:flex;
-    /* height: 5rem; */
     height: 100%;
     width: 100%;
 }
@@ -1437,7 +1436,7 @@
     align-self: center;
     justify-content: center;
     background: transparent;
-    box-shadow: 0px 0px 4px #808080;
+    box-shadow: .5px .5px 4px #808080;
     border: 1px solid #808080;
     cursor: pointer;
     border-radius: 50%;
@@ -1462,7 +1461,7 @@
 }
 
 .btn-hint:hover {
-    box-shadow: 0 0 10px orange;
+    box-shadow: .5px 0px 12px orange;
     border: 1px solid orange;
     color: orange;
 }
