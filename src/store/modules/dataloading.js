@@ -453,7 +453,7 @@ const actions = {
                   res: element
                 })
           })
-          aPromises = aRes;
+          aPromises.push(...aRes);
           break;
         case "Documents":
           let documentPromises,
