@@ -84,10 +84,10 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.Industry") }} </div>
               <div class="prof-tbody-item-txt">
-                <div class="prof-table-btns industry">
-                  <button :disabled="!projectEditMode" class="profile-table-industry-button" @click="removeIndustry" :name="index" v-for="industry in userProjects[index].Industries" :key="industry.id" :value="industry.id"> {{ industry.name }}</button>
+                <div ref="addedIndustries" class="prof-table-btns industry">
+                  <button :disabled="!projectEditMode" class="profile-table-industry-button" @click="removeIndustry" :name="index" v-for="industry in userProjects[index].Industries" :key="industry.id" :value="industry.id"> {{ industry.name }} </button>
                 </div>
-                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="addIndustry" :id="index" >
+                <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="addIndustry" :id="index" >
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
                   <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option>
                 </select>
@@ -171,24 +171,52 @@ export default {
       showHintFnProject: "showHintFnProject"
     }),
     selectContractor(evt) {
-      let contractorId = evt.target.value,
-          contractorsBranches = this.contractorsBranches,
-          industriesList = this.industryList,
+      let contrId = evt.target.value,
+          contrBranches = this.contractorsBranches,
+          indusList = this.industryList,
           arr = [],
-          index;
+          idx;
          
-      for (var i = 0; i < contractorsBranches.length; i++) {
-        if (contractorId === contractorsBranches[i].ContractorId) {
-          index = industriesList.map(industry => {
+      for (var i = 0; i < contrBranches.length; i++) {
+        if (contrId === contrBranches[i].ContractorId) {
+
+          idx = indusList.map(industry => {
             return industry.IndustryId
-          }).indexOf(contractorsBranches[i].IndustryId)
+          }).indexOf(contrBranches[i].IndustryId)
+          
+          let industryId = indusList[idx].IndustryId,
+              industryName = indusList[idx].IndustryName
+
           arr.push({
-            IndustryId: industriesList[index].IndustryId,
-            IndustryName: industriesList[index].IndustryName
+            IndustryId: industryId,
+            IndustryName: industryName
           })
         }
       }
       this.contractorIndustries = arr
+      this.$refs.industryEmpty[0].options[0].selected = true
+      this.checkIndustriesButtons(arr)
+    },
+    checkIndustriesButtons(contrIndustries) {
+      let btnsIndus = this.$refs.addedIndustries[0],
+          index
+
+      for (var i = 0; i < btnsIndus.childElementCount; i++) {
+        let btnValue = btnsIndus.children[i].value,
+            btnName = btnsIndus.children[i].name
+
+        index = contrIndustries.map(industry => {
+          return industry.IndustryId
+        }).indexOf(btnValue)
+        
+        if (index === -1) {
+          this.removeIndustry({target: {
+            value: btnValue,
+            name: btnName
+            }
+          })
+        }
+      }
     },
     remove(index) {
       let newData = utils.createClone(this.userProjects[index]);
