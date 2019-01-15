@@ -96,8 +96,9 @@ body {
 }
 
 .n-textarea {
-    max-width: 80%;
+    /* max-width: 80%; */
     min-width: 70%;
+    max-width: 60rem;
     min-height: 1.5rem;
     height: 3rem;
     padding: 0.3rem;

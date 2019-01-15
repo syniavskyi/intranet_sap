@@ -272,7 +272,8 @@
         "authPersonSignature": "Podpis osoby upoważnionej",
         "leaveRequest": "Proszę o udzielenie urlopu",
         "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
-        "requiredField": "Pole jest obowiązkowe"
+        "requiredField": "Pole jest obowiązkowe",
+        "requiredContractor": "Aby wyświetlić dostępne branże wybierz kontrahenta"
     },
     "select": {
         "language": {
@@ -336,7 +337,8 @@
         },
         "addModule": "Wybierz moduł z listy",
         "addIndustry": "Wybierz branżę z listy",
-        "addContractor": "Wybierz kontraktora z listy"
+        "addContractor": "Wybierz kontraktora z listy",
+        "currentContractor": "Przypisany kontraktor:"
     },
     "news": {
         "monday": "Poniedziałek",

@@ -1220,19 +1220,25 @@
     box-shadow: 0 0 10px #ff0000;
 }
 
-.profile-table-input {
+.profile-table-input,
+.profile-table-input-edit {
     padding-bottom:.1rem;
     align-self: center;
     font-family: 'Open Sans';
     font-size: 1rem;
     height: 1.6rem;
     border: 0;
-    border-bottom: 2px solid #808080;
+    /* border-bottom: 2px solid #808080; */
     transition: border .3s ease;
     width: 8.5rem;
     text-align: center;
     background: transparent;
 }
+.profile-table-input-edit {
+    color: orange;
+}
+
+
 .profile-table-select {
     text-indent: 0.2rem;
     background: transparent;
@@ -1460,7 +1466,8 @@
     top: .06rem;
 }
 
-.btn-hint:hover {
+.btn-hint:hover,
+.btn-hint-item:hover {
     box-shadow: .5px 0px 12px orange;
     border: 1px solid orange;
     color: orange;

@@ -273,7 +273,8 @@
         "authPersonSignature": "Unterschrift der berechtigten Person",
         "leaveRequest": "Ich bitte um einen Urlaub",
         "goToUserByFullname": "Gehen Sie zum Profil, basierend auf seinem Vor- und Nachnamen",
-        "requiredField": "Field is required"
+        "requiredField": "Field is required",
+        "requiredContractor": "Pick Contractor first to display available Branches"
     },
     "select": {
         "language": {
@@ -336,7 +337,8 @@
         },
         "addModule": "Modul wählen",
         "addIndustry": "Industrie auswählen",
-        "addContractor": "Auftragnehmer auswählen"
+        "addContractor": "Auftragnehmer auswählen",
+        "currentContractor": "Current contractor:"
     },
     "news": {
         "monday": "Montag",
