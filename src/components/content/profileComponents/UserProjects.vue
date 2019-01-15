@@ -51,11 +51,11 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
-                <input v-if="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" />
-                <!-- :disabled="!projectEditMode" -->
-                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)"  >
+                <p  v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
+                <input :class="!projectEditMode ? 'profile-table-input' : 'profile-table-input-edit'" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName"/>
+                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)" @input="checkFields(index)" >
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
-                  <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index"> {{ contractor.ContractorName }}</option>
+                  <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
                 </select>
               </div>
             </div>
@@ -78,7 +78,7 @@
                 <label class="checkbox-wrap" >
                   <input class="checkbox-margin" :disabled="!projectEditMode" type="checkbox" :checked="project.IsCurrent" @change="checkFields(index)" :name="index" v-model="userProjects[index].IsCurrent" />
                   <div class="checkbox-in"></div>
-                  <p style="padding:0;margin:0;">{{ $t("label.present") }}</p>
+                  <p style="padding:0;margin:0;color:#7a7a7a;">{{ $t("label.present") }}</p>
                 </label>
               </div>
             </div>
@@ -86,7 +86,7 @@
               <div class="prof-tbody-item-title">{{ $t("table.Industry") }} </div>
               <div class="prof-tbody-item-txt">
                 <div ref="addedIndustries" class="prof-table-btns industry">
-                  <button :disabled="!projectEditMode" class="profile-table-industry-button" @click="removeIndustry" :name="index" v-for="industry in userProjects[index].Industries" :key="industry.id" :value="industry.id"> {{ industry.name }} </button>
+                  <button v-for="industry in userProjects[index].Industries" :key="industry.id" :disabled="!projectEditMode" class="profile-table-industry-button" @click="removeIndustry" :name="index" :title="$t('button.delete')"  :value="industry.id"> {{ industry.name }} </button>
                 </div>
                 <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @mousedown="contrIndustries($event, index)" @change="addIndustry" :id="index"  >
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
@@ -94,12 +94,13 @@
                   <!-- <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
                 </select>
               </div>
+              <Toast v-if="showToast">{{ $t('message.requiredContractor')}}</Toast>
             </div>
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.Modules") }}</div>
               <div class="prof-tbody-item-txt profile-table-td-module">
                 <div class="prof-table-btns sapModule">
-                  <button :disabled="!projectEditMode" class="profile-table-module-button" @click="removeModule" :name="index" v-for="sapModule in userProjects[index].Modules" :key="sapModule.id" :value="sapModule.id"> {{ sapModule.id }} </button>
+                  <button v-for="sapModule in userProjects[index].Modules" :disabled="!projectEditMode" class="profile-table-module-button" @click="removeModule" :name="index" :title="$t('button.delete')"  :key="sapModule.id" :value="sapModule.id"> {{ sapModule.id }} </button>
                 </div>
                 <select v-if="projectEditMode" class="profile-table-select profile-table-select-modules" @change="addModule" :id="index">
                   <option disabled selected value>{{ $t("table.addModule") }}:</option>
@@ -130,11 +131,13 @@
         </div>
       </div>
     </div>
+    <!-- <div  class="toast">Cosoosoos</div> -->
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Toast from '../../dialogs/Toast'
 import moment from "moment";
 let utils = require("../../../utils");
 
@@ -148,7 +151,10 @@ export default {
       _beforeEditingProjects: null,
       showHintAfterSave: false,
       contractorIndustries: []
-    };
+    }
+  },
+  components: {
+    Toast 
   },
   computed: {
     ...mapGetters({
@@ -162,7 +168,8 @@ export default {
       disabledBtnToEdit: "getDisabledBtnToEdit",
       userProjectsDfLang: "getUserProjectsListDfLang",
       showHintProject: "getShowHintProject",
-      contractorsBranches: "getContractorsBranches"
+      contractorsBranches: "getContractorsBranches",
+      showToast: "getDisplayToast"
     })
   },
   methods: {
@@ -180,7 +187,10 @@ export default {
           i = optionsLength,
           option,
           idx
-      if (contrIndus === undefined || contrIndus === null) return
+      if (contrIndus === undefined || contrIndus === null) {
+          this.$store.dispatch('displayToast')
+          return
+        }
       while (selectIndus.options.length > 1) {
         i--
         selectIndus.remove(i)
@@ -205,7 +215,9 @@ export default {
           idx = indusList.map(industry => {
             return industry.IndustryId
           }).indexOf(contrBranches[i].IndustryId)
-          
+          if (idx === -1) {
+
+          }
           let industryId = indusList[idx].IndustryId,
               industryName = indusList[idx].IndustryName
 

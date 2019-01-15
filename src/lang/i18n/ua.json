@@ -271,7 +271,8 @@
         "authPersonSignature": "Podpis osoby upoważnionej",
         "leaveRequest": "Proszę o udzieleie urlopu",
         "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
-        "requiredField": "Field is required"
+        "requiredField": "Field is required",
+        "requiredContractor": "Pick Contractor first to display available Branches"
     },
     "select": {
         "language": {
@@ -335,7 +336,8 @@
         },
         "addModule": "Вибрати модул",
         "addIndustry": "Вибрати індустрію",
-        "addContractor": "Вибрати індустрію"
+        "addContractor": "Вибрати індустрію",
+        "currentContractor": "Current contractor:"
     },
     "news": {
         "monday": "Понеділок",

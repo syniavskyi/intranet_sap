@@ -273,7 +273,8 @@
         "authPersonSignature": "Signature of an authorized person",
         "leaveRequest": "I am asking for a leave",
         "goToUserByFullname": "Go to the employee's profile by choosing the name and surname",
-        "requiredField": "Field is required"
+        "requiredField": "Field is required",
+        "requiredContractor": "Pick Contractor first to display available Branches"
     },
     "select": {
         "language": {
@@ -337,7 +338,8 @@
         },
         "addModule": "Select module",
         "addIndustry": "Select industry",
-        "addContractor": "Select contractor"
+        "addContractor": "Select contractor",
+        "currentContractor": "Current contractor:"
     },
     "news": {
         "monday": "Monday",
