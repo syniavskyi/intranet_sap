@@ -51,11 +51,12 @@
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
-                <select class="profile-table-select profile-table-select-industry" :id="index" @change="selectContractor" >
+                <input v-if="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" />
+                <!-- :disabled="!projectEditMode" -->
+                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)"  >
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
-                  <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
+                  <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index"> {{ contractor.ContractorName }}</option>
                 </select>
-                <!-- <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ContractorName" /> -->
               </div>
             </div>
             <div class="prof-tbody-item">
@@ -87,9 +88,10 @@
                 <div ref="addedIndustries" class="prof-table-btns industry">
                   <button :disabled="!projectEditMode" class="profile-table-industry-button" @click="removeIndustry" :name="index" v-for="industry in userProjects[index].Industries" :key="industry.id" :value="industry.id"> {{ industry.name }} </button>
                 </div>
-                <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="addIndustry" :id="index" >
+                <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @mousedown="contrIndustries($event, index)" @change="addIndustry" :id="index"  >
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
-                  <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option>
+                  <!-- <option v-for=" industry in contrIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
+                  <!-- <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
                 </select>
               </div>
             </div>
@@ -123,7 +125,7 @@
                 <button v-if="projectEditMode" :disabled="true" class="prof-tbtn projSaveButton" @click="save(index)">{{ $t("button.save") }}</button>
               </div>
             </div>
-            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -170,7 +172,27 @@ export default {
       getNewDataForHint: "getNewDataForHint",
       showHintFnProject: "showHintFnProject"
     }),
-    selectContractor(evt) {
+    contrIndustries(event, index) {
+      if (index === undefined) return
+      let selectIndus = this.$refs.industryEmpty[index],
+          optionsLength = selectIndus.options.length,
+          contrIndus = this.contractorIndustries[index],
+          i = optionsLength,
+          option,
+          idx
+      if (contrIndus === undefined || contrIndus === null) return
+      while (selectIndus.options.length > 1) {
+        i--
+        selectIndus.remove(i)
+      } 
+      for (i = 0; i < contrIndus.length; i++) {
+        option = new Option(contrIndus[i].IndustryName, contrIndus[i].IndustryId)
+        option.setAttribute("id", contrIndus[i].IndustryId)
+        selectIndus.add(option)
+      }
+      selectIndus.options.selectedIndex  = 0
+    },
+    selectContractor(evt, index) {
       let contrId = evt.target.value,
           contrBranches = this.contractorsBranches,
           indusList = this.industryList,
@@ -179,7 +201,7 @@ export default {
          
       for (var i = 0; i < contrBranches.length; i++) {
         if (contrId === contrBranches[i].ContractorId) {
-
+          
           idx = indusList.map(industry => {
             return industry.IndustryId
           }).indexOf(contrBranches[i].IndustryId)
@@ -193,23 +215,25 @@ export default {
           })
         }
       }
-      this.contractorIndustries = arr
+      this.contractorIndustries[index] = arr
+      // this.userProjects[index].ContractorName =  evt.target.children[evt.target.selectedIndex].text
+      this.checkFields(index)
       this.$refs.industryEmpty[0].options[0].selected = true
-      this.checkIndustriesButtons(arr)
+      this.checkIndustriesButtons(arr, index)
     },
-    checkIndustriesButtons(contrIndustries) {
-      let btnsIndus = this.$refs.addedIndustries[0],
-          index
+    checkIndustriesButtons(contrIndustries, index) {
+      let btnsIndus = this.$refs.addedIndustries[index],
+          idx
 
       for (var i = 0; i < btnsIndus.childElementCount; i++) {
         let btnValue = btnsIndus.children[i].value,
             btnName = btnsIndus.children[i].name
 
-        index = contrIndustries.map(industry => {
+        idx = contrIndustries.map(industry => {
           return industry.IndustryId
         }).indexOf(btnValue)
         
-        if (index === -1) {
+        if (idx === -1) {
           this.removeIndustry({target: {
             value: btnValue,
             name: btnName
@@ -328,6 +352,7 @@ export default {
       return index + "p";
     },
     addModule(value) {
+
       const data = {
         index: value.target.id,
         moduleId: value.target.value
