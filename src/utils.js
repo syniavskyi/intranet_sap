@@ -256,7 +256,7 @@ export const checkRole = function(data) {
   }
   return aMaxRoles;
   }
-
+//compare dates and check changes in profile components
  export const dateToValid = function(beforeData, newData) {
    let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDay());
    let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDay());
@@ -304,7 +304,7 @@ export const checkRole = function(data) {
           let aResult = JSON.parse(sRes),
               sLink, sService, iLength, iStart, sSet
           aResult  = aResult.d.results
-          //add set name 
+          //add set name
           sLink    = aResult[0].__metadata.id
           sService = '/ZGW_INTRANET_SRV/'
           iLength  = sService.length

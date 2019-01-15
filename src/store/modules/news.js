@@ -228,7 +228,11 @@ const actions = {
       getNewsFn({commit, dispatch}) {
           // get news from RSS -> XML
           const proxyurl = "https://cors-anywhere.herokuapp.com/";
-            const url = "https://fakty.interia.pl/ciekawostki/feed"; // site that doesn’t send Access-Control-*
+            // const url = "https://fakty.interia.pl/ciekawostki/feed"; // site that doesn’t send Access-Control-*
+            // const url ="https://www.rmf24.pl/rozrywka/ciekawostki/feed"
+            // const url = "http://www.wykop.pl/rss/index.xml"
+            // const url = "https://nt.interia.pl/feed"
+            const url ="https://menway.interia.pl/feed"
             fetch(proxyurl + url)
             .then(response => response.text())
             .then(contents => commit('SET_NEWS', contents))
@@ -242,70 +246,7 @@ const actions = {
          convert.xmlDataToJSON(xmlTxt).then(json => {
              xmlTxt = json.rss.channel[0].item
              commit('SET_JSON_NEWS', xmlTxt)
-             dispatch("getArticlesFn")
          })
-      },
-      getArticlesFn({commit, getters}) {
-          // make html object
-          if(getters.getArticles.length !== 10) {
-            let allArticles = getters.getArticlesJson,
-          articles = []
-            for(let i in allArticles) {
-                let article = document.createRange().createContextualFragment(allArticles[i].description[0]),
-                a,  p, link,
-                title = document.createTextNode(allArticles[i].title[0]),
-                param = document.createElement('p'),
-                ahref = document.createElement('a'),
-                ahrefImg = document.createElement('a'),
-                div = document.createElement('div'),
-                img = document.createElement('img'),
-                headDiv = document.createElement('div'),
-                contentDiv = document.createElement('div'),
-                head = document.createElement('h1')
-                head.appendChild(title)
-                ahref.appendChild(head)
-                link = allArticles[i].link[0]
-                ahref.href = link
-                ahref.target = "_blank"
-                headDiv.appendChild(ahref)
-                headDiv.className = "artTitle"
-                if(article.childNodes[0].childNodes[0].nodeType == 1) {
-                    a = article.childNodes[0].childNodes[0];
-                    p = article.childNodes[0].childNodes[1];
-                    param.appendChild(p);
-                } else {
-                    img.id = "img"+[i]
-                    ahrefImg.className = "articleImg"
-                    ahrefImg.appendChild(img);
-                    ahrefImg.href = link;
-                    p = article.childNodes[0].childNodes[0];
-                    param.appendChild(p);
-                }
-                div.appendChild(headDiv)
-                contentDiv.className = "artContent"
-                if(a) {
-                contentDiv.appendChild(a)
-                contentDiv.appendChild(param)
-                div.appendChild(contentDiv)
-                } else {
-                contentDiv.appendChild(ahrefImg)
-                contentDiv.appendChild(param)
-                div.appendChild(contentDiv)
-                }
-                div.className = "artAll"
-                if(div !== null) {
-                    document.getElementById('articles').appendChild(div)
-                    articles.push(div)
-                }
-          }
-          commit('SET_ARTICLES', articles)
-          } else {
-              for(let val of getters.getArticles) {
-                  if(val!== null) {
-                    document.getElementById('articles').appendChild(val)
-                  }
-              }
-          }
       }
 }
 
