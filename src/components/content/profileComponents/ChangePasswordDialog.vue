@@ -45,7 +45,7 @@ export default {
       oldEyeType: "eye",
       newPasswordType: "password",
       newEyeType: "eye",
-      confirmasswordType: "password",
+      confirmPasswordType: "password",
       confirmEyeType: "eye",
     };
   },
