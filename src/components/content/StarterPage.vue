@@ -24,7 +24,7 @@
                       <div v-if="checkFileFormat(list.Filename) == '.pdf'">
                         <p class="starter-page-pdf">{{checkFileFormat(list.Filename)}}</p>
                       </div>
-                      <div v-if="checkFileFormat(list.Filename) == '.doc'">
+                      <div v-if="checkFileFormat(list.Filename) == '.doc' || checkFileFormat(list.Filename) == '.docx'">
                         <p class="starter-page-docx">{{checkFileFormat(list.Filename)}}</p>
                       </div>
                     </div>

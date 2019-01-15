@@ -208,16 +208,18 @@ export default {
           indusList = this.industryList,
           arr = [],
           idx;
-         
+
       for (var i = 0; i < contrBranches.length; i++) {
         if (contrId === contrBranches[i].ContractorId) {
           
           idx = indusList.map(industry => {
             return industry.IndustryId
           }).indexOf(contrBranches[i].IndustryId)
+
           if (idx === -1) {
 
           }
+
           let industryId = indusList[idx].IndustryId,
               industryName = indusList[idx].IndustryName
 
@@ -244,7 +246,7 @@ export default {
         idx = contrIndustries.map(industry => {
           return industry.IndustryId
         }).indexOf(btnValue)
-        
+    
         if (idx === -1) {
           this.removeIndustry({target: {
             value: btnValue,
