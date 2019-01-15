@@ -127,9 +127,9 @@ const actions = {
   submitPassword({
     getters, dispatch
   }, userData) {
-    let urlQuery = getters.getUrlQuery
+    // let urlQuery = getters.getUrlQuery
     userData.Action = 'C'
-    const url = 'http://nw5.local.pl:8050/sap/opu/odata/SAP/ZGW_INTRANET_SRV/Users' + '(' + "UserAlias='" + userData.UserAlias + "',Language='" + userData.Language + "')" + urlQuery
+    const url = 'Users' + '(' + "UserAlias='" + userData.UserAlias + "',Language='" + userData.Language + "')"
     let sToken = getters.getToken;
     axios.defaults.withCredentials = true
     delete userData.UserSkills
@@ -149,7 +149,7 @@ const actions = {
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
           "x-csrf-token": sToken,
-          "Cookie": getters.getCookie
+          // "Cookie": getters.getCookie
       }
     }).then(res => {
         let message = res.headers;

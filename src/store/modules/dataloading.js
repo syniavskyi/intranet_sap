@@ -274,10 +274,10 @@ const actions = {
             if (obj[index].DateStart) {
               obj[index].DateStart = utils.dateStringToObj(obj[index].DateStart);
             }
-            if (obj[index].DateEnd) {
-              obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
-            }
-            obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
+            obj[index].DateEnd != "/Date(0000)/" ?
+              obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd) :
+              obj[index].DateEnd = new Date();
+              obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
           }
         }
       }
@@ -583,7 +583,7 @@ const actions = {
          commit("SET_USER_PROJECTS", aResults);
          dispatch('formatUserProjects', aResults);
         break;
-        case "ContractorsBranchesSet": 
+        case "ContractorsBranchesSet":
           commit("SET_CONTRACTORS_BRANCHES", aResults)
         break;
         default:

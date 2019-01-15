@@ -109,8 +109,17 @@
               </div>
             </div>
           </div>
-          <div class="content-news">
-            <div id="articles"></div>
+          <div class="content-news art-all" id="articles">
+            <div v-for="(article, i) in articles" :key="i" class="art-all">
+              <div>
+                <a :href="article.link[0]" target="_blank" class="art-title">
+                  <h1>{{article.title[0]}}</h1>
+                </a>
+              </div>
+              <div class="art-content" v-html="article.description[0]">
+                <p class="art-paragraph"> {{article.description[0].p}}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -188,7 +197,8 @@ export default {
       usersList: "usersList",
       getShowAdverts: "getShowAdverts",
       showAdvertsLoader: "getAdvertsLoader",
-      advertsLoaded: "getInitialDataReaded"
+      advertsLoaded: "getInitialDataReaded",
+      articles: "getArticlesJson"
     }),
     eventsSrt() {
       this.events.sort((a,b) => (a.DateFrom > b.DateFrom) ? 1 : ((b.DateFrom > a.DateFrom) ? -1 : 0));

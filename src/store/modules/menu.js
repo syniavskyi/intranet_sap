@@ -31,7 +31,7 @@ const actions = {
             dispatch('clearAuthData');
             router.replace('/');
         })
-        localStorage.setItem('authorized', "false");
+            localStorage.setItem('authorized', "false");
             dispatch('clearAuthData');
             router.replace('/');
     },

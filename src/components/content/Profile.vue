@@ -16,7 +16,7 @@
             </select>
             <label class="label-select-lang">{{ $t("label.language") }}</label>
           </div>
-          <button  :disabled="disabledBtnToEdit" class="profile-header-button" @mouseout="onHoverOut" @mouseover="onHover" v-if="!editMode" @click="onEdit">{{ $t("button.editData") }}</button>
+          <button :disabled="disabledBtnToEdit" class="profile-header-button" @mouseout="onHoverOut" @mouseover="onHover" v-if="!editMode" @click="onEdit">{{ $t("button.editData") }}</button>
           <div v-if="editMode" class="header-button-save-reject">
             <p class="profile-error profile-error-data" v-if="!saveChangesSuccess">{{ $t("message.saveChangesError") }}</p>
             <button class="border-btn save-btn" @click="onSaveChanges" :disabled="disableSaveBtn">{{ $t("button.saveChanges") }}</button>
@@ -566,6 +566,7 @@ export default {
     },
     // get data for selected language
     getNewData() {
+      this.editMode = false;
       this.$store.dispatch('setLanguage', this.selectedCvLang);
       let cvLang = this.selectedCvLang.toUpperCase();
       localStorage.setItem("lang", this.selectedCvLang.toUpperCase());

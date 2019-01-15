@@ -281,7 +281,6 @@ body {
     transform: scale(.9);
 }
 
-
 .event-desc:hover {
     color: #ffa500;
 }
@@ -381,25 +380,27 @@ body {
     border-radius: 4px;
     margin: 1rem 0;
 }
-.artAll {
+.art-all {
     display: flex;
     flex-direction: column;
 }
-.artAll:not(:first-of-type) {
+.art-all:not(:first-of-type) {
     border-top: 5px solid #d3d3d3;
 }
 
-.artTitle {
+.art-title {
     display: flex;
     justify-content: center;
     background-color: rgb(247, 245, 243);
     margin-bottom: .4rem;
     text-align: center;
 }
-.artContent {
+.art-content {
     width: 95%;
 }
-
+.art-content img{
+    display: none;
+}
 .artContent a {
     display: none;
 }
@@ -408,22 +409,22 @@ body {
     color: inherit;
     min-width: 225px;
 }
-.articleImg {
-    background-image: none;
-}
 
 .content-news h1 {
     display: flex;
     font-size: 1.2rem;
     justify-content: end;
     padding: .2rem;
-    font-family: 'IBM Plex Sans', serif;
+    font-family: 'IBM Plex Sans', serif
 }
 
 #articles p {
     text-align: justify;
     padding-left: 1.5rem;
     font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .weatherDay {
@@ -487,24 +488,26 @@ body {
         align-items: center;
     }
 
-    .artAll {
+    .art-all {
         display: flex;
         flex-direction: column;
         justify-content: left;
         width: 100%;
     }
-    .artContent a {
+    .art-content a {
         display: flex;
         justify-content: center;
     }
-    .articleImg {
-        background-image: url('../../images/weather/news.png');
-        background-repeat: no-repeat;
+    .art-content img {
+        /* background-image: url('../../images/weather/news.png');
+        background-repeat: no-repeat; */
+        margin-right: 20px;
+        display: flex;
         height: 159px;
         max-width: 225px;
     }
 
-    .artTitle:hover {
+    .art-title:hover {
         color: rgb(36, 20, 0);
         background-color: rgb(255, 229, 202);
         width: 100%;
@@ -512,7 +515,7 @@ body {
         justify-content: center;
     }
 
-    .artContent {
+    .art-content {
         display: flex;
         min-width: 90%;
         max-width: 90%;
