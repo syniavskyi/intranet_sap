@@ -55,10 +55,11 @@
                 <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName"/>
                 <!-- <input v-if="projectEditMode" class="profile-table-input-view" :disabled="projectEditMode" v-model="_beforeEditingProjects[index].ContractorName""/> -->
                 <!-- <p v-if="projectEditMode"> {{ setEditedProjectContractor(index)}} </p> -->
-                <p class="profile-table-input-view" v-if="projectEditMode" v-once > {{ _beforeEditingProjects[index].ContractorName }} </p>
+                <p class="profile-table-input-view" v-if="projectEditMode && _beforeEditingProjects[index]" v-once> {{ _beforeEditingProjects[index].ContractorName }} </p>
+                <p class="profile-table-input-view" v-if="projectEditMode && !_beforeEditingProjects[index]" v-once> {{ userProjects[index].ContractorName }} </p>
                 <select @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)"  >
                   <!-- @input="checkFields(index)" -->
-                  <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
+                  <option disabled selected value>{{ $t("table.addContractor") }}:</option>
                   <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
                 </select>
               </div>
@@ -292,7 +293,7 @@ export default {
     save(index) {
       const dataToChange = this._beforeEditingProjects[index],
         newData = utils.createClone(this.userProjects[index]);
-        newData.index = index;
+        // newData.index = index;
         newData.Action ='U';
         newData.Language = localStorage.getItem('lang') //temp
       if (dataToChange) {
