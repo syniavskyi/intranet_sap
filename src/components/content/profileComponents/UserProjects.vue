@@ -52,8 +52,10 @@
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
                 <p  v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
-                <input :class="!projectEditMode ? 'profile-table-input' : 'profile-table-input-edit'" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName"/>
-                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)" @input="checkFields(index)" >
+                <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName"/>
+                <input v-if="projectEditMode" class="profile-table-input-edit" :disabled="!projectEditMode" v-model="_beforeEditingProjects[index].ContractorName"/>
+                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)"  >
+                  <!-- @input="checkFields(index)" -->
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
                   <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
                 </select>
@@ -230,7 +232,7 @@ export default {
         }
       }
       this.contractorIndustries[index] = arr
-      // this.userProjects[index].ContractorName =  evt.target.children[evt.target.selectedIndex].text
+      this.userProjects[index].ContractorName =  evt.target.children[evt.target.selectedIndex].text
       this.checkFields(index)
       this.$refs.industryEmpty[0].options[0].selected = true
       this.checkIndustriesButtons(arr, index)
