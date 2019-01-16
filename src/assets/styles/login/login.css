@@ -52,7 +52,8 @@
     margin-bottom: 0.5rem;
 }
 
-.show-pass-eye {
+.show-pass-eye,
+.show-pass-eyef {
     width: 1rem;
     padding: 0;
 }
@@ -181,7 +182,8 @@ button[disabled] span {
    cursor: not-allowed;
 }
 
-.show-pass-eye {
+.show-pass-eye,
+.show-pass-eyef {
     font-size: 0.8rem;
     align-self: right;
     order: 1;
@@ -193,11 +195,17 @@ button[disabled] span {
     border: none;
     padding: none;
     margin:none;
+    cursor: pointer;
  }
- .show-pass-eye:hover {
-     cursor: pointer;
+
+ .show-pass-eyef {
+     position: absolute;
+     top: .1rem;
+     right: 0;
  }
- .show-pass-eye:focus {
+
+ .show-pass-eye:focus,
+ .show-pass-eyef:focus {
      outline: none;
  }
  .loading-icon {

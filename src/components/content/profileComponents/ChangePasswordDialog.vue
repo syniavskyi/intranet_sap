@@ -11,19 +11,19 @@
                     <input :type="oldPasswordType" required class="cd-input" id="oldPass">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.oldPassword") }}</label>
-                    <button class="show-pass-eye"  @click="switchPasswordVisibility('old')"><icon :name="oldEyeType"></icon></button>
+                    <button class="show-pass-eyef"  @click="switchPasswordVisibility('old')"><icon :name="oldEyeType"></icon></button>
                 </div>
                 <div class="cd-for-input">
                     <input :type="newPasswordType" required class="cd-input" id="newPass">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.newPassword") }}</label>
-                     <button class="show-pass-eye"  @click="switchPasswordVisibility('new')"><icon :name="newEyeType"></icon></button>
+                     <button class="show-pass-eyef"  @click="switchPasswordVisibility('new')"><icon :name="newEyeType"></icon></button>
                 </div>
                 <div class="cd-for-input">
                     <input :type="confirmPasswordType" required class="cd-input" id="newPassConfirm">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.confirmPassword") }}</label>
-                     <button class="show-pass-eye"  @click="switchPasswordVisibility('confirm')"><icon :name="confirmEyeType"></icon></button>
+                     <button class="show-pass-eyef"  @click="switchPasswordVisibility('confirm')"><icon :name="confirmEyeType"></icon></button>
                 </div>
                 <button class="button" @click="onSubmit">
                     <span class="loading-icon"></span>
