@@ -45,16 +45,18 @@
               <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.projectName") }} </div>
               <div class="prof-tbody-item-txt">
-                <input :disabled="!projectEditMode" @input="checkFields(index)" class="profile-table-input" v-model="userProjects[index].ProjectName" />
+                <input :disabled="!projectEditMode" @input="checkFields(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName" />
               </div>
             </div>
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
-                <p  v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
+                <p v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
                 <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName"/>
-                <input v-if="projectEditMode" class="profile-table-input-edit" :disabled="!projectEditMode" v-model="_beforeEditingProjects[index].ContractorName"/>
-                <select v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)"  >
+                <!-- <input v-if="projectEditMode" class="profile-table-input-view" :disabled="projectEditMode" v-model="_beforeEditingProjects[index].ContractorName""/> -->
+                <!-- <p v-if="projectEditMode"> {{ setEditedProjectContractor(index)}} </p> -->
+                <p class="profile-table-input-view" v-if="projectEditMode" v-once > {{ _beforeEditingProjects[index].ContractorName }} </p>
+                <select @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)"  >
                   <!-- @input="checkFields(index)" -->
                   <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
                   <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
@@ -171,7 +173,9 @@ export default {
       userProjectsDfLang: "getUserProjectsListDfLang",
       showHintProject: "getShowHintProject",
       contractorsBranches: "getContractorsBranches",
-      showToast: "getDisplayToast"
+      showToast: "getDisplayToast",
+      editedProjectIdx: "getEditedProjectIdx",
+      editedProjectContractor: "getEditedProjectContractor"
     })
   },
   methods: {
@@ -181,6 +185,20 @@ export default {
       getNewDataForHint: "getNewDataForHint",
       showHintFnProject: "showHintFnProject"
     }),
+    setEditedProjectContractor (index) {
+      this.$nextTick(function() {
+        if (this.editedProjectIdx === index) {
+          return this.editedProjectContractor
+        } else if (this.editedProjectIdx === "") {
+          if (this._beforeEditingProjects !== null && this._beforeEditingProjects !== undefined) {
+            return this._beforeEditingProjects[index].ContractorName
+          } else
+           return this.userProjects[index].ContractorName
+        } else {
+          return this.userProjects[index].ContractorName
+        }
+      })
+    },
     contrIndustries(event, index) {
       if (index === undefined) return
       let selectIndus = this.$refs.industryEmpty[index],
@@ -205,7 +223,8 @@ export default {
       selectIndus.options.selectedIndex  = 0
     },
     selectContractor(evt, index) {
-      let contrId = evt.target.value,
+      let selectIndus = this.$refs.industryEmpty[index],
+          contrId = evt.target.value,
           contrBranches = this.contractorsBranches,
           indusList = this.industryList,
           arr = [],
@@ -218,20 +237,25 @@ export default {
             return industry.IndustryId
           }).indexOf(contrBranches[i].IndustryId)
 
-          if (idx === -1) {
-
-          }
-
-          let industryId = indusList[idx].IndustryId,
+          if (idx === -1) {}
+          else {
+            let industryId = indusList[idx].IndustryId,
               industryName = indusList[idx].IndustryName
 
-          arr.push({
-            IndustryId: industryId,
-            IndustryName: industryName
-          })
+            arr.push({
+              IndustryId: industryId,
+              IndustryName: industryName
+            })
+          }
+          
         }
       }
-      this.contractorIndustries[index] = arr
+      if (arr.length === 0) {
+        this.contractorIndustries[index] = this.industryList
+      } else {
+        this.contractorIndustries[index] = arr
+      }
+      selectIndus.options.selectedIndex  = 0
       this.userProjects[index].ContractorName =  evt.target.children[evt.target.selectedIndex].text
       this.checkFields(index)
       this.$refs.industryEmpty[0].options[0].selected = true
@@ -268,6 +292,7 @@ export default {
     save(index) {
       const dataToChange = this._beforeEditingProjects[index],
         newData = utils.createClone(this.userProjects[index]);
+        newData.index = index;
         newData.Action ='U';
         newData.Language = localStorage.getItem('lang') //temp
       if (dataToChange) {
@@ -280,10 +305,8 @@ export default {
         // newData.Action ='A';
       }
       this._beforeEditingProjects = utils.createClone(this.userProjects);
-      document.getElementsByClassName("projSaveButton")[
-          index
-        ].disabled = true;
-        this.showHintAfterSave = true;
+      document.getElementsByClassName("projSaveButton")[index].disabled = true;
+      this.showHintAfterSave = true;
     },
     checkFields(index) {
       let bChanged,

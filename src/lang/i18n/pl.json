@@ -338,7 +338,7 @@
         "addModule": "Wybierz moduł z listy",
         "addIndustry": "Wybierz branżę z listy",
         "addContractor": "Wybierz kontraktora z listy",
-        "currentContractor": "Przypisany kontraktor:"
+        "currentContractor": "Poprzednio przypisany kontraktor:"
     },
     "news": {
         "monday": "Poniedziałek",

@@ -12,7 +12,9 @@ const state = {
   userProjectsList: [],
   object: {},
   userProjectsListDfLang: [],
-  showHintProject: {}
+  showHintProject: {},
+  editedProjectIdx: "",
+  editedProjectContractor: ""
 };
 
 const mutations = {
@@ -42,6 +44,12 @@ const mutations = {
   },
   SET_SHOW_HINT_PROJECT(state, data) {
     state.showHintProject = data;
+  },
+  SET_EDITED_PROJECT_IDX(state, index) {
+    state.editedProjectIdx = index
+  },
+  SET_EDITED_PROJECT_CONTRACTOR(state, name) {
+    state.editedProjectContractor = name
   }
 }
 
@@ -97,7 +105,7 @@ const actions = {
     })
   },
   updateUserProjectsPosition({getters,
-    dispatch
+    dispatch, commit
   }, data) {
     const dataToSend = data;
     getters.getSelectedForCvUser ? dataToSend.UserAlias = getters.getSelectedForCvUser : dataToSend.UserAlias = localStorage.getItem("id");
@@ -107,6 +115,11 @@ const actions = {
     dataToSend.DateStartToChange = utils.formatDateForBackend(dataToSend.DateStartToChange);
     dataToSend.DateEndToChange = utils.formatDateForBackend(dataToSend.DateEndToChange);
     dataToSend.Language = localStorage.getItem('lang');
+    /* DJA */
+    commit('SET_EDITED_PROJECT_IDX', dataToSend.index)
+    commit('SET_EDITED_PROJECT_CONTRACTOR', dataToSend.ContractorName)
+    delete dataToSend.index;
+    /* DJA */
     delete dataToSend.User;
     dispatch('formatProjectToString', dataToSend);
     let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00',ProjectName='${dataToSend.ProjectName}',Language='${dataToSend.Language}')`;
@@ -430,6 +443,12 @@ const getters = {
   },
   getShowHintProject(state) {
     return state.showHintProject;
+  },
+  getEditedProjectIdx(state) {
+    return state.editedProjectIdx
+  },
+  getEditedProjectContractor(state) {
+    return state.editedProjectContractor
   }
 }
 

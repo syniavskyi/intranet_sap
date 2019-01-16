@@ -338,7 +338,7 @@
         "addModule": "Modul wählen",
         "addIndustry": "Industrie auswählen",
         "addContractor": "Auftragnehmer auswählen",
-        "currentContractor": "Current contractor:"
+        "currentContractor": "Previously assigned contractor:"
     },
     "news": {
         "monday": "Montag",

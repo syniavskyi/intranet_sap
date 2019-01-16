@@ -337,7 +337,7 @@
         "addModule": "Вибрати модул",
         "addIndustry": "Вибрати індустрію",
         "addContractor": "Вибрати індустрію",
-        "currentContractor": "Current contractor:"
+        "currentContractor": "Previously assigned contractor:"
     },
     "news": {
         "monday": "Понеділок",
