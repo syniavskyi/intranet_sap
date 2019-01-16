@@ -326,7 +326,7 @@ export default {
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
       if (this.leavePageFlag === false) {
       } else {
-          this.$store.commit('SET_LEAVE_PAGE_DIALOG', false)
+          this.$store.commit('SET_LEAVE_PAGE_FLAG', false)
           next()
         }
     } else {

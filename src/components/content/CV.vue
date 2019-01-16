@@ -221,10 +221,14 @@ export default {
       this._saveCVHistory(); // save information about generating CV to DB
     },
     fnLoop(skills) {
-      let skillStr = "", i;
-      if (skills) {
-        for (i of skills) {
-          skillStr += i + " "
+      let skillStr = "";
+      if(skills) {
+        for (let i = 0; i < skills.length; i++) {
+          if(i == skills.length-1) {
+            skillStr += skills[i] + " "
+          } else {
+            skillStr += skills[i]  + ", "
+          }
         }
         return skillStr
       } else return
@@ -305,9 +309,11 @@ export default {
          return fieldOfStudyName.SchoolDescription;
     },
     formatPositionName(WorkPos) {
-       let workPoses = [];
+      if(WorkPos) {
+         let workPoses = [];
          workPoses = this.workPositions.find(o => o.Key === WorkPos);
          return workPoses.Value;
+      }
     },
     formatLangName(Lang) {
        if(this.fullLanguageList.length > 0) {
