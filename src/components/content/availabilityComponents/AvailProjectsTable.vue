@@ -203,7 +203,8 @@ export default {
                  this.filteredUserProjects[index].ProjectId &&
                  this.filteredUserProjects[index].StartDate &&
                  this.filteredUserProjects[index].EndDate &&
-                 this.filteredUserProjects[index].Engag) {
+                 this.filteredUserProjects[index].Engag &&
+                 !this.invalidDates) {
                      document.getElementsByClassName("eduButtonsProj")[index].children[1].disabled = false;
                }    else {
                     document.getElementsByClassName("eduButtonsProj")[index].children[1].disabled = true;
