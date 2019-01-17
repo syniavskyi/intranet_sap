@@ -197,28 +197,20 @@ const actions = {
     });
   },
 
-  getDomainValues({
-    getters,
-    commit
-  }, domainData) {
+  getDomainValues({}, domainData) {
     let aLinks = [];
     domainData.forEach(function(oDomain){
       aLinks.push(`GET Dictionaries?$filter=Name%20eq%20'${oDomain.name}'%20and%20Language%20eq%20'${oDomain.lang}' HTTP/1.1`)
     })
 
-    let sData  = utils.packBatch(aLinks, getters.getToken)
-    axios({
+    let sData  = utils.packBatch(aLinks, localStorage.token)
+    return axios({
       method: 'post',
       url: "/$batch",
       headers: {
         "Content-type": "multipart/mixed; boundary=batch"
       },
       data: sData
-    }).then(res => {
-      let oParsedData = utils.parseBatchResponse(res)
-      commit('SET_BATCH_RES', oParsedData)
-    }).catch(error => {
-      console.log(error)
     })
   },
   getProjectsList({}) {
@@ -274,10 +266,10 @@ const actions = {
             if (obj[index].DateStart) {
               obj[index].DateStart = utils.dateStringToObj(obj[index].DateStart);
             }
-            obj[index].DateEnd != "/Date(0000)/" ?
-              obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd) :
-              obj[index].DateEnd = new Date();
-              obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
+            if (obj[index].DateEnd) {
+              obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
+            }
+            obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
           }
         }
       }
@@ -339,9 +331,6 @@ const actions = {
         commit('SET_USER_PHOTO_URL', dataURL);
       }
       commit('SET_SEL_USER_PHOTO_URL', dataURL);
-
-
-
       // localStorage.setItem("image", dataURL)
     }, false);
     image.addEventListener("error", function () {
@@ -350,9 +339,6 @@ const actions = {
       }
       commit('SET_SEL_USER_PHOTO_URL', "");
     });
-
-
-
   },
   checkPageToDisplay({}, userData) {
     if(userData.changePage && userData.login) {
@@ -436,8 +422,7 @@ const actions = {
           aPromises.push(userPhotoPromise);
           break;
         case "Domains":
-          let domainPromise,
-              arrDomain = [];
+          let arrDomain = [];
           for(let value of state.sapDomains) {
             let domainData = {
               name: value,
@@ -445,25 +430,23 @@ const actions = {
             };
             arrDomain.push(domainData)
           }
-          dispatch('getDomainValues', arrDomain);
-          let aRes = [],
-              aBatchRes = getters.getBatchRes
+          dispatch('getDomainValues', arrDomain).then(res => {
+            let oParsedData = utils.parseBatchResponse(res)
+            commit('SET_BATCH_RES', oParsedData)
+            let aRes = [],
+            aBatchRes = getters.getBatchRes
 
-          aBatchRes.filter(function(element){
-            return element.Set = 'Dictionaries'
-          }).forEach(function(element){
-                aRes.push({
-                  promise: element[0].Name,
-                  res: element
-                })
+            aBatchRes.filter(function(element){
+              return element.Set = 'Dictionaries'
+            }).forEach(function(element){
+              let obj = { sDomainName: element[0].Name, aResults: element }
+                  dispatch('setDomains', obj)
+            })
+          }).catch(err => {
+            console.log(err)
           })
-          aPromises.push(...aRes);
           break;
         case "Documents":
-          let documentPromises,
-              sData;
-          // for (let j = 0; j < getters.getFileTypes.length; j++) {
-            let fileTypes = getters.getFileTypes
             let aResponse = dispatch('getDocuments', fileTypes).then(res => {
               let oParsedData = utils.parseBatchResponse(res)
               commit('SET_BATCH_RES', oParsedData)
@@ -479,11 +462,9 @@ const actions = {
                   dispatch('setDocumentList', obj)
                   aRes.push({obj})
               })
-
             }).catch(error => {
               console.log(error)
             })
-
           break;
         case "Availabilities":
           let availabilityPromise = dispatch("getUserAvail", userData.user).then(res => ({res: res, promise: "Availabilities"}));
@@ -583,7 +564,7 @@ const actions = {
          commit("SET_USER_PROJECTS", aResults);
          dispatch('formatUserProjects', aResults);
         break;
-        case "ContractorsBranchesSet":
+        case "ContractorsBranchesSet": 
           commit("SET_CONTRACTORS_BRANCHES", aResults)
         break;
         default:
@@ -681,7 +662,6 @@ const actions = {
     if(sCommitName.length > 0){
       commit(sCommitName, aResults);
     }
-
   },
 
   setDocumentList({commit}, passedData){
