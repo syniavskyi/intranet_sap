@@ -145,7 +145,7 @@ const actions = {
   },
   toggleTile({}, element) {
     let height;
-    if (element.elChild.className === "delegations-table-wrapper") {
+    if (element.elChild.className === "delegations-table-wrapper" || element.elChild.className === "delegations-table-travel-wrapper") {
       let tableHeight = Array.prototype.reduce.call(element.elChild.firstElementChild.childNodes, function(p, c) {
         return p + (c.offsetHeight || 0);
       }, 0),
@@ -182,7 +182,7 @@ const actions = {
   },
   calcHeight({}, element) {
     let height;
-    if (element.elChild.className === "delegations-table-wrapper") {
+    if (element.elChild.className === "delegations-table-wrapper" || element.elChild.className === "delegations-table-travel-wrapper") {
       let tableHeight = Array.prototype.reduce.call(element.elChild.firstElementChild.childNodes, function(p, c) {
         return p + (c.offsetHeight || 0);
       }, 0),

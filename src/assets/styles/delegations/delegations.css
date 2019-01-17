@@ -615,12 +615,6 @@
     background: transparent;
 }
 
-@media (min-width: 30rem) {
-    .delegations-header-menu {
-        display: none;
-    }
-}
-
 .delegations-table-1 {
     display: flex;
     flex-direction: column;
@@ -631,13 +625,23 @@
 }
 
 .del-thead-1,
-.del-thead-2 {
+.del-thead-2,
+.del-thead-travel {
     color: #808080;
     background: #e5e5e5;
     display: none;
     width:100%;
     border-radius: 2px;
     align-items: center;
+}
+
+.del-thead-1,
+.del-thead-2 {
+    display: none;
+}
+
+.del-thead-travel {
+    display: none;
 }
 
 .del-thead-1 {
@@ -781,7 +785,8 @@
 
 /* DELEGATIONS TABLE CSS dla Koszty */
 
-.delegations-table-wrapper {
+.delegations-table-wrapper,
+.delegations-table-travel-wrapper {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -796,6 +801,7 @@
 .del-add-row {
     background: transparent;
     margin-right: 1rem;
+    margin-bottom: .7rem;
     border: 0;
     font-family: 'Roboto';
     font-size: 1rem;
@@ -803,11 +809,11 @@
     border-radius: 0.5rem;
     transition: box-shadow 0.3s ease;
     height: 1.5rem;
-    /* margin: .3rem 0; */
+    align-self: flex-end
 }
 
 .del-add-row:hover {
-    box-shadow: 0px 0px 10px orange;
+    box-shadow: 1px 0px 16px orange;
     cursor: pointer;
 }
 
@@ -942,7 +948,8 @@
     display: flex;
 }
 
-.del-tbody2-item-title {
+.del-tbody2-item-title,
+.del-tbody2-travel-item-title {
     display: flex;
     width: 35%;
     justify-content: center;
@@ -964,7 +971,8 @@
     border-bottom: 0;
 }
 .del-tfoot2,
-.del-tfoot2-s {
+.del-tfoot2-travel,
+.del-tfoot-travel-s {
     display: flex;
     width: 20%;
     justify-content: center;
@@ -973,7 +981,8 @@
 }
 
 .del-tfoot2 p ,
-.del-tfoot2-s p {
+.del-tfoot2-travel p,
+.del-tfoot-travel-s p {
     padding: 0;
     margin: 0;
 }
@@ -981,14 +990,27 @@
 .del-tfoot2 {
     width: 20%;
 }
-.del-tfoot2-s {
+
+.del-tfoot2-travel {
     width: 20%;
 }
 
-.del-tbody-2{
+.del-tfoot-travel-s {
+    width: 20%;
+}
+
+.del-tbody-2,
+.del-tbody-2-travel {
     display: flex;
-    flex-direction: column;
     width: 100%;
+}
+
+.del-tbody-2 {
+    flex-direction: column;
+}
+
+.del-tbody-2-travel {
+    flex-direction: column;
 }
 
 .del-tbody-2:last-of-type {
@@ -1002,6 +1024,11 @@
 
 .del-table-footer {
     display: none; 
+    min-height: 3rem;
+}
+
+.del-table-travel-footer {
+    display: none;
     min-height: 3rem;
 }
 
@@ -1049,12 +1076,17 @@
     justify-content: space-around;
 }
 
+@media (min-width: 30rem) {
+    .delegations-header-menu {
+        display: none;
+    }
+}
+
 @media (min-width: 44rem) {
     .delegations-content {
         width: 80%;
     }
 }
-
 
 @media (min-width:64rem) {
 
@@ -1078,24 +1110,7 @@
         width: 20%;
         min-height: 2rem;
     }
-    .del-tbody2-item-travel-xl {
-        width: 15%
-    }
-    .del-tbody2-item-travel-l {
-        width: 10%
-    }
-    .del-tbody2-item-travel-m {
-        width: 12%;
-    }
-    .del-tbody2-item-travel {
-        width: 9%
-    }
-    .del-tbody2-item-travel-s {
-        width: 7%
-    }
-    .del-tbody2-item-travel-xs {
-        width: 5%;
-    }
+
     .del-tbody2-item-w {
         display: flex;
         width: 20%;
@@ -1107,7 +1122,7 @@
         display: flex;
         width: 12.5%;
     }
-    .del-tfoot2-s {
+    .del-tfoot-travel-s {
         width: 5%;
     }
     .del-table-footer {
@@ -1122,7 +1137,7 @@
         min-height: 3rem;
     }
     .del-tbody-2-travel {
-        min-height: 6rem;
+        
     }
     .del-tbody-2-accom {
         min-height: 4.5rem;
@@ -1165,8 +1180,7 @@
         width: 9.09%;
         justify-content: center;
     }
-    .del-tfoot2,
-    .del-tfoot2-s {
+    .del-tfoot2 {
         display:none;
     }
 }
@@ -1211,5 +1225,60 @@
     }
     .del-tbody-cols {
         width: 10%;
+    }
+}
+
+@media (min-width: 93.75rem) {
+    .del-thead-travel {
+        display: flex;
+        min-height: 3rem;
+    }
+    
+    .del-tbody-2-travel {
+        flex-direction: row;
+        /* min-height: 3rem; */
+        min-height: 6rem;
+    }
+    .delegations-table-travel-wrapper {
+        flex-direction: column;
+    }
+
+
+
+
+    .del-table-travel-footer {
+        display: flex;
+        min-height: 3rem; 
+        width: 100%;
+    }
+    .del-tbody2-item-travel-xl {
+        width: 15%
+    }
+    .del-tbody2-item-travel-l {
+        width: 10%
+    }
+    .del-tbody2-item-travel-m {
+        width: 12%;
+    }
+    .del-tbody2-item-travel {
+        width: 9%
+    }
+    .del-tbody2-item-travel-s {
+        width: 7%
+    }
+    .del-tbody2-item-travel-xs {
+        width: 5%;
+    }
+    
+    .del-tbody2-travel-item-title {
+        display: none;
+    }
+
+    .del-tfoot2-travel {
+        display: none;
+    }
+
+    .del-tfoot-travel-s {
+        display:none;
     }
 }
