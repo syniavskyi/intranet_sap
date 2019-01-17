@@ -45,11 +45,6 @@
                                         <label class="delegations-label-cool">{{ $t("label.to") }} </label>
                                     </div>
                                     <div class="del-div-cool">
-                                        <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
-                                        <span class="del-div-bar"></span>
-                                        <label class="delegations-label-cool">{{ $t("label.target") }} </label>
-                                    </div>
-                                    <div class="del-div-cool">
                                         <v-date-picker class="delegations-input-date" @input="checkNewDelegation" v-model="newDelegation.createDate">
                                             <input value="newDelegation.createDate" />
                                         </v-date-picker>
@@ -61,6 +56,12 @@
                                         </v-date-picker>
                                         <label class="del-slabel">{{ $t("label.forTime") }} </label>
                                     </div>
+                                    <div class="del-div-cool">
+                                        <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
+                                        <span class="del-div-bar"></span>
+                                        <label class="delegations-label-cool">{{ $t("label.target") }} </label>
+                                    </div>
+                                    
                                 </div>
                                 <div class="delegations-inputs-section">
                                     <div class="del-div-cool">

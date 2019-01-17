@@ -9,7 +9,7 @@
         </div>
         <div class="delegations-tile-content">
             <div class="delegations-table-wrapper">
-                <div class="delegations-table-2 del-table-2">
+                <div class="delegations-table-2">
                     <div class="del-thead-2">
                         <div class="del-thead-item-adv">{{ $t("table.delegations.advanceDate") }}</div>
                         <div class="del-thead-item-adv">{{ $t("table.delegations.advanceCurrency") }}</div>

@@ -8,9 +8,9 @@
             <div class="delegations-tile-underscore"></div>
         </div>
         <div class="delegations-tile-content">
-            <div class="delegations-table-wrapper" id="delegations-table">
-                <div class="delegations-table-2 del-table-2">
-                    <div class="del-thead-2">
+            <div class="delegations-table-travel-wrapper" id="delegations-table">
+                <div class="delegations-table-2">
+                    <div class="del-thead-travel">
                         <div class="del-thead-item-travel-l">{{ $t("table.delegations.docDate") }}</div>
                         <div class="del-thead-item-travel">{{ $t("table.delegations.company") }}</div>
                         <div class="del-thead-item-travel">{{ $t("table.delegations.docNo") }}</div>
@@ -23,48 +23,49 @@
                         <div class="del-thead-item-travel">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
                         <div class="del-thead-item-travel-s"></div>
                     </div>
-                    <div class="del-tbody-2 del-tbody-2-travel" v-for="(cost, index) in travelCosts" :key="index">
+                    <div class="del-tbody-2-travel" v-for="(cost, index) in travelCosts" :key="index">
                         <div class="del-tbody2-item-travel-l">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.docDate") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.docDate") }}</div>
                             <div class="del-tbody2-item-txt" @mouseover="setOverflow" @mouseout="outOverflow">
                                 <v-date-picker class="delegations-tinput-date" mode="single" @change="getTravelRate(index)" v-model="cost.docDate">
                                     <input value="otherCosts[index].docDate" />
                                 </v-date-picker>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
                         <div class="del-tbody2-item-travel">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.company") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.company") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" @input="checkTravelFields" v-model="cost.company" />
                                     <span class="del-div-bar"></span>
                                 </div>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
                         <div class="del-tbody2-item-travel">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.docNo") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.docNo") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" @input="checkTravelFields" v-model="cost.docNo" />
                                     <span class="del-div-bar"></span>
                                 </div>
                             </div>
-                            <div class="del-tfoot2">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
+                            <div class="del-tfoot2-travel">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
                         </div>
                         <div class="del-tbody2-item-travel-xs">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.return") }}?</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.return") }}?</div>
                             <div class="del-tbody2-item-txt">
                                 <label class="checkbox-wrap">
                                     <input type="checkbox" class="checkbox-new" @change="updateTravelCosts" v-model="cost.payback" />
                                     <div class="checkbox-in"></div>
                                 </label>
                             </div>
-                            <div class="del-tfoot2-s">{{ totalCostsInCurr.trvPayback }}</div>
+                            <div class="del-tfoot2-travel">{{ totalCostsInCurr.trvPayback }}</div>
+                            <!-- del-tfoot-travel-s -->
                         </div>
                         <div class="del-tbody2-item-travel-xl">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.transport") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.transport") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <select class="delegations-tselect" :id="index" v-model="cost.transport" @change="setFieldsValues(cost)">
                                     <option v-for="transport in transportList" :key="transport.Key" :value="transport.Key">{{ transport.Value }}</option>
@@ -75,11 +76,11 @@
                                     <label class="delegations-tlabel-cool" v-if="!cost.licencePlateNo">{{ $t("label.registrationNo") }}</label>
                                 </div>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
 
                         <div class="del-tbody2-item-travel-m">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.paymentType") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.paymentType") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <select :id="index" :disabled="disableReturnType(cost)" :class="[{ 'delegations-tselect-m-disabled': disableReturnType(cost) },  'delegations-tselect-m']" v-model="cost.flatRate" @change="valuesForReturnType(cost)">
                                     <option disabled selected value></option>
@@ -95,56 +96,56 @@
                                     <option key="true" :value="true">{{ $t("label.capacityMore") }}<sup>3</sup></option>
                                 </select>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
                         <div class="del-tbody2-item-travel">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.kilometers") }}?</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.kilometers") }}?</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input :disabled="disableKilometers(cost)" :class="[{ 'delegations-tinput-s-disabled': disableKilometers(cost) },  'delegations-tinput-s']" type="number" @change="updateTravelCosts" v-model="cost.kilometers" />
                                     <span class="del-div-bar"></span>
                                 </div>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
                         <div class="del-tbody2-item-travel-s">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.currency") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.currency") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <select :disabled="disableCostAmount(cost)" :class="[{ 'delegations-tselect-s-disabled': disableCostAmount(cost) },  'delegations-tselect-s']" v-model="travelCosts[index].currency" @change="getTravelRate(index)">
                                     <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                 </select>
                             </div>
-                            <div class="del-tfoot2">---</div>
+                            <div class="del-tfoot2-travel">---</div>
                         </div>
                         <!-- acc -accomodation, trv - travel - oth - others -->
                         <div class="del-tbody2-item-travel">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.amount") }}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.amount") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input :disabled="disableCostAmount(cost)" :class="[{ 'delegations-tinput-s-disabled': disableCostAmount(cost) },  'delegations-tinput-s']" type="number" min="0" @input="updateTravelCosts" v-model="cost.amount" />
                                     <span class="del-div-bar"></span>
                                 </div>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
 
                         <div class="del-tbody2-item-travel">
-                            <div class="del-tbody2-item-title">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
+                            <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
                             <div class="del-tbody2-item-txt">{{cost.totalAmountCurr}}</div>
-                            <div class="del-tfoot2">
+                            <div class="del-tfoot2-travel">
                                 <p>{{totalCostsInCurr.travel }}</p>
                             </div>
                         </div>
                         <div class="del-tbody2-item-travel-s">
-                            <div class="del-tbody2-item-title"></div>
+                            <div class="del-tbody2-travel-item-title"></div>
                             <div class="del-tbody2-item-txt">
                                 <button class="btn-delete-row" @click="removeCostRow(index)">{{ $t("button.delete") }}</button>
                             </div>
-                            <div class="del-tfoot2">&nbsp;</div>
+                            <div class="del-tfoot2-travel">&nbsp;</div>
                         </div>
                     </div>
                 </div>
-                <div class="delegations-table-2 del-table-footer">
+                <div class="del-table-travel-footer">
                     <div class="del-tbody-2 del-tbody-2-travel">
                         <div class="del-tbody2-item-wfoot-cost"></div>
                         <div class="del-tbody2-item-cost">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
