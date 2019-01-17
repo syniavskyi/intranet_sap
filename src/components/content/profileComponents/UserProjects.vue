@@ -159,7 +159,7 @@ export default {
     }
   },
   components: {
-    Toast 
+    Toast
   },
   computed: {
     ...mapGetters({
@@ -215,7 +215,7 @@ export default {
       while (selectIndus.options.length > 1) {
         i--
         selectIndus.remove(i)
-      } 
+      }
       for (i = 0; i < contrIndus.length; i++) {
         option = new Option(contrIndus[i].IndustryName, contrIndus[i].IndustryId)
         option.setAttribute("id", contrIndus[i].IndustryId)
@@ -233,7 +233,7 @@ export default {
 
       for (var i = 0; i < contrBranches.length; i++) {
         if (contrId === contrBranches[i].ContractorId) {
-          
+
           idx = indusList.map(industry => {
             return industry.IndustryId
           }).indexOf(contrBranches[i].IndustryId)
@@ -248,7 +248,7 @@ export default {
               IndustryName: industryName
             })
           }
-          
+
         }
       }
       if (arr.length === 0) {
@@ -273,7 +273,7 @@ export default {
         idx = contrIndustries.map(industry => {
           return industry.IndustryId
         }).indexOf(btnValue)
-    
+
         if (idx === -1) {
           this.removeIndustry({target: {
             value: btnValue,
@@ -289,6 +289,7 @@ export default {
       this.$store.dispatch("updateUserProjectsPosition", newData);
       this.userProjects.splice(index, 1);
       this._beforeEditingProjects = utils.createClone(this.userProjects);
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     save(index) {
       const dataToChange = this._beforeEditingProjects[index],
@@ -308,6 +309,7 @@ export default {
       this._beforeEditingProjects = utils.createClone(this.userProjects);
       document.getElementsByClassName("projSaveButton")[index].disabled = true;
       this.showHintAfterSave = true;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     checkFields(index) {
       let bChanged,
@@ -363,6 +365,7 @@ export default {
         } else {
           bChanged = true;
         }
+        this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.projectEditMode});
       if (
         userPro.ProjectName &&
         userPro.ContractorName &&
@@ -431,6 +434,7 @@ export default {
       this.projectEditMode = false;
       this.showHintAfterSave = false;
       this.showHintFnProject({index: '', show: false});
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     editProjects() {
       this.projectEditMode = true;

@@ -194,6 +194,7 @@ export default {
       this.$store.commit("SET_USER_SKILLS", this._beforeEditingCacheSkills);
       this.$store.commit("SET_USER_LANGS", this._beforeEditingCacheLangs);
       this.editMode = false;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // check if new data should be updated or created
     save() {
@@ -203,6 +204,7 @@ export default {
       this._beforeEditingCacheSkills = utils.createClone(this.userSkills);
       this._beforeEditingCacheLangs = utils.createClone(this.userLangs);
       this.editMode = false;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // validate fields
     checkFieldsLangs(index) {
@@ -217,6 +219,7 @@ export default {
           document.getElementsByClassName("prof-skills-save")[
             index
           ].disabled = false;
+          this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.editMode});
         } else {
           document.getElementsByClassName("prof-skills-save")[index].disabled = true;
         }
@@ -234,6 +237,7 @@ export default {
       } else {
         this.bDisabled = true;
       }
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: !this.bDisabled, editMode: this.editMode});
     },
     checkSingleSkill(skillKey) {
       let beforeEdit = this._beforeEditingCacheSkills,

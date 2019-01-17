@@ -183,6 +183,7 @@ export default {
       }   else {
             bChanged = true;
       }
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.editMode});
       if (this.userEducation.length > 0) {
         if (
           userEdu.FieldOfStudy &&
@@ -213,6 +214,7 @@ export default {
         this.editUserEducation(newData);
         this.userEducation.splice(index, 1);
         this._beforeEditingCache = utils.createClone(this.userEducation)
+        this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
       }
     },
     //undo changes
@@ -221,6 +223,7 @@ export default {
       this.$store.commit("SET_EDUCATION_ERROR", false);
       this.$store.commit("SET_USER_EDUCATION", this._beforeEditingCache);
       this.editMode = false;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // check if new data should be updated or created
     save(index) {
@@ -241,6 +244,7 @@ export default {
        document.getElementsByClassName("eduButtons")[
             index
           ].children[0].disabled = true;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     formatDate(date) {
       return date !== null && date !== undefined
