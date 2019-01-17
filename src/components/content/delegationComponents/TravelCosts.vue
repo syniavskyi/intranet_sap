@@ -151,12 +151,12 @@
                         <div class="del-tbody2-item-cost">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
                         <div class="del-tbody2-item-cost-s">{{ totalCostsInCurr.trvPayback }}</div>
                         <div class="del-tbody2-item-cost-xw">---</div>
-                        <div class="del-tbody2-item-cost">---</div>
-                        <div class="del-tbody2-item-cost">---</div>
-                        <div class="del-tbody2-item-cost-s">---</div>
-                        <div class="del-tbody2-item-cost">---</div>
-                        <div class="del-tbody2-item-cost">{{totalCostsInCurr.travel }}</div>
-                        <div class="del-tbody2-item-cost">---</div>
+                        <div class="del-tbody2-item-cost-w">---</div>
+                        <div class="del-tbody2-item-cost-m">---</div>
+                        <div class="del-tbody2-item-cost-xs">---</div>
+                        <div class="del-tbody2-item-cost-m">---</div>
+                        <div class="del-tbody2-item-cost-m">{{totalCostsInCurr.travel }}</div>
+                        <div class="del-tbody2-item-cost-xs">---</div>
                     </div>
                 </div>
             </div>

@@ -220,6 +220,8 @@
 .delegations-input-cool,
 .delegations-dinput-cool {
     display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     height: 2rem;
     font-family: 'Roboto';
@@ -444,6 +446,7 @@
     text-align: center;
     border: 0;
     display:flex;
+    justify-content: center;
     align-items:center;
 }
 .delegations-input-date input,
@@ -532,6 +535,8 @@
 .delegations-tinput-s {
     font-family: inherit;
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 6.7rem;
     height: 1.5rem;
     font-size: 1.2rem;
@@ -573,11 +578,17 @@
 }
 
 .delegations-tinput-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     text-align: center;
     border: 0;
 }
 .delegations-tinput-date input {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
     width: 6rem;
     font-family: inherit;
     text-align: center;
@@ -893,8 +904,10 @@
 .del-tbody2-item-travel-xl, 
 .del-tbody2-item-cost,
 .del-tbody2-item-cost-w,
+.del-tbody2-item-cost-m,
 .del-tbody2-item-cost-xw,
 .del-tbody2-item-cost-s,
+.del-tbody2-item-cost-xs,
 .del-tbody2-item-scost,
 .del-tbody2-item-scost-w {
     display: flex;
@@ -930,7 +943,7 @@
 
 .del-tbody2-item-wfoot-cost {
     display: flex;
-    width: 21.09%;
+    width: 19%;
 }
 .del-tbody2-item-wfoot-adv {
     width: 40%;
@@ -1094,8 +1107,10 @@
     .del-tbody2-item-adv,
     .del-tbody2-item-cost,
     .del-tbody2-item-cost-w,
+    .del-tbody2-item-cost-m,
     .del-tbody2-item-cost-xw,
     .del-tbody2-item-cost-s,
+    .del-tbody2-item-cost-xs,
     .del-tbody2-item-scost,
     .del-tbody2-item-scost-w {
         justify-content: center;
@@ -1161,9 +1176,18 @@
         width: 10%;
     }
 
+    .del-tbody2-item-cost-m {
+        width: 9%;
+    }
+
     .del-tbody2-item-cost-s {
         width: 5%;
     }
+
+    .del-tbody2-item-cost-xs {
+        width: 7%;
+    }
+    
     .del-tbody2-item-cost-w {
         flex-direction: column;
         width: 12%;
@@ -1172,12 +1196,12 @@
     .del-thead-item-cost-xw,
     .del-tbody2-item-cost-xw {
         flex-direction: column;
-        width: 14%;
+        width: 15%;
     }
 
     .del-tbody2-item-cost {
         flex-direction: column;
-        width: 9.09%;
+        width: 9%;
         justify-content: center;
     }
     .del-tfoot2 {
