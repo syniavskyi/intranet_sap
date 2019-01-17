@@ -38,7 +38,11 @@ const state = {
     "2/5": "2/5",
     "3/5": "3/5",
     "4/5": "4/5"
-  }
+  },
+  hasDataChangeProf: {
+    changed: false,
+    editMode: false
+  } // check if data was changes in profile componentss
 };
 
 const mutations = {
@@ -59,6 +63,9 @@ const mutations = {
   },
   SET_WORK_TIME(state){
     state.workTime["Full"] = i18n.t("label.fulltime");
+  },
+  SET_DATA_CHANGE_PROF(state, data) {
+    state.hasDataChangeProf = data;
   }
 };
 
@@ -127,7 +134,6 @@ const actions = {
   submitPassword({
     getters, dispatch
   }, userData) {
-    // let urlQuery = getters.getUrlQuery
     userData.Action = 'C'
     const url = 'Users' + '(' + "UserAlias='" + userData.UserAlias + "',Language='" + userData.Language + "')"
     let sToken = getters.getToken;
@@ -144,12 +150,10 @@ const actions = {
       method: 'put',
       data: userData,
       headers: {
-          // "Content-Type": "application/x-www-form-urlencoded",//"application/atom+xml; type=entry; charset=utf-8",
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
           "Cache-Control": "no-cache",
-          "x-csrf-token": sToken,
-          // "Cookie": getters.getCookie
+          "x-csrf-token": sToken
       }
     }).then(res => {
         let message = res.headers;
@@ -197,6 +201,9 @@ const getters = {
   },
   getWorkTime(state){
     return state.workTime;
+  },
+  getDataChangedProf(state) {
+    return state.hasDataChangeProf;
   }
 };
 

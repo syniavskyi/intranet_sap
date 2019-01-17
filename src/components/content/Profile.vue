@@ -312,7 +312,10 @@ export default {
   // set login language
   beforeRouteLeave(to, from, next) {
     let lang = this.loginLanguage.toLowerCase(),
-    path = ""
+    path = "",
+    dataChangedProf = false,
+    editModeProf = false;
+    ;
     if (lang == "") {
       lang = "pl";
     }
@@ -320,13 +323,16 @@ export default {
     if(to.path !== '/cv') {
       this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
     }
-
-    if (this.editMode && this.hasDataChanged) {
+    dataChangedProf = this.hasDataChanged || this.$store.getters.getDataChangedProf.changed; // check if data was changed in profile comonents
+    editModeProf = this.editMode || this.$store.getters.getDataChangedProf.editMode;
+    if (editModeProf && dataChangedProf) {
       this.$store.commit('SET_NEXT_PATH', to.path)
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
       if (this.leavePageFlag === false) {
       } else {
+          this.$store.commit('SET_LEAVE_PAGE_DIALOG', false)
           this.$store.commit('SET_LEAVE_PAGE_FLAG', false)
+          this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
           next()
         }
     } else {
@@ -428,20 +434,6 @@ export default {
       return aFilteredUsers;
     }
   },
-  // beforeRouteLeave(to, from , next) {
-  //   if (this.editMode && this.hasDataChanged) {
-  //     this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
-  //     if (this.leavePageFlag !== null) {
-  //       if (this.leavePageFlag === false) {
-  //         return
-  //       } else {
-  //         next()
-  //       }
-  //     }
-  //   } else {
-  //     next()
-  //   }
-  // },
   watch: {
     selectedUser(value) {
       if(!value) {

@@ -124,7 +124,7 @@ export default {
      } else {
           bChanged  = true;
       }
-
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.editMode});
       if (this.userExperience.length > 0) {
         if (
           bChanged &&
@@ -152,6 +152,7 @@ export default {
       this.$store.commit("SET_EXPERIENCE_ERROR", false);
       this.$store.commit("SET_USER_EXPERIENCE", this._beforeEditingCache);
       this.editMode = false;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     remove(index) {
       let newData = utils.createClone(this.userExperience[index]);
@@ -160,6 +161,7 @@ export default {
       this.updateUserExp(newData);
       this.userExperience.splice(index, 1);
       this._beforeEditingCache = utils.createClone(this.userExperience);
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // check if new data should be updated or created
     save(index) {
@@ -179,7 +181,8 @@ export default {
       document.getElementsByClassName("expButtons")[
             index
           ].children[0].disabled = true;
-        },
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
+    },
     formatDate(date) {
       return date !== null && date !== undefined
         ? moment(date).format("DD.MM.YYYY")
