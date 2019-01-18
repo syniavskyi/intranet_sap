@@ -198,7 +198,7 @@
     right:50%; 
 }
 
- .cd-input:focus ~ span:before, .cd-input:focus ~ span:after {
+.cd-input:focus ~ span:before, .cd-input:focus ~ span:after {
     width: 50%;
 }
 

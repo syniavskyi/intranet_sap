@@ -368,6 +368,7 @@
         "delete": "usuń",
         "save": "zapisz",
         "reset": "resetuj",
-        "openHoliday": "Kliknij aby wygenerować wniosek urlopowy"
+        "openHoliday": "Kliknij aby wygenerować wniosek urlopowy",
+        "editDelegationNumber": "Edytuj numer delegacji"
     }
 }

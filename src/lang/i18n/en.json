@@ -369,6 +369,7 @@
         "delete": "delete",
         "save": "save",
         "reset": "reset",
-        "openHoliday": "click to create new holiday request"
+        "openHoliday": "click to create new holiday request",
+        "editDelegationNumber": "Edit delegation number"
     }
 }

@@ -70,6 +70,7 @@
     align-items:center;
     justify-content: space-around;
     transition: all .5s ease;
+    position: relative;
 }
 
 .delegations-tile:not(:first-of-type) .delegations-tile-content {
@@ -95,11 +96,88 @@
     align-items:center;
     color: #ccc;
     font-size: 1.2rem;
+    position: relative;
 }
 
-.delegation-number span {
+.delegation-number-title {
     font-size: 2rem;
     color: rgb(80, 80, 80);
+    border-bottom: 1px solid transparent;
+}
+
+.delegation-number-input,
+.delegation-number-input-edit,
+.delegation-number-btn {
+    border: 0;
+    background: transparent;
+    color: rgb(80, 80, 80);
+}
+
+.delegation-number-input,
+.delegation-number-input-edit {
+    width: 15rem;
+    font-size: 2rem;
+    border-bottom: 1px solid transparent;
+    transition: border .2s;
+}
+.del-number-cd {
+    padding:0;
+    margin: 0;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 14.8rem;
+}
+
+.del-number-error {
+    display: flex;
+    position: absolute;
+    top: -.8rem;
+    left: 0;
+    font-size: .8rem;
+    color: #cc0000;
+}
+
+.delegation-number-input-edit {
+    border-color: grey;
+}
+
+.delegation-number-input-edit:focus ~ span:before,
+.delegation-number-input-edit:focus ~ span:after {
+    width: 50%;
+}
+
+.delegation-number-btn,
+.delegation-number-btnc {
+    background: transparent;
+    border: 0;
+    font-size: 1.5rem;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    transition: color .2s;
+    cursor: pointer;
+}
+
+.delegation-number-btnc {
+    top: -3rem;
+    right: 0rem;
+}
+
+.delegation-number-btn {
+    transform: rotate(90deg);
+    top: .1rem;
+    right: -1.5rem;
+}
+
+.delegation-number-btn:hover,
+.delegation-number-btnc:hover {
+    color: #ffa500;
+}
+
+.delegation-input-edit span:after,
+.delegation-input-edit span:before {
+    height: 3px
 }
 
 .del-sections {
@@ -449,6 +527,13 @@
     justify-content: center;
     align-items:center;
 }
+
+.delegations-input-date:focus-within {
+    outline: 1px solid orange;
+    border-radius: 5px;
+}
+
+
 .delegations-input-date input,
 .delegations-dinput-date input {
     display: flex;
@@ -522,14 +607,14 @@
 .delegations-tselect-s-disabled {
     width: 3.8rem;
 }
-.delegations-tinput-time {
+/* .delegations-tinput-time {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: right;
     border: 0;
     border-bottom: 1px solid #808080;
-}
+} */
 .delegations-tinput,
 .delegations-tinput-w,
 .delegations-tinput-s {
@@ -611,12 +696,13 @@
     align-items: center;
     border-radius: 3px;
     width: 5rem;
-    text-align: center;
+    text-align: right;
     font-size: 1rem;
     border: 1px solid #d3d3d3;
     height: 1.55rem;
     font-family: inherit;
 }
+
 .delegations-tinput-time input {
     width: 6rem;
     text-align: center;

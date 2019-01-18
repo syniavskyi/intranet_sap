@@ -147,7 +147,7 @@
                 </div>
                 <div class="del-table-travel-footer">
                     <div class="del-tbody-2 del-tbody-2-travel">
-                        <div class="del-tbody2-item-wfoot-cost"></div>
+                        <div class="del-tbody2-item-wfoot-cost"/>
                         <div class="del-tbody2-item-cost">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
                         <div class="del-tbody2-item-cost-s">{{ totalCostsInCurr.trvPayback }}</div>
                         <div class="del-tbody2-item-cost-xw">---</div>
@@ -155,7 +155,7 @@
                         <div class="del-tbody2-item-cost-m">---</div>
                         <div class="del-tbody2-item-cost-xs">---</div>
                         <div class="del-tbody2-item-cost-m">---</div>
-                        <div class="del-tbody2-item-cost-m">{{totalCostsInCurr.travel }}</div>
+                        <div class="del-tbody2-item-cost-m">{{totalCostsInCurr.travel}}</div>
                         <div class="del-tbody2-item-cost-xs">---</div>
                     </div>
                 </div>

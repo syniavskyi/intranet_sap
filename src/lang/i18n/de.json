@@ -368,6 +368,7 @@
         "delete": "löschen",
         "save": "speichern",
         "reset": "zurücksetzen",
-        "openHoliday": "Klicken Sie hier, um eine neue Urlaubsanfrage zu erstellen"
+        "openHoliday": "Klicken Sie hier, um eine neue Urlaubsanfrage zu erstellen",
+        "editDelegationNumber": "Edit delegation number"
     }
 }
