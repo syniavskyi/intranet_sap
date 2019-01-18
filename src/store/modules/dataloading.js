@@ -264,10 +264,12 @@ const actions = {
             if (obj[index].DateStart) {
               obj[index].DateStart = utils.dateStringToObj(obj[index].DateStart);
             }
-            if (obj[index].DateEnd) {
+            obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
+            if(obj[index].IsCurrent){
+              obj[index].DateEnd = new Date();
+            } else {
               obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
             }
-            obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
           }
         }
       }
