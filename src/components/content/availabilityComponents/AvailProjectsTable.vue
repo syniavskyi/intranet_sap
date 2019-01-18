@@ -39,7 +39,7 @@
                         <div class="ava-tbproj-ititle">{{ $t("label.engag") }}</div>
                         <p v-if="!editMode">{{project.Engag}}</p>
                         <div v-if="editMode && authType !== 'OWN'">
-                            <input required class="ava-input-range-perc" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"/><span class="ava-perc-span">%</span>
+                            <input required class="ava-input-range-perc" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="ava-perc-span">%</span>
                             <span class="ava-div-bar"></span>
                         </div>
                     </div>
@@ -47,14 +47,14 @@
                         <div class="ava-tbproj-ititle">{{ $t("label.from") }}</div>
                         <p class="prof-date-label" v-if="!editMode"> {{ formatDate(project.StartDate) }} </p>
                         <v-date-picker v-if="editMode && authType !== 'OWN'" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.StartDate">
-                            <input value="project.StartDate" />
+                            <input value="project.StartDate">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.to") }}</div>
                         <p class="prof-date-label" v-if="!editMode"> {{ formatDate(project.EndDate) }} </p>
                         <v-date-picker v-if="editMode && authType !== 'OWN'" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.EndDate">
-                            <input value="project.EndDate" />
+                            <input value="project.EndDate">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbproj-item">

@@ -71,7 +71,7 @@
           </div>
           <div class="prof-input-xl">
             <!-- Języki programowania -->
-            <input v-on:keyup.enter="addProgramLang" required class="inputProfile inputEditPos" v-if="editMode" v-model="newProgramLang"/>
+            <input v-on:keyup.enter="addProgramLang" required class="inputProfile inputEditPos" v-if="editMode" v-model="newProgramLang">
             <span class="prof-div-bar"></span>
             <button class="prof-div-pos-btn" v-if="editMode" @click="addProgramLang">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'ProgramLang', show: true})" v-if="editMode">?</button>
@@ -84,7 +84,7 @@
         <div class="prof-skills-inputs">
           <div class="prof-input-xl">
             <!-- Technologie -->
-            <input v-on:keyup.enter="addTechnology" required class="inputProfile inputEditPos" v-if="editMode" v-model="newTechnology"/>
+            <input v-on:keyup.enter="addTechnology" required class="inputProfile inputEditPos" v-if="editMode" v-model="newTechnology">
             <span class="prof-div-bar"></span>
             <button tooltip="usuń" class="prof-div-pos-btn" v-if="editMode" @click="addTechnology">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'Technologies', show: true})" v-if="editMode">?</button>
@@ -95,7 +95,7 @@
           </div>
           <div class="prof-input-xl">
             <!-- Extensions -->
-            <input v-on:keyup.enter="addExtension" required class="inputProfile inputEditPos" v-if="editMode" v-model="newExtension"/>
+            <input v-on:keyup.enter="addExtension" required class="inputProfile inputEditPos" v-if="editMode" v-model="newExtension">
             <span class="prof-div-bar"></span>
             <button class="prof-div-pos-btn" v-if="editMode" @click="addExtension">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'Extensions', show: true})" v-if="editMode">?</button>
@@ -106,7 +106,7 @@
           </div>
           <div class="prof-input-xl">
             <!-- Additional experience -->
-            <input v-on:keyup.enter="addAdditional" required class="inputProfile inputEditPos" v-if="editMode" v-model="newAdditional"/>
+            <input v-on:keyup.enter="addAdditional" required class="inputProfile inputEditPos" v-if="editMode" v-model="newAdditional">
             <span class="prof-div-bar"></span>
             <button class="prof-div-pos-btn" v-if="editMode" @click="addAdditional">&#43;</button>
             <button class="btn-hint hint-abs" @click="showHintFn({name: 'AdditionalSkills', show: true})" v-if="editMode">?</button>

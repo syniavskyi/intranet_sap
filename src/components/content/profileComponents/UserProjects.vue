@@ -45,15 +45,15 @@
               <div class="prof-tbody-item">
               <div class="prof-tbody-item-title">{{ $t("table.projectName") }} </div>
               <div class="prof-tbody-item-txt">
-                <input :disabled="!projectEditMode" @input="checkFields(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName" />
+                <input :disabled="!projectEditMode" @input="checkFields(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName">
               </div>
             </div>
             <div class="prof-tbody-item">
               <div class="prof-tbody-item-title"> {{ $t("table.contractor") }}</div>
               <div class="prof-tbody-item-txt">
                 <p v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
-                <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName"/>
-                <!-- <input v-if="projectEditMode" class="profile-table-input-view" :disabled="projectEditMode" v-model="_beforeEditingProjects[index].ContractorName""/> -->
+                <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName">
+                <!-- <input v-if="projectEditMode" class="profile-table-input-view" :disabled="projectEditMode" v-model="_beforeEditingProjects[index].ContractorName""> -->
                 <!-- <p v-if="projectEditMode"> {{ setEditedProjectContractor(index)}} </p> -->
                 <p class="profile-table-input-view" v-if="projectEditMode && _beforeEditingProjects[index]" v-once> {{ _beforeEditingProjects[index].ContractorName }} </p>
                 <p class="profile-table-input-view" v-if="projectEditMode && !_beforeEditingProjects[index]" v-once> {{ userProjects[index].ContractorName }} </p>
@@ -70,18 +70,18 @@
                 <p class="prof-table-p" v-if="projectEditMode">{{ $t("label.startDate") }}</p>
                 <p class="table-p" v-if="!projectEditMode"> {{ formatDate(userProjects[index].DateStart) }} </p>
                 <v-date-picker popoverDirection="top" :max-date="project.IsCurrent ? new Date() : project.DateEnd" v-if="projectEditMode" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateStart">
-                  <input value="userProjects[index].DateStart" />
+                  <input value="userProjects[index].DateStart">
                 </v-date-picker>
                 <div class="table-p">&#8722;</div>
                 <p class="prof-table-p" v-if="projectEditMode">{{ $t("label.endDate") }}</p>
                 <div name="endDateDiv" :id="formatId(index)">
                   <p class="table-p" v-if="!projectEditMode && !project.IsCurrent"> {{ formatDate(userProjects[index].DateEnd) }} </p>
                   <v-date-picker popoverDirection="top" :max-date="new Date()" :min-date="project.DateStart" v-if="projectEditMode && !project.IsCurrent" @input="validateDates(index)" class="profile-table-date-picker" is-expanded mode="single" v-model="userProjects[index].DateEnd">
-                    <input value="userProjects[index].DateEnd"/>
+                    <input value="userProjects[index].DateEnd">
                   </v-date-picker>
                 </div>
                 <label class="checkbox-wrap" >
-                  <input class="checkbox-margin" :disabled="!projectEditMode" type="checkbox" :checked="project.IsCurrent" @change="checkFields(index)" :name="index" v-model="userProjects[index].IsCurrent" />
+                  <input class="checkbox-margin" :disabled="!projectEditMode" type="checkbox" :checked="project.IsCurrent" @change="checkFields(index)" :name="index" v-model="userProjects[index].IsCurrent">
                   <div class="checkbox-in"></div>
                   <p style="padding:0;margin:0;color:#7a7a7a;">{{ $t("label.present") }}</p>
                 </label>

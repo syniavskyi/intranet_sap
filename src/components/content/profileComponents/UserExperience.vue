@@ -20,7 +20,7 @@
               <p class="prof-date-label" v-if="!editMode"> {{ formatDate(experience.DateStart) }} </p>
               <div v-if="editMode" class="prof-input-xxs">
                 <v-date-picker class="prof-input-date" popoverDirection="top" v-if="editMode" @input="validateDates(index)" :max-date="experience.IsCurrent ? new Date() : experience.DateEnd" is-expanded mode="single" v-model="experience.DateStart">
-                  <input value="experience.DateStart" />
+                  <input value="experience.DateStart">
                 </v-date-picker>
                 <label v-if="editMode">{{ $t("label.from") }}</label>
               </div>
@@ -29,13 +29,13 @@
                 <p class="prof-date-label" v-if="!editMode && !experience.IsCurrent"> {{ formatDate(experience.DateEnd) }} </p>
                 <div v-if="editMode && !experience.IsCurrent" class="prof-input-xxs">
                   <v-date-picker class="prof-input-date" popoverDirection="top" :min-date="experience.DateStart" :max-date="new Date()" v-if="editMode" @input="validateDates(index)" is-expanded mode="single" v-model="experience.DateEnd">
-                    <input value="experience.DateEnd" />
+                    <input value="experience.DateEnd">
                   </v-date-picker>
                   <label v-if="editMode">{{ $t("label.to") }}</label>
                 </div>
               </div>
               <label class="checkbox-wrap">
-                <input class="checkbox-margin" :disabled="!editMode" type="checkbox" @change="checkFields(index)" :checked="experience.IsCurrent" :name="index" v-model="experience.IsCurrent" />
+                <input class="checkbox-margin" :disabled="!editMode" type="checkbox" @change="checkFields(index)" :checked="experience.IsCurrent" :name="index" v-model="experience.IsCurrent">
                 <div class="checkbox-in"></div>
                 <p style="padding:0;margin:0;">{{ $t("label.present") }}</p>
               </label>
@@ -44,7 +44,7 @@
           <div class="prof-row-inputs">
             <div class="prof-input-ss">
               <input required v-if="editMode" class="inputProfile inputEdit" v-model="experience.Employer" @input="checkFields(index)">
-              <input disabled class="inputProfile inputDisabled" v-if="!editMode" v-model="experience.Employer"/>
+              <input disabled class="inputProfile inputDisabled" v-if="!editMode" v-model="experience.Employer">
               <span class="prof-div-bar"></span>
               <label class="label-profile">{{ $t("label.employer") }}</label>
             </div>

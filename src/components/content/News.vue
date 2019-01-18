@@ -27,7 +27,7 @@
                   <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
                   <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
                   <v-date-picker @input="validateAdvert(advert)" v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
-                    <input value="advert.ValidTo"/>
+                    <input value="advert.ValidTo">
                   </v-date-picker>
                   <div class="advBtns">
                     <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
