@@ -365,6 +365,7 @@
         "delete": "Видалити",
         "save": "Записати",
         "reset": "Cкинути",
-        "openHoliday": "click to create new holiday request"
+        "openHoliday": "click to create new holiday request",
+        "editDelegationNumber": "Edit delegation number"
     }
 }

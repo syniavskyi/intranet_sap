@@ -17,13 +17,13 @@
                         <div class="delegations-tile-title">
                             <p  v-if="authType==='OWN'">{{userData.Fullname}}</p>
                             <div class="cd-for-select" v-if="authType==='*'">
-                                <select required class="cd-select" v-model="newDelegation.userId" @change="setUsername">
+                                <select class="cd-select" v-model="newDelegation.userId" @change="setUsername" required>
                                     <option v-for="user in usersList" :key="user.UserAlias" :value="user.UserAlias">{{ user.Fullname }}</option>
                                 </select>
                                 <label class="cd-slabel">{{ $t("label.selectEmployee") }}</label>
                             </div>
                             <div v-if="authType==='TEAM'" class="cd-for-select">
-                                <select required class="cd-select" v-model="newDelegation.userId" @change="setUsername">
+                                <select class="cd-select" v-model="newDelegation.userId" @change="setUsername" required>
                                     <option v-for="user in filteredTeamUsers" :key="user.UserAlias" :value="user.UserAlias">{{ user.Fullname }}</option>
                                 </select>
                                 <label class="cd-slabel">{{ $t("label.selectTeamMember") }}</label>
@@ -35,7 +35,16 @@
                     <div class="delegations-tile-content delegations-tile-content-1">
                         <div class="del-sections">
                             <div class="delegation-number">
-                                <span>{{ $t("label.delegationNo") }}:&nbsp;</span> <span>{{ delegationNumber }} </span> </div>
+                                <span class="delegation-number-title">{{ $t("label.delegationNo") }}:&nbsp;</span>
+                                <div v-if="delegationNumber !== null ? true : false" class="del-number-cd">
+                                    <div v-if="showDelegationNoError" class="del-number-error">Nieprawidłowy numer</div>
+                                    <masked-input @input="changeDelegationNumber" v-if="delegationNumber === null ? false : true" :class="disableDelegationNumber ? 'delegation-number-input' : 'delegation-number-input-edit'" mask="11/11/1111/AAA" type="text" v-model="delegationNumberModel" :disabled="disableDelegationNumber"></masked-input>
+                                    <span class="cd-span"></span>
+                                </div>
+                                <!-- <span>{{ delegationNumber }}</span>  -->
+                                <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== delegationNumberModel && !showDelegationNoError ? true : false " style="transform: rotate(0deg)">&#10003; Zapisz nowy numer</button>
+                                <button class="delegation-number-btn" v-if="delegationNumberModel === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button>
+                            </div>
                             <div class="del-inputs-sections">
                                 <div class="delegations-inputs-section">
                                     <p class="del-inputs-header">{{ $t("label.targetTime") }}</p>
@@ -61,7 +70,6 @@
                                         <span class="del-div-bar"></span>
                                         <label class="delegations-label-cool">{{ $t("label.target") }} </label>
                                     </div>
-                                    
                                 </div>
                                 <div class="delegations-inputs-section">
                                     <div class="del-div-cool">
@@ -127,6 +135,7 @@ import html2canvas from 'html2canvas'
 window.html2canvas = html2canvas
 
 import {mapGetters, mapActions} from 'vuex'
+import MaskedInput from "vue-masked-input";
 import Menu from '../Menu.vue'
 import AccomodationCosts from './delegationComponents/accomodationCosts'
 import OtherCosts from './delegationComponents/OtherCosts'
@@ -142,8 +151,16 @@ export default {
     data() {
         return {
             delegationUsername: localStorage.getItem('id'),
-            generatingPdfMode: false
+            generatingPdfMode: false,
+            disableDelegationNumber: true,
+            delegationNumberModel: "",
+            showDelegationNoError: false
         }
+    },
+    updated() {
+        this.$nextTick(function () {
+            if (this.delegationNumberModel === "" ) {this.delegationNumberModel = this.delegationNumber}
+        })
     },
     components: {
         'app-menu': Menu,
@@ -153,7 +170,8 @@ export default {
         'advance-table': AdvanceTable,
         'delegation-table': DelegationTable,
         'confirm-dialog': Dialog,
-        "modal": Modal
+        "modal": Modal,
+        MaskedInput
     },
     created(){
         let oStore = this.$store;
@@ -201,6 +219,20 @@ export default {
             countAllowance: 'countAllowance',
             countAllCosts: 'countAllCosts'
         }),
+        setNewDelegationNumber() {
+            this.$store.commit('SET_NEW_DELEG_NO', this.delegationNumberModel)
+        },
+        changeDelegationNumber(value) {
+            const regexp = new RegExp("([0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]\/[A-Z]{3})")
+            if (value === "") { 
+                return 
+            } else if (regexp.test(value)) {
+                this.showDelegationNoError = false
+            }
+             else {
+                this.showDelegationNoError = true
+            }
+        },
         setDelegationNo(){
             if (this.newDelegation.dates && this.delegationUsername) {
                 const data = {

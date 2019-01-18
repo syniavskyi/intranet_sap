@@ -49,12 +49,12 @@
                             </div>
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.date") }}</div>
-                                <div class="del-tbody-item">{{ delegationStartDate}} </div>
+                                <div class="del-tbody-item">{{ delegationStartDate }} </div>
                             </div>
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.time") }}</div>
                                 <div class="del-tbody-item">
-                                    <input class="delegations-tinput-time" type="time" v-model="defaultCostsData.firstLeaveHour" @change="countAllowance" />
+                                    <input required class="delegations-tinput-time" :disabled="delegationStartDate === null ? true : false" type="time" v-model="defaultCostsData.firstLeaveHour" @change="countAllowance" placeholder="" onfocus="value = ''">
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.time") }}</div>
                                 <div class="del-tbody-item">
-                                    <input class="delegations-tinput-time" type="time" v-model="defaultCostsData.firstArrivalHour" @change="countAllowance" />
+                                    <input class="delegations-tinput-time" :disabled="delegationStartDate === null ? true : false" type="time" v-model="defaultCostsData.firstArrivalHour" @change="countAllowance">
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,8 @@
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.time") }}</div>
                                 <div class="del-tbody-item">
-                                    <input class="delegations-tinput-time" type="time" v-model="defaultCostsData.secondLeaveHour" @change="countAllowance" /> </div>
+                                    <input class="delegations-tinput-time" :disabled="delegationEndDate === null ? true : false" type="time" v-model="defaultCostsData.secondLeaveHour" @change="countAllowance"> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,7 +127,7 @@
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.time") }}</div>
                                 <div class="del-tbody-item">
-                                    <input class="delegations-tinput-time" type="time" v-model="defaultCostsData.secondArrivalHour" @change="countAllowance" />
+                                    <input class="delegations-tinput-time" :disabled="delegationEndDate === null ? true : false" type="time" v-model="defaultCostsData.secondArrivalHour" @change="countAllowance">
                                 </div>
                             </div>
                         </div>
@@ -145,9 +146,9 @@
                                 <div class="del-tbody-title">{{ $t("table.delegations.place") }}</div>
                                 <div class="del-tbody-item">
                                     <div class="del-tbody-item-wrap">
-                                        <vue-google-autocomplete types="geocode" required class="delegations-input-cool" placeholder=""  :id="index + 'leave'" onfocus="value = ''" @input="customCosts[index].leavePlace = value"></vue-google-autocomplete>
+                                        <!-- <vue-google-autocomplete types="geocode" required class="delegations-input-cool" placeholder=""  :id="index + 'leave'" onfocus="value = ''" @input="customCosts[index].leavePlace = value"></vue-google-autocomplete> -->
+                                        <input class="delegations-tinput-w" @input="checkDelegationTable" v-model="customCosts[index].leavePlace">
                                         <span class="del-div-bar"></span>
-                                    <!-- <input class="delegations-tinput-w" @input="checkDelegationTable" v-model="customCosts[index].leavePlace" /> -->
                                     </div>
                                 </div>
                             </div>
@@ -155,14 +156,14 @@
                                 <div class="del-tbody-title">{{ $t("table.delegations.date") }}</div>
                                 <div class="del-tbody-item" @mouseover="setOverflow" @mouseout="outOverflow">
                                     <v-date-picker class="delegations-tinput-date" @input="checkDelegationTable" mode="single" v-model="customCosts[index].leaveDate">
-                                        <input value="customCosts[index].leaveDate" />
+                                        <input value="customCosts[index].leaveDate">
                                     </v-date-picker>
                                 </div>
                             </div>
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.time") }}</div>
                                 <div class="del-tbody-item">
-                                    <input class="delegations-tinput-time" type="time" v-model="customCosts[index].leaveHour" @change="checkDelegationTable" />
+                                    <input class="delegations-tinput-time" type="time" v-model="customCosts[index].leaveHour" @change="checkDelegationTable">
                                 </div>
                             </div>
                         </div>
@@ -174,9 +175,9 @@
                                 <div class="del-tbody-title">{{ $t("table.delegations.place") }}</div>
                                 <div class="del-tbody-item">
                                     <div class="del-tbody-item-wrap">
-                                        <vue-google-autocomplete types="geocode" required class="delegations-input-cool" placeholder="" :id="index +'arrival'" onfocus="value = ''" @input="customCosts[index].arrivalPlace = value"></vue-google-autocomplete>
+                                        <input class="delegations-tinput-w" @input="checkDelegationTable" v-model="customCosts[index].arrivalPlace" required>
                                         <span class="del-div-bar"></span>
-                                    <!-- <input class="delegations-tinput-w" @input="checkDelegationTable" v-model="customCosts[index].arrivalPlace" /> -->
+                                        <!-- <vue-google-autocomplete types="geocode" required class="delegations-input-cool" placeholder="" :id="index +'arrival'" onfocus="value = ''" @input="customCosts[index].arrivalPlace = value"></vue-google-autocomplete> -->
                                     </div>
                                 </div>
                             </div>
@@ -184,14 +185,14 @@
                                 <div class="del-tbody-title">{{ $t("table.delegations.date") }}</div>
                                 <div class="del-tbody-item" @mouseover="setOverflow" @mouseout="outOverflow">
                                     <v-date-picker class="delegations-tinput-date" @input="checkDelegationTable" mode="single" v-model="customCosts[index].arrivalDate">
-                                        <input value="customCosts[index].arrivalDate" />
+                                        <input value="customCosts[index].arrivalDate">
                                     </v-date-picker>
                                 </div>
                             </div>
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.time") }}</div>
                                 <div class="del-tbody-item">
-                                    <input class="delegations-tinput-time" type="time" v-model="customCosts[index].arrivalHour" @change="checkDelegationTable" />
+                                    <input class="delegations-tinput-time" type="time" v-model="customCosts[index].arrivalHour" @change="checkDelegationTable">
                                 </div>
                             </div>
                         </div>
