@@ -125,6 +125,7 @@
 import { mapGetters, mapActions } from "vuex";
 let utils = require("../../../utils");
 export default {
+  props: ['selected-user'],
   data() {
     return {
       editMode: false,
@@ -143,6 +144,11 @@ export default {
       bAdditionalSkills: false,
       bDisabled: true
     };
+  },
+  watch: {
+    selectedUser(value) {
+      this.editMode = false;
+    }
   },
   computed: {
     ...mapGetters({

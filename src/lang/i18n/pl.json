@@ -273,7 +273,9 @@
         "leaveRequest": "Proszę o udzielenie urlopu",
         "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
         "requiredField": "Pole jest obowiązkowe",
-        "requiredContractor": "Aby wyświetlić dostępne branże wybierz kontrahenta"
+        "requiredContractor": "Aby wyświetlić dostępne branże wybierz kontrahenta",
+        "unacceptableChar": "Niedozwolony znak (&)",
+        "notEqualPasswords": "Upewnij się, ze wprowadzone hasła są takie same"
     },
     "select": {
         "language": {

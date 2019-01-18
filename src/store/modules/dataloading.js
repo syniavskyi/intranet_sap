@@ -782,7 +782,7 @@ const getters = {
     return state.projectsList;
   },
   usersList(state) {
-    return state.userList;
+    return state.userList.sort((a, b) => a.Fullname.localeCompare(b.Fullname));
   },
   getContractorsList(state) {
     return state.contractorsList;

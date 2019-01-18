@@ -14,7 +14,7 @@
     <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
       <div class="prof-tile-column">
-        <div id="prof-user-exp" class="prof-div-row" v-for="(experience, index) in userExperience" :key='index'>
+        <div id="prof-user-exp" class="prof-div-row" v-for="(experience, index) in filterExperience" :key='index'>
           <div class="prof-row-dates">
             <div :class="editMode ? 'prof-row-dates-left' : 'prof-row-dates-left-s'">
               <p class="prof-date-label" v-if="!editMode"> {{ formatDate(experience.DateStart) }} </p>
@@ -75,6 +75,7 @@ import moment from "moment";
 import { mapGetters, mapActions, mapState } from "vuex";
 let utils = require("../../../utils");
 export default {
+  props: ['selected-user'],
   data() {
     return {
       editMode: false,
@@ -82,12 +83,22 @@ export default {
       invalidDates: false
     };
   },
+  watch: {
+    selectedUser(value) {
+      this.editMode = false;
+    }
+  },
   computed: {
     ...mapGetters({
       userExperience: "getUserExperience",
       workPositions: "getWorkPositions",
       disabledBtnToEdit: "getDisabledBtnToEdit"
-    })
+    }),
+    filterExperience() {
+      let filterExp;
+      this.editMode ? filterExp = this.userExperience : filterExp = this.userExperience.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
+      return filterExp;
+    }
   },
   methods: {
     ...mapActions(["addUserExperience", "updateUserExp", "saveNewUserExp"]),

@@ -272,7 +272,9 @@
         "leaveRequest": "Proszę o udzieleie urlopu",
         "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
         "requiredField": "Field is required",
-        "requiredContractor": "Pick Contractor first to display available Branches"
+        "requiredContractor": "Pick Contractor first to display available Branches",
+        "unacceptableChar": "Unacceptable character (&)",
+        "notEqualPasswords": "Make sure the passwords you enter are the same"
     },
     "select": {
         "language": {
