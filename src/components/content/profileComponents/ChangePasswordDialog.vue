@@ -14,21 +14,24 @@
                     <button class="show-pass-eyef"  @click="switchPasswordVisibility('old')"><icon :name="oldEyeType"></icon></button>
                 </div>
                 <div class="cd-for-input">
-                    <input :type="newPasswordType" required class="cd-input" id="newPass">
+                    <input :type="newPasswordType" required class="cd-input" id="newPass" v-model="newPassword" @input="checkChars(newPassword)">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.newPassword") }}</label>
                      <button class="show-pass-eyef"  @click="switchPasswordVisibility('new')"><icon :name="newEyeType"></icon></button>
                 </div>
                 <div class="cd-for-input">
-                    <input :type="confirmPasswordType" required class="cd-input" id="newPassConfirm">
+                    <input :type="confirmPasswordType" required class="cd-input" id="newPassConfirm" v-model="newPasswordRepeat">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.confirmPassword") }}</label>
                      <button class="show-pass-eyef"  @click="switchPasswordVisibility('confirm')"><icon :name="confirmEyeType"></icon></button>
                 </div>
-                <button class="button" @click="onSubmit">
-                    <span class="loading-icon"></span>
-                    <span class="span-arrow">{{ $t("button.send") }}</span>
-                </button>
+                <div>
+                    <p class="password-error" v-if="bDisabled.bln">{{bDisabled.msg}}</p>
+                    <button class="button" @click="onSubmit" :disabled="bDisabled.bln || newPassword === '' || newPasswordRepeat === ''">
+                        <span class="loading-icon"></span>
+                        <span class="span-arrow">{{ $t("button.send") }}</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -47,6 +50,12 @@ export default {
       newEyeType: "eye",
       confirmPasswordType: "password",
       confirmEyeType: "eye",
+      newPassword: "",
+      newPasswordRepeat: "",
+      bDisabled: {
+          bln: true,
+          msg: ''
+      }
     };
   },
   components: {
@@ -83,11 +92,14 @@ export default {
         }
     },
     onSubmit() {
+      this.newPassword !== this.newPasswordRepeat ? this.bDisabled = {bln: true, msg: i18n.t("message.notEqualPasswords")} : this.bDisabled = {bln: false, msg: ''};
       let userData = this.userData;
-    //   userData.UserAlias = "SJI";
       userData.Password = document.getElementById("oldPass").value;
       userData.NewPassword = document.getElementById("newPass").value;
-      this.$store.dispatch("submitPassword", userData);
+    //   this.$store.dispatch("submitPassword", userData);
+    },
+    checkChars(string){
+        string.includes('&') ? this.bDisabled = {bln: true, msg: i18n.t("message.unacceptableChar")} : this.bDisabled = {bln: false, msg: ''};
     }
   }
 };

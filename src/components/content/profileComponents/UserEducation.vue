@@ -14,7 +14,7 @@
     <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
       <div class="prof-tile-column">
-        <div class="prof-div-row" v-for="(education, index) in userEducation" :key='index'>
+        <div class="prof-div-row" v-for="(education, index) in filterEducation" :key='index'>
           <div class="prof-row-dates">
             <div :class="editMode ? 'prof-row-dates-left' : 'prof-row-dates-left-s'">
               <p class="prof-date-label" v-if="!editMode"> {{ formatDate(education.DateStart) }} </p>
@@ -113,12 +113,18 @@ import { mapGetters, mapActions, mapState } from "vuex";
 import { required, minLength } from "vuelidate/lib/validators";
 const utils = require("../../../utils");
 export default {
+  props: ['selected-user'],
   data() {
     return {
       editMode: false,
       _beforeEditingCache: null,
       invalidDates: false
     };
+  },
+  watch: {
+    selectedUser(value) {
+      this.editMode = false;
+    }
   },
   computed: {
     ...mapGetters({
@@ -129,6 +135,11 @@ export default {
       fieldOfStudyDescList: "getFieldOfStudyDescList",
       disabledBtnToEdit: "getDisabledBtnToEdit"
     }),
+    filterEducation() {
+      let filterEdu;
+      this.editMode ? filterEdu = this.userEducation : filterEdu = this.userEducation.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
+      return filterEdu;
+    }
   },
   methods: {
     ...mapActions(["addUserEduRow", "editUserEducation", "addUserEducation"]),
@@ -263,7 +274,13 @@ export default {
         this.invalidDates = formatStartDate > formatEndDate ? true : false;
       }
       this.checkFields(index);
-    }
+    },
+    // orderByDate(items){
+    //   let olnySort = false;
+    //   return items.filter(item => {
+    //   if (item['DateStart'] && olnySort) return item;
+    //   });
+    // }
   }
 };
 </script>

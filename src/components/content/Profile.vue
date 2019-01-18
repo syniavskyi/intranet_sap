@@ -242,10 +242,10 @@
             <user-cv-tile></user-cv-tile>
           </div>
         </div>
-        <user-education-component></user-education-component>
-        <user-experience-component></user-experience-component>
-        <user-projects-component></user-projects-component>
-        <user-skills-component></user-skills-component>
+        <user-education-component :selected-user="selectedUser"></user-education-component>
+        <user-experience-component :selected-user="selectedUser"></user-experience-component>
+        <user-projects-component :selected-user="selectedUser"></user-projects-component>
+        <user-skills-component :selected-user="selectedUser"></user-skills-component>
         <select-cv-content v-show="showSelectCv"></select-cv-content>
         <div v-show="showSelectCv" class="modal-overlay"></div>
         <change-user-password v-show="showPasswordDialog"></change-user-password>

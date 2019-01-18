@@ -274,7 +274,9 @@
         "leaveRequest": "I am asking for a leave",
         "goToUserByFullname": "Go to the employee's profile by choosing the name and surname",
         "requiredField": "Field is required",
-        "requiredContractor": "Pick Contractor first to display available Branches"
+        "requiredContractor": "Pick Contractor first to display available Branches",
+        "unacceptableChar": "Unacceptable character (&)",
+        "notEqualPasswords": "Make sure the passwords you enter are the same"
     },
     "select": {
         "language": {

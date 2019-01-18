@@ -147,6 +147,7 @@ import moment from "moment";
 let utils = require("../../../utils");
 
 export default {
+  props: ['selected-user'],
   data() {
     return {
       projectEditMode: false,
@@ -156,6 +157,11 @@ export default {
       _beforeEditingProjects: null,
       showHintAfterSave: false,
       contractorIndustries: []
+    }
+  },
+  watch: {
+    selectedUser(value) {
+      this.projectEditMode = false;
     }
   },
   components: {
@@ -177,7 +183,12 @@ export default {
       showToast: "getDisplayToast",
       editedProjectIdx: "getEditedProjectIdx",
       editedProjectContractor: "getEditedProjectContractor"
-    })
+    }),
+    filterProject() {
+      let filterPro;
+      this.projectEditMode ? filterPro = this.userProjects : filterPro = this.userProjects.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
+      return filterPro;
+    }
   },
   methods: {
     ...mapActions({

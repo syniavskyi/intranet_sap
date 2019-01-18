@@ -667,6 +667,16 @@ input:required {
 .p-error {
     margin: 0;
 }
+.password-error{
+    display: flex;
+    position: fixed;
+    top: 69%;
+    right: 35%; /* do dogadania z DJA */
+    font-size: 1rem;
+    padding: .3rem;
+    color: red;
+    z-index: 100;
+}
 /* SPI */
 @keyframes slide-in {
     from {
