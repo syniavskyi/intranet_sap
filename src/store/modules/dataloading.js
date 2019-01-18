@@ -1,7 +1,5 @@
 import axios from 'axios'
 import router from '@/router/index.js'
-import odata from 'odata'
-import { stat } from 'fs';
 let utils = require('../../utils')
 
 const state = {
@@ -203,7 +201,7 @@ const actions = {
       aLinks.push(`GET Dictionaries?$filter=Name%20eq%20'${oDomain.name}'%20and%20Language%20eq%20'${oDomain.lang}' HTTP/1.1`)
     })
 
-    let sData  = utils.packBatch(aLinks, localStorage.token)
+    let sData  = utils.packBatch(aLinks)
     return axios({
       method: 'post',
       url: "/$batch",
