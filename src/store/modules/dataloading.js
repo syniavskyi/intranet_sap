@@ -331,7 +331,7 @@ const actions = {
       commit('SET_SEL_USER_PHOTO_URL', dataURL);
       // localStorage.setItem("image", dataURL)
     }, false);
-    image.addEventListener("error", function () {
+    image.addEventListener("error", () => {
       if(sLoggedUser === sUserId){
         commit('SET_USER_PHOTO_URL', "");
       }
@@ -460,9 +460,7 @@ const actions = {
                   dispatch('setDocumentList', obj)
                   aRes.push({obj})
               })
-            }).catch(error => {
-              console.log(error)
-            })
+            }).catch(error => {})
           break;
         case "Availabilities":
           let availabilityPromise = dispatch("getUserAvail", userData.user).then(res => ({res: res, promise: "Availabilities"}));
