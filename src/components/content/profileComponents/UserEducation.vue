@@ -30,13 +30,13 @@
                 <p class="prof-date-label" v-if="!editMode && !education.IsCurrent"> {{ formatDate(education.DateEnd) }} </p>
                 <div v-if="editMode && !education.IsCurrent" class="prof-input-xxs">
                   <v-date-picker class="prof-input-date" popoverDirection="top" v-if="editMode" @input="validateDates(index)" is-expanded mode="single" :min-date="education.DateStart" v-model="education.DateEnd">
-                    <input value="education.DateEnd" />
+                    <input value="education.DateEnd">
                   </v-date-picker>
                   <label>{{ $t("label.to") }}</label>
                 </div>
               </div>
               <label class="checkbox-wrap">
-                <input class="checkbox-margin" :disabled="!editMode" type="checkbox" @change="checkFields(index)" :checked="education.IsCurrent" :name="index" v-model="education.IsCurrent"/>
+                <input class="checkbox-margin" :disabled="!editMode" type="checkbox" @change="checkFields(index)" :checked="education.IsCurrent" :name="index" v-model="education.IsCurrent">
                 <div class="checkbox-in"></div>
                 <p style="padding:0;margin:0;">{{ $t("label.present") }}</p>
               </label>
@@ -83,8 +83,8 @@
                 <label class="label-profile">{{ $t("label.formOfStudy") }}</label>
               </div>
               <div class="prof-input-xs">
-                <!-- <input required v-if="editMode" class="inputProfile inputEdit"  v-model="education.AcademicTitle"/> -->
-                <!-- <input disabled class="inputProfile inputDisabled" v-if="!editMode" v-model="education.AcademicTitle"/> -->
+                <!-- <input required v-if="editMode" class="inputProfile inputEdit"  v-model="education.AcademicTitle"> -->
+                <!-- <input disabled class="inputProfile inputDisabled" v-if="!editMode" v-model="education.AcademicTitle"> -->
                 <select required v-if="editMode" class="selectProfile selectEdit" @change="checkFields(index)" v-model="education.AcademicTitle">
                   <option v-for="type in academicTitles" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                 </select>

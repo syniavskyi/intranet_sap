@@ -14,7 +14,7 @@
           <div class="emp-filters">
             <div class="emp-section">
               <div class="cd-for-input">
-                <input required class="cd-input" v-model="aFilters.user"/>
+                <input required class="cd-input" v-model="aFilters.user">
                 <span class="cd-span"></span>
                 <label class="cd-label">{{ $t("label.enterNameOrSurname") }}</label>
               </div>

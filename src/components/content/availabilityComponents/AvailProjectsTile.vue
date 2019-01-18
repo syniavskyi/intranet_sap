@@ -28,7 +28,7 @@
                         <label class="ava-select-label-cool">{{ $t("label.project") }}</label>
                     </div>
                     <div class="ava-div-input-cool">
-                        <input required class="ava-input-range-perc" v-model="newProjectForUser.Engag" @input="validateNewEngag(newProjectForUser.Engag)" type="number" min="0" max="100" /><span class="ava-perc-span">%</span>
+                        <input required class="ava-input-range-perc" v-model="newProjectForUser.Engag" @input="validateNewEngag(newProjectForUser.Engag)" type="number" min="0" max="100" ><span class="ava-perc-span">%</span>
                         <span class="ava-div-bar"></span>
                         <label class="ava-input-label-cool">{{ $t("label.engag") }}</label>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="ava-add">
                     <div class="ava-div-select-cool">
                         <v-date-picker required class="ava-input-range-wide" @input="validateNewProject" popoverDirection="top" is-expanded mode="range" v-model="selectedDates">
-                            <input class="ava-input-range-wide" value="newProjectForUser.dates" />
+                            <input class="ava-input-range-wide" value="newProjectForUser.dates" >
                         </v-date-picker>
                         <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
                     </div>
