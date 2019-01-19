@@ -115,7 +115,7 @@
 
 .delegation-number-input,
 .delegation-number-input-edit {
-    width: 15rem;
+    width: 14.8rem;
     font-size: 2rem;
     border-bottom: 1px solid transparent;
     transition: border .2s;
@@ -161,8 +161,40 @@
 
 .delegation-number-btnc {
     top: -3rem;
-    right: 0rem;
+    right: -.6rem;
+    box-shadow: 0px 0px 10px grey;
+    border-radius: 1rem;
+    padding: 0.2rem .8rem;
+    padding-left: .7rem;
+    color: grey;
+    transition: color .2s box-shadow .2s;
+    animation: pulsy 2s infinite;
 }
+
+.delegation-number-btnc:hover {
+    box-shadow: 1px 1px 10px 10px rgba(255, 166, 0, 0.363);
+    color: orange;
+    animation-play-state: paused;
+}
+
+@keyframes pulsy {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.603);
+      color: grey;
+    }
+    50% {
+        box-shadow: 1px 1px 10px 10px rgba(255, 166, 0, 0.363);
+        color: orange;
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 166, 0, 0);
+        color: grey;
+    }
+  }
+
+/* .delegation-number-btnc:hover {
+    box-shadow: 1px 0px 16px orange; 
+} */
 
 .delegation-number-btn {
     transform: rotate(90deg);

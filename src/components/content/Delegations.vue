@@ -38,12 +38,14 @@
                                 <span class="delegation-number-title">{{ $t("label.delegationNo") }}:&nbsp;</span>
                                 <div v-if="delegationNumber !== null ? true : false" class="del-number-cd">
                                     <div v-if="showDelegationNoError" class="del-number-error">Nieprawidłowy numer</div>
-                                    <masked-input @input="changeDelegationNumber" v-if="delegationNumber === null ? false : true" :class="disableDelegationNumber ? 'delegation-number-input' : 'delegation-number-input-edit'" mask="11/11/1111/AAA" type="text" v-model="delegationNumberModel" :disabled="disableDelegationNumber"></masked-input>
+                                    <masked-input @input="changeDelegationNumber" v-if="delegationNumber === null ? false : true" :class="disableDelegationNumber ? 'delegation-number-input' : 'delegation-number-input-edit'" mask="11/11/1111/AAA" type="text" v-model="delegationNumber" :disabled="disableDelegationNumber"></masked-input>
                                     <span class="cd-span"></span>
                                 </div>
                                 <!-- <span>{{ delegationNumber }}</span>  -->
-                                <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== delegationNumberModel && !showDelegationNoError ? true : false " style="transform: rotate(0deg)">&#10003; Zapisz nowy numer</button>
-                                <button class="delegation-number-btn" v-if="delegationNumberModel === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button>
+                                <!-- <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== delegationNumberModel && !showDelegationNoError ? true : false " style="transform: rotate(0deg)">&#10003; Zapisz nowy numer</button> -->
+                                <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== oldDelegationNumber && !showDelegationNoError ? true : false " style="transform: rotate(0deg)">&#10003; Zapisz nowy numer</button>
+                                <!-- <button class="delegation-number-btn" v-if="delegationNumberModel === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button> -->
+                                <button class="delegation-number-btn" v-if="delegationNumber === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button>
                             </div>
                             <div class="del-inputs-sections">
                                 <div class="delegations-inputs-section">
@@ -153,14 +155,8 @@ export default {
             delegationUsername: localStorage.getItem('id'),
             generatingPdfMode: false,
             disableDelegationNumber: true,
-            delegationNumberModel: "",
             showDelegationNoError: false
         }
-    },
-    updated() {
-        this.$nextTick(function () {
-            if (this.delegationNumberModel === "" ) {this.delegationNumberModel = this.delegationNumber}
-        })
     },
     components: {
         'app-menu': Menu,
@@ -179,8 +175,8 @@ export default {
         oStore.dispatch('getData', null);
         utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
     },
-    computed: Object.assign(
-        mapGetters({
+    computed: {
+        ...mapGetters({
             userData: 'getUserInfo',
             accCostValidated: 'getAccCostValidated',
             currencyList: 'getCurrencyList',
@@ -192,27 +188,34 @@ export default {
             usersList: 'usersList',
             totalCostsInCurr: 'getTotalCostsInCurr',
             advanceData: 'getAdvanceData',
-            delegationNumber: 'getNewDelegationNumber',
+            oldDelegationNumber: 'getOldDelegationNumber',
             showDialog: 'getShowConfirmDelegation',
             displayMenu: 'getShowMenu',
             displayOverlay: 'getShowMenuOverlay',
-            authType: "getDelegationAuth"
-        }), {
-            disableSaveBtn() {
-                return (this.newDelegationValidated && this.delegationTableValidated && this.accCostValidated) ? false : true
+            authType: 'getDelegationAuth'
+        }),
+        delegationNumber: {
+            set(number) {
+                this.$store.commit('SET_NEW_DELEG_NO', number)
             },
-            disableGenerating(){
-                return (this.newDelegation.dates && this.delegationUsername) ? false : true
-            },
-            filteredTeamUsers() {
-                let aFilteredUsers = this.usersList,
-                    sTeam = this.userData.DepartmentName
-
-                aFilteredUsers = aFilteredUsers.filter(function(oData){ return oData.DepartmentName === sTeam });
-                return aFilteredUsers
+            get() {
+                return this.$store.state.delegations.NewDelegationNumber
             }
+        },
+        disableSaveBtn() {
+            return (this.newDelegationValidated && this.delegationTableValidated && this.accCostValidated) ? false : true
+        },
+        disableGenerating(){
+            return (this.newDelegation.dates && this.delegationUsername) ? false : true
+        },
+        filteredTeamUsers() {
+            let aFilteredUsers = this.usersList,
+                sTeam = this.userData.DepartmentName
+
+            aFilteredUsers = aFilteredUsers.filter(function(oData){ return oData.DepartmentName === sTeam });
+            return aFilteredUsers
         }
-    ),
+    },
     methods: {
         ...mapActions({
             checkNewDelegation: 'checkNewDelegation',
@@ -220,16 +223,17 @@ export default {
             countAllCosts: 'countAllCosts'
         }),
         setNewDelegationNumber() {
-            this.$store.commit('SET_NEW_DELEG_NO', this.delegationNumberModel)
+            this.$store.commit('SET_NEW_DELEG_NO', this.delegationNumber)
+            this.$store.commit('SET_OLD_DELEG_NO', this.delegationNumber)
         },
         changeDelegationNumber(value) {
-            const regexp = new RegExp("([0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]\/[A-Z]{3})")
+            const regexp = new RegExp("([0-3][0-9]\/[0-1][0-9]\/[0-9]{4}\/[A-Z]{3})")
             if (value === "") { 
-                return 
+                this.delegationNumber = this.oldDelegationNumber
+                this.changeDelegationNumber(this.delegationNumber)
             } else if (regexp.test(value)) {
                 this.showDelegationNoError = false
-            }
-             else {
+            } else {
                 this.showDelegationNoError = true
             }
         },

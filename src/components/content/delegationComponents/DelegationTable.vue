@@ -1,6 +1,6 @@
 <template>
     <div class="delegations-tile">
-        <div  id="del-tile-head-1" class="delegations-tile-header">
+        <div id="del-tile-head-1" class="delegations-tile-header">
             <div @click.self="toggleTile" class="delegations-tile-title">
                 {{ $t("header.travelExp") }}
                 <button class="del-add-row" @click="addRow">{{ $t("button.addRow") }}</button>
@@ -9,7 +9,7 @@
         </div>
         <div id="del-tile-content-1" class="delegations-tile-content">
             <div class="delegations-table-1">
-                <div class="del-thead-1">
+                <header class="del-thead-1">
                     <div class="del-table-row">
                         <div class="del-thead-title">{{ $t("table.delegations.leave") }}</div>
                         <div class="del-table-items">
@@ -27,9 +27,9 @@
                         </div>
                     </div>
                     <div class="del-table-btns"></div>
-                </div>
+                </header>
                 <!-- first default row -->
-                <div class="del-tbody-1">
+                <section class="del-tbody-1">
                     <div class="del-table-row">
                         <div class="del-tbody-title">{{ $t("table.delegations.leave") }}</div>
                         <div class="del-table-items">
@@ -82,9 +82,9 @@
                         <div class="del-tbody-title"></div>
                         <div class="del-tbody-col"></div>
                     </div>
-                </div>
+                </section>
                 <!-- second default row  -->
-                <div class="del-tbody-1">
+                <section class="del-tbody-1">
                     <div class="del-table-row">
                         <div class="del-tbody-title">{{ $t("table.delegations.leave") }}</div>
                         <div class="del-table-items">
@@ -136,9 +136,9 @@
                         <div class="del-tbody-title"></div>
                         <div class="del-tbody-col"></div>
                     </div>
-                </div>
+                </section>
                 <!-- rows that are added -->
-                <div class="del-tbody-1" v-for="(cost, index) in customCosts" :key="index">
+                <section class="del-tbody-1" v-for="(cost, index) in customCosts" :key="index">
                     <div class="del-table-row">
                         <div class="del-tbody-title">{{ $t("table.delegations.leave") }}</div>
                         <div class="del-table-items">
@@ -203,7 +203,7 @@
                             <button class="btn-delete-row" @click="removeRow(index)">{{ $t("button.delete") }}</button>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

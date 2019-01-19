@@ -51,6 +51,7 @@ const state = {
   newDelegationValidated: false,
   dailyAllowance: 30.00,
   NewDelegationNumber: null,
+  OldDelegationNumber: null,
   showConfirmDelegation: false,
   createDelegationSuccess: null,
   dataToRead: ["Domains", "Industries", "UserList", "UserData"],
@@ -72,6 +73,9 @@ const mutations = {
   },
   SET_NEW_DELEG_NO(state, number) {
     state.NewDelegationNumber = number
+  },
+  SET_OLD_DELEG_NO(state, number) {
+    state.OldDelegationNumber = number
   },
   SET_SHOW_CONFIRM_DELEG(state, show) {
     state.showConfirmDelegation = show
@@ -238,6 +242,7 @@ const actions = {
     },
     getDelegationNumber({commit}, data) {
       let url = "Delegations(DelegDate=" + data.DelegDate + ",UserId='" + data.UserAlias + "')"
+      commit('SET_DISPLAY_LOADER', true)
       axios({
         method: 'GET',
         url: url,
@@ -245,40 +250,41 @@ const actions = {
           "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
         }
       }).then(res => {
+        commit('SET_DISPLAY_LOADER', false)
         commit('SET_NEW_DELEG_NO', res.data.d.DelegNo)
+        commit('SET_OLD_DELEG_NO', res.data.d.DelegNo)
       }).catch(error => {
+        commit('SET_DISPLAY_LOADER', false)
       })
     },
-    saveDelegationNumber({commit, dispatch, getters}){
-        const oDelegation = getters.getNewDelegation
-        let data = {
-            UserId: oDelegation.userId,
-            DelegDate: utils.formatDateForBackend(oDelegation.dates.start),
-            DelegNo: getters.getNewDelegationNumber
+    saveDelegationNumber({commit, dispatch, getters}) {
+      const oDelegation = getters.getNewDelegation
+      let data = {
+          UserId: oDelegation.userId,
+          DelegDate: utils.formatDateForBackend(oDelegation.dates.start),
+          DelegNo: getters.getNewDelegationNumber
+      }
+      axios({
+        method: 'POST',
+        url: 'Delegations',
+        data: data,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "Cache-Control": "no-cache",
+          "x-csrf-token": getters.getToken
         }
-
-        axios({
-          method: 'POST',
-          url: 'Delegations',
-          data: data,
-          headers: {
-              "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest",
-              "Cache-Control": "no-cache",
-              "x-csrf-token": getters.getToken
-          }
-        }).then(res => {
-          commit('SET_CREATE_DELEG_SUCCESS',true)
-          dispatch('clearDelegationForm')
-          commit('SET_SHOW_CONFIRM_DELEG', false)
-          let message = res.headers;
-          dispatch('displayModal', message);
-        }).catch(error => {
-          commit('SET_CREATE_DELEG_SUCCESS',false)
-        })
-
-     },
-     clearDelegationForm({commit}){
+      }).then(res => {
+        commit('SET_CREATE_DELEG_SUCCESS',true)
+        dispatch('clearDelegationForm')
+        commit('SET_SHOW_CONFIRM_DELEG', false)
+        let message = res.headers;
+        dispatch('displayModal', message);
+      }).catch(error => {
+        commit('SET_CREATE_DELEG_SUCCESS',false)
+      })
+    },
+    clearDelegationForm({commit}){
       const totalCosts= {
         accPayback: 0,
         othPayback: 0,
@@ -395,6 +401,7 @@ const actions = {
       commit('SET_DELEG_COST_LIST', [])
       commit('SET_DELEGATION_TABLE_VALIDATED', false)
       commit('SET_NEW_DELEG_NO', null)
+      commit('SET_OLD_DELEG_NO', null)
       commit('SET_CREATE_DELEG_SUCCESS', null)
      }
 };
@@ -421,6 +428,9 @@ const getters = {
   },
   getNewDelegationNumber(state){
     return state.NewDelegationNumber
+  },
+  getOldDelegationNumber(state){
+    return state.OldDelegationNumber
   },
   getShowConfirmDelegation(state){
     return state.showConfirmDelegation
