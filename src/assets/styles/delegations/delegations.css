@@ -147,6 +147,13 @@
     width: 50%;
 }
 
+.delegation-number-label {
+    display: flex;
+    color: #ccc;
+    font-size: 2rem;
+    text-align: center;
+}
+
 .delegation-number-btn,
 .delegation-number-btnc {
     background: transparent;
@@ -167,13 +174,12 @@
     padding: 0.2rem .8rem;
     padding-left: .7rem;
     color: grey;
-    transition: color .2s box-shadow .2s;
+    /* transition: box-shadow .2s; */
     animation: pulsy 2s infinite;
 }
 
 .delegation-number-btnc:hover {
     box-shadow: 1px 1px 10px 10px rgba(255, 166, 0, 0.363);
-    color: orange;
     animation-play-state: paused;
 }
 
@@ -228,7 +234,8 @@
     align-items: flex-end;
 }
 
-.delegations-inputs-section {
+.delegations-inputs-section,
+.delegations-inputs-section-l {
     align-self:center;
     display:flex;
     flex-direction: column;
@@ -236,11 +243,20 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 10px #ccc;
-    padding-top: 1.5rem;
     position: relative;
     border-radius: 3px;
     transition: all 0.2s ease;
     margin: 1rem;
+}
+
+.delegations-inputs-section {
+    padding-top: 1.5rem;
+    width: 17rem;
+}
+
+.delegations-inputs-section-l {
+    width: 20rem;
+    padding-top: 1rem;
 }
 
 .del-inputs-header {
@@ -273,6 +289,13 @@
     margin-bottom:1rem;
 }
 /* COOOL INPUTS AND SELECT !!! */
+.del-div-currs {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-left: 1.6rem;
+}
+
 .del-div-cool,
 .del-div-cool-curr {
     display: flex;
@@ -281,6 +304,16 @@
     position: relative;
     margin-top: 0.5rem;
 }
+
+.del-div-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    margin-top: .8rem;
+    position: relative;
+    width: 18rem;
+}
+
 .del-div-tcool {
     display: flex;
     flex-direction: column;
@@ -436,6 +469,12 @@
     font-weight: 400;
 }
 
+.delegations-label-line {
+    display: flex;
+    color: orange;
+    font-size: 1rem;
+}
+
 .delegations-tlabel-cool {
     top: 0rem;
     left: 0.2rem;
@@ -469,6 +508,13 @@
     padding:0;
     margin:0;
     height: 2rem;
+}
+
+.del-p-line {
+    display: flex;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
 }
 
 .delegations-input-cool:focus ~ label,

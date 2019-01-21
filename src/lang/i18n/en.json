@@ -39,7 +39,8 @@
         "stopSlider": "Stop slider",
         "startSlider": "Start slider",
         "confirmGenerate": "Confirm and generate",
-        "logout": "logout"
+        "logout": "logout",
+        "saveNewDelegNumber": "Save new number"
     },
     "label": {
         "nationality": "Nationality",
@@ -179,7 +180,10 @@
         "daysCountSelect": "(liczba dni)",
         "forDay": "Za dzień:",
         "comments": "(uwagi)",
-        "hiddenData": "Data are hidden"
+        "hiddenData": "Data are hidden",
+        "delegationNoError": "Invalid number",
+        "delegationNoLabel": "Enter delegation period",
+        "carRegistrationNo": "Car registration no."
     },
     "header": {
         "login": "Log in to Intranet",

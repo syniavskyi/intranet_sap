@@ -39,7 +39,8 @@
         "stopSlider": "Zatrzymaj slider",
         "startSlider": "Uruchom slider",
         "confirmGenerate": "Zatwierdź i generuj",
-        "logout": "Wyloguj"
+        "logout": "Wyloguj",
+        "saveNewDelegNumber": "Zapisz nowy numer"
      },
     "label": {
         "nationality": "Narodowość",
@@ -178,7 +179,10 @@
         "daysCountSelect": "(liczba dni)",
         "forDay": "Za dzień:",
         "comments": "(uwagi)",
-        "hiddenData": "Dane są ukryte"
+        "hiddenData": "Dane są ukryte",
+        "delegationNoError": "Nieprawidłowy numer",
+        "delegationNoLabel": "Wprowadź okres delegacji",
+        "carRegistrationNo": "Nr rejstracyjny pojazdu"
     },
     "header": {
         "login": "Zaloguj się do Intranetu",
