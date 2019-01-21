@@ -17,15 +17,15 @@
                         <span class="ava-tile-entry">&nbsp;{{formattedType}}</span>
                     </p>
                     <div class="ava-div-select-cool">
-                        <v-date-picker v-if="authType === '*'" required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
+                        <v-date-picker v-if="authAcc === '*'" required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
                             <input class="ava-input-range-wide" value="selectedDates">
                         </v-date-picker>
-                        <v-date-picker  v-if="authType !== '*'" :min-date="new Date()" required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
+                        <v-date-picker  v-if="authAcc !== '*'" :min-date="new Date()" required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
                             <input class="ava-input-range-wide" value="selectedDates">
                         </v-date-picker>
                         <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
                     </div>
-                    <div class="ava-div-select-cool" v-if="authType === '*' || authType === 'TEAM' && selectedUser!==loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId)">
+                    <div class="ava-div-select-cool" v-if="authAcc === '*' || authAcc === 'TEAM' && selectedUser!==loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId)">
                         <select required class="ava-select-cool" v-model="newLeave.StatusId" @change="checkFields">
                             <option v-for="status in availStatusList" :key="status.Key" :value="status.Key">{{ status.Value }}</option>
                         </select>
@@ -51,7 +51,7 @@
 import { mapGetters, mapActions } from 'vuex';
 let utils = require('../../../utils')
 export default {
-    props: ['selected-type', 'selected-user', 'auth-type'],
+    props: ['selected-type', 'selected-user', 'auth-acc'],
     data() {
         return {
             selectedDates: null,
@@ -105,7 +105,7 @@ export default {
         checkFields() {
             let obj = this.newLeave;
             if(this.disabledBtnToEditAvail===false) {
-                if(this.selectedUser === this.loginAlias && this.authType !== '*' && obj.DateStart && obj.DateEnd && this.selectedType !== false) {
+                if(this.selectedUser === this.loginAlias && this.authAcc !== '*' && obj.DateStart && obj.DateEnd && this.selectedType !== false) {
                     this.disableAddNew = false;
                 } else {
                     for (let key in obj) {

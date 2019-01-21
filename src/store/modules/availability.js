@@ -12,7 +12,6 @@ const state = {
     avaliablityAuth: "",
     availAccAuth: "",
     disabledBtnToEditAvail: false,
-    disabledBtnToEditProject: false,
     filteredTeamUsers: []
 };
 
@@ -43,9 +42,6 @@ const mutations = {
     },
     SET_DISABLED_BTN_TO_EDIT_AVAIL(state, data) {
         state.disabledBtnToEditAvail = data;
-    },
-    SET_DISABLED_BTN_TO_EDIT_PROJECT(state, data) {
-        state.disabledBtnToEditProject = data;
     },
     SET_FILTERED_TEAM_USERS(state, data) {
         state.filteredTeamUsers = data;
@@ -114,9 +110,6 @@ const getters = {
     },
     getDisabledBtnToEditAvail(state) {
         return state.disabledBtnToEditAvail;
-    },
-    getDisabledBtnToEditProject(state) {
-        return state.disabledBtnToEditProject;
     },
     getFilteredTeamUsers(state) {
         return state.filteredTeamUsers;

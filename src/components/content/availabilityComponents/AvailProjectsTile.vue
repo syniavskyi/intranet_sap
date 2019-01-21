@@ -65,7 +65,7 @@ import { mapGetters, mapActions } from 'vuex';
 let utils = require('../../../utils')
 
 export default {
-    props: ['selected-user', 'auth-type'],
+    props: ['selected-user'],
     data() {
         return {
             selectedDates: null,
@@ -90,9 +90,9 @@ export default {
             const projectsList = this.projectsList
             let filteredProjects = []
 
-            for (let i = 0; i < projectsList.length; i++) {
-                if (projectsList[i].ContractorId === this.newProjectForUser.ContractorId) {
-                    filteredProjects.push(projectsList[i])
+            for (let project in projectsList) {
+                if (project.ContractorId === this.newProjectForUser.ContractorId) {
+                    filteredProjects.push(project)
                 }
             }
             return filteredProjects

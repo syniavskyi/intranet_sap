@@ -14,7 +14,7 @@ const state = {
   academicTitles: [],
   langLevels: [],
   workPositionList: [],
-  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP', 'ZINTRANET_ROLES', 'ZINTRANET_TRANSPORTS'],
+  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP', 'ZINTRANET_ROLES', 'ZINTRANET_TRANSPORTS', 'ZINTRANET_DELEGATION_TARGET'],
   sapModulesList: [],
   newUserFiles: [],
   adverts: [],
@@ -447,7 +447,7 @@ const actions = {
           })
           break;
         case "Documents":
-            let aResponse = dispatch('getDocuments', fileTypes).then(res => {
+            let aResponse = dispatch('getDocuments', getters.getFileTypes).then(res => {
               let oParsedData = utils.parseBatchResponse(res)
               commit('SET_BATCH_RES', oParsedData)
               let aRes = [],
@@ -562,7 +562,7 @@ const actions = {
          commit("SET_USER_PROJECTS", aResults);
          dispatch('formatUserProjects', aResults);
         break;
-        case "ContractorsBranchesSet": 
+        case "ContractorsBranchesSet":
           commit("SET_CONTRACTORS_BRANCHES", aResults)
         break;
         default:
