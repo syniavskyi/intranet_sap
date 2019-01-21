@@ -39,7 +39,8 @@
         "stopSlider": "Schieberegler stoppen",
         "startSlider": "Schieberegler aufrufen",
         "confirmGenerate": "Bestätigen und erzeugen",
-        "logout": "Auslogen"
+        "logout": "Auslogen",
+        "saveNewDelegNumber": "Save new number"
     },
     "label": {
         "nationality": "Nationalität",
@@ -179,7 +180,10 @@
         "daysCountSelect": "(liczba dni)",
         "forDay": "Za dzień:",
         "comments": "(uwagi)",
-        "hiddenData": "Data are hidden"
+        "hiddenData": "Data are hidden",
+        "delegationNoError": "Invalid number",
+        "delegationNoLabel": "Enter delegation period",
+        "carRegistrationNo": "Car registration no."
     },
     "header": {
         "login": "Melden Sie sich im Intranet an",

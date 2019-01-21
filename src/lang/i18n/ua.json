@@ -39,7 +39,8 @@
         "stopSlider": "Зупинити слайдер",
         "startSlider": "Запустити слайдер",
         "confirmGenerate": "Підтвердити і вигенерувати",
-        "logout": "logout"
+        "logout": "logout",
+        "saveNewDelegNumber": "Save new number"
     },
     "label": {
         "nationality": "Національність",
@@ -179,7 +180,10 @@
         "daysCountSelect": "(liczba dni)",
         "forDay": "Za dzień:",
         "comments": "(uwagi)",
-        "hiddenData": "Data are hidden"
+        "hiddenData": "Data are hidden",
+        "delegationNoError": "Invalid number",
+        "delegationNoLabel": "Enter delegation period",
+        "carRegistrationNo": "Car registration no."
     },
     "header": {
         "login": "Увійдіть до Інтранету",

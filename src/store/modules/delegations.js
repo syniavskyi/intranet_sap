@@ -46,7 +46,8 @@ const state = {
     currency: 'PLN',
     totalReturnAmount: 0,
     totalDelegationAmount: 0,
-    allowanceDeduction: 0
+    allowanceDeduction: 0,
+    carRegistrationNo: ""
   },
   newDelegationValidated: false,
   dailyAllowance: 30.00,
@@ -314,7 +315,7 @@ const actions = {
 
       const newDelegation = {
         number: null,
-        userId: null,
+        userId: localStorage.getItem("id"),
         createDate: null,
         destination: null,
         purpose: null,

@@ -37,15 +37,13 @@
                             <div class="delegation-number">
                                 <span class="delegation-number-title">{{ $t("label.delegationNo") }}:&nbsp;</span>
                                 <div v-if="delegationNumber !== null ? true : false" class="del-number-cd">
-                                    <div v-if="showDelegationNoError" class="del-number-error">Nieprawidłowy numer</div>
-                                    <masked-input @input="changeDelegationNumber" v-if="delegationNumber === null ? false : true" :class="disableDelegationNumber ? 'delegation-number-input' : 'delegation-number-input-edit'" mask="11/11/1111/AAA" type="text" v-model="delegationNumber" :disabled="disableDelegationNumber"></masked-input>
+                                    <div v-if="showDelegationNoError" class="del-number-error">{{ $t('label.delegationNoError') }}</div>
+                                    <masked-input @input="changeDelegationNumber" v-if="oldDelegationNumber === null ? false : true" :class="disableDelegationNumber ? 'delegation-number-input' : 'delegation-number-input-edit'" mask="11/11/1111/AAA" type="text" v-model="oldDelegationNumber" :disabled="disableDelegationNumber"></masked-input>
                                     <span class="cd-span"></span>
                                 </div>
-                                <!-- <span>{{ delegationNumber }}</span>  -->
-                                <!-- <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== delegationNumberModel && !showDelegationNoError ? true : false " style="transform: rotate(0deg)">&#10003; Zapisz nowy numer</button> -->
-                                <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== oldDelegationNumber && !showDelegationNoError ? true : false " style="transform: rotate(0deg)">&#10003; Zapisz nowy numer</button>
-                                <!-- <button class="delegation-number-btn" v-if="delegationNumberModel === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button> -->
-                                <button class="delegation-number-btn" v-if="delegationNumber === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button>
+                                <div v-if="oldDelegationNumber === null ? true : false" class="delegation-number-label">{{$t('label.delegationNoLabel')}}</div>
+                                <button class="delegation-number-btnc" @click="setNewDelegationNumber" v-if="delegationNumber !== oldDelegationNumber && !showDelegationNoError" style="transform: rotate(0deg)">&#10003; <span>{{ $t('button.saveNewDelegNumber') }}</span></button>
+                                <button class="delegation-number-btn" v-if="oldDelegationNumber === null ? false : true" @click="disableDelegationNumber = !disableDelegationNumber" :title="$t('title.editDelegationNumber')" >&#9998;</button>
                             </div>
                             <div class="del-inputs-sections">
                                 <div class="delegations-inputs-section">
@@ -56,16 +54,16 @@
                                         <label class="delegations-label-cool">{{ $t("label.to") }} </label>
                                     </div>
                                     <div class="del-div-cool">
-                                        <v-date-picker class="delegations-input-date" @input="checkNewDelegation" v-model="newDelegation.createDate">
-                                            <input value="newDelegation.createDate" />
-                                        </v-date-picker>
-                                        <label class="del-slabel">{{ $t("label.day") }} </label>
-                                    </div>
-                                    <div class="del-div-cool">
                                         <v-date-picker class="delegations-input-date" @input="setDelegationNo" is-expanded mode="range" v-model="newDelegation.dates">
                                             <input value="newDelegation.dates" />
                                         </v-date-picker>
                                         <label class="del-slabel">{{ $t("label.forTime") }} </label>
+                                    </div>
+                                    <div class="del-div-cool">
+                                        <v-date-picker class="delegations-input-date" @input="checkNewDelegation" v-model="newDelegation.createDate">
+                                            <input value="newDelegation.createDate" />
+                                        </v-date-picker>
+                                        <label class="del-slabel">{{ $t("label.day") }} </label>
                                     </div>
                                     <div class="del-div-cool">
                                         <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
@@ -75,44 +73,51 @@
                                 </div>
                                 <div class="delegations-inputs-section">
                                     <div class="del-div-cool">
+                                        <input required class="delegations-input-cool" v-model="newDelegation.carRegistrationNo" @input="checkNewDelegation" />
+                                        <span class="del-div-bar"></span>
+                                        <label class="delegations-label-cool">{{ $t("label.carRegistrationNo") }} </label>
+                                    </div>
+                                    <div class="del-div-cool">
                                         <select required class="delegations-select-cool" v-model="newDelegation.currency" @change="countAllCosts">
                                             <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                         </select>
                                         <label class="del-slabel">{{ $t("table.delegations.currency") }} </label>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <p class="del-p-cool">{{dailyAllowance}} PLN </p>
-                                        <label class="delegations-label-cool">{{ $t("label.dailyAllowance") }} </label>
-                                    </div>
-                                    <div class="del-div-cool">
-                                        <p class="del-p-cool">{{newDelegation.totalAllowance}} {{newDelegation.currency}} </p>
-                                        <label class="delegations-label-cool">{{ $t("label.totalAllowance") }}: </label>
-                                    </div>
-                                    <div class="del-div-cool-curr">
-                                        <p class="del-inp-curr">{{newDelegation.currency}}</p>
-                                        <input required id="del-inp-curr1" class="delegations-input-cool" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
-                                        <span class="del-div-bar"></span>
-                                        <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
+                                    <div class="del-div-currs">
+                                        <div class="del-div-cool-curr">
+                                            <p class="del-inp-curr">{{newDelegation.currency}}</p>
+                                            <input required id="del-inp-curr1" class="delegations-input-cool" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
+                                            <span class="del-div-bar"></span>
+                                            <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
+                                        </div>
+                                        <div class="del-div-cool-curr">
+                                            <p class="del-inp-curr">{{newDelegation.currency}}</p>
+                                            <input required class="delegations-input-cool" v-model="totalCostsInCurr.totalPayback"/>
+                                            <span class="del-div-bar"></span>
+                                            <label class="delegations-label-cool-s">{{ $t("label.totalReturnAmount") }}: </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="delegations-inputs-section">
-                                    <div class="del-div-cool">
-                                        <p class="del-p-cool">{{ newDelegation.hours }}</p>
-                                        <label class="delegations-label-cool">{{ $t("label.hoursInDelegation") }} </label>
+                                <div class="delegations-inputs-section-l">
+                                    <div class="del-div-line">
+                                        <label class="delegations-label-line">{{ $t("label.dailyAllowance") }} </label>
+                                        <p class="del-p-line">{{dailyAllowance}} PLN</p>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <p class="del-p-cool"> {{ totalCostsInCurr.amount}}  {{newDelegation.currency}}</p>
-                                        <label class="delegations-label-cool">{{ $t("label.totalDelegationAmount") }}: </label>
+                                    <div class="del-div-line">
+                                        <label class="delegations-label-line">{{ $t("label.totalAllowance") }}: </label>
+                                        <p class="del-p-line">{{newDelegation.totalAllowance}} {{newDelegation.currency}} </p>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <p class="del-p-cool"> {{ totalCostsInCurr.advance}}  {{newDelegation.currency}}</p>
-                                        <label class="delegations-label-cool">{{ $t("label.advanceAmount") }}: </label>
+                                    <div class="del-div-line">
+                                        <label class="delegations-label-line">{{ $t("label.hoursInDelegation") }} </label>
+                                        <p class="del-p-line">{{ newDelegation.hours }}</p>
                                     </div>
-                                    <div class="del-div-cool-curr">
-                                        <p class="del-inp-curr">{{newDelegation.currency}}</p>
-                                        <input required class="delegations-input-cool" v-model="totalCostsInCurr.totalPayback"/>
-                                        <span class="del-div-bar"></span>
-                                        <label class="delegations-label-cool-s">{{ $t("label.totalReturnAmount") }}: </label>
+                                    <div class="del-div-line">
+                                        <label class="delegations-label-line">{{ $t("label.advanceAmount") }}: </label>
+                                        <p class="del-p-line"> {{ totalCostsInCurr.advance}}  {{newDelegation.currency}}</p>
+                                    </div>
+                                    <div class="del-div-line">
+                                        <label class="delegations-label-line">{{ $t("label.totalDelegationAmount") }}: </label>
+                                        <p class="del-p-line">{{ totalCostsInCurr.amount}}  {{newDelegation.currency}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +171,7 @@ export default {
         'advance-table': AdvanceTable,
         'delegation-table': DelegationTable,
         'confirm-dialog': Dialog,
-        "modal": Modal,
+        'modal': Modal,
         MaskedInput
     },
     created(){
@@ -174,6 +179,7 @@ export default {
         oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getDelegationToRead);
         oStore.dispatch('getData', null);
         utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
+        this.$store.dispatch('clearDelegationForm')
     },
     computed: {
         ...mapGetters({
@@ -188,18 +194,18 @@ export default {
             usersList: 'usersList',
             totalCostsInCurr: 'getTotalCostsInCurr',
             advanceData: 'getAdvanceData',
-            oldDelegationNumber: 'getOldDelegationNumber',
+            delegationNumber: 'getNewDelegationNumber',
             showDialog: 'getShowConfirmDelegation',
             displayMenu: 'getShowMenu',
             displayOverlay: 'getShowMenuOverlay',
             authType: 'getDelegationAuth'
         }),
-        delegationNumber: {
+        oldDelegationNumber: {
             set(number) {
-                this.$store.commit('SET_NEW_DELEG_NO', number)
+                this.$store.commit('SET_OLD_DELEG_NO', number)
             },
             get() {
-                return this.$store.state.delegations.NewDelegationNumber
+                return this.$store.state.delegations.OldDelegationNumber
             }
         },
         disableSaveBtn() {
@@ -223,14 +229,15 @@ export default {
             countAllCosts: 'countAllCosts'
         }),
         setNewDelegationNumber() {
-            this.$store.commit('SET_NEW_DELEG_NO', this.delegationNumber)
-            this.$store.commit('SET_OLD_DELEG_NO', this.delegationNumber)
+            this.disableDelegationNumber = true
+            this.$store.commit('SET_NEW_DELEG_NO', this.oldDelegationNumber)
+            this.$store.commit('SET_OLD_DELEG_NO', this.oldDelegationNumber)
         },
         changeDelegationNumber(value) {
-            const regexp = new RegExp("([0-3][0-9]\/[0-1][0-9]\/[0-9]{4}\/[A-Z]{3})")
-            if (value === "") { 
-                this.delegationNumber = this.oldDelegationNumber
-                this.changeDelegationNumber(this.delegationNumber)
+            const regexp = new RegExp("([0-3][0-9]\/[0-1][0-9]\/[0-2][0-9]{3}\/[A-Z]{3})")
+            if (value === "") {
+                this.oldDelegationNumber = this.delegationNumber
+                this.changeDelegationNumber(this.oldDelegationNumber) 
             } else if (regexp.test(value)) {
                 this.showDelegationNoError = false
             } else {
