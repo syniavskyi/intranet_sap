@@ -81,12 +81,12 @@
                             </div>
                         </div>
                     </div>
-                    <app-not-authorized-projects-tile :auth-type="authType" :selected-user="selectedUser.UserAlias" v-if="selectedType === 'PR' && showContent == true && authType === 'OWN'"></app-not-authorized-projects-tile>
-                    <app-projects-tile :auth-type="authType" :selected-user="selectedUser.UserAlias" v-if="selectedType === 'PR' && showContent == true && authType !== 'OWN'"></app-projects-tile>
-                    <app-leaves-tile   :auth-type="authType" :selected-user="selectedUser.UserAlias" :selected-type="selectedType"  v-if="selectedType !== 'PR' && showContent == true"></app-leaves-tile>
+                    <app-not-authorized-projects-tile :auth-type="authType" :selected-user="selectedUser.UserAlias" v-if="selectedType === 'PR' && showContent == true && authAcc === 'OWN'"></app-not-authorized-projects-tile>
+                    <app-projects-tile :auth-type="authType" :auth-acc="authAcc" :selected-user="selectedUser.UserAlias" v-if="selectedType === 'PR' && showContent == true && authAcc !== 'OWN'"></app-projects-tile>
+                    <app-leaves-tile :auth-acc="authAcc" :selected-user="selectedUser.UserAlias" :selected-type="selectedType"  v-if="selectedType !== 'PR' && showContent == true"></app-leaves-tile>
                </div>
                 <div class="availability-tiles-row">
-                    <app-projects-table :auth-type="authType" :selected-status="selectedStatus" v-if="selectedType === 'PR' && showContent == true"></app-projects-table>
+                    <app-projects-table :auth-type="authType" :auth-acc="authAcc" :selected-status="selectedStatus" v-if="selectedType === 'PR' && showContent == true"></app-projects-table>
                     <app-leaves-table :auth-type="authType" :selected-type="selectedType" :selected-status="selectedStatus" v-if="selectedType !== 'PR' && showContent == true"></app-leaves-table>
                 </div>
             </div>

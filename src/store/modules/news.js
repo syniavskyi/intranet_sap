@@ -232,7 +232,7 @@ const actions = {
             // const url ="https://www.rmf24.pl/rozrywka/ciekawostki/feed"
             // const url = "http://www.wykop.pl/rss/index.xml"
             // const url = "https://nt.interia.pl/feed"
-            const url ="http://on.interia.pl/feed"
+            const url ="https://fakty.interia.pl/ciekawostki/feed"
             fetch(proxyurl + url)
             .then(response => response.text())
             .then(contents => commit('SET_NEWS', contents))
