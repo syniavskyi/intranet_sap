@@ -182,7 +182,7 @@
         "comments": "(uwagi)",
         "hiddenData": "Data are hidden",
         "delegationNoError": "Invalid number",
-        "delegationNoLabel": "Enter delegation period",
+        "delegationNoLabel": "Will be filled",
         "carRegistrationNo": "Car registration no."
     },
     "header": {
