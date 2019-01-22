@@ -11,6 +11,7 @@
                 </div>
             </div>
             <confirm-dialog v-if="showDialog"></confirm-dialog>
+            <success-dialog v-if="showSuccessDialog"></success-dialog>
             <div class="delegations-tiles">
                 <div class="delegations-tile delegations-inputs">
                     <div class="delegations-tile-header">
@@ -73,6 +74,12 @@
                                 </div>
                                 <div class="delegations-inputs-section">
                                     <div class="del-div-cool">
+                                        <select ref="meanOfTransport" class="delegations-select-cool" v-model="selectedMeanOfTransport" @change="showRegistrationInput" required>
+                                            <option v-for="transport in transportList" :key="transport.Key" :value="transport.Key">{{ transport.Value }}</option>
+                                        </select>
+                                        <label class="del-slabel">{{ $t("table.delegations.transport") }} </label>
+                                    </div>
+                                    <div class="del-div-cool" v-if="showRegNoInput">
                                         <input required class="delegations-input-cool" v-model="newDelegation.carRegistrationNo" @input="checkNewDelegation" />
                                         <span class="del-div-bar"></span>
                                         <label class="delegations-label-cool">{{ $t("label.carRegistrationNo") }} </label>
@@ -151,6 +158,7 @@ import AdvanceTable from './delegationComponents/AdvanceTable'
 import DelegationTable from './delegationComponents/DelegationTable'
 import Dialog from '../dialogs/ConfirmDelegationDialog'
 import Modal from '../dialogs/MessageLogDialog'
+import SuccessDialog from '../dialogs/SuccessDelegationDialog'
 
 let utils = require('../../utils')
 
@@ -172,7 +180,8 @@ export default {
         'delegation-table': DelegationTable,
         'confirm-dialog': Dialog,
         'modal': Modal,
-        MaskedInput
+        MaskedInput,
+        'success-dialog': SuccessDialog
     },
     created(){
         let oStore = this.$store;
@@ -198,15 +207,18 @@ export default {
             showDialog: 'getShowConfirmDelegation',
             displayMenu: 'getShowMenu',
             displayOverlay: 'getShowMenuOverlay',
-            authType: 'getDelegationAuth'
+            authType: 'getDelegationAuth',
+            showSuccessDialog: 'getSuccessDelegationDialog',
+            transportList: 'getTransportList',
+            showRegNoInput: 'getShowRegistrationNoInput' 
         }),
         oldDelegationNumber: {
-            set(number) {
-                this.$store.commit('SET_OLD_DELEG_NO', number)
-            },
-            get() {
-                return this.$store.state.delegations.OldDelegationNumber
-            }
+            set (number) { this.$store.commit('SET_OLD_DELEG_NO', number) },
+            get () { return this.$store.state.delegations.OldDelegationNumber }
+        },
+        selectedMeanOfTransport: {
+            set (key) { this.$store.commit('SET_MEAN_OF_TRANSPORT', key) },
+            get () { return this.$store.state.delegations.meanOfTransport }
         },
         disableSaveBtn() {
             return (this.newDelegationValidated && this.delegationTableValidated && this.accCostValidated) ? false : true
@@ -228,6 +240,14 @@ export default {
             countAllowance: 'countAllowance',
             countAllCosts: 'countAllCosts'
         }),
+        showRegistrationInput(evt) {
+            let key = evt.target.value
+            if (key === 'PRVCAR' || key === 'COMCAR' || key === 'MOTOR' || key === 'MOPED') {
+                this.$store.commit('SET_SHOW_REGISTRATION_INPUT', true)
+            } else {
+                this.$store.commit('SET_SHOW_REGISTRATION_INPUT', false)
+            }
+        },
         setNewDelegationNumber() {
             this.disableDelegationNumber = true
             this.$store.commit('SET_NEW_DELEG_NO', this.oldDelegationNumber)

@@ -182,7 +182,7 @@
         "hiddenData": "Dane są ukryte",
         "delegationNoError": "Nieprawidłowy numer",
         "delegationNoLabel": "Wprowadź okres delegacji",
-        "carRegistrationNo": "Nr rejstracyjny pojazdu"
+        "carRegistrationNo": "Nr rejestracyjny pojazdu"
     },
     "header": {
         "login": "Zaloguj się do Intranetu",
@@ -279,7 +279,8 @@
         "requiredField": "Pole jest obowiązkowe",
         "requiredContractor": "Aby wyświetlić dostępne branże wybierz kontrahenta",
         "unacceptableChar": "Niedozwolony znak (&)",
-        "notEqualPasswords": "Upewnij się, ze wprowadzone hasła są takie same"
+        "notEqualPasswords": "Upewnij się, ze wprowadzone hasła są takie same",
+        "savedDelegationBackend": "Delegacja o numerze {delegNo} została utworzona"
     },
     "select": {
         "language": {

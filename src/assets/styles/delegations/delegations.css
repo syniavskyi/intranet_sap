@@ -431,7 +431,7 @@
     
 .del-div-bar:before, .del-div-bar:after {
     content:'';
-    display: flex;
+    display: table;
     flex-shrink: 0;
     height:2px; 
     width:0;
@@ -1239,12 +1239,20 @@
     font-size: 1.5rem;
 } 
 
-.del-modal-h3 {
+.del-modal-h3,
+.del-modal-hgrey {
     font-size: 1.5rem;
     margin: 0;
     font-weight: 400;
-    color: orange;
     text-align: center;
+}
+
+.del-modal-h3 {
+    color: orange;
+}
+
+.del-modal-hgrey {
+    color: grey;
 }
 
 .del-modal-btns {

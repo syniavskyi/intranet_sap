@@ -278,7 +278,8 @@
         "requiredField": "Field is required",
         "requiredContractor": "Pick Contractor first to display available Branches",
         "unacceptableChar": "Unacceptable character (&)",
-        "notEqualPasswords": "Make sure the passwords you enter are the same"
+        "notEqualPasswords": "Make sure the passwords you enter are the same",
+        "savedDelegationBackend": "Delegation with number {delegNo} was created"
     },
     "select": {
         "language": {
