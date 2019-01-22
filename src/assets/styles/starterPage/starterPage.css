@@ -96,7 +96,8 @@
 }
 
 .starter-page-pdf,
-.starter-page-docx {
+.starter-page-docx,
+.starter-page-link {
     padding: .1rem .3rem;
     border: 1px solid rgba(128, 128, 128, 0.28);
     border-radius: 4px;
@@ -111,7 +112,9 @@
 .starter-page-docx {
     background: rgb(114, 114, 255);
 }
-
+.starter-page-link {
+    background: rgb(121, 169, 247);
+}
 .starter-page-list-item-wrapper {
     align-self: center;
 }
@@ -201,12 +204,14 @@
     .starter-page-item {
         position: static;
     }
-    
+
     .starter-page-item-text {
         position: relative;
     }
     .starter-page-pdf,
-    .starter-page-docx {
+    .starter-page-docx,
+    .starter-page-link
+     {
         display: flex;
     }
     .starter-page-list {

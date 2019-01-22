@@ -12,7 +12,7 @@
         </div>
         <h3 class="starter-page-user-header">{{ $t("header.welcome") }}</h3>
           <div class="starter-page-lists">
-            <div class="starter-page-list">
+            <div class="starter-page-list" v-if="docListNew && docListNew.length !== 0">
               <div class="starter-page-list-header">
                 <p class="starter-page-list-title">{{ $t("label.documentListNew") }}</p>
               </div>
@@ -20,12 +20,16 @@
                 <ul class="starter-page-ul">
                   <li class="starter-page-item" v-for="list in docListNew" :key="list.FileId">
                     <div class="starter-page-list-item-btns">
-                      <a class="starter-page-file-btn" :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
+                      <a class="starter-page-file-btn" v-if="list.Filename.includes('http')" :title="$t('title.download')" target="_blank" :href="list.Filename">&#x21e3;</a>
+                      <a class="starter-page-file-btn" v-else :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
                       <div v-if="checkFileFormat(list.Filename) == '.pdf'">
                         <p class="starter-page-pdf">{{checkFileFormat(list.Filename)}}</p>
                       </div>
                       <div v-if="checkFileFormat(list.Filename) == '.doc' || checkFileFormat(list.Filename) == '.docx'">
                         <p class="starter-page-docx">{{checkFileFormat(list.Filename)}}</p>
+                      </div>
+                      <div v-if="list.Filename.includes('http')">
+                        <p class="starter-page-link"> .link </p>
                       </div>
                     </div>
                     <div class="starter-page-list-item-wrapper">
@@ -45,7 +49,7 @@
                 </div>
               </div>
             </div>
-            <div class="starter-page-list">
+            <div class="starter-page-list" v-if="docListInfo && docListInfo.length !== 0">
               <div class="starter-page-list-header">
                 <p class="starter-page-list-title">{{ $t("label.documentListInfo") }}</p>
               </div>
@@ -53,12 +57,16 @@
                 <ul class="starter-page-ul">
                   <li class="starter-page-item" v-for="list in docListInfo" :key="list.FileId">
                     <div class="starter-page-list-item-btns">
-                      <a class="starter-page-file-btn" :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
+                      <a class="starter-page-file-btn" v-if="list.Filename.includes('http')" :title="$t('title.download')" target="_blank" :href="list.Filename">&#x21e3;</a>
+                      <a class="starter-page-file-btn" v-else :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
                       <div v-if="checkFileFormat(list.Filename) == '.pdf'">
                         <p class="starter-page-pdf"> {{checkFileFormat(list.Filename)}}</p>
                       </div>
-                      <div v-if="checkFileFormat(list.Filename) == '.doc'">
+                      <div v-if="checkFileFormat(list.Filename) == '.doc' || checkFileFormat(list.Filename) == '.docx'">
                         <p class="starter-page-docx">{{checkFileFormat(list.Filename)}} </p>
+                      </div>
+                       <div v-if="list.Filename.includes('http')">
+                        <p class="starter-page-link"> .link </p>
                       </div>
                     </div>
                     <div class="starter-page-list-item-wrapper">
@@ -111,7 +119,6 @@ export default {
       setButtonNew: "getButtonStateNew",
       setButtonInfo: "getButtonStateInfo",
       docListNew: "getDocListNew",
-      listForStatus: "getListForStatus",
       docListInfo: "getDocListInfo",
       displayMenu: "getShowMenu",
       displayOverlay: "getShowMenuOverlay"
@@ -119,9 +126,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getNewDocs",
-      "getInfoDocs",
-      "getDocsStatus",
       "checkListForNew",
       "checkListForInfo",
       "checkFileFormat",

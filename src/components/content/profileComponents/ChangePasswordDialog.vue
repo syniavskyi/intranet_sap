@@ -92,11 +92,15 @@ export default {
         }
     },
     onSubmit() {
-      this.newPassword !== this.newPasswordRepeat ? this.bDisabled = {bln: true, msg: i18n.t("message.notEqualPasswords")} : this.bDisabled = {bln: false, msg: ''};
-      let userData = this.userData;
-      userData.Password = document.getElementById("oldPass").value;
-      userData.NewPassword = document.getElementById("newPass").value;
-    //   this.$store.dispatch("submitPassword", userData);
+      if(this.newPassword !== this.newPasswordRepeat){
+        this.bDisabled = {bln: true, msg: i18n.t("message.notEqualPasswords")}
+      } else {
+        this.bDisabled = {bln: false, msg: ''};
+        let userData = this.userData;
+        userData.Password = document.getElementById("oldPass").value;
+        userData.NewPassword = document.getElementById("newPass").value;
+        this.$store.dispatch("submitPassword", userData);
+      }
     },
     checkChars(string){
         string.includes('&') ? this.bDisabled = {bln: true, msg: i18n.t("message.unacceptableChar")} : this.bDisabled = {bln: false, msg: ''};

@@ -161,9 +161,6 @@ const getters = {
   },
   getDocListInfo(state) {
     return state.docListInfo;
-  },
-  getListForStatus(state) {
-    return state.listForStatus;
   }
 }
 

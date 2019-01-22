@@ -90,7 +90,7 @@ export default {
             const projectsList = this.projectsList
             let filteredProjects = []
 
-            for (let project in projectsList) {
+            for (let project of projectsList) {
                 if (project.ContractorId === this.newProjectForUser.ContractorId) {
                     filteredProjects.push(project)
                 }
