@@ -78,6 +78,7 @@ const actions = {
             commit('SET_REMOVE_SUCCESS', true)
             let message = res.headers;
             dispatch('displayModal', message);
+            dispatch('getData', { user: data.UserId })
         }).catch(error => {
             dispatch('hideAllMessages');
             commit('SET_REMOVE_ERROR', true)
@@ -106,7 +107,7 @@ const actions = {
             let message = res.headers;
             dispatch('displayModal', message);
             commit("SET_PROMISE_TO_READ", ["NewToken", "Availabilities"]);
-            dispatch('getData');
+            dispatch('getData', { user: data.UserId });
           }).catch(error => {
         })
     },
@@ -135,7 +136,7 @@ const actions = {
             let message = res.headers;
             dispatch('displayModal', message);
             commit("SET_PROMISE_TO_READ", ["NewToken", "Availabilities"]);
-            dispatch('getData');
+            dispatch('getData', { user: data.UserId });
         }).catch(error => {
         })
         }
