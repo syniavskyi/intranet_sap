@@ -1,0 +1,45 @@
+<template>
+    <div>
+        <div class="modal-new-xs">
+            <div class="modal-header-new">
+                <h1 class="modal-title-new">{{ $t("header.delegationConfirm") }}</h1>
+                <button @click="hideDialog" class="modal-close">&#10006;</button>
+            </div>
+            <div class="modal-content-new-hs">
+                <div class="del-modal-section">
+                    <i18n class="del-modal-hgrey" path="message.savedDelegationBackend" tag="h3">
+                        <span class="del-modal-h3" place="delegNo" style="color: orange">{{ savedDelegationNumber }}</span>
+                    </i18n>
+                    <div class="del-modal-btns">
+                        <button class="oclear-btn" @click="hideDialog">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+    name: 'SuccessDelegationDialog',
+    computed: {
+        ...mapGetters({
+            showSuccessDialog: 'getSuccessDelegationDialog',
+            savedDelegationNumber: 'getSavedDelegationFromBackend'
+        })
+    }, 
+    methods: {
+        hideDialog() {
+            this.$store.commit('SET_SAVED_DELEGATION_FROM_BACKEND', null)
+            this.$store.commit('SET_SHOW_SUCCESS_DELEGATION', false)
+            this.$store.commit('SET_MEAN_OF_TRANSPORT', null)
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

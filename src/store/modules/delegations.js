@@ -47,16 +47,20 @@ const state = {
     totalReturnAmount: 0,
     totalDelegationAmount: 0,
     allowanceDeduction: 0,
-    carRegistrationNo: ""
+    carRegistrationNo: null
   },
+  meanOfTransport: "",
   newDelegationValidated: false,
   dailyAllowance: 30.00,
   NewDelegationNumber: null,
   OldDelegationNumber: null,
   showConfirmDelegation: false,
+  showSuccessDelegation: false,
   createDelegationSuccess: null,
+  savedDelegationFromBackend: null,
   dataToRead: ["Domains", "Industries", "UserList", "UserData"],
-  delegationAuth: ""
+  delegationAuth: "",
+  showRegistrationNoInput: false
 };
 
 const mutations = {
@@ -86,6 +90,18 @@ const mutations = {
   },
   SET_DELEGATION_AUTH(state, sAuth){
     state.delegationAuth = sAuth;
+  },
+  SET_SHOW_SUCCESS_DELEGATION(state, show) {
+    state.showSuccessDelegation = show
+  },
+  SET_SAVED_DELEGATION_FROM_BACKEND(state, number) {
+    state.savedDelegationFromBackend = number
+  },
+  SET_MEAN_OF_TRANSPORT(state, transportKey) {
+    state.meanOfTransport = transportKey
+  },
+  SET_SHOW_REGISTRATION_INPUT(state, show) {
+    state.showRegistrationNoInput = show
   }
 };
 
@@ -276,13 +292,14 @@ const actions = {
           "x-csrf-token": getters.getToken
         }
       }).then(res => {
-        commit('SET_CREATE_DELEG_SUCCESS',true)
-        dispatch('clearDelegationForm')
         commit('SET_SHOW_CONFIRM_DELEG', false)
-        let message = res.headers;
-        dispatch('displayModal', message);
+        // commit('SET_CREATE_DELEG_SUCCESS', true)
+        commit('SET_SHOW_SUCCESS_DELEGATION', true)
+        dispatch('clearDelegationForm')
+        commit('SET_SAVED_DELEGATION_FROM_BACKEND', res.data.d.DelegNo)
+        commit('SET_MEAN_OF_TRANSPORT', null)
       }).catch(error => {
-        commit('SET_CREATE_DELEG_SUCCESS',false)
+        commit('SET_CREATE_DELEG_SUCCESS', false)
       })
     },
     clearDelegationForm({commit}){
@@ -324,8 +341,11 @@ const actions = {
         currency: 'PLN',
         totalReturnAmount: 0,
         totalDelegationAmount: 0,
-        allowanceDeduction: 0
+        allowanceDeduction: 0,
+        carRegistrationNo: null
       }
+      commit('SET_MEAN_OF_TRANSPORT', null)
+      commit('SET_SHOW_REGISTRATION_INPUT', false)
       commit('SET_NEW_DELEGATION', newDelegation)
       commit('SET_NEW_DELEGATION_VALIDATED', false)
 
@@ -403,6 +423,7 @@ const actions = {
       commit('SET_DELEGATION_TABLE_VALIDATED', false)
       commit('SET_NEW_DELEG_NO', null)
       commit('SET_OLD_DELEG_NO', null)
+      commit('SET_SAVED_DELEGATION_FROM_BACKEND', null)
       commit('SET_CREATE_DELEG_SUCCESS', null)
      }
 };
@@ -444,6 +465,18 @@ const getters = {
   },
   getDelegationAuth(state){
     return state.delegationAuth;
+  },
+  getSuccessDelegationDialog(state) {
+    return state.showSuccessDelegation
+  },
+  getSavedDelegationFromBackend(state) {
+    return state.savedDelegationFromBackend
+  },
+  getMeanOfTransport(state) {
+    return state.meanOfTransport
+  },
+  getShowRegistrationNoInput(state) {
+    return state.showRegistrationNoInput
   }
 };
 

@@ -57,7 +57,8 @@
 }
 
 .modal-content-new,
-.modal-content-list {
+.modal-content-list,
+.modal-content-new-hs {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -65,6 +66,10 @@
     align-self: center;
     align-items: center;
     width: 100%;
+}
+
+.modal-content-new-hs {
+    height: 8.5rem;
 }
 
 .modal-content-new {
