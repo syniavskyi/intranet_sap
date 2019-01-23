@@ -6,6 +6,7 @@
     <router-view/>
     <modal v-show="showModal"/>
     <warning-dialog></warning-dialog>
+    <session-end-dialog></session-end-dialog>
   </div>
   <!-- </div> -->
 </template>
@@ -15,6 +16,7 @@ import Menu from './components/Menu.vue'
 import Loader from './components/dialogs/Loader.vue'
 import Modal from './components/dialogs/MessageLogDialog'
 import WarningDialog from './components/dialogs/WarningDialog'
+import SessionEndDialog from './components/dialogs/SessionEndDialog'
 import { mapGetters } from 'vuex';
 export default {
   name: 'App',
@@ -22,7 +24,8 @@ export default {
     'app-menu': Menu,
     'loader': Loader,
     'modal': Modal,
-    'warning-dialog': WarningDialog
+    'warning-dialog': WarningDialog,
+    'session-end-dialog': SessionEndDialog
   },
 
 
