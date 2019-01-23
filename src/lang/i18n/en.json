@@ -280,7 +280,7 @@
     "goToUserByFullname": "Go to the employee's profile by choosing the name and surname",
     "requiredField": "Field is required",
     "requiredContractor": "Pick Contractor first to display available Branches",
-    "unacceptableChar": "Unacceptable character (&)",
+    "unacceptableChar": "Unacceptable character (&, # or %)",
     "notEqualPasswords": "Make sure the passwords you enter are the same",
     "savedDelegationBackend": "Delegation with number {delegNo} was created",
     "sessionEndInfo": "The session has expired. You will be taken to the homepage. Log in again. Your changes have not been saved."

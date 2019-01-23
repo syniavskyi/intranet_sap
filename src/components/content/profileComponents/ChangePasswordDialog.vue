@@ -103,7 +103,7 @@ export default {
       }
     },
     checkChars(string){
-        string.includes('&') ? this.bDisabled = {bln: true, msg: i18n.t("message.unacceptableChar")} : this.bDisabled = {bln: false, msg: ''};
+        string.includes('&') || string.includes('%') || string.includes('#')? this.bDisabled = {bln: true, msg: i18n.t("message.unacceptableChar")} : this.bDisabled = {bln: false, msg: ''};
     }
   }
 };

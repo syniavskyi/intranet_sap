@@ -279,7 +279,7 @@
         "goToUserByFullname": "Gehen Sie zum Profil, basierend auf seinem Vor- und Nachnamen",
         "requiredField": "Field is required",
         "requiredContractor": "Pick Contractor first to display available Branches",
-        "unacceptableChar": "Unacceptable character (&)",
+        "unacceptableChar": "Unacceptable character (&, # or %)",
         "notEqualPasswords": "Make sure the passwords you enter are the same",
         "savedDelegationBackend": "Delegation with number {delegNo} was created"
     },
