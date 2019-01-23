@@ -19,18 +19,31 @@
 
 .plane-login {
     flex-shrink: 0;
-    min-height: 37rem;
+    min-height: 35rem;
 }
 
-[class*="input-login-"] {
+.logini-margin {
+    margin-top: 1.8rem;
+}
+
+.cd-llogin {
+    background: transparent;
+}
+
+/* [class*="input-login-"] {
     width: 15rem;
 }
 
 .input:focus + label[class*='label-login'] {
     font-size: 1.2rem;
+} */
+
+.label {
+    display: flex;
+    align-items: center;
 }
 
-.label-login-email {
+/* .label-login-email {
     order: 0; 
 }
 .input-login-email {
@@ -50,7 +63,7 @@
 
 .label + .input {
     margin-bottom: 0.5rem;
-}
+} */
 
 .show-pass-eye,
 .show-pass-eyef {
@@ -198,6 +211,11 @@ button[disabled] span {
     cursor: pointer;
  }
 
+ .show-pass-eye {
+    position: absolute;
+    right: 0;
+ }
+
  .show-pass-eyef {
      position: absolute;
      top: .1rem;
@@ -227,7 +245,7 @@ button[disabled] span {
         height: 70%;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
-        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60%);
+        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60.2%);
         flex-direction: row;
         justify-content: flex-start;
     }
@@ -236,7 +254,7 @@ button[disabled] span {
     }  
     .label {
         align-self: flex-start;
-        margin-left: 2.5rem;
+        margin-left: 3rem;
     }
     .plane-parent-login {
         height: 100%;
@@ -319,7 +337,7 @@ opacity: 0;
         min-height: 27rem;
     }
     .label {
-        margin-left: 2.5rem;
+        margin-left: 3rem;
         align-self: flex-start;
     }
 }
@@ -332,7 +350,7 @@ opacity: 0;
      }
      .div-select-login > select {
          margin-right: 2rem;
-         margin-top: 1rem;
+         /* margin-top: 1rem; */
      }
 }
 
