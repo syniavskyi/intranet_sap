@@ -4,7 +4,8 @@ const state = {
   leavePageDialog: false,
   leavePageFlag: false,
   nextPath: "",
-  sessionLogout: false
+  sessionLogout: false,
+  photoToLargeDialog: false
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   },
   SET_SESSION_LOGOUT(state, status) {
     state.sessionLogout = status
+  },
+  SET_SUBMIT_PHOTO_ERR_DIALOG(state, show) {
+    state.photoToLargeDialog = show
   }
 }
 
@@ -59,7 +63,8 @@ const getters = {
   getNextPath: state => {
     return state.nextPath
   },
-  getSessionStatus: state => state.sessionLogout
+  getSessionStatus: state => state.sessionLogout,
+  getSubmitPhotoErr: state => state.photoToLargeDialog
 }
 
 export default {

@@ -121,7 +121,6 @@
   flex-direction: column;
   width: 90%;
   align-items: center;
-  /* padding-left: 1rem; */
   align-self: center;
   height: 50%;
   justify-content: center;
@@ -146,6 +145,23 @@
 }
 
 /* MODAL LOGIN */
+
+.modal-h {
+  height: 5.5rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FOOTER CONTAINTER FOR BUTTONS*/
+.modal-fbtns {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+/* FOOTER CONTAINTER FOR BUTTONS*/
 
 /* ERROR MODAL / MESSAGE LOG DIALOG */
 

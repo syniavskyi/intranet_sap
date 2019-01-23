@@ -498,8 +498,9 @@ input:required {
     margin-right: 1rem;
 }
 
-.func-btn:hover {
-    box-shadow:0 1px 16px #bd8f1c;
+.func-btn:hover,
+.func-btnm:hover {
+    box-shadow: 0px 1px 16px #bd8f1c;
 }
 
 .clear-btn,
