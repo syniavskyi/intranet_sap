@@ -96,27 +96,27 @@ const mutations = {
   SET_USER_PHOTO_URL(state, url) {
     state.userPhotoUrl = url;
   },
-  SET_SEL_USER_PHOTO_URL(state, url){
+  SET_SEL_USER_PHOTO_URL(state, url) {
     state.selectedUserPhotoUrl = url;
   },
   SET_SELECTED_FOR_CV_USER(state, data) {
     state.selectedForCvUser = data;
   },
-  SET_PROMISE_LIST(state, data){
+  SET_PROMISE_LIST(state, data) {
     state.promiseList = data;
   },
-  SET_PROMISE_TO_READ(state, data){
+  SET_PROMISE_TO_READ(state, data) {
     state.promiseListToRead = data;
   },
-  SET_GO_FROM_CV(state, isFromCv){
+  SET_GO_FROM_CV(state, isFromCv) {
     state.goFromCv = isFromCv;
   },
-  SET_TO_READ_EXCLUDED(state, data){
+  SET_TO_READ_EXCLUDED(state, data) {
     data = data.filter(oItem => oItem !== "Domains");
     data.push("NewToken");
     state.promiseListToRead = data;
   },
-  SET_USER_AUTH(state, aAuth){
+  SET_USER_AUTH(state, aAuth) {
     state.userAuth = aAuth;
   },
   SET_TRANSPORT(state, data) {
@@ -131,12 +131,16 @@ const mutations = {
 };
 
 const actions = {
-  getData({getters, dispatch, commit}, passedData){
+  getData({
+    getters,
+    dispatch,
+    commit
+  }, passedData) {
     let passedUserId, passedLang, bChangePage, bLogin,
-        aRoles = getters.getRoleList,
-        sFirsLang;
+      aRoles = getters.getRoleList,
+      sFirsLang;
     // check and assign passed data
-    if(passedData){
+    if (passedData) {
       passedUserId = passedData.user;
       passedLang = passedData.lang;
       bChangePage = passedData.changePage;
@@ -151,11 +155,11 @@ const actions = {
       login: bLogin || false
     };
     // check if domains are read - if it has been read, get language of get domains by roles
-    if(aRoles.length !== 0){
+    if (aRoles.length !== 0) {
       sFirsLang = aRoles[0].Language.toUpperCase();
     }
     // if read language equals user language - do not read domains again
-    if(sFirsLang === userData.lang){
+    if (sFirsLang === userData.lang) {
       commit('SET_TO_READ_EXCLUDED', getters.getPromisesToRead);
     }
     // finally read data
@@ -167,22 +171,24 @@ const actions = {
     getters,
     commit
   }, userData) {
-   let aPromises; // prepare promises to read data
+    let aPromises; // prepare promises to read data
 
-   dispatch("setPromises", userData); // set promises by passed array
-   aPromises = getters.getPromiseList;
-   commit("SET_DISPLAY_LOADER", true); // set loader
+    dispatch("setPromises", userData); // set promises by passed array
+    aPromises = getters.getPromiseList;
+    commit("SET_DISPLAY_LOADER", true); // set loader
     axios.all(aPromises).then(res => { // send promise
-      dispatch("setDataInResponse", { res, userData }); // set data from responses
-    }).catch(error => {  // catch error
-      if(error.response.status === 401) {
-        dispatch('logout');
-        location.reload();
+      dispatch("setDataInResponse", {
+        res,
+        userData
+      }); // set data from responses
+    }).catch(error => { // catch error
+      if (error.response.status === 401) {
+        dispatch('logoutSession', true)
       }
     });
   },
 
-  getNewToken(){
+  getNewToken() {
     return axios({
       method: 'get',
       url: '$metadata',
@@ -197,11 +203,11 @@ const actions = {
 
   getDomainValues({}, domainData) {
     let aLinks = [];
-    domainData.forEach(function(oDomain){
+    domainData.forEach(function (oDomain) {
       aLinks.push(`GET Dictionaries?$filter=Name%20eq%20'${oDomain.name}'%20and%20Language%20eq%20'${oDomain.lang}' HTTP/1.1`)
     })
 
-    let sData  = utils.packBatch(aLinks)
+    let sData = utils.packBatch(aLinks)
     return axios({
       method: 'post',
       url: "/$batch",
@@ -235,15 +241,15 @@ const actions = {
   }, userData) {
     let url;
     let sUserAlias = userData.user || localStorage.getItem("id"),
-        sLang = userData.lang || localStorage.getItem("lang");
-    if(!sUserAlias){
+      sLang = userData.lang || localStorage.getItem("lang");
+    if (!sUserAlias) {
       sUserAlias = userData.user;
     }
-    if(!sLang){
+    if (!sLang) {
       sLang = userData.lang;
     }
     getters.getDataForHint ? url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserSkills,UserAuth,UserCvProjects' :
-                             url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang,UserFiles,UserAuth'
+      url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang,UserFiles,UserAuth'
     return axios({
       method: 'GET',
       url: url,
@@ -265,7 +271,7 @@ const actions = {
               obj[index].DateStart = utils.dateStringToObj(obj[index].DateStart);
             }
             obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
-            if(obj[index].IsCurrent){
+            if (obj[index].IsCurrent) {
               obj[index].DateEnd = new Date();
             } else {
               obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
@@ -297,10 +303,11 @@ const actions = {
   // },
 
   loadUserPhoto({
-    commit, getters
+    commit,
+    getters
   }, userAlias) {
     const sUserId = userAlias,
-      sLoggedUser =  localStorage.getItem("id"),
+      sLoggedUser = localStorage.getItem("id"),
       sLanguage = 'PL',
       sFileType = "USER-PHOTO";
     const url =
@@ -327,26 +334,26 @@ const actions = {
       ctx.drawImage(image, 0, 0, image.width, image.height);
 
       let dataURL = imgCanvas.toDataURL("image/png");
-      if(sLoggedUser === sUserId){
+      if (sLoggedUser === sUserId) {
         commit('SET_USER_PHOTO_URL', dataURL);
       }
       commit('SET_SEL_USER_PHOTO_URL', dataURL);
       // localStorage.setItem("image", dataURL)
     }, false);
     image.addEventListener("error", () => {
-      if(sLoggedUser === sUserId){
+      if (sLoggedUser === sUserId) {
         commit('SET_USER_PHOTO_URL', "");
       }
       commit('SET_SEL_USER_PHOTO_URL', "");
     });
   },
   checkPageToDisplay({}, userData) {
-    if(userData.changePage && userData.login) {
+    if (userData.changePage && userData.login) {
       router.replace('/news');
-     } else if(!userData.changePage && userData.login) {
+    } else if (!userData.changePage && userData.login) {
       router.replace('/starterpage');
-     }
-      userData.login = false;
+    }
+    userData.login = false;
   },
   getAdverts({}) {
     return axios({
@@ -358,153 +365,217 @@ const actions = {
     })
   },
 
-  setPromises({dispatch, commit, getters}, userData){
+  setPromises({
+    dispatch,
+    commit,
+    getters
+  }, userData) {
     var aPromises = [],
-        aPromiseList = state.promiseListToRead;
-  if(aPromiseList){
-    for(let i = 0; i < aPromiseList.length; i++){
-      let sPromiseName = aPromiseList[i];
-      switch(sPromiseName){
-        case "Adverts":
-          const advertsPromise =  dispatch("getAdverts").then(res => ({ res: res, promise: 'Adverts' }));
-          aPromises.push(advertsPromise);
-          break;
-        case "Events":
-          const eventsPromise = dispatch('getEvents').then(res => ({ res: res, promise: 'Events' }));
-          aPromises.push(eventsPromise);
-          break;
-        case "UserData":
-          const userDataPromise = dispatch('getUserData', userData).then(res => ({ res: res, promise: 'UserData' }));
-          aPromises.push(userDataPromise);
-          break;
-        case "Contractors":
-          const contractorPromise = dispatch('getContractorsList').then(res => ( { res: res, promise: "Contractors"}));
-          aPromises.push(contractorPromise);
-          break;
-        case "Industries":
-          const industriesPromise = dispatch('getIndustries', userData).then(res => ( { res: res, promise: "Industries"}));
-          aPromises.push(industriesPromise);
-          break;
-        case "Projects":
-          const projectPromise = dispatch('getProjectsList').then(res => ( { res: res, promise: "Projects"}));
-          aPromises.push(projectPromise);
-          break;
-        case "UserList":
-          const userListPromise = dispatch('getUsersLists').then(res => ( { res: res, promise: "UserList"}));
-          aPromises.push(userListPromise);
-          break;
-        case "Languages":
-          const languagesPromise = dispatch('getAllLanguages', userData).then(res => ( { res: res, promise: "Languages"}));
-          aPromises.push(languagesPromise);
-          break;
-        case "SchoolDesc":
-          const schoolDescPromise = dispatch('getSchoolDesc', userData.lang).then(res => ( { res: res, promise: "SchoolDesc"}));
-          aPromises.push(schoolDescPromise);
-          break;
-        case "FieldOfStudy":
-          const fieldOfStudyPromise = dispatch('getFieldOfStudyDesc', userData.lang).then(res => ( { res: res, promise: "FieldOfStudy"}));
-          aPromises.push(fieldOfStudyPromise);
-          break;
-        case "StarterDocsInfo":
-          const starterDocsPromiseInfo = dispatch('getInfoDocs', userData).then(res => ( { res: res, promise: "StarterDocsInfo" } ));
-          aPromises.push(starterDocsPromiseInfo);
-          break;
-        case "StarterDocsNew":
-          const starterDocsPromiseNew = dispatch('getNewDocs', userData).then(res => ( { res: res, promise: "StarterDocsNew" } ));
-          aPromises.push(starterDocsPromiseNew);
-          break;
-        case "NewToken":
-          const newTokenPromise = dispatch('getNewToken').then(res => ( { res: res, promise: "NewToken" } ));
-          aPromises.push(newTokenPromise);
-          break;
-        case "UserPhoto":
-          const userPhotoPromise = dispatch("getUserPhoto", userData).then(res => ({res: res, promise: "UserPhoto"}));
-          aPromises.push(userPhotoPromise);
-          break;
-        case "Domains":
-          let arrDomain = [];
-          for(let value of state.sapDomains) {
-            let domainData = {
-              name: value,
-              lang: userData.lang
-            };
-            arrDomain.push(domainData)
-          }
-          dispatch('getDomainValues', arrDomain).then(res => {
-            let oParsedData = utils.parseBatchResponse(res)
-            commit('SET_BATCH_RES', oParsedData)
-            let aRes = [],
-            aBatchRes = getters.getBatchRes
+      aPromiseList = state.promiseListToRead;
+    if (aPromiseList) {
+      for (let i = 0; i < aPromiseList.length; i++) {
+        let sPromiseName = aPromiseList[i];
+        switch (sPromiseName) {
+          case "Adverts":
+            const advertsPromise = dispatch("getAdverts").then(res => ({
+              res: res,
+              promise: 'Adverts'
+            }));
+            aPromises.push(advertsPromise);
+            break;
+          case "Events":
+            const eventsPromise = dispatch('getEvents').then(res => ({
+              res: res,
+              promise: 'Events'
+            }));
+            aPromises.push(eventsPromise);
+            break;
+          case "UserData":
+            const userDataPromise = dispatch('getUserData', userData).then(res => ({
+              res: res,
+              promise: 'UserData'
+            }));
+            aPromises.push(userDataPromise);
+            break;
+          case "Contractors":
+            const contractorPromise = dispatch('getContractorsList').then(res => ({
+              res: res,
+              promise: "Contractors"
+            }));
+            aPromises.push(contractorPromise);
+            break;
+          case "Industries":
+            const industriesPromise = dispatch('getIndustries', userData).then(res => ({
+              res: res,
+              promise: "Industries"
+            }));
+            aPromises.push(industriesPromise);
+            break;
+          case "Projects":
+            const projectPromise = dispatch('getProjectsList').then(res => ({
+              res: res,
+              promise: "Projects"
+            }));
+            aPromises.push(projectPromise);
+            break;
+          case "UserList":
+            const userListPromise = dispatch('getUsersLists').then(res => ({
+              res: res,
+              promise: "UserList"
+            }));
+            aPromises.push(userListPromise);
+            break;
+          case "Languages":
+            const languagesPromise = dispatch('getAllLanguages', userData).then(res => ({
+              res: res,
+              promise: "Languages"
+            }));
+            aPromises.push(languagesPromise);
+            break;
+          case "SchoolDesc":
+            const schoolDescPromise = dispatch('getSchoolDesc', userData.lang).then(res => ({
+              res: res,
+              promise: "SchoolDesc"
+            }));
+            aPromises.push(schoolDescPromise);
+            break;
+          case "FieldOfStudy":
+            const fieldOfStudyPromise = dispatch('getFieldOfStudyDesc', userData.lang).then(res => ({
+              res: res,
+              promise: "FieldOfStudy"
+            }));
+            aPromises.push(fieldOfStudyPromise);
+            break;
+          case "StarterDocsInfo":
+            const starterDocsPromiseInfo = dispatch('getInfoDocs', userData).then(res => ({
+              res: res,
+              promise: "StarterDocsInfo"
+            }));
+            aPromises.push(starterDocsPromiseInfo);
+            break;
+          case "StarterDocsNew":
+            const starterDocsPromiseNew = dispatch('getNewDocs', userData).then(res => ({
+              res: res,
+              promise: "StarterDocsNew"
+            }));
+            aPromises.push(starterDocsPromiseNew);
+            break;
+          case "NewToken":
+            const newTokenPromise = dispatch('getNewToken').then(res => ({
+              res: res,
+              promise: "NewToken"
+            }));
+            aPromises.push(newTokenPromise);
+            break;
+          case "UserPhoto":
+            const userPhotoPromise = dispatch("getUserPhoto", userData).then(res => ({
+              res: res,
+              promise: "UserPhoto"
+            }));
+            aPromises.push(userPhotoPromise);
+            break;
+          case "Domains":
+            let arrDomain = [];
+            for (let value of state.sapDomains) {
+              let domainData = {
+                name: value,
+                lang: userData.lang
+              };
+              arrDomain.push(domainData)
+            }
+            dispatch('getDomainValues', arrDomain).then(res => {
+              let oParsedData = utils.parseBatchResponse(res)
+              commit('SET_BATCH_RES', oParsedData)
+              let aRes = [],
+                aBatchRes = getters.getBatchRes
 
-            aBatchRes.filter(function(element){
-              return element.Set = 'Dictionaries'
-            }).forEach(function(element){
-              let obj = { sDomainName: element[0].Name, aResults: element }
-                  dispatch('setDomains', obj)
-            })
-          }).catch(err => {
-            console.log(err)
-          })
-          break;
-        case "Documents":
+              aBatchRes.filter(function (element) {
+                return element.Set = 'Dictionaries'
+              }).forEach(function (element) {
+                let obj = {
+                  sDomainName: element[0].Name,
+                  aResults: element
+                }
+                dispatch('setDomains', obj)
+              })
+            }).catch(err => {})
+            break;
+          case "Documents":
             let aResponse = dispatch('getDocuments', getters.getFileTypes).then(res => {
               let oParsedData = utils.parseBatchResponse(res)
               commit('SET_BATCH_RES', oParsedData)
               let aRes = [],
-              aBatchRes = getters.getBatchRes
+                aBatchRes = getters.getBatchRes
 
-              aBatchRes.filter(function(element){
+              aBatchRes.filter(function (element) {
                 return element.Set = 'Attachements'
-              }).forEach(function(element){
-                let obj = { aResults: element,
-                        documentType: element[0].FileId.split('-')[0]
-                    }
-                  dispatch('setDocumentList', obj)
-                  aRes.push({obj})
+              }).forEach(function (element) {
+                let obj = {
+                  aResults: element,
+                  documentType: element[0].FileId.split('-')[0]
+                }
+                dispatch('setDocumentList', obj)
+                aRes.push({
+                  obj
+                })
               })
             }).catch(error => {})
-          break;
-        case "Availabilities":
-          let availabilityPromise = dispatch("getUserAvail", userData.user).then(res => ({res: res, promise: "Availabilities"}));
-          aPromises.push(availabilityPromise);
-        break;
-        case "AvailProjects":
-          let availProjectsPromise = dispatch("getUserProjects", userData.user).then(res => ({res: res, promise: "AvailProjects"}));
-          aPromises.push(availProjectsPromise);
-          break;
-        case "ContractorsBranchesSet": {
-          let projectsContractors = dispatch('getContractorsBranches', userData).then(res => ({ res: res, promise: "ContractorsBranchesSet" }));
-          aPromises.push(projectsContractors);
+            break;
+          case "Availabilities":
+            let availabilityPromise = dispatch("getUserAvail", userData.user).then(res => ({
+              res: res,
+              promise: "Availabilities"
+            }));
+            aPromises.push(availabilityPromise);
+            break;
+          case "AvailProjects":
+            let availProjectsPromise = dispatch("getUserProjects", userData.user).then(res => ({
+              res: res,
+              promise: "AvailProjects"
+            }));
+            aPromises.push(availProjectsPromise);
+            break;
+          case "ContractorsBranchesSet":
+            {
+              let projectsContractors = dispatch('getContractorsBranches', userData).then(res => ({
+                res: res,
+                promise: "ContractorsBranchesSet"
+              }));
+              aPromises.push(projectsContractors);
+            }
         }
       }
+      commit("SET_PROMISE_LIST", aPromises);
     }
-    commit("SET_PROMISE_LIST", aPromises);
-   }
   },
 
-  setDataInResponse({dispatch,commit,getters}, data){
+  setDataInResponse({
+    dispatch,
+    commit,
+    getters
+  }, data) {
     let response = data.res,
-        userData = data.userData,
-        sPromiseName,
-        aResponse,
-        aResults;
-    for(let j = 0; j < response.length; j++){
-          sPromiseName = response[j].promise;
-          aResponse = response[j].res;
-      if(aResponse.data){
-        if(aResponse.data.d){
+      userData = data.userData,
+      sPromiseName,
+      aResponse,
+      aResults;
+    for (let j = 0; j < response.length; j++) {
+      sPromiseName = response[j].promise;
+      aResponse = response[j].res;
+      if (aResponse.data) {
+        if (aResponse.data.d) {
           aResults = aResponse.data.d.results;
         }
-      }else{
+      } else {
         aResults = aResponse
       }
       // get logs from backend
       let message = response[j].res.headers;
-      if(message){
-       dispatch('displayModal', message);
+      if (message) {
+        dispatch('displayModal', message);
       }
 
-      switch(sPromiseName){
+      switch (sPromiseName) {
         case "Adverts":
           dispatch("setAdvertList", aResponse);
           break;
@@ -513,10 +584,10 @@ const actions = {
           break;
         case "UserData":
           dispatch("setUserData", aResponse);
-          if(aResponse.data.d.UserFiles.results) {
-            if(aResponse.data.d.UserFiles.results.length !== 0) {
+          if (aResponse.data.d.UserFiles.results) {
+            if (aResponse.data.d.UserFiles.results.length !== 0) {
               userData.changePage = false;
-             }
+            }
           }
           break;
         case "Contractors":
@@ -543,7 +614,7 @@ const actions = {
         case "StarterDocsInfo":
           commit('SET_DOC_LIST_INFO', aResults);
           dispatch('checkStatus', aResults);
-          if(aResults.length === 0){
+          if (aResults.length === 0) {
             router.replace("/news")
           }
           break;
@@ -558,29 +629,35 @@ const actions = {
         case "UserPhoto":
           break;
         case "Availabilities":
-         commit("SET_USER_AVAIL", aResults);
-         dispatch('formatUserLeaves', aResults);
-        break;
+          commit("SET_USER_AVAIL", aResults);
+          dispatch('formatUserLeaves', aResults);
+          break;
         case "AvailProjects":
-         commit("SET_USER_PROJECTS", aResults);
-         dispatch('formatUserProjects', aResults);
-        break;
+          commit("SET_USER_PROJECTS", aResults);
+          dispatch('formatUserProjects', aResults);
+          break;
         case "ContractorsBranchesSet":
           commit("SET_CONTRACTORS_BRANCHES", aResults)
-        break;
+          break;
         default:
           let bEndFunction = false;
-          for(let k = 0; k < state.sapDomains.length; k++){
+          for (let k = 0; k < state.sapDomains.length; k++) {
             let sDomainName = state.sapDomains[k];
-            if(sDomainName === sPromiseName && !bEndFunction){
-              dispatch("setDomains", { aResults, sDomainName });
+            if (sDomainName === sPromiseName && !bEndFunction) {
+              dispatch("setDomains", {
+                aResults,
+                sDomainName
+              });
               bEndFunction = true;
             }
           }
-          for(let l = 0; l < getters.getFileTypes.length; l++){
+          for (let l = 0; l < getters.getFileTypes.length; l++) {
             let documentType = getters.getFileTypes[l];
-            if(documentType === sPromiseName && !bEndFunction){
-              dispatch("setDocumentList", { aResults, documentType })
+            if (documentType === sPromiseName && !bEndFunction) {
+              dispatch("setDocumentList", {
+                aResults,
+                documentType
+              })
               bEndFunction = true;
             }
           }
@@ -591,7 +668,9 @@ const actions = {
     dispatch('checkPageToDisplay', userData);
   },
 
-  setAdvertList({commit}, response){
+  setAdvertList({
+    commit
+  }, response) {
     let oAdverts = response.data.d.results;
     for (let index in oAdverts) {
       if (oAdverts[index].ValidTo) {
@@ -603,7 +682,10 @@ const actions = {
     commit('SET_INITIAL_DATA_READED', true);
   },
 
-  setEvents({commit, dispatch}, response){
+  setEvents({
+    commit,
+    dispatch
+  }, response) {
     let oEvents = response.data.d.results;
     commit('SET_EVENTS', oEvents);
     oEvents = utils.formatToArray(oEvents)
@@ -611,12 +693,14 @@ const actions = {
     dispatch('setColor');
   },
 
-  setDomains({commit}, aParams){
+  setDomains({
+    commit
+  }, aParams) {
     let aResults = aParams.aResults,
-        sDomainName = aParams.sDomainName,
-        sCommitName = "";
+      sDomainName = aParams.sDomainName,
+      sCommitName = "";
 
-    switch(sDomainName){
+    switch (sDomainName) {
       case 'ZINTRANET_DEPARTMENT':
         sCommitName = 'SET_DEP_LIST';
         break;
@@ -658,91 +742,99 @@ const actions = {
         break;
       case 'ZINTRANET_TRANSPORTS':
         sCommitName = 'SET_TRANSPORT';
-      break;
+        break;
     }
-    if(sCommitName.length > 0){
+    if (sCommitName.length > 0) {
       commit(sCommitName, aResults);
     }
   },
 
-  setDocumentList({commit}, passedData){
+  setDocumentList({
+    commit
+  }, passedData) {
     let sCommitName = "",
-        aResults = passedData.aResults,
-        fileType = passedData.documentType;
+      aResults = passedData.aResults,
+      fileType = passedData.documentType;
 
-      switch(fileType){
-        case 'INFO':
-          sCommitName = "SET_INFORMATION_FILES";
-          break;
-        case 'DOC':
-          sCommitName = "SET_DOCUMENT_FILES";
-          break;
-        case 'OFF':
-          sCommitName = "SET_OFFICE_FILES";
-          break;
-        case 'SAPB':
-          sCommitName = "SET_SYSTEM_FILES";
-          break;
-        case 'INST':
-          sCommitName = "SET_INSTRUCTION_FILES";
-          break;
-      }
-      commit(sCommitName, aResults);
+    switch (fileType) {
+      case 'INFO':
+        sCommitName = "SET_INFORMATION_FILES";
+        break;
+      case 'DOC':
+        sCommitName = "SET_DOCUMENT_FILES";
+        break;
+      case 'OFF':
+        sCommitName = "SET_OFFICE_FILES";
+        break;
+      case 'SAPB':
+        sCommitName = "SET_SYSTEM_FILES";
+        break;
+      case 'INST':
+        sCommitName = "SET_INSTRUCTION_FILES";
+        break;
+    }
+    commit(sCommitName, aResults);
   },
 
-  setUserData({dispatch, commit, getters}, response){
-      //skillSet is name of commit
-      let skillSet;
-      dispatch('formatUserData', response.data.d); // format dates for date pickers and "is current" fields
-      let oData = getters.getUserInfo;
+  setUserData({
+    dispatch,
+    commit,
+    getters
+  }, response) {
+    //skillSet is name of commit
+    let skillSet;
+    dispatch('formatUserData', response.data.d); // format dates for date pickers and "is current" fields
+    let oData = getters.getUserInfo;
 
-        if(!getters.getDataForHint) {
-          skillSet = 'SET_USER_SKILLS';
-          dispatch('getUserFilesData') // get data about all user files (cv, photos, documents etc.)
-          dispatch('loadUserPhoto', oData.UserAlias); //load user's photo for menu and profile TO BE READ
-          let aAuth = utils.checkRole(oData.UserAuth.results);
-          dispatch("_setAuthorizations", aAuth);
-          //set authorization for all objects - to optimize
-          commit('SET_USER_EDUCATION', oData.UserEducations.results); //set user education data for profile and cv
-          commit('SET_USER_EXPERIENCE', oData.UserExperiences.results); //set user experience data for profile and cv
+    if (!getters.getDataForHint) {
+      skillSet = 'SET_USER_SKILLS';
+      dispatch('getUserFilesData') // get data about all user files (cv, photos, documents etc.)
+      dispatch('loadUserPhoto', oData.UserAlias); //load user's photo for menu and profile TO BE READ
+      let aAuth = utils.checkRole(oData.UserAuth.results);
+      dispatch("_setAuthorizations", aAuth);
+      //set authorization for all objects - to optimize
+      commit('SET_USER_EDUCATION', oData.UserEducations.results); //set user education data for profile and cv
+      commit('SET_USER_EXPERIENCE', oData.UserExperiences.results); //set user experience data for profile and cv
 
-          commit('SET_USER_LANGS', oData.UserLang.results);
+      commit('SET_USER_LANGS', oData.UserLang.results);
 
-          commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
+      commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
 
-          commit('SET_USER_PROJECTS_LIST', oData.UserCvProjects.results); //set user projects data for profile and cv
-          dispatch('adjustProjects');
-        } else {
-          skillSet = 'SET_USER_SKILLS_DF_LANG';
-      }
-      commit('SET_USER_PROJECTS_LIST_DF_LANG', oData.UserCvProjects.results); //set user projects data for profile and cv
+      commit('SET_USER_PROJECTS_LIST', oData.UserCvProjects.results); //set user projects data for profile and cv
+      dispatch('adjustProjects');
+    } else {
+      skillSet = 'SET_USER_SKILLS_DF_LANG';
+    }
+    commit('SET_USER_PROJECTS_LIST_DF_LANG', oData.UserCvProjects.results); //set user projects data for profile and cv
 
-      commit(skillSet, oData.UserSkills.results); //set user skills data for profile and cv
-      let userSkills = utils.formatToArray(oData.UserSkills.results);
-      if (userSkills) {
-        for(let key in userSkills[0]) {
-          if (userSkills[0][key][0] === "") {
-            userSkills[0][key] = [];
-          }
+    commit(skillSet, oData.UserSkills.results); //set user skills data for profile and cv
+    let userSkills = utils.formatToArray(oData.UserSkills.results);
+    if (userSkills) {
+      for (let key in userSkills[0]) {
+        if (userSkills[0][key][0] === "") {
+          userSkills[0][key] = [];
         }
-        commit(skillSet, userSkills[0]);
-      }  else {
-          userSkills = {
-            SapModules: [],
-            ProgramLang: [],
-            Technologies: [],
-            Extensions: [],
-            AdditionalSkills: []
-          }
-          commit(skillSet, userSkills);
       }
-      commit('SET_DATA_LOADED', true);
-      commit('SET_DATA_FOR_HINT', false);
+      commit(skillSet, userSkills[0]);
+    } else {
+      userSkills = {
+        SapModules: [],
+        ProgramLang: [],
+        Technologies: [],
+        Extensions: [],
+        AdditionalSkills: []
+      }
+      commit(skillSet, userSkills);
+    }
+    commit('SET_DATA_LOADED', true);
+    commit('SET_DATA_FOR_HINT', false);
 
-      // dispatch('checkPageToDisplay', userData.changePage) //TEMP
+    // dispatch('checkPageToDisplay', userData.changePage) //TEMP
   },
 
-  _setAuthorizations({commit}, aAuth){
+  _setAuthorizations({
+    commit
+  }, aAuth) {
     commit('SET_USER_AUTH', aAuth);
     commit('SET_DELEGATION_AUTH', aAuth.ZDELEG);
     commit('SET_CALENDAR_AUTH', aAuth.ZEVENT);
@@ -816,22 +908,22 @@ const getters = {
   getUserPhotoUrl(state) {
     return state.userPhotoUrl
   },
-  getSelectedUserPhotoUrl(state){
+  getSelectedUserPhotoUrl(state) {
     return state.selectedUserPhotoUrl;
   },
   getSelectedForCvUser(state) {
     return state.selectedForCvUser;
   },
-  getPromiseList(state){
+  getPromiseList(state) {
     return state.promiseList;
   },
-  getPromisesToRead(state){
+  getPromisesToRead(state) {
     return state.promiseListToRead;
   },
-  getGoFromCv(state){
+  getGoFromCv(state) {
     return state.goFromCv;
   },
-  getUserAuth(state){
+  getUserAuth(state) {
     return state.userAuth;
   },
   getTransportList(state) {
