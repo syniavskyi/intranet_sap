@@ -112,6 +112,12 @@
     height: 10%;
     position: relative;
 }
+
+.avail-error-wrap {
+    display: flex;
+    width: 100%;
+}
+
 .avail-error {
     position: absolute;
     top: 3rem;
