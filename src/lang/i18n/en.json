@@ -285,7 +285,8 @@
     "notEqualPasswords": "Make sure the passwords you enter are the same",
     "savedDelegationBackend": "Delegation with number {delegNo} was created",
     "sessionEndInfo": "The session has expired. You will be taken to the homepage. Log in again. Your changes have not been saved.",
-    "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size."
+    "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size.",
+    "weatherError": "An error occurred while loading the weather."
   },
   "select": {
     "language": {
