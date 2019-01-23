@@ -5,7 +5,7 @@
       <h1 class="leave-page-header">{{ $t("header.sessionEnd") }}</h1>
       <p class="leave-page-info">{{ $t("message.sessionEndInfo") }}</p>
       <div class="leave-buttons">
-        <button class="leave-page-btn func-btn" @click="afterClickLogout">OK</button>
+        <button class="leave-page-btn func-btnm" @click="afterClickLogout">OK</button>
       </div>
     </div>
   </div>
