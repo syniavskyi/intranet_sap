@@ -47,7 +47,7 @@
                                             <option v-for="user in filteredUsers" :value="user" :key="user.UserAlias">{{ user.Fullname }}</option>
                                         </select>
                                         <label class="ava-select-label-cool">{{ $t("label.employee") }}</label>
-                                        <span>
+                                        <span class="avail-error-wrap">
                                             <label class="avail-error" v-if="filteredUsers.length === 0">{{ $t("label.emptyUsers") }}</label>
                                         </span>
                                     </div>
