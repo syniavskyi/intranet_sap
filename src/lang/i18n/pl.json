@@ -278,7 +278,7 @@
         "goToUserByFullname": "Przejdź do profilu pracownika wybierając jego imię i nazwisko",
         "requiredField": "Pole jest obowiązkowe",
         "requiredContractor": "Aby wyświetlić dostępne branże wybierz kontrahenta",
-        "unacceptableChar": "Niedozwolony znak (&)",
+        "unacceptableChar": "Niedozwolony znak (&, # or %)",
         "notEqualPasswords": "Upewnij się, ze wprowadzone hasła są takie same",
         "savedDelegationBackend": "Delegacja o numerze {delegNo} została utworzona"
     },

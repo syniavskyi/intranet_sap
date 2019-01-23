@@ -11,137 +11,11 @@
           </div>
         </div>
         <div class="documents-page-tiles">
-          <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" aria-expanded="false" class="documents-tiles-row-header">
-              <i18n path="header.documentsCount">
-                <span place="number"> {{docFiles.length}} </span>
-              </i18n>
-            </div>
-            <div class="documents-tiles-row-content">
-              <div class="documents-tile documents-tile-1-3" v-for="doc in docFiles" :key="doc.FileId">
-                <div class="documents-tile-header">
-                  <p class="documents-tile-header-title">{{ doc.Filename }}</p>
-                  <!-- documents-tile-header-title -->
-                  <div class="documents-tile-underscore"></div>
-                </div>
-                <div class="documents-tile-content">
-                  <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_" :title="$t('title.download')">
-                      <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
-                      <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
-                      <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
-                      <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
-                      <div class="doc-file-desc">{{ doc.Filename }}</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.systemData">
-                <span place="number">{{ systemFiles.length }}</span>
-              </i18n>
-            </div>
-            <div class="documents-tiles-row-content">
-              <div class="documents-tile documents-tile-1-3" v-for="doc in systemFiles" :key="doc.FileId">
-                <div class="documents-tile-header">
-                  <p class="documents-tile-header-title">{{ doc.Filename }}</p>
-                  <div class="documents-tile-underscore"></div>
-                </div>
-                <div class="documents-tile-content">
-                  <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
-                      <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
-                      <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
-                      <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
-                      <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
-                      <div class="doc-file-desc">{{ doc.Filename }}</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.office">
-                <span place="number">{{ officeFiles.length }}</span>
-              </i18n>
-            </div>
-            <div class="documents-tiles-row-content">
-              <div class="documents-tile documents-tile-1-3" v-for="doc in officeFiles" :key="doc.FileId">
-                <div class="documents-tile-header">
-                  <p class="documents-tile-header-title">{{ doc.Filename }}</p>
-                  <div class="documents-tile-underscore"></div>
-                </div>
-                <div class="documents-tile-content">
-                 <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
-                      <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
-                      <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
-                      <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
-                      <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
-                      <div class="doc-file-desc">{{ doc.Filename }}</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.information">
-                <span place="number">{{ infoFiles.length }}</span>
-              </i18n>
-            </div>
-            <div class="documents-tiles-row-content">
-              <div class="documents-tile documents-tile-1-3" v-for="doc in infoFiles" :key="doc.FileId">
-                <div class="documents-tile-header">
-                  <p class="documents-tile-header-title">{{ doc.Filename }}</p>
-                  <div class="documents-tile-underscore"></div>
-                </div>
-                <div class="documents-tile-content">
-                 <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
-                      <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
-                      <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
-                      <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
-                      <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
-                      <div class="doc-file-desc">{{ doc.Filename }}</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="documents-tiles-row">
-            <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
-              <i18n path="header.instructions">
-                <span place="number">{{ instrFiles.length }}</span>
-              </i18n>
-            </div>
-            <div class="documents-tiles-row-content">
-              <div class="documents-tile documents-tile-1-3" v-for="doc in instrFiles" :key="doc.FileId">
-                <div class="documents-tile-header">
-                  <p class="documents-tile-header-title">{{ doc.Filename }}</p>
-                  <div class="documents-tile-underscore"></div>
-                </div>
-                <div class="documents-tile-content">
-                 <div class="documents-div">
-                    <a class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')">
-                      <div class="doc-file-img doc-file-pdf" v-if="checkFileFormat(doc.Filename) == '.pdf'"></div>
-                      <div class="doc-file-img doc-file-doc" v-if="checkFileFormat(doc.Filename) == '.docx' || checkFileFormat(doc.Filename) == '.doc'"></div>
-                      <div class="doc-file-img doc-file-xls" v-if="checkFileFormat(doc.Filename) == '.xls'"></div>
-                      <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
-                      <div class="doc-file-desc">{{ doc.Filename }}</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <file-row :file-type="docFiles" :header-name="'header.documentsCount'"></file-row>
+          <file-row :file-type="systemFiles" :header-name="'header.systemData'"></file-row>
+          <file-row :file-type="officeFiles" :header-name="'header.office'"></file-row>
+          <file-row :file-type="infoFiles" :header-name="'header.information'"></file-row>
+          <file-row :file-type="instrFiles" :header-name="'header.instructions'"></file-row>
         </div>
       </div>
     </div>
@@ -152,13 +26,12 @@ import Menu from "../Menu.vue";
 import i18n from "../../lang/lang";
 import { mapGetters } from "vuex";
 import Modal from '../dialogs/MessageLogDialog';
+import FileRow from '../dialogs/FileRow';
 const utils = require("../../utils");
 
 export default {
   data() {
-    return {
-      closed: "true"
-    }
+    return {}
   },
   computed: Object.assign(
     mapGetters({
@@ -188,30 +61,6 @@ export default {
       let obj = { window, event };
       this.$store.dispatch("setSideMenu", obj);
     },
-    checkFileFormat(name) {
-      return name.slice(name.lastIndexOf(".")).toLowerCase();
-    },
-    generateLink(file) {
-      let url =
-        window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileId='" +
-        file +
-        "',Language='" +
-        "PL" +
-        "',UserAlias='" +
-        "" +
-        "')/$value?c=" + this.$store.getters.getCookie;
-      return url;
-    },
-    toggleDocTile(evt) {
-      if (evt.target.getAttribute("aria-expanded") === "false") {
-        evt.target.setAttribute("aria-expanded", true);
-        this.closed = true;
-      } else evt.target.setAttribute("aria-expanded", false);
-      let el = evt.target.nextElementSibling,
-        elChild = evt.target.nextElementSibling;
-      const name = { el, elChild };
-      this.$store.dispatch("toggleDocTile", name);
-    },
     calcDocsHeight(tiles) {
       var tiles = document.getElementsByClassName("documents-tiles-row");
       this.$store.dispatch("calcDocsHeight", tiles);
@@ -219,7 +68,8 @@ export default {
   },
   components: {
     "app-menu": Menu,
-    "modal": Modal
+    "modal": Modal,
+    "file-row": FileRow
   }
 };
 </script>

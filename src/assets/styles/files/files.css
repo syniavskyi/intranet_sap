@@ -61,7 +61,7 @@
 }
 .documents-tiles-row-header[aria-expanded="true"]:hover:after {
     transform: translateY(-.5rem) rotate(270deg);
-    
+
 }
 .documents-tiles-row-header[aria-expanded="true"]:after {
     transform: translateY(0rem) rotate(270deg);
@@ -79,7 +79,7 @@
 .documents-tiles-row-content {
     display: flex;
     width:  100%;
-    flex-direction: column; 
+    flex-direction: column;
     align-self: center;
     transition: all .5s ease;
     overflow: hidden;
@@ -171,13 +171,16 @@
     background-image: url(../../images/files/doc-48.png);
 }
 .doc-file-pdf {
-    background-image: url(../../images/files/pdf-48.png); 
+    background-image: url(../../images/files/pdf-48.png);
 }
 .doc-file-xls {
     background-image: url(../../images/files/xls-48.png);
 }
 .doc-file-zip {
     background-image: url(../../images/files/zip-48.png);
+}
+.doc-file-link {
+    background-image: url(../../images/files/link-48.png);
 }
 
 .doc-file-div {
@@ -244,7 +247,7 @@
         height: auto;
         font-size: 1rem;
     }
-    
+
     .documents-tile:hover .doc-file-img {
         animation: slide-left 0.3s;
         animation-fill-mode: forwards;
