@@ -2,8 +2,8 @@
   <div>
     <div v-if="sessionStatus" class="modal-overlay"/>
     <div v-if="sessionStatus" class="modal-new-s modal-leave-page">
-      <h1 class="leave-page-header">{{ $t(header.sessionEnd) }}</h1>
-      <p class="leave-page-info">{{ $t(message.sessionEndInfo) }}</p>
+      <h1 class="leave-page-header">{{ $t("header.sessionEnd") }}</h1>
+      <p class="leave-page-info">{{ $t("message.sessionEndInfo") }}</p>
       <div class="leave-buttons">
         <button class="leave-page-btn func-btn" @click="afterClickLogout">OK</button>
       </div>
@@ -12,6 +12,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import i18n from "../../lang/lang";
 export default {
   computed: {
     ...mapGetters({
