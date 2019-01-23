@@ -260,14 +260,14 @@
 }
 
 .del-inputs-header {
-    position: absolute;
+    /* position: absolute; */
     color: #ccc;
     top:.2rem;
     left:auto;
     right: auto;
     border-radius: 2rem;
     transition: all 0.4s ease;
-    padding: .2rem .3rem;
+    /* padding: .2rem .3rem; */
     margin: 0;
 }
 
