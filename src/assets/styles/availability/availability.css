@@ -268,8 +268,8 @@
     color: #ffa500;
     background: #ffffff;
     transition: all .25s ease;
+    cursor: pointer;
 }
-
 
 .ava-select-reset:hover {
     background:#ffa500;

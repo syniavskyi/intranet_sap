@@ -90,7 +90,7 @@
 
 .starter-page-file-btn:hover {
     border: 1px solid #ffa500;
-    box-shadow: 0px 0px 10px #ffa500;
+    box-shadow: 1px 1px 12px #ffa500;
     color: #ffa500;
     cursor: pointer;
 }

@@ -716,6 +716,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
+    min-width: 200px;
 }
 
 .img-user-class {

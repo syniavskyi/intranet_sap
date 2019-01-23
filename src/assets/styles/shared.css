@@ -68,8 +68,8 @@
     background: url(../images/nav3/power-32.png) no-repeat center;
     max-width: 2.65rem;
     max-height: 1.9rem;
-    width: 2.65rem;
-    height: 1.9rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border: 0;
     border-radius: 50%;
     transition: all .3s ease;
@@ -79,8 +79,7 @@
 
 .logout-button:hover {
     cursor:pointer;
-    /* box-shadow: 0px 0px 10px rgb(168, 168, 168); */
-    box-shadow: 0px 0px 10px #ff0000;
+    box-shadow: -1px -1px 12px #ca0000;
 }
 
 .logout-button:hover > .logout-text {

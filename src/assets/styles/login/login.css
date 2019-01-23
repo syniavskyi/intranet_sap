@@ -30,57 +30,10 @@
     background: transparent;
 }
 
-/* [class*="input-login-"] {
-    width: 15rem;
-}
-
-.input:focus + label[class*='label-login'] {
-    font-size: 1.2rem;
-} */
-
-.label {
-    display: flex;
-    align-items: center;
-}
-
-/* .label-login-email {
-    order: 0; 
-}
-.input-login-email {
-    order: 1;
-}
-.label-login-pass {
-    order: 2; 
-}
-.input-login-pass {
-    width: 14rem;
-    order: 3;
-}
-
-.label + .forgot-pass {
-    margin-top: 0;
-}
-
-.label + .input {
-    margin-bottom: 0.5rem;
-} */
-
 .show-pass-eye,
 .show-pass-eyef {
     width: 1rem;
     padding: 0;
-}
-
-.login-pass-div {
-    order: 3;
-    width: 20rem;
-    justify-content: center;
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-.login-pass-div > .input {
-    margin-bottom: 0.5rem;
 }
 
 .forgot-pass {
@@ -275,7 +228,7 @@ button[disabled] span {
     opacity: 0;
 }
 .show-alert-enter {
-opacity: 0;
+    opacity: 0;
 }
 
 .show-alert-move {
