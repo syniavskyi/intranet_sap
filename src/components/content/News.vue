@@ -14,31 +14,80 @@
           <div class="news-tile">
             <div class="tile-head">
               <div class="tile-head-row">
-                  <h2 class="tile-head-title">{{ $t("header.messages")}}</h2>
-                  <button @click="newMessage" class="func-btn"><span class="nfb-span">&#43;</span><span class="nfbm-span">{{ $t("button.newMessage") }}</span></button>
+                <h2 class="tile-head-title">{{ $t("header.messages")}}</h2>
+                <button @click="newMessage" class="func-btn">
+                  <span class="nfb-span">&#43;</span>
+                  <span class="nfbm-span">{{ $t("button.newMessage") }}</span>
+                </button>
               </div>
               <div class="tile-underscore"/>
             </div>
             <!-- <loader v-if="showAdvertsLoader"></loader> -->
             <div class="tile-content new-tile-cnt">
               <!-- <transition-group name="fly" tag="div"> -->
-                <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.AdvertId" :id="advert.AdvertId">
-                  <textarea @input="validateAdvert(advert)" :disabled="!editMode || loginAlias !== advert.CreatedBy" class="n-textarea" v-model="advert.Message"/>
-                  <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
-                  <p class="table-p" v-if="!editMode">  {{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }} </p>
-                  <v-date-picker @input="validateAdvert(advert)" v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
-                    <input value="advert.ValidTo">
-                  </v-date-picker>
-                  <div class="advBtns">
-                    <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)">{{ $t("button.edit") }}</button>
-                    <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy">{{ $t("button.save") }}</button>
-                    <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode || loginAlias !== advert.CreatedBy">{{ $t("button.cancel") }}</button>
-                    <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
-                  </div>
+              <div
+                class="news-adv-item"
+                v-for="(advert, index) in advertsList"
+                :key="advert.AdvertId"
+                :id="advert.AdvertId"
+              >
+                <textarea
+                  @input="validateAdvert(advert)"
+                  :disabled="!editMode || loginAlias !== advert.CreatedBy"
+                  class="n-textarea"
+                  v-model="advert.Message"
+                />
+                <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
+                <p
+                  class="table-p"
+                  v-if="!editMode"
+                >{{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }}</p>
+                <v-date-picker
+                  @input="validateAdvert(advert)"
+                  v-if="editMode && loginAlias === advert.CreatedBy"
+                  require
+                  class="cd-range"
+                  popoverDirection="bottom"
+                  mode="single"
+                  v-model="advert.ValidTo"
+                  :min-date="new Date()"
+                >
+                  <input value="advert.ValidTo">
+                </v-date-picker>
+                <div class="advBtns">
+                  <button
+                    class="clear-btn"
+                    :disabled="loginAlias !== advert.CreatedBy"
+                    @click="editAdvert(advert)"
+                  >{{ $t("button.edit") }}</button>
+                  <button
+                    class="clear-btn"
+                    @click="saveAdvert(advert)"
+                    :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy"
+                  >{{ $t("button.save") }}</button>
+                  <button
+                    class="clear-btn"
+                    @click="cancelEditing(index)"
+                    :disabled="!editMode || loginAlias !== advert.CreatedBy"
+                  >{{ $t("button.cancel") }}</button>
+                  <button
+                    class="oclear-btn"
+                    v-if="editMode && loginAlias === advert.CreatedBy"
+                    @click="removeAdvert(advert.AdvertId)"
+                  >X</button>
                 </div>
+              </div>
               <!-- </transition-group> -->
-              <button v-show="isMoreThanFiveAdverts && slideIndex > 5" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
-              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length < 5" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
+              <button
+                v-show="isMoreThanFiveAdverts && slideIndex > 5"
+                @click="nextSlide(-1)"
+                class="news-adv-left"
+              >&#8249;</button>
+              <button
+                v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length < 5"
+                @click="nextSlide(1)"
+                class="news-adv-right"
+              >&#8250;</button>
             </div>
           </div>
           <div class="api">
@@ -51,13 +100,19 @@
               </div>
               <div class="tile-content">
                 <div v-if="eventsSrt.length > 0" class="news-events-wrap">
-                  <div v-for="(event, index) in eventsSrt" :key='index' class="single-event">
-                    <div class="low-prio-event" v-if="event.Priority=='L'"> </div>
-                    <div class="medium-prio-event" v-if="event.Priority=='M'"> </div>
-                    <div class="high-prio-event" v-if="event.Priority=='H'"> </div>
+                  <div v-for="(event, index) in eventsSrt" :key="index" class="single-event">
+                    <div class="low-prio-event" v-if="event.Priority=='L'"></div>
+                    <div class="medium-prio-event" v-if="event.Priority=='M'"></div>
+                    <div class="high-prio-event" v-if="event.Priority=='H'"></div>
                     <div class="news-evt-attr">
-                      <div class="event-date">{{setDateTo(event)}}
-                        <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc"></button>
+                      <div class="event-date">
+                        {{setDateTo(event)}}
+                        <button
+                          class="event-desc"
+                          v-if="event.Description"
+                          @mouseenter="setEventDesc(event.EventId)"
+                          :title="eventDesc"
+                        ></button>
                         <!-- &#8943; -->
                       </div>
                       <div class="event-title">{{ event.EventName }}</div>
@@ -75,10 +130,15 @@
                 </div>
               </div>
             </div>
-            <div class="content-weather"  :class="today.isDay ? 'weatherDay' : 'weatherNight' ">
+            <weather-error v-if="weatherError"></weather-error>
+            <div
+              v-if="!weatherError"
+              class="content-weather"
+              :class="today.isDay ? 'weatherDay' : 'weatherNight' "
+            >
               <div class="intro">
                 <div class="town">
-                  <p> {{weatherData.town}} </p>
+                  <p>{{weatherData.town}}</p>
                 </div>
                 <div class="icon">
                   <img :src="weatherData.icon" alt="icon" height="64px">
@@ -87,21 +147,24 @@
               <div>
                 <div class="weather-header"></div>
                 <div class="temp">
-                  <p> {{ weatherData.celcius }} <sup>o</sup>C </p>
+                  <p>
+                    {{ weatherData.celcius }}
+                    <sup>o</sup>C
+                  </p>
                 </div>
               </div>
               <div class="additional">
                 <div class="weatherDesc">
-                  <img src="../../assets/images/weather/winds.png" class="iconWeather"/>
-                  <p> {{weatherData.wind}} km/h</p>
+                  <img src="../../assets/images/weather/winds.png" class="iconWeather">
+                  <p>{{weatherData.wind}} km/h</p>
                 </div>
                 <div class="weatherDesc">
-                  <img src="../../assets/images/weather/clouds.png"  class="iconWeather"/>
-                  <p> {{weatherData.clouds}}%</p>
+                  <img src="../../assets/images/weather/clouds.png" class="iconWeather">
+                  <p>{{weatherData.clouds}}%</p>
                 </div>
                 <div class="weatherDesc">
-                  <img src="../../assets/images/weather/humiditys.png" class="iconWeather"/>
-                  <p> {{weatherData.humidity}}%</p>
+                  <img src="../../assets/images/weather/humiditys.png" class="iconWeather">
+                  <p>{{weatherData.humidity}}%</p>
                 </div>
               </div>
               <div class="date">
@@ -117,7 +180,7 @@
                 </a>
               </div>
               <div class="art-content" v-html="article.description[0]">
-                <p class="art-paragraph"> {{article.description[0].p}}</p>
+                <p class="art-paragraph">{{article.description[0].p}}</p>
               </div>
             </div>
           </div>
@@ -137,8 +200,9 @@ import i18n from "../../lang/lang";
 import moment from "moment";
 import Toast from "../dialogs/Toast";
 import NewMessageDialog from "../dialogs/NewMessageDialog";
-import Loader from '../dialogs/Loader.vue';
-import Modal from '../dialogs/MessageLogDialog';
+import Loader from "../dialogs/Loader.vue";
+import Modal from "../dialogs/MessageLogDialog";
+import WeatherError from "./WeatherErrorTile";
 let utils = require("../../utils");
 
 export default {
@@ -170,9 +234,12 @@ export default {
   created() {
     this.getTodayFn();
     this.getNewsFn();
-    this.$store.commit('SET_PROMISE_TO_READ', this.$store.getters.getNewsToRead);
-    this.$store.dispatch('getData', null);
-    this.$store.commit('SET_ADVERTS_LOADER', true);
+    this.$store.commit(
+      "SET_PROMISE_TO_READ",
+      this.$store.getters.getNewsToRead
+    );
+    this.$store.dispatch("getData", null);
+    this.$store.commit("SET_ADVERTS_LOADER", true);
     utils.checkAuthLink(this.$router, this.$store.getters.getUserAuth.ZMENU);
   },
   destroyed() {
@@ -180,12 +247,14 @@ export default {
   },
   components: {
     "app-menu": Menu,
-    "loader": Loader,
+    loader: Loader,
     toast: Toast,
     "new-message": NewMessageDialog,
-    "modal": Modal
+    modal: Modal,
+    "weather-error": WeatherError
   },
-  computed: {...mapGetters({
+  computed: {
+    ...mapGetters({
       weatherData: "getWeatherData",
       today: "getToday",
       displayMenu: "getShowMenu",
@@ -198,35 +267,38 @@ export default {
       getShowAdverts: "getShowAdverts",
       showAdvertsLoader: "getAdvertsLoader",
       advertsLoaded: "getInitialDataReaded",
-      articles: "getArticlesJson"
+      articles: "getArticlesJson",
+      weatherError: "getWeatherError"
     }),
     eventsSrt() {
-      this.events.sort((a,b) => (a.DateFrom > b.DateFrom) ? 1 : ((b.DateFrom > a.DateFrom) ? -1 : 0));
+      this.events.sort((a, b) =>
+        a.DateFrom > b.DateFrom ? 1 : b.DateFrom > a.DateFrom ? -1 : 0
+      );
       let addDays = function(date, days) {
-          let result = new Date(date);
-          result.setDate(result.getDate() + days);
-          return result;
-        }
+        let result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+      };
       let substructDays = function(date, days) {
-          let result = new Date(date);
-          result.setDate(result.getDate() - days);
-          return result;
-        }
+        let result = new Date(date);
+        result.setDate(result.getDate() - days);
+        return result;
+      };
       let filteredEvents = this.events.filter(function(oItem) {
-          let eventDays = (oItem.DateTo - oItem.DateFrom) / 86400000;
-          return oItem.DateFrom > substructDays(new Date(), 1) && oItem.DateFrom < addDays(new Date(), 7)
-            || new Date() > substructDays(new Date(), eventDays) && oItem.DateFrom < new Date() && oItem.DateTo > new Date()
-        });
+        let eventDays = (oItem.DateTo - oItem.DateFrom) / 86400000;
+        return (
+          (oItem.DateFrom > substructDays(new Date(), 1) &&
+            oItem.DateFrom < addDays(new Date(), 7)) ||
+          (new Date() > substructDays(new Date(), eventDays) &&
+            oItem.DateFrom < new Date() &&
+            oItem.DateTo > new Date())
+        );
+      });
       return filteredEvents;
     }
   },
   methods: {
-    ...mapActions([
-      "geoLoc",
-      "getTodayFn",
-      "getNewsFn",
-      "updateAdvert"
-    ]),
+    ...mapActions(["geoLoc", "getTodayFn", "getNewsFn", "updateAdvert"]),
     setDateTo(event) {
       if (event.DateTo <= event.DateFrom) {
         return moment(event.DateFrom).format("DD-MM-YYYY");
@@ -258,7 +330,7 @@ export default {
       this.isAdvertValid = false;
     },
     removeAdvert(advertId) {
-      this.$store.dispatch('removeAdvert', advertId)
+      this.$store.dispatch("removeAdvert", advertId);
       this.editMode = false;
     },
     cancelEditing(index) {
@@ -267,7 +339,8 @@ export default {
       this.editMode = false;
     },
     validateAdvert(advert) {
-      this.isAdvertValid = advert.Message === "" || advert.ValidTo === null ? false : true;
+      this.isAdvertValid =
+        advert.Message === "" || advert.ValidTo === null ? false : true;
     },
     formatDate(date) {
       return date !== null && date !== undefined
@@ -295,15 +368,23 @@ export default {
     // },
     runCarosuel(n) {
       var slides = document.getElementsByClassName("news-adv-item");
-      if (n < 5 || n > slides.length || slides.length === 0 || slides.length <= 5 ) {
-        if (n < 5 ) {this.slideIndex = 5}
-        else if (n > slides.length) {this.slideIndex = slides.length}
-        return
+      if (
+        n < 5 ||
+        n > slides.length ||
+        slides.length === 0 ||
+        slides.length <= 5
+      ) {
+        if (n < 5) {
+          this.slideIndex = 5;
+        } else if (n > slides.length) {
+          this.slideIndex = slides.length;
+        }
+        return;
       }
       for (var i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }
-      if (!n) n = this.slideIndex
+      if (!n) n = this.slideIndex;
       for (var j = n - 5; j < this.slideIndex; j++) {
         slides[j].style.display = "flex";
       }
