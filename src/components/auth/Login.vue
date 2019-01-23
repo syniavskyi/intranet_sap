@@ -6,16 +6,27 @@
         <p class="p-login">{{ $t("header.login") }}</p>
       </div>
       <div class="login-credentials">
-        <input class="input input-login-email" v-model="username" @blur="$v.username.$touch()">
-        <label class="label label-login-email"> {{ $t("label.user") }}</label>
-        <div class="login-pass-div">
+        <div class="cd-for-input logini-margin">
+          <input class="cd-input" v-model="username" @blur="$v.username.$touch()" required>
+          <span class="cd-span"/>
+          <label class="cd-tlabel">{{ $t("label.user")}}</label>
+        </div>
+        <div class="cd-for-input logini-margin">
+          <input class="cd-input" :type="passwordFieldType" @keyup.enter="onSubmit" v-model="password" @blur="$v.password.$touch()" :trim="password" autocomplete="new-password" required>
+          <span class="cd-span"/>
+          <button class="show-pass-eye"  @click="switchPasswordVisibility"><icon :name="eyeType"></icon></button>
+          <label class="cd-tlabel cd-llogin">{{ $t("label.password") }}</label>
+        </div>
+        <!-- <input class="input input-login-email" v-model="username" @blur="$v.username.$touch()">
+        <label class="label label-login-email"> {{ $t("label.user") }}</label> -->
+        <!-- <div class="login-pass-div">
           <input :type="passwordFieldType" @keyup.enter="onSubmit" class="input input-login-pass" v-model="password" @blur="$v.password.$touch()" :trim="password" autocomplete="new-password">
           <button class="show-pass-eye"  @click="switchPasswordVisibility"><icon :name="eyeType"></icon></button>
         </div>
-        <label for="password" class="label label-login-pass">{{ $t("label.password") }}</label>
+        <label for="password" class="label label-login-pass">{{ $t("label.password") }}</label> -->
         <p class="forgot-pass" @click="switchForgotPassword">{{ $t("button.forgotPass") }}</p>
         <div class="div-select-login">
-          <label class="label" for="role">{{ $t("label.language") }}</label>
+          <label class="label">{{ $t("label.language") }}</label>
             <select class="select-login" v-model="selectedLang">
               <option v-for="language in languageList" :key="language.id" :value="language.id">{{ language.description }}</option>
             </select>
