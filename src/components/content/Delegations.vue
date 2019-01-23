@@ -48,7 +48,7 @@
                             </div>
                             <div class="del-inputs-sections">
                                 <div class="delegations-inputs-section">
-                                    <p class="del-inputs-header">{{ $t("label.targetTime") }}</p>
+                                    <!-- <p class="del-inputs-header">{{ $t("label.targetTime") }}</p> -->
                                     <div class="del-div-cool">
                                         <input required class="delegations-input-cool" v-model="newDelegation.destination" @input="checkNewDelegation" />
                                         <span class="del-div-bar"></span>
