@@ -476,7 +476,8 @@ input:required {
 }
 
 /* Functional Buttons */
-.func-btn {
+.func-btn,
+.func-btnm {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -486,12 +487,15 @@ input:required {
     background: #FFB05C;
     font: 1rem 'Open Sans';
     padding: 0.25rem .4rem;
-    margin-right: 1rem;
     box-shadow: 0 2px 8px #808080;
     text-align: center;
     transition: box-shadow 0.25s ease;
     cursor: pointer;
     max-height: 2rem;
+}
+
+.func-btn {
+    margin-right: 1rem;
 }
 
 .func-btn:hover {

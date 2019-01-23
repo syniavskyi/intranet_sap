@@ -224,11 +224,12 @@
 }
 
 .leave-page-btn {
-  display: initial;
   width: 80px;
 }
 
 .leave-buttons {
+  display: flex;
+  justify-content: center;
   width: 200px;
   align-self: center;
 }
@@ -246,8 +247,9 @@
 }
 
 .leave-page-info {
+  color: #333;
   font-size: 20px;
-  text-align: justify;
+  text-align: center;
 }
 
 @keyframes modal-trans {
