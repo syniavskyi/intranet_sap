@@ -11,10 +11,10 @@ const state = {
     DateFrom: null,
     DateTo: null,
     Description: '',
-    Priority: '',
+    Priority: 'L',
     EventType: '',
     TargetGroup: [],
-    EventPrivacy: '',
+    EventPrivacy: 'PBL',
     color: '',
     EventTypeName: '',
     Employee: []
@@ -216,11 +216,11 @@ const actions = {
       DateFrom: null,
       DateTo: null,
       Description: null,
-      Priority: null,
+      Priority: 'L',
       EventType: null,
       TargetGroup: [],
       Employee: [],
-      EventPrivacy: null,
+      EventPrivacy: 'PBL',
       color: null
     };
     commit('SET_CLEARED_DATA', clearForm);

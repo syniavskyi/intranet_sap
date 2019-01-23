@@ -1,18 +1,12 @@
 import axios from 'axios'
 
 const state = {
-  buttonStateNew: true,
-  buttonStateInfo: true,
   docListNew: [],
   docListInfo: [],
   listForStatus: [],
 }
 
 const mutations = {
-  // check if all documents are filled
-  SET_BUTTON_STATE_NEW(state, data) {
-    state.buttonStateNew = data;
-  },
   // docs for new user
   SET_DOC_LIST_NEW(state, data) {
     state.docListNew = data;
@@ -21,41 +15,9 @@ const mutations = {
   SET_DOC_LIST_INFO(state, data) {
     state.docListInfo = data;
   },
-  //doc info for new user
-  SET_BUTTON_STATE_INFO(state, data) {
-    state.buttonStateInfo = data;
-  }
 }
 
 const actions = {
-  // check if one of chheckboxes is not checked and set button to disabled
-  checkListForNew({
-    commit
-  }, data) {
-    var bState = false;
-    for (let newData of data) {
-      if (newData.Status) {
-        bState = false;
-      } else {
-        return commit('SET_BUTTON_STATE_NEW', true)
-      }
-      commit('SET_BUTTON_STATE_NEW', bState);
-    }
-  },
-  //same as above
-  checkListForInfo({
-    commit
-  }, data) {
-    var bState = false;
-    for (let newData of data) {
-      if (newData.Status) {
-        bState = false;
-      } else {
-        return commit('SET_BUTTON_STATE_INFO', true);
-      }
-      commit('SET_BUTTON_STATE_INFO', bState);
-    }
-  },
   // change Status from X/- to true/false
   checkStatus({}, files) {
     for(let index in files) {
@@ -84,6 +46,7 @@ const actions = {
       }
     })
   },
+  // edit the document with the given id: info or new
   editSingleNewDoc({getters, dispatch}, data) {
     let sToken = getters.getToken;
     const editData = {
@@ -150,12 +113,6 @@ const actions = {
 }
 
 const getters = {
-  getButtonStateNew(state) {
-    return state.buttonStateNew;
-  },
-  getButtonStateInfo(state) {
-    return state.buttonStateInfo
-  },
   getDocListNew(state) {
     return state.docListNew;
   },
