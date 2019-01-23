@@ -61,7 +61,7 @@
     border: 1px solid #d3d3d3;
 }
 
-.cd-textarea:disabled {background-color: transparent;}
+.cd-textarea:disabled { background-color: transparent; }
 
 .cd-select,
 .cd-dselect,
