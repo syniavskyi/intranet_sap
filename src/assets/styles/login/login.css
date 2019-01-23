@@ -19,55 +19,21 @@
 
 .plane-login {
     flex-shrink: 0;
-    min-height: 37rem;
+    min-height: 35rem;
 }
 
-[class*="input-login-"] {
-    width: 15rem;
+.logini-margin {
+    margin-top: 1.8rem;
 }
 
-.input:focus + label[class*='label-login'] {
-    font-size: 1.2rem;
-}
-
-.label-login-email {
-    order: 0; 
-}
-.input-login-email {
-    order: 1;
-}
-.label-login-pass {
-    order: 2; 
-}
-.input-login-pass {
-    width: 14rem;
-    order: 3;
-}
-
-.label + .forgot-pass {
-    margin-top: 0;
-}
-
-.label + .input {
-    margin-bottom: 0.5rem;
+.cd-llogin {
+    background: transparent;
 }
 
 .show-pass-eye,
 .show-pass-eyef {
     width: 1rem;
     padding: 0;
-}
-
-.login-pass-div {
-    order: 3;
-    width: 20rem;
-    justify-content: center;
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-.login-pass-div > .input {
-    margin-bottom: 0.5rem;
 }
 
 .forgot-pass {
@@ -198,6 +164,11 @@ button[disabled] span {
     cursor: pointer;
  }
 
+ .show-pass-eye {
+    position: absolute;
+    right: 0;
+ }
+
  .show-pass-eyef {
      position: absolute;
      top: .1rem;
@@ -227,7 +198,7 @@ button[disabled] span {
         height: 70%;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
-        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60%);
+        background: radial-gradient(ellipse 50% 150% at -1% 50%, #f7f7f7 58%, lightgray 60%, white 60.2%);
         flex-direction: row;
         justify-content: flex-start;
     }
@@ -236,7 +207,7 @@ button[disabled] span {
     }  
     .label {
         align-self: flex-start;
-        margin-left: 2.5rem;
+        margin-left: 3rem;
     }
     .plane-parent-login {
         height: 100%;
@@ -257,7 +228,7 @@ button[disabled] span {
     opacity: 0;
 }
 .show-alert-enter {
-opacity: 0;
+    opacity: 0;
 }
 
 .show-alert-move {
@@ -319,7 +290,7 @@ opacity: 0;
         min-height: 27rem;
     }
     .label {
-        margin-left: 2.5rem;
+        margin-left: 3rem;
         align-self: flex-start;
     }
 }
@@ -332,7 +303,7 @@ opacity: 0;
      }
      .div-select-login > select {
          margin-right: 2rem;
-         margin-top: 1rem;
+         /* margin-top: 1rem; */
      }
 }
 
