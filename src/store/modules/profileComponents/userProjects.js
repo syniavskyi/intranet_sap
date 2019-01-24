@@ -125,6 +125,7 @@ const actions = {
     let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00',ProjectName='${dataToSend.ProjectName}',Language='${dataToSend.Language}')`;
     let urlU = "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(dataToSend.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" + dataToSend.ProjectName + "',Language='" + dataToSend.Language + "')";
     let sToken = getters.getToken;
+    commit('SET_DISPLAY_LOADER', true)
     axios({
       url: dataToSend.Action === 'D' ? urlD : urlU,
       method: 'put',
@@ -138,8 +139,10 @@ const actions = {
     }).then(res => {
         let message = res.headers;
         dispatch('displayModal', message);
+        commit('SET_DISPLAY_LOADER', false)
       }).catch(error => {
-    })
+        commit('SET_DISPLAY_LOADER', false)
+      })
   },
   // format project from array with objects to string
   formatProjectToString({}, dataToSend) {
