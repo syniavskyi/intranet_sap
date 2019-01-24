@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="modal-overlay"></div>
-    <transition name="modal-fade">
+    <transition name="modal-fade" mode="in-out">
         <div class="modal-new-stretch" role="dialog" v-if="showModal">
           <header class="modal-header-err" :class="headerClass">
             <h1 v-if="messageLog.length > 1" class="modal-title">{{ formatHeader(messageLog[0].severity) }}</h1>
@@ -42,3 +42,4 @@ export default {
     }
 }
 </script>
+

@@ -233,7 +233,8 @@
         "instructions": "Instruktionen ({number})",
         "error": "Fehler",
         "info": "Information",
-        "warning": "Warnung"
+        "warning": "Warnung",
+        "photoErr": "Error while uploading photo"
     },
     "message": {
         "loginError": "Passwort oder Benutzername sind ungültig.",
@@ -281,7 +282,8 @@
         "requiredContractor": "Pick Contractor first to display available Branches",
         "unacceptableChar": "Unacceptable character (&, # or %)",
         "notEqualPasswords": "Make sure the passwords you enter are the same",
-        "savedDelegationBackend": "Delegation with number {delegNo} was created"
+        "savedDelegationBackend": "Delegation with number {delegNo} was created",
+        "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size."
     },
     "select": {
         "language": {

@@ -231,7 +231,8 @@
         "office": "Офіс ({number})",
         "information": "Інформація ({number})",
         "instructions": "Інструкції ({number})",
-        "error": "Помилка"
+        "error": "Помилка",
+        "photoErr": "Error while uploading photo"
     },
     "message": {
         "loginError": "Пароль або ім'я користувача недійсні.",
@@ -279,7 +280,8 @@
         "requiredContractor": "Pick Contractor first to display available Branches",
         "unacceptableChar": "Unacceptable character (&, # or %)",
         "notEqualPasswords": "Make sure the passwords you enter are the same",
-        "savedDelegationBackend": "Delegation with number {delegNo} was created"
+        "savedDelegationBackend": "Delegation with number {delegNo} was created",
+        "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size."
     },
     "select": {
         "language": {

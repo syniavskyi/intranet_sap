@@ -30,8 +30,8 @@ const actions = {
         commit('SET_SHOW_MODAL', false)
     },
     displayModal({commit}, headers) {
-          let jsonStr = headers["sap-message"];
-          if(jsonStr) {
+        let jsonStr = headers["sap-message"];
+        if(jsonStr) {
             try {
               let messageObj = JSON.parse(jsonStr);
               commit('SET_MESSAGE_LOG', messageObj.details);
@@ -43,9 +43,9 @@ const actions = {
               } else {
                 commit('SET_HEADER_MODAL_CLASS', 'modal-header-info');
               }
-             }
+            }
             catch(err){}
-          }
+        }
     }
 }
 
