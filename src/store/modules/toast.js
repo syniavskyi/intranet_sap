@@ -45,8 +45,6 @@ const actions = {
               }
             }
             catch(err){}
-        } else if (headers.status) {
-            // if ()
         }
     }
 }
