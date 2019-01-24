@@ -2,11 +2,10 @@
     <div class="availability-tile ava-tile-3">
         <div class="availability-tile-header">
             <div class="ava-tile-header-title">
-               <h2>{{ $t("label.availabilityOverview") }}
-                </h2>
+               <h2>{{ $t("label.availabilityOverview") }}</h2>
                 <div class="availability-tile-underscore"></div>
             </div>
-            <button class="holiday-button-static" >
+            <button class="holiday-button-static">
                 <img src="../../../assets/images/island.png">
                 <p>{{$t('title.openHoliday')}}</p>
             </button>
