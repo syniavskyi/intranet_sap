@@ -356,10 +356,10 @@ export default {
           }
         }
       }
-      bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart);
+      bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart, "equal");
       bCurrent = beforeEdit.IsCurrent !== userPro.IsCurrent;
       if(userPro.DateEnd) {
-          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userPro.DateEnd);
+          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userPro.DateEnd, "equal");
       }
       bDateChange = bCurrent || bDateEnd;
       bDesc = beforeEdit.Description !== userPro.Description;

@@ -176,10 +176,10 @@ export default {
       bUniversity = beforeEdit.University !== userEdu.University;
       bStudyType = beforeEdit.StudyType !== userEdu.StudyType;
       bAcademicTitle = beforeEdit.AcademicTitle !== userEdu.AcademicTitle;
-      bDateStart = utils.dateToValid(beforeEdit.DateStart, userEdu.DateStart);
+      bDateStart = utils.dateToValid(beforeEdit.DateStart, userEdu.DateStart, "equal");
       bCurrent = beforeEdit.IsCurrent !== userEdu.IsCurrent;
       if(userEdu.DateEnd) {
-          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userEdu.DateEnd);
+          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userEdu.DateEnd, "equal");
       }
       bDateChange = bCurrent || bDateEnd;
       bChanged =
