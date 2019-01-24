@@ -8,11 +8,6 @@
                 <div class="content-header-title-and-menu">
                     <div @click="showMenu" class="content-header-menu">&#9776;</div>
                     <p class="content-header-title">{{ $t("header.availability") }}</p>
-                    <p @click="closeAlert" class="ava-error-header" v-if="saveSuccess">{{ $t("message.successfullySaved") }}</p>
-                    <p @click="closeAlert" v-if="editError">{{ $t("message.editProjectError") }}</p>
-                    <p @click="closeAlert" v-if="removeError">{{ $t("message.removeProjectError") }}</p>
-                    <p @click="closeAlert" v-if="addingError">{{ $t("message.addProjectError") }}</p>
-                    <p @click="closeAlert" class="ava-error-header" v-if="removeSuccess">{{ $t("message.successfullyRemovedProject") }}</p>
                 </div>
             </div>
             <div class="availability-tiles">
@@ -146,11 +141,6 @@ export default {
             userData: 'getUserInfo',
             sectionsList: 'sectionsList',
             projectsList: 'projectsList',
-            addingError: "getAddingError",
-            removeError: "getRemoveError",
-            editError: "getEditError",
-            saveSuccess: "getSaveDataSucccess",
-            removeSuccess: "getRemoveSuccess",
             availStatusList: 'getAvailStatus',
             availTypesList: 'getAvailType',
             newLeave: 'getNewLeaveForUser',
@@ -249,7 +239,6 @@ export default {
     methods: {
         ...mapActions({
             validateEditProject: 'validateEditProject',
-            closeAlert: 'hideAllMessages',
             validateNewEngag: 'validateNewEngag',
             validateEditEngag: 'validateEditEngag'
         }),

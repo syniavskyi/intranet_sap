@@ -73,16 +73,10 @@ const actions = {
                 "x-csrf-token": sToken
             }
         }).then(res => {
-            dispatch('hideAllMessages')
-            commit('SET_REMOVE_ERROR', false)
-            commit('SET_REMOVE_SUCCESS', true)
             let message = res.headers;
             dispatch('displayModal', message);
             dispatch('getData', { user: data.UserId })
         }).catch(error => {
-            dispatch('hideAllMessages');
-            commit('SET_REMOVE_ERROR', true)
-            commit('SET_REMOVE_SUCCESS', false)
         })
     },
     addUserLeave({commit, getters, dispatch}) {

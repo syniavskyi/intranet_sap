@@ -29,7 +29,7 @@ const actions = {
     closeModal({commit}) {
         commit('SET_SHOW_MODAL', false)
     },
-    displayModal({commit}, headers) {
+    displayModal({commit, getters}, headers) {
         let jsonStr = headers["sap-message"];
         if(jsonStr) {
             try {
@@ -45,6 +45,8 @@ const actions = {
               }
             }
             catch(err){}
+        } else if (headers.status) {
+            // if ()
         }
     }
 }
