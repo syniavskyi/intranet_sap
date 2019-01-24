@@ -6,7 +6,6 @@
         <div class="component-content">
             <div class="content-header">
                 <div class="content-header-title-and-menu">
-                    <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu"> -->
                     <div @click="showMenu" class="content-header-menu">&#9776;</div>
                     <p class="content-header-title">{{ $t("header.availability") }}</p>
                     <p @click="closeAlert" class="ava-error-header" v-if="saveSuccess">{{ $t("message.successfullySaved") }}</p>
@@ -14,7 +13,6 @@
                     <p @click="closeAlert" v-if="removeError">{{ $t("message.removeProjectError") }}</p>
                     <p @click="closeAlert" v-if="addingError">{{ $t("message.addProjectError") }}</p>
                     <p @click="closeAlert" class="ava-error-header" v-if="removeSuccess">{{ $t("message.successfullyRemovedProject") }}</p>
-                    <!-- <button v-show="saveSuccess || editError|| removeError || addingError || removeSuccess" class="ava-button" @click="closeAlert">X</button> -->
                 </div>
             </div>
             <div class="availability-tiles">
@@ -140,7 +138,8 @@ export default {
         'app-not-authorized-projects-tile': NotAuthProjectsTile,
         'modal': Modal
     },
-    computed: Object.assign(mapGetters({
+    computed: {
+        ...mapGetters({
             departmentList: 'getDepartmentList',
             branchList: 'getBranchList',
             usersList: 'usersList',
@@ -163,8 +162,7 @@ export default {
             authType: 'getAvailabilityAuth',
             authAcc: 'getAvailAcceptAuth',
             disabledBtnToEditAvail: "getDisabledBtnToEditAvail"
-
-        }), {
+        }),
         filteredUsers() {
             let aFilteredUsers = this.usersList,
                 selectedDep = this.selectedDepartment,
@@ -212,7 +210,7 @@ export default {
                 customData: t
             }))
         }
-    }),
+    },
     created() {
       let oStore = this.$store;
       oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getAvailabilityToRead);

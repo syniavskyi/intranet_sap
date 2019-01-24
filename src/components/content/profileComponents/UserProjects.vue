@@ -287,7 +287,6 @@
         </div>
       </div>
     </div>
-    <!-- <div  class="toast">Cosoosoos</div> -->
   </div>
 </template>
 
