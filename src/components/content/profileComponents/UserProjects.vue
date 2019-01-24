@@ -525,26 +525,26 @@ export default {
             }
           }
         }
-        bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart);
-        bCurrent = beforeEdit.IsCurrent !== userPro.IsCurrent;
-        if (userPro.DateEnd) {
-          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userPro.DateEnd);
-        }
-        bDateChange = bCurrent || bDateEnd;
-        bDesc = beforeEdit.Description !== userPro.Description;
-        bChanged =
-          bProjectName ||
-          bContractor ||
-          bIndustries ||
-          bModules ||
-          bDateStart ||
-          bDateChange ||
-          bDesc
-            ? true
-            : false;
-      } else {
-        bChanged = true;
+      bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart, "equal");
+      bCurrent = beforeEdit.IsCurrent !== userPro.IsCurrent;
+      if(userPro.DateEnd) {
+          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userPro.DateEnd, "equal");
       }
+      bDateChange = bCurrent || bDateEnd;
+      bDesc = beforeEdit.Description !== userPro.Description;
+      bChanged =
+        bProjectName ||
+        bContractor ||
+        bIndustries ||
+        bModules ||
+        bDateStart ||
+        bDateChange ||
+        bDesc
+          ? true
+          : false;
+        } else {
+          bChanged = true;
+        }
       this.$store.commit("SET_DATA_CHANGE_PROF", {
         changed: bChanged,
         editMode: this.projectEditMode

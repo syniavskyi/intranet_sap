@@ -257,10 +257,14 @@ export const checkRole = function(data) {
   return aMaxRoles;
   }
 //compare dates and check changes in profile components
- export const dateToValid = function(beforeData, newData) {
-   let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDay());
-   let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDay());
-   return a.getTime() !== b.getTime();
+ export const dateToValid = function(beforeData, newData, operation) {
+   let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDate());
+   let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDate());
+   if(operation === "equal") {
+    return a.getTime() !== b.getTime()
+   } else if(operation === "later" ) {
+    return a.getTime() >= b.getTime()
+   }
  }
  //add one day to data send to backend
  export const formatTimeZone = function(oDate) {

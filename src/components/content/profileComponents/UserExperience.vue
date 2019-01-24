@@ -125,10 +125,10 @@ export default {
       if(beforeEdit) {
          bEmployer = beforeEdit.Employer !== userExp.Employer;
          bWorkPos = beforeEdit.WorkPos !== userExp.WorkPos;
-         bDateStart = utils.dateToValid(beforeEdit.DateStart, userExp.DateStart);
+         bDateStart = utils.dateToValid(beforeEdit.DateStart, userExp.DateStart, "equal");
          bCurrent = beforeEdit.IsCurrent !== userExp.IsCurrent;
           if(userExp.DateEnd) {
-              bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userExp.DateEnd);
+              bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userExp.DateEnd, "equal");
           }
           bDateChange = bCurrent || bDateEnd;
           bChanged = bEmployer || bWorkPos || bDateStart || bDateChange ? true : false;

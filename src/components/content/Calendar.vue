@@ -15,7 +15,7 @@
           <div class="calendar-in-row">
             <div class="cal-and-fils">
               <div>
-                <v-date-picker mode='single' :min-date="new Date()" v-model="selectedValue" :attributes="attributes" is-inline @dayclick='dayClicked'/>
+                <v-date-picker mode='single' :min-date="new Date()" v-model="addEvent.DateFrom" :attributes="attributes" is-inline @dayclick='dayClicked'/>
               </div>
               <div class="cal-filters">
                 <div class="cd-for-select">
@@ -64,7 +64,7 @@
                 </ul>
               </div>
               <!-- Modal for add event -->
-              <event-form v-if="dialogEvent" :selected-value="selectedValue" :display-save-button="displaySaveButton"></event-form>
+              <event-form v-if="dialogEvent" :display-save-button="displaySaveButton"></event-form>
             </div>
           </div>
         </div>
@@ -85,7 +85,6 @@ const utils = require("../../utils");
 export default {
   data() {
     return {
-      selectedValue: null,
       selectedDay: null,
       isSelected: false,
       selectedUser: false,
@@ -196,12 +195,13 @@ export default {
     },
     // day cklicked on v-calendar
     dayClicked(day) {
-      // if (day.attributes[0].key === "disabled") return
-      // SPi zakomentowałam, bo nie działa
+      // if selected date is later than today, don't show events
+      if (!utils.dateToValid(day.date, new Date(), "later")) return
       this.selectedDay = day;
     },
     // modal for new event
     openDialog() {
+      this.$store.commit("SET_DATE_FROM", this.addEvent.DateFrom);
       this.clearForm();
       this.performDialog();
       this.displaySaveButton = true;
