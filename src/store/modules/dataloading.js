@@ -271,11 +271,12 @@ const actions = {
               obj[index].DateStart = utils.dateStringToObj(obj[index].DateStart);
             }
             obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
-            if (obj[index].IsCurrent) {
-              obj[index].DateEnd = new Date();
-            } else {
+            if (obj[index].DateEnd ) {
               obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
-            }
+            } 
+            // else {
+            //   obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
+            // }
           }
         }
       }
@@ -799,8 +800,8 @@ const actions = {
       commit('SET_USER_LANGS', oData.UserLang.results);
 
       commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
-
-      commit('SET_USER_PROJECTS_LIST', oData.UserCvProjects.results); //set user projects data for profile and cv
+      dispatch("_setProjectOrginalEndDate", oData.UserCvProjects.results);
+      // commit('SET_USER_PROJECTS_LIST', aCvProjects); //set user projects data for profile and cv
       dispatch('adjustProjects');
     } else {
       skillSet = 'SET_USER_SKILLS_DF_LANG';
@@ -830,6 +831,13 @@ const actions = {
     commit('SET_DATA_FOR_HINT', false);
 
     // dispatch('checkPageToDisplay', userData.changePage) //TEMP
+  },
+
+  _setProjectOrginalEndDate({commit}, aUserProject){
+    for(let i = 0; i < aUserProject.length; i++){
+      aUserProject[i].DateEndToChange = aUserProject[i].DateEnd;
+    }
+    commit("SET_USER_PROJECTS_LIST", aUserProject);
   },
 
   _setAuthorizations({
