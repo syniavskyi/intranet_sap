@@ -175,18 +175,14 @@
                         <label class="label-profile">{{ $t("label.department") }}</label>
                       </div>
                       <div class="prof-input-s">
-                        <input disabled class="inputProfile inputDisabled" v-model="userData.JobPosition">
+                        <select required v-if="editMode" v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectEdit">
+                          <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
+                        </select>
+                        <select required v-if="!editMode" disabled v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectDisabledh4">
+                          <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
+                        </select>
                         <label class="label-profile">{{ $t("label.position") }}</label>
                       </div>
-                      <!-- dodawanie nowej pozycji przez BO lub Management -->
-                      <!-- <div v-if="editMode" class="prof-input-s">
-                        <input disabled v-if="!editMode" class="inputProfile inputDisabled" v-model="newPosition"/>
-                        <input v-on:keyup.enter="addNewPositionForUser" required v-if="editMode" class="inputProfile inputEditPos" v-model="newPosition"/>
-                        <span class="prof-div-bar"></span>
-                        <label class="label-profile">{{ $t("label.position") }}</label>
-                        <button class="prof-div-pos-btn" @click="addNewPositionForUser">+</button>
-                        <button class="prof-div-pos-elem" v-for="position in userPositions" :key="position" @click="removeUserPosition(position)">{{position}}</button>
-                      </div> -->
                       <div class="prof-input-s">
                         <input v-if="editMode" required class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.CurrentProject">
                         <input disabled v-if="!editMode" class="inputDisabled inputProfile" v-model="userData.CurrentProject">
@@ -242,10 +238,10 @@
             <user-cv-tile></user-cv-tile>
           </div>
         </div>
-        <user-education-component :selected-user="selectedUser"></user-education-component>
-        <user-experience-component :selected-user="selectedUser"></user-experience-component>
-        <user-projects-component :selected-user="selectedUser"></user-projects-component>
-        <user-skills-component :selected-user="selectedUser"></user-skills-component>
+        <user-education-component></user-education-component>
+        <user-experience-component></user-experience-component>
+        <user-projects-component></user-projects-component>
+        <user-skills-component></user-skills-component>
         <select-cv-content v-show="showSelectCv"></select-cv-content>
         <div v-show="showSelectCv" class="modal-overlay"></div>
         <change-user-password v-show="showPasswordDialog"></change-user-password>
@@ -296,6 +292,7 @@ export default {
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV,
       workTime: this.$store.getters.getWorkTime,
       loginAlias: localStorage.getItem("id"),
+      workPositionList: this.$store.getters.getWorkPositions,
       selectedUser: this.$store.getters.getSelectedForCvUser || localStorage.getItem("id")
     };
   },
@@ -312,10 +309,7 @@ export default {
   // set login language
   beforeRouteLeave(to, from, next) {
     let lang = this.loginLanguage.toLowerCase(),
-    path = "",
-    dataChangedProf = false,
-    editModeProf = false;
-    ;
+    path = ""
     if (lang == "") {
       lang = "pl";
     }
@@ -323,16 +317,13 @@ export default {
     if(to.path !== '/cv') {
       this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
     }
-    dataChangedProf = this.hasDataChanged || this.$store.getters.getDataChangedProf.changed; // check if data was changed in profile comonents
-    editModeProf = this.editMode || this.$store.getters.getDataChangedProf.editMode;
-    if (editModeProf && dataChangedProf) {
+
+    if (this.editMode && this.hasDataChanged) {
       this.$store.commit('SET_NEXT_PATH', to.path)
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
       if (this.leavePageFlag === false) {
       } else {
-          this.$store.commit('SET_LEAVE_PAGE_DIALOG', false)
           this.$store.commit('SET_LEAVE_PAGE_FLAG', false)
-          this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
           next()
         }
     } else {
@@ -434,6 +425,20 @@ export default {
       return aFilteredUsers;
     }
   },
+  // beforeRouteLeave(to, from , next) {
+  //   if (this.editMode && this.hasDataChanged) {
+  //     this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
+  //     if (this.leavePageFlag !== null) {
+  //       if (this.leavePageFlag === false) {
+  //         return
+  //       } else {
+  //         next()
+  //       }
+  //     }
+  //   } else {
+  //     next()
+  //   }
+  // },
   watch: {
     selectedUser(value) {
       if(!value) {
@@ -539,21 +544,6 @@ export default {
       } else {
         this.checkIfDataChanged();
         this.disableSaveBtn = this.hasDataChanged === true ? false : true;
-      }
-    },
-    addNewPositionForUser() {
-      const userPos = this.userPositions;
-      userPos.push(this.newPosition);
-      this.$store.commit("SET_USER_JOB_POS", userPos);
-    },
-    removeUserPosition(position) {
-      const userPos = this.userPositions;
-      for (let i = 0; userPos.length; i++) {
-        if (userPos[i] == position) {
-          userPos.splice(i, 1);
-          this.$store.commit("SET_USER_JOB_POS", userPos);
-          return;
-        }
       }
     },
     // get data for selected language

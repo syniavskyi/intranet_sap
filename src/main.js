@@ -28,7 +28,7 @@ require('./assets/styles/shared.css');
 require('./assets/styles/login/login.css');
 require('./assets/styles/profile/profile.css');
 require('./assets/styles/registration/registration.css');
-require('./assets/styles/dashboard/dashboard.css');
+// require('./assets/styles/dashboard/dashboard.css');
 require('./assets/styles/starterPage/starterPage.css');
 require('./assets/styles/availability/availability.css');
 require('./assets/styles/employees/employees.css');

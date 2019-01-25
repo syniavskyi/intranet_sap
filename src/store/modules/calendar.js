@@ -11,10 +11,10 @@ const state = {
     DateFrom: null,
     DateTo: null,
     Description: '',
-    Priority: '',
+    Priority: 'L',
     EventType: '',
     TargetGroup: [],
-    EventPrivacy: '',
+    EventPrivacy: 'PBL',
     color: '',
     EventTypeName: '',
     Employee: []
@@ -130,7 +130,6 @@ const actions = {
     dispatch,
     commit
   }, data) {
-    data.DateFrom = getters.getSelectedDate;
     data.DateTo = !data.DateTo ? data.DateFrom : data.DateTo;
     let eventData = utils.createClone(data);
     eventData.DateFrom = utils.formatDateForBackend(data.DateFrom);
@@ -208,19 +207,19 @@ const actions = {
       })
   },
   clearForm({
-    commit
+    commit, getters
   }) {
     let clearForm = {
       EventName: null,
       EventTime: null,
-      DateFrom: null,
+      DateFrom: getters.getDateFrom,
       DateTo: null,
       Description: null,
-      Priority: null,
+      Priority: 'L',
       EventType: null,
       TargetGroup: [],
       Employee: [],
-      EventPrivacy: null,
+      EventPrivacy: 'PBL',
       color: null
     };
     commit('SET_CLEARED_DATA', clearForm);
@@ -271,7 +270,10 @@ const getters = {
   },
   getDialogEvent(state) {
     return state.dialogEvent;
-  }
+  },
+   getDateFrom(state) {
+     return state.selectedDate;
+   }
 };
 
 export default {

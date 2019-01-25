@@ -42,17 +42,17 @@ export default {
   data() {
     return {
       closed: "true"
-    };
+    }
   },
-  computed: Object.assign(
-    mapGetters({
+  computed: {
+    ...mapGetters({
       displayMenu: "getShowMenu",
       displayOverlay: "getShowMenuOverlay"
     })
-  ),
+  },
   methods: {
     checkFileFormat(name) {
-      return name.slice(name.lastIndexOf(".")).toLowerCase();
+      return name.slice(name.lastIndexOf(".")).toLowerCase()
     },
     generateLink(file) {
       let url = `${window.location.origin}/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/AttachmentMedias(FileId='${file}',Language='PL',UserAlias='')/$value?c=${this.$store.getters.getCookie}`
@@ -67,9 +67,7 @@ export default {
         elChild = evt.target.nextElementSibling;
       const name = { el, elChild };
       this.$store.dispatch("toggleDocTile", name);
-    },
-  },
-};
+    }
+  }
+}
 </script>
-<style>
-</style>

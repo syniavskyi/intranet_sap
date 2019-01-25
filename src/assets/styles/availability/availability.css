@@ -5,40 +5,9 @@
     padding:0; */
     /* max-width: 100%; */
 /* } */
+
 :root {
     --request-input-color: #e8eef4;
-}
-.ava-error-header {
-    display: flex;
-    position: fixed;
-    background: #ffa500;
-    font-size: 1rem;
-    min-height: 1.2rem;
-    padding: .3rem;
-    border-radius: .5rem;
-    animation: display-grow;
-    color: #ffffff;
-    top: 100px;
-    right: 10px;
-    overflow: hidden;
-    animation-duration: 0.6s;
-    animation: pulse 1.5s infinite;
-    transition: background 0.5s ease;
-    z-index: 100;
-}
-.ava-error-header:hover {
-    cursor: pointer;
-    background: rgb(255, 185, 54);
-}
-.ava-error-header-x {
-    display: flex;
-    position: absolute;
-    top: 10px;
-    right: -10px;
-    animation: display-grow;
-    overflow: hidden;
-    animation-timing-function: cubic-bezier(0.1, 0.4, 0.5);
-    animation-duration: 4s;
 }
 
 @keyframes display-grow {

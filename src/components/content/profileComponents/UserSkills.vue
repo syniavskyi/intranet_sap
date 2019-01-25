@@ -225,7 +225,7 @@ export default {
           document.getElementsByClassName("prof-skills-save")[
             index
           ].disabled = false;
-          this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.editMode});
+          this.$store.commit("SET_DATA_CHANGE_PROF", {changed: true, editMode: this.editMode});
         } else {
           document.getElementsByClassName("prof-skills-save")[index].disabled = true;
         }

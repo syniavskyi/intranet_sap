@@ -121,7 +121,6 @@
   flex-direction: column;
   width: 90%;
   align-items: center;
-  /* padding-left: 1rem; */
   align-self: center;
   height: 50%;
   justify-content: center;
@@ -146,6 +145,23 @@
 }
 
 /* MODAL LOGIN */
+
+.modal-h {
+  height: 5.5rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FOOTER CONTAINTER FOR BUTTONS*/
+.modal-fbtns {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+/* FOOTER CONTAINTER FOR BUTTONS*/
 
 /* ERROR MODAL / MESSAGE LOG DIALOG */
 
@@ -264,6 +280,15 @@
     transform: rotate3d(.8, .8, .8, 240deg);
     opacity: 0;
   }
+}
+
+.modal-fade-enter-active, 
+.modal-fade-leave-active {
+  transition: opacity .2s;
+}
+.modal-fade-enter, 
+.modal-fade-leave-active /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 /*     DIALOG  /   MODAL - end     */

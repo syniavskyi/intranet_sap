@@ -126,8 +126,11 @@ const actions = {
     }).then(res => {
       let message = res.headers;
       dispatch('displayModal', message);
-      dispatch('loadUserPhoto', data.userId);
+      dispatch('loadUserPhoto', data.userId); 
     }).catch(error => {
+      if (res.status === 413) {
+        commit('SET_SUBMIT_PHOTO_ERR_DIALOG', true)
+      }
     })
   },
 
