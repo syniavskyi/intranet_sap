@@ -458,22 +458,22 @@ export default {
       }
     },
     remove(index) {
-      let newData = utils.createClone(this.userProjects[index]);
+      let newData = utils.createClone(this.userProjects[index])
       if(newData.DateEndToChange){
-        newData.DateEnd = newData.DateEndToChange;
+        newData.DateEnd = newData.DateEndToChange
       }
-      newData.Action = 'D';
-      this.$store.dispatch("updateUserProjectsPosition", newData);
-      this.userProjects.splice(index, 1);
-      this._beforeEditingProjects = utils.createClone(this.userProjects);
+      newData.Action = 'D'
+      this.$store.dispatch("updateUserProjectsPosition", { newData, index })
+      // this.userProjects.splice(index, 1);
+      this._beforeEditingProjects = utils.createClone(this.userProjects)
       this.$store.commit("SET_DATA_CHANGE_PROF", {
         changed: false,
         editMode: false
-      });
+      })
     },
     save(index) {
       const dataToChange = this._beforeEditingProjects[index],
-        newData = utils.createClone(this.userProjects[index]);
+        newData = utils.createClone(this.userProjects[index])
       // newData.index = index;
       newData.Action = "U";
       newData.DateEndToChange = newData.DateEnd;
@@ -482,7 +482,7 @@ export default {
         newData.DateStartToChange = dataToChange.DateStart;
         // newData.DateEndToChange = dataToChange.DateEnd; 25.01.2019 AWi
         newData.ProjectNameToChange = dataToChange.ProjectName;
-        this.$store.dispatch("updateUserProjectsPosition", newData);
+        this.$store.dispatch("updateUserProjectsPosition", { newData });
       } else {
         this.$store.dispatch("saveUserProjectsPosition", newData);
         // newData.Action ='A';
