@@ -1101,7 +1101,7 @@
     height: 2rem;
     /* width: 14rem; */
     border: 1px solid #d3d3d3;
-    color: black;
+    color: #666;
     border-radius: 3px;
     appearance: none;
     -webkit-appearance: none; 
@@ -1266,6 +1266,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .prof-table-p {
