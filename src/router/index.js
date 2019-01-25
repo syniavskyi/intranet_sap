@@ -6,7 +6,6 @@ import store from '@/store/store'
 import Login from '@/components/auth/Login'
 import Registration from '@/components/auth/Registration'
 
-import Dashboard from '@/components/content/Dashboard'
 import News from '@/components/content/News'
 import Profile from '@/components/content/Profile'
 import Employees from '@/components/content/Employees'
@@ -33,12 +32,6 @@ export default new Router({
         path: '/registration',
         name: 'Registration',
         component: Registration,
-        beforeEnter: AuthGuard
-    },
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: Dashboard,
         beforeEnter: AuthGuard
     },
     {
