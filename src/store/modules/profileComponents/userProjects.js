@@ -21,6 +21,9 @@ const mutations = {
   SET_USER_PROJECTS_LIST(state, list) {
     state.userProjectsList = list
   },
+  SET_USER_PROJECTS_LIST_REMOVE(state, index){
+    state.userProjectsList.splice(index, 1)
+  },
   SET_PROJECT_ERROR(state, isError) {
     state.showProjectError = isError
   },
@@ -107,7 +110,7 @@ const actions = {
   updateUserProjectsPosition({getters,
     dispatch, commit
   }, data) {
-    const dataToSend = data;
+    const dataToSend = data.newData;
     getters.getSelectedForCvUser ? dataToSend.UserAlias = getters.getSelectedForCvUser : dataToSend.UserAlias = localStorage.getItem("id");
     dataToSend.DateStart = utils.formatDateForBackend(dataToSend.DateStart);
     dataToSend.DateEnd = utils.formatDateForBackend(dataToSend.DateEnd);
@@ -138,6 +141,9 @@ const actions = {
       }
     }).then(res => {
         let message = res.headers;
+        if(dataToSend.Action === 'D'){
+          commit('SET_USER_PROJECTS_LIST_REMOVE', data.index)
+        }
         dispatch('displayModal', message);
         commit('SET_DISPLAY_LOADER', false)
       }).catch(error => {
