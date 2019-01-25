@@ -45,6 +45,15 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/";
 
+// axios.interceptors.response.use(function (config) {
+//     if (config.status === 200) {
+//         store.commit('SET_AXIOS_INTERCEPTOR_MODAL', true);
+//         return config;
+//     } else {
+//         return config;
+//     }
+// })
+
 export const app = new Vue({
     el: '#app',
     router,
