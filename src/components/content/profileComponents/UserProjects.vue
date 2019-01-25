@@ -459,7 +459,9 @@ export default {
     },
     remove(index) {
       let newData = utils.createClone(this.userProjects[index]);
-      newData.DateEnd = newData.DateEndToChange;
+      if(newData.DateEndToChange){
+        newData.DateEnd = newData.DateEndToChange;
+      }
       newData.Action = 'D';
       this.$store.dispatch("updateUserProjectsPosition", newData);
       this.userProjects.splice(index, 1);
@@ -474,6 +476,7 @@ export default {
         newData = utils.createClone(this.userProjects[index]);
       // newData.index = index;
       newData.Action = "U";
+      newData.DateEndToChange = newData.DateEnd;
       newData.Language = localStorage.getItem("lang"); //temp
       if (dataToChange) {
         newData.DateStartToChange = dataToChange.DateStart;
