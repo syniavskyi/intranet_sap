@@ -49,8 +49,6 @@
                   <table v-if="cvElements.photo" width="15%">
                     <tr>
                       <td>
-                        <!-- v-if="cvElements.photo" -->
-                        <!-- <img  id="cv-img" class="img-user-class" src="../../assets/images/hd.jpg"  width="150px"> -->
                         <img class="img-user-class" id="cv-img" :src="userPhoto" width="150px">
                       </td>
                     </tr>
@@ -58,8 +56,6 @@
                   <table v-if="!cvElements.photo" width="15%">
                     <tr>
                       <td>
-                        <!-- v-if="cvElements.photo" -->
-                        <!-- <img  id="cv-img" class="img-user-class" src="../../assets/images/hd.jpg"  width="150px"> -->
                       </td>
                     </tr>
                   </table>

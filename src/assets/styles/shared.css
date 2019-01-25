@@ -218,6 +218,7 @@ li p {transition: margin .35s ease;}
 .nav-item-img {
     display: flex;
     margin-left: 5%;
+    transform: scale(.82);
 }
 
 .nav-item p {
