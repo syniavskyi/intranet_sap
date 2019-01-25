@@ -1,6 +1,5 @@
 <template>
     <div class="plane-nav">
-        <!-- <div class="modal-overlay-menu"></div> -->
         <div class="nav-header">
             <button class="logout-button" @click="logout">
                 <span class="logout-text">{{$t("button.logout")}}</span>
@@ -31,14 +30,6 @@
                         </button>
                     </router-link>
                 </li>
-                <!-- <li>
-                    <router-link class="nav-router-link" to="/news">
-                        <button class="nav-item">
-                            <img class="nav-item-img" src="../assets/images/nav3/grey_616161/view-dashboard-g-24.png">
-                            <p>{{ $t("header.news") }}</p>
-                        </button>
-                    </router-link>
-                </li> -->
                 <li v-if="menuAuth.calendar">
                     <router-link class="nav-router-link" to="/calendar">
                         <button @click="closeMenu" class="nav-item">
@@ -55,14 +46,6 @@
                         </button>
                     </router-link>
                 </li>
-                <!-- <li>
-                    <router-link class="nav-router-link" to="/informations">
-                        <button class="nav-item">
-                            <img class="nav-item-img" src="../assets/images/nav3/grey_616161/information-g-24.png">
-                            <p>{{ $t("header.informations") }}</p>
-                        </button>
-                    </router-link>
-                </li> -->
                 <li v-if="menuAuth.documents">
                     <router-link class="nav-router-link" to="/files">
                         <button @click="closeMenu" class="nav-item">
