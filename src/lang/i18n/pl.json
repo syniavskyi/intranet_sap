@@ -285,7 +285,8 @@
     "savedDelegationBackend": "Delegacja o numerze {delegNo} została utworzona",
     "sessionEndInfo": "Sesja wygasła. Zostaniesz przeniesiony na stronę główną. Zaloguje się ponownie. Twoje zmiany nie zostały zapisane.",
     "photoToLarge": "Zdjęcia posiada zbyt duzy rozmiar. Prześlij zdjęcie poniżej 1 MB",
-    "weatherError": "Wystąpił błąd podczas pobierania pogody."
+    "weatherError": "Wystąpił błąd podczas pobierania pogody.",
+    "responseError": "Zapytanie nie powiodło się, spróbuj ponownie, lub wyloguj się i zaloguj ponownie."
   },
   "select": {
     "language": {

@@ -5,7 +5,8 @@ const state = {
   leavePageFlag: false,
   nextPath: "",
   sessionLogout: false,
-  photoToLargeDialog: false
+  photoToLargeDialog: false,
+  axiosInterceptorErr: false
 }
 
 const mutations = {
@@ -26,6 +27,9 @@ const mutations = {
   },
   SET_SUBMIT_PHOTO_ERR_DIALOG(state, show) {
     state.photoToLargeDialog = show
+  },
+  SET_AXIOS_INTERCEPTOR_MODAL(state, show) {
+    state.axiosInterceptorErr = show
   }
 }
 
@@ -64,7 +68,8 @@ const getters = {
     return state.nextPath
   },
   getSessionStatus: state => state.sessionLogout,
-  getSubmitPhotoErr: state => state.photoToLargeDialog
+  getSubmitPhotoErr: state => state.photoToLargeDialog,
+  getAxiosInterceptorModal: state => state.axiosInterceptorErr
 }
 
 export default {
