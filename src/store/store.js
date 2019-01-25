@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/login'
 import registration from './modules/registration'
-import dashboard from './modules/dashboard'
 import profile from './modules/profile'
 import calendar from './modules/calendar'
 import menu from './modules/menu'
@@ -38,7 +37,6 @@ export default new Vuex.Store({
     modules: {
         login,
         registration,
-        dashboard,
         profile,
         calendar,
         menu,
