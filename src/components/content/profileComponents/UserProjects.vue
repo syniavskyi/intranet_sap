@@ -60,16 +60,13 @@
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("table.contractor") }}</div>
                 <div class="prof-tbody-item-txt">
-                  <p
-                    v-if="projectEditMode"
-                    style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;"
-                  >{{$t('table.currentContractor')}}</p>
+                  <p v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
                   <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName">
                   <!-- <input v-if="projectEditMode" class="profile-table-input-view" :disabled="projectEditMode" v-model="_beforeEditingProjects[index].ContractorName""> -->
                   <!-- <p v-if="projectEditMode"> {{ setEditedProjectContractor(index)}} </p> -->
                   <p class="profile-table-input-view" v-if="projectEditMode && _beforeEditingProjects[index]" v-once>{{ _beforeEditingProjects[index].ContractorName }}</p>
                   <p class="profile-table-input-view" v-if="projectEditMode && !_beforeEditingProjects[index]" v-once>{{ userProjects[index].ContractorName }}</p>
-                  <select @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)">
+                  <select ref="emptyContractors" @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)">
                     <!-- @input="checkFields(index)" -->
                     <option disabled selected value>{{ $t("table.addContractor") }}:</option>
                     <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
@@ -159,7 +156,7 @@ import moment from "moment";
 let utils = require("../../../utils");
 
 export default {
-  props: ["selected-user"],
+  props: ["selected-user", "reset-contractors"],
   data() {
     return {
       projectEditMode: false,
@@ -174,6 +171,21 @@ export default {
   watch: {
     selectedUser(value) {
       this.projectEditMode = false;
+    },
+    resetContractors(value) {
+      let aContractors =this.$refs.emptyContractors,
+          aIndustries = this.$refs.industryEmpty
+      this.contractorIndustries = []
+      if (aIndustries && value === true) {
+        for (var i = 0; i < aIndustries.length; i++) {
+          aContractors[i].selectedIndex = 0
+          aIndustries[i].selectedIndex = 0
+          while(aIndustries[i].childElementCount > 1) {
+            aIndustries[i].removeChild(aIndustries[i].lastElementChild)
+          }
+        }
+      }
+      this.$emit('set-reset-industries', false)
     }
   },
   components: {
