@@ -208,7 +208,7 @@
         </div>
         <user-education-component :selected-user="selectedUser"></user-education-component>
         <user-experience-component :selected-user="selectedUser"></user-experience-component>
-        <user-projects-component :selected-user="selectedUser"></user-projects-component>
+        <user-projects-component @set-reset-industries="onResetContractors" :selected-user="selectedUser" :reset-contractors="resetContractors"></user-projects-component>
         <user-skills-component :selected-user="selectedUser"></user-skills-component>
         <select-cv-content v-show="showSelectCv"></select-cv-content>
         <div v-show="showSelectCv" class="modal-overlay"></div>
@@ -262,7 +262,8 @@ export default {
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV,
       workTime: this.$store.getters.getWorkTime,
       loginAlias: localStorage.getItem("id"),
-      selectedUser: this.$store.getters.getSelectedForCvUser || localStorage.getItem("id")
+      selectedUser: this.$store.getters.getSelectedForCvUser || localStorage.getItem("id"),
+      resetContractors: false
     };
   },
   validations: {
@@ -429,7 +430,10 @@ export default {
       getUserData: "getUserData",
       getGoFromCv: "getGoFromCv"
     }),
-      showMenu(event) {
+    onResetContractors(value) {
+      this.resetContractors = value
+    },
+    showMenu(event) {
       let obj = { window, event };
       this.$store.dispatch("setSideMenu", obj);
     },
@@ -527,6 +531,7 @@ export default {
     // get data for selected language
     getNewData() {
       this.editMode = false;
+      this.resetContractors = true;
       this.$store.dispatch('setLanguage', this.selectedCvLang);
       let cvLang = this.selectedCvLang.toUpperCase();
       localStorage.setItem("lang", this.selectedCvLang.toUpperCase());
