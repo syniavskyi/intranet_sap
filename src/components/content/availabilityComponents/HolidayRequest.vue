@@ -52,7 +52,7 @@ export default {
                     contentHeight = canvas.height,
                     imgWidth = 540,
                     imgHeight = 540/contentWidth * contentHeight,
-                    img = canvas.toDataURL("image/png", 1.0),
+                    img = canvas.toDataURL("image/jpeg", 1.0),
                     doc = new jsPDF('', 'pt', 'a4');
                     doc.addImage(img, 'JPEG', 10, 10, imgWidth, imgHeight);
                     doc.save(pdfName + '.pdf');
