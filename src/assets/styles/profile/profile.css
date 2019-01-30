@@ -233,6 +233,15 @@
     flex-grow: 1;
 }
 
+.prof-tile-cv {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    text-align: center;
+    color: #9e9e9e;
+    font: 1.2rem 'Arial'
+}
+
 .prof-skills {
     display: flex;
     flex-direction: column;

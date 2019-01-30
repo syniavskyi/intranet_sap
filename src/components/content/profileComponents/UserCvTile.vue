@@ -8,7 +8,8 @@
       <div class="tile-underscore"></div>
     </div>
     <div class="profile-tile-content">
-      <div class="cv-buttons">
+      <h3 class="prof-tile-cv">Aby wygenerować CV wybierz przycisk generuj w nagłówku</h3>
+      <!-- <div class="cv-buttons">
         <div class="button-cv">
           <div class="prof-input-100">
             <select class="selectProfile selectEdit" required  v-model="selectedDownloadLang" @change="checkIfFileExist">
@@ -43,7 +44,7 @@
             <button :title="$t('title.delete')" :disabled="disableFileOptions" class="download pdf-add-pl" @click="deleteFile">X</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
