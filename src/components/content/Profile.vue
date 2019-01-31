@@ -156,8 +156,14 @@
                         <label class="label-profile">{{ $t("label.department") }}</label>
                       </div>
                       <div class="prof-input-s">
-                        <input disabled class="inputProfile inputDisabled" v-model="userData.JobPosition">
-                        <label class="label-profile">{{ $t("label.position") }}</label>
+                        <select required v-if="editMode && this.authType !== 'OWN'" v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectEdit">
+                          <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
+                        </select>
+                        <select required v-if="!editMode || this.authType === 'OWN'" disabled v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectDisabledh4">
+                          <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
+                        </select>
+                        <!-- <input disabled class="inputProfile inputDisabled" v-model="userData.JobPosition"> -->
+                        <label class="label-profile">{{ $t("label.position") }}</label> 
                       </div>
                       <!-- dodawanie nowej pozycji przez BO lub Management -->
                       <!-- <div v-if="editMode" class="prof-input-s">
@@ -331,6 +337,9 @@ export default {
     }
     oStore.commit('SET_SHOW_CV_DIALOG', false);
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
+    this.$nextTick(() => {
+      this.authType = this.$store.getters.getUserAuth.ZPROF_ATCV;
+    })
   },
   components: {
     MaskedInput,
@@ -363,7 +372,8 @@ export default {
       disabledBtnToEdit: "getDisabledBtnToEdit",
       showLeavePageDialog: "getLeavePageDialog",
       leavePageFlag: "getLeavePageFlag",
-      showPhotoErr: 'getSubmitPhotoErr'
+      showPhotoErr: 'getSubmitPhotoErr',
+      workPositionList: "getWorkPositions"
     }),
     formatAddress() {
       const data = this.userData;
