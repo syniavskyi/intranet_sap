@@ -7,7 +7,11 @@ const state = {
     avaliablityAuth: "",
     availAccAuth: "",
     disabledBtnToEditAvail: false,
-    filteredTeamUsers: []
+    filteredTeamUsers: [],
+    selectedBranch: null,
+    selectedDep: null,
+    selectedUser: null,
+    selectedUserName: null
 }
 
 const mutations = {
@@ -25,6 +29,17 @@ const mutations = {
     },
     SET_FILTERED_TEAM_USERS(state, data) {
         state.filteredTeamUsers = data
+    },
+    SET_SELECTED_DEF_AVAIL(state, data) {
+        if(data.selectedBranch){
+            state.selectedBranch = data.selectedBranch
+        }
+        if(data.selectedDep){
+            state.selectedDep = data.selectedDep
+        }
+        if(data.selectedUser){
+            state.selectedUser = data.selectedUser
+        }
     }
 }
 
@@ -71,6 +86,18 @@ const getters = {
     },
     getFilteredTeamUsers(state) {
         return state.filteredTeamUsers
+    },
+    getSelectedBranch(state){
+        return state.selectedBranch
+    },
+    getSelectedDepartment(state){
+        return state.selectedDep
+    },
+    getSelectedUser(state){
+        return state.selectedUser
+    },
+    getSelectedUserName(state){
+        return state.selectedUserName
     }
 }
 

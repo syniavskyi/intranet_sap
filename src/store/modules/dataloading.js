@@ -802,7 +802,9 @@ const actions = {
       commit('SET_NEW_USER_FILES_LIST', oData.UserFiles.results); //set list of files for starter page for new user
       dispatch("_setProjectOrginalEndDate", oData.UserCvProjects.results);
       // commit('SET_USER_PROJECTS_LIST', aCvProjects); //set user projects data for profile and cv
-      dispatch('adjustProjects');
+      dispatch('adjustProjects')
+      commit('SET_NEW_PROJ', { UserAlias: oData.UserAlias })
+      commit('SET_SELECTED_DEF_AVAIL', { selectedBranch: oData.BranchId, selectedDep: oData.DepartmentId, selectedUser: oData.UserAlias} )
     } else {
       skillSet = 'SET_USER_SKILLS_DF_LANG';
     }

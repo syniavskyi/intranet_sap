@@ -24,6 +24,18 @@ const mutations = {
     // set data to holiday request
     SET_NEW_HOLIDAY(state, data) {
         state.newHoliday = data
+    },
+    SET_NEW_LEAVE(state, data) {
+        if(data.UserId){
+            state.newLeaveForUser.UserId = data.UserId;
+        }
+        if(data.TypeId || data.TypeIdNull){
+            state.newLeaveForUser.TypeId = data.TypeId;
+        }
+        if(data.UserId){
+            state.newLeaveForUser.UserId = data.UserId;
+        }
+        
     }
 };
 

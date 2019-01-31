@@ -96,16 +96,18 @@ export default {
                 this.checkFields();
             } else {
                 this.disableAddNew = true;
-                this.selectedType = false;
+                this.$emit("change-selected-type", false)
+                // this.selectedType = false;
             }
         }
     },
     methods: {
         ...mapActions({addNewLeave: 'addUserLeave'}),
         checkFields() {
+            this.$store.commit('SET_NEW_LEAVE', {UserId: this.selectedUser});
             let obj = this.newLeave;
             if(this.disabledBtnToEditAvail===false) {
-                if(this.selectedUser === this.loginAlias && this.authAcc !== '*' && obj.DateStart && obj.DateEnd && this.selectedType !== false) {
+                if(this.selectedUser === this.loginAlias && this.authAcc !== '*' && obj.DateStart && obj.DateEnd && this.selectedType !== false && this.selectedUser) {
                     this.disableAddNew = false;
                 } else {
                     for (let key in obj) {
