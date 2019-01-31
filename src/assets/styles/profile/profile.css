@@ -1246,6 +1246,9 @@
     width: 8rem;
     text-align: center;
     background: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .profile-table-input-edit {
@@ -1254,7 +1257,6 @@
 
 .profile-table-input-view {
     color: orange;
-    
 }
 
 
