@@ -125,6 +125,7 @@ const actions = {
     /* DJA */
     delete dataToSend.User;
     dispatch('formatProjectToString', dataToSend);
+    dataToSend.ProjectName = "Abc"
     let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00',ProjectName='${dataToSend.ProjectName}',Language='${dataToSend.Language}')`;
     let urlU = "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(dataToSend.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" + dataToSend.ProjectName + "',Language='" + dataToSend.Language + "')";
     let sToken = getters.getToken;

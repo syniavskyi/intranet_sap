@@ -54,7 +54,7 @@
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("table.projectName") }}</div>
                 <div class="prof-tbody-item-txt">
-                  <input :disabled="!projectEditMode" @input="checkFields(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName">
+                  <input :disabled="!projectEditMode" @input="checkProjectName(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName">
                 </div>
               </div>
               <div class="prof-tbody-item">
@@ -330,6 +330,10 @@ export default {
           });
         }
       }
+    },
+    checkProjectName(index){
+      this.userProjects[index].ProjectName.replace('[0-9a-zA-Z]', '')
+      this.checkFields(index)
     },
     remove(index) {
       let newData = utils.createClone(this.userProjects[index])
