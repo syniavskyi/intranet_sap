@@ -101,16 +101,17 @@
             </table>
           <!-- projects -->
             <h3 style="font-weight:bold; margin-bottom:10px; margin-top:10px; padding-bottom:5px; border-bottom: 2px solid #E79600; text-transform:uppercase; font-family:'Arial';">{{ $t("header.projects") }}</h3>
-            <table align="center" width="99%" v-for="(project) in userProjects" :key="project.id">
+            <table align="center" width="99%" v-for="(project, index) in userProjects" :key="project.id">
               <tr>
                 <td style="width:30%; vertical-align: top;  font-family:'Arial';" v-if="cvElements.contractor">
                   <p style="padding:0; margin:0;margin-bottom: 3px; font-weight:bold;">{{project.ContractorName}}</p>
                   <p style="padding:0; margin:0;" v-if="!project.IsCurrent">{{formatDate(project.DateStart)}} - {{formatDate(project.DateEnd)}}</p>
                   <p style="padding:0; margin:0;" v-if="project.IsCurrent">{{formatDate(project.DateStart)}} - {{setIfCurrentDate(project.IsCurrent)}}</p>
                 </td>
-                <td style="width:55%; vertical-align: top; font-family:'Arial';">
+                <td id="projectID" style="width:55%; vertical-align: top; font-family:'Arial';">
                   <p style="margin:0; padding:0; margin-bottom:3px; width:90%; font-weight:bold;" v-for="industry in project.Industries" :key="industry.id">{{industry.name}}</p>
-                  <p style="mso-cellspacing:0; margin:0; padding:0; margin-bottom: 10px;">{{descriptionFormatting(project.Description)}}</p>
+                  <p :id="index" style="mso-cellspacing:0; margin:0; padding:0; height: 0;">{{descriptionFormatting(index, project.Description)}}</p>
+                  <!-- margin-bottom: 10px; -->
                 </td>
                 <td style="width:10%; max-width:10%; vertical-align: top; font-family:'Arial';">
                   <p style="mso-cellspacing:0; margin:0; padding:0;" v-for="sapModule in project.Modules" :key="sapModule.id">
@@ -208,10 +209,12 @@ export default {
     ...mapActions([
        "getIndustries"
     ]), 
-    descriptionFormatting(desc){
+    descriptionFormatting(projectid, desc){
       let i,
-          newDesc = ""
-      if (desc.match(/\n/)) {
+          newDesc = "",
+          domElem = document.getElementById(projectid) || null,
+          parentDiv = document.getElementById("projectID") || null
+      if (desc.match(/\n/) && domElem !== undefined && domElem !== null) {
         desc = desc.split('\n')
         i = desc.length
         while (i--) {
@@ -223,13 +226,39 @@ export default {
         }
         if (desc.length > 1) {
           for (i = 0; i < desc.length; i++) {
-            newDesc = newDesc + desc[i] + '\n'
+            let newDiv = this.createElem(desc[i])
+            if (domElem.nextElementSibling !== null) {
+              // let endDiv = this.endElem(domElem)
+              domElem.nextElementSibling.insertAdjacentElement('afterend', newDiv)
+              // endDiv.insertAdjacentElement('afterend', newDiv)
+            }
+            else {
+              domElem.insertAdjacentElement('afterend', newDiv)
+            }
           }
         } else {
-          newDesc = desc[0]
+          let newDiv = this.createElem(desc[0])
+          domElem.insertAdjacentElement('afterend', newDiv)
         }
-        return newDesc
+      } else if (domElem !== null) {
+        let newDiv = this.createElem(desc)
+        domElem.insertAdjacentElement('afterend', newDiv)
       }
+    },
+    // endElem(domElem) {
+    //   if (domElem.nextElementSibling && domElem.nextElementSibling.id === "") {
+    //     this.endElem(domElem.nextElementSibling)
+    //   } else {
+    //     return domElem
+    //   }
+    // },
+    createElem(desc) {
+      let newDiv = document.createElement("p"),
+          newDesc = ""
+      newDiv.className = "pempty"
+      newDesc = document.createTextNode(desc)
+      newDiv.appendChild(newDesc)
+      return newDiv
     },
     generate(oEvent) {
       if (this.cvElements.format == "PDF") {
@@ -408,6 +437,12 @@ export default {
 }
 </script>
 <style>
+
+.pempty {
+  margin: 0;
+  padding: 0;
+}
+
 #content,
 .content {
   background: grey;
