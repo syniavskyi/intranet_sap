@@ -110,7 +110,7 @@
                 </td>
                 <td style="width:55%; vertical-align: top; font-family:'Arial';">
                   <p style="margin:0; padding:0; margin-bottom:3px; width:90%; font-weight:bold;" v-for="industry in project.Industries" :key="industry.id">{{industry.name}}</p>
-                  <p style="mso-cellspacing:0; margin:0; padding:0; margin-bottom: 10px;">{{project.Description}}</p>
+                  <p style="mso-cellspacing:0; margin:0; padding:0; margin-bottom: 10px;">{{descriptionFormatting(project.Description)}}</p>
                 </td>
                 <td style="width:10%; max-width:10%; vertical-align: top; font-family:'Arial';">
                   <p style="mso-cellspacing:0; margin:0; padding:0;" v-for="sapModule in project.Modules" :key="sapModule.id">
@@ -204,10 +204,33 @@ export default {
     let oStore = this.$store;
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
-  methods: Object.assign(
-    mapActions([
+  methods: {
+    ...mapActions([
        "getIndustries"
-    ]), {
+    ]), 
+    descriptionFormatting(desc){
+      let i,
+          newDesc = ""
+      if (desc.match(/\n/)) {
+        desc = desc.split('\n')
+        i = desc.length
+        while (i--) {
+          if (desc[i] === "") {
+            desc.splice(i, 1)
+          } else {
+            break
+          }
+        }
+        if (desc.length > 1) {
+          for (i = 0; i < desc.length; i++) {
+            newDesc = newDesc + desc[i] + '\n'
+          }
+        } else {
+          newDesc = desc[0]
+        }
+        return newDesc
+      }
+    },
     generate(oEvent) {
       if (this.cvElements.format == "PDF") {
         this.generatePdf();
@@ -359,10 +382,9 @@ export default {
             console.log(error);
       });
     }
-  }
-  ),
-  computed: (
-    mapGetters({
+  },
+  computed: {
+    ...mapGetters({
       userEducation: "getUserEducation",
       userProjects: "getUserProjectsList",
       userExperience: "getUserExperience",
@@ -382,8 +404,8 @@ export default {
       showModal: "getShowModal",
       userPhoto: "getSelectedUserPhotoUrl"
     })
-  )
-};
+  }
+}
 </script>
 <style>
 #content,
