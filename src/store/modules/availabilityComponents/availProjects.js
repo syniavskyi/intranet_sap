@@ -1,6 +1,7 @@
 import axios from 'axios'
 import moment from 'moment'
 import { parse } from 'path';
+import { stat } from 'fs';
 let utils = require('../../../utils')
 
 const state = {
@@ -17,13 +18,26 @@ const state = {
 
 const mutations = {
   SET_USER_AVAIL_PROJECTS(state, userAvail) {
-    state.userAvailProjects = userAvail
+    if(userAvail){
+      state.userAvailProjects = userAvail
+    }
   },
   SET_USER_PROJECTS(state, userProjects) {
     state.userProjects = userProjects
   },
   SET_NEW_PROJECT_FOR_USER(state, project) {
     state.newProjectForUser = project
+  },
+  SET_NEW_PROJ(state, data){
+    if(data.UserAlias){
+      state.newProjectForUser.UserAlias = data.UserAlias
+    }
+    if(data.StartDate && !data.StartDateIsNull){
+      state.newProjectForUser.StartDate = utils.formatDateForBackend(data.StartDate)
+    }
+    if(data.EndDate && !data.EndDateIsNull){
+      state.newProjectForUser.EndDate = utils.formatDateForBackend(data.EndDate)
+    }
   }
 };
 

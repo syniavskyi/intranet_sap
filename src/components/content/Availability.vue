@@ -16,7 +16,7 @@
                         <div class="availability-tile-header">
                             <div class="ava-tile-header-title">
                                 <h2 v-if="selectedUser === null">{{ $t("header.selectEmployee") }}</h2>
-                                <h2 class="ava-selected-user-h2" v-else-if="selectedUser !== null">{{ selectedUser.Fullname }}</h2>
+                                <h2 class="ava-selected-user-h2" v-else-if="selectedUser !== null">{{ formattedUsername }}</h2>
                                 <div class="availability-tile-underscore"></div>
                             </div>
                         </div>
@@ -36,8 +36,8 @@
                                         <label class="ava-select-label-cool">{{ $t("label.branch") }}</label>
                                     </div>
                                     <div class="ava-div-select-cool" v-if="selectedDepartment != null">
-                                        <select required class="ava-select-cool" v-model="selectedUser" @change="loadUserProjects(selectedUser.UserAlias)">
-                                            <option v-for="user in filteredUsers" :value="user" :key="user.UserAlias">{{ user.Fullname }}</option>
+                                        <select required class="ava-select-cool" v-model="selectedUser" @change="loadUserProjects(selectedUser)">
+                                            <option v-for="user in filteredUsers" :value="user.UserAlias" :key="user.UserAlias">{{ user.Fullname }}</option>
                                         </select>
                                         <label class="ava-select-label-cool">{{ $t("label.employee") }}</label>
                                         <span class="avail-error-wrap">
@@ -74,12 +74,12 @@
                             </div>
                         </div>
                     </div>
-                    <app-not-authorized-projects-tile :auth-type="authType" :selected-user="selectedUser.UserAlias" v-if="selectedType === 'PR' && showContent == true && authAcc === 'OWN'"></app-not-authorized-projects-tile>
-                    <app-projects-tile :auth-type="authType" :auth-acc="authAcc" :selected-user="selectedUser.UserAlias" v-if="selectedType === 'PR' && showContent == true && authAcc !== 'OWN'"></app-projects-tile>
-                    <app-leaves-tile :auth-acc="authAcc" :selected-user="selectedUser.UserAlias" :selected-type="selectedType"  v-if="selectedType !== 'PR' && showContent == true"></app-leaves-tile>
+                    <app-not-authorized-projects-tile :auth-type="authType" :selected-user="selectedUser" v-if="selectedType === 'PR' && showContent == true && authAcc === 'OWN'"></app-not-authorized-projects-tile>
+                    <app-projects-tile :auth-type="authType" :auth-acc="authAcc" :selected-user="selectedUser" v-if="selectedType === 'PR' && showContent == true && authAcc !== 'OWN'"></app-projects-tile>
+                    <app-leaves-tile @change-selected-type="changeSelectedType" :auth-acc="authAcc" :selected-user="selectedUser" :selected-type="selectedType"  v-if="selectedType !== 'PR' && showContent == true"></app-leaves-tile>
                </div>
                 <div class="availability-tiles-row">
-                    <app-projects-table :auth-type="authType" :auth-acc="authAcc" :selected-status="selectedStatus" v-if="selectedType === 'PR' && showContent == true"></app-projects-table>
+                    <app-projects-table ref="projectsTable" :auth-type="authType" :auth-acc="authAcc" :selected-status="selectedStatus" v-show="selectedType === 'PR' && showContent == true"></app-projects-table>
                     <app-leaves-table :auth-type="authType" :selected-type="selectedType" :selected-status="selectedStatus" v-if="selectedType !== 'PR' && showContent == true"></app-leaves-table>
                 </div>
             </div>
@@ -114,10 +114,10 @@ export default {
     data() {
         return {
             showUsersCalendar: false,
-            selectedDepartment: null,
-            selectedBranch: null,
+            // selectedDepartment: null,
+            // selectedBranch: null,
             showBranchSelect: true,
-            selectedUser: null,
+            // selectedUser: null,
             showContent: false,
             selectedType: null,
             selectedStatus: null,
@@ -153,6 +153,41 @@ export default {
             authAcc: 'getAvailAcceptAuth',
             disabledBtnToEditAvail: "getDisabledBtnToEditAvail"
         }),
+        selectedBranch: {
+            get () {
+                return this.$store.getters.getSelectedBranch
+            },
+            set (branchId) {
+                this.$store.commit('SET_SELECTED_DEF_AVAIL', { selectedBranch: branchId, selectedDep: null, selectedUser: null })
+            }
+        },
+        selectedDepartment: {
+            get () {
+                return this.$store.getters.getSelectedDepartment
+            },
+            set (departmentId) {
+                this.$store.commit('SET_SELECTED_DEF_AVAIL', { selectedDep: departmentId, selectedUser: null, selectedBranch: null })
+            }
+        },
+        selectedUser: {
+            get () {
+                let sUserId = this.$store.getters.getSelectedUser
+                return sUserId
+            },
+            set (userId) {
+                this.$store.commit('SET_SELECTED_DEF_AVAIL', { selectedUser: userId, selectedDep: null, selectedBranch: null })
+                this.$store.commit('SET_NEW_PROJ', { UserAlias: userId })
+                
+            }
+        },
+        formattedUsername() {
+            const userId = this.selectedUser
+             for (let i = 0; i < this.usersList.length; i++){
+                 if (this.usersList[i].UserAlias === userId) {
+                      return this.usersList[i].Fullname
+                 }
+             }
+        },
         filteredUsers() {
             let aFilteredUsers = this.usersList,
                 selectedDep = this.selectedDepartment,
@@ -206,25 +241,22 @@ export default {
       oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getAvailabilityToRead);
       oStore.dispatch('getData', null);
       utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
+      this.$nextTick(() => {
+          this.checkAuthorization()
+      })
     },
     watch: {
         selectedType(value) {
-            this.newLeave.TypeId = value;
+            let isTypeIdNull = !value ? true : false;
+            this.$store.commit('SET_NEW_LEAVE', {TypeId: value, TypeIdNull: isTypeIdNull});
+            // this.newLeave.TypeId = value;
         },
         selectedUser(value){
-            this.newLeave.UserId = value.UserAlias;
-            this.newProject.UserAlias = value.UserAlias;
-
-        // check if button is disabled to create project or other avail type
-            if(this.authAcc === '*') {
-            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
-            } else if(this.authAcc === 'TEAM' && this.filteredUsers.find(o => o.UserAlias === this.selectedUser.UserAlias)) {
-            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
-            } else if(this.authType === 'OWN' && this.selectedUser.UserAlias === this.loginAlias) {
-            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
-            } else {
-            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', true);
-            }
+            this.$store.commit('SET_NEW_LEAVE', {UserId: value});
+            this.$refs.projectsTable.cancel() 
+            // this.newLeave.UserId = value.UserAlias;
+            this.newProject.UserAlias = value;
+            this.checkAuthorization();
         },
         selectedBranch(value) {
     //   filter users to make possibility to edit or accept avails
@@ -234,6 +266,9 @@ export default {
                 return oData.DepartmentId === idTeam;
             });
             this.$store.commit('SET_FILTERED_TEAM_USERS', aFilteredUsers);
+            
+        },
+        selectedDepartment(value){
         }
     },
     methods: {
@@ -250,9 +285,24 @@ export default {
             this.$store.commit('SET_DISPLAY_LOADER', true)
             this.$store.commit('SET_PROMISE_TO_READ', this.$store.getters.getAvailabilityToRead);
             let userData = {
-                user: this.selectedUser.UserAlias
+                user: this.selectedUser
             }
             this.$store.dispatch('getData', userData);
+        },
+        changeSelectedType(value){
+            this.selectedType = value;
+        },
+        checkAuthorization(){
+         // check if button is disabled to create project or other avail type
+            if(this.authAcc === '*') {
+            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
+            } else if(this.authAcc === 'TEAM' && this.filteredUsers.find(o => o.UserAlias === this.selectedUser)) {
+            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
+            } else if(this.authType === 'OWN' && this.selectedUser === this.loginAlias) {
+            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', false);
+            } else {
+            this.$store.commit('SET_DISABLED_BTN_TO_EDIT_AVAIL', true);
+            }
         }
     }
 }

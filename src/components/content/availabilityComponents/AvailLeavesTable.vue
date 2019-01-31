@@ -137,8 +137,10 @@ export default {
                         return oItem.StatusId === sStatus;
                     }
                }
-                aFilteredAvail = aFilteredAvail.filter(fnFilter);
-
+               if(fnFilter){
+                   aFilteredAvail = aFilteredAvail.filter(fnFilter);
+               }
+               
                 return aFilteredAvail
            }
         },

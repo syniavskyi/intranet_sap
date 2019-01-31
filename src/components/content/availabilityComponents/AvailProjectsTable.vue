@@ -31,14 +31,14 @@
                         <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="project.ProjectId" >
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
                         </select>
-                        <select v-if="editMode && authType !== 'OWN'" class="selectProfile selectEdit" v-model="project.ProjectId" @change="checkFields(index)">
+                        <select v-if="editMode" class="selectProfile selectEdit" v-model="project.ProjectId" @change="checkFields(index)">
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
                         </select>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.engag") }}</div>
                         <p v-if="!editMode">{{project.Engag}}</p>
-                        <div v-if="editMode && authType !== 'OWN'">
+                        <div v-if="editMode">
                             <input required class="ava-input-range-perc" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="ava-perc-span">%</span>
                             <span class="ava-div-bar"></span>
                         </div>
@@ -46,20 +46,20 @@
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.from") }}</div>
                         <p class="prof-date-label" v-if="!editMode"> {{ formatDate(project.StartDate) }} </p>
-                        <v-date-picker v-if="editMode && authType !== 'OWN'" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.StartDate">
+                        <v-date-picker v-if="editMode" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.StartDate">
                             <input value="project.StartDate">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.to") }}</div>
                         <p class="prof-date-label" v-if="!editMode"> {{ formatDate(project.EndDate) }} </p>
-                        <v-date-picker v-if="editMode && authType !== 'OWN'" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.EndDate">
+                        <v-date-picker v-if="editMode" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.EndDate">
                             <input value="project.EndDate">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.status") }}</div>
-                        <select v-if="editMode && authType !== 'OWN'" class="selectProfile selectEdit" v-model="project.StatusId" @change="checkFields(index)">
+                        <select v-if="editMode" class="selectProfile selectEdit" v-model="project.StatusId" @change="checkFields(index)">
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
                         </select>
                          <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="project.StatusId" >
@@ -74,8 +74,8 @@
                     </div>
                     <div class="ava-tbs-item eduButtonsProj">
                         <div class="ava-tbs-ititle">{{ $t("label.options") }}</div>
-                        <button class="btn-delete-row" v-if="editMode && authType !== 'OWN'" @click="update(index)" :disabled="true">{{ $t("button.save") }}</button>
-                        <button class="btn-delete-row" v-if="editMode && authType !== 'OWN'" @click="remove(project)">{{ $t("button.delete") }}</button>
+                        <button class="btn-delete-row" v-if="editMode" @click="update(index)">{{ $t("button.save") }}</button>
+                        <button class="btn-delete-row" v-if="editMode" @click="remove(project)">{{ $t("button.delete") }}</button>
                     </div>
                 </div>
             </div>
@@ -104,6 +104,9 @@ export default {
             disabledBtnToEditAvail: "getDisabledBtnToEditAvail"
         }),
         noAvailEntries() {
+            if(!this.filteredUserProjects){
+                return true
+            }
             if (this.filteredUserProjects.length === 0) {
                 return true
             } else {

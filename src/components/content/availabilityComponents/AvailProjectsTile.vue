@@ -74,8 +74,16 @@ export default {
     },
     watch: {
         selectedDates(value){
-            this.newProjectForUser.StartDate = utils.formatDateForBackend(value.start)
-            this.newProjectForUser.EndDate = utils.formatDateForBackend(value.end)
+            if(value){
+                this.$store.commit('SET_NEW_PROJ', { StartDate: value.start, EndDate: value.end })
+                // this.newProjectForUser.StartDate = utils.formatDateForBackend(value.start)
+                // this.newProjectForUser.EndDate = utils.formatDateForBackend(value.end)
+            } else {
+                this.$store.commit('SET_NEW_PROJ', { StartDateIsNull: true, EndDateIsNull: true })
+                // this.newProjectForUser.StartDate = this.newProjectForUser.EndDate = null
+            }
+            this.validateNewProject(this.newProjectForUser);
+
         }
     },
     computed: {
@@ -112,7 +120,8 @@ export default {
         }),
         addNewProjectForUser(){
             this.$store.dispatch('addUserProject')
-            this.selectedDates = null
+            this.$store.commit('SET_NEW_PROJ', { StartDateIsNull: true, EndDateIsNull: true} )
+            // this.selectedDates = null
         },
         removeSelectedProject() {
             const userId = this.newProjectForUser.UserAlias,
@@ -142,6 +151,7 @@ export default {
                 StartDate: null,
                 EndDate: null
             })
+            this.selectedDates = null;
         },
         validateNewProject(){
             let obj = this.newProjectForUser
