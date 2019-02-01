@@ -1,4 +1,5 @@
 /* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA / DATEPICKER - start */
+.cd-for-input-xxs,
 .cd-for-input-xs,
 .cd-for-input-s,
 .cd-for-input,
@@ -18,6 +19,7 @@
     width: 8.6rem;
 }
 
+.cd-for-input-xxs {width: 6rem;}
 .cd-for-input-s {width: 13rem;}
 
 .cd-for-select {width: 15rem;}
@@ -64,8 +66,9 @@
 .cd-textarea:disabled { background-color: transparent; }
 
 .cd-select,
-.cd-dselect,
-.cd-tselect {
+.cd-dselect, /* disabled select */
+.cd-tselect, /* table select */ 
+.cd-wselect /* select with width */ {
     display: flex;
     width: 100%;
     height: 2rem;
@@ -85,6 +88,28 @@
     border: 1px solid #d3d3d3;
     outline-color: #ffa500;
     cursor: pointer;
+}
+
+.cd-wselect {
+    margin-left: 1rem;
+    align-self: center;
+}
+
+.cd-wdselect {
+    display: flex;
+    height: 2rem;
+    border: 0;
+    background: #ffffff;
+    font: 1.1rem 'Roboto';
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    margin: .1rem  0;
+    margin-left: 1rem;
+}
+
+.cd-wselect {
+    width: 10rem;
 }
 
 .cd-date {

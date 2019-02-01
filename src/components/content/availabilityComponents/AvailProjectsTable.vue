@@ -20,11 +20,12 @@
                     <div class="ava-thproj-item">{{ $t("label.to") }}</div>
                     <div class="ava-thproj-item">{{ $t("label.status") }}</div>
                     <div class="ava-thproj-item">{{ $t("label.remarks") }}</div>
+                    <div class="ava-thproj-item">---</div>
                 </div>
                 <div class="ava-proj-tbody" v-for="(project, index) in filteredUserProjects" :key="index">
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.entryType") }}</div>
-                        <p>{{formattedProjectType()}}</p>
+                        <p class="pempty">{{formattedProjectType()}}</p>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.projectName") }}</div>
@@ -37,8 +38,8 @@
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.engag") }}</div>
-                        <p v-if="!editMode">{{project.Engag}}</p>
-                        <div v-if="editMode">
+                        <p class="pempty" v-if="!editMode">{{project.Engag}}</p>
+                        <div class="cd-for-input-xxs" v-if="editMode">
                             <input required class="ava-input-range-perc" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="ava-perc-span">%</span>
                             <span class="ava-div-bar"></span>
                         </div>
@@ -72,7 +73,8 @@
                             <textarea :disabled="!editMode" v-model="project.Description"  @input="checkFields(index)"></textarea>
                         </div>
                     </div>
-                    <div class="ava-tbs-item eduButtonsProj">
+                    <div class="ava-tbproj-item eduButtonsProj">
+                         <!-- ava-tbs-item -->
                         <div class="ava-tbs-ititle">{{ $t("label.options") }}</div>
                         <button class="btn-delete-row" v-if="editMode" @click="update(index)">{{ $t("button.save") }}</button>
                         <button class="btn-delete-row" v-if="editMode" @click="remove(project)">{{ $t("button.delete") }}</button>

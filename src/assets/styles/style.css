@@ -17,6 +17,11 @@ body {
   /* margin-left: calc(100vw - 100%);  */
 }
 
+.pempty {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   /*font-family: 'Montserrat', 'Avenir', Helvetica, Arial, sans-serif;*/
   font-family: 'Montserrat';
