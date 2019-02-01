@@ -213,7 +213,7 @@ export default {
       let i,
           newDesc = "",
           domElem = document.getElementById(projectid) || null,
-          parentDiv = document.getElementById("projectID") || null
+          newDiv
       if (desc.match(/\n/) && domElem !== undefined && domElem !== null) {
         desc = desc.split('\n')
         i = desc.length
@@ -226,36 +226,29 @@ export default {
         }
         if (desc.length > 1) {
           for (i = 0; i < desc.length; i++) {
-            let newDiv = this.createElem(desc[i])
+            newDiv = this.createElem(desc[i])
             if (domElem.nextElementSibling !== null) {
-              // let endDiv = this.endElem(domElem)
-              domElem.nextElementSibling.insertAdjacentElement('afterend', newDiv)
-              // endDiv.insertAdjacentElement('afterend', newDiv)
+              while(domElem.nextElementSibling && domElem.nextElementSibling.id === "") {
+                domElem = domElem.nextElementSibling
+              }
             }
-            else {
-              domElem.insertAdjacentElement('afterend', newDiv)
-            }
+            domElem.insertAdjacentElement('afterend', newDiv)
           }
         } else {
-          let newDiv = this.createElem(desc[0])
+          newDiv = this.createElem(desc[0])
           domElem.insertAdjacentElement('afterend', newDiv)
         }
       } else if (domElem !== null) {
-        let newDiv = this.createElem(desc)
+        newDiv = this.createElem(desc)
         domElem.insertAdjacentElement('afterend', newDiv)
       }
     },
-    // endElem(domElem) {
-    //   if (domElem.nextElementSibling && domElem.nextElementSibling.id === "") {
-    //     this.endElem(domElem.nextElementSibling)
-    //   } else {
-    //     return domElem
-    //   }
-    // },
     createElem(desc) {
       let newDiv = document.createElement("p"),
           newDesc = ""
-      newDiv.className = "pempty"
+      newDiv.style.margin = "0"
+      newDiv.style.padding = "0"
+      newDiv.style.marginLeft = "3px"
       newDesc = document.createTextNode(desc)
       newDiv.appendChild(newDesc)
       return newDiv
@@ -437,11 +430,6 @@ export default {
 }
 </script>
 <style>
-
-.pempty {
-  margin: 0;
-  padding: 0;
-}
 
 #content,
 .content {
