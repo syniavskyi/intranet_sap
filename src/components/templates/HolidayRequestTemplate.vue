@@ -97,7 +97,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import i18n from "../../../lang/lang";
+import i18n from "../../lang/lang";
 export default {
     name: 'holidayRequestTemplate',
      created() {

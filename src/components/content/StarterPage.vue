@@ -25,7 +25,7 @@ import Menu from "../Menu.vue";
 import i18n from "../../lang/lang";
 import { mapGetters, mapActions } from "vuex";
 import Modal from '../dialogs/MessageLogDialog';
-import StarterPageTemplate from '../dialogs/StarterPageTemplate';
+import StarterPageTemplate from '../templates/StarterPageTemplate';
 const utils = require("../../utils")
 
 export default {
