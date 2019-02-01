@@ -26,7 +26,7 @@ import Menu from "../Menu.vue";
 import i18n from "../../lang/lang";
 import { mapGetters } from "vuex";
 import Modal from '../dialogs/MessageLogDialog';
-import FileRow from '../dialogs/FileRow';
+import FileRow from '../templates/FileRow';
 const utils = require("../../utils");
 
 export default {

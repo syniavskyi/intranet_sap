@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import HolidayRequestTemplate from './HolidayRequestTemplate';
 import { mapGetters, mapActions } from "vuex";
 import i18n from "../../../lang/lang";
 import html2canvas from 'html2canvas';
 import jsPDF from "jspdf";
+import HolidayRequestTemplate from "../../templates/HolidayRequestTemplate";
 export default {
     name: 'holidayRequest',
     components: {
