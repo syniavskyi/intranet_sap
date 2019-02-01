@@ -14,7 +14,7 @@ const mutations = {
   // informational documents
   SET_DOC_LIST_INFO(state, data) {
     state.docListInfo = data;
-  },
+  }
 }
 
 const actions = {
@@ -88,6 +88,7 @@ const actions = {
         }).then(res => {
             let message = res.headers;
             dispatch('displayModal', message);
+            dispatch('getData', null)
         }).catch(error => {
         })
   },
@@ -107,6 +108,8 @@ const actions = {
     }).then(res => {
         let message = res.headers;
         dispatch('displayModal', message);
+        // this.$store.commit("SET_PROMISE_TO_READ", ["UserData", "StarterDocsInfo", "StarterDocsNew", "NewToken"]);
+        dispatch('getData', null);
     }).catch(error => {
     })
   }

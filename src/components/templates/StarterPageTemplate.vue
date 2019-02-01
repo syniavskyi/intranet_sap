@@ -7,7 +7,7 @@
     <ul class="starter-page-ul">
       <li class="starter-page-item" v-for="list in fileType" :key="list.FileId">
          <div class="starter-page-list-item-btns">
-            <a class="starter-page-file-btn" v-if="list.Filename.includes('http')" :title="$t('title.download')" target="_blank" :href="list.Filename">&#x21e3;</a>
+            <a class="starter-page-file-btn" v-if="list.Link" :title="$t('title.download')" target="_blank" :href="list.Link">&#x21e3;</a>
             <a class="starter-page-file-btn" v-else :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
             <div v-if="checkFileFormat(list.Filename) == '.pdf'">
                 <p class="starter-page-pdf">{{checkFileFormat(list.Filename)}}</p>
@@ -15,7 +15,7 @@
             <div v-if="checkFileFormat(list.Filename) == '.doc' || checkFileFormat(list.Filename) == '.docx'">
                  <p class="starter-page-docx">{{checkFileFormat(list.Filename)}}</p>
             </div>
-            <div v-if="list.Filename.includes('http')">
+            <div v-if="list.Link !== ''">
                 <p class="starter-page-link"> .link </p>
             </div>
          </div>
@@ -85,11 +85,12 @@ export default {
     },
     removeNewFile() {
       this.deleteNewFile();
-      this.$store.commit('SET_BUTTON_STATE_NEW', true);
+      // this.$store.commit('SET_BUTTON_STATE_NEW', true);
     },
     removeInfoFile() {
       this.deleteInfoFile();
-      this.$store.commit('SET_BUTTON_STATE_INFO', true);
+      
+      // this.$store.commit('SET_BUTTON_STATE_INFO', true);
     }
   }
 };

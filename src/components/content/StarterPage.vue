@@ -35,7 +35,7 @@ export default {
     "starter-page-template": StarterPageTemplate
   },
   created() {
-      this.$store.commit("SET_PROMISE_TO_READ", ["UserData", "StarterDocsInfo", "StarterDocsNew"]);
+      this.$store.commit("SET_PROMISE_TO_READ", ["UserData", "StarterDocsInfo", "StarterDocsNew", "NewToken"]);
       this.$store.dispatch('getData', null);
       utils.checkAuthLink(this.$router, this.$store.getters.getUserAuth.ZMENU);
   },
