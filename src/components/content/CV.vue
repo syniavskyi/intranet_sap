@@ -111,13 +111,9 @@
                 <td id="projectID" style="width:55%; vertical-align: top; font-family:'Arial';">
                   <p style="margin:0; padding:0; margin-bottom:3px; width:90%; font-weight:bold;" v-for="industry in project.Industries" :key="industry.id">{{industry.name}}</p>
                   <p :id="index" style="mso-cellspacing:0; margin:0; padding:0; height: 0;">{{descriptionFormatting(index, project.Description)}}</p>
-                  <!-- margin-bottom: 10px; -->
                 </td>
                 <td style="width:10%; max-width:10%; vertical-align: top; font-family:'Arial';">
-                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-for="sapModule in project.Modules" :key="sapModule.id">
-                    {{ sapModule.id }}
-                    <!-- <strong >&nbsp;</strong> -->
-                  </p>
+                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-for="sapModule in project.Modules" :key="sapModule.id">{{ sapModule.id }}</p>
                 </td>
               </tr>
               <tr>
@@ -128,29 +124,44 @@
             <h3 style="font-weight: bold; margin-bottom: 10px; margin-top:10px; padding-bottom:5px; border-bottom:2px solid #E79600; text-transform: uppercase; font-family: 'Arial';">{{ $t("label.sapModulesExp") }}</h3>
             <table>
               <tr>
-                <td width="50%" style="font-family: 'Arial'; font-weight: bold;"><p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.SapModules && userSkills.SapModules != 0">{{ $t("label.sapModules") }}</p></td>
-                <!-- <td style="mso-cellspacing:0; margin:0; padding:0; white-space: normal;"><p style="float: left; letter-spacing: -1px; mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';white-space: normal;" v-for="sapModule in userSkills.SapModules" :key="sapModule.id">{{sapModule}}</p></td> -->
-                <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.SapModules)}}</p></td>
+                <td width="50%" style="font-family: 'Arial'; font-weight: bold;">
+                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.SapModules && userSkills.SapModules != 0">{{ $t("label.sapModules") }}</p>
+                </td>
+                <td>
+                  <p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.SapModules)}}</p>
+                </td>
               </tr>
               <tr>
-                <td style="font-family: 'Arial'; font-weight: bold;"><p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.ProgramLang && userSkills.ProgramLang != 0">{{ $t("label.programmingLanguages") }}</p></td>
-                <!-- <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';"  v-for="programLang in userSkills.ProgramLang" :key="programLang.id">{{programLang}}</p></td> -->
-                <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.ProgramLang)}}</p></td>
+                <td style="font-family: 'Arial'; font-weight: bold;">
+                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.ProgramLang && userSkills.ProgramLang != 0">{{ $t("label.programmingLanguages") }}</p>
+                </td>
+                <td>
+                  <p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.ProgramLang)}}</p>
+                </td>
               </tr>
               <tr>
-                <td style="font-family: 'Arial'; font-weight: bold;"><p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.Technologies && userSkills.Technologies != 0">{{ $t("label.technologies") }}</p></td>
-                <!-- <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';" v-for="technology in userSkills.Technologies" :key="technology.id">{{technology}}</p></td> -->
-                <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.Technologies)}}</p></td>
+                <td style="font-family: 'Arial'; font-weight: bold;">
+                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.Technologies && userSkills.Technologies != 0">{{ $t("label.technologies") }}</p>
+                </td>
+                <td>
+                  <p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.Technologies)}}</p>
+                </td>
               </tr>
               <tr>
-                <td style="font-family: 'Arial'; font-weight: bold;"><p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.Extensions && userSkills.Extensions.length != 0">{{ $t("label.extensions") }}</p></td>
-                <!-- <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';" v-for="extension in userSkills.Extensions" :key="extension.id">{{extension}}</p></td> -->
-                <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.Extensions)}}</p></td>
+                <td style="font-family: 'Arial'; font-weight: bold;">
+                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.Extensions && userSkills.Extensions.length != 0">{{ $t("label.extensions") }}</p>
+                </td>
+                <td>
+                  <p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.Extensions)}}</p>
+                </td>
               </tr>
               <tr>
-                <td style="font-family: 'Arial'; font-weight: bold;"><p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.AdiitionalSkills && userSkills.AdiitionalSkills.length != 0">{{ $t("label.additionalSkills") }}</p></td>
-                <!-- <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';" v-for="additionalSkill in userSkills.AdiitionalSkills" :key="additionalSkill.id">{{additionalSkill}}</p></td> -->
-                <td><p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.AdiitionalSkills)}}</p></td>
+                <td style="font-family: 'Arial'; font-weight: bold;">
+                  <p style="mso-cellspacing:0; margin:0; padding:0;" v-if="userSkills.AdiitionalSkills && userSkills.AdiitionalSkills.length != 0">{{ $t("label.additionalSkills") }}</p>
+                </td>
+                <td>
+                  <p style="mso-cellspacing:0; margin:0; padding:0; font-family: 'Arial';">{{fnLoop(userSkills.AdiitionalSkills)}}</p>
+                </td>
               </tr>
             </table>
           </td>
@@ -407,7 +418,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userEducation: "getUserEducation",
+      // userEducation: "getUserEducation",
+      userEducation: "getSortedUserEducation",
       userProjects: "getUserProjectsList",
       userExperience: "getUserExperience",
       userData: "userData",

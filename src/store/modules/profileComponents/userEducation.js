@@ -132,6 +132,11 @@ const getters = {
   getUserEducation(state) {
     return state.userEducation
   },
+  getSortedUserEducation(state) {
+    let filterEdu = state.userEducation
+    filterEdu = filterEdu.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
+    return filterEdu;
+  },
   getSchoolDescList(state) {
     return state.schoolDescList;
   },
