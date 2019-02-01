@@ -13,8 +13,8 @@
         </div>
         <div class="documents-tile-content">
           <div class="documents-div">
-            <a v-if="doc.Filename.includes('http')" class="doc-file-div" :href="doc.Filename" target="_blank" :title="$t('title.download')">
-              <div class="doc-file-img doc-file-link" v-if="doc.Filename.includes('http')"></div>
+            <a v-if="doc.Link" class="doc-file-div" :href="doc.Link" target="_blank" :title="$t('title.download')">
+              <div class="doc-file-img doc-file-link" v-if="doc.Link"></div>
               <div class="doc-file-desc">{{ doc.Filename }}</div>
             </a>
             <a v-else class="doc-file-div" :href="generateLink(doc.FileId)" target="_blank" :title="$t('title.download')" >
