@@ -591,7 +591,6 @@ input:required {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-
 /* LOADER */
 
 /* MESSAGE TOAST */
@@ -650,7 +649,7 @@ input:required {
 .tile-content {
     display: flex;
     height: 90%;
-    align-self: center;
+    flex: 1 1 auto;
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
