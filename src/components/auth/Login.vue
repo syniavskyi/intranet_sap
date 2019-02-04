@@ -33,7 +33,7 @@
         </button>
       </div>
     </div>
-    <LoginForgotPassModal v-if="showRemindPassword"></LoginForgotPassModal>
+    <LoginForgotPassModal v-if="showRemindPassword" :language="this.selectedLang"></LoginForgotPassModal>
   </div>
 </template>
 
