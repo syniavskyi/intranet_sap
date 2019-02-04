@@ -235,9 +235,9 @@ export const checkRole = function(data) {
     } else if(!oRoleByKey){ // if there is no key, push it
       aMaxRoles[oRole.Key] = oRole.Value;
     } else if(oRoleByKey){ // if author. object already in, get more significant
-      sValueWas = oRoleByKey.Value;
+      sValueWas = aMaxRoles[oRole.Key]//oRoleByKey;
       sValue = oRole.Value;
-      switch(oRole.Value){
+      switch(sValue){
         case "*":
           aMaxRoles[oRole.Key] = sValue;
           break;
@@ -247,7 +247,7 @@ export const checkRole = function(data) {
           }
           break;
         case "OWN":
-          if(sValueWas !== "*" || sValueWas !== "TEAM" ){
+          if(sValueWas !== "*" && sValueWas !== "TEAM" ){
             aMaxRoles[oRole.Key] = sValue;
           }
           break;
