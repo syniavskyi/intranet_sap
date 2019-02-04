@@ -6,7 +6,7 @@
                 <div class="availability-tile-underscore"></div>
             </div>
             <button class="holiday-button-static">
-                <img src="../../../assets/images/island.png">
+                <img src="../../../assets/images/printer32px.png">
                 <p>{{$t('title.openHoliday')}}</p>
             </button>
             <button class="profile-edit-btn" v-if="!editMode" :disabled="disabledBtnToEditAvail" @click="edit">{{ $t("button.edit") }}</button>
@@ -28,36 +28,33 @@
                          <select disabled v-if="!editMode || avail.StatusId === 'CO'" class="cd-wdselect" v-model="avail.TypeId">
                             <option v-for="type in availTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select>
-                        <select v-if="editMode && avail.StatusId !== 'CO'" class="cd-wselect" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
+                        <select v-if="editMode && avail.StatusId !== 'CO'" class="cd-wselect mla mtb" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
                             <option v-for="type in filteredAvailTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select>
                         <button v-if="avail.TypeId !== 'WR' && !editMode" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
-                            <img src="../../../assets/images/island.png">
+                            <img src="../../../assets/images/printer32px.png">
                         </button>
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.from") }}</div>
-                        <p class="prof-date-label" v-if="!editMode || avail.StatusId !== 'PL'"> {{ formatDate(avail.DateStart) }} </p>
-                        <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*' " class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
+                        <p class="avail-date-label" v-if="!editMode || avail.StatusId !== 'PL'"> {{ formatDate(avail.DateStart) }} </p>
+                        <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*' " class="avail-date-label" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
                             <input value="avail.DateStart">
                         </v-date-picker>
-                        <v-date-picker :min-date="new Date()" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
+                        <v-date-picker :min-date="new Date()" v-if="editMode && avail.StatusId === 'PL' && authType !=='*'" class="cd-wdate mla mtb" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateStart">
                             <input value="avail.DateStart">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.to") }}</div>
-                        <p class="prof-date-label" v-if="!editMode || avail.StatusId !== 'PL' "> {{ formatDate(avail.DateEnd) }} </p>
-                        <!-- <v-date-picker v-if="editMode && avail.StatusId === 'PL' && authType === '*'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
-                            <input value="avail.DateEnd">
-                        </v-date-picker> -->
-                        <v-date-picker :min-date="avail.DateStart" v-if="editMode && avail.StatusId === 'PL'" class="prof-input-date" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
+                        <p class="avail-date-label mla" v-if="!editMode || avail.StatusId !== 'PL' "> {{ formatDate(avail.DateEnd) }} </p>
+                        <v-date-picker :min-date="avail.DateStart" v-if="editMode && avail.StatusId === 'PL'" class="cd-wdate mla mtb" popoverDirection="top" @input="validateDates(index, avail.EntryId)" is-expanded mode="single" v-model="avail.DateEnd">
                             <input value="avail.DateStart">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.status") }}</div>
-                         <select disabled class="cd-wdselect" v-model="avail.StatusId">
+                         <select disabled class="cd-wdselect mla mtb" v-model="avail.StatusId">
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
                         </select>
                     </div>

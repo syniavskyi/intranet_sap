@@ -29,6 +29,16 @@
     }
 }
 
+.avail-date-label {
+    display: flex;
+    position: relative;
+    border-radius: 1rem;
+    background: #FFB05C;
+    color: #ffffff;
+    padding: .3rem .7rem;
+    margin: .2rem;
+}
+
 .availability-tiles {
     display:flex;
     flex-direction: column;
@@ -90,7 +100,6 @@
 .avail-error {
     position: absolute;
     top: 3rem;
-    /* right: .8rem; */
     font-size: 0.75rem;
     color: #ff0000;
 }
@@ -159,6 +168,24 @@
     justify-content: space-between;
 }
 
+
+.holiday-button img,
+.holiday-button-static img {
+    border-radius: .5rem;
+    padding: .05rem;
+    transition: box-shadow .2s;
+    transform: scale(.4rem);
+}
+
+.holiday-button-static img {
+    margin-right: .5rem;
+}
+
+.holiday-button:hover img,
+.holiday-button-static:hover img {
+    box-shadow: 1px 1px 12px grey;
+}
+
 .holiday-button-static p {
     color: #808080;
     font: 1.2rem 'Arial';
@@ -181,12 +208,7 @@
     text-align: center;
     font-family: 'Roboto';
 }
-/* .request-input-generate {
-    background-color: white;
-} */
-/* .request-input-date {
-    text-align: right;
-} */
+
 .request-personal-data {
     width: 300px;
     text-align: left;
@@ -226,6 +248,8 @@
 .ava-select-and-calendar {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
 }
 .availability-select-options {
     display: flex;
@@ -251,12 +275,24 @@
     background:#ffa500;
     color: #ffffff;
 }
+
+.ava-calendar .ava-content-header {
+    margin: 1rem 0 .5rem 0;
+}
+
+.ava-calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 .ava-content-header {
     display: flex;
     justify-content: center;
     color: #808080;
     font-size: 1.2rem;
     margin-top: 0;
+    text-align: center;
 }
 
 .ava-tile-entry {
@@ -450,8 +486,10 @@
 }
 
 .availability-calendar {
-    margin: .5rem 1rem;
+    display: flex;
+    margin: .5rem .3rem;
     animation: slide-up 0.7s ease;
+    align-self: center;
 }
 
 #ava-edit-project-dialog,
@@ -566,6 +604,7 @@
     width: 95%;
     box-shadow: 0 0 10px rgb(170, 170, 170);
     border-radius: 4px;
+    margin: .5rem 0;
 }
 
 .ava-proj-thead,
@@ -583,7 +622,6 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    margin: 0.5rem 0 ;
 }
 
 .ava-proj-tbody:nth-of-type(odd),
@@ -606,7 +644,7 @@
 .eduButtonsAvail {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .ava-thproj-item,
@@ -636,7 +674,7 @@
     height: 2rem;
 }
 
-.ava-tbproj-item .ava-tbproj-itxt,
+/* .ava-tbproj-item .ava-tbproj-itxt, */
 .ava-tbs-item .ava-tbs-itxt {
     border-bottom: 1px solid #ccc;
 }
@@ -658,7 +696,7 @@
     width: 60%;
     display: flex;
     align-items: center;
-    padding-left: 0.5rem;
+    /* padding-left: 0.5rem; */
 }
 
 .notAuthToAddProject {
@@ -693,7 +731,8 @@
     }
 }
 
-@media (min-width: 35rem) {
+/* @media (min-width: 35rem) { */
+@media(min-width: 56.25rem) {
     .holiday-button-static {
         display : flex;
     }
@@ -717,42 +756,32 @@
     .ava-edit-2 {
         width: 100%;
     }
-    .ava-proj-thead,
+
     .ava-thead-s {
         display: flex;
     }
-    .ava-proj-tbody,
+ 
     .ava-tbody-s {
         flex-direction: row;
         margin:0;
     }
-    .ava-tbproj-ititle,
-    .ava-tbs-ititle {
-        display: none;
-    }
 
-    .ava-thproj-item,
-    .ava-tbproj-item,
-    .ava-tbproj-itxt,
     .ava-ths-item,
     .ava-tbs-item,
     .ava-tbs-itxt {
         justify-content: center;
         align-items: center;
     }
-    .ava-thproj-item:not(:last-of-type),
-    .ava-tbproj-item:not(:last-of-type) {
-        width: 12%;
+
+    .ava-tbs-ititle {
+        display: none;
     }
+
     .ava-ths-item,
     .ava-tbs-item {
         width:20%
     }
-    .ava-thproj-item:last-of-type,
-    .ava-tbproj-item:last-of-type {
-        width: 16%;
-    }
-    .ava-tbproj-item .ava-tbproj-itxt,
+
     .ava-tbs-item .ava-tbs-itxt {
         border-bottom: 0;
     }
@@ -763,10 +792,6 @@
     .ava-tbproj-itxt {
         padding-left: 0;
     }
-    /* .ava-thproj-item:nth-of-type(8),
-    .ava-thproj-item:nth-of-type(8) {
-        width: 1%;
-    } */
     .availability-select-options {
         margin-top: 0;
     }
@@ -791,6 +816,48 @@
     }
 }
 
+@media (min-width: 78.125rem) { /* Availability Projects Table*/
+    .ava-proj-thead {
+        display: flex;
+    }
+    .ava-tbproj-item .ava-tbproj-itxt {
+        border-bottom: 0;
+    }
+
+    .ava-thproj-item:not(:last-of-type),
+    .ava-tbproj-item:not(:last-of-type) {
+        width: 12%;
+    }
+
+    .ava-thproj-item:last-of-type,
+    .ava-tbproj-item:last-of-type {
+        width: 13%;
+    }
+
+    .ava-thproj-item:nth-of-type(2),
+    .ava-tbproj-item:nth-of-type(2),
+    .ava-thproj-item:nth-of-type(6),
+    .ava-tbproj-item:nth-of-type(6) {
+        width: 13.5%
+    }
+
+    .ava-proj-tbody {
+        flex-direction: row;
+        margin:0;
+    }
+
+    .ava-thproj-item,
+    .ava-tbproj-item,
+    .ava-tbproj-itxt {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ava-tbproj-ititle {
+        display: none;
+    }
+}
+
 @media (min-width:86.25rem) {
     .ava-select-and-calendar {
         flex-direction: row;
@@ -798,4 +865,20 @@
     #ava-edit-project-dialog {
         min-width: 33rem;
     }
+    .ava-calendar .ava-content-header {
+        margin: 0 0 .5rem 0;
+    }
+}
+
+.mla {
+    margin-left: .25rem;
+}
+
+.mtb {
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+.mra {
+    margin-right: .25rem;
 }
