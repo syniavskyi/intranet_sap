@@ -207,9 +207,7 @@ export default {
 
             usersFiltred = res.data.d.results.filter(user => filterDep(user));
 
-            if(usersFiltred.length === 0) {
-              usersFiltred = res.data.d.results.filter(user => filterRole(user));
-            }
+            usersFiltred.length === 0 ? usersFiltred = res.data.d.results.filter(user => filterRole(user)) : null;
 
             this.$store.commit('GET_USER_LIST', usersFiltred);
             this.$store.commit('SET_DISPLAY_LOADER', false);
