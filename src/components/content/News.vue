@@ -25,73 +25,26 @@
             <!-- <loader v-if="showAdvertsLoader"></loader> -->
             <div class="tile-content new-tile-cnt" v-if="advertsList.length > 0 ">
               <!-- <transition-group name="fly" tag="div"> -->
-              <div
-                class="news-adv-item"
-                v-for="(advert, index) in advertsList"
-                :key="advert.AdvertId"
-                :id="advert.AdvertId"
-              >
-                <textarea
-                  @input="validateAdvert(advert)"
-                  :disabled="!editMode || loginAlias !== advert.CreatedBy"
-                  class="n-textarea"
-                  v-model="advert.Message"
-                />
+              <div class="news-adv-item" v-for="(advert, index) in advertsList" :key="advert.AdvertId" :id="advert.AdvertId">
+                <textarea @input="validateAdvert(advert)" :disabled="!editMode || loginAlias !== advert.CreatedBy" class="n-textarea" v-model="advert.Message"></textarea>
                 <p class="table-p">{{formatAuthorName(advert.CreatedBy)}}</p>
-                <p
-                  class="table-p"
-                  v-if="!editMode"
-                >{{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }}</p>
-                <v-date-picker
-                  @input="validateAdvert(advert)"
-                  v-if="editMode && loginAlias === advert.CreatedBy"
-                  require
-                  class="cd-range"
-                  popoverDirection="bottom"
-                  mode="single"
-                  v-model="advert.ValidTo"
-                  :min-date="new Date()"
-                >
+                <p class="table-p" v-if="!editMode">{{ $t("label.messageValidTo") }} {{ formatDate(advert.ValidTo) }}</p>
+                <v-date-picker @input="validateAdvert(advert)" v-if="editMode && loginAlias === advert.CreatedBy" require class="cd-range" popoverDirection="bottom" mode="single" v-model="advert.ValidTo" :min-date="new Date()">
                   <input value="advert.ValidTo">
                 </v-date-picker>
                 <div class="advBtns">
-                  <button
-                    class="clear-btn"
-                    :disabled="loginAlias !== advert.CreatedBy"
-                    @click="editAdvert(advert)"
-                  >{{ $t("button.edit") }}</button>
-                  <button
-                    class="clear-btn"
-                    @click="saveAdvert(advert)"
-                    :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy"
-                  >{{ $t("button.save") }}</button>
-                  <button
-                    class="clear-btn"
-                    @click="cancelEditing(index)"
-                    :disabled="!editMode || loginAlias !== advert.CreatedBy"
-                  >{{ $t("button.cancel") }}</button>
-                  <button
-                    class="oclear-btn"
-                    v-if="editMode && loginAlias === advert.CreatedBy"
-                    @click="removeAdvert(advert.AdvertId)"
-                  >X</button>
+                  <button class="clear-btn" :disabled="loginAlias !== advert.CreatedBy" @click="editAdvert(advert)" >{{ $t("button.edit") }}</button>
+                  <button class="clear-btn" @click="saveAdvert(advert)" :disabled="!isAdvertValid || loginAlias !== advert.CreatedBy">{{ $t("button.save") }}</button>
+                  <button class="clear-btn" @click="cancelEditing(index)" :disabled="!editMode || loginAlias !== advert.CreatedBy">{{ $t("button.cancel") }}</button>
+                  <button class="oclear-btn" v-if="editMode && loginAlias === advert.CreatedBy" @click="removeAdvert(advert.AdvertId)">X</button>
                 </div>
               </div>
               <!-- </transition-group> -->
-              <button
-                v-show="isMoreThanFiveAdverts && slideIndex > 5"
-                @click="nextSlide(-1)"
-                class="news-adv-left"
-              >&#8249;</button>
-              <button
-                v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length < 5"
-                @click="nextSlide(1)"
-                class="news-adv-right"
-              >&#8250;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex > 5" @click="nextSlide(-1)" class="news-adv-left">&#8249;</button>
+              <button v-show="isMoreThanFiveAdverts && slideIndex !== advertsList.length && !advertsList.length < 5" @click="nextSlide(1)" class="news-adv-right">&#8250;</button>
             </div>
             <div v-else class="news-tile-wrap">
               <h1>{{ $t("news.noMessages") }}</h1>
-
             </div>
           </div>
           <div class="api">
@@ -111,12 +64,7 @@
                     <div class="news-evt-attr">
                       <div class="event-date">
                         {{setDateTo(event)}}
-                        <button
-                          class="event-desc"
-                          v-if="event.Description"
-                          @mouseenter="setEventDesc(event.EventId)"
-                          :title="eventDesc"
-                        ></button>
+                        <button class="event-desc" v-if="event.Description" @mouseenter="setEventDesc(event.EventId)" :title="eventDesc"></button>
                         <!-- &#8943; -->
                       </div>
                       <div class="event-title">{{ event.EventName }}</div>
@@ -135,11 +83,8 @@
               </div>
             </div>
             <weather-error v-if="weatherError"></weather-error>
-            <div
-              v-if="!weatherError"
-              class="content-weather"
-              :class="today.isDay ? 'weatherDay' : 'weatherNight' "
-            >
+            <div v-if="!weatherError" class="content-weather"
+              :class="today.isDay ? 'weatherDay' : 'weatherNight'">
               <div class="intro">
                 <div class="town">
                   <p>{{weatherData.town}}</p>
@@ -151,8 +96,7 @@
               <div>
                 <div class="weather-header"></div>
                 <div class="temp">
-                  <p>
-                    {{ weatherData.celcius }}
+                  <p>{{ weatherData.celcius }}
                     <sup>o</sup>C
                   </p>
                 </div>
