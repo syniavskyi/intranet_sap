@@ -8,7 +8,7 @@
       <div class="tile-underscore"></div>
     </div>
     <div class="profile-tile-content">
-      <h3 class="prof-tile-cv">Aby wygenerować CV wybierz przycisk generuj w nagłówku</h3>
+      <h3 class="prof-tile-cv">{{ $t("message.toGenerateCvClickButton") }}</h3>
       <!-- <div class="cv-buttons">
         <div class="button-cv">
           <div class="prof-input-100">
