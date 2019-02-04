@@ -140,7 +140,7 @@
     "format": "Format",
     "employer": "Employer",
     "jobPosition": "Job position",
-    "eg": "e.g",
+    "eg": "No",
     "entryType": "Entry Type",
     "status": "Status",
     "display": "Display",
@@ -287,7 +287,8 @@
     "sessionEndInfo": "The session has expired. You will be taken to the homepage. Log in again. Your changes have not been saved.",
     "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size.",
     "weatherError": "An error occurred while loading the weather.",
-    "responseError": "Request failed, try again, or log out and login again."
+    "responseError": "Request failed, try again, or log out and login again.",
+    "toGenerateCvClickButton": "To generate a CV, select the generate button in the header"
   },
   "select": {
     "language": {
