@@ -933,9 +933,6 @@ const getters = {
   getGoFromCv(state) {
     return state.goFromCv;
   },
-  getUserAuth(state) {
-    return state.userAuth;
-  },
   getTransportList(state) {
     return state.transportList;
   },
