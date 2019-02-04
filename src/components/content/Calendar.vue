@@ -199,8 +199,8 @@ export default {
         this.$store.commit('SET_DISPLAY_LOADER', true);
 
         if(event.target.value !== "BTECH") {
-          const filterDep = (res) => res.DepartmentId === event.target.value;
-          const filterRole = (res) => res.Role === event.target.value;
+          const filterDep = res => res.DepartmentId === event.target.value;
+          const filterRole = res => res.Role === event.target.value;
 
           this.$store.dispatch('getUsersLists').then(res => {
             let usersFiltred = [];
