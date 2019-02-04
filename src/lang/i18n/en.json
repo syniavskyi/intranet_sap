@@ -363,7 +363,8 @@
     "saturday": "Saturday",
     "sunday": "Sunday",
     "upcomingEvents": "Upcoming Events:",
-    "emptyEvents": "No upcoming events"
+    "emptyEvents": "No upcoming events",
+    "noMessages": "There is no message to display"
   },
   "dates": {
     "day": "day ",

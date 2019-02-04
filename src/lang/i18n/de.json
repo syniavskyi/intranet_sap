@@ -359,7 +359,8 @@
         "saturday": "Samstag",
         "sunday": "Sonntag",
         "upcomingEvents": "Kommende Veranstaltungen:",
-        "emptyEvents": "No upcoming events"
+        "emptyEvents": "Keine anstehenden Ereignisse",
+        "noMessages": "Es wird keine Meldung angezeigt"
     },
     "dates": {
         "day": "Tag ",

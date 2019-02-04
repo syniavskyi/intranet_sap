@@ -358,7 +358,8 @@
         "saturday": "Субота",
         "sunday": "Неділя",
         "upcomingEvents": "Майбутні події:",
-        "emptyEvents": "No upcoming events"
+        "emptyEvents": "No upcoming events",
+        "noMessages": "There is no message to display"
     },
     "dates": {
         "day": "день ",
