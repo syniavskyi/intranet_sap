@@ -53,9 +53,9 @@
     height: 2.2rem;
 }
 
-.cd-textarea {
+.cd-textarea,
+.cd-ttextarea {
     max-width: 95%;
-    min-width: 94%;
     min-height: 1.5rem;
     padding: 0.3rem;
     font-size: 1rem;
@@ -63,12 +63,16 @@
     border: 1px solid #d3d3d3;
 }
 
+.cd-textarea {
+    min-width: 94%;
+}
+
 .cd-textarea:disabled { background-color: transparent; }
 
 .cd-select,
 .cd-dselect, /* disabled select */
 .cd-tselect, /* table select */ 
-.cd-wselect /* select with width */ {
+.cd-wselect /* select with width for availability */ {
     display: flex;
     width: 100%;
     height: 2rem;
@@ -90,29 +94,27 @@
     cursor: pointer;
 }
 
-.cd-wselect {
-    margin-left: 1rem;
+.cd-wselect { /* availability select */
     align-self: center;
+    width: 8rem;
+    /* margin-left: .3rem; */
 }
 
-.cd-wdselect {
+.cd-wdselect { /* availability select */
     display: flex;
     height: 2rem;
     border: 0;
-    background: #ffffff;
+    background: transparent;
     font: 1.1rem 'Roboto';
     appearance: none;
     -webkit-appearance: none; 
     -moz-appearance: none;
-    margin: .1rem  0;
-    margin-left: 1rem;
+    width: 12rem;
+    text-indent: .5rem;
 }
 
-.cd-wselect {
-    width: 10rem;
-}
-
-.cd-date {
+.cd-date,
+.cd-wdate /* input date with width for availability */ {
     width: 20.5rem;
     text-align: center;
     border: 0;
@@ -121,7 +123,13 @@
     border-radius: 4px;
     outline-color: #ffa500;
 }
-.cd-date input {
+
+.cd-wdate {
+    width: 6.5rem;
+}
+
+.cd-date input,
+.cd-wdate input {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -292,3 +300,13 @@
     transition: color .1s;
 }
 /* COOL RADIOBUTTON */
+
+@media (min-width:56.25rem) {
+    .cd-wdselect {
+        text-align-last: center;
+        text-indent: 0;
+    }
+    .cd-wselect {
+        margin-left: .1rem;
+    }
+}

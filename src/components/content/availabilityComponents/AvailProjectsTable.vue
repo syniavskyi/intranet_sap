@@ -29,48 +29,48 @@
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.projectName") }}</div>
-                        <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="project.ProjectId" >
+                        <select disabled v-if="!editMode" class="cd-wdselect mla" v-model="project.ProjectId" >
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
                         </select>
-                        <select v-if="editMode" class="selectProfile selectEdit" v-model="project.ProjectId" @change="checkFields(index)">
+                        <select v-if="editMode" class="cd-wselect mla" v-model="project.ProjectId" @change="checkFields(index)">
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
                         </select>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.engag") }}</div>
-                        <p class="pempty" v-if="!editMode">{{project.Engag}}</p>
-                        <div class="cd-for-input-xxs" v-if="editMode">
-                            <input required class="ava-input-range-perc" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="ava-perc-span">%</span>
+                        <p class="pempty mla" v-if="!editMode">{{project.Engag}}</p>
+                        <div class="cd-for-input-xxs mtb" v-if="editMode">
+                            <input required class="ava-input-range-perc mla" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="ava-perc-span">%</span>
                             <span class="ava-div-bar"></span>
                         </div>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.from") }}</div>
-                        <p class="prof-date-label" v-if="!editMode"> {{ formatDate(project.StartDate) }} </p>
-                        <v-date-picker v-if="editMode" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.StartDate">
+                        <p class="avail-date-label" v-if="!editMode"> {{ formatDate(project.StartDate) }} </p>
+                        <v-date-picker v-if="editMode" class="cd-wdate mla mtb" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.StartDate">
                             <input value="project.StartDate">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.to") }}</div>
-                        <p class="prof-date-label" v-if="!editMode"> {{ formatDate(project.EndDate) }} </p>
-                        <v-date-picker v-if="editMode" class="prof-input-date" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.EndDate">
+                        <p class="avail-date-label" v-if="!editMode"> {{ formatDate(project.EndDate) }} </p>
+                        <v-date-picker v-if="editMode" class="cd-wdate mla mtb" popoverDirection="top" @input="validateDates(index)" is-expanded mode="single" v-model="project.EndDate">
                             <input value="project.EndDate">
                         </v-date-picker>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.status") }}</div>
-                        <select v-if="editMode" class="selectProfile selectEdit" v-model="project.StatusId" @change="checkFields(index)">
+                        <select v-if="editMode" class="cd-wselect mla mtb" v-model="project.StatusId" @change="checkFields(index)">
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
                         </select>
-                         <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="project.StatusId" >
+                         <select disabled v-if="!editMode" class="cd-wdselect mla mtb" v-model="project.StatusId" >
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
                         </select>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.remarks") }}</div>
                         <div class="ava-tbproj-itxt">
-                            <textarea :disabled="!editMode" v-model="project.Description"  @input="checkFields(index)"></textarea>
+                            <textarea class="cd-ttextarea mla mtb mra" :disabled="!editMode" v-model="project.Description"  @input="checkFields(index)"></textarea>
                         </div>
                     </div>
                     <div class="ava-tbproj-item eduButtonsProj">
