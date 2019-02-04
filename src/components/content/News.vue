@@ -23,7 +23,7 @@
               <div class="tile-underscore"/>
             </div>
             <!-- <loader v-if="showAdvertsLoader"></loader> -->
-            <div class="tile-content new-tile-cnt">
+            <div class="tile-content new-tile-cnt" v-if="advertsList.length > 0 ">
               <!-- <transition-group name="fly" tag="div"> -->
               <div
                 class="news-adv-item"
@@ -89,6 +89,10 @@
                 class="news-adv-right"
               >&#8250;</button>
             </div>
+            <div v-else class="news-tile-wrap">
+              <h1>{{ $t("news.noMessages") }}</h1>
+
+            </div>
           </div>
           <div class="api">
             <div class="content-event">
@@ -99,7 +103,7 @@
                 <div class="tile-underscore"/>
               </div>
               <div class="tile-content">
-                <div v-if="eventsSrt.length > 0" class="news-events-wrap">
+                <div v-if="eventsSrt.length > 0" class="news-tile-wrap">
                   <div v-for="(event, index) in eventsSrt" :key="index" class="single-event">
                     <div class="low-prio-event" v-if="event.Priority=='L'"></div>
                     <div class="medium-prio-event" v-if="event.Priority=='M'"></div>
@@ -125,7 +129,7 @@
                     <div class="none-event" v-if="event.EventType==''"/>
                   </div>
                 </div>
-                <div v-else class="news-events-wrap">
+                <div v-else class="news-tile-wrap">
                   <h1>{{$t('news.emptyEvents')}}</h1>
                 </div>
               </div>

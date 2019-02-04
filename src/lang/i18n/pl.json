@@ -194,7 +194,7 @@
     "employees": "Pracownicy",
     "informations": "Informacje",
     "documents": "Dokumenty",
-    "documentsCount": "Documenty ({number})",
+    "documentsCount": "Dokumenty ({number})",
     "personalData": "Dane osobowe",
     "contact": "Dane kontaktowe",
     "employee": "Dane pracownika",
@@ -362,7 +362,8 @@
     "saturday": "Sobota",
     "sunday": "Niedziela",
     "upcomingEvents": "Nadchodzące wydarzenia:",
-    "emptyEvents": "Brak wydarzeń w najbliższym czasie"
+    "emptyEvents": "Brak wydarzeń w najbliższym czasie",
+    "noMessages": "Brak wiadomości do wyświetlenia"
   },
   "dates": {
     "day": "dzień ",
