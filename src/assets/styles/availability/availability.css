@@ -168,6 +168,9 @@
     justify-content: space-between;
 }
 
+.holiday-button-static:focus {
+    outline: 0;
+}
 
 .holiday-button img,
 .holiday-button-static img {
