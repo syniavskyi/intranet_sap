@@ -7,10 +7,15 @@
                 <button class="modal-close" @click="switchForgotPassword">&#10006;</button>
             </div>
             <div class="modal-email">
-                <div class="cd-for-input-xxl">
+                <!-- <div class="cd-for-input-xxl">
                     <input required class="cd-input" v-model="email">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.enterEmail") }}</label>
+                </div> -->
+                <div class="cd-for-input-xxl">
+                    <input required class="cd-input" v-model="Username">
+                    <span class="cd-span"></span>
+                    <label class="cd-label">Podaj nazwę użytkownika</label>
                 </div>
                 <transition name="fade-alert">
                     <p class="success-alert" v-if="sendEmailSuccess">{{ $t("message.sendEmailSuccess") }}</p>
@@ -19,7 +24,8 @@
                     <p class="success-alert" v-if="sendEmailError">{{ $t("message.sendEmailError") }}</p>
                 </transition>
             </div>
-            <button class="button" :disabled="$v.email.$invalid" type="button" @click="onResetPassword"><span class="span-arrow">{{ $t("button.resetPass") }}</span></button>
+            <!-- :disabled="$v.email.$invalid" -->
+            <button class="button"  type="button" @click="onResetPassword"><span class="span-arrow">{{ $t("button.resetPass") }}</span></button>
         </div>
     </div>
 </template>
@@ -31,9 +37,13 @@ export default {
     name: 'LoginForgotPassModal',
     data() {
         return {
-            email: ""
+            email: "",
+            Username: null
         }
     },
+    props: [
+        'language'
+    ],
     validations: {
         email: { required, email }
     },
@@ -45,7 +55,13 @@ export default {
     ),
     methods: {
         onResetPassword() {
-            this.$store.dispatch("sendEmailWithPass", this.email);
+            const oUserData = {
+                UserAlias: this.Username.toUpperCase(),
+                Language:  this.language === undefined ? "PL" : this.language,
+                Action: 'R'
+            }
+            this.$store.dispatch("sendEmailWithPass", oUserData);
+
         },
         switchForgotPassword() {
             this.$store.commit("SET_LOG_FORGOT_PASS_MODAL", false)

@@ -87,22 +87,41 @@ const actions = {
   },
   sendEmailWithPass({
     commit, dispatch
-  }, email) {
+  }, userData) {
+    const sPasswordUrl = 'Users' + '(' + "UserAlias='" + userData.UserAlias + "',Language='" + userData.Language + "')",
+          sLoginUrl = `?sap-user=CREATE_USER&sap-password=ides01&sap-language=PL`;
     axios({
-      method: 'post',
-      url: '/api/user/password/reset',
+      method: 'get',
+      url: sLoginUrl,
       headers: {
-        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-      },
-      data: params
+        "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
+        "X-CSRF-Token": "Fetch",
+        "X-Requested-With": "XMLHttpRequest",
+        "Cache-Control": "no-cache"
+      }
     }).then(res => {
-      commit('SET_EMAIL_SUCCESS', true);
-      let message = res.headers;
-      dispatch('displayModal', message);
-    }).catch(error => {
-      commit('SET_EMAIL_ERROR', true);
-      console.log(error)
-    })
+        axios({
+          url: sPasswordUrl,
+          method: 'put',
+          data: userData,
+          headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "Cache-Control": "no-cache",
+              "x-csrf-token":  res.request.getResponseHeader('x-csrf-token')
+          }
+        }).then(res => {
+            commit('SET_EMAIL_SUCCESS', true);
+            let message = res.headers;
+            dispatch('displayModal', message);
+          }).catch(error => {
+            commit('SET_EMAIL_ERROR', true);
+            console.log(error)
+        })
+      }).catch(error => {
+        // commit('SET_LOGIN_ERROR', true);
+        // commit('SET_DISPLAY_LOADER', false);
+      })
   },
   generatePassword({
     commit
