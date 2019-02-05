@@ -263,6 +263,7 @@ const actions = {
   }, data) {
     if (data) {
       data.EmploymentDate = utils.dateStringToObj(data.EmploymentDate);
+      data.DateBirth = utils.dateStringToObj(data.DateBirth);
       for (let key in data) {
         if (key === "UserCvProjects" || key === "UserEducations" || key === "UserExperiences") {
           let obj = data[key].results;
