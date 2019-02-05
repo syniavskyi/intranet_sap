@@ -99,6 +99,7 @@ export default {
         },
 
         closeMenu() {
+            this.$store.commit('SET_MENU_CLICKED', false)
             if (window.matchMedia("(max-width: 40rem)").matches) {
                 this.$store.commit("SET_DISPLAY_MENU", false)
                 this.$store.commit("SET_MENU_OVERLAY", false)

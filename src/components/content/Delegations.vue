@@ -332,6 +332,7 @@ export default {
             }
         },
         showMenu(event) {
+            this.$store.commit('SET_MENU_CLICKED', true)
             let obj = {window, event}
             this.$store.dispatch("setSideMenu", obj);
         },
