@@ -138,6 +138,7 @@ export default {
       this.aFilters = {};
     },
     showMenu(event) {
+      this.$store.commit('SET_MENU_CLICKED', true)
       let name = { window, event };
       this.$store.dispatch("setSideMenu", name);
     },

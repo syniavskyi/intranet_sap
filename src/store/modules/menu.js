@@ -4,7 +4,8 @@ import router from '@/router/index.js'
 const state = {
     showMenu: true,
     showMenuOverlay: false,
-    menuAuth: ""
+    menuAuth: "",
+    menuClicked: false
 };
 
 const mutations = {
@@ -16,7 +17,10 @@ const mutations = {
     },
     SET_MENU_AUTH(state, oAuth) {
         state.menuAuth = oAuth;
-    }
+    },
+    SET_MENU_CLICKED(state, bool) {
+        state.menuClicked = bool
+    } 
 };
 
 const actions = {
@@ -35,25 +39,37 @@ const actions = {
             dispatch('clearAuthData');
             router.replace('/');
     },
-    setSideMenu({}, obj) {
+    setSideMenu({commit}, obj) {
         if(obj.event) {
             /* If user clicks Hamburger Menu button in component header: MENU and OVERLAY are displayed for small screen devices */
             if (obj.window.matchMedia("(max-width:40rem)").matches && obj.event.type === "click") {
-                state.showMenu =  true
-                state.showMenuOverlay = true
-            /* If user resizes app window: MENU and OVERLAY are automatically hidden for very small screen devices */
-            } else if (obj.window.matchMedia("(max-width:40rem)").matches && obj.event.type === "resize") {
-                state.showMenu =  true
-                state.showMenuOverlay = true
-            /* If user uses app on large screen device: MENU must always be visible and OVERLAY must never be visible  */
-            } else  {
-                state.showMenu = true;
-                state.showMenuOverlay = false;
+                if (getters.getMenuClicked) {
+                    commit('SET_DISPLAY_MENU', true)
+                    commit('SET_MENU_OVERLAY', true)
+                }
+            /* If users scrolls on small screen device and Link Bar gets hidden it emits a resize event, than it is checked if user opened menu with a Button to prevent hiding menu on page/menu scroll */
+            } else if (obj.window.matchMedia("(max-width:40rem)").matches && obj.event.target.screen.orientation.type === "portrait-primary" && obj.event.type === "resize") { 
+                if (getters.getMenuClicked === true) {
+                    commit('SET_DISPLAY_MENU', true)
+                    commit('SET_MENU_OVERLAY', true)
+                } else if (getters.getMenuClicked === false) {
+                    commit('SET_DISPLAY_MENU', false)
+                    commit('SET_MENU_OVERLAY', false)
+                }
+            /* On resize event on large screen devices always display MENU and never display OVERLAY */
+            } else if (obj.window.matchMedia("(min-width:40rem)").matches && obj.event.target.screen.orientation.type === "landscape-primary" && obj.event.type === "resize") {
+                commit('SET_DISPLAY_MENU', true)
+                commit('SET_MENU_OVERLAY', false)
+            /* On resize event on large screen devices always hide MENU and OVERLAY */
+            } else if (obj.window.matchMedia("(max-width:40rem)").matches && obj.event.target.screen.orientation.type === "landscape-primary" && obj.event.type === "resize") {
+                commit('SET_DISPLAY_MENU', false)
+                commit('SET_MENU_OVERLAY', false)
             }
-        /* On start of application on small screen device: display MENU and OVERLAY */
-        } else if (obj.window.matchMedia("(max-width:40rem)").matches) {
-            state.showMenu = true
-            state.showMenuOverlay = true
+        /* on small and large screen devices and tiny browser Width always initially Hide menu and Overlay  */
+        } else if ((obj.window.matchMedia("(max-width:40rem)").matches && obj.window.screen.orientation.type === "portrait-primary") || 
+                    (obj.window.matchMedia("(max-width:40rem)").matches && obj.window.screen.orientation.type === "landscape-primary")) {
+            commit('SET_DISPLAY_MENU', false)
+            commit('SET_MENU_OVERLAY', false)
         }
     }, clearAuthData() {
         localStorage.clear();
@@ -76,6 +92,9 @@ const getters = {
     },
     getMenuAuth(state){
         return state.menuAuth;
+    },
+    getMenuClicked(state) {
+        return state.menuClicked
     }
 };
 
