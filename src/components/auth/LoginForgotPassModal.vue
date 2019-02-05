@@ -17,12 +17,6 @@
                     <span class="cd-span"></span>
                     <label class="cd-label">Podaj nazwę użytkownika</label>
                 </div>
-                <transition name="fade-alert">
-                    <p class="success-alert" v-if="sendEmailSuccess">{{ $t("message.sendEmailSuccess") }}</p>
-                </transition>
-                <transition name="fade-alert">
-                    <p class="success-alert" v-if="sendEmailError">{{ $t("message.sendEmailError") }}</p>
-                </transition>
             </div>
             <!-- :disabled="$v.email.$invalid" -->
             <button class="button"  type="button" @click="onResetPassword"><span class="span-arrow">{{ $t("button.resetPass") }}</span></button>
@@ -47,12 +41,6 @@ export default {
     validations: {
         email: { required, email }
     },
-    computed: Object.assign(
-        mapGetters({
-            sendEmailSuccess: "isSendEmailSuccess",
-            sendEmailError: "isSendEmailError"
-        })
-    ),
     methods: {
         onResetPassword() {
             const oUserData = {

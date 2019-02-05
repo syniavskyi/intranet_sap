@@ -238,8 +238,6 @@
   },
   "message": {
     "loginError": "Wprowadzona nazwa użytkownika lub hasło są nieprawidłowe",
-    "sendEmailSuccess": "Na podany adres email wysłano nowe hasło.",
-    "sendEmailError": "Niepowodzenie podczas wysyłania maila. Sprawdź wprowadzony adres email",
     "emailValidation": "Email posiada nieprawidłowy format lub jest pusty.",
     "phoneValidation": "Numer telefonu posiada nieprawidłowy format",
     "saveChangesError": "Niepowodzenie podczas zapisu danych.",
