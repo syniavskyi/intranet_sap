@@ -368,14 +368,14 @@
     "noMessages": "There is no message to display"
   },
   "dates": {
-    "day": "day ",
-    "days": "days ",
-    "month": " month ",
-    "monthsF": " months ",
-    "monthsM": " months ",
-    "year": " year ",
-    "yearsF": " years ",
-    "yearsM": " years "
+    "day": "day",
+    "days": "days",
+    "month": "month",
+    "monthsF": "months",
+    "monthsM": "months",
+    "year": "year",
+    "yearsF": "years",
+    "yearsM": "years"
   },
   "title": {
     "download": "download",

@@ -367,14 +367,14 @@
     "noMessages": "Brak wiadomości do wyświetlenia"
   },
   "dates": {
-    "day": "dzień ",
-    "days": "dni ",
-    "month": " miesiąc ",
-    "monthsF": " miesiące ",
-    "monthsM": " miesięcy ",
-    "year": " rok ",
-    "yearsF": " lata ",
-    "yearsM": " lat "
+    "day": "dzień",
+    "days": "dni",
+    "month": "miesiąc",
+    "monthsF": "miesiące",
+    "monthsM": "miesięcy",
+    "year": "rok",
+    "yearsF": "lata",
+    "yearsM": "lat"
   },
   "title": {
     "download": "pobierz",

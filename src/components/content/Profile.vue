@@ -205,6 +205,15 @@
                       <input disabled class="inputProfile inputDisabled" v-if="!editMode" :value="setFormatedDate">
                       <label class="label-profile">{{ $t("label.workExperience") }}</label>
                     </div>
+                    <div class="prof-input-s">
+                      <input :value="formatedBirthDate" disabled class="inputProfile inputDisabled" v-if="!editMode">
+                      <v-date-picker  @input="checkFormFields" v-if="editMode" class="delegations-input-date inputDisabled" v-model="userData.DateBirth" :max-date="new Date()">
+                        <input value="userData.dateBirth"/>
+                      </v-date-picker>
+                      <span class="prof-div-bar"></span>
+                      <label class="label-profile">{{ $t("label.dateOfBirth") }}</label>
+                      <p class="prof-error" v-if="invalidDate">{{ $t("message.dateValidation") }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -386,6 +395,12 @@ export default {
     },
     formatDate() {
       let date = this.userData.EmploymentDate;
+         return date !== null && date !== undefined
+        ? moment(date).format("DD.MM.YYYY")
+        : "-";
+    },
+    formatedBirthDate(){
+      let date = this.userData.DateBirth;
          return date !== null && date !== undefined
         ? moment(date).format("DD.MM.YYYY")
         : "-";

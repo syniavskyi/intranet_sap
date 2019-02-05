@@ -147,29 +147,29 @@ export const setWorkExperience = function (date) {
   if (date.years === 0) {
     oDates.year = "";
   } else if (date.years === 1) {
-    oDates.year = i18n.t("dates.year");
+    oDates.year = `${i18n.t("dates.year")} `;
   } else if (date.years > 1 && date.years <= 4) {
-    oDates.year = date.years + i18n.t("dates.yearsF");
+    oDates.year = `${date.years} ${i18n.t("dates.yearsF")} `
   } else if (date.years > 4) {
-    oDates.year = date.years + i18n.t("dates.yearsM");
+    oDates.year = `${date.years} ${i18n.t("dates.yearsM")} `
   }
 
   if (date.months === 0) {
     oDates.month = "";
   } else if (date.months === 1) {
-    oDates.month = i18n.t("dates.month");
+    oDates.month = `${i18n.t("dates.month")} `;
   } else if (date.months > 1 && date.months <= 4) {
-    oDates.month = date.months + i18n.t("dates.monthsF");
+    oDates.month = `${date.months} ${i18n.t("dates.monthsF")} `
   } else if (date.months > 4) {
-    oDates.month = date.months + i18n.t("dates.monthsM");
+    oDates.month = `${date.months} ${i18n.t("dates.monthsM")} `
   }
 
   if (date.days === 0) {
     oDates.day = "";
   } else if (date.days === 1) {
-    oDates.day = date.days + i18n.t("dates.day");
+    oDates.day = `${date.days} ${i18n.t("dates.day")}`
   } else {
-    oDates.day = date.days + i18n.t("dates.days");
+    oDates.day = `${date.days} ${i18n.t("dates.days")}`
   }
 
   return oDates;
