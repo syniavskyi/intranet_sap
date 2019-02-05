@@ -238,8 +238,6 @@
     },
     "message": {
         "loginError": "Passwort oder Benutzername sind ungültig.",
-        "sendEmailSuccess": "Ein neues Passwort wurde an Ihre E-Mail-Adresse gesendet.",
-        "sendEmailError": "E-Mail wurde nicht gesendet, überprüfen Sie die eingegebene E-Mail-Adresse.",
         "emailValidation": "Die E-Mail hat ein ungültiges Format oder ist leer.",
         "phoneValidation": "Telefonnummer hat ein ungültiges Format.",
         "saveChangesError": "Fehler beim Speichern von Daten.",
@@ -289,8 +287,9 @@
     },
     "select": {
         "language": {
-            "english": "English",
-            "polish": "Polish"
+            "english": "Englisch",
+            "polish": "Polnisch",
+            "ukrainian": "Ukrainisch"
         },
         "cvLanguage": {
             "english": "EN",

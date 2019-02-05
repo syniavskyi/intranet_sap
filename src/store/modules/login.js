@@ -3,8 +3,6 @@ import axios from 'axios'
 const state = {
   loginForgotPassModal: false,
   loginError: false,
-  sendEmailSuccess: false,
-  sendEmailError: false,
   urlQuery: null,
   password: null,
   hashedPassword: null,
@@ -20,12 +18,6 @@ const mutations = {
   },
   SET_LOGIN_ERROR(state, isError) {
     state.loginError = isError
-  },
-  SET_EMAIL_SUCCESS(state, isSuccess) {
-    state.sendEmailSuccess = isSuccess
-  },
-  SET_EMAIL_ERROR(state, isError) {
-    state.sendEmailError = isError
   },
   SET_URL_QUERY(state, data) {
     state.urlQuery = data
@@ -111,11 +103,9 @@ const actions = {
               "x-csrf-token":  res.request.getResponseHeader('x-csrf-token')
           }
         }).then(res => {
-            commit('SET_EMAIL_SUCCESS', true);
             let message = res.headers;
             dispatch('displayModal', message);
           }).catch(error => {
-            commit('SET_EMAIL_ERROR', true);
             console.log(error)
         })
       }).catch(error => {
@@ -148,12 +138,6 @@ const getters = {
   },
   isLoginError(state) {
     return state.loginError
-  },
-  isSendEmailSuccess(state) {
-    return state.sendEmailSuccess
-  },
-  isSendEmailError(state) {
-    return state.sendEmailError
   },
   getUrlQuery(state) {
     return state.urlQuery

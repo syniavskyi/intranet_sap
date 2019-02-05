@@ -239,8 +239,6 @@
   },
   "message": {
     "loginError": "Password or username are invalid.",
-    "sendEmailSuccess": "New password was sent at your email address.",
-    "sendEmailError": "Email has not been send, check entered email address.",
     "emailValidation": "Email address is empty or is in incorrect format.",
     "phoneValidation": "Phone number has incorrect format.",
     "saveChangesError": "The changes weren't saved.",
