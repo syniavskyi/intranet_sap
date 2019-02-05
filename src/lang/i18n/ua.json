@@ -363,14 +363,14 @@
         "noMessages": "There is no message to display"
     },
     "dates": {
-        "day": "день ",
-        "days": "днів ",
-        "month": " місяць ",
-        "monthsF": " місяців ",
-        "monthsM": " місяців ",
-        "year": " рік ",
-        "yearsF": " років ",
-        "yearsM": " років "
+        "day": "день",
+        "days": "днів",
+        "month": " місяць",
+        "monthsF": "місяців",
+        "monthsM": "місяців",
+        "year": "рік",
+        "yearsF": "років",
+        "yearsM": "років"
     },
     "title": {
         "download": "Cкачати",

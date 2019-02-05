@@ -364,14 +364,14 @@
         "noMessages": "Es wird keine Meldung angezeigt"
     },
     "dates": {
-        "day": "Tag ",
-        "days": "Tage ",
-        "month": " Monat ",
-        "monthsF": " Monate ",
-        "monthsM": " Monate ",
-        "year": " Jahr ",
-        "yearsF": " Jahre ",
-        "yearsM": " Jahre "
+        "day": "Tag",
+        "days": "Tage",
+        "month": "Monat",
+        "monthsF": "Monate",
+        "monthsM": "Monate",
+        "year": "Jahr",
+        "yearsF": "Jahre",
+        "yearsM": "Jahre"
     },
     "title": {
         "download": "download",

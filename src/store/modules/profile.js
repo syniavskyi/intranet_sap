@@ -87,6 +87,7 @@ const actions = {
     delete userData.UserFiles;
 
     userData.EmploymentDate = utils.formatDateForBackend(userData.EmploymentDate);
+    userData.DateBirth = utils.formatDateForBackend(userData.DateBirth);
 
     const url = `Users(UserAlias='${userData.UserAlias}',Language='${userData.Language}')`;
     let sToken = getters.getToken;
