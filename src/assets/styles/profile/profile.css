@@ -1017,6 +1017,16 @@
     border-bottom: 1px solid #808080;
     width: 100%;
     text-align: center;
+    animation-name: flying-in;
+    animation-duration: .5s;
+}
+
+@keyframes flying-in {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
 }
 
 .inputEditPos {
@@ -1049,7 +1059,7 @@
     margin: 0;
     height: 2.2rem;
     font-size: 1.2rem;
-    text-align: center;
+    text-align: left;
     /* padding: 0.28rem 0; */
     font-family: 'Roboto';
     color: #333;
@@ -1058,6 +1068,8 @@
     border-bottom: 1px solid transparent;
     width: 100%;
     justify-content: center;
+    animation-name: flying-in;
+    animation-duration: .5s;
 }
 .inputDisabled:focus {
     outline: none;
@@ -1171,15 +1183,21 @@
 
 .selectDisabled {
     display: flex;
-    text-align: center;
+    text-align: left;
     justify-content: center;
-    align-items: center;
-    text-align-last: center;
+    align-items: left;
+    /* text-align-last: center; */
 }
 
-.selectDisabledh4 {
+.selectDisabledh4,
+.selectDisabledh4:disabled {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: left !important;
     font-weight: normal;
     border: 1px solid transparent;
+    text-align: left;
+    text-align-last: left;
     background-image: none;
     height: 2.3rem;
     font-size: 1.2rem;
@@ -1956,9 +1974,9 @@
     text-align: center;
   }
   
-  .inputDisabled {
+  /* .inputDisabled {
     text-align: center;
-  }
+  } */
   
   @keyframes slide-down {
     100% {
