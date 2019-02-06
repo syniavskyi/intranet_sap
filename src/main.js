@@ -50,14 +50,14 @@ axios.interceptors.response.use(function (config) {
     if (config.status === 413) {
         throw config
     } else {
-        return config;
+        return config
     }
 })
-axios.interceptors.request.use(function (config) {
-    if (config.status === 413) {
+axios.interceptors.request.use(null, (error) => {
+    if (error.status === 413) {
         throw config
     } else {
-        return config;
+        return config
     }
 })
 
