@@ -125,7 +125,7 @@
                       <img class="img-user-class" id="userProfilePhoto" :src="userPhoto" width="150px">
                       <p class="profile-error profile-error-image" v-if="photoUploadError">{{ $t("message.photoUploadError") }}</p>
                       <label for="change-user-image" class="profile-edit-btn" v-if="!disabledBtnToEdit">{{ $t("button.changePhoto") }}
-                        <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload" id="change-user-image">
+                        <input accept="image/*" style="width: 1rem;" type="file" ref="photo" @change="handlePhotoUpload($event)" id="change-user-image">
                       </label>
                     </div>
                   </div>
@@ -506,7 +506,7 @@ export default {
         }
       }
     },
-    handlePhotoUpload() {
+    handlePhotoUpload(evt) {
       this.photo = this.$refs.photo.files[0];
       this.disableSubmit = false;
       let data = {
@@ -515,6 +515,7 @@ export default {
         type: "USER-PHOTO",
         language: "PL"
       };
+      evt.target.value = null
       this.$store.dispatch("submitPhoto", data);
     },
     phoneValidation(value) {

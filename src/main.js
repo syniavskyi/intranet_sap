@@ -12,6 +12,7 @@ import i18n from './lang/lang'
 import store from './store/store'
 import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
+import { resolve } from 'url';
 
 Vue.use(Vuelidate)
 Vue.use(Vuex)
@@ -45,14 +46,20 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/";
 
-// axios.interceptors.response.use(function (config) {
-//     if (config.status === 200) {
-//         store.commit('SET_AXIOS_INTERCEPTOR_MODAL', true);
-//         return config;
-//     } else {
-//         return config;
-//     }
-// })
+axios.interceptors.response.use(function (config) {
+    if (config.status === 413) {
+        throw config
+    } else {
+        return config;
+    }
+})
+axios.interceptors.request.use(function (config) {
+    if (config.status === 413) {
+        throw config
+    } else {
+        return config;
+    }
+})
 
 export const app = new Vue({
     el: '#app',

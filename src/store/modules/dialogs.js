@@ -28,8 +28,8 @@ const mutations = {
   SET_SUBMIT_PHOTO_ERR_DIALOG(state, show) {
     state.photoToLargeDialog = show
   },
-  SET_AXIOS_INTERCEPTOR_MODAL(state, show) {
-    state.axiosInterceptorErr = show
+  SET_AXIOS_INTERCEPTOR_MODAL(state) {
+    state.axiosInterceptorErr = true
   }
 }
 

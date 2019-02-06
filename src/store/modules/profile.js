@@ -113,7 +113,7 @@ const actions = {
     commit, getters, dispatch
   }, data) {
     let slugHeader = data.file.name + ';' + data.type + ';' + data.language + ';' + data.userId + ';' + data.file.type;
-
+    commit('SET_DISPLAY_LOADER', true)
     axios({
       method: 'POST',
       url: 'AttachmentMedias',
@@ -125,10 +125,12 @@ const actions = {
         "x-csrf-token": getters.getToken
       }
     }).then(res => {
+      commit('SET_DISPLAY_LOADER', false)
       let message = res.headers;
       dispatch('displayModal', message);
       dispatch('loadUserPhoto', data.userId); 
     }).catch(error => {
+      commit('SET_DISPLAY_LOADER', false)
       if (error.status === 413) {
         commit('SET_SUBMIT_PHOTO_ERR_DIALOG', true)
       }
