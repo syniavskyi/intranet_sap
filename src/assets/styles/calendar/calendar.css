@@ -377,6 +377,7 @@
 
 .event-attr {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     justify-content: space-between;
     min-height: 6.5rem;
@@ -424,6 +425,7 @@
 }
 .event-time {
     display: flex;
+    margin-top: .5rem;
     justify-content: space-between;
 }
 .event-select-error{

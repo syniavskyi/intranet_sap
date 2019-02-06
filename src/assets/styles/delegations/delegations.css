@@ -390,6 +390,8 @@
 .delegations-select-cool,
 .delegations-dselect-cool {
     display: flex;
+    /* justify-content: center; */
+    align-items: center;
     width: 100%;
     height: 2rem;
     border-radius: 3px;
@@ -420,7 +422,7 @@
     text-indent: .5rem;
     background-image: url("../../images/expand2.png");
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: 100% 50%;
     border: 1px solid #d3d3d3;
 }
 .delegations-dselect-cool {
