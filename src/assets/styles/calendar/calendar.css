@@ -354,6 +354,8 @@
 
 .selected-day {
     display: flex;
+    margin: 0;
+    padding: 0;
     justify-content: center;
     flex-wrap: wrap;
     min-width: 16.6rem;
