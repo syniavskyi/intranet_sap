@@ -15,7 +15,7 @@
           <div class="calendar-in-row">
             <div class="cal-and-fils">
               <div>
-                <v-date-picker mode="single" :min-date="new Date()" v-model="addEvent.DateFrom" :attributes="attributes" is-inline @dayclick="dayClicked" />
+                <v-date-picker mode="single" :min-date="minDate" v-model="addEvent.DateFrom" :attributes="attributes" is-inline @dayclick="dayClicked" />
               </div>
               <div class="cal-filters">
                 <div class="cd-for-select">
@@ -40,7 +40,7 @@
             <div v-if="selectedDay" class="calendar-tile">
               <div class="add-event-header">
                 <h3 class="add-event-title">{{ selectedDay.date.toLocaleDateString() }}</h3>
-                <button @click="openDialog" class="button add-button">{{ $t("button.add") }}</button>
+                <button v-if="enableToEdit" @click="openDialog" class="button add-button">{{ $t("button.add") }}</button>
               </div>
               <div class="add-event-content">
                 <ul class="selected-day">
@@ -58,7 +58,7 @@
                       <div class="evt-type">{{ attr.EventTypeName }}</div>
                       <div class="evt-priv">{{ attr.EventPrivacy }}</div>
                     </div>
-                    <div class="events-buttons">
+                    <div class="events-buttons" v-if="enableToEdit">
                       <button class="cal-btn-edit" :disabled="attr.CreatedBy !== loginAlias && authType !== '*'" @click="editEventClick(attr, $t)">
                         {{ $t("button.edit") }}
                       </button>
@@ -104,6 +104,7 @@ export default {
     oStore.commit("SET_PROMISE_TO_READ", oStore.getters.getEventsToRead);
     oStore.dispatch("getData", null);
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
+    oStore.dispatch('clearFilters');
   },
   computed: Object.assign(
     mapGetters({
@@ -119,6 +120,16 @@ export default {
       dialogEvent: "getDialogEvent"
     }),
     {
+      minDate() {
+        return new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+      },
+      enableToEdit() {
+        if(this.selectedDay.date.setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)){
+          return true;
+        } else {
+          return false;
+        }
+      },
       filteredEvents() {
         let aEvents = this.events,
           aFilters = this.filters;
@@ -223,7 +234,7 @@ export default {
       // day clicked on v-calendar
       dayClicked(day) {
         // if selected date is later than today, don't show events
-        if (!utils.dateToValid(day.date, new Date(), "later")) return;
+        if (!utils.dateToValid(day.date, this.minDate, "later")) return;
         this.selectedDay = day;
       },
       // modal for new event
