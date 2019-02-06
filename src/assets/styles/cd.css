@@ -74,6 +74,7 @@
 .cd-tselect, /* table select */ 
 .cd-wselect /* select with width for availability */ {
     display: flex;
+    align-items: center;
     width: 100%;
     height: 2rem;
     border-radius: 3px;
