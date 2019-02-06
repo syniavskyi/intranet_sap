@@ -795,9 +795,6 @@
     .ava-tbproj-itxt {
         padding-left: 0;
     }
-    .availability-select-options {
-        margin-top: 0;
-    }
 }
 
 @media (min-width: 44rem) {
@@ -864,6 +861,9 @@
 @media (min-width:86.25rem) {
     .ava-select-and-calendar {
         flex-direction: row;
+    }
+    .availability-select-options {
+        margin-top: 0;
     }
     #ava-edit-project-dialog {
         min-width: 33rem;
