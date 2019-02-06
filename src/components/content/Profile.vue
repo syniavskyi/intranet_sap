@@ -159,7 +159,7 @@
                         <select required v-if="editMode && this.authType !== 'OWN'" v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectEdit">
                           <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
                         </select>
-                        <select required v-if="!editMode || this.authType === 'OWN'" disabled v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectDisabledh4">
+                        <select required v-if="!editMode || this.authType === 'OWN'" disabled v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectDisabled">
                           <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
                         </select>
                         <!-- <input disabled class="inputProfile inputDisabled" v-model="userData.JobPosition"> -->
@@ -186,7 +186,7 @@
                       <select required v-if="editMode" v-model="userData.WorkTime" @change="checkFormFields" class="selectProfile selectEdit">
                         <option v-bind:key="key" v-for="(value,key) in workTime" :value="key">{{value}}</option>
                       </select>
-                      <select disabled v-if="!editMode" v-model="userData.WorkTime" @change="checkFormFields" class="selectProfile selectDisabledh4">
+                      <select disabled v-if="!editMode" v-model="userData.WorkTime" @change="checkFormFields" class="selectProfile selectDisabled">
                         <option v-bind:key="key" v-for="(value,key) in workTime" :value="key">{{value}}</option>
                       </select>
                       <label class="label-profile">{{ $t("label.worktime") }}</label>
@@ -607,6 +607,3 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
