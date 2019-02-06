@@ -124,12 +124,12 @@ const actions = {
         "Slug": slugHeader,
         "x-csrf-token": getters.getToken
       }
-    }).then(res => {
+    }).then(function(res) {
       commit('SET_DISPLAY_LOADER', false)
       let message = res.headers;
       dispatch('displayModal', message);
       dispatch('loadUserPhoto', data.userId); 
-    }).catch(error => {
+    }).catch(function(error) {
       commit('SET_DISPLAY_LOADER', false)
       if (error.status === 413) {
         commit('SET_SUBMIT_PHOTO_ERR_DIALOG', true)
