@@ -7,14 +7,16 @@
       </div>
       <div class="login-credentials">
         <div class="cd-for-input logini-margin">
-          <input class="cd-input" v-model="username" @blur="$v.username.$touch()" required>
+          <input class="cd-input" v-model="username" required>
+          <!-- @blur="$v.username.$touch()" -->
           <span class="cd-span"/>
           <label class="cd-tlabel">{{ $t("label.user")}}</label>
         </div>
         <div class="cd-for-input logini-margin">
-          <input class="cd-input" :type="passwordFieldType" @keyup.enter="onSubmit" v-model="password" @blur="$v.password.$touch()" :trim="password" autocomplete="new-password" required>
+          <input class="cd-input" :type="passwordFieldType" @keyup.enter="onSubmit" v-model="password" :trim="password" required>
+          <!-- @blur="$v.password.$touch()" -->
           <span class="cd-span"/>
-          <button class="show-pass-eye"  @click="switchPasswordVisibility"><icon :name="eyeType"></icon></button>
+          <button class="show-pass-eye" @click="switchPasswordVisibility"><icon :name="eyeType"></icon></button>
           <label class="cd-tlabel cd-llogin">{{ $t("label.password") }}</label>
         </div>
         <p class="forgot-pass" @click="switchForgotPassword">{{ $t("button.forgotPass") }}</p>
@@ -27,8 +29,9 @@
         <transition name="show-alert">
           <p class="login-error" v-if="loginError">{{ $t("message.loginError") }}</p>
         </transition>
-        <button class="button login-button" :disabled="$v.password.$invalid" @click="onSubmit">
-          <span class="loading-icon"><img  src="../../assets/images/loading-white.png" v-show="isLoading"></span>
+        <button class="button login-button" @click="onSubmit">
+          <!-- :disabled="$v.password.$invalid" -->
+          <span class="loading-icon"><img src="../../assets/images/loading-white.png" v-show="isLoading"></span>
           <span class="span-arrow" v-show="!isLoading">{{ $t("button.login") }}</span>
         </button>
       </div>
@@ -63,10 +66,6 @@ export default {
   components: {
     Icon,
     LoginForgotPassModal
-  },
-  validations: {
-    password: { required, minLen: minLength(6) },
-    username: { required }
   },
   methods: {
     onSubmit() {
