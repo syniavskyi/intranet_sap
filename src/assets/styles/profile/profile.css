@@ -981,7 +981,7 @@
 .inputEdit:focus ~ label,
 .inputDisabled ~ label,
 .selectDisabled ~ label,
-.selectDisabledh4 ~ label,
+/* .selectDisabledh4 ~ label, */
 .inputEdit:valid ~ label,
 .selectEdit:focus ~ label,
 .selectEdit:valid ~ label,
@@ -1189,7 +1189,7 @@
     /* text-align-last: center; */
 }
 
-.selectDisabledh4,
+/* .selectDisabledh4,
 .selectDisabledh4:disabled {
     display: flex;
     justify-content: flex-start; 
@@ -1202,7 +1202,7 @@
     height: 2.3rem;
     font-size: 1.2rem;
     text-indent: calc(50% - 2rem);
-}
+} */
 
 .inputEdit:hover,
 .inputEdit:focus {
