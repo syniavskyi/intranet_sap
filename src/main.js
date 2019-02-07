@@ -46,18 +46,18 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/";
 
-axios.interceptors.response.use(function (response) {
-    if (response.status === 413) {
-        throw response;
-    } else {
-        return response;
-    }
-})
-axios.interceptors.request.use(function(config) {
-        return config;
-    }, function(error) {
-        return Promise.reject(error);
-})
+// axios.interceptors.response.use(function (response) {
+//     if (response.status === 413) {
+//         throw response;
+//     } else {
+//         return response;
+//     }
+// })
+// axios.interceptors.request.use(function(config) {
+//         return config;
+//     }, function(error) {
+//         return Promise.reject(error);
+// })
 
 export const app = new Vue({
     el: '#app',
