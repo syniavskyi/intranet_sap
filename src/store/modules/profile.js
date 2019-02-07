@@ -151,6 +151,8 @@ const actions = {
     delete userData.UserEducations
     delete userData.UserCvProjects
     delete userData.UserAuth
+    userData.EmploymentDate = utils.formatDateForBackend(userData.EmploymentDate);
+    userData.DateBirth = utils.formatDateForBackend(userData.DateBirth);
     axios({
       url: url,
       method: 'put',
