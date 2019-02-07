@@ -120,7 +120,7 @@
                   </div>
                   <select v-if="projectEditMode" class="profile-table-select profile-table-select-modules" @change="addModule" :id="index">
                     <option disabled selected value>{{ $t("table.addModule") }}:</option>
-                    <option v-for="sapModule in modulesList" :key="sapModule.Key" :value="sapModule.Key">{{ sapModule.Value }}</option>
+                    <option v-for="sapModule in modulesList" :key="sapModule.Key" :value="sapModule.Key">{{ sapModule.Key }} - {{ sapModule.Value }}</option>
                   </select>
                 </div>
               </div>

@@ -125,12 +125,12 @@ export default {
       this.$store.commit("SET_SHOW_CV_DIALOG", false);
     },
     showCv() {
-      var oStore = this.$store;
       if(!this.cvElements.language){
         this.cvElements.language = this.$i18n.locale.toUpperCase();
       }
       this.cvElements.position = this.cvElements.position ? this.cvElements.position : this.userData.JobPosition;
-      oStore.commit("SET_CV_ELEMENTS", this.cvElements);
+      this.cvElements.entity = this.cvElements.entity || null
+      this.$store.commit("SET_CV_ELEMENTS", this.cvElements);
       localStorage.setItem("Object", JSON.stringify(this.cvElements));
       this.$router.push({ name: "CV" });
     }

@@ -10,7 +10,8 @@ const state = {
         language: localStorage.getItem('lang'),
         format: "DOCX",
         contractor: true,
-        position: ""
+        position: "",
+        entity: ""
     },
     cvFormats: ["DOCX"],
     showSelectCvDialog: false,
