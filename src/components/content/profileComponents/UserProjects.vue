@@ -104,7 +104,7 @@
                   <div ref="addedIndustries" class="prof-table-btns industry">
                     <button v-for="industry in userProjects[index].Industries" :key="industry.id" :disabled="!projectEditMode" class="profile-table-industry-button" @click="removeIndustry" :name="index" :title="$t('button.delete')" :value="industry.id">{{ industry.name }}</button>
                   </div>
-                  <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @mousedown="contrIndustries($event, index)" @change="addIndustry" :id="index">
+                  <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @mousedown.self="contrIndustries($event, index)" @change="addIndustry($event)" :id="index">
                     <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
                     <!-- <option v-for=" industry in contrIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
                     <!-- <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
