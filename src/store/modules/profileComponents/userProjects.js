@@ -432,6 +432,11 @@ const getters = {
   getUserProjectsList(state) {
     return state.userProjectsList
   },
+  getSorterUserProjectsList(state) {
+    let filterProjects = state.userProjectsList
+    filterProjects = filterProjects.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
+    return filterProjects;
+  },
   getShowProjectError(state) {
     return state.showProjectError
   },
