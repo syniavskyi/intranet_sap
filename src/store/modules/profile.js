@@ -143,20 +143,21 @@ const actions = {
     userData.Action = 'C'
     const url = 'Users' + '(' + "UserAlias='" + userData.UserAlias + "',Language='" + userData.Language + "')"
     let sToken = getters.getToken;
+    let userDataToSend = { ... userData };
     axios.defaults.withCredentials = true
-    delete userData.UserSkills
-    delete userData.UserLang
-    delete userData.UserFiles
-    delete userData.UserExperiences
-    delete userData.UserEducations
-    delete userData.UserCvProjects
-    delete userData.UserAuth
-    userData.EmploymentDate = utils.formatDateForBackend(userData.EmploymentDate);
-    userData.DateBirth = utils.formatDateForBackend(userData.DateBirth);
+    delete userDataToSend.UserSkills
+    delete userDataToSend.UserLang
+    delete userDataToSend.UserFiles
+    delete userDataToSend.UserExperiences
+    delete userDataToSend.UserEducations
+    delete userDataToSend.UserCvProjects
+    delete userDataToSend.UserAuth
+    userDataToSend.EmploymentDate = utils.formatDateForBackend(userData.EmploymentDate);
+    userDataToSend.DateBirth = utils.formatDateForBackend(userData.DateBirth);
     axios({
       url: url,
       method: 'put',
-      data: userData,
+      data: userDataToSend,
       headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
