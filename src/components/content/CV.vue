@@ -224,16 +224,6 @@ export default {
     descriptionFormatting(desc) {
       return desc.replace(/\n/g, "<br/>")
     },
-    createElem(desc) {
-      let newDiv = document.createElement("p"),
-          newDesc = ""
-      newDiv.style.margin = "0"
-      newDiv.style.padding = "0"
-      newDiv.style.marginLeft = "3px"
-      newDesc = document.createTextNode(desc)
-      newDiv.appendChild(newDesc)
-      return newDiv
-    },
     generate(oEvent) {
       if (this.cvElements.format == "PDF") {
         this.generatePdf();
@@ -390,7 +380,8 @@ export default {
     ...mapGetters({
       // userEducation: "getUserEducation",
       userEducation: "getSortedUserEducation",
-      userProjects: "getUserProjectsList",
+      // userProjects: "getUserProjectsList",
+      userProjects: "getSorterUserProjectsList",
       userExperience: "getUserExperience",
       userData: "userData",
       cvElements: "getCvElements",
