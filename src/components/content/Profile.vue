@@ -516,6 +516,10 @@ export default {
         language: "PL"
       };
       evt.target.value = null
+      if (this.photo.size > 1000000) {
+        this.$store.commit('SET_SUBMIT_PHOTO_ERR_DIALOG', true)
+        return
+      }
       this.$store.dispatch("submitPhoto", data);
     },
     phoneValidation(value) {
