@@ -110,7 +110,8 @@
                 </td>
                 <td id="projectID" style="width:55%; vertical-align: top; font-family:'Arial';">
                   <p style="margin:0; padding:0; margin-bottom:3px; width:90%; font-weight:bold;" v-for="industry in project.Industries" :key="industry.id">{{industry.name}}</p>
-                  <p :id="index" style="mso-cellspacing:0; margin:0; padding:0; height: 0;">{{descriptionFormatting(index, project.Description)}}</p>
+                  <!-- <p :id="index" style="mso-cellspacing:0; margin:0; padding:0; height: 0;">{{descriptionFormatting(index, project.Description)}}</p> -->
+                  <p :id="index" style="mso-cellspacing:0; margin:0; padding:0; height: auto;" v-html="descriptionFormatting(project.Description)"></p>
                 </td>
                 <td style="width:10%; max-width:10%; vertical-align: top; font-family:'Arial';">
                   <p style="mso-cellspacing:0; margin:0; padding:0;" v-for="sapModule in project.Modules" :key="sapModule.id">{{ sapModule.id }}</p>
@@ -219,40 +220,9 @@ export default {
   methods: {
     ...mapActions([
        "getIndustries"
-    ]), 
-    descriptionFormatting(projectid, desc){
-      let i,
-          newDesc = "",
-          domElem = document.getElementById(projectid) || null,
-          newDiv
-      if (desc.match(/\n/) && domElem !== undefined && domElem !== null) {
-        desc = desc.split('\n')
-        i = desc.length
-        while (i--) {
-          if (desc[i] === "") {
-            desc.splice(i, 1)
-          } else {
-            break
-          }
-        }
-        if (desc.length > 1) {
-          for (i = 0; i < desc.length; i++) {
-            newDiv = this.createElem(desc[i])
-            if (domElem.nextElementSibling !== null) {
-              while(domElem.nextElementSibling && domElem.nextElementSibling.id === "") {
-                domElem = domElem.nextElementSibling
-              }
-            }
-            domElem.insertAdjacentElement('afterend', newDiv)
-          }
-        } else {
-          newDiv = this.createElem(desc[0])
-          domElem.insertAdjacentElement('afterend', newDiv)
-        }
-      } else if (domElem !== null) {
-        newDiv = this.createElem(desc)
-        domElem.insertAdjacentElement('afterend', newDiv)
-      }
+    ]),
+    descriptionFormatting(desc) {
+      return desc.replace(/\n/g, "<br/>")
     },
     createElem(desc) {
       let newDiv = document.createElement("p"),
