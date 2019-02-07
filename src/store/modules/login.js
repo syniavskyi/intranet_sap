@@ -104,6 +104,7 @@ const actions = {
           }
         }).then(res => {
             let message = res.headers;
+            dispatch('clearAuthData');
             dispatch('displayModal', message);
           }).catch(error => {
             console.log(error)
