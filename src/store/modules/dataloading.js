@@ -14,7 +14,7 @@ const state = {
   academicTitles: [],
   langLevels: [],
   workPositionList: [],
-  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP', 'ZINTRANET_ROLES', 'ZINTRANET_TRANSPORTS', 'ZINTRANET_DELEGATION_TARGET'],
+  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP', 'ZINTRANET_ROLES', 'ZINTRANET_TRANSPORTS', 'ZINTRANET_DELEGATION_TARGET', 'ZWORK_POS_LEVEL', 'ZWORK_POSITIONS'],
   sapModulesList: [],
   newUserFiles: [],
   adverts: [],
@@ -30,6 +30,8 @@ const state = {
   promiseList: [],
   goFromCv: false, //default
   transportList: [],
+  workPosLevel: [],
+  workPositions: [],
   messageLog: [],
   resFromBatch: [],
   contractorsBranches: []
@@ -121,6 +123,12 @@ const mutations = {
   },
   SET_TRANSPORT(state, data) {
     state.transportList = data;
+  },
+  SET_WORK_POSITIONS_LEVELS(state, data) {
+    state.workPosLevel= data
+  },
+  SET_WORK_POSITIONS(state, data) {
+    state.workPositions= data
   },
   SET_MESSAGE_LOG(state, data) {
     state.messageLog = data;
@@ -249,7 +257,7 @@ const actions = {
       sLang = userData.lang;
     }
     getters.getDataForHint ? url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserSkills,UserAuth,UserCvProjects' :
-      url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserEducations,UserExperiences,UserCvProjects,UserSkills,UserLang,UserFiles,UserAuth'
+      url = 'Users' + '(UserAlias=' + "'" + sUserAlias.toUpperCase() + "'," + "Language='" + sLang + "')" + '?&$expand=UserEducations,UserExperience2,UserCvProjects,UserSkills,UserLang,UserFiles,UserAuth'
     return axios({
       method: 'GET',
       url: url,
@@ -745,6 +753,12 @@ const actions = {
       case 'ZINTRANET_TRANSPORTS':
         sCommitName = 'SET_TRANSPORT';
         break;
+      case 'ZWORK_POS_LEVEL':
+        sCommitName = 'SET_WORK_POSITIONS_LEVELS'
+        break;
+      case 'ZWORK_POSITIONS': 
+        sCommitName = 'SET_WORK_POSITIONS'
+        break;
     }
     if (sCommitName.length > 0) {
       commit(sCommitName, aResults);
@@ -796,7 +810,7 @@ const actions = {
       dispatch("_setAuthorizations", aAuth);
       //set authorization for all objects - to optimize
       commit('SET_USER_EDUCATION', oData.UserEducations.results); //set user education data for profile and cv
-      commit('SET_USER_EXPERIENCE', oData.UserExperiences.results); //set user experience data for profile and cv
+      commit('SET_USER_EXPERIENCE', oData.UserExperience2.results); //set user experience data for profile and cv
 
       commit('SET_USER_LANGS', oData.UserLang.results);
 
@@ -936,6 +950,12 @@ const getters = {
   },
   getTransportList(state) {
     return state.transportList;
+  },
+  getPositionsLevel(state) {
+    return state.workPosLevel;
+  },
+  getOnlyWorkPositions(state) {
+    return state.workPositions;
   },
   getMessageLog(state) {
     return state.messageLog;

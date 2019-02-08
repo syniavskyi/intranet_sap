@@ -49,13 +49,23 @@
               <label class="label-profile">{{ $t("label.employer") }}</label>
             </div>
             <div class="prof-input-ss">
-              <select required v-if="editMode" class="selectProfile selectEdit" @change="checkFields(index)" v-model="experience.WorkPos">
-                <option v-for="workPos in workPositions" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
+              <select required v-if="editMode" class="selectProfile selectEdit" @change="checkFields(index)" v-model="experience.ExperienceLevel">
+                <option v-for="workPos in positionsLevels" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
               </select>
-              <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="experience.WorkPos">
-                <option v-for="workPos in workPositions" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
+              <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="experience.ExperienceLevel">
+                <option v-for="workPos in positionsLevels" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
               </select>
               <!-- :disabled="!editMode" -->
+              <span class="prof-div-bar"></span>
+              <label class="label-profile">{{ $t("label.jobPosition") }}</label>
+            </div>
+            <div class="prof-input-ss">
+              <select required v-if="editMode" class="selectProfile selectEdit" @change="checkFields(index)" v-model="experience.ExperiencePosition">
+                <option v-for="workPos in onlyWorkPositions" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
+              </select>
+              <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="experience.ExperiencePosition">
+                <option v-for="workPos in onlyWorkPositions" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
+              </select>
               <span class="prof-div-bar"></span>
               <label class="label-profile">{{ $t("label.jobPosition") }}</label>
             </div>
@@ -92,7 +102,9 @@ export default {
     ...mapGetters({
       userExperience: "getUserExperience",
       workPositions: "getWorkPositions",
-      disabledBtnToEdit: "getDisabledBtnToEdit"
+      disabledBtnToEdit: "getDisabledBtnToEdit",
+      positionsLevels: "getPositionsLevel",
+      onlyWorkPositions: "getOnlyWorkPositions"
     }),
     filterExperience() {
       let filterExp;
