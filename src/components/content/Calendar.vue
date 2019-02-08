@@ -105,6 +105,7 @@ export default {
     oStore.dispatch("getData", null);
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
     oStore.dispatch('clearFilters');
+    this.filters.department = 'BTECH'
   },
   computed: Object.assign(
     mapGetters({
@@ -158,20 +159,31 @@ export default {
             aEvents = aEvents.filter(fnFilter);
           }
         }
+        // this.filterEventForDay;
         return aEvents;
       },
       // events filter by clicked day
       filterEventForDay() {
         let aEvents = this.events;
-        let fnFilter;
-        let day = this.selectedDay.date;
+        const day = this.selectedDay.date;
 
-        fnFilter = function(oItem) {
-          return (
-            oItem.DateFrom <= day.setHours(1) && day.setHours(1) <= oItem.DateTo
-          );
-        };
-        return (aEvents = aEvents.filter(fnFilter));
+        const fnFilter = oItem => oItem.DateFrom <= day.setHours(1) && day.setHours(1) <= oItem.DateTo
+        const fnFilterTargetGroup = function (event) {
+          if(this.filters.department) {
+            for(let values of event.TargetGroup) {
+              return values === this.filters.department
+            }
+          } else if(this.userData.DepartmentId) {
+            for(let values of event.TargetGroup) {
+              return values === this.userData.DepartmentId
+            }
+          } else {
+            return event;
+          }
+        }.bind(this);
+
+        aEvents = aEvents.filter(fnFilter);
+        return aEvents = aEvents.filter(fnFilterTargetGroup)
       },
       // calendar attributes
       attributes() {
