@@ -1379,11 +1379,11 @@
     display: flex;
     flex-direction: column;
     width: 98%;
-    height: 100%;
+    /* height: 100%; */
     align-self: center;
     background: #ffffff;
     box-shadow: 0 0 10px #808080;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .prof-thead {
