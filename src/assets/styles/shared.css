@@ -61,15 +61,13 @@
 .logout-button {
     display: flex;
     order: 2;
-    position: relative;
+    position: absolute;
     z-index: 1;
     top: .7rem;
     right: 1rem;
     background: url(../images/nav3/power-32.png) no-repeat center;
-    max-width: 2.65rem;
-    max-height: 1.9rem;
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 30px;
+    height: 30px;
     border: 0;
     border-radius: 50%;
     transition: all .3s ease;
@@ -114,6 +112,7 @@
     -webkit-transition: color 0.2s ease;
     transition: color 0.2s ease;
     cursor: pointer;
+    position: absolute;
 }
 
 .close-btn:hover {
