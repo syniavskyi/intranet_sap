@@ -48,7 +48,7 @@ const actions = {
     dataToSave.DateStartToChange = null;
     delete data.Action;
     dataToSave.IsCurrent = data.IsCurrent ? 'X' : '-'
-    let url = 'UserExperience2';
+    let url = 'UserExperiences2';
     let sToken = getters.getToken;
     axios({
       url: url,
@@ -73,10 +73,10 @@ const actions = {
     data.DateStart = utils.formatDateForBackend(data.DateStart);
     data.DateEnd = utils.formatDateForBackend(data.DateEnd);
     data.IsCurrent = data.IsCurrent ? 'X' : '-';
-    const urlU = `UserExperience2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
+    const urlU = `UserExperiences2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
     // const urlU = "UserExperience2(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPosToChange + "',Employer='" + data.EmployerToChange + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00')";
-    const urlD = `UserExperience2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
-    const urlX = "UserExperience2(UserAlias='" + data.UserAlias + "',ExperienceLevel='" + data.ExperienceLevel + "',Employer='" + data.Employer + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
+    const urlD = `UserExperiences2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
+    // const urlX = "UserExperiences2(UserAlias='" + data.UserAlias + "',ExperienceLevel='" + data.ExperienceLevel + "',Employer='" + data.Employer + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
     data.DateStartToChange = utils.formatDateForBackend(data.DateStartToChange);
     data.DateEndToChange = utils.formatDateForBackend(data.DateEndToChange);
     delete data.User;
