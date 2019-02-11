@@ -125,10 +125,10 @@ const mutations = {
     state.transportList = data;
   },
   SET_WORK_POSITIONS_LEVELS(state, data) {
-    state.workPosLevel= data
+    state.workPosLevel = data
   },
   SET_WORK_POSITIONS(state, data) {
-    state.workPositions= data
+    state.workPositions = data
   },
   SET_MESSAGE_LOG(state, data) {
     state.messageLog = data;
@@ -904,7 +904,7 @@ const getters = {
     return state.langLevels
   },
   getWorkPositions(state) {
-    return state.workPositionList;
+    return state.workPositions;
   },
   getModulesList(state) {
     return state.sapModulesList;

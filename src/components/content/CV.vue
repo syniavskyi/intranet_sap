@@ -89,7 +89,8 @@
             <table align="center" class="border-collapse: collapse;"  width="99%" v-for="(experience) in userExperience" :key='experience.id'>
               <tr>
                 <td style="padding:0; font-family:'Arial'; font-weight:bold;" width="41%"><p style="mso-cellspacing:0; margin:0; padding:0;"> {{experience.Employer}}</p></td>
-                <td style="padding:0; font-family:'Arial'; font-size:0.9rem;"><p style="mso-cellspacing:0; margin:0; padding:0;">{{formatPositionName(experience.WorkPos)}}</p></td>
+                <!-- <td style="padding:0; font-family:'Arial'; font-size:0.9rem;"><p style="mso-cellspacing:0; margin:0; padding:0;">{{formatPositionName(experience.WorkPos)}}</p></td> -->
+                <td style="padding:0; font-family:'Arial'; font-size:0.9rem;"><p style="mso-cellspacing:0; margin:0; padding:0;">{{formatPositionName(experience)}}</p></td>
               </tr>
               <tr>
                 <td style="border-spacing:0; font-family:'Arial';" v-if="!experience.IsCurrent"><p style="mso-cellspacing:0; margin:0; padding:0; margin-bottom:10px;" >{{formatDate(experience.DateStart)}} - {{formatDate(experience.DateEnd)}}</p></td>
@@ -322,10 +323,19 @@ export default {
          return fieldOfStudyName.SchoolDescription;
     },
     formatPositionName(WorkPos) {
-      if(WorkPos) {
-         let workPoses = [];
-         workPoses = this.workPositions.find(o => o.Key === WorkPos);
-         return workPoses.Value;
+      if(WorkPos.ExperiencePosition) {
+        let workPoses,
+            workLvl = ' ';
+        workPoses = this.workPositions.find(o => o.Key === WorkPos.ExperiencePosition);
+        if(WorkPos.ExperienceLevel !== 'REGULA') {
+          workLvl = this.workLevel.find(o => o.Key === WorkPos.ExperienceLevel)
+        }
+
+        if(workLvl === ' ') {
+          return `${workLvl} ${workPoses.Value}`
+        } else {
+          return `${workLvl.Value} ${workPoses.Value}`
+        }
       }
     },
     formatLangName(Lang) {
@@ -392,6 +402,7 @@ export default {
       schoolDesc: 'getSchoolDescList',
       fieldOfStudyDesc: 'getFieldOfStudyDescList',
       workPositions: 'getWorkPositions',
+      workLevel: 'getPositionsLevel',
       fullLanguageList: 'getFullLanguageList',
       langLevels: 'getLangLevels',
       getToken: 'getToken',
