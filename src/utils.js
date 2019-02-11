@@ -258,6 +258,7 @@ export const checkRole = function(data) {
   }
 //compare dates and check changes in profile components
  export const dateToValid = function(beforeData, newData, operation) {
+   
    let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDate());
    let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDate());
    if(operation === "equal") {
