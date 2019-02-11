@@ -131,23 +131,28 @@ export default {
     },
     // validate fields and set button to disabled or not
     checkFields(index) {
-      let bChanged, bEmployer, bWorkPos, bDateStart, sProStart, sEditStart,  bCurrent, bDateChange, bDateEnd,
+      let bChanged, bEmployer, bLevExp, bWorkPos, bDateStart, sProStart, sEditStart,  bCurrent, bDateChange, bDateEnd,
           beforeEdit = this._beforeEditingCache[index],
           userExp = this.userExperience[index];
       if(beforeEdit) {
          bEmployer = beforeEdit.Employer !== userExp.Employer;
-         bWorkPos = beforeEdit.WorkPos !== userExp.WorkPos;
+        //  bWorkPos = beforeEdit.WorkPos !== userExp.WorkPos;
+         bLevExp = beforeEdit.ExperienceLevel !== userExp.ExperienceLevel;
+         bWorkPos = beforeEdit.ExperiencePosition !== userExp.ExperiencePosition; 
          bDateStart = utils.dateToValid(beforeEdit.DateStart, userExp.DateStart, "equal");
          bCurrent = beforeEdit.IsCurrent !== userExp.IsCurrent;
           if(userExp.DateEnd) {
               bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userExp.DateEnd, "equal");
           }
           bDateChange = bCurrent || bDateEnd;
-          bChanged = bEmployer || bWorkPos || bDateStart || bDateChange ? true : false;
+          bChanged = bEmployer || bLevExp || bWorkPos || bDateStart || bDateChange ? true : false;
      } else {
           bChanged  = true;
       }
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.editMode});
+      if(beforeEdit.IsCurrent && !userExp.IsCurrent){
+        this.userExperience[index].DateEnd = new Date();
+      }
       if (this.userExperience.length > 0) {
         if (
           bChanged &&
@@ -197,6 +202,8 @@ export default {
         newData.WorkPosToChange = dataToChange.WorkPos;
         newData.EmployerToChange = dataToChange.Employer;
         newData.DateStartToChange = dataToChange.DateStart;
+        newData.ExperienceLevelToChange = dataToChange.ExperienceLevel;
+        newData.ExperiencePositionToChange = dataToChange.ExperiencePosition;
         this.updateUserExp(newData);
       } else {
         this.saveNewUserExp(newData);
