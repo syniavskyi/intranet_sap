@@ -273,7 +273,7 @@ const actions = {
       data.EmploymentDate = utils.dateStringToObj(data.EmploymentDate);
       data.DateBirth = utils.dateStringToObj(data.DateBirth);
       for (let key in data) {
-        if (key === "UserCvProjects" || key === "UserEducations" || key === "UserExperiences") {
+        if (key === "UserCvProjects" || key === "UserEducations" || key === "UserExperience2") {
           let obj = data[key].results;
           for (let index in obj) {
             if (obj[index].DateStart) {

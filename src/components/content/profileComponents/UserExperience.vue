@@ -152,7 +152,8 @@ export default {
         if (
           bChanged &&
           userExp.Employer &&
-          userExp.WorkPos &&
+          userExp.ExperienceLevel &&
+          userExp.ExperiencePosition &&
           userExp.DateStart &&
           (userExp.DateEnd !== null || userExp.IsCurrent)
         ) {

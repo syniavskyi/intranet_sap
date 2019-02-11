@@ -40,19 +40,20 @@ const actions = {
   saveNewUserExp({
     getters, dispatch
   }, data) {
-    getters.getSelectedForCvUser ? data.UserAlias = getters.getSelectedForCvUser : data.UserAlias = localStorage.getItem("id");
-    data.DateStart = utils.formatDateForBackend(data.DateStart);
-    data.DateEnd = utils.formatDateForBackend(data.DateEnd);
-    data.DateEndToChange = null;
-    data.DateStartToChange = null;
+    let dataToSave = {... data};
+    getters.getSelectedForCvUser ? dataToSave.UserAlias = getters.getSelectedForCvUser : dataToSave.UserAlias = localStorage.getItem("id");
+    dataToSave.DateStart = utils.formatDateForBackend(data.DateStart);
+    dataToSave.DateEnd = utils.formatDateForBackend(data.DateEnd);
+    dataToSave.DateEndToChange = null;
+    dataToSave.DateStartToChange = null;
     delete data.Action;
-    data.IsCurrent = data.IsCurrent ? 'X' : '-'
-    let url = 'UserExperiences';
+    dataToSave.IsCurrent = data.IsCurrent ? 'X' : '-'
+    let url = 'UserExperience2';
     let sToken = getters.getToken;
     axios({
       url: url,
       method: 'post',
-      data: data,
+      data: dataToSave,
       headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
@@ -72,10 +73,13 @@ const actions = {
     data.DateStart = utils.formatDateForBackend(data.DateStart);
     data.DateEnd = utils.formatDateForBackend(data.DateEnd);
     data.IsCurrent = data.IsCurrent ? 'X' : '-';
-    const urlU = "UserExperiences(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPosToChange + "',Employer='" + data.EmployerToChange + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00')";
-    const urlD = "UserExperiences(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPos + "',Employer='" + data.Employer + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
+    const urlU = `UserExperience2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
+    // const urlU = "UserExperience2(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPosToChange + "',Employer='" + data.EmployerToChange + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00')";
+    const urlD = `UserExperience2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
+    const urlX = "UserExperience2(UserAlias='" + data.UserAlias + "',ExperienceLevel='" + data.ExperienceLevel + "',Employer='" + data.Employer + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
     data.DateStartToChange = utils.formatDateForBackend(data.DateStartToChange);
     data.DateEndToChange = utils.formatDateForBackend(data.DateEndToChange);
+    delete data.User;
     let sToken = getters.getToken;
     axios({
       url: data.Action === 'U' ? urlU : urlD,
