@@ -6,7 +6,6 @@
       <div class="component-content">
         <div class="content-header">
           <div class="content-header-title-and-menu">
-            <!-- <img src="../../assets/images/nav/if_menu-32.png" width="32px" class="content-header-menu"> -->
             <div @click="showMenu" class="content-header-menu">&#9776;</div>
             <p class="content-header-title">{{ $t("header.calendar") }}</p>
           </div>
