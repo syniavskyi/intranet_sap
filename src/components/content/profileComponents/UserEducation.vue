@@ -1,10 +1,10 @@
 <template>
-  <div class="profile-tile">
+  <div :class="hoverOrEdit ?  'profile-tile profile-main-edit' : 'profile-tile'">
     <div class="profile-tile-header">
       <div class="profile-tile-header-row">
         <h2 class="profile-tile-title">{{ $t("header.education") }}</h2>
         <div class="profile-table-buttons">
-          <button class="profile-edit-btn" :disabled="disabledBtnToEdit" v-if="!editMode" @mouseover="onHover" @mouseout="onHoverOut" @click="edit">{{ $t("button.edit") }}</button>
+          <button class="profile-edit-btn" :disabled="disabledBtnToEdit" v-if="!editMode" @mouseover="hoverOrEdit = true" @mouseout="hoverOrEdit = false" @click="edit">{{ $t("button.edit") }}</button>
           <button class="profile-edit-btn-e" v-if="editMode" @click="addUserEduRow"><span class="prof-btn-icon">&plus;</span><span class="prof-btn-txt">{{ $t("button.addNewEntry")}}</span></button>
           <button class="profile-edit-btn-e" v-if="editMode" @click="cancel"><span class="prof-btn-txt">{{ $t("button.finishEdit") }}</span><span class="prof-btn-icon">&#10004;</span></button>
         </div>
@@ -118,7 +118,8 @@ export default {
     return {
       editMode: false,
       _beforeEditingCache: null,
-      invalidDates: false
+      invalidDates: false,
+      hoverOrEdit: false
     };
   },
   watch: {
@@ -145,18 +146,12 @@ export default {
     ...mapActions(["addUserEduRow", "editUserEducation", "addUserEducation"]),
     edit() {
       this.editMode = true;
-      this.onHover(this.$el);
+      this.hoverOrEdit = true;
       this._beforeEditingCache = utils.createClone(this.userEducation);
       var checkboxes = this.$el.querySelectorAll(".checkbox-wrap");
       for (var i = 0; i < checkboxes.length; i++) {
         checkboxes[i].setAttribute("style", "display: flex;");
       }
-    },
-    onHover(el) {
-      this.$store.dispatch("onLightUp", el.style ? el : this.$el);
-    },
-    onHoverOut(el) {
-      this.$store.dispatch("onLightOut", el.style ? el : this.$el);
     },
     // validate fields and set button to disabled or not
     checkFields(index) {
@@ -230,10 +225,10 @@ export default {
     },
     //undo changes
     cancel() {
-      this.onHoverOut(this.$el);
       this.$store.commit("SET_EDUCATION_ERROR", false);
       this.$store.commit("SET_USER_EDUCATION", this._beforeEditingCache);
       this.editMode = false;
+      this.hoverOrEdit = false;
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // check if new data should be updated or created
