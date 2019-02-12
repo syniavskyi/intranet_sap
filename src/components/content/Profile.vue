@@ -16,7 +16,7 @@
             </select>
             <label class="label-select-lang">{{ $t("label.language") }}</label>
           </div>
-          <button :disabled="disabledBtnToEdit" class="profile-header-button" @mouseout="onHoverOut" @mouseover="onHover" v-if="!editMode" @click="onEdit">{{ $t("button.editData") }}</button>
+          <button :disabled="disabledBtnToEdit" class="profile-header-button" @mouseout="hoverOrEdit = false" @mouseover="hoverOrEdit = true" v-if="!editMode" @click="onEdit">{{ $t("button.editData") }}</button>
           <div v-if="editMode" class="header-button-save-reject">
             <p class="profile-error profile-error-data" v-if="!saveChangesSuccess">{{ $t("message.saveChangesError") }}</p>
             <button class="border-btn save-btn" @click="onSaveChanges" :disabled="disableSaveBtn">{{ $t("button.saveChanges") }}</button>
@@ -36,7 +36,7 @@
         <div class="profile-tiles">
           <div class="profile-tiles-row-wrap">
             <div class="profile-tiles-row">
-              <div class="profile-tile-1-3 profile-main-edit">
+              <div :class="hoverOrEdit ? 'profile-tile-1-3 profile-main-edit' : 'profile-tile-1-3'">  
                 <div class="profile-tile-header">
                   <h2 class="prof-tile-h2">{{ $t("header.contact") }}</h2>
                   <div class="tile-underscore"></div>
@@ -92,7 +92,7 @@
                   </div>
                 </div>
               </div>
-              <div class="profile-tile-1-3 profile-main-edit">
+              <div :class="hoverOrEdit ? 'profile-tile-1-3 profile-main-edit' : 'profile-tile-1-3'">
                 <div class="profile-tile-header">
                   <h2 class="prof-tile-h2">{{ $t("header.communicators") }}</h2>
                   <div class="tile-underscore"></div>
@@ -133,7 +133,7 @@
               </div>
             </div>
             <div class="profile-tiles-row">
-              <div class="profile-tile-1-2 profile-main-edit">
+              <div :class="hoverOrEdit ? 'profile-tile-1-2 profile-main-edit' : 'profile-tile-1-2'">
                 <div class="profile-tile-header">
                   <div class="profile-tile-header-row">
                     <h2 class="prof-tile-h2">{{ $t("header.employee") }}</h2>
@@ -278,7 +278,8 @@ export default {
       workTime: this.$store.getters.getWorkTime,
       loginAlias: localStorage.getItem("id"),
       selectedUser: this.$store.getters.getSelectedForCvUser || localStorage.getItem("id"),
-      resetContractors: false
+      resetContractors: false,
+      hoverOrEdit: false
     };
   },
   validations: {
@@ -466,6 +467,7 @@ export default {
     onEdit() {
       this.showNoChangesAlert = false;
       this.editMode = !this.editMode;
+      this.hoverOrEdit = true;
       this._beforeEditingCache = Object.assign({}, this.userData);
     },
     showChangePassword() {
@@ -476,6 +478,7 @@ export default {
       this._beforeEditingCache = null;
       this.showNoChangesAlert = false;
       this.editMode = !this.editMode;
+      this.hoverOrEdit = false;
     },
     onSaveChanges() {
       let data;
@@ -580,18 +583,6 @@ export default {
       this.$store.dispatch('getData', userData);
       this.$store.commit("SET_WORK_TIME");
 
-    },
-    onHover() {
-      let mainEdits = document.querySelectorAll(".profile-main-edit");
-      for (let i = 0; i < mainEdits.length; i++) {
-        mainEdits[i].style.boxShadow = "0px 0px 20px orange";
-      }
-    },
-    onHoverOut() {
-      let mainEdits = document.querySelectorAll(".profile-main-edit");
-      for (let i = 0; i < mainEdits.length; i++) {
-        mainEdits[i].style.boxShadow = "0px 0px 10px grey";
-      }
     },
     setUserCity: function (addressData, placeResultData, id) {
       this.userData.City = addressData.locality;

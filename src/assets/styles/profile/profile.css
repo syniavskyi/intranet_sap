@@ -1572,6 +1572,10 @@
     background: #ccc;
 }
 
+.profile-main-edit {
+    box-shadow: 0 0 20px orange;
+}
+
 @media (min-width: 30rem) {
     .profile-nav-and-content {
         min-height: 71.7rem;
