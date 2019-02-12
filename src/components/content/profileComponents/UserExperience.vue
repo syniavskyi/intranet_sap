@@ -11,7 +11,6 @@
       </div>
       <div class="tile-underscore"></div>
     </div>
-    <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
       <div class="prof-tile-column">
         <div id="prof-user-exp" class="prof-div-row" v-for="(experience, index) in filterExperience" :key='index'>
@@ -55,7 +54,6 @@
               <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="experience.ExperienceLevel">
                 <option v-for="workPos in positionsLevels" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
               </select>
-              <!-- :disabled="!editMode" -->
               <span class="prof-div-bar"></span>
               <label class="label-profile">{{ $t("label.jobPosition") }}</label>
             </div>

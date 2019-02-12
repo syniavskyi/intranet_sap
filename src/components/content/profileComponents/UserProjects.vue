@@ -4,10 +4,7 @@
       <div class="profile-tile-header-row">
         <h2 class="profile-tile-title">{{ $t("header.projects") }}</h2>
         <button class="btn-hint" @click="getNewDataForHint" v-if="projectEditMode">?</button>
-        <div
-          class="prof-hint-tt"
-          v-if="projectEditMode && !showHintAfterSave"
-        >{{ $t("message.hintInfoProject") }}</div>
+        <div class="prof-hint-tt" v-if="projectEditMode && !showHintAfterSave">{{ $t("message.hintInfoProject") }}</div>
         <div class="prof-hint-tt" v-if="showHintAfterSave">{{ $t("message.hintReminder") }}</div>
         <div class="profile-table-buttons">
           <button class="profile-edit-btn" :disabled="disabledBtnToEdit" @click="editProjects" @mouseover="hoverOrEdit = true" @mouseout="hoverOrEdit = false" v-if="!projectEditMode">{{ $t("button.editProjects") }}</button>
@@ -23,7 +20,6 @@
       </div>
       <div class="tile-underscore"></div>
     </div>
-    <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
       <i18n path="message.incompleteData" tag="p" class="profile-error" name="error" v-if="showProjectError">
         <span place="errorProNo">{{ errorProjectNo }}</span>
@@ -54,8 +50,7 @@
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("table.projectName") }}</div>
                 <div class="prof-tbody-item-txt">
-                  <input :disabled="!projectEditMode" @input="checkProjectName(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName" maxlength="255"  >
-                                    
+                  <input :disabled="!projectEditMode" @input="checkProjectName(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName" maxlength="255">        
                 </div>
               </div>
               <div class="prof-tbody-item">
@@ -63,12 +58,9 @@
                 <div class="prof-tbody-item-txt">
                   <p v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
                   <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName">
-                  <!-- <input v-if="projectEditMode" class="profile-table-input-view" :disabled="projectEditMode" v-model="_beforeEditingProjects[index].ContractorName""> -->
-                  <!-- <p v-if="projectEditMode"> {{ setEditedProjectContractor(index)}} </p> -->
                   <p class="profile-table-input-view" v-if="projectEditMode && _beforeEditingProjects[index]" v-once>{{ _beforeEditingProjects[index].ContractorName }}</p>
                   <p class="profile-table-input-view" v-if="projectEditMode && !_beforeEditingProjects[index]" v-once>{{ userProjects[index].ContractorName }}</p>
                   <select ref="emptyContractors" @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)">
-                    <!-- @input="checkFields(index)" -->
                     <option disabled selected value>{{ $t("table.addContractor") }}:</option>
                     <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
                   </select>
@@ -106,8 +98,6 @@
                   </div>
                   <select ref="industryEmpty" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @mousedown.self="contrIndustries($event, index)" @change="addIndustry($event)" :id="index">
                     <option disabled selected value>{{ $t("table.addIndustry") }}:</option>
-                    <!-- <option v-for=" industry in contrIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
-                    <!-- <option v-for="industry in contractorIndustries" :key="industry.IndustryId" :value="industry.IndustryId"> {{ industry.IndustryName }}</option> -->
                   </select>
                 </div>
                 <Toast v-if="showToast">{{ $t('message.requiredContractor')}}</Toast>
