@@ -164,7 +164,7 @@
 .profile-tile-header {
     margin:0;
     padding: 0;
-    height: 10%;
+    /* height: 10%; */
     width: 100%;
     min-height: 3.4rem;
 }
