@@ -172,20 +172,6 @@ const actions = {
         dispatch('displayModal', message);
       }).catch(error => {
     })
-
-  },
-
-  onLightUp({}, el) {
-    const shadow = "0px 0px 20px orange";
-    if (el.style) {
-      el.style.boxShadow = shadow;
-    }
-  },
-  onLightOut({}, el) {
-    const shadow = "0px 0px 10px grey";
-    if (el.style) {
-      el.style.boxShadow = shadow;
-    }
   }
 };
 
