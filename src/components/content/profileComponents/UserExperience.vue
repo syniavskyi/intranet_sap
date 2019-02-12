@@ -150,9 +150,12 @@ export default {
           bChanged  = true;
       }
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: bChanged, editMode: this.editMode});
-      if(beforeEdit.IsCurrent && !userExp.IsCurrent){
-        this.userExperience[index].DateEnd = new Date();
+      if(beforeEdit){
+        if(beforeEdit.IsCurrent && !userExp.IsCurrent){
+          this.userExperience[index].DateEnd = new Date();
+        }
       }
+
       if (this.userExperience.length > 0) {
         if (
           bChanged &&
