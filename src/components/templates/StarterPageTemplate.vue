@@ -9,8 +9,8 @@
          <div class="starter-page-list-item-btns">
             <a class="starter-page-file-btn" v-if="list.Link" :title="$t('title.download')" target="_blank" :href="list.Link">&#x21e3;</a>
             <a class="starter-page-file-btn" v-else :title="$t('title.download')" target="_blank" :href="generateLinks(list.FileId)">&#x21e3;</a>
-            <div v-if="checkFileFormat(list.Filename) == '.pdf'">
-                <p class="starter-page-pdf">{{checkFileFormat(list.Filename)}}</p>
+            <div v-if="checkFileFormat(list.Filename.toLowerCase()) == '.pdf'">
+                <p class="starter-page-pdf">{{checkFileFormat(list.Filename).toLowerCase()}}</p>
             </div>
             <div v-if="checkFileFormat(list.Filename) == '.doc' || checkFileFormat(list.Filename) == '.docx'">
                  <p class="starter-page-docx">{{checkFileFormat(list.Filename)}}</p>
