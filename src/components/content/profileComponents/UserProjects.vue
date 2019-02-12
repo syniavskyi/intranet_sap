@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-tile">
+  <div :class="hoverOrEdit ? 'profile-tile profile-main-edit' : 'profile-tile'">
     <div class="profile-tile-header">
       <div class="profile-tile-header-row">
         <h2 class="profile-tile-title">{{ $t("header.projects") }}</h2>
@@ -10,7 +10,7 @@
         >{{ $t("message.hintInfoProject") }}</div>
         <div class="prof-hint-tt" v-if="showHintAfterSave">{{ $t("message.hintReminder") }}</div>
         <div class="profile-table-buttons">
-          <button class="profile-edit-btn" :disabled="disabledBtnToEdit" @click="editProjects" @mouseover="onHover" @mouseout="onHoverOut" v-if="!projectEditMode">{{ $t("button.editProjects") }}</button>
+          <button class="profile-edit-btn" :disabled="disabledBtnToEdit" @click="editProjects" @mouseover="hoverOrEdit = true" @mouseout="hoverOrEdit = false" v-if="!projectEditMode">{{ $t("button.editProjects") }}</button>
           <button class="profile-edit-btn-e" v-if="projectEditMode" @click="addRow">
             <span class="prof-btn-txt">{{ $t("button.addProject") }}</span>
             <span class="prof-btn-icon">&plus;</span>
@@ -166,7 +166,8 @@ export default {
       showEndInput: true,
       _beforeEditingProjects: null,
       showHintAfterSave: false,
-      contractorIndustries: []
+      contractorIndustries: [],
+      hoverOrEdit: false
     };
   },
   watch: {
@@ -451,12 +452,6 @@ export default {
         ].disabled = true;
       }
     },
-    onHover(el) {
-      this.$store.dispatch("onLightUp", el.style ? el : this.$el);
-    },
-    onHoverOut(el) {
-      this.$store.dispatch("onLightOut", el.style ? el : this.$el);
-    },
     formatId(index) {
       return index + "p";
     },
@@ -493,10 +488,10 @@ export default {
       this.checkFields(data.index);
     },
     finishEditing() {
-      this.onHoverOut(this.$el);
       this.$store.commit("SET_PROJECT_ERROR", false);
       this.$store.commit("SET_USER_PROJECTS_LIST", this._beforeEditingProjects);
       this.projectEditMode = false;
+      this.hoverOrEdit = false;
       this.showHintAfterSave = false;
       this.showHintFnProject({ index: "", show: false });
       this.$store.commit("SET_DATA_CHANGE_PROF", {
@@ -507,7 +502,7 @@ export default {
     editProjects() {
       this.projectEditMode = true;
       this._beforeEditingProjects = utils.createClone(this.userProjects);
-      this.onHover(this.$el);
+      this.hoverOrEdit = true;
     },
     formatDate(date) {
       return date !== null && date !== undefined

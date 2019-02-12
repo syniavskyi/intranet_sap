@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-tile">
+  <div :class="hoverOrEdit ? 'profile-tile profile-main-edit' : 'profile-tile'">
     <!-- SPi -->
       <div class="prof-skills-hint" v-if="showHint.show">
         <button class="prof-hint-close" @click="showHintFn({name: '', show: false})">X</button>
@@ -15,7 +15,7 @@
           <div class="prof-hint-tt" v-if="!editMode">{{ $t("message.hintReminder") }}</div>
           <div class="prof-hint-tt" v-if="editMode">{{ $t("message.hintInfoSkill") }}</div>
         <div class="profile-table-buttons">
-          <button class="profile-edit-btn" :disabled="disabledBtnToEdit" v-if="!editMode" @mouseover="onHover" @mouseout="onHoverOut" @click="edit">{{ $t("button.edit") }}</button>
+          <button class="profile-edit-btn" :disabled="disabledBtnToEdit" v-if="!editMode" @mouseover="hoverOrEdit = true" @mouseout="hoverOrEdit = false" @click="edit">{{ $t("button.edit") }}</button>
           <button class="profile-edit-btn-e" v-if="editMode" @click="cancel"><span class="prof-btn-txt">{{ $t("button.cancel") }}</span><span class="prof-btn-icon">&#10005;</span></button>
           <button class="profile-edit-btn-e" :disabled="bDisabled" v-if="editMode" @click="save()"><span class="prof-btn-txt">{{ $t("button.save") }}</span><span class="prof-btn-icon">&#10004;</span></button>
         </div>
@@ -142,7 +142,8 @@ export default {
       bTechnologies: false,
       bExtensions: false,
       bAdditionalSkills: false,
-      bDisabled: true
+      bDisabled: true,
+      hoverOrEdit: false
     };
   },
   watch: {
@@ -175,15 +176,10 @@ export default {
       "showHintFn",
       "getNewDataForHint"
     ]),
-    onHover(el) {
-      this.$store.dispatch("onLightUp", el.style ? el : this.$el);
-    },
-    onHoverOut(el) {
-      this.$store.dispatch("onLightOut", el.style ? el : this.$el);
-    },
+
     edit() {
       this.editMode = true;
-      this.onHover(this.$el);
+      this.hoverOrEdit = true;
       this._beforeEditingCacheSkills = utils.createClone(this.userSkills);
       this._beforeEditingCacheLangs = utils.createClone(this.userLangs);
     },
@@ -196,10 +192,10 @@ export default {
     },
     // undo changes
     cancel() {
-      this.onHoverOut(this.$el);
       this.$store.commit("SET_USER_SKILLS", this._beforeEditingCacheSkills);
       this.$store.commit("SET_USER_LANGS", this._beforeEditingCacheLangs);
       this.editMode = false;
+      this.hoverOrEdit = false;
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // check if new data should be updated or created
