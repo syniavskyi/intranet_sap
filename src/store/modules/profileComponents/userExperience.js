@@ -74,9 +74,7 @@ const actions = {
     data.DateEnd = utils.formatDateForBackend(data.DateEnd);
     data.IsCurrent = data.IsCurrent ? 'X' : '-';
     const urlU = `UserExperiences2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
-    // const urlU = "UserExperience2(UserAlias='" + data.UserAlias + "',WorkPos='" + data.WorkPosToChange + "',Employer='" + data.EmployerToChange + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00')";
     const urlD = `UserExperiences2(UserAlias='${data.UserAlias }',ExperienceLevel='${data.ExperienceLevel}',ExperiencePosition='${data.ExperiencePosition}',Employer='${data.Employer}',Language='${data.Language}',DateStart=datetime'${moment(data.DateStart).format("YYYY-MM-DD")}T00:00:00')`
-    // const urlX = "UserExperiences2(UserAlias='" + data.UserAlias + "',ExperienceLevel='" + data.ExperienceLevel + "',Employer='" + data.Employer + "',Language='" + data.Language + "',DateStart=datetime'" + moment(data.DateStart).format("YYYY-MM-DD") + "T00:00:00')";
     data.DateStartToChange = utils.formatDateForBackend(data.DateStartToChange);
     data.DateEndToChange = utils.formatDateForBackend(data.DateEndToChange);
     delete data.User;
