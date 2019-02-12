@@ -904,7 +904,7 @@ const getters = {
     return state.langLevels
   },
   getWorkPositions(state) {
-    return state.workPositions;
+    return state.workPositionList;
   },
   getModulesList(state) {
     return state.sapModulesList;
