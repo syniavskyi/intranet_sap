@@ -326,7 +326,7 @@ export default {
       if(WorkPos.ExperiencePosition) {
         let workPoses,
             workLvl = ' ';
-        workPoses = this.workPositions.find(o => o.Key === WorkPos.ExperiencePosition);
+        workPoses = this.workPositionsOnly.find(o => o.Key === WorkPos.ExperiencePosition);
         if(WorkPos.ExperienceLevel !== 'REGULA') {
           workLvl = this.workLevel.find(o => o.Key === WorkPos.ExperienceLevel)
         }
@@ -402,6 +402,7 @@ export default {
       schoolDesc: 'getSchoolDescList',
       fieldOfStudyDesc: 'getFieldOfStudyDescList',
       workPositions: 'getWorkPositions',
+      workPositionsOnly: 'getOnlyWorkPositions',
       workLevel: 'getPositionsLevel',
       fullLanguageList: 'getFullLanguageList',
       langLevels: 'getLangLevels',
