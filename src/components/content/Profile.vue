@@ -162,18 +162,8 @@
                         <select required v-if="!editMode || this.authType === 'OWN'" disabled v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectDisabled">
                           <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
                         </select>
-                        <!-- <input disabled class="inputProfile inputDisabled" v-model="userData.JobPosition"> -->
                         <label class="label-profile">{{ $t("label.position") }}</label> 
                       </div>
-                      <!-- dodawanie nowej pozycji przez BO lub Management -->
-                      <!-- <div v-if="editMode" class="prof-input-s">
-                        <input disabled v-if="!editMode" class="inputProfile inputDisabled" v-model="newPosition"/>
-                        <input v-on:keyup.enter="addNewPositionForUser" required v-if="editMode" class="inputProfile inputEditPos" v-model="newPosition"/>
-                        <span class="prof-div-bar"></span>
-                        <label class="label-profile">{{ $t("label.position") }}</label>
-                        <button class="prof-div-pos-btn" @click="addNewPositionForUser">+</button>
-                        <button class="prof-div-pos-elem" v-for="position in userPositions" :key="position" @click="removeUserPosition(position)">{{position}}</button>
-                      </div> -->
                       <div class="prof-input-s">
                         <input v-if="editMode" required class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.CurrentProject">
                         <input disabled v-if="!editMode" class="inputDisabled inputProfile" v-model="userData.CurrentProject">
@@ -290,20 +280,18 @@ export default {
       }
     }
   },
-  mounted() {
-  },
   // set login language
   beforeRouteLeave(to, from, next) {
     let lang = this.loginLanguage.toLowerCase(),
-    path = "",
-    dataChangedProf = false,
-    editModeProf = false;
-    ;
+        dataChangedProf = false,
+        editModeProf = false,
+        path = "";
+
     if (lang == "") {
       lang = "pl";
     }
     this.$store.commit("SET_LANG", lang);
-    if(to.path !== '/cv') {
+    if (to.path !== '/cv') {
       this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
     }
     dataChangedProf = this.hasDataChanged || this.$store.getters.getDataChangedProf.changed; // check if data was changed in profile comonents
@@ -311,26 +299,25 @@ export default {
     if (editModeProf && dataChangedProf) {
       this.$store.commit('SET_NEXT_PATH', to.path)
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
-      if (this.leavePageFlag === false) {
-      } else {
-          this.$store.commit('SET_LEAVE_PAGE_DIALOG', false)
-          this.$store.commit('SET_LEAVE_PAGE_FLAG', false)
-          this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
-          next()
-        }
+      if (this.leavePageFlag !== false) {
+        this.$store.commit('SET_LEAVE_PAGE_DIALOG', false)
+        this.$store.commit('SET_LEAVE_PAGE_FLAG', false)
+        this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
+        next()
+      }
     } else {
       next()
     }
   },
   beforeRouteEnter(to, from, next) {
-    if(from.name  ===  "Employees") {
+    if (from.name  ===  "Employees") {
       next(vm  => {
         vm.selectedUser  =  vm.$route.params.user;
         vm.getNewData();
       });
     } else {
-        next();
-      }
+      next();
+    }
   },
   created() {
     this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
@@ -338,8 +325,8 @@ export default {
         sUserAlias = localStorage.getItem("id"),
         sLang = localStorage.getItem("lang");
     oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getProfileToRead);
-    if(oStore.getters.getCookie){
-      if(oStore.getters.getGoFromCv && oStore.getters.getRoleList.length > 0){ // if go from CV - do not read data
+    if (oStore.getters.getCookie) {
+      if (oStore.getters.getGoFromCv && oStore.getters.getRoleList.length > 0) { // if go from CV - do not read data
         oStore.commit("SET_GO_FROM_CV", false);
       } else {
         oStore.dispatch('getData', null);
@@ -365,7 +352,6 @@ export default {
     "modal": Modal,
     "submit-photo-err": SubmitPhotoErr
   },
-
   computed: {
     ...mapGetters({
       userData: "getUserInfo",
@@ -396,24 +382,20 @@ export default {
     },
     formatDate() {
       let date = this.userData.EmploymentDate;
-         return date !== null && date !== undefined
-        ? moment(date).format("DD.MM.YYYY")
-        : "-";
+      return date !== null && date !== undefined ? moment(date).format("DD.MM.YYYY") : "-";
     },
-    formatedBirthDate(){
+    formatedBirthDate() {
       let date = this.userData.DateBirth;
-         return date !== null && date !== undefined
-        ? moment(date).format("DD.MM.YYYY")
-        : "-";
+      return date !== null && date !== undefined ? moment(date).format("DD.MM.YYYY") : "-";
     },
     setFormatedDate() {
       let oCalculateDifference = moment.preciseDiff(this.userData.EmploymentDate, new Date(), true),
           oFormatedDate;
         // if there is some differences - show work experience
-          if(oCalculateDifference){
+        if (oCalculateDifference) {
           oFormatedDate = utils.setWorkExperience(oCalculateDifference);
         }
-        if(oFormatedDate.day.includes('NaN')) {
+        if (oFormatedDate.day.includes('NaN')) {
           return i18n.t("message.lackOfData");
         } else {
           return oFormatedDate.year + oFormatedDate.month + oFormatedDate.day;
@@ -431,24 +413,21 @@ export default {
   },
   watch: {
     selectedUser(value) {
-      if(!value) {
+      if (!value) {
         this.selectedUser = localStorage.getItem('id');
         localStorage.setItem('cvUser', this.selectedUser);
       }
       let profileActivityAuth = this.$store.getters.getUserAuth.ZPROF_ATCV;
-      if(profileActivityAuth === '*') {
+      if (profileActivityAuth === '*') {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
-      } else if(profileActivityAuth === 'TEAM' && this.filteredTeamUsers.find(o => o.UserAlias === this.selectedUser)) {
+      } else if (profileActivityAuth === 'TEAM' && this.filteredTeamUsers.find(o => o.UserAlias === this.selectedUser)) {
         this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
-      } else if(this.selectedUser === this.loginAlias) {
-       this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+      } else if (this.selectedUser === this.loginAlias) {
+        this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
       } else {
-       this.$store.commit('SET_DISABLED_BTN_TO_EDIT', true);
+        this.$store.commit('SET_DISABLED_BTN_TO_EDIT', true);
       }
       localStorage.setItem('cvUser', this.selectedUser);
-    },
-    leavePageFlag(newFlag, oldFlag) {
-
     }
   },
   methods: {
@@ -526,40 +505,14 @@ export default {
       this.$store.dispatch("submitPhoto", data);
     },
     phoneValidation(value) {
-      // const regex = new RegExp("^(?=.*[0-9])[- +()0-9]+$");
-      // this.invalidPhone = regex.test(value) ? false : true; //.target.value) ? false : true;
       this.checkFormFields();
     },
-    // dateValidation(value) {
-    //   const day = parseInt(value.slice(0, 2)),
-    //       month = parseInt(value.slice(3, 5));
-
-    //   this.invalidDate = day > 31 || month > 12 ? true : false;
-    //   this.disableSaveBtn = day > 31 || month > 12 ? true : false;
-
-    //   this.checkFormFields();
-    // },
     checkFormFields() {
       if (this.invalidPhone || this.invalidDate || this.$v.userData.Email.$invalid) {
         this.disableSaveBtn = true;
       } else {
         this.checkIfDataChanged();
         this.disableSaveBtn = this.hasDataChanged === true ? false : true;
-      }
-    },
-    addNewPositionForUser() {
-      const userPos = this.userPositions;
-      userPos.push(this.newPosition);
-      this.$store.commit("SET_USER_JOB_POS", userPos);
-    },
-    removeUserPosition(position) {
-      const userPos = this.userPositions;
-      for (let i = 0; userPos.length; i++) {
-        if (userPos[i] == position) {
-          userPos.splice(i, 1);
-          this.$store.commit("SET_USER_JOB_POS", userPos);
-          return;
-        }
       }
     },
     // get data for selected language
@@ -584,9 +537,6 @@ export default {
       this.$store.commit("SET_WORK_TIME");
 
     },
-    setUserCity: function (addressData, placeResultData, id) {
-      this.userData.City = addressData.locality;
-    },
     leavePage() {
       let leave = true
       if (this._beforeEditingProjects){
@@ -597,7 +547,7 @@ export default {
         return leave
       }
       // this.$router.push({name: this.routeToGo})
-    },
+    }
   }
 };
 </script>
