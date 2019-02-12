@@ -1217,6 +1217,7 @@
 }
 .border-btn {
     display: flex;
+    align-items: center;
     font-size:.9rem;
     padding: 5px 11px 5px 15px;
     text-decoration: none;
@@ -1480,6 +1481,7 @@
 .btn-hint-item {
     display: flex;
     align-self: center;
+    align-items:center;
     justify-content: center;
     background: transparent;
     box-shadow: .5px .5px 4px #808080;
@@ -1498,6 +1500,7 @@
     position: absolute;
     top: .5rem;
     right: 1rem;
+    margin: .5rem 0;
 }
 
 .hint-abs {
