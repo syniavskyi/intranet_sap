@@ -200,12 +200,12 @@ export default {
     },
     // check if new data should be updated or created
     save() {
-      this.onHoverOut(this.$el);
       let data = utils.createClone(this.userSkills);
       this.saveUserSkills(data);
       this._beforeEditingCacheSkills = utils.createClone(this.userSkills);
       this._beforeEditingCacheLangs = utils.createClone(this.userLangs);
       this.editMode = false;
+      this.hoverOrEdit = false;
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
     // validate fields
