@@ -37,7 +37,8 @@ const state = {
     "1/5": "1/5",
     "2/5": "2/5",
     "3/5": "3/5",
-    "4/5": "4/5"
+    "4/5": "4/5",
+    "B2B": "B2B"
   },
   hasDataChangeProf: {
     changed: false,
@@ -88,6 +89,8 @@ const actions = {
 
     userData.EmploymentDate = utils.formatDateForBackend(userData.EmploymentDate);
     userData.DateBirth = utils.formatDateForBackend(userData.DateBirth);
+
+    delete userData.UserExperience2;
 
     const url = `Users(UserAlias='${userData.UserAlias}',Language='${userData.Language}')`;
     let sToken = getters.getToken;
