@@ -5,7 +5,7 @@
                 {{ $t("header.travelExp") }}
                 <button class="del-add-row" @click="addRow">{{ $t("button.addRow") }}</button>
             </div>
-            <div class="delegations-tile-underscore"></div>
+            <div class="tile-underscore"></div>
         </div>
         <div id="del-tile-content-1" class="delegations-tile-content">
             <div class="delegations-table-1">
