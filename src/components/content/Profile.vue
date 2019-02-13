@@ -47,27 +47,27 @@
                       <div class="prof-input-adr" v-if="editMode">
                         <div class="prof-input-uno">
                           <input required v-model="userData.Street" v-on:input="checkFormFields()" />
-                          <span class="prof-div-bar"></span>
+                          <span class="cd-span"></span>
                           <label class="prof-ainput-lbl">{{ $t("label.street") }}</label>
                         </div>
                         <div class="prof-input-uno">
                           <input required v-model="userData.BuildingNumber" v-on:input="checkFormFields()"/>
-                          <span class="prof-div-bar"></span>
+                          <span class="cd-span"></span>
                           <label class="prof-ainput-lbl">{{ $t("label.buildingNumber") }}</label>
                         </div>
                         <div class="prof-input-uno">
                           <input required v-model="userData.ApartmentNumber" v-on:input="checkFormFields()">
-                          <span class="prof-div-bar"></span>
+                          <span class="cd-span"></span>
                           <label class="prof-ainput-lbl">{{ $t("label.apartmentNumber") }}</label>
                         </div>
                         <div class="prof-input-uno">
                           <input required v-model="userData.City" v-on:input="checkFormFields()">
-                          <span class="prof-div-bar"></span>
+                          <span class="cd-span"></span>
                           <label class="prof-ainput-lbl">{{ $t("label.city") }}</label>
                         </div>
                         <div class="prof-input-uno">
                           <input required v-model="userData.PostalCode" v-on:input="checkFormFields()">
-                          <span class="prof-div-bar"></span>
+                          <span class="cd-span"></span>
                           <label class="prof-ainput-lbl">{{ $t("label.postalCode") }}</label>
                         </div>
                       </div>
@@ -78,14 +78,14 @@
                     <div class="prof-input">
                       <input required v-if="editMode" class="inputEdit inputProfile" @input="checkFormFields"  v-model="userData.Email" @blur="$v.userData.Email.$touch()">
                       <input v-if="!editMode" disabled type="text" class="inputDisabled inputProfile " v-model="userData.Email">
-                      <span class="prof-div-bar"></span>
+                      <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.email") }}</label>
                       <p class="prof-error" v-if="$v.userData.Email.$invalid">{{ $t("message.emailValidation") }}</p>
                     </div>
                     <div class="prof-input">
                       <masked-input required v-if="editMode" class="inputEdit inputProfile" mask="\+11 111 111 111" type="text" v-model="userData.Telephone" @input="phoneValidation"></masked-input>
                       <input v-if="!editMode" disabled class="inputDisabled inputProfile" v-model="userData.Telephone">
-                      <span class="prof-div-bar"></span>
+                      <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.phone") }}</label>
                       <p class="prof-error" v-if="invalidPhone">{{ $t("message.phoneValidation") }}</p>
                     </div>
@@ -102,14 +102,14 @@
                     <div class="prof-input-m">
                       <input required v-if="editMode" class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.SkypeId">
                       <input v-if="!editMode" disabled class="inputProfile inputDisabled" v-model="userData.SkypeId">
-                      <span class="prof-div-bar"></span>
+                      <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.skype") }}</label>
                       <img class="prof-comm-img" src="../../assets/images/comm/grey/skype.png"/>
                     </div>
                     <div class="prof-input-m">
                       <input required v-if="editMode" class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.SlackId">
                       <input disabled v-if="!editMode" class="inputProfile inputDisabled" v-model="userData.SlackId">
-                      <span class="prof-div-bar"></span>
+                      <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.slack") }}</label>
                       <img class="prof-comm-img" src="../../assets/images/comm/grey/slack.png"/>
                     </div>
@@ -167,7 +167,7 @@
                       <div class="prof-input-s">
                         <input v-if="editMode" required class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.CurrentProject">
                         <input disabled v-if="!editMode" class="inputDisabled inputProfile" v-model="userData.CurrentProject">
-                        <span class="prof-div-bar"></span>
+                        <span class="cd-span"></span>
                         <label class="label-profile">{{ $t("label.project") }}</label>
                       </div>
                     </div>
@@ -186,7 +186,7 @@
                       <v-date-picker  @input="checkFormFields" v-if="editMode" class="delegations-input-date inputDisabled" v-model="userData.EmploymentDate" :max-date="new Date()">
                         <input value="userData.employmentDate"/>
                       </v-date-picker>
-                      <span class="prof-div-bar"></span>
+                      <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.employmentDate") }}</label>
                       <p class="prof-error" v-if="invalidDate">{{ $t("message.dateValidation") }}</p>
                     </div>
@@ -200,7 +200,7 @@
                       <v-date-picker  @input="checkFormFields" v-if="editMode" class="delegations-input-date inputDisabled" v-model="userData.DateBirth" :max-date="new Date()">
                         <input value="userData.dateBirth"/>
                       </v-date-picker>
-                      <span class="prof-div-bar"></span>
+                      <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.dateOfBirth") }}</label>
                       <p class="prof-error" v-if="invalidDate">{{ $t("message.dateValidation") }}</p>
                     </div>

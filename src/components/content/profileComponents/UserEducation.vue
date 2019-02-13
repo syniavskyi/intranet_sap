@@ -56,7 +56,7 @@
                   <option v-for="fieldOfStudy in fieldOfStudyDescList" :key="fieldOfStudy.SchoolId" :value="fieldOfStudy.SchoolId">{{fieldOfStudy.SchoolDescription}}</option>
                 </select>
                 <!-- :disabled="!editMode" -->
-                <span class="prof-div-bar"></span>
+                <span class="cd-span"></span>
                 <label class="label-profile">{{ $t("label.fieldOfStudy") }}</label>
               </div>
               <div class="prof-input-l">
@@ -66,7 +66,7 @@
                 <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="education.University">
                   <option v-for="school in schoolDescList" :key="school.SchoolId" :value="school.SchoolId">{{school.SchoolDescription}}</option>
                 </select>
-                <span class="prof-div-bar"></span>
+                <span class="cd-span"></span>
                 <label class="label-profile">{{ $t("label.university") }}</label>
               </div>
             </div>
@@ -79,7 +79,7 @@
                   <option v-for="type in studyTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                 </select>
                 <!-- :disabled="!editMode" -->
-                <span class="prof-div-bar"></span>
+                <span class="cd-span"></span>
                 <label class="label-profile">{{ $t("label.formOfStudy") }}</label>
               </div>
               <div class="prof-input-xs">
@@ -92,7 +92,7 @@
                   <option v-for="type in academicTitles" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                 </select>
                 <!-- :disabled="!editMode -->
-                <span class="prof-div-bar"></span>
+                <span class="cd-span"></span>
                 <label class="label-profile">{{ $t("label.degree") }}</label>
               </div>
             </div>

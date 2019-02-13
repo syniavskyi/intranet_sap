@@ -44,7 +44,7 @@
             <div class="prof-input-ss">
               <input required v-if="editMode" class="inputProfile inputEdit" v-model="experience.Employer" @input="checkFields(index)">
               <input disabled class="inputProfile inputDisabled" v-if="!editMode" v-model="experience.Employer">
-              <span class="prof-div-bar"></span>
+              <span class="cd-span"></span>
               <label class="label-profile">{{ $t("label.employer") }}</label>
             </div>
             <div class="prof-input-ss">
@@ -54,7 +54,7 @@
               <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="experience.ExperienceLevel">
                 <option v-for="workPos in positionsLevels" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
               </select>
-              <span class="prof-div-bar"></span>
+              <span class="cd-span"></span>
               <label class="label-profile">{{ $t("label.jobPosition") }}</label>
             </div>
             <div class="prof-input-ss">
@@ -64,7 +64,7 @@
               <select disabled v-if="!editMode" class="selectProfile selectDisabled" v-model="experience.ExperiencePosition">
                 <option v-for="workPos in onlyWorkPositions" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
               </select>
-              <span class="prof-div-bar"></span>
+              <span class="cd-span"></span>
               <label class="label-profile">{{ $t("label.jobPosition") }}</label>
             </div>
           </div>
