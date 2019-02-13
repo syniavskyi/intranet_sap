@@ -57,12 +57,6 @@
     justify-content: space-between;
 }
 
-.delegations-tile-underscore {
-    width: 5rem;
-    height: 0.5rem;
-    background: #ffa500;
-}
-
 .delegations-tile-content {
     display:flex;
     width: 100%;
@@ -97,6 +91,7 @@
     color: #ccc;
     font-size: 1.2rem;
     position: relative;
+    max-width:85%;
 }
 
 .delegation-number-title {
@@ -198,14 +193,12 @@
     }
   }
 
-/* .delegation-number-btnc:hover {
-    box-shadow: 1px 0px 16px orange; 
-} */
 
 .delegation-number-btn {
     transform: rotate(90deg);
-    top: .1rem;
+    bottom: .2rem;
     right: -1.5rem;
+    outline: none;
 }
 
 .delegation-number-btn:hover,

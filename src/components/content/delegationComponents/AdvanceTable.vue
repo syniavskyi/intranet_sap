@@ -5,7 +5,7 @@
                 {{ $t("header.advance") }}
                 <button class="del-add-row" @click="addAdvanceRow"> {{ $t("button.addRow") }} </button>
             </div>
-            <div class="delegations-tile-underscore"></div>
+            <div class="tile-underscore"></div>
         </div>
         <div class="delegations-tile-content">
             <div class="delegations-table-wrapper">

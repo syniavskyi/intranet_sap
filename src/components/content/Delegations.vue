@@ -31,7 +31,7 @@
                             </div>
                             <button class="func-btn" :disabled="disableGenerating" @click="generatePdf">{{ $t("button.generatePDF") }}</button>
                         </div>
-                        <div class="delegations-tile-underscore"></div>
+                        <div class="tile-underscore"></div>
                     </div>
                     <div class="delegations-tile-content delegations-tile-content-1">
                         <div class="del-sections">
