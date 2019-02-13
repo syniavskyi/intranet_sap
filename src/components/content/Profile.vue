@@ -6,9 +6,9 @@
       <leave-page-dialog v-if="showLeavePageDialog"></leave-page-dialog>
       <div class="profile-content">
         <div class="profile-header">
-          <div class="profile-header-title-and-menu">
+          <div class="content-header-title-and-menu">
             <div @click="showMenu" class="content-header-menu">&#9776;</div>
-            <p class="profile-header-title">{{ $t("header.profile") }}</p>
+            <p class="content-header-title">{{ $t("header.profile") }}</p>
           </div>
           <div v-if="!editMode" class="prof-input-lang">
             <select required class="selectLang" v-model="selectedCvLang" @change="getNewData">
