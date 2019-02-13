@@ -15,7 +15,7 @@
             <div class="tile-head">
               <div class="tile-head-row">
                 <h2 class="tile-head-title">{{ $t("header.messages")}}</h2>
-                <button @click="newMessage" class="func-btn">
+                <button @click="newMessage" class="func-btn ae">
                   <span class="nfb-span">&#43;</span>
                   <span class="nfbm-span">{{ $t("button.newMessage") }}</span>
                 </button>

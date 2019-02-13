@@ -1,11 +1,11 @@
 <template>
   <div class="availability-tile ava-tile-2">
-    <div class="availability-tile-header">
-            <div class="ava-tile-header-title">
-                <h2>{{ $t("label.projectsOverview") }}</h2>
-                <div class="availability-tile-underscore"></div>
-            </div>
+    <div class="tile-head">
+        <div class="tile-head-title">
+            <h2>{{ $t("label.projectsOverview") }}</h2>   
         </div>
+        <div class="tile-underscore"/>
+    </div>
     <p class="notAuthToAddProject">{{ $t("message.notAuthToAddProject") }}</p>
   </div>
 </template>

@@ -1,0 +1,49 @@
+/* tile head */
+.tile-head {
+    display: flex;
+    flex-direction: column;
+    min-height: 3.4rem;
+}
+
+.tile-head-title {
+    display: flex;
+    font-weight: 500;
+    color: #333;
+    margin: 0rem;
+    padding: 0.5rem 1rem;
+    align-self: flex-start;
+}
+
+.tile-head-title h2 {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+
+.tile-head-row {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+    align-items: center;
+}
+
+.tile-underscore {
+    width: 5rem;
+    height: 0.5rem;
+    background: #ffa500;
+}
+
+.tile-content {
+    display: flex;
+    height: 90%;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.ae { 
+    align-self: flex-end;
+}
+/* tile head */

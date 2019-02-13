@@ -1,13 +1,13 @@
 <template>
     <!-- for adding new project -->
     <div class="availability-tile ava-tile-2">
-        <div class="availability-tile-header">
-            <div class="ava-tile-header-title">
+        <div class="tile-header">
+            <div class="tile-head-title">
                 <i18n path="message.addProjectforUser" tag="h2">
                     <span place="user"> {{formattedUsername}} </span>
-                    </i18n>
-                <div class="availability-tile-underscore"></div>
+                </i18n>
             </div>
+            <div class="tile-underscore"/>
             <!-- <button class="ava-button ava-button-add" @click="showAddProjectDialog = true"> Dodaj projekt </button> -->
         </div>
         <div class="availability-tile-content">
