@@ -1,16 +1,18 @@
 <template>
     <div class="availability-tile ava-tile-3">
-        <div class="availability-tile-header">
-            <div class="ava-tile-header-title">
-               <h2>{{ $t("label.availabilityOverview") }}</h2>
-                <div class="availability-tile-underscore"></div>
+        <div class="tile-head">
+            <div class="tile-head-row">
+                <div class="tile-head-title">
+                    <h2>{{ $t("label.availabilityOverview") }}</h2>
+                </div>
+                <button class="holiday-button-static">
+                    <img src="../../../assets/images/printer32px.png">
+                    <p class="pempty">{{$t('title.openHoliday')}}</p>
+                </button>
+                <button class="profile-edit-btn" v-if="!editMode" :disabled="disabledBtnToEditAvail" @click="edit">{{ $t("button.edit") }}</button>
+                <button class="profile-edit-btn-e" v-if="editMode" @click="cancel"><span class="prof-btn-txt">{{ $t("button.finishEdit") }}</span><span class="prof-btn-icon">&#10004;</span></button>
             </div>
-            <button class="holiday-button-static">
-                <img src="../../../assets/images/printer32px.png">
-                <p>{{$t('title.openHoliday')}}</p>
-            </button>
-            <button class="profile-edit-btn" v-if="!editMode" :disabled="disabledBtnToEditAvail" @click="edit">{{ $t("button.edit") }}</button>
-            <button class="profile-edit-btn-e" v-if="editMode" @click="cancel"><span class="prof-btn-txt">{{ $t("button.finishEdit") }}</span><span class="prof-btn-icon">&#10004;</span></button>
+            <div class="tile-underscore"></div>
         </div>
         <p class="ava-content-header" v-if="noAvailEntries">{{ $t("message.noEntriesForParameters") }}</p>
         <div class="availability-tile-content" v-if="!noAvailEntries">

@@ -617,44 +617,6 @@ input:required {
 }
 /* MESSAGE TOAST */
 
-/* tile head */
-.tile-head {
-    display: flex;
-    flex-direction: column;
-    min-height: 3.4rem;
-}
-
-.tile-head-title {
-    display: flex;
-    font-weight: 500;
-    color: #333;
-    margin: 0rem;
-    padding: 0.5rem 1rem;
-    align-self: center;
-}
-
-.tile-head-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.tile-underscore {
-    width: 5rem;
-    height: 0.5rem;
-    background: #ffa500;
-}
-
-.tile-content {
-    display: flex;
-    height: 90%;
-    flex: 1 1 auto;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-}
-/* tile head */
-
 .table-p {
     color: #808080;
     padding: 0;

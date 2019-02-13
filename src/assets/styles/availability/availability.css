@@ -81,17 +81,6 @@
     min-height: 29rem;
 }
 
-.availability-tile-header {
-    display: flex;
-    width: 100%;
-    background: transparent;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 3rem;
-    /* height: 10%; */
-    position: relative;
-}
-
 .avail-error-wrap {
     display: flex;
     width: 100%;
@@ -102,22 +91,6 @@
     top: 3rem;
     font-size: 0.75rem;
     color: #ff0000;
-}
-.availability-tile-header h2{
-    padding: 0.5rem 1rem;
-    margin: 0;
-    font-weight: 500;
-    font-size: 1.3rem;
-}
-.ava-tile-header-title {
-    display: flex;
-    flex-direction: column;
-}
-
-.availability-tile-underscore {
-    width: 5rem;
-    height: .5rem;
-    background: #ffa500;
 }
 
 .availability-tile-content {

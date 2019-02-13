@@ -40,6 +40,7 @@ require('./assets/styles/news/news.css');
 require('./assets/styles/pdf/pdf.css');
 require('./assets/styles/cd.css');
 require('./assets/styles/modals.css');
+require('./assets/styles/tiles.css')
 
 
 Vue.config.productionTip = false

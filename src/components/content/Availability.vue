@@ -13,12 +13,12 @@
             <div class="availability-tiles">
                 <div class="availability-tiles-row">
                     <div class="availability-tile ava-tile-1">
-                        <div class="availability-tile-header">
-                            <div class="ava-tile-header-title">
-                                <h2 v-if="selectedUser === null">{{ $t("header.selectEmployee") }}</h2>
-                                <h2 class="ava-selected-user-h2" v-else-if="selectedUser !== null">{{ formattedUsername }}</h2>
-                                <div class="availability-tile-underscore"></div>
+                        <div class="tile-head">
+                            <div class="tile-head-row">
+                                <h2 class="tile-head-title" v-if="selectedUser === null">{{ $t("header.selectEmployee") }}</h2>
+                                <h2 class="tile-head-title" v-else-if="selectedUser !== null">{{ formattedUsername }}</h2>
                             </div>
+                            <div class="tile-underscore"/>
                         </div>
                         <div class="availability-tile-content">
                             <div class="ava-select-and-calendar">
