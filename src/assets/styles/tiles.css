@@ -24,7 +24,6 @@
 .tile-head-row {
     display: flex;
     justify-content: space-between;
-    /* align-items: flex-end; */
     align-items: center;
 }
 
@@ -43,6 +42,8 @@
     justify-content: center;
 }
 
+
+/* Align self classes */ 
 .ae { 
     align-self: flex-end;
 }
