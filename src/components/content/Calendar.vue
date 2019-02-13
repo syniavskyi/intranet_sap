@@ -106,8 +106,8 @@ export default {
     oStore.dispatch('clearFilters');
     this.filters.department = 'BTECH'
   },
-  computed: Object.assign(
-    mapGetters({
+  computed: {
+    ...mapGetters({
       departmentList: "getTargetGroup",
       events: "getAllEvents",
       addEvent: "getEventToChange",
@@ -119,7 +119,7 @@ export default {
       authType: "getCalendarAuth",
       dialogEvent: "getDialogEvent"
     }),
-    {
+    
       minDate() {
         return new Date(new Date().setFullYear(new Date().getFullYear() - 1))
       },
@@ -203,8 +203,7 @@ export default {
           }
         }));
       }
-    }
-  ),
+  },
   components: {
     "app-menu": Menu,
     modal: Modal,

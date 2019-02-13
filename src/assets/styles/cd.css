@@ -10,6 +10,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    position: relative;
 }
 
 .cd-for-input-xs {
@@ -47,6 +48,12 @@
     border-bottom: 1px solid #757575;
     position: relative;
     cursor: text;
+}
+
+.cd-perc-span {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 6rem;
 }
 
 .cd-input[type="time"] {
@@ -238,25 +245,35 @@
 
 /* COOL (CONTET) DIV DATE PICKER INPUT */
 
-.cd-range ~ label {
+.cd-range ~ label,
+.cd-rangex ~ label {
     top: -.65rem;
     font-size: .9rem;
     color: rgb(255, 145, 0);
     padding: 0 .2rem;
 }
 
-.cd-range {
-    width: 8rem;
+.cd-range,
+.cd-rangex {
     text-align: center;
     border: 0;
     display:flex;
     align-items:center;
 }
-.cd-range input {
+
+.cd-range {
+    width: 8rem;
+}
+
+.cd-rangex {
+    width: 15rem;
+}
+
+.cd-range input,
+.cd-rangex input {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 14rem;
     text-align: center;
     outline-color: #ffa500;
     height: 1.8rem;
@@ -265,6 +282,13 @@
     background: transparent;
     font-size: 1rem; 
     border: 1px solid rgb(207, 207, 207);
+}
+.cd-range input {
+    width: 14rem;
+}
+
+.cd-rangex input {
+    width: 15rem;
 }
 
 /* COOL (CONTET) DIV DATE PICKER INPUT */
