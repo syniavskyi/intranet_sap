@@ -43,25 +43,10 @@
     flex-shrink: 0;
 }
 
-.profile-header-title-and-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .profile-header-menu {
     display: flex;
     margin: 1rem .3rem;
     height: 2rem;
-}
-
-.profile-header-title {
-    color: #7b7777;
-    margin: 0;
-    line-height: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 0 .5rem;
 }
 
 .profile-header-button {

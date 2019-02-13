@@ -178,6 +178,13 @@
     animation-play-state: paused;
 }
 
+.delegation-number-btn {
+    transform: rotate(90deg);
+    bottom: .2rem;
+    right: -1.5rem;
+    outline: none;
+}
+
 @keyframes pulsy {
     0% {
       box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.603);
@@ -192,14 +199,6 @@
         color: grey;
     }
   }
-
-
-.delegation-number-btn {
-    transform: rotate(90deg);
-    bottom: .2rem;
-    right: -1.5rem;
-    outline: none;
-}
 
 .delegation-number-btn:hover,
 .delegation-number-btnc:hover {
