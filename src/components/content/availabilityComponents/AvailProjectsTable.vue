@@ -41,8 +41,8 @@
                         <div class="ava-tbproj-ititle">{{ $t("label.engag") }}</div>
                         <p class="pempty mla" v-if="!editMode">{{project.Engag}}</p>
                         <div class="cd-for-input-xxs mtb" v-if="editMode">
-                            <input required class="ava-input-range-perc mla" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="ava-perc-span">%</span>
-                            <span class="ava-div-bar"></span>
+                            <input required class="cd-input mla" v-model="project.Engag" @input="validateNewEngag(index)" type="number" min="0" max="100"><span class="cd-perc-span">%</span>
+                            <span class="cd-span"></span>
                         </div>
                     </div>
                     <div class="ava-tbproj-item">

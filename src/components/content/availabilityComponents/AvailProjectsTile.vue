@@ -27,18 +27,18 @@
                         </select>
                         <label class="cd-slabel">{{ $t("label.project") }}</label>
                     </div>
-                    <div class="ava-div-input-cool">
-                        <input required class="ava-input-range-perc" v-model="newProjectForUser.Engag" @input="validateNewEngag(newProjectForUser.Engag)" type="number" min="0" max="100" ><span class="ava-perc-span">%</span>
-                        <span class="ava-div-bar"></span>
-                        <label class="ava-input-label-cool">{{ $t("label.engag") }}</label>
+                    <div class="cd-for-input cd-b">
+                        <input required class="cd-input" v-model="newProjectForUser.Engag" @input="validateNewEngag(newProjectForUser.Engag)" type="number" min="0" max="100" ><span class="cd-perc-span">%</span>
+                        <span class="cd-span"></span>
+                        <label class="cd-label">{{ $t("label.engag") }}</label>
                     </div>
                 </div>
                 <div class="ava-add">
-                    <div class="ava-div-select-cool">
-                        <v-date-picker required class="ava-input-range-wide" @input="validateNewProject" popoverDirection="top" is-expanded mode="range" v-model="selectedDates">
-                            <input class="ava-input-range-wide" value="newProjectForUser.dates" >
+                    <div class="cd-for-input">
+                        <v-date-picker required class="cd-rangex cd-b" @input="validateNewProject" popoverDirection="top" is-expanded mode="range" v-model="selectedDates">
+                            <input value="newProjectForUser.dates" >
                         </v-date-picker>
-                        <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
+                        <label class="cd-slabel">{{ $t("label.dates") }}</label>
                     </div>
                     <div class="cd-for-select cd-b">
                         <select required class="cd-select" v-model="newProjectForUser.StatusId" @change="validateNewProject">
@@ -47,7 +47,7 @@
                         </select>
                         <label class="cd-slabel">{{ $t("label.status") }}</label>
                     </div>
-                    <div class="cd-for-input">
+                    <div class="cd-for-input cd-b">
                         <textarea class="cd-textarea" required maxlength="50" @input="validateNewProject" v-model="newProjectForUser.Description" />
                         <label class="cd-slabel">{{ $t("label.remarks") }}</label>
                     </div>

@@ -16,26 +16,26 @@
                     <p class="ava-content-header" v-if="newLeave.TypeId !== null">{{ $t("label.entryType") }}:
                         <span class="ava-tile-entry">&nbsp;{{formattedType}}</span>
                     </p>
-                    <div class="ava-div-select-cool">
-                        <v-date-picker v-if="authAcc === '*'" required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
-                            <input class="ava-input-range-wide" value="selectedDates">
+                    <div class="cd-for-input cd-b">
+                        <v-date-picker v-if="authAcc === '*'" required class="cd-rangex" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
+                            <input value="selectedDates">
                         </v-date-picker>
-                        <v-date-picker  v-if="authAcc !== '*'" :min-date="new Date()" required class="ava-input-range-wide" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
-                            <input class="ava-input-range-wide" value="selectedDates">
+                        <v-date-picker  v-if="authAcc !== '*'" :min-date="new Date()" required class="cd-rangex" popoverDirection="top" is-expanded mode="range" v-model="selectedDates" @change="checkFields">
+                            <input value="selectedDates">
                         </v-date-picker>
-                        <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
+                        <label class="cd-slabel">{{ $t("label.dates") }}</label>
                     </div>
-                    <div class="ava-div-select-cool" v-if="authAcc === '*' || authAcc === 'TEAM' && selectedUser!==loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId)">
-                        <select required class="ava-select-cool" v-model="newLeave.StatusId" @change="checkFields">
+                    <div class="cd-for-input cd-b" v-if="authAcc === '*' || authAcc === 'TEAM' && selectedUser!==loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId)">
+                        <select required class="cd-select" v-model="newLeave.StatusId" @change="checkFields">
                             <option v-for="status in availStatusList" :key="status.Key" :value="status.Key">{{ status.Value }}</option>
                         </select>
-                        <label class="ava-select-label-cool">{{ $t("label.status") }}</label>
+                        <label class="cd-slabel">{{ $t("label.status") }}</label>
                     </div>
                 </div>
                 <div class="ava-add">
-                    <div class="ava-div-input-cool" v-if="newLeave.TypeId == 'OT'">
-                        <textarea class="ava-textarea" required maxlength="50" @change="checkFields"/>
-                    <label class="ava-select-label-cool">{{ $t("label.remarks") }}</label>
+                    <div class="cd-for-input cd-b" v-if="newLeave.TypeId == 'OT'">
+                        <textarea class="cd-textarea" required maxlength="50" @change="checkFields"/>
+                        <label class="cd-label">{{ $t("label.remarks") }}</label>
                     </div>
                     <div class="ava-div-buttons">
                         <button class="ava-button" >{{ $t("button.cancel") }}</button>
