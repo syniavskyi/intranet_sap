@@ -22,8 +22,8 @@
                 <select required class="cd-select" v-model="aFilters.department">
                   <option v-for="department in departmentList" :key="department.Key" :value="department.Value">{{ department.Value }}</option>
                 </select>
-                <button class="ava-select-reset" :title="$t('title.reset')" @click="aFilters.department = null">&#10006;</button>
-                <label class="ava-select-label-cool">{{ $t("label.orSelectDep") }}</label>
+                <button class="select-reset" :title="$t('title.reset')" @click="aFilters.department = null">&#10006;</button>
+                <label class="cd-slabel">{{ $t("label.orSelectDep") }}</label>
               </div>
               <button class="func-btn emp-btn" @click="clearFilters">{{ $t("button.clear") }}</button>
             </div>
