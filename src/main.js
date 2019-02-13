@@ -30,7 +30,6 @@ require('./assets/styles/tiles.css')
 require('./assets/styles/login/login.css');
 require('./assets/styles/profile/profile.css');
 require('./assets/styles/registration/registration.css');
-// require('./assets/styles/dashboard/dashboard.css');
 require('./assets/styles/starterPage/starterPage.css');
 require('./assets/styles/availability/availability.css');
 require('./assets/styles/employees/employees.css');
@@ -38,28 +37,12 @@ require('./assets/styles/files/files.css');
 require('./assets/styles/delegations/delegations.css');
 require('./assets/styles/calendar/calendar.css');
 require('./assets/styles/news/news.css');
-require('./assets/styles/pdf/pdf.css');
 require('./assets/styles/cd.css');
 require('./assets/styles/modals.css');
-
-
 
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = window.location.origin + "/api/sap/opu/odata/sap/ZGW_INTRANET_SRV/";
-
-// axios.interceptors.response.use(function (response) {
-//     if (response.status === 413) {
-//         throw response;
-//     } else {
-//         return response;
-//     }
-// })
-// axios.interceptors.request.use(function(config) {
-//         return config;
-//     }, function(error) {
-//         return Promise.reject(error);
-// })
 
 export const app = new Vue({
     el: '#app',
