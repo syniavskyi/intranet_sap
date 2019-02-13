@@ -13,19 +13,19 @@
         <div class="availability-tile-content">
             <div id="add-project-dialog">
                 <div class="ava-add">
-                    <div class="ava-div-select-cool">
-                        <select required class="ava-select-cool" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
+                    <div class="cd-for-select cd-b">
+                        <select required class="cd-select" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
                             <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
                         </select>
-                        <label class="ava-select-label-cool">{{ $t("label.contractor") }}</label>
+                        <label class="cd-slabel">{{ $t("label.contractor") }}</label>
                     </div>
                 </div>
                 <div class="ava-add">
-                    <div class="ava-div-input-cool">
-                        <select required class="ava-select-cool" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
+                    <div class="cd-for-select cd-b">
+                        <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
                             <option v-for="project in filteredProjects" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
                         </select>
-                        <label class="ava-select-label-cool">{{ $t("label.project") }}</label>
+                        <label class="cd-slabel">{{ $t("label.project") }}</label>
                     </div>
                     <div class="ava-div-input-cool">
                         <input required class="ava-input-range-perc" v-model="newProjectForUser.Engag" @input="validateNewEngag(newProjectForUser.Engag)" type="number" min="0" max="100" ><span class="ava-perc-span">%</span>
@@ -40,12 +40,12 @@
                         </v-date-picker>
                         <label class="ava-input-label-cool">{{ $t("label.dates") }}</label>
                     </div>
-                    <div class="ava-div-select-cool">
-                        <select required class="ava-select-cool" v-model="newProjectForUser.StatusId" @change="validateNewProject">
+                    <div class="cd-for-select cd-b">
+                        <select required class="cd-select" v-model="newProjectForUser.StatusId" @change="validateNewProject">
                             <option v-for="status in availStatusList" :key="status.Key" :value="status.Key">{{ status.Value }}</option>
                             <!-- <option v-for="branch in branchList" :key="branch.branchId" :value="selectedBranch = branch.branchId">{{ branch.branchName }}</option> -->
                         </select>
-                        <label class="ava-select-label-cool">{{ $t("label.status") }}</label>
+                        <label class="cd-slabel">{{ $t("label.status") }}</label>
                     </div>
                     <div class="cd-for-input">
                         <textarea class="cd-textarea" required maxlength="50" @input="validateNewProject" v-model="newProjectForUser.Description" />

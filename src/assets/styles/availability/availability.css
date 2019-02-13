@@ -235,6 +235,7 @@
     min-width: 15rem;
     margin-top: 1rem;
 }
+
 .ava-select-reset {
     position: absolute;
     top: .45rem;
@@ -344,7 +345,6 @@
     color: rgb(255, 145, 0);
 }
 
-.ava-select,
 .ava-select-cool,
 .ava-select-cool-err {
     background: #ffffff;

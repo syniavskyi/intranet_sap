@@ -23,40 +23,40 @@
                         <div class="availability-tile-content">
                             <div class="ava-select-and-calendar">
                                 <div class="availability-select-options">
-                                    <div class="ava-div-select-cool">
-                                        <select required class="ava-select-cool" v-model="selectedBranch">
+                                    <div class="cd-for-select cd-b">
+                                        <select required class="cd-select" v-model="selectedBranch">
                                             <option v-for="branch in branchList" :key="branch.Key" :value="branch.Key">{{ branch.Value }}</option>
                                         </select>
-                                        <label class="ava-select-label-cool">{{ $t("label.department") }}</label>
+                                        <label class="cd-slabel">{{ $t("label.department") }}</label>
                                     </div>
-                                    <div class="ava-div-select-cool" v-if="selectedBranch != null">
-                                        <select required class="ava-select-cool" v-model="selectedDepartment">
+                                    <div class="cd-for-select cd-b" v-if="selectedBranch != null">
+                                        <select required class="cd-select" v-model="selectedDepartment">
                                             <option v-for="department in departmentList" :key="department.Key" :value="department.Key">{{ department.Value }}</option>
                                         </select>
-                                        <label class="ava-select-label-cool">{{ $t("label.branch") }}</label>
+                                        <label class="cd-slabel">{{ $t("label.branch") }}</label>
                                     </div>
-                                    <div class="ava-div-select-cool" v-if="selectedDepartment != null">
-                                        <select required class="ava-select-cool" v-model="selectedUser" @change="loadUserProjects(selectedUser)">
+                                    <div class="cd-for-select cd-b" v-if="selectedDepartment != null">
+                                        <select required class="cd-select" v-model="selectedUser" @change="loadUserProjects(selectedUser)">
                                             <option v-for="user in filteredUsers" :value="user.UserAlias" :key="user.UserAlias">{{ user.Fullname }}</option>
                                         </select>
-                                        <label class="ava-select-label-cool">{{ $t("label.employee") }}</label>
+                                        <label class="cd-slabel">{{ $t("label.employee") }}</label>
                                         <span class="avail-error-wrap">
                                             <label class="avail-error" v-if="filteredUsers.length === 0">{{ $t("label.emptyUsers") }}</label>
                                         </span>
                                     </div>
-                                    <div class="ava-div-select-cool" v-if="selectedUser != null">
-                                        <select required class="ava-select-cool" v-model="selectedType">
+                                    <div class="cd-for-select cd-b" v-if="selectedUser != null">
+                                        <select required class="cd-select" v-model="selectedType">
                                             <option v-for="type in availTypesList" :value="type.Key" :key="type.Key">{{type.Value}}</option>
                                         </select>
-                                        <button class="ava-select-reset" :title="$t('title.reset')" v-if="selectedType" @click="selectedType = null">&#10006;</button>
-                                        <label class="ava-select-label-cool">{{ $t("label.entryType") }}</label>
+                                        <button class="select-reset" :title="$t('title.reset')" v-if="selectedType" @click="selectedType = null">&#10006;</button>
+                                        <label class="cd-slabel">{{ $t("label.entryType") }}</label>
                                     </div>
-                                    <div class="ava-div-select-cool" v-if="selectedUser != null">
-                                        <select required class="ava-select-cool" v-model="selectedStatus">
+                                    <div class="cd-for-select cd-b" v-if="selectedUser != null">
+                                        <select required class="cd-select" v-model="selectedStatus">
                                             <option v-for="status in availStatusList" :key="status.Key" :value="status.Key">{{ status.Value }}</option>
                                         </select>
-                                        <button class="ava-select-reset" :title="$t('title.reset')" v-if="selectedStatus" @click="selectedStatus = null">&#10006;</button>
-                                        <label class="ava-select-label-cool">{{ $t("label.status") }}</label>
+                                        <button class="select-reset" :title="$t('title.reset')" v-if="selectedStatus" @click="selectedStatus = null">&#10006;</button>
+                                        <label class="cd-slabel">{{ $t("label.status") }}</label>
                                     </div>
                                     <button class="ava-button ava-button-edit" v-if="selectedUser != null" @click="showContent = true">{{ $t("label.display") }}</button>
                                 </div>
