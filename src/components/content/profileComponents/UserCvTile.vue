@@ -52,6 +52,8 @@
 <script>
 import i18n from "../../../lang/lang";
 import { mapGetters } from "vuex";
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -71,7 +73,19 @@ export default {
   },
   methods: {
     showSelectDialog() {
-      this.$store.commit("SET_SHOW_CV_DIALOG", true);
+      const url = "$metadata"
+      axios({
+        method: 'GET',
+        url: url,
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        }
+      }).then(function() {
+        this.$store.commit("SET_SHOW_CV_DIALOG", true);
+      }.bind(this))
+      .catch(function (err) {
+        this.$store.dispatch('logoutSession', true);
+      }.bind(this))
     },
     setSelectedFormat(value) {
       this.selectedFormat = value.target.value;
