@@ -40,7 +40,8 @@
         "startSlider": "Schieberegler aufrufen",
         "confirmGenerate": "Bestätigen und erzeugen",
         "logout": "Auslogen",
-        "saveNewDelegNumber": "Save new number"
+        "saveNewDelegNumber": "Save new number",
+        "backToProf": "back to profile"
     },
     "label": {
         "nationality": "Nationalität",

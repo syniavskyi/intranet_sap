@@ -40,7 +40,8 @@
     "startSlider": "Uruchom slider",
     "confirmGenerate": "Zatwierdź i generuj",
     "logout": "Wyloguj",
-    "saveNewDelegNumber": "Zapisz nowy numer"
+    "saveNewDelegNumber": "Zapisz nowy numer",
+    "backToProf": "Powrót do profilu"
   },
   "label": {
     "nationality": "Narodowość",

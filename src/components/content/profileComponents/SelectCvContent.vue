@@ -56,7 +56,7 @@
           <div class="cv-modal-div">
             <!-- Wybierz format -->
             <select required class="cv-modal-select" v-model="cvElements.format" @blur="$v.cvElements.format.$touch()">
-              <option v-for="format in formats" :value="format" :key="format"> "{{format}}" </option>
+              <option v-for="format in formats" :value="format" :key="format"> {{format}} </option>
             </select>
             <label class="cv-modal-label">{{ $t("label.selectFormat") }}</label>
           </div>
