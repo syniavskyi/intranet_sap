@@ -851,11 +851,6 @@
     line-height: 2.2rem;
 }
 
-.prof-add-pos {
-    display: flex;
-    position: absolute;
-}
-
 .label-select-lang {
     background: #d8d8d8;
     top: .3rem;
@@ -989,16 +984,6 @@
 .inputEditPos:focus ~ div button {
     color:  orange;
     border-color: orange;
-}
-
-@keyframes border-trans {
-    from {border-bottom: 1px solid transparent}
-    to {border-bottom: 1px solid black;}
-}
-
-@keyframes border-trans-out {
-    from {border-bottom: 1px solid black;}
-    to {border-bottom: 1px solid transparent;}
 }
 
 .inputDisabled {
@@ -1182,7 +1167,6 @@
 .profile-table-input-view {
     color: orange;
 }
-
 
 .profile-table-select {
     text-indent: 0.2rem;
@@ -1414,10 +1398,6 @@
     box-shadow: .5px 0px 12px orange;
     border: 1px solid orange;
     color: orange;
-}
-
-.skill-hint {
-    display: flex;
 }
 
 .prof-skills-hint {
