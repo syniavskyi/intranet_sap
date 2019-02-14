@@ -55,7 +55,7 @@
                 <option v-for="workPos in positionsLevels" :key="workPos.Key" :value="workPos.Key">{{workPos.Value}}</option>
               </select>
               <span class="cd-span"></span>
-              <label class="label-profile">{{ $t("label.jobPosition") }}</label>
+              <label class="label-profile">{{ $t("label.jobLevel") }}</label>
             </div>
             <div class="prof-input-ss">
               <select required v-if="editMode" class="selectProfile selectEdit" @change="checkFields(index)" v-model="experience.ExperiencePosition">

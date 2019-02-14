@@ -140,6 +140,7 @@
         "format": "Format",
         "employer": "Arbeiter",
         "jobPosition": "Position",
+        "jobLevel": "Level",
         "eg": "Ordn.",
         "entryType": "Eintragstyp",
         "status": "Status",
