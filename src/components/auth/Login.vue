@@ -10,14 +10,14 @@
           <input class="cd-input" v-model="username" required>
           <!-- @blur="$v.username.$touch()" -->
           <span class="cd-span"/>
-          <label class="cd-tlabel">{{ $t("label.user")}}</label>
+          <label class="cd-label">{{ $t("label.user")}}</label>
         </div>
         <div class="cd-for-input logini-margin">
           <input class="cd-input" :type="passwordFieldType" @keyup.enter="onSubmit" v-model="password" :trim="password" required>
           <!-- @blur="$v.password.$touch()" -->
           <span class="cd-span"/>
           <button class="show-pass-eye" @click="switchPasswordVisibility"><icon :name="eyeType"></icon></button>
-          <label class="cd-tlabel cd-llogin">{{ $t("label.password") }}</label>
+          <label class="cd-label cd-llogin">{{ $t("label.password") }}</label>
         </div>
         <p class="forgot-pass" @click="switchForgotPassword">{{ $t("button.forgotPass") }}</p>
         <div class="div-select-login">
