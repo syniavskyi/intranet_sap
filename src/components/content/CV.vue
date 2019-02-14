@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                       <!-- width="180px" -->
-                      <td valign="top" style="font-weight:bold; font-family:'Arial';">{{ $t("label.knowledgeOfForeignLanguages") }}
+                      <td valign="top" style="font-weight:bold; font-family:'Arial'; margin-right: 20px;">{{ $t("label.knowledgeOfForeignLanguages") }}
                         <!-- <p style="mso-text-control: 'wrap'; mso-cellspacing:0; width: 80%; margin:0; padding:0;"></p> -->
                         </td>
                       <td style="font-family:'Arial';"><p v-for="langu in userLangs" :key="langu.id" style="mso-cellspacing:0; margin:0; padding:0;">{{formatLangName(langu.LanguageId)}} - {{formatLangLevel(langu.LangLevel)}}</p></td>
