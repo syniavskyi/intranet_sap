@@ -1,6 +1,9 @@
 <template>
 <div class="content">
-  <button @click="generate" class="cv-modal-btn-bclear center-btn">{{ $t("button.confirmGenerate") }}</button>
+  <div class="cv-buttons">
+    <button @click="generate" class="cv-modal-btn-bclear center-btn">{{ $t("button.confirmGenerate") }}</button>
+    <button @click="backToProf" class="cv-modal-btn-bclear center-btn">{{ $t("button.backToProf") }}</button>
+  </div>
   <div id="content">
     <div class="Section1" >
     <!-- header with name and position-->
@@ -8,7 +11,7 @@
         <tr>
           <td>
             <tr class="tr-header" align="right">
-              <h1  v-if="cvElements.name" style="font-family:'Arial'">{{userInfo.Fullname}}</h1>
+              <h1 v-if="cvElements.name" style="font-family:'Arial'">{{userInfo.Fullname}}</h1>
               <h2 style="font-family: 'Arial'">{{cvElements.position}}</h2>
             </tr>
         <!-- personal data -->
@@ -38,7 +41,7 @@
                     </tr>
                     <tr>
                       <!-- width="180px" -->
-                      <td valign="top" style="font-weight:bold; font-family:'Arial'; margin-right: 20px;">{{ $t("label.knowledgeOfForeignLanguages") }}
+                      <td valign="top" style="font-weight:bold; font-family:'Arial';">{{ $t("label.knowledgeOfForeignLanguages") }}
                         <!-- <p style="mso-text-control: 'wrap'; mso-cellspacing:0; width: 80%; margin:0; padding:0;"></p> -->
                         </td>
                       <td style="font-family:'Arial';"><p v-for="langu in userLangs" :key="langu.id" style="mso-cellspacing:0; margin:0; padding:0;">{{formatLangName(langu.LanguageId)}} - {{formatLangLevel(langu.LangLevel)}}</p></td>
@@ -251,7 +254,8 @@ export default {
       let oTimeStampOld = new Date().toLocaleString(),
             oTimeStamp = oTimeStampOld.replace(/:\s*/g, "-"),
             sLanguage = this.cvElements.language.toUpperCase(),
-            fileNameAndFormat = `CV ${userData.Fullname},${sLanguage}(${oTimeStamp}).docx`;
+            fileNameAndFormat;
+      this.cvElements.name ? fileNameAndFormat = `CV ${userData.Fullname},${sLanguage}(${oTimeStamp}).docx` : fileNameAndFormat = `CV ${this.cvElements.position},${sLanguage}(${oTimeStamp}).docx`
       if (this.cvElements.photo) {this.convertImagesToBase64();}
       const preHtml = "<html xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns:m='http://schemas.microsoft.com/office/2004/12/omml' xmlns='http://www.w3.org/TR/REC-html40'> <head><meta http-equiv=Content-Type content='text/html; charset=utf-8'></head> <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]--><body>",
         postHtml = "</body></html>";
@@ -385,6 +389,9 @@ export default {
       }).catch(error => {
             console.log(error);
       });
+    },
+    backToProf() {
+      this.$router.push({name: 'Profile'})
     }
   },
   computed: {
@@ -481,5 +488,13 @@ export default {
   margin: 10px auto 10px auto;
   background: white;
   display: flex;
+}
+.cv-buttons {
+  display: flex;
+  justify-content: center;
+}
+.cv-buttons button {
+  padding: .6rem .8rem;
+  margin: 10px;
 }
 </style>

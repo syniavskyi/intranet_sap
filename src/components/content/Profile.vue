@@ -294,7 +294,7 @@ export default {
     if (to.path !== '/cv') {
       this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
     }
-    dataChangedProf = this.hasDataChanged || this.$store.getters.getDataChangedProf.changed; // check if data was changed in profile comonents
+    dataChangedProf = this.hasDataChanged || this.$store.getters.getDataChangedProf.changed; // check if data was changed in profile components
     editModeProf = this.editMode || this.$store.getters.getDataChangedProf.editMode;
     if (editModeProf && dataChangedProf) {
       this.$store.commit('SET_NEXT_PATH', to.path)

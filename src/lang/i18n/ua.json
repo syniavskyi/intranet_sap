@@ -40,7 +40,8 @@
         "startSlider": "Запустити слайдер",
         "confirmGenerate": "Підтвердити і вигенерувати",
         "logout": "logout",
-        "saveNewDelegNumber": "Save new number"
+        "saveNewDelegNumber": "Save new number",
+        "backToProf": "back to profile"
     },
     "label": {
         "nationality": "Національність",
