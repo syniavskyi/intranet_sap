@@ -11,10 +11,10 @@
           </div>
         </div>
         <h3 class="starter-page-user-header">{{ $t("header.welcome") }}</h3>
-          <div class="starter-page-lists">
-            <starter-page-template :file-type="docListNew" :file-header="'label.documentListNew'" :type="'new'"></starter-page-template>
-            <starter-page-template :file-type="docListInfo" :file-header="'label.documentListInfo'" :type="'info'"></starter-page-template>
-          </div>
+        <div class="starter-page-lists">
+          <starter-page-template :file-type="docListNew" :file-header="'label.documentListNew'" :type="'new'"></starter-page-template>
+          <starter-page-template :file-type="docListInfo" :file-header="'label.documentListInfo'" :type="'info'"></starter-page-template>
+        </div>
       </div>
     </div>
   </div>
