@@ -36,7 +36,7 @@
               <label class="checkbox-wrap">
                 <input class="checkbox-margin" :disabled="!editMode" type="checkbox" @change="checkFields(index)" :checked="experience.IsCurrent" :name="index" v-model="experience.IsCurrent">
                 <div class="checkbox-in"></div>
-                <p style="padding:0;margin:0;">{{ $t("label.present") }}</p>
+                <p class="p-empty">{{ $t("label.present") }}</p>
               </label>
             </div>
           </div>
