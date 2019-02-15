@@ -6,7 +6,8 @@ const state = {
   nextPath: "",
   sessionLogout: false,
   photoToLargeDialog: false,
-  axiosInterceptorErr: false
+  axiosInterceptorErr: false,
+  showCV: false //show cv dialog
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
   },
   SET_AXIOS_INTERCEPTOR_MODAL(state, show) {
     state.axiosInterceptorErr = show
+  },
+  SET_SHOW_CV(state, data) { //cv dialog, check if is clicked
+    state.showCV = data
   }
 }
 
@@ -40,13 +44,15 @@ const actions = {
   }) {
     commit('SET_LEAVE_PAGE_DIALOG', false)
     commit('SET_LEAVE_PAGE_FLAG', true)
-    router.replace(getters.getNextPath)
+    getters.showCV ? router.replace(getters.getNextPath) : commit("SET_SHOW_CV_DIALOG", true);
+    commit('SET_SHOW_CV', false)
   },
   rejectPageLeave({
     commit
   }) {
     commit('SET_LEAVE_PAGE_DIALOG', false)
     commit('SET_LEAVE_PAGE_DIALOG', false)
+    commit('SET_SHOW_CV', false)
   },
   logoutSession({
     commit
@@ -55,21 +61,14 @@ const actions = {
   }
 }
 const getters = {
-  getWarningDialog: state => {
-    return state.warningDialog
-  },
-  getLeavePageDialog: state => {
-    return state.leavePageDialog
-  },
-  getLeavePageFlag: state => {
-    return state.leavePageFlag
-  },
-  getNextPath: state => {
-    return state.nextPath
-  },
+  getWarningDialog: state => state.warningDialog,
+  getLeavePageDialog: state => state.leavePageDialog,
+  getLeavePageFlag: state => state.leavePageFlag,
+  getNextPath: state => state.nextPath,
   getSessionStatus: state => state.sessionLogout,
   getSubmitPhotoErr: state => state.photoToLargeDialog,
-  getAxiosInterceptorModal: state => state.axiosInterceptorErr
+  getAxiosInterceptorModal: state => state.axiosInterceptorErr,
+  getShowCV: state => state.showCV
 }
 
 export default {

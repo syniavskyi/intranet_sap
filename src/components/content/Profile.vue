@@ -36,7 +36,7 @@
         <div class="profile-tiles">
           <div class="profile-tiles-row-wrap">
             <div class="profile-tiles-row">
-              <div :class="hoverOrEdit ? 'profile-tile-1-3 profile-main-edit' : 'profile-tile-1-3'">  
+              <div :class="hoverOrEdit ? 'profile-tile-1-3 profile-main-edit' : 'profile-tile-1-3'">
                 <div class="profile-tile-header">
                   <h2 class="prof-tile-h2">{{ $t("header.contact") }}</h2>
                   <div class="tile-underscore"></div>
@@ -162,7 +162,7 @@
                         <select required v-if="!editMode || this.authType === 'OWN'" disabled v-model="userData.JobPositionKey" @change="checkFormFields" class="selectProfile selectDisabled">
                           <option v-bind:key="position.Key" v-for="position in workPositionList" :value="position.Key">{{position.Value}}</option>
                         </select>
-                        <label class="label-profile">{{ $t("label.position") }}</label> 
+                        <label class="label-profile">{{ $t("label.position") }}</label>
                       </div>
                       <div class="prof-input-s">
                         <input v-if="editMode" required class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.CurrentProject">
@@ -321,6 +321,7 @@ export default {
   },
   created() {
     this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+    this.$store.commit("SET_DATA_CHANGE_PROF", {changed: this.hasDataChanged, editMode: this.editMode});
     let oStore = this.$store,
         sUserAlias = localStorage.getItem("id"),
         sLang = localStorage.getItem("lang");
@@ -446,6 +447,7 @@ export default {
     onEdit() {
       this.showNoChangesAlert = false;
       this.editMode = !this.editMode;
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: this.hasDataChanged, editMode: this.editMode});
       this.hoverOrEdit = true;
       this._beforeEditingCache = Object.assign({}, this.userData);
     },
@@ -514,6 +516,7 @@ export default {
         this.checkIfDataChanged();
         this.disableSaveBtn = this.hasDataChanged === true ? false : true;
       }
+      this.$store.commit("SET_DATA_CHANGE_PROF", {changed: this.hasDataChanged, editMode: this.editMode});
     },
     // get data for selected language
     getNewData() {
