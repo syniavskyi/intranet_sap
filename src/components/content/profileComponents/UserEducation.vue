@@ -38,7 +38,7 @@
               <label class="checkbox-wrap">
                 <input class="checkbox-margin" :disabled="!editMode" type="checkbox" @change="checkFields(index)" :checked="education.IsCurrent" :name="index" v-model="education.IsCurrent">
                 <div class="checkbox-in"></div>
-                <p style="padding:0;margin:0;">{{ $t("label.present") }}</p>
+                <p class="p-empty">{{ $t("label.present") }}</p>
               </label>
             </div>
             <!-- SPI wywalić? <div class="prof-row-btns">
