@@ -55,6 +55,7 @@ import { mapGetters } from "vuex";
 import axios from 'axios';
 
 export default {
+  props: ['show-dialog'],
   data() {
     return {
       selectedDownloadLang: i18n.locale,
@@ -68,24 +69,31 @@ export default {
       fileUploadError: "isFileUploadError",
       showSelectCv: "getShowSelectCvDialog",
       formats: "getCvFormats",
-      userFilesList: "getUserFiles"
+      userFilesList: "getUserFiles",
+      profileDataChanged: "getDataChangedProf",
+      leavePageFlag: "getLeavePageFlag"
     })
   },
   methods: {
     showSelectDialog() {
-      const url = "$metadata"
-      axios({
-        method: 'GET',
-        url: url,
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        }
-      }).then(function() {
-        this.$store.commit("SET_SHOW_CV_DIALOG", true);
-      }.bind(this))
-      .catch(function (err) {
-        this.$store.dispatch('logoutSession', true);
-      }.bind(this))
+      this.$store.commit('SET_SHOW_CV', true);
+      if(this.profileDataChanged.changed || this.profileDataChanged.editMode) {
+        this.$store.commit('SET_LEAVE_PAGE_DIALOG', true);
+      } else {
+        const url = "$metadata"
+        axios({
+          method: 'GET',
+          url: url,
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+          }
+        }).then(function() {
+          this.$store.commit("SET_SHOW_CV_DIALOG", true);
+        }.bind(this))
+        .catch(function (err) {
+          this.$store.dispatch('logoutSession', true);
+        }.bind(this))
+      }
     },
     setSelectedFormat(value) {
       this.selectedFormat = value.target.value;
