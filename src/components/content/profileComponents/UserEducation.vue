@@ -137,9 +137,14 @@ export default {
       disabledBtnToEdit: "getDisabledBtnToEdit"
     }),
     filterEducation() {
-      let filterEdu;
-      this.editMode ? filterEdu = this.userEducation : filterEdu = this.userEducation.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
-      return filterEdu;
+      let filterEdu = this.userEducation;
+      for(let edu of filterEdu) {
+        if(edu.IsCurrent) {
+          edu.DateEnd = new Date()
+        }
+      }
+      this.editMode ? filterEdu = this.userEducation : filterEdu.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+  return filterEdu;
     }
   },
   methods: {

@@ -243,6 +243,7 @@
     "loginError": "Password or username are invalid.",
     "emailValidation": "Email address is empty or is in incorrect format.",
     "phoneValidation": "Phone number has incorrect format.",
+    "skypeValidation": "Max length for skype is 32 characters",
     "saveChangesError": "The changes weren't saved.",
     "noChanges": "No changes were made",
     "dateValidation": "Date has incorrect format.",

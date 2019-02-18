@@ -242,6 +242,7 @@
         "loginError": "Passwort oder Benutzername sind ungültig.",
         "emailValidation": "Die E-Mail hat ein ungültiges Format oder ist leer.",
         "phoneValidation": "Telefonnummer hat ein ungültiges Format.",
+        "skypeValidation": "Max length for skype is 32 characters",
         "saveChangesError": "Fehler beim Speichern von Daten.",
         "noChanges": "Es wurden keine Änderungen vorgenommen",
         "dateValidation": "Datum hat ein ungültiges Format.",

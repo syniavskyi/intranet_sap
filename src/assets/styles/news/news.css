@@ -430,7 +430,7 @@ body {
     text-align: justify;
     padding-left: 1.5rem;
     font-size: 1rem;
-    display: flex;
+    display: block;
     flex-direction: row;
     align-items: center;
 }
@@ -507,12 +507,16 @@ body {
         justify-content: center;
     }
     .art-content img {
-        /* background-image: url('../../images/weather/news.png');
-        background-repeat: no-repeat; */
+        background-image: url('../../images/weather/news.png');
+        background-repeat: no-repeat;
         margin-right: 20px;
         display: flex;
         height: 159px;
         max-width: 225px;
+    }
+
+    #articles p {
+        display: flex;
     }
 
     .art-title:hover {
@@ -546,5 +550,11 @@ body {
     }
     .town {
         margin-left: 0.5%;
+    }
+    .art-content img{
+        display: none;
+    }
+    #articles p {
+        display: block;
     }
 }

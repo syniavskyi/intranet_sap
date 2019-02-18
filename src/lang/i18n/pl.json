@@ -242,6 +242,7 @@
     "loginError": "Wprowadzona nazwa użytkownika lub hasło są nieprawidłowe",
     "emailValidation": "Email posiada nieprawidłowy format lub jest pusty.",
     "phoneValidation": "Numer telefonu posiada nieprawidłowy format",
+    "skypeValidation": "Maksymalna długość dla Skype'a wynosi 32 znaki",
     "saveChangesError": "Niepowodzenie podczas zapisu danych.",
     "noChanges": "Nie wprowadzono zmian",
     "dateValidation": "Data posiada nieprawidłowy format",

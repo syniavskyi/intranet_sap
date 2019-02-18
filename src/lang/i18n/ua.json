@@ -240,6 +240,7 @@
         "loginError": "Пароль або ім'я користувача недійсні.",
         "emailValidation": "Електронна адреса порожня або в неправильному форматі.",
         "phoneValidation": "Номер телефону має невірний формат.",
+        "skypeValidation": "Max length for skype is 32 characters",
         "saveChangesError": "Зміни не збережено.",
         "noChanges": "Зміни не було внесено",
         "dateValidation": "Дата має неправильний формату.",
