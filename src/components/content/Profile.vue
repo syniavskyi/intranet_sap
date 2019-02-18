@@ -100,14 +100,15 @@
                 <div class="profile-tile-content">
                   <div class="profile-tile-inputs">
                     <div class="prof-input-m">
-                      <input required v-if="editMode" class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.SkypeId">
+                      <input required v-if="editMode" class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.SkypeId" maxlength="32">
                       <input v-if="!editMode" disabled class="inputProfile inputDisabled" v-model="userData.SkypeId">
                       <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.skype") }}</label>
+                      <p class="prof-error" v-if="userData.SkypeId && userData.SkypeId.length === 32">{{ $t("message.skypeValidation") }}</p>
                       <img class="prof-comm-img" src="../../assets/images/comm/grey/skype.png"/>
                     </div>
                     <div class="prof-input-m">
-                      <input required v-if="editMode" class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.SlackId">
+                      <input required v-if="editMode" class="inputProfile inputEdit" @input="checkFormFields" v-model="userData.SlackId" maxlength="80">
                       <input disabled v-if="!editMode" class="inputProfile inputDisabled" v-model="userData.SlackId">
                       <span class="cd-span"></span>
                       <label class="label-profile">{{ $t("label.slack") }}</label>
@@ -230,7 +231,7 @@ import moment from "moment";
 import MaskedInput from "vue-masked-input";
 require("moment-precise-range-plugin");
 
-import { required, email } from "vuelidate/lib/validators";
+import { required, email, maxLength } from "vuelidate/lib/validators";
 import htmlDocx from "html-docx-js/dist/html-docx";
 import { saveAs } from "file-saver";
 import { mapGetters, mapActions } from "vuex";
