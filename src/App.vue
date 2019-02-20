@@ -13,7 +13,6 @@ import { mapGetters } from 'vuex';
 import Menu from './components/Menu.vue'
 import Loader from './components/dialogs/Loader.vue'
 import MessageLogDialog from './components/dialogs/MessageLogDialog'
-import WarningDialog from './components/dialogs/WarningDialog'
 import SessionEndDialog from './components/dialogs/SessionEndDialog'
 
 export default {
@@ -22,7 +21,6 @@ export default {
     'app-menu': Menu,
     'loader': Loader,
     'message-log-dialog': MessageLogDialog,
-    'warning-dialog': WarningDialog,
     'session-end-dialog': SessionEndDialog
   },
   created() {
