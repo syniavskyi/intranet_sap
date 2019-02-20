@@ -81,8 +81,7 @@
   justify-content: space-between;
   align-items: center;
   font-family: 'Lato';
-  height: 30%;
-  max-height: 4.7rem;
+  min-height: 4.7rem;
 }
 
 .modal-title-new {

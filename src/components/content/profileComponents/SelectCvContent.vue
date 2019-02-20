@@ -1,7 +1,7 @@
 <template>
   <div class="modal-new">
       <header class="modal-header-new">
-        <h1 class="cv-modal-h1">{{ $t("header.generateCV") }}</h1>
+        <h1 class="modal-title-new">{{ $t("header.generateCV") }}</h1>
         <button class="modal-close" @click="close">&#10006;</button>
       </header>
       <div class="cv-modal-content">
@@ -46,9 +46,9 @@
           </div>
         </div>
         <div class="cv-modal-selects">
-          <div class="cv-modal-div-s">
+          <div class="cv-modal-div">
           <!-- Wybierz język -->
-            <select required class="cv-modal-select" v-model="cvElements.language" @blur="$v.cvElements.language.$touch()">
+            <select class="cv-modal-select" v-model="cvElements.language" @blur="$v.cvElements.language.$touch()" required>
               <option v-for="language in languageList" :key="language.id" :value="language.id.toUpperCase()"> {{language.description}}</option>
             </select>
             <label class="cv-modal-label">{{ $t("label.selectLanguage") }}</label>
@@ -60,15 +60,15 @@
             </select>
             <label class="cv-modal-label">{{ $t("label.selectFormat") }}</label>
           </div>
-          <div class="cv-modal-div-s">
+          <div class="cv-modal-div">
             <input required class="cv-modal-input" v-model="cvElements.position" @blur="$v.cvElements.position.$touch()">
-            <span class="imodal-div-bar"></span>
+            <span class="cd-span"></span>
             <label class="cv-modal-label">{{ $t("label.position") }}</label>
             <p v-if='!cvElements.position' class="avail-error p-error"> {{ $t("message.requiredField") }} </p>
           </div>
-          <div class="cv-modal-div-s">
+          <div class="cv-modal-div">
             <input required class="cv-modal-input" v-model="cvElements.entity">
-            <span class="imodal-div-bar"></span>
+            <span class="cd-span"></span>
             <label class="cv-modal-label">{{ $t("label.entity") }}</label>
           </div>
         </div>
@@ -139,15 +139,6 @@ export default {
 </script>
 
 <style>
-.cv-modal-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.cv-modal-h1 {
-  margin-left: 1rem;
-  color: #333;
-}
 
 .cv-modal-content {
   display: flex;
@@ -181,22 +172,13 @@ export default {
   margin-bottom: 1rem;
 }
 
-.cv-modal-div,
-.cv-modal-div-s,
-.cv-modal-div-l {
+.cv-modal-div {
   display: flex;
   position: relative;
   margin-top: 0.4rem;
   margin-bottom: 1rem;
-  width: 10rem;
-  flex-direction: column;
-}
-
-.cv-modal-div {
   width: 10.1rem;
-}
-.cv-modal-div-l {
-  width: 12rem;
+  flex-direction: column;
 }
 
 .cv-modal-input {
@@ -213,30 +195,6 @@ export default {
   border-bottom: 1px solid #757575;
 }
 
-.imodal-div-bar {
-  position: relative;
-  display: flex;
-  width: 100%;
-}
-
-.imodal-div-bar:before,
-.imodal-div-bar:after {
-  content: "";
-  height: 2px;
-  width: 0;
-  bottom: 0;
-  position: absolute;
-  background: rgb(255, 145, 0);
-  transition: 0.5s ease all;
-  -moz-transition: 0.5s ease all;
-  -webkit-transition: 0.5s ease all;
-}
-.imodal-div-bar:before {
-  left: 50%;
-}
-.imodal-div-bar:after {
-  right: 50%;
-}
 /* active state */
 .cv-modal-input:focus ~ span:before,
 .cv-modal-input:focus ~ span:after {

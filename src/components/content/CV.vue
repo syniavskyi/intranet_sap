@@ -427,17 +427,12 @@ export default {
 #content,
 .content {
   background: grey;
-  /* display: flex; */
   justify-content: center;
   align-items: center;
   width: 100%;
   height: min-content;
 }
-.tr-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
+
 .Section1 {
   background: white;
   display: flex;
@@ -451,20 +446,13 @@ export default {
   width: 50%;
   height: 100%;
   padding: 6rem;
-  /* transform: scale(0.5, 0.5); */
 }
-.cv-table-header {
-  text-align: left;
-  background-color: lightgray;
-}
-.cv-modal-btn,
-.cv-modal-btn-clear,
+
 .cv-modal-btn-bclear {
   display: flex;
   cursor: pointer;
   color: #333;
   border: 0;
-  /* height: 4rem; */
   border-radius: 4px;
   transition: all 0.2s ease;
   justify-content: center;
@@ -472,13 +460,10 @@ export default {
   margin: 0.2rem;
   outline: none;
   font-size: 0.85rem;
-}
-.cv-modal-btn-bclear {
   background: transparent;
-  /* text-transform: uppercase; */
   border: 2px solid rgb(61, 61, 61);
-  /* padding: .6rem .8rem; */
 }
+
 .cv-modal-btn-bclear:hover {
   box-shadow: 0px 0px 8px #333;
   background: #333;
