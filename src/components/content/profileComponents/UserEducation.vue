@@ -139,7 +139,6 @@ export default {
     }),
     filterEducation() {
       let filterEdu;
-      // filterEdu = utils.createClone(this.$store.getters.getUserEducation);
       filterEdu = this.userEducation;
       for(let edu of filterEdu) {
         if(edu.IsCurrent) {

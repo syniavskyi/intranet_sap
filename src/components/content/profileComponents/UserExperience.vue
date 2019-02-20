@@ -89,7 +89,8 @@ export default {
       editMode: false,
       _beforeEditingCache: null,
       invalidDates: false,
-      hoverOrEdit: false
+      hoverOrEdit: false,
+      allowToSort: true
     };
   },
   watch: {
@@ -107,7 +108,13 @@ export default {
     }),
     filterExperience() {
       let filterExp;
-      this.editMode ? filterExp = this.userExperience : filterExp = this.userExperience.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
+      filterExp = this.userExperience;
+      for(let exp of filterExp) {
+        if(exp.IsCurrent) {
+          exp.DateEnd = new Date()
+        }
+      }
+      this.editMode  && !this.allowToSort ? filterExp : filterExp.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
       return filterExp;
     }
   },
@@ -116,6 +123,7 @@ export default {
     edit() {
       this.editMode = true;
       this.hoverOrEdit = true;
+      this.allowToSort = false;
       this._beforeEditingCache = utils.createClone(this.userExperience);
       var checkboxes = this.$el.querySelectorAll(".checkbox-wrap");
       for (var i = 0; i < checkboxes.length; i++) {
@@ -176,6 +184,7 @@ export default {
       this.$store.commit("SET_EXPERIENCE_ERROR", false);
       this.$store.commit("SET_USER_EXPERIENCE", this._beforeEditingCache);
       this.editMode = false;
+      this.allowToSort = false;
       this.hoverOrEdit = false;
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },

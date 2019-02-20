@@ -157,7 +157,8 @@ export default {
       _beforeEditingProjects: null,
       showHintAfterSave: false,
       contractorIndustries: [],
-      hoverOrEdit: false
+      hoverOrEdit: false,
+      allowToSort: true
     };
   },
   watch: {
@@ -201,12 +202,14 @@ export default {
       editedProjectContractor: "getEditedProjectContractor"
     }),
     filterProject() {
-      let filterPro;
-      this.projectEditMode
-        ? (filterPro = this.userProjects)
-        : (filterPro = this.userProjects.sort((a, b) =>
-            a.DateStart < b.DateStart ? 1 : b.DateStart < a.DateStart ? -1 : 0
-          ));
+      let filterExp;
+      filterPro = this.userProjects;
+      for(let pro of filterPro) {
+        if(pro.IsCurrent) {
+          pro.DateEnd = new Date()
+        }
+      }
+      this.projectEditMode  && !this.allowToSort ? filterPro : filterPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
       return filterPro;
     }
   },
@@ -481,6 +484,7 @@ export default {
       this.$store.commit("SET_PROJECT_ERROR", false);
       this.$store.commit("SET_USER_PROJECTS_LIST", this._beforeEditingProjects);
       this.projectEditMode = false;
+      this.allowToSort = false;
       this.hoverOrEdit = false;
       this.showHintAfterSave = false;
       this.showHintFnProject({ index: "", show: false });
@@ -491,6 +495,7 @@ export default {
     },
     editProjects() {
       this.projectEditMode = true;
+      this.allowToSort = false;
       this._beforeEditingProjects = utils.createClone(this.userProjects);
       this.hoverOrEdit = true;
     },
