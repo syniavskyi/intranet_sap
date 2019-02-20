@@ -119,7 +119,8 @@ export default {
       editMode: false,
       _beforeEditingCache: null,
       invalidDates: false,
-      hoverOrEdit: false
+      hoverOrEdit: false,
+      allowToSort: true
     };
   },
   watch: {
@@ -137,14 +138,16 @@ export default {
       disabledBtnToEdit: "getDisabledBtnToEdit"
     }),
     filterEducation() {
-      let filterEdu = this.userEducation;
+      let filterEdu;
+      // filterEdu = utils.createClone(this.$store.getters.getUserEducation);
+      filterEdu = this.userEducation;
       for(let edu of filterEdu) {
         if(edu.IsCurrent) {
           edu.DateEnd = new Date()
         }
       }
-      this.editMode ? filterEdu = this.userEducation : filterEdu.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
-  return filterEdu;
+      this.editMode  && !this.allowToSort ? filterEdu : filterEdu.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      return filterEdu;
     }
   },
   methods: {
@@ -152,6 +155,7 @@ export default {
     edit() {
       this.editMode = true;
       this.hoverOrEdit = true;
+      this.allowToSort = false;
       this._beforeEditingCache = utils.createClone(this.userEducation);
       var checkboxes = this.$el.querySelectorAll(".checkbox-wrap");
       for (var i = 0; i < checkboxes.length; i++) {
@@ -233,6 +237,7 @@ export default {
       this.$store.commit("SET_EDUCATION_ERROR", false);
       this.$store.commit("SET_USER_EDUCATION", this._beforeEditingCache);
       this.editMode = false;
+      this.allowToSort = true;
       this.hoverOrEdit = false;
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: false, editMode: false});
     },
