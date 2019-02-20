@@ -2,8 +2,8 @@
   <div>
     <div class="modal-overlay" v-if="dialogEvent"></div>
     <div class="modal-new-m" v-if="dialogEvent">
-      <div class="modal-header">
-        <h1 class="modal-title">{{ $t("header.addNewEvent") }}</h1>
+      <div class="modal-header-new">
+        <h1 class="modal-title-new">{{ $t("header.addNewEvent") }}</h1>
         <button class="modal-close" @click="performDialog">&#10006;</button>
       </div>
       <div class="modal-content-new">

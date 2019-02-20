@@ -3,18 +3,18 @@
     <div class="modal-overlay"></div>
     <transition name="modal-fade" mode="in-out">
         <div class="modal-new-stretch" role="dialog" v-if="showModal">
-          <header class="modal-header-err" :class="headerClass">
-            <h1 v-if="messageLog.length > 1" class="modal-title">{{ formatHeader(messageLog[0].severity) }}</h1>
-            <h1 v-if="!messageLog[1]" class="modal-title">{{ formatHeader(messageLog[0].severity) }}</h1>
+          <header class="modal-header" :class="headerClass">
+            <h1 v-if="messageLog.length > 1" class="m-log-title">{{ formatHeader(messageLog[0].severity) }}</h1>
+            <h1 v-if="!messageLog[1]" class="m-log-title">{{ formatHeader(messageLog[0].severity) }}</h1>
             <button @click="closeModal" class="modal-close">&#10006;</button>
           </header>
           <div class="modal-content-list">
             <div v-if="messageLog.length > 1">
-               <section :class="message.severity" class="modal-item" v-for="(message, index) in messageLog" :key="index">
+               <section :class="message.severity" class="m-log-item" v-for="(message, index) in messageLog" :key="index">
                    {{index+1}}. {{message.message}}
                </section>
             </div>
-            <section v-if="!messageLog[1]" :class="messageLog[0].severity" class="modal-item">
+            <section v-if="!messageLog[1]" :class="messageLog[0].severity" class="m-log-item">
                 {{messageLog[0].message}}
             </section>
           </div>

@@ -17,13 +17,13 @@
                     <input :type="newPasswordType" required class="cd-input" id="newPass" v-model="newPassword" @input="checkChars(newPassword)">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.newPassword") }}</label>
-                     <button class="show-pass-eyef"  @click="switchPasswordVisibility('new')"><icon :name="newEyeType"></icon></button>
+                    <button class="show-pass-eyef"  @click="switchPasswordVisibility('new')"><icon :name="newEyeType"></icon></button>
                 </div>
                 <div class="cd-for-input">
                     <input :type="confirmPasswordType" required class="cd-input" id="newPassConfirm" v-model="newPasswordRepeat">
                     <span class="cd-span"></span>
                     <label class="cd-label">{{ $t("label.confirmPassword") }}</label>
-                     <button class="show-pass-eyef"  @click="switchPasswordVisibility('confirm')"><icon :name="confirmEyeType"></icon></button>
+                    <button class="show-pass-eyef"  @click="switchPasswordVisibility('confirm')"><icon :name="confirmEyeType"></icon></button>
                 </div>
                 <div>
                     <p class="password-error" v-if="bDisabled.bln">{{bDisabled.msg}}</p>
