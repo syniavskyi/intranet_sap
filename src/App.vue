@@ -3,7 +3,6 @@
     <loader v-if="showLoader"/>
     <router-view/>
     <message-log-dialog v-show="showModal"/>
-    <warning-dialog/>
     <session-end-dialog/>
   </div>
 </template>
