@@ -92,14 +92,14 @@ import { required } from "vuelidate/lib/validators";
 import i18n from "../../lang/lang";
 import { mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-     return {
-        isSelected: false,
-        selectedUser: false,
-        selectedGroup: false,
-        }
-    },
-    props: ['disabled-edit-button', 'display-save-button'],
+  data() {
+    return {
+      isSelected: false,
+      selectedUser: false,
+      selectedGroup: false,
+      }
+  },
+  props: ['disabled-edit-button', 'display-save-button'],
     validations: {
       addEvent: {
         EventName: {
@@ -115,42 +115,41 @@ export default {
           required
         }
       }
+    },
+  computed: {
+    ...mapGetters({
+    eventTypes: "getEventTypes",
+    priorities: "getPriorities",
+    addEvent: "getEventToChange",
+    usersList: "usersList",
+    targetGroup: "getTargetGroup",
+    userData: "getUserInfo",
+    authType: "getCalendarAuth",
+    dialogEvent: "getDialogEvent"
+    })
   },
-    computed: Object.assign(
-    mapGetters({
-      eventTypes: "getEventTypes",
-      priorities: "getPriorities",
-      addEvent: "getEventToChange",
-      usersList: "usersList",
-      targetGroup: "getTargetGroup",
-      userData: "getUserInfo",
-      authType: "getCalendarAuth",
-      dialogEvent: "getDialogEvent"
-    }), {   }
-  ),
-    methods: Object.assign(
-    mapActions([
-      "addNewEvent",
-      "editEvent",
-      "performDialog"
-    ]), {
-        // trigger function from js to adjust data for backend
-        editForm(data) {
-            data.Action = 'U';
-            this.editEvent(data);
-             this.performDialog();
-        },
-        addNewEventBtn(data) {
-            this.addNewEvent(data);
-            this.performDialog();
-        },
-        // permision to filter calendar
-        backToModal() {
-            this.isSelected = !this.isSelected;
-            this.addEvent.Employee = [];
-            this.addEvent.TargetGroup = [];
-        }
-     }
-  )
+  methods: {
+    ...mapActions([
+    "addNewEvent",
+    "editEvent",
+    "performDialog"
+  ]),
+    // trigger function from js to adjust data for backend
+    editForm(data) {
+      data.Action = 'U';
+      this.editEvent(data);
+      this.performDialog();
+    },
+    addNewEventBtn(data) {
+      this.addNewEvent(data);
+      this.performDialog();
+    },
+    // permision to filter calendar
+    backToModal() {
+      this.isSelected = !this.isSelected;
+      this.addEvent.Employee = [];
+      this.addEvent.TargetGroup = [];
+    }
+  }
 }
 </script>
