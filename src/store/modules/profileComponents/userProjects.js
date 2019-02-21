@@ -14,7 +14,8 @@ const state = {
   userProjectsListDfLang: [],
   showHintProject: {},
   editedProjectIdx: "",
-  editedProjectContractor: ""
+  editedProjectContractor: "",
+  sortedCVPro: []
 };
 
 const mutations = {
@@ -53,6 +54,9 @@ const mutations = {
   },
   SET_EDITED_PROJECT_CONTRACTOR(state, name) {
     state.editedProjectContractor = name
+  },
+  SET_SORTED_CV_PRO(state, data) {
+    state.sortedCVPro = data
   }
 }
 
@@ -104,6 +108,8 @@ const actions = {
     }).then(res => {
       let message = res.headers;
       dispatch('displayModal', message);
+      commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
+      dispatch('getData');
       }).catch(error => {
     })
   },
@@ -146,6 +152,8 @@ const actions = {
         }
         dispatch('displayModal', message);
         commit('SET_DISPLAY_LOADER', false)
+        commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
+        dispatch('getData');
       }).catch(error => {
         commit('SET_DISPLAY_LOADER', false)
       })
@@ -188,25 +196,6 @@ const actions = {
       dataToSend.Modules = moduleString;
     }
   },
-  // checkUserProjectsPosition({
-  //   commit
-  // }, project) {
-  //   for (let key in project) {
-  //     if (!project[key]) {
-  //       if (key == "DateEnd" && project.isCurrent === true) {
-  //         commit('SET_PROJECT_ERROR', false)
-  //       } else if (key == "index") {
-  //         commit('SET_PROJECT_ERROR', false)
-  //       } else {
-  //         commit('SET_PROJECT_ERROR', true)
-  //         commit('SET_ERROR_PROJECT_NO', project.index + 1)
-  //         return
-  //       }
-  //     } else {
-  //       commit('SET_PROJECT_ERROR', false)
-  //     }
-  //   }
-  // },
   // add new sap module
   addModule({
     commit,
@@ -432,10 +421,8 @@ const getters = {
   getUserProjectsList(state) {
     return state.userProjectsList
   },
-  getSorterUserProjectsList(state) {
-    let filterProjects = state.userProjectsList
-    filterProjects = filterProjects.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
-    return filterProjects;
+  getSortedUserProjectsList(state) {
+    return state.sortedCVPro;
   },
   getShowProjectError(state) {
     return state.showProjectError

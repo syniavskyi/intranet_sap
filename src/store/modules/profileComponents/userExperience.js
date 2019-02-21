@@ -5,7 +5,8 @@ let utils = require('../../../utils')
 
 const state = {
   userExperience: [],
-  showExperienceError: false
+  showExperienceError: false,
+  sortedCVExp: []
 }
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
   },
   SET_EXPERIENCE_ERROR(state, isError) {
     state.showExperienceError = isError
+  },
+  SET_SORTED_CV_EXP(state, data) {
+    state.sortedCVExp = data
   }
 }
 
@@ -100,7 +104,10 @@ const actions = {
 const getters = {
   getUserExperience(state) {
     return state.userExperience
-  }
+  },
+  getSortedUserExperience(state) {
+    return state.sortedCVExp
+  },
 }
 
 export default {
