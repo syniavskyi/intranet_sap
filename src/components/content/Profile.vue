@@ -321,7 +321,9 @@ export default {
     }
   },
   created() {
-    this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+    if(this.loginAlias === this.selectedUser) {
+      this.$store.commit('SET_DISABLED_BTN_TO_EDIT', false);
+    }
     this.$store.commit("SET_DATA_CHANGE_PROF", {changed: this.hasDataChanged, editMode: this.editMode});
     let oStore = this.$store,
         sUserAlias = localStorage.getItem("id"),

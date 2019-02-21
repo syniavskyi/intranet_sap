@@ -136,6 +136,12 @@
                 <travel-costs-table></travel-costs-table>
                 <accomodation-costs-table></accomodation-costs-table>
                 <other-costs-table></other-costs-table>
+                <div class="delegation-signature" v-if="showSignature">
+                   <div class="deleg-sig">
+                    <p>.............................................................................................................................</p>
+                    <p> miejsce na podpis</p>
+                   </div>
+                </div>
             </div>
         </div>
     </div>
@@ -168,7 +174,8 @@ export default {
             delegationUsername: localStorage.getItem('id'),
             generatingPdfMode: false,
             disableDelegationNumber: true,
-            showDelegationNoError: false
+            showDelegationNoError: false,
+            showSignature: true
         }
     },
     components: {
@@ -257,7 +264,7 @@ export default {
             const regexp = new RegExp("([0-3][0-9]\/[0-1][0-9]\/[0-2][0-9]{3}\/[A-Z]{3})")
             if (value === "") {
                 this.oldDelegationNumber = this.delegationNumber
-                this.changeDelegationNumber(this.oldDelegationNumber) 
+                this.changeDelegationNumber(this.oldDelegationNumber)
             } else if (regexp.test(value)) {
                 this.showDelegationNoError = false
             } else {
@@ -282,6 +289,7 @@ export default {
         generatePdf() {
             this.generatingPdfMode = true
             // this.loopClasses()
+            // this.showSignature = true
             const source = document.body.getElementsByClassName('delegations-content')[0]
 
             html2canvas(source).then(canvas => {
@@ -310,6 +318,7 @@ export default {
                     pdf.save(fileName + '.pdf');
                     this.$store.commit('SET_SHOW_CONFIRM_DELEG', true)
             })
+                    // this.showSignature = false
         },
 
         loopClasses() {
