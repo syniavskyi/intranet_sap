@@ -824,6 +824,10 @@ input:required {
     font-weight: bold;
 }
 
+h3.content-header-title{
+    font-size: 1.2rem;
+}
+
 @media(min-width: 44rem) {
 
     .component-content {

@@ -9,7 +9,7 @@ const state = {
   informationFiles: [],
   instructionFiles: [],
   fileTypes: ['INFO', 'DOC', 'OFF', 'SAPB', 'INST'],
-  dataToRead: ["UserData", "Documents"]
+  dataToRead: ["UserData", "Documents", "NewToken"]
 }
 
 const mutations = {
@@ -91,6 +91,24 @@ const actions = {
       height = tiles[i].firstElementChild.offsetHeight
       tiles[i].lastElementChild.style.height = "0px"
     }
+  },
+  uploadDocument({getters}, file){
+    let slugHeader = `${file.name};TEST-DOCUM;PL;;${file.type};${file.addToStarter};${file.sendEmail}`;
+    axios({
+      method: 'POST',
+      url: 'AttachmentMedias',
+      data: file,
+      headers: {
+        "Content-type": file.type,
+        "X-Requesteg-With": "XMLHttpRequest",
+        "Slug": slugHeader,
+        "x-csrf-token": getters.getToken
+      }
+    }).then(res=>{
+      console.log(res)
+    }).catch(error=>{
+      console.log(error)
+    })
   }
 }
 const getters = {
