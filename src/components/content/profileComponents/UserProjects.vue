@@ -40,7 +40,7 @@
             <div class="prof-thead-item">---</div>
           </div>
           <div class="prof-tbody">
-            <div class="prof-tbody-row" v-for="(project, index) in userProjects" :key="index">
+            <div class="prof-tbody-row" v-for="(project, index) in filterProject" :key="index">
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("label.eg") }}</div>
                 <div class="prof-tbody-item-txt">
@@ -202,14 +202,15 @@ export default {
       editedProjectContractor: "getEditedProjectContractor"
     }),
     filterProject() {
-      let filterExp;
+      let filterPro;
       filterPro = this.userProjects;
       for(let pro of filterPro) {
         if(pro.IsCurrent) {
           pro.DateEnd = new Date()
         }
       }
-      this.projectEditMode  && !this.allowToSort ? filterPro : filterPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      this.projectEditMode && !this.allowToSort ? filterPro : filterPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      this.$store.commit('SET_SORTED_CV_PRO', filterPro)
       return filterPro;
     }
   },

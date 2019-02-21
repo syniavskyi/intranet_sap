@@ -5,7 +5,8 @@ const state = {
   userEducation: [],
   showEducationError: false,
   schoolDescList: [],
-  fieldOfStudyDescList: []
+  fieldOfStudyDescList: [],
+  sortedCVEdu: []
 }
 
 const mutations = {
@@ -21,6 +22,9 @@ const mutations = {
   SET_FIELD_OF_STUDY_DESC_LIST(state, data) {
     state.fieldOfStudyDescList = data;
   },
+  SET_SORTED_CV_EDU(state, data) {
+    state.sortedCVEdu = data;
+  }
 }
 
 const actions = {
@@ -133,9 +137,7 @@ const getters = {
     return state.userEducation
   },
   getSortedUserEducation(state) {
-    let filterEdu = state.userEducation
-    filterEdu = filterEdu.sort((a,b) => (a.DateStart < b.DateStart) ? 1 : ((b.DateStart < a.DateStart) ? -1 : 0));
-    return filterEdu;
+    return state.sortedCVEdu;
   },
   getSchoolDescList(state) {
     return state.schoolDescList;
