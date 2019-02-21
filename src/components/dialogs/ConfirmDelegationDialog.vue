@@ -7,10 +7,10 @@
         </div>
         <div class="m-content">
             <div class="m-section">
-                <h3 class="del-modal-h3" v-if="!isSuccess">{{ $t("message.successfullySaved") }}</h3>
-                <h2 class="del-modal-h2">{{ $t("message.delegationConfirmQuestion") }}</h2>
+                <h3 class="m-h3" v-if="!isSuccess">{{ $t("message.successfullySaved") }}</h3>
+                <h2 class="m-h2">{{ $t("message.delegationConfirmQuestion") }}</h2>
                 <p v-if="isSuccess">{{ $t("message.failureDuringDelegationSaving") }}</p>
-                <div class="del-modal-btns">
+                <div class="m-btns">
                     <button class="clear-btn" @click="saveDelegationNumber">{{ $t("button.yes") }}</button>
                     <button class="oclear-btn" @click="hideDialog">{{ $t("button.cancel") }}</button>
                 </div>

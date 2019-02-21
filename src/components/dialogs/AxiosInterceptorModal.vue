@@ -8,8 +8,8 @@
             </div>
             <div class="m-content-hs">
                 <div class="m-section">
-                    <h3 class="del-modal-hgrey"> {{ t("message.responseError") }} </h3>
-                    <div class="del-modal-btns">
+                    <h3 class="m-hgrey"> {{ t("message.responseError") }} </h3>
+                    <div class="m-btns">
                         <button class="oclear-btn" @click="hideDialog">OK</button>
                     </div>
                 </div>
