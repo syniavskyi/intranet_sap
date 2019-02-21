@@ -3,7 +3,7 @@
         <div class="modal-overlay" v-if="showError"/>
         <div class="modal-new-xs" v-if="showError">
             <div class="modal-header-new">
-                <h1 class="modal-title-new">{{ $t("header.error") }}</h1>
+                <h1 class="m-title">{{ $t("header.error") }}</h1>
                 <button @click="hideDialog" class="modal-close">&#10006;</button>
             </div>
             <div class="modal-content-new-hs">

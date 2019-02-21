@@ -951,7 +951,7 @@
     color: rgb(119, 119, 119);
     border-radius: 0.5rem;
     transition: box-shadow 0.3s ease;
-    height: 1.5rem;
+    min-height: 1.5rem;
     align-self: flex-end
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="modal-new">
       <header class="modal-header-new">
-        <h1 class="modal-title-new">{{ $t("header.generateCV") }}</h1>
+        <h1 class="m-title">{{ $t("header.generateCV") }}</h1>
         <button class="modal-close" @click="close">&#10006;</button>
       </header>
       <div class="cv-modal-content">

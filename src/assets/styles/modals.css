@@ -64,7 +64,8 @@
   min-height: 4.7rem;
 }
 
-.modal-title-new {
+/* .modal-title-new { */
+.m-title {
   margin: 0 1rem;
   color: #333;
 }
