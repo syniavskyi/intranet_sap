@@ -3,7 +3,7 @@
         <div class="modal-overlay"></div>
         <div class="modal-new-s">
             <header class="modal-header-new modal-advert-header">
-                <h1 class="modal-title-new">{{ $t("label.addNewMessage") }}</h1>
+                <h1 class="m-title">{{ $t("label.addNewMessage") }}</h1>
                 <button @click="close" class="modal-close">&#10006;</button>
             </header>
             <div class="modal-content-new modal-advert-content">

@@ -3,7 +3,7 @@
         <div class="modal-overlay"></div>
         <div class="modal-new-s">
             <div class="modal-header-new">
-                <h1 class="modal-title-new">{{ $t("header.changePassword") }}</h1>
+                <h1 class="m-title">{{ $t("header.changePassword") }}</h1>
                 <button @click="close" class="modal-close">&#10006;</button>
             </div>
             <div class="modal-content-new">
