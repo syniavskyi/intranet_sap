@@ -2,7 +2,7 @@
   <div>
     <div class="modal-overlay"></div>
     <transition name="modal-fade" mode="in-out">
-        <div class="modal-new-stretch" role="dialog" v-if="showModal">
+        <div class="modal-stretch" role="dialog" v-if="showModal">
           <header class="modal-header" :class="headerClass">
             <h1 v-if="messageLog.length > 1" class="m-log-title">{{ formatHeader(messageLog[0].severity) }}</h1>
             <h1 v-if="!messageLog[1]" class="m-log-title">{{ formatHeader(messageLog[0].severity) }}</h1>

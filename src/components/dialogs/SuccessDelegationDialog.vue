@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-new-xs">
+        <div class="modal-xs">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.delegationConfirm") }}</h1>
                 <button @click="hideDialog" class="m-close">&#10006;</button>

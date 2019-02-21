@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="modal-overlay" v-if="showError"/>
-        <div class="modal-new-xs" v-if="showError">
+        <div class="modal-xs" v-if="showError">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.error") }}</h1>
                 <button @click="hideDialog" class="m-close">&#10006;</button>

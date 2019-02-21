@@ -1,7 +1,7 @@
 <template>
     <div @click="closeConfirmDialog">
         <div class="modal-overlay"/>
-        <div class="modal-new-xs" @click.stop>
+        <div class="modal-xs" @click.stop>
             <header class="m-header">
                 <h1 class="m-title">
                     <slot name="modal-title"></slot>

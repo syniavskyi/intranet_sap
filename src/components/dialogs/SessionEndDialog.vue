@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="sessionStatus" class="modal-overlay"/>
-    <div v-if="sessionStatus" class="modal-new-s modal-leave-page">
+    <div v-if="sessionStatus" class="modal-s modal-leave-page">
       <h1 class="leave-page-header">{{ $t("header.sessionEnd") }}</h1>
       <p class="leave-page-info">{{ $t("message.sessionEndInfo") }}</p>
       <div class="leave-buttons">
