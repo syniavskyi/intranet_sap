@@ -7,9 +7,10 @@
         <div class="content-header">
           <div class="content-header-title-and-menu">
             <div @click="showMenu" class="content-header-menu">&#9776;</div>
-            <p class="content-header-title">{{ $t("header.documents") }}</p>
+            <h2 class="content-header-title">{{ $t("header.documents") }}</h2>
           </div>
         </div>
+        <upload-file-component></upload-file-component>
         <div class="documents-page-tiles">
           <file-row :file-type="docFiles" :header-name="'header.documentsCount'"></file-row>
           <file-row :file-type="systemFiles" :header-name="'header.systemData'"></file-row>
@@ -27,11 +28,13 @@ import i18n from "../../lang/lang";
 import { mapGetters } from "vuex";
 import Modal from '../dialogs/MessageLogDialog';
 import FileRow from '../templates/FileRow';
+import UploadFile from './filesComponents/UploadFile'
 const utils = require("../../utils");
 
 export default {
   data() {
-    return {}
+    return {
+    }
   },
   computed: Object.assign(
     mapGetters({
@@ -70,7 +73,8 @@ export default {
   components: {
     "app-menu": Menu,
     "modal": Modal,
-    "file-row": FileRow
+    "file-row": FileRow,
+    "upload-file-component": UploadFile
   }
 };
 </script>
