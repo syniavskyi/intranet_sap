@@ -6,7 +6,7 @@
                 <h1 class="m-title">{{ $t("header.photoErr") }}</h1>
                 <button @click="close" class="modal-close">&#10006;</button>
             </div>
-            <div class="modal-content-new">
+            <div class="m-content">
                 <div class="modal-h">{{ $t("message.photoToLarge") }}</div>
             </div>
             <div class="modal-fbtns">

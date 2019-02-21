@@ -6,7 +6,7 @@
         <h1 class="m-title">{{ $t("header.addNewEvent") }}</h1>
         <button class="modal-close" @click="performDialog">&#10006;</button>
       </div>
-      <div class="modal-content-new">
+      <div class="m-content">
         <div class="modal-calendar">
           <div class="cd-for-input-xl">
             <input required class="cd-input" v-model="addEvent.EventName" @blur="$v.addEvent.EventName.$touch()" :maxlength="40">

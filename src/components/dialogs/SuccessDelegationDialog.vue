@@ -5,7 +5,7 @@
                 <h1 class="m-title">{{ $t("header.delegationConfirm") }}</h1>
                 <button @click="hideDialog" class="modal-close">&#10006;</button>
             </div>
-            <div class="modal-content-new-hs">
+            <div class="m-content-hs">
                 <div class="del-modal-section">
                     <i18n class="del-modal-hgrey" path="message.savedDelegationBackend" tag="h3">
                         <span class="del-modal-h3" place="delegNo" style="color: orange">{{ savedDelegationNumber }}</span>

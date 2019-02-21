@@ -6,7 +6,7 @@
                 <h1 class="m-title">{{ $t("header.changePassword") }}</h1>
                 <button @click="close" class="modal-close">&#10006;</button>
             </div>
-            <div class="modal-content-new">
+            <div class="m-content">
                 <div class="cd-for-input">
                     <input :type="oldPasswordType" required class="cd-input" id="oldPass">
                     <span class="cd-span"></span>

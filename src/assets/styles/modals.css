@@ -87,9 +87,9 @@
   color: #808080;
 }
 
-.modal-content-new,
+.m-content,
 .modal-content-list,
-.modal-content-new-hs {
+.m-content-hs {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -99,11 +99,11 @@
   width: 100%;
 }
 
-.modal-content-new-hs {
+.m-content-hs {
   height: 8.5rem;
 }
 
-.modal-content-new {
+.m-content {
   justify-content: space-around;
 }
 
