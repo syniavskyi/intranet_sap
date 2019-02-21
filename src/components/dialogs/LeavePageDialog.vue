@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="modal-overlay"/>
-        <div class="modal-new-s modal-leave-page">
+        <div class="modal-s modal-leave-page">
             <h1 class="leave-page-header">{{ $t("message.confirmPageLeaving") }}</h1>
             <p class="leave-page-info">{{ $t("message.unsavedData") }}</p>
             <div class="leave-buttons">

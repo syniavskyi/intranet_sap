@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="modal-overlay"></div>
-        <div class="modal-new-s">
+        <div class="modal-s">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.forgotPass") }}</h1>
                 <button class="m-close" @click="switchForgotPassword">&#10006;</button>
