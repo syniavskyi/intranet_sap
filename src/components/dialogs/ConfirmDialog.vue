@@ -6,10 +6,10 @@
                 <h1 class="m-title">
                     <slot name="modal-title"></slot>
                 </h1>
-                <button @click="closeConfirmDialog" class="modal-close">&#10006;</button>
+                <button @click="closeConfirmDialog" class="m-close">&#10006;</button>
             </header>
             <div class="m-content">
-                <div class="del-modal-section">
+                <div class="m-section">
                     <slot name="modal-text"></slot>
                 </div>
             </div>

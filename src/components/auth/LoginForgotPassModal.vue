@@ -4,7 +4,7 @@
         <div class="modal-new-s">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.forgotPass") }}</h1>
-                <button class="modal-close" @click="switchForgotPassword">&#10006;</button>
+                <button class="m-close" @click="switchForgotPassword">&#10006;</button>
             </div>
             <div class="modal-email">
                 <!-- <div class="cd-for-input-xxl">
