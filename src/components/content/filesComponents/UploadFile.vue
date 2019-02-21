@@ -1,20 +1,22 @@
 <template>
     <div class="file-upload" v-if="this.authType !== 'OWN' && this.show">
-        <h3 class="content-header-title">Dodaj nowy dokument</h3>
+        <h3 class="content-header-title">{{ $t("header.addNewFile") }}</h3>
         <div class="drag-drop">
             <div id="drop" class="drag-drop__container" draggable="true" @dragover.prevent="handleDragOver" @dragleave="handleLeave"
              @dragenter="handleDragEnter" @drop.prevent="handleDrop">
                 <div class="drag-drop__container--border">
                     <img src="../../../assets/images/icons/upload-icon-grey.svg" class="drag-drop__container--image">
-                    <p class="p-empty" style="padding: 0; margin: 0;">Przeciągnij tutaj pliki, które chcesz dodać do systemu. </p> 
+                    <p class="p-empty" style="padding: 0; margin: 0;">
+                        {{ $t("message.dragToUpade") }}
+                    </p> 
                 </div>
             </div>       
         </div>
-        <h3 class="content-header-title">Pliki ({{ files.length }})</h3>
+        <h3 class="content-header-title">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h3>
         <div class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
-                    <label class="dd-table__cell dd-table__label">&nbsp;</label>
+                    <label class="dd-table__cell dd-table__label">Format pliku</label>
                     <label class="dd-table__cell dd-table__label">Nazwa pliku</label>
                     <label class="dd-table__cell dd-table__label">Typ dokumentu</label>
                     <label class="dd-table__cell dd-table__label">Dodać do SP</label>
@@ -32,7 +34,9 @@
                                 </div>
                                 <div class="dd-table__cell cd-for-select">
                                     <select class="cd-select" name="">
-                                        <option>Test</option>
+                                        <option v-for="fileType in fileTypes" :key="fileType.Key">
+                                            {{ fileType.Value }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="dd-table__cell">
@@ -69,6 +73,7 @@
 <script>
 
 import i18n from "../../../lang/lang";
+import { mapGetters } from 'vuex';
 
 const insideElements = new Set();
 
@@ -86,6 +91,11 @@ export default {
       show: false,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
+    },
+    computed: {
+        ...mapGetters({
+            fileTypes: "getUploadFileTypes"
+        })
     },
     methods: {
         handleDragEnter(e) {
@@ -305,7 +315,7 @@ export default {
 .dd-table__label {
     color: #7b7777;
     height: 3rem;
-    font-weight: 700;
+    font-weight: 500;
     align-items: center;
     text-align: left;
     justify-content: left;
@@ -326,6 +336,8 @@ export default {
 .dd-table__no-files-choosen {
     text-align: center;
     padding: 1.5rem 1.8rem;
+    color: #7b7777;
+    font-weight: 500;
 }
 
 .dd-table__remove-btn {
