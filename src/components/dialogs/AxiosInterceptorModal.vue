@@ -6,7 +6,7 @@
                 <h1 class="m-title">{{ $t("header.error") }}</h1>
                 <button @click="hideDialog" class="modal-close">&#10006;</button>
             </div>
-            <div class="modal-content-new-hs">
+            <div class="m-content-hs">
                 <div class="del-modal-section">
                     <h3 class="del-modal-hgrey"> {{ t("message.responseError") }} </h3>
                     <div class="del-modal-btns">

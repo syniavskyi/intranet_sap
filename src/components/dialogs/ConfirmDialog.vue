@@ -8,7 +8,7 @@
                 </h1>
                 <button @click="closeConfirmDialog" class="modal-close">&#10006;</button>
             </header>
-            <div class="modal-content-new">
+            <div class="m-content">
                 <div class="del-modal-section">
                     <slot name="modal-text"></slot>
                 </div>

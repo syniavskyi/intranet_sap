@@ -6,7 +6,7 @@
                 <h1 class="m-title">{{ $t("label.addNewMessage") }}</h1>
                 <button @click="close" class="modal-close">&#10006;</button>
             </header>
-            <div class="modal-content-new modal-advert-content">
+            <div class="m-content modal-advert-content">
                 <div class="cd-for-input">
                     <textarea v-model="newAdvert.Message" required class="cd-textarea ta-height"></textarea>
                     <span class="cd-span"></span>
