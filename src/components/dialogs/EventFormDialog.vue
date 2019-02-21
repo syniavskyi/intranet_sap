@@ -2,7 +2,7 @@
   <div>
     <div class="modal-overlay" v-if="dialogEvent"></div>
     <div class="modal-new-m" v-if="dialogEvent">
-      <div class="modal-header-new">
+      <div class="m-header">
         <h1 class="m-title">{{ $t("header.addNewEvent") }}</h1>
         <button class="modal-close" @click="performDialog">&#10006;</button>
       </div>

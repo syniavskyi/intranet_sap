@@ -56,7 +56,7 @@
   height: 600px;
 }
 
-.modal-header-new {
+.m-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -167,13 +167,13 @@
   justify-content: center;
 }
 
-/* FOOTER CONTAINTER FOR BUTTONS*/
+/* FOOTER CONTAINER FOR BUTTONS*/
 .modal-fbtns {
   display:flex;
   justify-content: space-around;
   align-items: center;
 }
-/* FOOTER CONTAINTER FOR BUTTONS*/
+/* FOOTER CONTAINER FOR BUTTONS*/
 
 /* MESSAGE LOG DIALOG */
 
@@ -201,11 +201,6 @@
 }
 
 /* MESSAGE LOG DIALOG */
-
-.animate-modal-close {
-  animation: modal-trans;
-  animation-duration: .55s;
-}
 
 .warning {
   color: #ffa500;
@@ -265,13 +260,11 @@
 
 @keyframes modal-trans {
   from {
-    /* scale(1) translate(-50%, -50%)  */
     transform: rotate3d(0);
     opacity: 1;
   }
 
   to {
-    /* scale(0) translate(-500%, -500%)  */
     transform: rotate3d(.8, .8, .8, 240deg);
     opacity: 0;
   }
@@ -282,8 +275,13 @@
   transition: opacity .2s;
 }
 .modal-fade-enter, 
-.modal-fade-leave-active /* .fade-leave-active below version 2.1.8 */ {
+.modal-fade-leave-active {
   opacity: 0;
+}
+
+.animate-modal-close {
+  animation: modal-trans;
+  animation-duration: .55s;
 }
 
 /*     DIALOG  /   MODAL - end     */

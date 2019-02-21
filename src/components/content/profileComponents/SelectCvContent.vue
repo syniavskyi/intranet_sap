@@ -1,6 +1,6 @@
 <template>
   <div class="modal-new">
-      <header class="modal-header-new">
+      <header class="m-header">
         <h1 class="m-title">{{ $t("header.generateCV") }}</h1>
         <button class="modal-close" @click="close">&#10006;</button>
       </header>
