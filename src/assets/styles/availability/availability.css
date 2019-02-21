@@ -2,25 +2,6 @@
     --request-input-color: #e8eef4;
 }
 
-@keyframes display-grow {
-    0% {
-        opacity: 0;
-    }
-    1% {
-        display: flex;
-        opacity: 0;
-        height: 2rem;
-        width: 13rem;
-        transform: translateY(250px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        height: 2rem;
-        width: 13rem;
-    }
-}
-
 .avail-date-label {
     display: flex;
     position: relative;
@@ -464,21 +445,6 @@
     margin: auto;
     font-size: 1.2rem;
 }
-
-@keyframes pulse {
-    0% {
-      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
-      box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
-    }
-    70% {
-        -moz-box-shadow: 0 0 0 15px rgba(204,169,44, 0);
-        box-shadow: 0 0 0 15px rgba(204,169,44, 0);
-    }
-    100% {
-        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
-        box-shadow: 0 0 0 0 rgba(204,169,44, 0);
-    }
-  }
 
 @keyframes slide-up {
     100% {
