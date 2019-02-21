@@ -1188,46 +1188,6 @@
     border-bottom-right-radius: 4px;
 }
 
-.del-modal-section {
-    display: flex;
-    flex-direction:column;
-    flex:1;
-    align-self: center;
-    width: 80%;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.del-modal-h2 {
-    display: flex;
-    margin: 0;
-    color: #696969;
-    font-weight: 400;
-    text-align: center;
-    font-size: 1.5rem;
-} 
-
-.del-modal-h3,
-.del-modal-hgrey {
-    font-size: 1.5rem;
-    margin: 0;
-    font-weight: 400;
-    text-align: center;
-}
-
-.del-modal-h3 {
-    color: orange;
-}
-
-.del-modal-hgrey {
-    color: grey;
-}
-
-.del-modal-btns {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
 
 @media (min-width: 30rem) {
     .delegations-header-menu {
