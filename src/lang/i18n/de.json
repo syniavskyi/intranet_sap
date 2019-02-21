@@ -185,7 +185,8 @@
         "hiddenData": "Data are hidden",
         "delegationNoError": "Invalid number",
         "delegationNoLabel": "Will be filled",
-        "carRegistrationNo": "Car registration no."
+        "carRegistrationNo": "Car registration no.",
+        "filesToUpload": "Files ({amount})"
     },
     "header": {
         "login": "Melden Sie sich im Intranet an",
@@ -236,7 +237,8 @@
         "error": "Fehler",
         "info": "Information",
         "warning": "Warnung",
-        "photoErr": "Error while uploading photo"
+        "photoErr": "Error while uploading photo",
+        "addNewFile": "Add new document"
     },
     "message": {
         "loginError": "Passwort oder Benutzername sind ungültig.",
@@ -286,7 +288,8 @@
         "savedDelegationBackend": "Delegation with number {delegNo} was created",
         "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size.",
         "responseError": "Request failed, try again, or log out and login again.",
-        "toGenerateCvClickButton": "Um einen Lebenslauf zu erstellen, klicken Sie in der Kopfzeile auf die Schaltfläche 'Lebenslauf erstellen'"
+        "toGenerateCvClickButton": "Um einen Lebenslauf zu erstellen, klicken Sie in der Kopfzeile auf die Schaltfläche 'Lebenslauf erstellen'",
+        "dragToUpade": "Drag here the files that you want to add to the system."
     },
     "select": {
         "language": {

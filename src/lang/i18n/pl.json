@@ -184,7 +184,8 @@
     "hiddenData": "Dane są ukryte",
     "delegationNoError": "Nieprawidłowy numer",
     "delegationNoLabel": "Uzupełni się po wyborze okresu",
-    "carRegistrationNo": "Nr rejestracyjny pojazdu"
+    "carRegistrationNo": "Nr rejestracyjny pojazdu",
+    "filesToUpload": "Pliki ({amount})"
   },
   "header": {
     "login": "Zaloguj się do Intranetu",
@@ -236,7 +237,8 @@
     "info": "Informacja",
     "warning": "Ostrzeżenie",
     "sessionEnd": "Sesja wygasła",
-    "photoErr": "Błąd podczas przesyłania zdjęcia"
+    "photoErr": "Błąd podczas przesyłania zdjęcia",
+    "addNewFile": "Dodaj nowy dokument"
   },
   "message": {
     "loginError": "Wprowadzona nazwa użytkownika lub hasło są nieprawidłowe",
@@ -288,7 +290,8 @@
     "photoToLarge": "Zdjęcia posiada zbyt duzy rozmiar. Prześlij zdjęcie poniżej 1 MB",
     "weatherError": "Wystąpił błąd podczas pobierania pogody.",
     "responseError": "Zapytanie nie powiodło się, spróbuj ponownie, lub wyloguj się i zaloguj ponownie.",
-    "toGenerateCvClickButton": "Aby wygenerować CV wybierz przycisk generuj w nagłówku"
+    "toGenerateCvClickButton": "Aby wygenerować CV wybierz przycisk generuj w nagłówku",
+    "dragToUpade": "Przeciągnij tutaj pliki, które chcesz dodać do systemu."
   },
   "select": {
     "language": {

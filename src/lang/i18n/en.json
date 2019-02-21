@@ -185,7 +185,8 @@
     "hiddenData": "Data are hidden",
     "delegationNoError": "Invalid number",
     "delegationNoLabel": "Will be filled",
-    "carRegistrationNo": "Car registration no."
+    "carRegistrationNo": "Car registration no.",
+    "filesToUpload": "Files ({amount})"
   },
   "header": {
     "login": "Log in to Intranet",
@@ -237,7 +238,8 @@
     "info": "Information",
     "warning": "Warning",
     "sessionEnd": "The session has expired",
-    "photoErr": "Error while uploading photo"
+    "photoErr": "Error while uploading photo",
+    "addNewFile": "Add new document"
   },
   "message": {
     "loginError": "Password or username are invalid.",
@@ -289,7 +291,8 @@
     "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size.",
     "weatherError": "An error occurred while loading the weather.",
     "responseError": "Request failed, try again, or log out and login again.",
-    "toGenerateCvClickButton": "To generate a CV, select the generate button in the header"
+    "toGenerateCvClickButton": "To generate a CV, select the generate button in the header",
+    "dragToUpade": "Drag here the files that you want to add to the system."
   },
   "select": {
     "language": {

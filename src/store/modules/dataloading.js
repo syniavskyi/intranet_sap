@@ -14,7 +14,8 @@ const state = {
   academicTitles: [],
   langLevels: [],
   workPositionList: [],
-  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP', 'ZINTRANET_ROLES', 'ZINTRANET_TRANSPORTS', 'ZINTRANET_DELEGATION_TARGET', 'ZWORK_POS_LEVEL', 'ZWORK_POSITIONS'],
+  uploadFileTypes: [],
+  sapDomains: ["ZINTRANET_DEPARTMENT", "ZINTRANET_AVAIL_TYPE", "ZINTRANET_AVAIL_STATUS", "ZINTRANET_BRANCH", "ZINTRANET_STUDIES_TYPES", "ZINTANET_ACADEMIC_TITLES", "ZINTRANET_LANG_LEVEL", "ZWORK_POS", "ZINTRANET_SAP_MODULES", 'ZINTRANET_PRIORITY', 'ZINTRANET_EVENT_TYPE', 'ZINTRANET_TARGET_GROUP', 'ZINTRANET_ROLES', 'ZINTRANET_TRANSPORTS', 'ZINTRANET_DELEGATION_TARGET', 'ZWORK_POS_LEVEL', 'ZWORK_POSITIONS', 'ZINTRANET_FILE_TYPE'],
   sapModulesList: [],
   newUserFiles: [],
   adverts: [],
@@ -129,6 +130,9 @@ const mutations = {
   },
   SET_WORK_POSITIONS(state, data) {
     state.workPositions = data
+  },
+  SET_UPL_FILETYPE(state, data){
+    state.uploadFileTypes = data
   },
   SET_MESSAGE_LOG(state, data) {
     state.messageLog = data;
@@ -759,6 +763,9 @@ const actions = {
       case 'ZWORK_POSITIONS': 
         sCommitName = 'SET_WORK_POSITIONS'
         break;
+      case 'ZINTRANET_FILE_TYPE':
+        sCommitName = 'SET_UPL_FILETYPE'
+        break;
     }
     if (sCommitName.length > 0) {
       commit(sCommitName, aResults);
@@ -953,6 +960,9 @@ const getters = {
   },
   getPositionsLevel(state) {
     return state.workPosLevel;
+  },
+  getUploadFileTypes(state){
+    return state.uploadFileTypes;
   },
   getOnlyWorkPositions(state) {
     return state.workPositions;
