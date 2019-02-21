@@ -4,7 +4,7 @@
     <div class="modal-new-m" v-if="dialogEvent">
       <div class="m-header">
         <h1 class="m-title">{{ $t("header.addNewEvent") }}</h1>
-        <button class="modal-close" @click="performDialog">&#10006;</button>
+        <button class="m-close" @click="performDialog">&#10006;</button>
       </div>
       <div class="m-content">
         <div class="modal-calendar">

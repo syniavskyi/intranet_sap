@@ -6,7 +6,7 @@
           <header class="modal-header" :class="headerClass">
             <h1 v-if="messageLog.length > 1" class="m-log-title">{{ formatHeader(messageLog[0].severity) }}</h1>
             <h1 v-if="!messageLog[1]" class="m-log-title">{{ formatHeader(messageLog[0].severity) }}</h1>
-            <button @click="closeModal" class="modal-close">&#10006;</button>
+            <button @click="closeModal" class="m-close">&#10006;</button>
           </header>
           <div class="modal-content-list">
             <div v-if="messageLog.length > 1">

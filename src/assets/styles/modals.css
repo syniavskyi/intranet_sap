@@ -70,7 +70,7 @@
   color: #333;
 }
 
-.modal-close {
+.m-close {
   display: flex;
   align-self: flex-start;
   font-size: 1.5rem;
@@ -83,7 +83,7 @@
   cursor: pointer;
 }
 
-.modal-close:hover {
+.m-close:hover {
   color: #808080;
 }
 
@@ -104,6 +104,17 @@
 }
 
 .m-content {
+  justify-content: space-around;
+}
+
+/* .del-modal-section { */
+.m-section {
+  display: flex;
+  flex-direction:column;
+  flex:1;
+  align-self: center;
+  width: 80%;
+  align-items: center;
   justify-content: space-around;
 }
 

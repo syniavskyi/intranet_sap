@@ -4,7 +4,7 @@
         <div class="modal-new-xs">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.photoErr") }}</h1>
-                <button @click="close" class="modal-close">&#10006;</button>
+                <button @click="close" class="m-close">&#10006;</button>
             </div>
             <div class="m-content">
                 <div class="modal-h">{{ $t("message.photoToLarge") }}</div>

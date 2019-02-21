@@ -3,10 +3,10 @@
     <div class="modal-new-s">
         <div class="m-header">
             <h1 class="m-title">{{ $t("header.delegationConfirm") }}</h1>
-            <button @click="hideDialog" class="modal-close">&#10006;</button>
+            <button @click="hideDialog" class="m-close">&#10006;</button>
         </div>
         <div class="m-content">
-            <div class="del-modal-section">
+            <div class="m-section">
                 <h3 class="del-modal-h3" v-if="!isSuccess">{{ $t("message.successfullySaved") }}</h3>
                 <h2 class="del-modal-h2">{{ $t("message.delegationConfirmQuestion") }}</h2>
                 <p v-if="isSuccess">{{ $t("message.failureDuringDelegationSaving") }}</p>

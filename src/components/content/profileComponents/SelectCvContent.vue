@@ -2,7 +2,7 @@
   <div class="modal-new">
       <header class="m-header">
         <h1 class="m-title">{{ $t("header.generateCV") }}</h1>
-        <button class="modal-close" @click="close">&#10006;</button>
+        <button class="m-close" @click="close">&#10006;</button>
       </header>
       <div class="cv-modal-content">
         <div class="cv-modal-tbuttons">
