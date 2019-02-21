@@ -2,7 +2,7 @@
     <div>
         <div class="modal-overlay"/>
         <div class="modal-new-xs">
-            <div class="modal-header-new">
+            <div class="m-header">
                 <h1 class="m-title">{{ $t("header.photoErr") }}</h1>
                 <button @click="close" class="modal-close">&#10006;</button>
             </div>
