@@ -319,6 +319,9 @@ li p {transition: margin .35s ease;}
 }
 
 .label {
+    display: flex;
+    height: 100%;
+    align-items: center;
     height: 1.8rem;
     align-self: center;
     color: rgba(0,0,0, 0.6);
