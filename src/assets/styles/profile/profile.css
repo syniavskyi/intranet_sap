@@ -396,6 +396,11 @@
 .prof-row-btn {
     background: orange;
 }
+
+.prof-row-btn:not(:disabled) {
+    animation: pulsy 2s infinite;
+}
+
 .prof-row-dbtn {
     color: black;
     background: #e6e6e6;
@@ -1354,6 +1359,10 @@
     align-items: center;
     margin: .5rem;
     outline-color: orange;
+}
+
+.projSaveButton {
+    background: orange;
 }
 
 .projSaveButton:not(:disabled) {

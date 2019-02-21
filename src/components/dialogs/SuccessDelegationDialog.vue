@@ -8,7 +8,7 @@
             <div class="m-content-hs">
                 <div class="m-section">
                     <i18n class="m-hgrey" path="message.savedDelegationBackend" tag="h3">
-                        <span class="m-h3" place="delegNo" style="color: orange">{{ savedDelegationNumber }}</span>
+                        <span class="m-h3" place="delegNo">{{ savedDelegationNumber }}</span>
                     </i18n>
                     <div class="m-btns">
                         <button class="oclear-btn" @click="hideDialog">OK</button>

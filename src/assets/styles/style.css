@@ -39,14 +39,17 @@ body {
 @keyframes pulsy {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.603);
-    color: grey;
+    /* color: grey; */
+    color: #eee;
   }
   50% {
       box-shadow: 1px 1px 10px 10px rgba(255, 166, 0, 0.363);
-      color: orange;
+      /* color: orange; */
+      color: #fff;
   }
   100% {
       box-shadow: 0 0 0 0 rgba(255, 166, 0, 0);
-      color: grey;
+      /* color: grey; */
+      color: #eee;
   }
 }
