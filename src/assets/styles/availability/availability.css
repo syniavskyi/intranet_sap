@@ -232,17 +232,6 @@
     color: #ffa500;
 }
 
-@keyframes shake {
-    0% { -webkit-transform: translate(3px); }
-    20% { -webkit-transform: translate(-3px); }
-	40% { -webkit-transform: translate(5px); }
-	60% { -webkit-transform: translate(-5px); }
-	80% { -webkit-transform: translate(3px); }
-	100% { -webkit-transform: translate(0px); }
-}
-
-/* active state */
-
 .ava-div-buttons {
     display:flex;
     justify-content: space-around;
@@ -289,7 +278,7 @@
     outline: none;
 }
 
-.ava-button-edit{
+.ava-button-edit {
     margin: .5rem;
     animation: slide-up 0.6s ease;
 }
@@ -313,27 +302,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.ava-error {
-    position: absolute;
-    font-family: 'Roboto';
-    margin: 0;
-    line-height: 1rem;
-    bottom: -1rem;
-    left: -1.15rem;
-    width: 100%;
-    font-size: .85rem;
-    z-index: 1;
-    text-align: center;
-    color: #ff0000;
-}
-
-.ava-error-img {
-    position: absolute;
-    top: .3rem;
-    right: 1.6rem;
-    animation: shake .5s;
 }
 
 /* Availability Tables and their Inputs / Selects */
@@ -457,7 +425,15 @@
     }
 }
 
-/* @media (min-width: 35rem) { */
+@media (min-width: 44rem) {
+    .availability-content {
+        width: 80%;
+    }
+    .availability-header-menu {
+        display: none;
+    }
+}
+
 @media(min-width: 56.25rem) {
     .holiday-button-static {
         display : flex;
@@ -520,15 +496,6 @@
     }
 }
 
-@media (min-width: 44rem) {
-    .availability-content {
-        width: 80%;
-    }
-    .availability-header-menu {
-        display: none;
-    }
-}
-
 @media (min-width: 74.7rem) {
     #ava-edit-project-dialog {
         flex-direction: row;
@@ -581,7 +548,7 @@
     }
 }
 
-@media (min-width:86.25rem) {
+@media (min-width: 86.25rem) {
     .ava-select-and-calendar {
         flex-direction: row;
     }
