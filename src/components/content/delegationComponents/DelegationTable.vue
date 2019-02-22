@@ -39,7 +39,7 @@
                                     <div class="del-tbody-item-wrap">
                                         <input required class="delegations-input-cool" placeholder="" id="firstLeavePlace" v-model="defaultCostsData.firstLeavePlace"  onfocus="value = ''">
                                         <!-- v-on:input="checkFormFields()" -->
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                         <!-- <select class="delegations-tselect" @change="checkDelegationTable" v-model="defaultCostsData.firstLeavePlace">
                                             <option v-for="department in departmentList" :key="department.depId" :value="department.depId">{{ department.depName }}</option>
                                         </select> -->
@@ -112,7 +112,7 @@
                                     <div class="del-tbody-item-wrap">
                                         <!-- <vue-google-autocomplete types="geocode" required class="delegations-input-cool" placeholder=""  id="secondArrivalPlace" onfocus="value = ''" @input="defaultCostsData.secondArrivalPlace = value"></vue-google-autocomplete> -->
                                         <input class="delegations-input-cool" v-model="defaultCostsData.secondArrivalPlace" required>
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                         <!-- <select class="delegations-tselect" @change="checkDelegationTable" v-model="defaultCostsData.secondArrivalPlace">
                                             <option v-for="department in departmentList" :key="department.depId" :value="department.depId">{{ department.depName }}</option>
                                         </select> -->
@@ -146,7 +146,7 @@
                                 <div class="del-tbody-item">
                                     <div class="del-tbody-item-wrap">
                                         <input class="delegations-tinput-w" @input="checkDelegationTable" :disabled="customCosts[index].dates === null ? true : false" v-model="customCosts[index].leavePlace">
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                                 <div class="del-tbody-item">
                                     <div class="del-tbody-item-wrap">
                                         <input class="delegations-tinput-w" @input="checkDelegationTable" :disabled="customCosts[index].dates === null ? true : false" v-model="customCosts[index].arrivalPlace" required>
-                                        <span class="del-div-bar"/>
+                                        <span class="cd-span"/>
                                     </div>
                                 </div>
                             </div>

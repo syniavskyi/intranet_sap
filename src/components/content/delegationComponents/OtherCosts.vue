@@ -35,7 +35,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" @input="checkOtherCostsFields" v-model="cost.company" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2">&nbsp;</div>
@@ -45,7 +45,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" v-model="cost.docNo"/>
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
@@ -75,7 +75,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" type="number" min="0" @change="getOtherCostRate(index)" v-model="cost.amount" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2">&nbsp;</div>

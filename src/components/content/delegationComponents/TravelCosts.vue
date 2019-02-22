@@ -38,7 +38,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" @input="checkTravelFields" v-model="cost.company" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2-travel">&nbsp;</div>
@@ -48,7 +48,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" @input="checkTravelFields" v-model="cost.docNo" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2-travel">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
@@ -72,7 +72,7 @@
                                 </select>
                                 <div class="del-div-tcool">
                                     <input required :disabled="hideLicencePlateNo(cost)" :class="[{ 'delegations-tinput-disabled': hideLicencePlateNo(cost) },  'delegations-tinput', 'del-tinput-sfont']" @change="checkTravelFields" v-model="cost.licencePlateNo" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                     <label class="delegations-tlabel-cool" v-if="!cost.licencePlateNo">{{ $t("label.registrationNo") }}</label>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input :disabled="disableKilometers(cost)" :class="[{ 'delegations-tinput-s-disabled': disableKilometers(cost) },  'delegations-tinput-s']" type="number" @change="updateTravelCosts" v-model="cost.kilometers" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2-travel">&nbsp;</div>
@@ -123,7 +123,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input :disabled="disableCostAmount(cost)" :class="[{ 'delegations-tinput-s-disabled': disableCostAmount(cost) },  'delegations-tinput-s']" type="number" min="0" @input="updateTravelCosts" v-model="cost.amount" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2-travel">&nbsp;</div>

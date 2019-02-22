@@ -31,7 +31,7 @@
                                     </label>
                                     <div class="del-div-tcool" v-show="hideAccFields(cost)">
                                         <input required class="delegations-tinput-s del-tinput-sfont"  v-model="cost.flatRateDays" @input="countAccFlatRate(index)"/>
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                         <label class="delegations-tlabel-cool" v-show="hideAccFields(cost)">{{ $t("table.delegations.days") }}</label>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
                                         <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" @input="checkAccomodationFields" v-model="cost.company" />
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                     </div>
                                 </div>
                                 <div class="del-tfoot2">&nbsp;</div>
@@ -61,7 +61,7 @@
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
                                         <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" @input="checkAccomodationFields" v-model="cost.docNo" />
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                     </div>
                                 </div>
                                 <div class="del-tfoot2">{{ $t("table.delegations.amount") }} {{newDelegation.currency}}</div>
@@ -91,7 +91,7 @@
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
                                         <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" type="number" min="0" @change="getAccCostRate(index)" v-model="cost.amount" />
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                     </div>
                                 </div>
                                 <div class="del-tfoot2">&nbsp;</div>
