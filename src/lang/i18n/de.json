@@ -41,7 +41,8 @@
         "confirmGenerate": "Bestätigen und erzeugen",
         "logout": "Auslogen",
         "saveNewDelegNumber": "Save new number",
-        "backToProf": "back to profile"
+        "backToProf": "Back to profile",
+        "sendFiles": "Send files"
     },
     "label": {
         "nationality": "Nationalität",
@@ -186,7 +187,12 @@
         "delegationNoError": "Invalid number",
         "delegationNoLabel": "Will be filled",
         "carRegistrationNo": "Car registration no.",
-        "filesToUpload": "Files ({amount})"
+        "filesToUpload": "Files ({amount})",
+        "fileFormatUpl": "File format",
+        "fileNameUpl": "Filename",
+        "fileTypeUpl": "Document type",
+        "addToSPUpl": "Add to Startpage",
+        "sendEmailUpl": "Send e-mail"
     },
     "header": {
         "login": "Melden Sie sich im Intranet an",
@@ -289,7 +295,8 @@
         "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size.",
         "responseError": "Request failed, try again, or log out and login again.",
         "toGenerateCvClickButton": "Um einen Lebenslauf zu erstellen, klicken Sie in der Kopfzeile auf die Schaltfläche 'Lebenslauf erstellen'",
-        "dragToUpade": "Drag here the files that you want to add to the system."
+        "dragToUpade": "Drag here the files that you want to add to the system.",
+        "noFilesChosen": "No files chosen."
     },
     "select": {
         "language": {

@@ -9,7 +9,7 @@ const state = {
   informationFiles: [],
   instructionFiles: [],
   fileTypes: ['INFO', 'DOC', 'OFF', 'SAPB', 'INST'],
-  dataToRead: ["UserData", "Documents", "NewToken", "Dictionaries"]
+  dataToRead: ["UserData", "Documents", "NewToken", "Domains"]
 }
 
 const mutations = {

@@ -39,9 +39,10 @@
         "stopSlider": "Зупинити слайдер",
         "startSlider": "Запустити слайдер",
         "confirmGenerate": "Підтвердити і вигенерувати",
-        "logout": "logout",
+        "logout": "Logout",
         "saveNewDelegNumber": "Save new number",
-        "backToProf": "back to profile"
+        "backToProf": "Back to profile",
+        "sendFiles": "Send files"
     },
     "label": {
         "nationality": "Національність",
@@ -186,7 +187,12 @@
         "delegationNoError": "Invalid number",
         "delegationNoLabel": "Will be filled",
         "carRegistrationNo": "Car registration no.",
-        "filesToUpload": "Files ({amount})"
+        "filesToUpload": "Files ({amount})",
+        "fileFormatUpl": "File format",
+        "fileNameUpl": "Filename",
+        "fileTypeUpl": "Document type",
+        "addToSPUpl": "Add to Startpage",
+        "sendEmailUpl": "Send e-mail"
     },
     "header": {
         "login": "Увійдіть до Інтранету",
@@ -287,7 +293,8 @@
         "photoToLarge": "Photo is too large. Upload photo smaller than 1 MB in size.",
         "responseError": "Request failed, try again, or log out and login again.",
         "toGenerateCvClickButton": "To generate a CV, select the generate button in the header",
-        "dragToUpade": "Drag here the files that you want to add to the system."
+        "dragToUpade": "Drag here the files that you want to add to the system.",
+        "noFilesChosen": "No files chosen."
     },
     "select": {
         "language": {

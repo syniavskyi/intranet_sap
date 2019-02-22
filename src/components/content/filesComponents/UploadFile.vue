@@ -16,11 +16,11 @@
         <div class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
-                    <label class="dd-table__cell dd-table__label">Format pliku</label>
-                    <label class="dd-table__cell dd-table__label">Nazwa pliku</label>
-                    <label class="dd-table__cell dd-table__label">Typ dokumentu</label>
-                    <label class="dd-table__cell dd-table__label">Dodać do SP</label>
-                    <label class="dd-table__cell dd-table__label">Wysłać e-mail</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileNameUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.addToSPUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
                     <label class="dd-table__cell dd-table__label">&nbsp;</label>
                 </header>
                 <section>
@@ -59,13 +59,13 @@
                             </div>
                         </div>
                         <div class="dd-table__no-files-choosen" v-else>
-                            Nie wybrano żadnych plików
+                            {{ $t("message.noFilesChosen") }}
                         </div>
                 </section>
             </div>
         </div>
         <div class="drag-drop__btn">
-            <button @click="sendFiles" class="func-btn">Wyślij pliki</button>
+            <button @click="sendFiles" class="func-btn">{{ $t("button.sendFiles")}}</button>
         </div>
     </div>
 </template>
@@ -82,14 +82,8 @@ export default {
     name: 'upload-file',
     data() {
       return {
-      newFile: {
-        filePath: '',
-        isDraggingOver: false,
-        transferData: undefined,
-        handleFiles: undefined
-      },
       files: [],
-      show: false,
+      show: true,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
