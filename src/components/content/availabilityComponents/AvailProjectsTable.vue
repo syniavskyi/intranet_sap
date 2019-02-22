@@ -77,8 +77,8 @@
                     <div class="ava-tbproj-item eduButtonsProj">
                          <!-- ava-tbs-item -->
                         <div class="ava-tbs-ititle">{{ $t("label.options") }}</div>
-                        <button class="btn-delete-row" v-if="editMode" @click="update(index)">{{ $t("button.save") }}</button>
-                        <button class="btn-delete-row" v-if="editMode" @click="remove(project)">{{ $t("button.delete") }}</button>
+                        <button class="btn-row" v-if="editMode" @click="update(index)">{{ $t("button.save") }}</button>
+                        <button class="btn-row" v-if="editMode" @click="remove(project)">{{ $t("button.delete") }}</button>
                     </div>
                 </div>
             </div>

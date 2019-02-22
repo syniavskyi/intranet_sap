@@ -54,7 +54,7 @@
                         <div class="del-tbody2-item-adv">
                             <div class="del-tbody2-item-title"></div>
                             <div class="del-tbody2-item-txt">
-                                <button class="btn-delete-row" @click="removeAdvanceRow(index)">{{ $t("button.delete") }}</button>
+                                <button class="btn-row" @click="removeAdvanceRow(index)">{{ $t("button.delete") }}</button>
                             </div>
                             <div class="del-tfoot2">&nbsp;</div>
                         </div>
