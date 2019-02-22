@@ -2,7 +2,7 @@
 <div class="plane-component">
     <div class="component-nav-and-content">
         <app-menu v-show="displayMenu"></app-menu>
-        <div class="modal-overlay" v-show="displayOverlay"></div>
+        <div class="m-overlay" v-show="displayOverlay"></div>
         <div class="component-content">
             <div class="content-header">
                 <div class="content-header-title-and-menu">

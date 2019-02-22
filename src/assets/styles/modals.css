@@ -1,5 +1,5 @@
 /*     DIALOG  /   MODAL - start       */
-.modal-overlay {
+.m-overlay {
   display: flex;
   position: fixed;
   z-index: 1500;

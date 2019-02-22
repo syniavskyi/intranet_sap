@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="modal-overlay"></div>
+    <div class="m-overlay"></div>
 </div>
 </template>
 <script>

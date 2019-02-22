@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-overlay"></div>
+        <div class="m-overlay"></div>
         <div class="modal-s">
             <header class="m-header modal-advert-header">
                 <h1 class="m-title">{{ $t("label.addNewMessage") }}</h1>
@@ -17,7 +17,6 @@
                     <input required v-model="newAdvert.ValidTo" value="newAdvert.ValidTo"/>
                 </v-date-picker>
                 <button :disabled="!newAdvert.Message || !newAdvert.ValidTo || newAdvert.Message === '' " @click="addNewAdvert(newAdvert)" class="button">
-                    <!-- {{ $t("button.add") }} -->
                     <span class="span-arrow">{{ $t("button.send") }}</span>
                 </button>
             </div>
@@ -41,15 +40,13 @@ export default {
     },
     methods: {
       ...mapActions([
-      "addNewAdvert"
+        "addNewAdvert"
         ]),
         close() {
             this.$store.commit("SET_SHOW_NEW_MESSAGE_DIALOG", false)
         },
         formatDate(date) {
-         return date !== null && date !== undefined
-        ? moment(date).format("DD.MM.YYYY")
-        : "-";
+            return date !== null && date !== undefined ? moment(date).format("DD.MM.YYYY") : "-"
         }
     }
 }
@@ -60,5 +57,4 @@ export default {
     max-height: 10rem;
     height: 6rem;
 }
-
 </style>

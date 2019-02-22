@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-overlay" v-if="showError"/>
+        <div class="m-overlay" v-if="showError"/>
         <div class="modal-xs" v-if="showError">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.error") }}</h1>

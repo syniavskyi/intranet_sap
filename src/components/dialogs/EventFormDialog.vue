@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="modal-overlay" v-if="dialogEvent"></div>
+    <div class="m-overlay" v-if="dialogEvent"></div>
     <div class="modal-m" v-if="dialogEvent">
       <div class="m-header">
         <h1 class="m-title">{{ $t("header.addNewEvent") }}</h1>
