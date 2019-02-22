@@ -1,6 +1,6 @@
 <template>
     <div class="file-upload" v-if="this.authType !== 'OWN' && this.show">
-        <h3 class="content-header-title">{{ $t("header.addNewFile") }}</h3>
+        <h3 class="content-header-title content-header-title-h3">{{ $t("header.addNewFile") }}</h3>
         <div class="drag-drop">
             <div id="drop" class="drag-drop__container" draggable="true" @dragover.prevent="handleDragOver" @dragleave="handleLeave"
              @dragenter="handleDragEnter" @drop.prevent="handleDrop">
@@ -12,7 +12,8 @@
                 </div>
             </div>       
         </div>
-        <h3 class="content-header-title">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h3>
+        <!-- FILES TABLE -->
+        <h4 class="content-header-title content-header-title-h4">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h4>
         <div class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
@@ -65,13 +66,72 @@
             </div>
         </div>
         <div class="drag-drop__btn">
-            <button @click="sendFiles" class="func-btn">{{ $t("button.sendFiles")}}</button>
+            <button @click="sendFiles" class="func-btn cd-b">{{ $t("button.sendFiles")}}</button>
         </div>
+        <!-- LINKS TABLE -->
+        <div class="drag-drop__list">     
+            <div class="dd-table">
+                <header class="dd-table__header">
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileNameUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.addToSPUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
+                    <label class="dd-table__cell dd-table__label">&nbsp;</label>
+                </header>
+                <section>
+                        <div class="dd-table__body" v-if="links.length > 0">
+                            <div class="dd-table__row" v-for="link in links" :key="link.linkId">
+                                <div class="dd-table__cell" :class="link.typeClass">
+                                    &nbsp;
+                                </div>
+                                <div class="dd-table__cell cd-for-input">
+                                    <input type="text" class="cd-input" v-model="link.fileName">
+                                    <span class="cd-span"></span>
+                                </div>
+                                <div class="dd-table__cell cd-for-select">
+                                    <select class="cd-select" name="">
+                                        <option v-for="fileType in fileTypes" :key="fileType.Key">
+                                            {{ fileType.Value }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="dd-table__cell">
+                                    <label class="checkbox-wrap">
+                                        <input type="checkbox" class="checkbox-new" v-model="link.addToStarter" />
+                                        <div class="checkbox-in"></div>
+                                    </label>
+                                </div>
+                                <div class="dd-table__cell">
+                                    <label class="checkbox-wrap">
+                                        <input type="checkbox" class="checkbox-new" v-model="link.sendEmail" />
+                                        <div class="checkbox-in"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="dd-table__cell">
+                                    <button class="dd-table__remove-btn">X</button>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+            </div>
+        </div>
+        <h3 class="content-header-title content-header-title-h3">{{ $t("header.prevDocuments") }}</h3>
     </div>
 </template>
 
 
 <script>
+
+/* TO DO:
+ * -obsłużyć dodawanie linków
+ * -uporządkować CSS-y
+ * -obsłużyć usuwanie przed zapisem
+ * -obsłużyć backend
+ * -dodać loadera 
+ * -walidacja
+ */
 
 import i18n from "../../../lang/lang";
 import { mapGetters } from 'vuex';
@@ -83,7 +143,8 @@ export default {
     data() {
       return {
       files: [],
-      show: true,
+      links: [],
+      show: false,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
@@ -308,7 +369,7 @@ export default {
 
 .dd-table__body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .dd-table__row {
@@ -319,6 +380,10 @@ export default {
     border-radius: 10px;
     margin-bottom: 1rem;
     transition: background-color .2s;
+}
+
+.dd-table__row:not(:last-child){
+    margin-bottom: 3rem;
 }
 
 .dd-table__cell {

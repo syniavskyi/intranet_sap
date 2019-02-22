@@ -783,8 +783,12 @@ input:required {
     font-weight: bold;
 }
 
-h3.content-header-title{
+.content-header-title-h3{
     font-size: 1.2rem;
+}
+
+.content-header-title-h4 {
+    font-size: 1rem;
 }
 
 @media(min-width: 44rem) {

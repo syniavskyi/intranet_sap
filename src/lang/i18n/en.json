@@ -245,7 +245,8 @@
     "warning": "Warning",
     "sessionEnd": "The session has expired",
     "photoErr": "Error while uploading photo",
-    "addNewFile": "Add new document"
+    "addNewFile": "Add new document",
+    "prevDocuments": "Preview documents"
   },
   "message": {
     "loginError": "Password or username are invalid.",
