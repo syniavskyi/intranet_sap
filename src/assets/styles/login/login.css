@@ -234,23 +234,6 @@ button[disabled] span {
     position: absolute;
 }
 
-@keyframes show-alert-in {
-    from {
-        transform: translateY(20px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-@keyframes show-alert-out {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(20px);
-    }
-}
 
 @media (min-height: 0rem) and (max-height: 38rem) {
     .plane {
