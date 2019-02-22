@@ -61,12 +61,12 @@
                         </select>
                     </div>
                     <div class="ava-tbs-item confirmButtonAvail" v-if="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'">
-                        <button class="btn-delete-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'confirm'})">{{ $t("button.confirm") }}</button>
-                        <button class="btn-delete-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'reject'})">{{ $t("button.reject") }}</button>
+                        <button class="btn-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'confirm'})">{{ $t("button.confirm") }}</button>
+                        <button class="btn-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'reject'})">{{ $t("button.reject") }}</button>
                     </div>
                     <div class="ava-tbs-item eduButtonsAvail" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'">
-                        <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
-                        <button class="btn-delete-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
+                        <button class="btn-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" :disabled="true" @click="operation({index, avail, operation: 'save'})">{{ $t("button.save") }}</button>
+                        <button class="btn-row" v-if="editMode && newLeave.UserId === loginAlias || editMode && authAcc && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || editMode && authAcc ==='*'" @click="remove(index, avail)">{{ $t("button.delete") }}</button>
                     </div>
                 </div>
             </div>

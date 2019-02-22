@@ -119,7 +119,7 @@
     color: grey;
 }
 
-.btn-delete-row {
+.btn-row {
     height: 2rem;
     color: #333;
     background: #ccc;
@@ -134,7 +134,7 @@
     outline-color: #ffa500;
 }
 
-.btn-delete-row:hover {
+.btn-row:hover {
     cursor: pointer;
     background: rgb(173, 173, 173);
     color: rgb(90, 90, 90);

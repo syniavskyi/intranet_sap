@@ -20,19 +20,18 @@
     width: 8.6rem;
 }
 
-.cd-for-input-xxs {width: 6rem;}
-.cd-for-input-s {width: 13rem;}
+.cd-for-input-xxs { width: 6rem; }
 
-.cd-for-select {width: 15rem;}
+.cd-for-input-s { width: 13rem; }
 
-.cd-for-input {width: 15rem;}
+.cd-for-select { width: 15rem; }
 
-.cd-for-input-xxl {width: 26rem;}
+.cd-for-input { width: 15rem; }
+
+.cd-for-input-xxl { width: 26rem; }
 
 .cd-for-input-xl,
-.cd-for-select-xl {
-    width: 20.5rem;
-}
+.cd-for-select-xl { width: 20.5rem; }
 
 .cd-input {
     display: flex;
@@ -57,9 +56,7 @@
     right: 6rem;
 }
 
-.cd-input[type="time"] {
-    height: 2.2rem;
-}
+.cd-input[type="time"] { height: 2.2rem; }
 
 .cd-textarea,
 .cd-ttextarea {
@@ -71,9 +68,7 @@
     border: 1px solid #d3d3d3;
 }
 
-.cd-textarea {
-    min-width: 94%;
-}
+.cd-textarea { min-width: 94%; }
 
 .cd-textarea:disabled { background-color: transparent; }
 
@@ -106,7 +101,6 @@
 .cd-wselect { /* availability select */
     align-self: center;
     width: 8rem;
-    /* margin-left: .3rem; */
 }
 
 .cd-wdselect { /* availability select */
@@ -133,9 +127,7 @@
     outline-color: #ffa500;
 }
 
-.cd-wdate {
-    width: 6.5rem;
-}
+.cd-wdate { width: 6.5rem; }
 
 .cd-date input,
 .cd-wdate input {
@@ -218,7 +210,7 @@
     padding: 0 .2rem;
 }
 
-.cd-span { position:relative; display:flex; width:100%; }
+.cd-span { position: relative; display: flex; width: 100%; }
     
 .cd-span:before, .cd-span:after {
     content:'';
@@ -233,19 +225,14 @@
     -moz-transition:0.5s ease all; 
     -webkit-transition:0.5s ease all;
 }
-.cd-span:before {
-    left:50%;
-}
-.cd-span:after {
-    right:50%; 
-}
+.cd-span:before { left:50%; }
 
-.cd-input:focus ~ span:before, .cd-input:focus ~ span:after {
-    width: 50%;
-}
+.cd-span:after { right:50%; }
+
+.cd-input:focus ~ span:before, 
+.cd-input:focus ~ span:after { width: 50%; }
 
 /* COOL (CONTET) DIV DATE PICKER INPUT */
-
 .cd-range ~ label,
 .cd-rangex ~ label {
     top: -.65rem;
@@ -262,13 +249,9 @@
     align-items:center;
 }
 
-.cd-range {
-    width: 8rem;
-}
+.cd-range { width: 8rem; }
 
-.cd-rangex {
-    width: 15rem;
-}
+.cd-rangex { width: 15rem; }
 
 .cd-range input,
 .cd-rangex input {
@@ -284,14 +267,9 @@
     font-size: 1rem; 
     border: 1px solid rgb(207, 207, 207);
 }
-.cd-range input {
-    width: 14rem;
-}
+.cd-range input { width: 14rem; }
 
-.cd-rangex input {
-    width: 15rem;
-}
-
+.cd-rangex input { width: 15rem; }
 /* COOL (CONTET) DIV DATE PICKER INPUT */
 
 /* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA  - end */
@@ -316,9 +294,7 @@
     box-shadow: 0px 0px 10px #ffa500;
 }
 
-.cd-rbtn:checked + label {
-    color: #808080;
-}
+.cd-rbtn:checked + label { color: #808080; }
 
 .cd-Lrbtn {
     color: #999;
@@ -349,11 +325,7 @@
         text-align-last: center;
         text-indent: 0;
     }
-    .cd-wselect {
-        margin-left: .1rem;
-    }
+    .cd-wselect { margin-left: .1rem; }
 }
 
-.cd-b {
-    margin-bottom: 1.5rem;
-}
+.cd-b { margin-bottom: 1.5rem; }
