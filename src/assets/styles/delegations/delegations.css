@@ -395,27 +395,6 @@
     text-indent: 5.5rem;
 }
 
-.del-div-bar { position:relative; display:flex; width:100%; }
-    
-.del-div-bar:before, .del-div-bar:after {
-    content:'';
-    display: table;
-    flex-shrink: 0;
-    height:2px; 
-    width:0;
-    bottom:0; 
-    position:absolute;
-    background:rgb(255, 145, 0); 
-    transition:0.5s ease all; 
-    -moz-transition:0.5s ease all; 
-    -webkit-transition:0.5s ease all;
-}
-.del-div-bar:before {
-    left:50%;
-}
-.del-div-bar:after {
-    right:50%; 
-} 
 /* active state */
 .delegations-input-cool:focus ~ span:before, .delegations-input-cool:focus ~ span:after,
 .delegations-tinput:focus ~ span:before, .delegations-tinput:focus ~ span:after,

@@ -51,7 +51,7 @@
                                     <!-- <p class="del-inputs-header">{{ $t("label.targetTime") }}</p> -->
                                     <div class="del-div-cool">
                                         <input required class="delegations-input-cool" v-model="newDelegation.destination" @input="checkNewDelegation" />
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                         <label class="delegations-label-cool">{{ $t("label.to") }} </label>
                                     </div>
                                     <div class="del-div-cool">
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="del-div-cool">
                                         <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                         <label class="delegations-label-cool">{{ $t("label.target") }} </label>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="del-div-cool" v-if="showRegNoInput">
                                         <input required class="delegations-input-cool" v-model="newDelegation.carRegistrationNo" @input="checkNewDelegation" />
-                                        <span class="del-div-bar"></span>
+                                        <span class="cd-span"/>
                                         <label class="delegations-label-cool">{{ $t("label.carRegistrationNo") }} </label>
                                     </div>
                                     <div class="del-div-cool">
@@ -94,13 +94,13 @@
                                         <div class="del-div-cool-curr">
                                             <p class="del-inp-curr">{{newDelegation.currency}}</p>
                                             <input required id="del-inp-curr1" class="delegations-input-cool" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
-                                            <span class="del-div-bar"></span>
+                                            <span class="cd-span"/>
                                             <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
                                         </div>
                                         <div class="del-div-cool-curr">
                                             <p class="del-inp-curr">{{newDelegation.currency}}</p>
                                             <input required class="delegations-input-cool" v-model="totalCostsInCurr.totalPayback"/>
-                                            <span class="del-div-bar"></span>
+                                            <span class="cd-span"/>
                                             <label class="delegations-label-cool-s">{{ $t("label.totalReturnAmount") }}: </label>
                                         </div>
                                     </div>

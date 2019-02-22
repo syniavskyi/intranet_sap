@@ -41,7 +41,7 @@
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
                                     <input class="delegations-tinput" type="number" min="0" @input="getAdvanceRate(index)" v-model="advance.amount" />
-                                    <span class="del-div-bar"></span>
+                                    <span class="cd-span"/>
                                 </div>
                             </div>
                             <div class="del-tfoot2">&nbsp;</div>
