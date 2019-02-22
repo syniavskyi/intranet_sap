@@ -30,7 +30,8 @@
                                     &nbsp;
                                 </div>
                                 <div class="dd-table__cell cd-for-input">
-                                    <input type="text" class="cd-input" v-model="file.fileName"/>
+                                    <input type="text" class="cd-input" v-model="file.fileName">
+                                    <span class="cd-span"></span>
                                 </div>
                                 <div class="dd-table__cell cd-for-select">
                                     <select class="cd-select" name="">
@@ -172,13 +173,36 @@ export default {
         _determineFileClass(fileType){
             let className;
             switch(fileType.toLowerCase()){
-                case 'xls':
-                className = "doc-file-xls";
+                case 'doc':
+                className = 'doc-file-doc'
                 break;
-                case 'pdf':
-                className = "doc-file-pdf";
+                case 'gif':
+                className = 'doc-file-gif'
                 break;
                 case 'jpg':
+                case 'jpeg':
+                className = 'doc-file-jpg'
+                break;
+                case 'mp3':
+                className = "doc-file-mp3"
+                break;                
+                case 'mp4':
+                className = "doc-file-mp4"
+                break;
+                case 'pdf':
+                className = "doc-file-pdf"
+                break;                
+                case 'png':
+                className = 'doc-file-png'
+                break;
+                case 'ppt':
+                className = 'doc-file-ppt'
+                break;
+                case 'xls':
+                className = "doc-file-xls"
+                break;
+                case 'zip':
+                className = 'doc-file-zip'
                 break;
                 default:
                 className = ""
@@ -306,7 +330,6 @@ export default {
 .dd-table__cell {
     display:flex;
     height: 3rem;
-    flex-direction: row;
     transition: background-color .2s;
     padding: .1rem 1.5rem;
     justify-content: center;

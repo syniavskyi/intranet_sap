@@ -178,18 +178,47 @@
 .doc-file-doc {
     background-image: url(../../images/files/doc-48.png);
 }
-.doc-file-pdf {
-    background-image: url(../../images/files/pdf-48.png);
+
+.doc-file-gif {
+    background-image: url(../../images/files/gif-48.png)
 }
-.doc-file-xls {
-    background-image: url(../../images/files/xls-48.png);
+
+.doc-file-jpg {
+    background-image: url(../../images/files/jpg-48.png);
 }
-.doc-file-zip {
-    background-image: url(../../images/files/zip-48.png);
-}
+
 .doc-file-link {
     background-image: url(../../images/files/link-48.png);
 }
+
+.doc-file-mp3 {
+    background-image: url(../../images/files/mp3-48.png)
+}
+
+.doc-file-mp4 {
+    background-image: url(../../images/files/mp4-48.png)
+}
+
+.doc-file-pdf {
+    background-image: url(../../images/files/pdf-48.png);
+}
+
+.doc-file-png {
+    background-image: url(../../images/files/png-48.png);
+}
+
+.doc-file-ppt {
+    background-image: url(../../images/files/ppt-48.png)
+}
+
+.doc-file-xls {
+    background-image: url(../../images/files/xls-48.png);
+}
+
+.doc-file-zip {
+    background-image: url(../../images/files/zip-48.png);
+}
+
 
 .doc-file-div {
     display:flex;
