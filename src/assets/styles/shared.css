@@ -328,12 +328,6 @@ li p {transition: margin .35s ease;}
     transition: font-size 0.3s ease;
 }
 
-.input:hover,
-.input:focus {
-    cursor: text;
-    border-bottom: 2px solid #ffa500;
-}
-
 .button {
     height: 3.5rem;
     width: 12rem;

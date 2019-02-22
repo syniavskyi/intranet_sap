@@ -41,10 +41,10 @@
     width: 100%;
     justify-content: center;
 }
+/* tile head */
 
-
-/* Align self classes */ 
+/* align-self classes */ 
 .ae { 
     align-self: flex-end;
 }
-/* tile head */
+/* align-self classes */ 
