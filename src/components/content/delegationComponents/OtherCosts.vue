@@ -24,7 +24,7 @@
                         <div class="del-tbody2-item-scost">
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.docDate") }}</div>
                             <div class="del-tbody2-item-txt" @mouseover="setOverflow" @mouseout="outOverflow">
-                                <v-date-picker popover-direction="top" class="delegations-tinput-date" mode="single" @change="getOtherCostRate(index)" v-model="cost.docDate">
+                                <v-date-picker popover-direction="top" class="cd-tdate" mode="single" @change="getOtherCostRate(index)" v-model="cost.docDate">
                                     <input value="otherCosts[index].docDate" />
                                 </v-date-picker>
                             </div>

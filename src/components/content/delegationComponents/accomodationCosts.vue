@@ -50,7 +50,7 @@
                                 <div class="del-tbody2-item-title">{{ $t("table.delegations.company") }}</div>
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
-                                        <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" @input="checkAccomodationFields" v-model="cost.company" />
+                                        <input :disabled="hideAccFields(cost)" :class="[{ 'cd-tinput-dis': hideAccFields(cost) },  'cd-tinput']" @input="checkAccomodationFields" v-model="cost.company" />
                                         <span class="cd-span"/>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="del-tbody2-item-title">{{ $t("table.delegations.docNo") }}</div>
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
-                                        <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" @input="checkAccomodationFields" v-model="cost.docNo" />
+                                        <input :disabled="hideAccFields(cost)" :class="[{ 'cd-tinput-dis': hideAccFields(cost) },  'cd-tinput']" @input="checkAccomodationFields" v-model="cost.docNo" />
                                         <span class="cd-span"/>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="del-tbody2-item-title">{{ $t("table.delegations.amount") }} </div>
                                 <div class="del-tbody2-item-txt">
                                     <div class="del-tbody-item-wrap">
-                                        <input :disabled="hideAccFields(cost)" :class="[{ 'delegations-tinput-disabled': hideAccFields(cost) },  'delegations-tinput']" type="number" min="0" @change="getAccCostRate(index)" v-model="cost.amount" />
+                                        <input :disabled="hideAccFields(cost)" :class="[{ 'cd-tinput-dis': hideAccFields(cost) },  'cd-tinput']" type="number" min="0" @change="getAccCostRate(index)" v-model="cost.amount" />
                                         <span class="cd-span"/>
                                     </div>
                                 </div>

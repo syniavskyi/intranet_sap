@@ -48,83 +48,82 @@
                             </div>
                             <div class="del-inputs-sections">
                                 <div class="delegations-inputs-section">
-                                    <!-- <p class="del-inputs-header">{{ $t("label.targetTime") }}</p> -->
-                                    <div class="del-div-cool">
-                                        <input required class="delegations-input-cool" v-model="newDelegation.destination" @input="checkNewDelegation" />
+                                    <div class="cd-for-del">
+                                        <input required class="cd-input" v-model="newDelegation.destination" @input="checkNewDelegation" />
                                         <span class="cd-span"/>
-                                        <label class="delegations-label-cool">{{ $t("label.to") }} </label>
+                                        <label class="cd-label">{{ $t("label.to") }}</label>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <v-date-picker class="delegations-input-date" @input="setDelegationNo" is-expanded mode="range" v-model="newDelegation.dates">
+                                    <div class="cd-for-del">
+                                        <v-date-picker class="cd-rangem" @input="setDelegationNo" is-expanded mode="range" v-model="newDelegation.dates">
                                             <input value="newDelegation.dates" />
                                         </v-date-picker>
-                                        <label class="del-slabel">{{ $t("label.forTime") }} </label>
+                                        <label class="cd-slabel">{{ $t("label.forTime") }}</label>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <v-date-picker class="delegations-input-date" @input="checkNewDelegation" v-model="newDelegation.createDate">
+                                    <div class="cd-for-del">
+                                        <v-date-picker class="cd-rangem" @input="checkNewDelegation" v-model="newDelegation.createDate">
                                             <input value="newDelegation.createDate" />
                                         </v-date-picker>
-                                        <label class="del-slabel">{{ $t("label.day") }} </label>
+                                        <label class="cd-slabel">{{ $t("label.day") }}</label>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <input required class="delegations-input-cool" v-model="newDelegation.purpose" @input="checkNewDelegation" />
+                                    <div class="cd-for-del">
+                                        <input required class="cd-input" v-model="newDelegation.purpose" @input="checkNewDelegation" />
                                         <span class="cd-span"/>
-                                        <label class="delegations-label-cool">{{ $t("label.target") }} </label>
+                                        <label class="cd-label">{{ $t("label.target") }}</label>
                                     </div>
                                 </div>
                                 <div class="delegations-inputs-section">
-                                    <div class="del-div-cool">
-                                        <select ref="meanOfTransport" class="delegations-select-cool" v-model="selectedMeanOfTransport" @change="showRegistrationInput" required>
+                                    <div class="cd-for-del">
+                                        <select ref="meanOfTransport" class="cd-select" v-model="selectedMeanOfTransport" @change="showRegistrationInput" required>
                                             <option v-for="transport in transportList" :key="transport.Key" :value="transport.Key">{{ transport.Value }}</option>
                                         </select>
-                                        <label class="del-slabel">{{ $t("table.delegations.transport") }} </label>
+                                        <label class="cd-slabel">{{ $t("table.delegations.transport") }}</label>
                                     </div>
-                                    <div class="del-div-cool" v-if="showRegNoInput">
-                                        <input required class="delegations-input-cool" v-model="newDelegation.carRegistrationNo" @input="checkNewDelegation" />
+                                    <div class="cd-for-del" v-if="showRegNoInput">
+                                        <input required class="cd-input" v-model="newDelegation.carRegistrationNo" @input="checkNewDelegation" />
                                         <span class="cd-span"/>
-                                        <label class="delegations-label-cool">{{ $t("label.carRegistrationNo") }} </label>
+                                        <label class="cd-label">{{ $t("label.carRegistrationNo") }}</label>
                                     </div>
-                                    <div class="del-div-cool">
-                                        <select required class="delegations-select-cool" v-model="newDelegation.currency" @change="countAllCosts">
+                                    <div class="cd-for-del">
+                                        <select required class="cd-select" v-model="newDelegation.currency" @change="countAllCosts">
                                             <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                         </select>
-                                        <label class="del-slabel">{{ $t("table.delegations.currency") }} </label>
+                                        <label class="cd-slabel">{{ $t("table.delegations.currency") }} </label>
                                     </div>
                                     <div class="del-div-currs">
                                         <div class="del-div-cool-curr">
                                             <p class="del-inp-curr">{{newDelegation.currency}}</p>
-                                            <input required id="del-inp-curr1" class="delegations-input-cool" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
+                                            <input required id="del-inp-curr1" class="cd-input" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
                                             <span class="cd-span"/>
                                             <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
                                         </div>
                                         <div class="del-div-cool-curr">
                                             <p class="del-inp-curr">{{newDelegation.currency}}</p>
-                                            <input required class="delegations-input-cool" v-model="totalCostsInCurr.totalPayback"/>
+                                            <input required class="cd-input" v-model="totalCostsInCurr.totalPayback"/>
                                             <span class="cd-span"/>
                                             <label class="delegations-label-cool-s">{{ $t("label.totalReturnAmount") }}: </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="delegations-inputs-section-l">
-                                    <div class="del-div-line">
-                                        <label class="delegations-label-line">{{ $t("label.dailyAllowance") }} </label>
-                                        <p class="del-p-line">{{dailyAllowance}} PLN</p>
+                                    <div class="del-row">
+                                        <label class="del-lline">{{ $t("label.dailyAllowance") }} </label>
+                                        <p class="del-pline">{{dailyAllowance}} PLN</p>
                                     </div>
-                                    <div class="del-div-line">
-                                        <label class="delegations-label-line">{{ $t("label.totalAllowance") }}: </label>
-                                        <p class="del-p-line">{{newDelegation.totalAllowance}} {{newDelegation.currency}} </p>
+                                    <div class="del-row">
+                                        <label class="del-lline">{{ $t("label.totalAllowance") }}: </label>
+                                        <p class="del-pline">{{newDelegation.totalAllowance}} {{newDelegation.currency}} </p>
                                     </div>
-                                    <div class="del-div-line">
-                                        <label class="delegations-label-line">{{ $t("label.hoursInDelegation") }} </label>
-                                        <p class="del-p-line">{{ newDelegation.hours }}</p>
+                                    <div class="del-row">
+                                        <label class="del-lline">{{ $t("label.hoursInDelegation") }} </label>
+                                        <p class="del-pline">{{ newDelegation.hours }}</p>
                                     </div>
-                                    <div class="del-div-line">
-                                        <label class="delegations-label-line">{{ $t("label.advanceAmount") }}: </label>
-                                        <p class="del-p-line"> {{ totalCostsInCurr.advance}}  {{newDelegation.currency}}</p>
+                                    <div class="del-row">
+                                        <label class="del-lline">{{ $t("label.advanceAmount") }}: </label>
+                                        <p class="del-pline"> {{ totalCostsInCurr.advance}}  {{newDelegation.currency}}</p>
                                     </div>
-                                    <div class="del-div-line">
-                                        <label class="delegations-label-line">{{ $t("label.totalDelegationAmount") }}: </label>
-                                        <p class="del-p-line">{{ totalCostsInCurr.amount}}  {{newDelegation.currency}}</p>
+                                    <div class="del-row">
+                                        <label class="del-lline">{{ $t("label.totalDelegationAmount") }}: </label>
+                                        <p class="del-pline">{{ totalCostsInCurr.amount}}  {{newDelegation.currency}}</p>
                                     </div>
                                 </div>
                             </div>
