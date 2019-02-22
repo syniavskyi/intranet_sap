@@ -41,7 +41,8 @@
     "confirmGenerate": "Zatwierdź i generuj",
     "logout": "Wyloguj",
     "saveNewDelegNumber": "Zapisz nowy numer",
-    "backToProf": "Powrót do profilu"
+    "backToProf": "Powrót do profilu",
+    "sendFiles": "Wyślij pliki"
   },
   "label": {
     "nationality": "Narodowość",
@@ -185,7 +186,12 @@
     "delegationNoError": "Nieprawidłowy numer",
     "delegationNoLabel": "Uzupełni się po wyborze okresu",
     "carRegistrationNo": "Nr rejestracyjny pojazdu",
-    "filesToUpload": "Pliki ({amount})"
+    "filesToUpload": "Pliki ({amount})",
+    "fileFormatUpl": "Format pliku",
+    "fileNameUpl": "Nazwa pliku",
+    "fileTypeUpl": "Typ dokumentu",
+    "addToSPUpl": "Dodaj do starterpage",
+    "sendEmailUpl": "Wyślij e-mail"
   },
   "header": {
     "login": "Zaloguj się do Intranetu",
@@ -291,7 +297,8 @@
     "weatherError": "Wystąpił błąd podczas pobierania pogody.",
     "responseError": "Zapytanie nie powiodło się, spróbuj ponownie, lub wyloguj się i zaloguj ponownie.",
     "toGenerateCvClickButton": "Aby wygenerować CV wybierz przycisk generuj w nagłówku",
-    "dragToUpade": "Przeciągnij tutaj pliki, które chcesz dodać do systemu."
+    "dragToUpade": "Przeciągnij tutaj pliki, które chcesz dodać do systemu.",
+    "noFilesChosen": "Nie wybrano żadnych plików."
   },
   "select": {
     "language": {
