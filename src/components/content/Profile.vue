@@ -2,7 +2,7 @@
   <div class="plane-profile">
     <div class="profile-nav-and-content">
       <app-menu v-show="displayMenu"></app-menu>
-      <div class="modal-overlay" v-show="displayOverlay"></div>
+      <div class="m-overlay" v-show="displayOverlay"></div>
       <leave-page-dialog v-if="showLeavePageDialog"></leave-page-dialog>
       <div class="profile-content">
         <div class="profile-header">
@@ -217,7 +217,7 @@
         <user-projects-component @set-reset-industries="onResetContractors" :selected-user="selectedUser" :reset-contractors="resetContractors"></user-projects-component>
         <user-skills-component :selected-user="selectedUser"></user-skills-component>
         <select-cv-content v-show="showSelectCv"></select-cv-content>
-        <div v-show="showSelectCv" class="modal-overlay"></div>
+        <div v-show="showSelectCv" class="m-overlay"></div>
         <change-user-password v-show="showPasswordDialog"></change-user-password>
         <submit-photo-err v-if="showPhotoErr"/>
         </div>

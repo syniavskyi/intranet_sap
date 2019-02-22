@@ -265,7 +265,7 @@
         "addProjectforUser": "Projekt für Benutzer {user} hinzufügen",
         "confirmPageLeaving": "Bestätigen Sie das Verlassen der Seite",
         "unsavedData": "Eingegebene Daten werden nicht gespeichert. Möchten Sie diese Seite wirklich verlassen?",
-        "delegationConfirmQuestion": "Möchten Sie die Delegation bestätigen? Stellen Sie sicher, dass die eingegebenen Daten gültig sind",
+        "delegationConfirmQuestion": "Möchten Sie die Delegation bestätigen und die Nummer speichern? Stellen Sie sicher, dass die eingegebenen Daten gültig sind",
         "failedToSaveDelegation": "Delegierung konnte nicht gespeichert werden",
         "userRegistered": "Konto für {fullname} erstellt. Nachricht mit Login und Passwort wurde an {email} gesendet.",
         "userNotregistered": "Kontoerstellung für {fullname} fehlgeschlagen",
