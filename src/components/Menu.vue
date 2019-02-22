@@ -8,9 +8,8 @@
             <button @click="closeMenu" class="close-btn">&#10006;</button>
         </div>
         <div class="nav-user">
-            <div class="picture-loader" v-if="!userPhotoUrl">
-            </div>
-            <img class="nav-user-img" width="130px" :src="userPhotoUrl">
+            <div class="picture-loader" v-if="!userPhotoUrl"/>
+            <img class="nav-user-img" :src="userPhotoUrl">
         </div>
         <nav class="nav">
             <ul class="nav-list">
@@ -97,7 +96,6 @@ export default {
         logout() {
             this.$store.dispatch('logout')
         },
-
         closeMenu() {
             this.$store.commit('SET_MENU_CLICKED', false)
             if (window.matchMedia("(max-width: 40rem)").matches) {
@@ -107,18 +105,4 @@ export default {
         }
     }
 }
-
 </script>
-
-<style>
-.modal-overlay-menu {
-    display: flex;
-    position: absolute;
-    z-index: 100;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.384);
-}
-</style>
