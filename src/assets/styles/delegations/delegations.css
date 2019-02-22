@@ -213,7 +213,6 @@
 }
 
 .delegations-inputs-section {
-    padding-top: 1.5rem;
     width: 17rem;
 }
 
@@ -223,14 +222,12 @@
 }
 
 .del-inputs-header {
-    /* position: absolute; */
     color: #ccc;
     top:.2rem;
     left:auto;
     right: auto;
     border-radius: 2rem;
     transition: all 0.4s ease;
-    /* padding: .2rem .3rem; */
     margin: 0;
 }
 
@@ -259,7 +256,6 @@
     margin-left: 1.6rem;
 }
 
-.del-div-cool,
 .del-div-cool-curr {
     display: flex;
     flex-direction: column;
@@ -268,7 +264,7 @@
     margin-top: 0.5rem;
 }
 
-.del-div-line {
+.del-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
@@ -286,9 +282,6 @@
     margin-top: .9rem;
 }
 
-.del-div-cool {
-    width: 14rem;
-}
 .del-div-cool-curr {
     width: 12.5rem;
 }
@@ -302,7 +295,6 @@
     position: relative;
 }
 
-.delegations-input-cool,
 .delegations-dinput-cool {
     display: flex;
     align-items: center;
@@ -323,10 +315,6 @@
     right: -2rem;
     top: -.7rem;
     font-size: 1.1rem;
-}
-
-.delegations-input-cool {
-    border-bottom: 1px solid #757575;
 }
 
 .delegations-select-cool,
@@ -361,13 +349,6 @@
     border: 1px solid #d3d3d3;
 }
 
-/* active state */
-.delegations-input-cool:focus ~ span:before, .delegations-input-cool:focus ~ span:after,
-.delegations-tinput:focus ~ span:before, .delegations-tinput:focus ~ span:after,
-.delegations-tinput-s:focus ~ span:before, .delegations-tinput-s:focus ~ span:after {
-    width:50%;
-}
-
 .delegations-label-cool,
 .delegations-label-cool-s,
 .delegations-tlabel-cool,
@@ -382,7 +363,7 @@
     font-weight: 400;
 }
 
-.delegations-label-line {
+.del-lline {
     display: flex;
     color: orange;
     font-size: 1rem;
@@ -404,7 +385,7 @@
 .delegations-label-cool-s {
     left:0.3rem;
     top: 0.5rem;
-    font-size: .95rem;
+    font-size: .8rem;
 }
 
 .del-slabel {
@@ -413,19 +394,15 @@
     font-size: 1.2rem;
 }
 
-.del-p-line {
+.del-pline {
     display: flex;
     font-size: 1rem;
     margin: 0;
     padding: 0;
 }
 
-.delegations-input-cool:focus ~ label,
 .delegations-select-cool:focus ~ label,
-.delegations-input-cool:valid ~ label,
 .delegations-dinput-cool ~ label,
-.delegations-input-cool-s:valid ~ label,
-.delegations-input-cool-s:focus ~ label,
 .delegations-input-date ~ label,
 .delegations-dinput-date ~ label,
 .delegations-select-cool:valid ~ label,
@@ -451,13 +428,6 @@
 
 .del-div-cool-dhead > .delegations-dselect-cool ~ label {
     display:none;
-}
-
-.delegations-input-cool:focus,
-.delegations-input-cool-s:focus,
-.delegations-dinput-cool:focus,
-.delegations-tinput-s:focus {
-    outline: none;
 }
 
 /* COOOL INPUTS AND SELECT !!! */
@@ -649,33 +619,6 @@
     background: #ffffff;
     font-size: 1rem;
     height: 1.5rem;
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 4px;
-    background: transparent;
-}
-
-.delegations-tinput:focus,
-.delegations-tinput-time:focus {
-    outline: none;
-}
-
-.delegations-tinput-time {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    width: 5rem;
-    text-align: right;
-    font-size: 1rem;
-    border: 1px solid #d3d3d3;
-    height: 1.55rem;
-    font-family: inherit;
-}
-
-.delegations-tinput-time input {
-    width: 6rem;
-    text-align: center;
-    height: 1.8rem;
     border: 1px solid rgb(207, 207, 207);
     border-radius: 4px;
     background: transparent;
@@ -1015,6 +958,7 @@
 .del-tfoot-travel-s {
     display: flex;
     width: 20%;
+    align-items: center;
     justify-content: center;
     background: #ccc; 
     color: #eeeeee;

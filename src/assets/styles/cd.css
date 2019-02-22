@@ -6,7 +6,8 @@
 .cd-for-input-xl,
 .cd-for-input-xxl,
 .cd-for-select,
-.cd-for-select-xl {
+.cd-for-select-xl,
+.cd-for-del {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -33,13 +34,22 @@
 .cd-for-input-xl,
 .cd-for-select-xl { width: 20.5rem; }
 
-.cd-input {
+.cd-for-del { 
+    width: 14rem;
+    margin: 1rem 0 .5rem 0;
+}
+.cd-for-del:last-of-type {
+    margin-bottom: 1rem;
+}
+
+.cd-input,
+.cd-tinput { /* delegations table input */
     display: flex;
     text-align: center;
     width: 100%;
     min-height: 2rem;
     font-family: 'Roboto';
-    font-size: 1rem;
+    font-size: 1.1rem;
     background :transparent;
     border:0;
     outline: none;
@@ -48,6 +58,36 @@
     position: relative;
     cursor: text;
     flex: 1;
+}
+
+/* delegations table input */
+.cd-tinput { width: 6rem; }
+
+.cd-tinput-dis { /* delegations table input - disabled */
+    font-family: inherit;
+    display: flex;
+    width: 6.7rem;
+    height: 1.5rem;
+    font-size: 1.2rem;
+    color: #ccc;
+    background: transparent;
+    border: 0;
+    text-align: center;
+    pointer-events: none;
+}
+
+.cd-tinput-time { /* delegation table input with type time */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    width: 5rem;
+    text-align: right;
+    font-size: 1rem;
+    border: 1px solid #d3d3d3;
+    height: 1.55rem;
+    font-family: inherit;
+    outline: none;
 }
 
 .cd-perc-span {
@@ -75,11 +115,12 @@
 .cd-select,
 .cd-dselect, /* disabled select */
 .cd-tselect, /* table select */ 
-.cd-wselect /* select with width for availability */ {
+.cd-wselect, /* select with width for availability */
+.cd-tselects,
+.cd-tselectm {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 2.2rem;
     border-radius: 3px;
     flex-shrink: 0;
     border:0;
@@ -97,6 +138,14 @@
     outline-color: #ffa500;
     cursor: pointer;
 }
+
+.cd-select,
+.cd-dselect, /* disabled select */
+.cd-tselect, /* table select */ 
+.cd-wselect { height: 2.2rem; }
+
+.cd-tselects,
+.cd-tselectm { height: 1.8rem; }
 
 .cd-wselect { /* availability select */
     align-self: center;
@@ -143,6 +192,29 @@
     font-size: 1rem;
     border: 1px solid rgb(207, 207, 207);
     outline-color: #ffa500
+}
+
+.cd-tdate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    border: 0;
+}
+.cd-tdate input {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 6rem;
+    font-family: inherit;
+    text-align: center;
+    background: #ffffff;
+    font-size: 1rem;
+    height: 1.5rem;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 4px;
+    background: transparent;
 }
 
 .cd-label,
@@ -193,6 +265,7 @@
 .cd-select:valid ~ label,
 .cd-textarea:focus ~ label,
 .cd-textarea:valid ~ label,
+.cd-tinput ~ label,
 .cd-dselect ~ label,
 .cd-date ~ label {
     top: -.65rem;
@@ -230,10 +303,13 @@
 .cd-span:after { right:50%; }
 
 .cd-input:focus ~ span:before, 
-.cd-input:focus ~ span:after { width: 50%; }
+.cd-input:focus ~ span:after,
+.cd-tinput:focus ~ span:before,
+.cd-tinput:focus ~ span:after { width: 50%; }
 
-/* COOL (CONTET) DIV DATE PICKER INPUT */
+/* COOL (CONTENT) DIV DATE PICKER INPUT */
 .cd-range ~ label,
+.cd-rangem ~ label,
 .cd-rangex ~ label {
     top: -.65rem;
     font-size: .9rem;
@@ -242,6 +318,7 @@
 }
 
 .cd-range,
+.cd-rangem,
 .cd-rangex {
     text-align: center;
     border: 0;
@@ -251,9 +328,12 @@
 
 .cd-range { width: 8rem; }
 
+.cd-rangem { width: 15rem; }
+
 .cd-rangex { width: 15rem; }
 
 .cd-range input,
+.cd-rangem input,
 .cd-rangex input {
     display: flex;
     align-items: center;
@@ -269,9 +349,10 @@
 }
 .cd-range input { width: 14rem; }
 
+.cd-rangem input { width: 14rem; }
+
 .cd-rangex input { width: 15rem; }
 /* COOL (CONTET) DIV DATE PICKER INPUT */
-
 /* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA  - end */
 
 /* COOL RADIOBUTTON */
@@ -329,3 +410,5 @@
 }
 
 .cd-b { margin-bottom: 1.5rem; }
+.cd-mb { margin-bottom: 1rem; }
+.cd-sb { margin-bottom: .5rem; }

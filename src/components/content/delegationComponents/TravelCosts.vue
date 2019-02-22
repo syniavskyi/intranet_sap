@@ -27,7 +27,7 @@
                         <div class="del-tbody2-item-travel-l">
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.docDate") }}</div>
                             <div class="del-tbody2-item-txt" @mouseover="setOverflow" @mouseout="outOverflow">
-                                <v-date-picker class="delegations-tinput-date" mode="single" @change="getTravelRate(index)" v-model="cost.docDate">
+                                <v-date-picker class="cd-tdate" mode="single" @change="getTravelRate(index)" v-model="cost.docDate">
                                     <input value="otherCosts[index].docDate" />
                                 </v-date-picker>
                             </div>
@@ -37,7 +37,7 @@
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.company") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input class="delegations-tinput" @input="checkTravelFields" v-model="cost.company" />
+                                    <input class="cd-tinput" @input="checkTravelFields" v-model="cost.company" />
                                     <span class="cd-span"/>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.docNo") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input class="delegations-tinput" @input="checkTravelFields" v-model="cost.docNo" />
+                                    <input class="cd-tinput" @input="checkTravelFields" v-model="cost.docNo" />
                                     <span class="cd-span"/>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                         <div class="del-tbody2-item-travel-xl">
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.transport") }}</div>
                             <div class="del-tbody2-item-txt">
-                                <select class="delegations-tselect" :id="index" v-model="cost.transport" @change="setFieldsValues(cost)">
+                                <select class="cd-tselectm" :id="index" v-model="cost.transport" @change="setFieldsValues(cost)">
                                     <option v-for="transport in transportList" :key="transport.Key" :value="transport.Key">{{ transport.Value }}</option>
                                 </select>
                                 <div class="del-div-tcool">
@@ -102,7 +102,7 @@
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.kilometers") }}?</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input :disabled="disableKilometers(cost)" :class="[{ 'delegations-tinput-s-disabled': disableKilometers(cost) },  'delegations-tinput-s']" type="number" @change="updateTravelCosts" v-model="cost.kilometers" />
+                                    <input :disabled="disableKilometers(cost)" :class="[{ 'cd-tinput-dis': disableKilometers(cost) },  'cd-tinput']" type="number" @change="updateTravelCosts" v-model="cost.kilometers" />
                                     <span class="cd-span"/>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.amount") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input :disabled="disableCostAmount(cost)" :class="[{ 'delegations-tinput-s-disabled': disableCostAmount(cost) },  'delegations-tinput-s']" type="number" min="0" @input="updateTravelCosts" v-model="cost.amount" />
+                                    <input :disabled="disableCostAmount(cost)" :class="[{ 'cd-tinput-dis': disableCostAmount(cost) },  'cd-tinput']" type="number" min="0" @input="updateTravelCosts" v-model="cost.amount" />
                                     <span class="cd-span"/>
                                 </div>
                             </div>
