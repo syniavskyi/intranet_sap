@@ -244,7 +244,8 @@
         "info": "Information",
         "warning": "Warnung",
         "photoErr": "Error while uploading photo",
-        "addNewFile": "Add new document"
+        "addNewFile": "Add new document",
+        "prevDocuments": "Preview documents"
     },
     "message": {
         "loginError": "Passwort oder Benutzername sind ungültig.",

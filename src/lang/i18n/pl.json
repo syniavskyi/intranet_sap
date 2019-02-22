@@ -244,7 +244,8 @@
     "warning": "Ostrzeżenie",
     "sessionEnd": "Sesja wygasła",
     "photoErr": "Błąd podczas przesyłania zdjęcia",
-    "addNewFile": "Dodaj nowy dokument"
+    "addNewFile": "Dodaj nowy dokument",
+    "prevDocuments": "Przeglądaj dokumenty"
   },
   "message": {
     "loginError": "Wprowadzona nazwa użytkownika lub hasło są nieprawidłowe",
