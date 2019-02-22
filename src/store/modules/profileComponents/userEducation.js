@@ -129,7 +129,7 @@ const actions = {
         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
       }
     })
-  }
+  },
 }
 
 const getters = {

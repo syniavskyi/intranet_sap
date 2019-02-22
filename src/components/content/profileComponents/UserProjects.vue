@@ -210,7 +210,6 @@ export default {
         }
       }
       this.projectEditMode && !this.allowToSort ? filterPro : filterPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
-      this.$store.commit('SET_SORTED_CV_PRO', filterPro)
       return filterPro;
     }
   },

@@ -220,6 +220,7 @@ export default {
   created() {
     let oStore = this.$store;
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
+    this.this.sortForCV();
   },
   methods: {
     ...mapActions([
@@ -396,11 +397,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      // userEducation: "getUserEducation",
       userEducation: "getSortedUserEducation",
-      // userProjects: "getUserProjectsList",
       userProjects: "getSortedUserProjectsList",
-      // userExperience: "getUserExperience",
       userExperience: "getSortedUserExperience",
       userData: "userData",
       cvElements: "getCvElements",

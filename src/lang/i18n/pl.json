@@ -265,7 +265,7 @@
     "addProjectforUser": "Dodaj projekt dla użytkownika {user}",
     "confirmPageLeaving": "Potwierdź opuszczenie strony",
     "unsavedData": "Wprowadzone dane nie zostaną zapisane. Czy na pewno chcesz opuścić stronę?",
-    "delegationConfirmQuestion": "Czy chcesz zatwierdzić delegację? Upewnij się, że wprowadzone dane są prawidłowe.",
+    "delegationConfirmQuestion": "Czy chcesz zatwierdzić delegację i zapisać numer? Upewnij się, że wprowadzone dane są prawidłowe.",
     "failedToSaveDelegation": "Niepowodzenie podczas zapisu numeru delegacji",
     "userRegistered": "Utworzono konto dla {fullname}. Wiadomość z loginem oraz hasłem została wysłana na adres: {email}.",
     "userNotregistered": "Konto dla {fullname} nie zostało utworzone",

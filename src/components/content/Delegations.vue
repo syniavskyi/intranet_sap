@@ -136,10 +136,10 @@
                 <travel-costs-table></travel-costs-table>
                 <accomodation-costs-table></accomodation-costs-table>
                 <other-costs-table></other-costs-table>
-                <div class="delegation-signature" v-if="showSignature">
+                <div class="delegation-signature">
                    <div class="deleg-sig">
-                    <p>.............................................................................................................................</p>
-                    <p> miejsce na podpis</p>
+                        <p>.............................................................................................................................</p>
+                        <p> miejsce na podpis</p>
                    </div>
                 </div>
             </div>
@@ -174,8 +174,7 @@ export default {
             delegationUsername: localStorage.getItem('id'),
             generatingPdfMode: false,
             disableDelegationNumber: true,
-            showDelegationNoError: false,
-            showSignature: true
+            showDelegationNoError: false
         }
     },
     components: {
@@ -217,7 +216,7 @@ export default {
             authType: 'getDelegationAuth',
             showSuccessDialog: 'getSuccessDelegationDialog',
             transportList: 'getTransportList',
-            showRegNoInput: 'getShowRegistrationNoInput' 
+            showRegNoInput: 'getShowRegistrationNoInput'
         }),
         oldDelegationNumber: {
             set (number) { this.$store.commit('SET_OLD_DELEG_NO', number) },
@@ -289,7 +288,6 @@ export default {
         generatePdf() {
             this.generatingPdfMode = true
             // this.loopClasses()
-            // this.showSignature = true
             const source = document.body.getElementsByClassName('delegations-content')[0]
 
             html2canvas(source).then(canvas => {
@@ -318,7 +316,6 @@ export default {
                     pdf.save(fileName + '.pdf');
                     this.$store.commit('SET_SHOW_CONFIRM_DELEG', true)
             })
-                    // this.showSignature = false
         },
 
         loopClasses() {

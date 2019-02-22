@@ -146,7 +146,6 @@ export default {
         }
       }
       this.editMode  && !this.allowToSort ? filterEdu : filterEdu.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
-      this.$store.commit('SET_SORTED_CV_EDU', filterEdu)
       return filterEdu;
     }
   },

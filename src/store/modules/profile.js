@@ -172,7 +172,32 @@ const actions = {
         dispatch('displayModal', message);
       }).catch(error => {
     })
-  }
+  },
+  sortForCV({getters, commit}) {
+    let componentsToSort = [{getter: 'getUserEducation', setter: 'SET_SORTED_CV_EDU'},
+                            {getter: 'getUserExperience', setter: 'SET_SORTED_CV_EXP'},
+                            {getter: 'getUserProjectsList', setter: 'SET_SORTED_CV_PRO'}] ,
+    sortedComp,
+    month,
+    year;
+    for(let component of componentsToSort) {
+      sortedComp = utils.createClone(getters[component.getter])
+      for(let comp of sortedComp) {
+        if(comp.IsCurrent) {
+          comp.DateEnd = new Date()
+        }
+        for(let key in comp) {
+          if (key.toLowerCase().includes("date")) {
+            month = comp[key].getMonth()
+            year = comp[key].getFullYear()
+            comp[key] = new Date(year, month, '01')
+          }
+        }
+      }
+      sortedComp.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1))
+      commit(component.setter, sortedComp)
+    }
+    }
 };
 
 const getters = {

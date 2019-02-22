@@ -266,7 +266,7 @@
     "addProjectforUser": "Add project for user {user}",
     "confirmPageLeaving": "Confirm page leaving",
     "unsavedData": "Entered data will not be saved. Are you sure you want to leave this page?",
-    "delegationConfirmQuestion": "Do you want to confirm delegation? Make sure that entered data are valid",
+    "delegationConfirmQuestion": "Do you want to confirm delegation and save te number? Make sure that entered data are valid",
     "failedToSaveDelegation": "Failed to save delegation",
     "userRegistered": "Account created for {fullname}. Message with login and password was sent to {email}.",
     "userNotregistered": "Account creation failed for {fullname}",
