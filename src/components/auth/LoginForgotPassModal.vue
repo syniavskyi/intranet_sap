@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-overlay"></div>
+        <div class="m-overlay"></div>
         <div class="modal-s">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.forgotPass") }}</h1>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-overlay"></div>
+        <div class="m-overlay"></div>
         <div class="loader">
             <div></div>
             <div></div>

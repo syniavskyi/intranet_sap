@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-overlay"/>
+        <div class="m-overlay"/>
         <div class="modal-s modal-leave-page">
             <h1 class="leave-page-header">{{ $t("message.confirmPageLeaving") }}</h1>
             <p class="leave-page-info">{{ $t("message.unsavedData") }}</p>
@@ -14,11 +14,11 @@
 <script>
 import {mapActions} from 'vuex'
 export default {
-    methods: Object.assign(
-    mapActions([
-      "resolvePageLeave",
-      "rejectPageLeave",
-    ]), {}
-  )
+    methods: {
+        ...mapActions([
+        "resolvePageLeave",
+        "rejectPageLeave"
+        ])
+    }
 }
 </script>

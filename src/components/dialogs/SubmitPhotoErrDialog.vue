@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="modal-overlay"/>
+        <div class="m-overlay"/>
         <div class="modal-xs">
             <div class="m-header">
                 <h1 class="m-title">{{ $t("header.photoErr") }}</h1>
@@ -26,7 +26,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

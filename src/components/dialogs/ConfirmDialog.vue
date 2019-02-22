@@ -1,6 +1,6 @@
 <template>
     <div @click="closeConfirmDialog">
-        <div class="modal-overlay"/>
+        <div class="m-overlay"/>
         <div class="modal-xs" @click.stop>
             <header class="m-header">
                 <h1 class="m-title">

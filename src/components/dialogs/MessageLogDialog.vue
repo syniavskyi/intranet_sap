@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="modal-overlay"></div>
+    <div class="m-overlay"></div>
     <transition name="modal-fade" mode="in-out">
         <div class="modal-stretch" role="dialog" v-if="showModal">
           <header class="modal-header" :class="headerClass">
