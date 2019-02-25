@@ -83,7 +83,6 @@
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.paymentType") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <select :id="index" :disabled="disableReturnType(cost)" :class="[{ 'cd-tselects-dis': disableReturnType(cost) },  'cd-tselects']" v-model="cost.flatRate" @change="valuesForReturnType(cost)">
-                                    <!-- delegations-tselect-m-disabled delegations-tselect-m -->
                                     <option disabled selected value></option>
                                     <option key="true" :value="true">{{ $t("table.delegations.flatRate") }}</option>
                                     <option key="false" :value="false">{{ $t("table.delegations.noFlatRate") }}</option>
@@ -113,7 +112,6 @@
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.currency") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <select :disabled="disableCostAmount(cost)" :class="[{ 'cd-tselectxs-dis': disableCostAmount(cost) },  'cd-tselectxs']" v-model="travelCosts[index].currency" @change="getTravelRate(index)">
-                                    <!-- delegations-tselect-s-disabled delegations-tselect-s -->
                                     <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                 </select>
                             </div>

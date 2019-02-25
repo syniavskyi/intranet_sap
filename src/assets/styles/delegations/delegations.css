@@ -295,21 +295,6 @@
     position: relative;
 }
 
-.delegations-dinput-cool {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 2rem;
-    font-family: 'Roboto';
-    font-size: 1rem;
-    background :transparent;
-    border:0;
-    width: 100%;
-    text-indent: 0.5rem;
-    position: relative;
-}
-
 .del-inp-curr {
     position: absolute;
     right: -2rem;
@@ -317,36 +302,9 @@
     font-size: 1.1rem;
 }
 
-.delegations-select-cool,
-.delegations-dselect-cool {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 2rem;
-    border-radius: 3px;
-    flex-shrink: 0;
-    border:0;
-    font-family: 'Roboto';
-    appearance: none;
-    -webkit-appearance: none; 
-    -moz-appearance: none;
-    font-size: 1rem;
-    background: #ffffff;
-}
-.delegations-select-cool,
-.delegations-tselect,
 .delegations-tinput-date input:focus,
-.delegations-tselect-s,
 .delegations-input-date input {
     outline-color: #ffa500;
-}
-
-.delegations-select-cool {
-    text-indent: .5rem;
-    background-image: url("../../images/expand2.png");
-    background-repeat: no-repeat;
-    background-position: 100% 50%;
-    border: 1px solid #d3d3d3;
 }
 
 .delegations-label-cool,
@@ -401,12 +359,8 @@
     padding: 0;
 }
 
-.delegations-select-cool:focus ~ label,
-.delegations-dinput-cool ~ label,
 .delegations-input-date ~ label,
-.delegations-dinput-date ~ label,
-.delegations-select-cool:valid ~ label,
-.delegations-dselect-cool ~ label {
+.delegations-dinput-date ~ label {
     top: -.65rem;
     font-size: .9rem;
     color: rgb(255, 145, 0);
@@ -424,10 +378,6 @@
     font-size: .9rem;
     color: rgb(255, 145, 0);
     padding: 0 .2rem;
-}
-
-.del-div-cool-dhead > .delegations-dselect-cool ~ label {
-    display:none;
 }
 
 /* COOOL INPUTS AND SELECT !!! */
@@ -452,22 +402,6 @@
     border-color: orange;
 }
 
-.delegations-select {
-    text-indent: 5%;
-    background: transparent;
-    height: 2rem;
-    border: 1px solid #d3d3d3;
-    color: #000000;
-    border-radius: 3px;
-    appearance: none;
-    -webkit-appearance: none; 
-    -moz-appearance: none;
-    background-image: url("../../images/expand2.png");
-    background-repeat: no-repeat;
-    background-position: right;
-    width: 14rem;
-}
-
 .delegations-input-date,
 .delegations-dinput-date {
     width: 14rem;
@@ -482,7 +416,6 @@
     outline: 1px solid orange;
     border-radius: 5px;
 }
-
 
 .delegations-input-date input,
 .delegations-dinput-date input {
@@ -500,129 +433,9 @@
 
 .delegations-input-date input { border: 1px solid rgb(207, 207, 207); }
 
-.delegations-tselect,
-.delegations-tselect-s,
-.delegations-tselect-m {
-    display: flex;
-    align-items:center;
-    text-indent: .2rem;
-    font-family: inherit;
-    font-size: 1rem;
-    background: #ffffff;
-    height: 1.8rem;
-    border: 1px solid #d3d3d3;
-    color: black;
-    border-radius: 3px;
-    appearance: none;
-    -webkit-appearance: none; 
-    -moz-appearance: none;
-    background-image: url("../../images/expand2.png");
-    background-repeat: no-repeat;
-    background-position: right;
-}
-.delegations-tselect-disabled,
-.delegations-tselect-s-disabled,
-.delegations-tselect-m-disabled {
-    display: flex;
-    align-items:center;
-    font-family: inherit;
-    font-size: 1rem;
-    background: #ffffff;
-    height: 1.8rem;
-
-    color: #ccc;
-    border-radius: 3px;
-    appearance: none;
-    -webkit-appearance: none; 
-    -moz-appearance: none;
-    border: 1px solid rgba(211, 211, 211, 0.5);
-    background-image: url("../../images/expand2-dis.png");
-    background-repeat: no-repeat;
-    background-position: right;
-}
-.delegations-tselect,
-.delegations-tselect-disabled {
-    width: 10rem;
-}
-
-.delegations-tselect-m,
-.delegations-tselect-m-disabled {
-    width:7.8rem;
-}
-
-.delegations-tselect-s,
-.delegations-tselect-s-disabled {
-    width: 3.8rem;
-}
-
-.delegations-tinput,
-.delegations-tinput-w,
-.delegations-tinput-s {
-    font-family: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 6.7rem;
-    height: 1.5rem;
-    font-size: 1.2rem;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid #808080;
-    text-align: center;
-    position: relative;
-}
 .del-tinput-sfont {
     font-size: 0.95rem;
     text-transform: uppercase;
-}
-.delegations-tinput-disabled,
-.delegations-tinput-w-disabled,
-.delegations-tinput-s-disabled {
-    font-family: inherit;
-    display: flex;
-    width: 6.7rem;
-    height: 1.5rem;
-    font-size: 1.2rem;
-    color: #ccc;
-    background: transparent;
-    border: 0;
-    text-align: center;
-    pointer-events: none;
-}
-.delegations-tinput,
-.delegations-tinput-disabled {
-    width: 6rem;
-}
-.delegations-tinput-w,
-.delegations-tinput-w-disabled {
-    width: 10rem;
-}
-.delegations-tinput-s,
-.delegations-tinput-s-disabled {
-    width: 6rem;
-}
-
-.delegations-tinput-date {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-    border: 0;
-}
-.delegations-tinput-date input {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    width: 6rem;
-    font-family: inherit;
-    text-align: center;
-    background: #ffffff;
-    font-size: 1rem;
-    height: 1.5rem;
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 4px;
-    background: transparent;
 }
 
 .delegations-table-1 {
