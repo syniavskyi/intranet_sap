@@ -102,15 +102,15 @@ export default {
   },
   validations: {
       cvElements: {
-        language: {
-          required
-        },
-        format: {
-          required
-        },
-        position: {
-          required
-        }
+          language: {
+            required
+          },
+          format: {
+            required
+          },
+          position: {
+            required
+          }
       }
   },
   methods: {

@@ -25,7 +25,7 @@ const state = {
     }
   ],
   showChangePasswordDialog: false,
-  disabledBtnToEdit: false,
+  disabledBtnToEdit: false, // permission to editing profile
   dataToRead: ["NewToken", "Domains", "FieldOfStudy", "SchoolDesc", "Industries", "UserData", "UserList", "Contractors", "Projects", "Languages", "ContractorsBranchesSet"],
   workTime: {
     "Full": i18n.t("label.fulltime"),
@@ -40,10 +40,10 @@ const state = {
     "4/5": "4/5",
     "B2B": "B2B"
   },
-  hasDataChangeProf: {
+  hasDataChangeProf: { // check if data was changes in profile componentss
     changed: false,
     editMode: false
-  } // check if data was changes in profile componentss
+  }
 };
 
 const mutations = {
@@ -131,7 +131,7 @@ const actions = {
       commit('SET_DISPLAY_LOADER', false)
       let message = res.headers;
       dispatch('displayModal', message);
-      dispatch('loadUserPhoto', data.userId); 
+      dispatch('loadUserPhoto', data.userId);
     }).catch(function(error) {
       commit('SET_DISPLAY_LOADER', false)
       if (error.status === 413) {
@@ -173,6 +173,7 @@ const actions = {
       }).catch(error => {
     })
   },
+  // sort data for cv
   sortForCV({getters, commit}) {
     let componentsToSort = [{getter: 'getUserEducation', setter: 'SET_SORTED_CV_EDU'},
                             {getter: 'getUserExperience', setter: 'SET_SORTED_CV_EXP'},
@@ -190,7 +191,7 @@ const actions = {
           if (key.toLowerCase().includes("date")) {
             month = comp[key].getMonth()
             year = comp[key].getFullYear()
-            comp[key] = new Date(year, month, '01')
+            comp[key] = new Date(year, month, '01') //hidden days in cv
           }
         }
       }

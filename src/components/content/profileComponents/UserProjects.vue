@@ -40,7 +40,7 @@
             <div class="prof-thead-item">---</div>
           </div>
           <div class="prof-tbody">
-            <div class="prof-tbody-row" v-for="(project, index) in filterProject" :key="index">
+            <div class="prof-tbody-row" v-for="(project, index) in sortedProjects" :key="index">
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("label.eg") }}</div>
                 <div class="prof-tbody-item-txt">
@@ -201,16 +201,16 @@ export default {
       editedProjectIdx: "getEditedProjectIdx",
       editedProjectContractor: "getEditedProjectContractor"
     }),
-    filterProject() {
-      let filterPro;
-      filterPro = this.userProjects;
-      for(let pro of filterPro) {
+    sortedProjects() {
+      let sortedPro;
+      sortedPro = this.userProjects;
+      for(let pro of sortedPro) {
         if(pro.IsCurrent) {
           pro.DateEnd = new Date()
         }
       }
-      this.projectEditMode && !this.allowToSort ? filterPro : filterPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
-      return filterPro;
+      this.projectEditMode && !this.allowToSort ? sortedPro : sortedPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      return sortedPro;
     }
   },
   methods: {

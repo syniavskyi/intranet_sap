@@ -226,7 +226,7 @@ export default {
           document.getElementsByClassName("prof-skills-save")[index].disabled = true;
         }
     },
-    // check fields for skills
+    // check if skills has been changed
     checkFieldsSkills(event) {
       if (
         this.bSapModules ||
