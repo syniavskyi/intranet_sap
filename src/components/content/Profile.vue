@@ -296,8 +296,8 @@ export default {
       this.$store.commit("SET_SELECTED_FOR_CV_USER", localStorage.getItem("id"));
     }
     dataChangedProf = this.hasDataChanged || this.$store.getters.getDataChangedProf.changed; // check if data was changed in profile components
-    editModeProf = this.editMode || this.$store.getters.getDataChangedProf.editMode;
-    if (editModeProf && dataChangedProf) {
+    editModeProf = this.editMode || this.$store.getters.getDataChangedProf.editMode; //check if edit mode is on in profile components
+    if (editModeProf && dataChangedProf) { //show dialog
       this.$store.commit('SET_NEXT_PATH', to.path)
       this.$store.commit('SET_LEAVE_PAGE_DIALOG', true)
       if (this.leavePageFlag !== false) {
@@ -457,7 +457,7 @@ export default {
     showChangePassword() {
       this.$store.commit("SET_SHOW_CHANGE_PASSWORD_DIALOG", true);
     },
-    onCancelEdit() {
+    onCancelEdit() { //back to original data
       Object.assign(this.userData, this._beforeEditingCache);
       this._beforeEditingCache = null;
       this.showNoChangesAlert = false;
@@ -521,7 +521,7 @@ export default {
       }
       this.$store.commit("SET_DATA_CHANGE_PROF", {changed: this.hasDataChanged, editMode: this.editMode});
     },
-    // get data for selected language
+    // get data for selected language or user
     getNewData() {
       this.editMode = false;
       this.resetContractors = true;

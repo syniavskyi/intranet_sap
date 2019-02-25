@@ -14,7 +14,7 @@
     <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
       <div class="prof-tile-column">
-        <div class="prof-div-row" v-for="(education, index) in filterEducation" :key='index'>
+        <div class="prof-div-row" v-for="(education, index) in sotredEducation" :key='index'>
           <div class="prof-row-dates">
             <div :class="editMode ? 'prof-row-dates-left' : 'prof-row-dates-left-s'">
               <p class="prof-date-label" v-if="!editMode"> {{ formatDate(education.DateStart) }} </p>
@@ -137,16 +137,16 @@ export default {
       fieldOfStudyDescList: "getFieldOfStudyDescList",
       disabledBtnToEdit: "getDisabledBtnToEdit"
     }),
-    filterEducation() {
-      let filterEdu = [];
-      filterEdu = this.userEducation;
-      for(let edu of filterEdu) {
+    sortedEducation() {
+      let sortedEdu = [];
+      sortedEdu = this.userEducation;
+      for(let edu of sortedEdu) {
         if(edu.IsCurrent) {
           edu.DateEnd = new Date()
         }
       }
-      this.editMode  && !this.allowToSort ? filterEdu : filterEdu.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
-      return filterEdu;
+      this.editMode  && !this.allowToSort ? sortedEdu : sortedEdu.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      return sortedEdu;
     }
   },
   methods: {
@@ -278,13 +278,7 @@ export default {
         this.invalidDates = formatStartDate > formatEndDate ? true : false;
       }
       this.checkFields(index);
-    },
-    // orderByDate(items){
-    //   let olnySort = false;
-    //   return items.filter(item => {
-    //   if (item['DateStart'] && olnySort) return item;
-    //   });
-    // }
+    }
   }
 };
 </script>

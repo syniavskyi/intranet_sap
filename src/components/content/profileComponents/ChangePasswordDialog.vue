@@ -52,9 +52,9 @@ export default {
       confirmEyeType: "eye",
       newPassword: "",
       newPasswordRepeat: "",
-      bDisabled: {
+      bDisabled: { //check id data is valid
           bln: true,
-          msg: ''
+          msg: '' //error message
       }
     };
   },
@@ -75,7 +75,7 @@ export default {
         setTimeout(() => {this.$store.commit("SET_SHOW_CHANGE_PASSWORD_DIALOG", false)
                           el.classList.remove("animate-modal-close")  }, 550);
     },
-    switchPasswordVisibility(type){
+    switchPasswordVisibility(type){ //show or hide password
         switch(type) {
             case "old":
                 this.oldPasswordType = this.oldPasswordType === "password" ? "text" : "password";
@@ -92,7 +92,7 @@ export default {
         }
     },
     onSubmit() {
-      if(this.newPassword !== this.newPasswordRepeat){
+      if(this.newPassword !== this.newPasswordRepeat){ //chech if passwords are equal
         this.bDisabled = {bln: true, msg: i18n.t("message.notEqualPasswords")}
       } else {
         this.bDisabled = {bln: false, msg: ''};
@@ -102,8 +102,8 @@ export default {
         this.$store.dispatch("submitPassword", userData);
       }
     },
-    checkChars(string){
-        string.includes('&') || string.includes('%') || string.includes('#')? this.bDisabled = {bln: true, msg: i18n.t("message.unacceptableChar")} : this.bDisabled = {bln: false, msg: ''};
+    checkChars(string){ //check if new password includes forbidden characters
+        string.includes('&') || string.includes('%') || string.includes('#') ? this.bDisabled = {bln: true, msg: i18n.t("message.unacceptableChar")} : this.bDisabled = {bln: false, msg: ''};
     }
   }
 };

@@ -13,7 +13,7 @@
     </div>
     <div class="profile-tile-content">
       <div class="prof-tile-column">
-        <div id="prof-user-exp" class="prof-div-row" v-for="(experience, index) in filterExperience" :key='index'>
+        <div id="prof-user-exp" class="prof-div-row" v-for="(experience, index) in sortedExperience" :key='index'>
           <div class="prof-row-dates">
             <div :class="editMode ? 'prof-row-dates-left' : 'prof-row-dates-left-s'">
               <p class="prof-date-label" v-if="!editMode"> {{ formatDate(experience.DateStart) }} </p>
@@ -106,16 +106,16 @@ export default {
       positionsLevels: "getPositionsLevel",
       onlyWorkPositions: "getOnlyWorkPositions"
     }),
-    filterExperience() {
-      let filterExp;
-      filterExp = this.userExperience;
-      for(let exp of filterExp) {
+    sortedExperience() {
+      let sortedExp;
+      sortedExp = this.userExperience;
+      for(let exp of sortedExp) {
         if(exp.IsCurrent) {
           exp.DateEnd = new Date()
         }
       }
-      this.editMode  && !this.allowToSort ? filterExp : filterExp.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
-      return filterExp;
+      this.editMode  && !this.allowToSort ? sortedExp : sortedExp.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      return sortedExp;
     }
   },
   methods: {
