@@ -41,7 +41,6 @@
                                 <div class="del-tbody2-item-title">{{ $t("table.delegations.docDate") }}</div>
                                 <div class="del-tbody2-item-txt" @mouseover="setOverflow" @mouseout="outOverflow">
                                     <v-date-picker popover-direction="top" :class="[{ 'cd-tdate-dis': hideAccFields(cost) },  'cd-tdate']"  mode="single" @input="getAccCostRate(index)" v-model="cost.docDate">
-                                        <!-- delegations-tinput-date-disabled delegations-tinput-date -->
                                         <input :disabled="hideAccFields(cost)" value="accomodationCosts[index].docDate" />
                                     </v-date-picker>
                                 </div>
@@ -81,7 +80,6 @@
                                 <div class="del-tbody2-item-title">{{ $t("table.delegations.currency") }}</div>
                                 <div class="del-tbody2-item-txt">
                                     <select :disabled="hideAccFields(cost)" :class="[{ 'cd-tselectxs-dis': hideAccFields(cost) },  'cd-tselectxs']" v-model="accomodationCosts[index].currency" @change="getAccCostRate(index)">
-                                        <!-- delegations-tselect-s-disabled delegations-tselect-s-->
                                         <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                     </select>
                                 </div>

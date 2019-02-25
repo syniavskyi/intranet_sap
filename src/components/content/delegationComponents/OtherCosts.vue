@@ -64,7 +64,6 @@
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.currency") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <select class="cd-tselectxs" v-model="otherCosts[index].currency" @change="getOtherCostRate(index)">
-                                    <!-- delegations-tselect-s -->
                                     <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                 </select>
                             </div>
