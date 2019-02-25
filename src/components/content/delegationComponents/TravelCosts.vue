@@ -71,9 +71,9 @@
                                     <option v-for="transport in transportList" :key="transport.Key" :value="transport.Key">{{ transport.Value }}</option>
                                 </select>
                                 <div class="del-div-tcool">
-                                    <input required :disabled="hideLicencePlateNo(cost)" :class="[{ 'delegations-tinput-disabled': hideLicencePlateNo(cost) },  'delegations-tinput', 'del-tinput-sfont']" @change="checkTravelFields" v-model="cost.licencePlateNo" />
+                                    <input required :disabled="hideLicencePlateNo(cost)" :class="[{ 'cd-tinput-dis': hideLicencePlateNo(cost) },  'cd-tinput', 'del-tinput-sfont']" @change="checkTravelFields" v-model="cost.licencePlateNo" />
                                     <span class="cd-span"/>
-                                    <label class="delegations-tlabel-cool" v-if="!cost.licencePlateNo">{{ $t("label.registrationNo") }}</label>
+                                    <label class="cd-tslabel" v-if="!cost.licencePlateNo">{{ $t("label.registrationNo") }}</label>
                                 </div>
                             </div>
                             <div class="del-tfoot2-travel">&nbsp;</div>
@@ -82,14 +82,15 @@
                         <div class="del-tbody2-item-travel-m">
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.paymentType") }}</div>
                             <div class="del-tbody2-item-txt">
-                                <select :id="index" :disabled="disableReturnType(cost)" :class="[{ 'delegations-tselect-m-disabled': disableReturnType(cost) },  'delegations-tselect-m']" v-model="cost.flatRate" @change="valuesForReturnType(cost)">
+                                <select :id="index" :disabled="disableReturnType(cost)" :class="[{ 'cd-tselects-dis': disableReturnType(cost) },  'cd-tselects']" v-model="cost.flatRate" @change="valuesForReturnType(cost)">
+                                    <!-- delegations-tselect-m-disabled delegations-tselect-m -->
                                     <option disabled selected value></option>
                                     <option key="true" :value="true">{{ $t("table.delegations.flatRate") }}</option>
                                     <option key="false" :value="false">{{ $t("table.delegations.noFlatRate") }}</option>
                                 </select>
                             <!-- </div>
                             <div class="del-tbody2-item-txt"> -->
-                                <select :disabled="disableEngineCapacity(cost)" :class="[{ 'delegations-tselect-m-disabled': disableEngineCapacity(cost) },  'delegations-tselect-m']" v-model="cost.engineCapacity" @change="updateTravelCosts">
+                                <select :disabled="disableEngineCapacity(cost)" :class="[{ 'cd-tselects-dis': disableEngineCapacity(cost) },  'cd-tselects']" v-model="cost.engineCapacity" @change="updateTravelCosts">
                                     <option disabled selected value></option>
                                     <!-- true is for more than 900 cm, false for less -->
                                     <option key="false" :value="false">{{ $t("label.capacityLess") }}<sup>3</sup></option>
@@ -111,7 +112,8 @@
                         <div class="del-tbody2-item-travel-s">
                             <div class="del-tbody2-travel-item-title">{{ $t("table.delegations.currency") }}</div>
                             <div class="del-tbody2-item-txt">
-                                <select :disabled="disableCostAmount(cost)" :class="[{ 'delegations-tselect-s-disabled': disableCostAmount(cost) },  'delegations-tselect-s']" v-model="travelCosts[index].currency" @change="getTravelRate(index)">
+                                <select :disabled="disableCostAmount(cost)" :class="[{ 'cd-tselectxs-dis': disableCostAmount(cost) },  'cd-tselectxs']" v-model="travelCosts[index].currency" @change="getTravelRate(index)">
+                                    <!-- delegations-tselect-s-disabled delegations-tselect-s -->
                                     <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                 </select>
                             </div>

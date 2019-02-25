@@ -34,7 +34,7 @@
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.company") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input class="delegations-tinput" @input="checkOtherCostsFields" v-model="cost.company" />
+                                    <input class="cd-tinput" @input="checkOtherCostsFields" v-model="cost.company" />
                                     <span class="cd-span"/>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.docNo") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input class="delegations-tinput" v-model="cost.docNo"/>
+                                    <input class="cd-tinput" v-model="cost.docNo"/>
                                     <span class="cd-span"/>
                                 </div>
                             </div>
@@ -63,7 +63,8 @@
                         <div class="del-tbody2-item-scost">
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.currency") }}</div>
                             <div class="del-tbody2-item-txt">
-                                <select class="delegations-tselect-s" v-model="otherCosts[index].currency" @change="getOtherCostRate(index)">
+                                <select class="cd-tselectxs" v-model="otherCosts[index].currency" @change="getOtherCostRate(index)">
+                                    <!-- delegations-tselect-s -->
                                     <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                 </select>
                             </div>
@@ -74,7 +75,7 @@
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.amount") }}</div>
                             <div class="del-tbody2-item-txt">
                                 <div class="del-tbody-item-wrap">
-                                    <input class="delegations-tinput" type="number" min="0" @change="getOtherCostRate(index)" v-model="cost.amount" />
+                                    <input class="cd-tinput" type="number" min="0" @change="getOtherCostRate(index)" v-model="cost.amount" />
                                     <span class="cd-span"/>
                                 </div>
                             </div>
