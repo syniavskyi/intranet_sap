@@ -529,12 +529,13 @@
     font-size: 1rem;
     background: #ffffff;
     height: 1.8rem;
-    border: 1px solid rgba(211, 211, 211, 0.5);
+
     color: #ccc;
     border-radius: 3px;
     appearance: none;
     -webkit-appearance: none; 
     -moz-appearance: none;
+    border: 1px solid rgba(211, 211, 211, 0.5);
     background-image: url("../../images/expand2-dis.png");
     background-repeat: no-repeat;
     background-position: right;

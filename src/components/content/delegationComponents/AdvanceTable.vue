@@ -21,8 +21,8 @@
                         <div class="del-tbody2-item-adv">
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.advanceDate") }}</div>
                             <div class="del-tbody2-item-txt" @mouseover="setOverflow" @mouseout="outOverflow">
-                                <v-date-picker  class="delegations-tinput-date" mode="single" @input="getAdvanceRate(index)" v-model="advance.date">
-                                    <input  value="otherCosts[index].docDate" />
+                                <v-date-picker class="cd-tdate" mode="single" @input="getAdvanceRate(index)" v-model="advance.date">
+                                    <input value="otherCosts[index].docDate" />
                                 </v-date-picker>
                             </div>
                             <div class="del-tfoot2">&nbsp;</div>
@@ -30,7 +30,7 @@
                         <div class="del-tbody2-item-adv">
                             <div class="del-tbody2-item-title">{{ $t("table.delegations.currency") }}</div>
                             <div class="del-tbody2-item-txt">
-                                <select class="delegations-tselect-s" v-model="advance.currency" @change="getAdvanceRate(index)">
+                                <select class="cd-tselectxs" v-model="advance.currency" @change="getAdvanceRate(index)">
                                     <option v-for="currency in currencyList" :key="currency.id" :value="currency.id">{{ currency.id }}</option>
                                 </select>
                             </div>

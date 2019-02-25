@@ -152,7 +152,8 @@
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.date") }}</div>
                                 <div class="del-tbody-item" @mouseover="setOverflow" @mouseout="outOverflow">
-                                    <v-date-picker class="delegations-tinput-date" @input="checkDelegationTable" mode="single" v-model="customCosts[index].leaveDate">
+                                    <v-date-picker class="cd-tdate" @input="checkDelegationTable" mode="single" v-model="customCosts[index].leaveDate">
+                                        <!-- delegations-tinput-date -->
                                         <input value="customCosts[index].leaveDate">
                                     </v-date-picker>
                                 </div>
@@ -180,7 +181,8 @@
                             <div class="del-tbody-wrap">
                                 <div class="del-tbody-title">{{ $t("table.delegations.date") }}</div>
                                 <div class="del-tbody-item" @mouseover="setOverflow" @mouseout="outOverflow">
-                                    <v-date-picker class="delegations-tinput-date" @input="checkDelegationTable" mode="single" v-model="customCosts[index].arrivalDate">
+                                    <v-date-picker class="cd-tdate" @input="checkDelegationTable" mode="single" v-model="customCosts[index].arrivalDate">
+                                        <!-- delegations-tinput-date -->
                                         <input value="customCosts[index].arrivalDate">
                                     </v-date-picker>
                                 </div>

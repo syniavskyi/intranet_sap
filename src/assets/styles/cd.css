@@ -47,7 +47,7 @@
     display: flex;
     text-align: center;
     width: 100%;
-    min-height: 2rem;
+
     font-family: 'Roboto';
     font-size: 1.1rem;
     background :transparent;
@@ -60,13 +60,17 @@
     flex: 1;
 }
 
+.cd-input { min-height: 2rem; }
+
+.cd-tinput { height: 1.5rem;}
 /* delegations table input */
-.cd-tinput { width: 6rem; }
+.cd-tinput,
+.cd-tinput-dis { width: 6rem; }
 
 .cd-tinput-dis { /* delegations table input - disabled */
     font-family: inherit;
     display: flex;
-    width: 6.7rem;
+    /* width: 6.7rem; */
     height: 1.5rem;
     font-size: 1.2rem;
     color: #ccc;
@@ -117,7 +121,9 @@
 .cd-tselect, /* table select */ 
 .cd-wselect, /* select with width for availability */
 .cd-tselects,
-.cd-tselectm {
+.cd-tselectm,
+.cd-tselects,
+.cd-tselectxs {
     display: flex;
     align-items: center;
     width: 100%;
@@ -130,7 +136,7 @@
     -moz-appearance: none;
     font-size: 1rem;
     background: #ffffff;
-    text-indent: .5rem;
+    text-indent: .25rem;
     background-image: url("../images/expand2.png");
     background-repeat: no-repeat;
     background-position: right;
@@ -139,13 +145,27 @@
     cursor: pointer;
 }
 
+.cd-tselects-dis,
+.cd-tselectxs-dis {
+    border: 1px solid rgba(211, 211, 211, 0.5);
+    background-image: url("../images/expand2-dis.png");
+}
+
 .cd-select,
 .cd-dselect, /* disabled select */
 .cd-tselect, /* table select */ 
 .cd-wselect { height: 2.2rem; }
 
 .cd-tselects,
-.cd-tselectm { height: 1.8rem; }
+.cd-tselectm,
+.cd-tselects,
+.cd-tselectxs { height: 1.8rem; }
+
+.cd-tselects,
+.cd-tselects-dis { width: 7.8rem; }
+
+.cd-tselectxs,
+.cd-tselectxs-dis { width: 3.8rem; }
 
 .cd-wselect { /* availability select */
     align-self: center;
@@ -194,7 +214,8 @@
     outline-color: #ffa500
 }
 
-.cd-tdate {
+.cd-tdate,
+.cd-tdate-dis {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,7 +223,8 @@
     text-align: center;
     border: 0;
 }
-.cd-tdate input {
+.cd-tdate input,
+.cd-tdate-dis input {
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -217,8 +239,14 @@
     background: transparent;
 }
 
+.cd-tdate-dis input {
+    border: 1px solid #eee;
+    color: #eee;
+}
+
 .cd-label,
-.cd-slabel {
+.cd-slabel, /* select label */
+.cd-tslabel { /* table small label*/
     display: flex;
     align-items: flex-end;
     color:#999; 
@@ -244,17 +272,23 @@
     font-size:1.2rem;
 }
 
-.cd-label {
+.cd-label { /* input label*/
     top: 0.5rem;
-    left:0.3rem;
+    left: 0.3rem;
 }
 
-.cd-slabel {
+.cd-tslabel { /* table small label*/
+    top: 0rem;
+    left: 0.3rem;
+    font-size: 1rem;
+}
+
+.cd-slabel { /* select label */
     top: 0.35rem;
     left:0.3rem;
 }
 
-.cd-tlabel {
+.cd-tlabel { 
     top: 0.3rem;
     left: 0.3rem;
 }
@@ -265,13 +299,25 @@
 .cd-select:valid ~ label,
 .cd-textarea:focus ~ label,
 .cd-textarea:valid ~ label,
-.cd-tinput ~ label,
+.cd-tinput:focus ~ label,
+.cd-tinput:valid ~ label,
+.cd-tinput-dis:valid ~ label,
+.cd-tinput-dis:focus ~ label,
 .cd-dselect ~ label,
 .cd-date ~ label {
     top: -.65rem;
-    font-size: 1rem;
+    font-size: .9rem;
     color: rgb(255, 145, 0);
     padding: 0 .2rem;
+}
+
+.cd-tinput-dis ~ label {
+    color: rgb(211, 211, 211);
+}
+
+.cd-tinput:valid ~ label,
+.cd-tinput:focus ~ label {
+    top: -.9rem;
 }
 
 .cd-tselect:valid ~ label,

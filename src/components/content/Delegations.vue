@@ -16,7 +16,7 @@
                 <div class="delegations-tile delegations-inputs">
                     <div class="delegations-tile-header">
                         <div class="delegations-tile-title">
-                            <p  v-if="authType==='OWN'">{{userData.Fullname}}</p>
+                            <p v-if="authType==='OWN'">{{userData.Fullname}}</p>
                             <div class="cd-for-select" v-if="authType==='*'">
                                 <select class="cd-select" v-model="newDelegation.userId" @change="setUsername" required>
                                     <option v-for="user in usersList" :key="user.UserAlias" :value="user.UserAlias">{{ user.Fullname }}</option>
@@ -138,7 +138,7 @@
                 <div class="delegation-signature">
                    <div class="deleg-sig">
                         <p>..................................................................................</p>
-                        <p> miejsce na podpis</p>
+                        <p>miejsce na podpis</p>
                    </div>
                 </div>
             </div>
