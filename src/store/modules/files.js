@@ -109,6 +109,33 @@ const actions = {
     }).catch(error=>{
       console.log(error)
     })
+  },
+  uploadLink({getters}, link){
+    let data = {
+      FileId: link.type,
+      Language: "",
+      Link: link.url,
+      UploadFile: true,
+      Filename: link.fileName,
+      UserAlias: "",
+      SendEmail: link.sendEmail,
+      AddToStarter: link.addToStarter
+    }
+    axios({
+      method: 'POST',
+      url: 'Attachments',
+      data: data,
+      headers: {
+        // "Content-type": file.type,
+        "X-Requesteg-With": "XMLHttpRequest",
+        // "Slug": slugHeader,
+        "x-csrf-token": getters.getToken
+      }
+    }).then(res=>{
+      console.log(res)
+    }).catch(error=>{
+      console.log(error)
+    })   
   }
 }
 const getters = {

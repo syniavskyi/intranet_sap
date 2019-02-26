@@ -17,44 +17,44 @@
         <div class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileNameUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.addToSPUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">&nbsp;</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileNameUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.addToSPUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;</label>
                 </header>
                 <section>
                         <div class="dd-table__body" v-if="files.length > 0">
                             <div class="dd-table__row" v-for="file in files" :key="file.fileId">
-                                <div class="dd-table__cell" :class="file.typeClass">
+                                <div class="dd-table__cell dd-table__c-files" :class="file.typeClass">
                                     &nbsp;
                                 </div>
-                                <div class="dd-table__cell cd-for-input">
+                                <div class="dd-table__cell dd-table__c-files cd-for-input">
                                     <input type="text" class="cd-input" v-model="file.fileName">
                                     <span class="cd-span"></span>
                                 </div>
-                                <div class="dd-table__cell cd-for-select">
-                                    <select class="cd-select" name="">
-                                        <option v-for="fileType in fileTypes" :key="fileType.Key">
+                                <div class="dd-table__cell dd-table__c-files cd-for-select">
+                                    <select class="cd-select" name="" v-model="file.fileType">
+                                        <option v-for="fileType in fileTypes" :key="fileType.Key" :value="fileType.Key">
                                             {{ fileType.Value }}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="dd-table__cell">
+                                <div class="dd-table__cell dd-table__c-files">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" class="checkbox-new" v-model="file.addToStarter" />
                                         <div class="checkbox-in"></div>
                                     </label>
                                 </div>
-                                <div class="dd-table__cell">
+                                <div class="dd-table__cell dd-table__c-files">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" class="checkbox-new" v-model="file.sendEmail" />
                                         <div class="checkbox-in"></div>
                                     </label>
                                 </div>
                                 
-                                <div class="dd-table__cell">
+                                <div class="dd-table__cell dd-table__c-files">
                                     <button class="dd-table__remove-btn">X</button>
                                 </div>
                             </div>
@@ -66,51 +66,57 @@
             </div>
         </div>
         <div class="drag-drop__btn">
-            <button @click="sendFiles" class="func-btn cd-b">{{ $t("button.sendFiles")}}</button>
+            <button :disabled="$v.files.$invalid" @click="sendFiles" class="func-btn cd-b">{{ $t("button.sendFiles")}}</button>
         </div>
-        <!-- LINKS TABLE -->
+        <!-- LINK TABLE -->
+        <h3 class="content-header-title content-header-title-h3">{{ $t("header.addNewLink") }}</h3>
         <div class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileNameUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.addToSPUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
-                    <label class="dd-table__cell dd-table__label">&nbsp;</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.fileNameUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.fileUrlUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.addToSPUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
+                    <label class="dd-table__cell dd-table__c-link dd-table__label">&nbsp;</label>
                 </header>
                 <section>
-                        <div class="dd-table__body" v-if="links.length > 0">
-                            <div class="dd-table__row" v-for="link in links" :key="link.linkId">
-                                <div class="dd-table__cell" :class="link.typeClass">
+                        <div class="dd-table__body">
+                            <div class="dd-table__row">
+                                <div class="dd-table__cell dd-table__c-link new-doc-file-img doc-file-link">
                                     &nbsp;
                                 </div>
-                                <div class="dd-table__cell cd-for-input">
+                                <div class="dd-table__cell dd-table__c-link cd-for-input">
                                     <input type="text" class="cd-input" v-model="link.fileName">
                                     <span class="cd-span"></span>
                                 </div>
-                                <div class="dd-table__cell cd-for-select">
-                                    <select class="cd-select" name="">
-                                        <option v-for="fileType in fileTypes" :key="fileType.Key">
+                                 <div class="dd-table__cell dd-table__c-link cd-for-input">
+                                    <input type="text" class="cd-input" v-model="link.url">
+                                    <span class="cd-span"></span>
+                                </div>
+                                <div class="dd-table__cell dd-table__c-link cd-for-select">
+                                    <select class="cd-select" name="" v-model="link.type">
+                                        <option v-for="fileType in fileTypes" :key="fileType.Key" :value="fileType.Key">
                                             {{ fileType.Value }}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="dd-table__cell">
+                                <div class="dd-table__cell dd-table__c-link">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" class="checkbox-new" v-model="link.addToStarter" />
                                         <div class="checkbox-in"></div>
                                     </label>
                                 </div>
-                                <div class="dd-table__cell">
+                                <div class="dd-table__cell dd-table__c-link">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" class="checkbox-new" v-model="link.sendEmail" />
                                         <div class="checkbox-in"></div>
                                     </label>
                                 </div>
                                 
-                                <div class="dd-table__cell">
-                                    <button class="dd-table__remove-btn">X</button>
+                                <div class="dd-table__cell dd-table__c-link dd-table__links-btn">
+                                    <button :disabled="$v.link.$invalid" @click="sendLink" class="func-btn cd-b">{{ $t("button.send")}}</button>
                                 </div>
                             </div>
                         </div>
@@ -135,6 +141,7 @@
 
 import i18n from "../../../lang/lang";
 import { mapGetters } from 'vuex';
+import { required, minLength, url } from "vuelidate/lib/validators";
 
 const insideElements = new Set();
 
@@ -143,11 +150,33 @@ export default {
     data() {
       return {
       files: [],
-      links: [],
+      link: {
+          fileName: "",
+          type: "",
+          url: "",
+          addToStarter: false,
+          sendEmail: false
+      },
       show: false,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
+
+    validations: {
+        files: {
+            required,
+            $each: {
+                fileName: { required, minLength: minLength(3) },
+                fileType: { required }
+            }
+        },
+        link: {
+            fileName: { required, minLength: minLength(3) },
+            type: { required },
+            url: { required, url}
+        }
+    },
+
     computed: {
         ...mapGetters({
             fileTypes: "getUploadFileTypes"
@@ -213,6 +242,7 @@ export default {
                         size: file.size,
                         type: file.type,
                         typeClass: "",
+                        fileType: "",
                         addToStarter: false,
                         sendEmail: false,
                         status: "",
@@ -275,8 +305,13 @@ export default {
             let files = this.files;
 
             for(const file of files){
-                this.$store.dispatch("uploadDocument", file)
+                // this.$store.dispatch("uploadDocument", file)
             }
+        },
+
+        sendLink({getters}){
+            let link = this.link
+            this.$store.dispatch("uploadLink", link)
         }
 
     }
@@ -394,6 +429,10 @@ export default {
     justify-content: center;
 }
 
+.dd-table__links-btn {
+    height: 100%;
+}
+
 .dd-table__label {
     color: #7b7777;
     height: 3rem;
@@ -403,16 +442,36 @@ export default {
     justify-content: left;
 }
 
-.dd-table__cell:nth-of-type(1), 
-.dd-table__cell:nth-of-type(4), 
-.dd-table__cell:nth-of-type(5),
-.dd-table__cell:nth-of-type(6){
+.dd-table__c-files:nth-of-type(1), 
+.dd-table__c-files:nth-of-type(4), 
+.dd-table__c-files:nth-of-type(5),
+.dd-table__c-files:nth-of-type(6){
     width: 10%;
 }
 
-.dd-table__cell:nth-of-type(2),
-.dd-table__cell:nth-of-type(3){
+.dd-table__c-files:nth-of-type(2),
+.dd-table__c-files:nth-of-type(3){
     width: 30%;
+}
+
+.dd-table__c-link:nth-of-type(5),
+.dd-table__c-link:nth-of-type(6) {
+    visibility: hidden;
+    width: 8%;
+}
+
+.dd-table__c-link:nth-of-type(1),
+.dd-table__c-link:nth-of-type(7) {
+    width: 10%;
+}
+
+.dd-table__c-link:nth-of-type(4) {
+    width: 16%;
+}
+
+.dd-table__c-link:nth-of-type(2),
+.dd-table__c-link:nth-of-type(3){
+    width: 24%;
 }
 
 .dd-table__no-files-choosen {

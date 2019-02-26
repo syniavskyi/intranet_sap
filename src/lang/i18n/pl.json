@@ -191,7 +191,8 @@
     "fileNameUpl": "Nazwa pliku",
     "fileTypeUpl": "Typ dokumentu",
     "addToSPUpl": "Dodaj do starterpage",
-    "sendEmailUpl": "Wyślij e-mail"
+    "sendEmailUpl": "Wyślij e-mail",
+    "fileUrlUpl": "URL"
   },
   "header": {
     "login": "Zaloguj się do Intranetu",
@@ -245,6 +246,7 @@
     "sessionEnd": "Sesja wygasła",
     "photoErr": "Błąd podczas przesyłania zdjęcia",
     "addNewFile": "Dodaj nowy dokument",
+    "addNewLink": "Dodaj nowy link",
     "prevDocuments": "Przeglądaj dokumenty"
   },
   "message": {
