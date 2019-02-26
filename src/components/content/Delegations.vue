@@ -90,17 +90,17 @@
                                         <label class="cd-slabel">{{ $t("table.delegations.currency") }} </label>
                                     </div>
                                     <div class="del-div-currs">
-                                        <div class="del-div-cool-curr">
+                                        <div class="del-div-curr">
                                             <p class="del-inp-curr">{{newDelegation.currency}}</p>
                                             <input required id="del-inp-curr1" class="cd-input" v-model="newDelegation.allowanceDeduction" @input="checkNewDelegation" />
                                             <span class="cd-span"/>
-                                            <label class="delegations-label-cool">{{ $t("label.allowanceDeduction") }}: </label>
+                                            <label class="cd-label">{{ $t("label.allowanceDeduction") }}: </label>
                                         </div>
-                                        <div class="del-div-cool-curr">
+                                        <div class="del-div-curr">
                                             <p class="del-inp-curr">{{newDelegation.currency}}</p>
                                             <input required class="cd-input" v-model="totalCostsInCurr.totalPayback"/>
                                             <span class="cd-span"/>
-                                            <label class="delegations-label-cool-s">{{ $t("label.totalReturnAmount") }}: </label>
+                                            <label class="cd-label">{{ $t("label.totalReturnAmount") }}: </label>
                                         </div>
                                     </div>
                                 </div>
