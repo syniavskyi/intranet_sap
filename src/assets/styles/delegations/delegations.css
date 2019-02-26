@@ -248,7 +248,7 @@
     flex-direction: column;
     margin-bottom:1rem;
 }
-/* COOOL INPUTS AND SELECT !!! */
+
 .del-div-currs {
     display: flex;
     flex-direction: column;
@@ -256,7 +256,7 @@
     margin-left: 1.6rem;
 }
 
-.del-div-cool-curr {
+.del-div-curr {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
@@ -282,17 +282,8 @@
     margin-top: .9rem;
 }
 
-.del-div-cool-curr {
+.del-div-curr {
     width: 12.5rem;
-}
-
-.del-div-cool-head {
-    margin-top: 0.7rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    width: 15rem;
-    flex-direction: column;
-    position: relative;
 }
 
 .del-inp-curr {
@@ -300,25 +291,6 @@
     right: -2rem;
     top: -.7rem;
     font-size: 1.1rem;
-}
-
-.delegations-tinput-date input:focus,
-.delegations-input-date input {
-    outline-color: #ffa500;
-}
-
-.delegations-label-cool,
-.delegations-label-cool-s,
-.delegations-tlabel-cool,
-.del-slabel {
-    display: flex;
-    align-items: flex-end;
-    color:#999; 
-    position:absolute;
-    pointer-events:none;
-    background-color: #ffffff;
-    transition:0.3s ease all; 
-    font-weight: 400;
 }
 
 .del-lline {
@@ -332,24 +304,6 @@
     left: 0.2rem;
     font-size: 1.1rem;
     background: transparent;
-}
-
-.delegations-label-cool {
-    left:0.3rem;
-    top: 0.5rem;
-    font-size:1.2rem;
-}
-
-.delegations-label-cool-s {
-    left:0.3rem;
-    top: 0.5rem;
-    font-size: .8rem;
-}
-
-.del-slabel {
-    left:0.35rem;
-    top:0.35rem;
-    font-size: 1.2rem;
 }
 
 .del-pline {
@@ -679,7 +633,6 @@
     align-items: center; 
     text-align: center;
     background: #e5e5e5;
-    /* line-height: 2rem; */
     color: grey;
 }
 .del-tbody2-item-txt {
