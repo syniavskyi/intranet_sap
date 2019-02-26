@@ -192,7 +192,8 @@
         "fileNameUpl": "Filename",
         "fileTypeUpl": "Document type",
         "addToSPUpl": "Add to Startpage",
-        "sendEmailUpl": "Send e-mail"
+        "sendEmailUpl": "Send e-mail",
+        "fileUrlUpl": "URL"
     },
     "header": {
         "login": "Увійдіть до Інтранету",
@@ -243,6 +244,7 @@
         "error": "Помилка",
         "photoErr": "Error while uploading photo",
         "addNewFile": "Add new document",
+        "addNewLink": "Add new link",
         "prevDocuments": "Preview documents"
     },
     "message": {

@@ -628,13 +628,16 @@ const actions = {
         case "StarterDocsInfo":
           commit('SET_DOC_LIST_INFO', aResults);
           dispatch('checkStatus', aResults);
-          if (aResults.length === 0) {
+          if (aResults.length === 0 && getters.getDocListNew.length === 0) {
             router.replace("/news")
           }
           break;
         case "StarterDocsNew":
           commit('SET_DOC_LIST_NEW', aResults);
           dispatch('checkStatus', aResults);
+          if (aResults.length === 0 && getters.getDocListInfo.length === 0) {
+            router.replace("/news")
+          }
           break;
         case "NewToken":
           let sToken = aResponse.request.getResponseHeader('x-csrf-token');
