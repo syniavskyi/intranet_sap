@@ -94,14 +94,14 @@ export default {
       oStore.dispatch('getData', null);
       utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
-  computed: Object.assign(
-    mapGetters({
+  computed: {
+    ...mapGetters({
       usersList: "usersList",
       departmentList: "getDepartmentList",
       displayMenu: "getShowMenu",
       displayOverlay: "getShowMenuOverlay"
-    }), {
-      filteredUsers: function() {
+    }),
+    filteredUsers: function() {
       let self = this,
         aFilteredUsers = this.usersList,
         aFilters = this.aFilters;
@@ -128,13 +128,12 @@ export default {
       }
       return aFilteredUsers;
     }
-    }
-  ),
-  methods: Object.assign(
-    mapActions({
+  },
+  methods: {
+    ...mapActions({
       getUsersLists: "getUsersLists"
-    }), {
-       clearFilters() {
+    }),
+    clearFilters() {
       this.aFilters = {};
     },
     showMenu(event) {
@@ -146,8 +145,7 @@ export default {
       router.replace({ name: "Profile", params: { user: user.UserAlias } })
     }
   }
-  )
-};
+}
 </script>
 
 <style>

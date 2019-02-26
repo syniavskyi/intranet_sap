@@ -107,7 +107,6 @@ export default {
       oStore.commit('SET_REGISTER_DEF_DATA');
       oStore.commit('SET_PROMISE_TO_READ', aPromisesToRead);
       oStore.dispatch('getData', null);
-      // this.checkRegistrationAuth(oStore);
       utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
       oStore.commit("SET_DIALOG_ERROR_STATUS", false);
   },
@@ -168,16 +167,10 @@ export default {
         Language: this.Language.toUpperCase()
       });
       this.isLoading = false;
-    },
-    // checkRegistrationAuth(oStore) {
-    //   var bAuth = oStore.getters.getUserAuth.ZMENU.registration;
-
-    //   if(!bAuth) {
-    //     this.$router.push({name: "News"})
-    //   }
-    // }
+    }
   },
-  computed: Object.assign(mapGetters({
+  computed: {
+    ...mapGetters({
       displayMenu: "getShowMenu",
       displayMenuOverlay: "getShowMenuOverlay",
       isError: "getDialogErrorStatus",
@@ -188,6 +181,7 @@ export default {
       branchList: "getBranchList",
       registerData: "getRegistratinData",
       menuAuth: "getMenuAuth"
-  }))
-};
+    })
+  }
+}
 </script>
