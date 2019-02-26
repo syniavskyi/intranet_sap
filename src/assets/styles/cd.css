@@ -186,15 +186,18 @@
 }
 
 .cd-date,
-.cd-wdate /* input date with width for availability */ {
-    width: 20.5rem;
+.cd-wdate,
+.cd-wxdate /* input date with width for availability */ {
     text-align: center;
     border: 0;
     display:flex;
     align-items:center;
     border-radius: 4px;
     outline-color: #ffa500;
+    width: 100%;
 }
+
+.cd-wxdate { width: 20.5rem; }
 
 .cd-wdate { width: 6.5rem; }
 

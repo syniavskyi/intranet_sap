@@ -184,7 +184,7 @@
                     </div>
                     <div class="prof-input-s">
                       <input :value="formatDate" disabled class="inputProfile inputDisabled" v-if="!editMode">
-                      <v-date-picker  @input="checkFormFields" v-if="editMode" class="delegations-input-date inputDisabled" v-model="userData.EmploymentDate" :max-date="new Date()">
+                      <v-date-picker  @input="checkFormFields" v-if="editMode" class="cd-date inputDisabled" v-model="userData.EmploymentDate" :max-date="new Date()">
                         <input value="userData.employmentDate"/>
                       </v-date-picker>
                       <span class="cd-span"></span>
@@ -198,7 +198,7 @@
                     </div>
                     <div class="prof-input-s">
                       <input :value="formatedBirthDate" disabled class="inputProfile inputDisabled" v-if="!editMode">
-                      <v-date-picker  @input="checkFormFields" v-if="editMode" class="delegations-input-date inputDisabled" v-model="userData.DateBirth" :max-date="new Date()">
+                      <v-date-picker  @input="checkFormFields" v-if="editMode" class="cd-date inputDisabled" v-model="userData.DateBirth" :max-date="new Date()">
                         <input value="userData.dateBirth"/>
                       </v-date-picker>
                       <span class="cd-span"></span>

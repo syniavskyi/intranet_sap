@@ -24,13 +24,13 @@
             <label class="cd-label">{{ $t("label.eventDescription") }}</label>
           </div>
           <div class="cd-for-select-xl">
-            <v-date-picker required class="cd-date" popoverDirection="bottom" is-expanded mode="single" v-model="addEvent.DateFrom" :min-date="new Date()">
+            <v-date-picker required class="cd-wxdate" popoverDirection="bottom" is-expanded mode="single" v-model="addEvent.DateFrom" :min-date="new Date()">
               <input value="addEvent.DateFrom">
             </v-date-picker>
             <label class="cd-slabel">{{ $t("label.startDate") }} </label>
           </div>
           <div class="cd-for-select-xl">
-            <v-date-picker required class="cd-date" popoverDirection="bottom" is-expanded mode="single" v-model="addEvent.DateTo" :min-date="addEvent.DateFrom">
+            <v-date-picker required class="cd-wxdate" popoverDirection="bottom" is-expanded mode="single" v-model="addEvent.DateTo" :min-date="addEvent.DateFrom">
               <input value="addEvent.DateTo">
             </v-date-picker>
             <label class="cd-slabel">{{ $t("label.endDate") }} </label>
