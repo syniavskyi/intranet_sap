@@ -209,9 +209,8 @@ export default {
     modal: Modal,
     "event-form": Form
   },
-  methods: Object.assign(
-    mapActions(["clearForm", "clearFilters", "editEvent", "performDialog"]),
-    {
+  methods: {
+    ...mapActions(["clearForm", "clearFilters", "editEvent", "performDialog"]),
       showMenu(event) {
         this.$store.commit('SET_MENU_CLICKED', true)
         let obj = { window, event };
@@ -284,6 +283,5 @@ export default {
         }
       }
     }
-  )
 };
 </script>

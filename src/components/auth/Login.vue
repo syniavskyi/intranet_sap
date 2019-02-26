@@ -94,12 +94,13 @@ export default {
       this.$store.dispatch("setLanguage", language);
     }
   },
-  computed: Object.assign(mapGetters({
+  computed: {
+    ...mapGetters({
       loginError: "isLoginError",
       newPassword: "password",
       languageList: "getLanguageList",
       showRemindPassword: "getLoginPassModal"
     })
-  )
+  }
 };
 </script>
