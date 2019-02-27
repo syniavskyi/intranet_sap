@@ -110,7 +110,7 @@ const actions = {
       console.log(error)
     })
   },
-  uploadLink({getters}, link){
+  uploadLink({getters, dispatch}, link){
     let data = {
       FileId: link.type,
       Language: "",
@@ -126,13 +126,12 @@ const actions = {
       url: 'Attachments',
       data: data,
       headers: {
-        // "Content-type": file.type,
         "X-Requesteg-With": "XMLHttpRequest",
-        // "Slug": slugHeader,
         "x-csrf-token": getters.getToken
       }
     }).then(res=>{
-      console.log(res)
+      dispatch("SET_PROMISE_TO_READ", ["Documents", "NewToken"])
+      dispatch("getData", null)
     }).catch(error=>{
       console.log(error)
     })   

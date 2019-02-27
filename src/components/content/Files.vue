@@ -53,6 +53,11 @@ export default {
         oStore.dispatch('getData', null);
         utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
   },
+  watch: {
+    docFiles(value){
+      this.calcDocsHeight()
+    }
+  },
   mounted() {
     this.$nextTick(() => {
        // calculating doucument title height to change class that will suffice lack of support for property : -webkit-line-clamp and -webkit-box in Firefox
