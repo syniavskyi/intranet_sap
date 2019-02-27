@@ -26,7 +26,6 @@
     width: 100%; 
     transition: background-color 0.3s ease;
     min-height: 3.4rem;
-    z-index: 0;
 }
 
 .delegations-tile:not(:first-of-type) .delegations-tile-header:hover {
