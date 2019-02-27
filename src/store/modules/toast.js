@@ -1,3 +1,5 @@
+import { stat } from "fs";
+
 const state = {
     showToast: false,
     timeoutRunning: false,
@@ -11,6 +13,9 @@ const mutations = {
     },
     SET_HEADER_MODAL_CLASS(state, data) {
         state.headerModalClass = data;
+    },
+    SET_SHOW_TOAST(state, data){
+        state.showToast = data;
     }
 }
 

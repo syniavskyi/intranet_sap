@@ -299,7 +299,8 @@
         "responseError": "Request failed, try again, or log out and login again.",
         "toGenerateCvClickButton": "Um einen Lebenslauf zu erstellen, klicken Sie in der Kopfzeile auf die Schaltfläche 'Lebenslauf erstellen'",
         "dragToUpade": "Drag here the files that you want to add to the system.",
-        "noFilesChosen": "No files chosen."
+        "noFilesChosen": "No files chosen.",
+        "mailWillBeSend": "E-mail with information about new file will be send to btech.wszyscy@btech.pl"
     },
     "select": {
         "language": {

@@ -301,7 +301,8 @@
     "responseError": "Zapytanie nie powiodło się, spróbuj ponownie, lub wyloguj się i zaloguj ponownie.",
     "toGenerateCvClickButton": "Aby wygenerować CV wybierz przycisk generuj w nagłówku",
     "dragToUpade": "Przeciągnij tutaj pliki, które chcesz dodać do systemu.",
-    "noFilesChosen": "Nie wybrano żadnych plików."
+    "noFilesChosen": "Nie wybrano żadnych plików.",
+    "mailWillBeSend": "E-mail z informacją o dodaniu pliku zostanie wysłany na adres btech.wszyscy@btech.pl"
   },
   "select": {
     "language": {

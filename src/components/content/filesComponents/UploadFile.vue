@@ -1,7 +1,8 @@
 <template>
-    <div class="file-upload" v-if="this.authType !== 'OWN' && this.show">
-        <h3 class="content-header-title content-header-title-h3">{{ $t("header.addNewFile") }}</h3>
-        <div class="drag-drop">
+    <div class="file-upload" v-if="this.authType !== 'OWN'">
+    <!-- <div class="file-upload" v-if="this.authType !== 'OWN' && this.show"> -->
+        <h3 v-if="this.show" class="content-header-title content-header-title-h3">{{ $t("header.addNewFile") }}</h3>
+        <div v-if="this.show" class="drag-drop">
             <div id="drop" class="drag-drop__container" draggable="true" @dragover.prevent="handleDragOver" @dragleave="handleLeave"
              @dragenter="handleDragEnter" @drop.prevent="handleDrop">
                 <div class="drag-drop__container--border">
@@ -13,8 +14,8 @@
             </div>       
         </div>
         <!-- FILES TABLE -->
-        <h4 class="content-header-title content-header-title-h4">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h4>
-        <div class="drag-drop__list">     
+        <h4 v-if="this.show" class="content-header-title content-header-title-h4">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h4>
+        <div v-if="this.show" class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
@@ -26,7 +27,7 @@
                 </header>
                 <section>
                         <div class="dd-table__body" v-if="files.length > 0">
-                            <div class="dd-table__row" v-for="file in files" :key="file.fileId">
+                            <div class="dd-table__row" v-for="(file, index) in files" :key="file.fileId">
                                 <div class="dd-table__cell dd-table__c-files" :class="file.typeClass">
                                     &nbsp;
                                 </div>
@@ -55,7 +56,7 @@
                                 </div>
                                 
                                 <div class="dd-table__cell dd-table__c-files">
-                                    <button class="dd-table__remove-btn">X</button>
+                                    <button @click="removeFile(index)" class="dd-table__remove-btn">X</button>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +66,7 @@
                 </section>
             </div>
         </div>
-        <div class="drag-drop__btn">
+        <div v-if="this.show" class="drag-drop__btn">
             <button :disabled="$v.files.$invalid" @click="sendFiles" class="func-btn cd-b">{{ $t("button.sendFiles")}}</button>
         </div>
         <!-- LINK TABLE -->
@@ -114,7 +115,6 @@
                                         <div class="checkbox-in"></div>
                                     </label>
                                 </div>
-                                
                                 <div class="dd-table__cell dd-table__c-link dd-table__links-btn">
                                     <button :disabled="$v.link.$invalid" @click="sendLink" class="func-btn cd-b">{{ $t("button.send")}}</button>
                                 </div>
@@ -123,6 +123,7 @@
                 </section>
             </div>
         </div>
+        <Toast v-if="showToast">{{ $t('message.mailWillBeSend')}}</Toast>
         <h3 class="content-header-title content-header-title-h3">{{ $t("header.prevDocuments") }}</h3>
     </div>
 </template>
@@ -142,6 +143,7 @@
 import i18n from "../../../lang/lang";
 import { mapGetters } from 'vuex';
 import { required, minLength, url } from "vuelidate/lib/validators";
+import Toast from "../../dialogs/Toast";
 
 const insideElements = new Set();
 
@@ -179,8 +181,24 @@ export default {
 
     computed: {
         ...mapGetters({
-            fileTypes: "getUploadFileTypes"
-        })
+            fileTypes: "getUploadFileTypes",
+            showToast: "getDisplayToast"
+        }),
+        showEmailToast() {
+            return this.link.sendEmail
+        }
+    },
+    watch: {
+        showEmailToast(val){
+            if(val){
+                this.$store.dispatch("displayToast")
+            } else {
+                this.$store.commit("SET_SHOW_TOAST", false)
+            }
+        }
+    },
+    components: {
+        Toast
     },
     methods: {
         handleDragEnter(e) {
@@ -312,6 +330,11 @@ export default {
         sendLink({getters}){
             let link = this.link
             this.$store.dispatch("uploadLink", link)
+        },
+
+        removeFile(index){
+            this.files.splice
+            console.log(this.files);
         }
 
     }
@@ -456,7 +479,7 @@ export default {
 
 .dd-table__c-link:nth-of-type(5),
 .dd-table__c-link:nth-of-type(6) {
-    visibility: hidden;
+    /* visibility: hidden; */
     width: 8%;
 }
 
