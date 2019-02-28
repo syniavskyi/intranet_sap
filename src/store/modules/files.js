@@ -9,7 +9,13 @@ const state = {
   informationFiles: [],
   instructionFiles: [],
   fileTypes: ['INFO', 'DOC', 'OFF', 'SAPB', 'INST'],
-  dataToRead: ["UserData", "Documents", "NewToken", "Domains"]
+  dataToRead: ["UserData", "Documents", "NewToken", "Domains"],
+  linkStructure: {
+    fileName: "",
+    type: "",
+    url: "",
+    addToStarter: false,
+    sendEmail: false },
 }
 
 const mutations = {
@@ -31,6 +37,9 @@ const mutations = {
   SET_INSTRUCTION_FILES(state, docs) {
     state.instructionFiles = docs
   },
+  SET_LINK_STRUCTURE(state, data){
+    state.linkStructure = data
+  }
 }
 
 const actions = {
@@ -110,7 +119,7 @@ const actions = {
       console.log(error)
     })
   },
-  uploadLink({getters, dispatch}, link){
+  uploadLink({getters, dispatch, commit}, link){
     let data = {
       FileId: link.type,
       Language: "",
@@ -121,6 +130,7 @@ const actions = {
       SendEmail: link.sendEmail,
       AddToStarter: link.addToStarter
     }
+    commit("SET_DISPLAY_LOADER", true);
     axios({
       method: 'POST',
       url: 'Attachments',
@@ -130,10 +140,16 @@ const actions = {
         "x-csrf-token": getters.getToken
       }
     }).then(res=>{
-      dispatch("SET_PROMISE_TO_READ", ["Documents", "NewToken"])
+      let clearStructure = {
+                            fileName: "",
+                            type: "",
+                            url: "",
+                            addToStarter: false,
+                            sendEmail: false }
+      commit("SET_PROMISE_TO_READ", ["Documents", "NewToken"])
       dispatch("getData", null)
+      commit("SET_LINK_STRUCTURE", clearStructure)
     }).catch(error=>{
-      console.log(error)
     })   
   }
 }
@@ -160,7 +176,10 @@ const getters = {
     return state.fileTypes
   },
   getFilesToRead(state){
-    return state.dataToRead;
+    return state.dataToRead
+  },
+  getLinkStructure(state){
+    return state.linkStructure
   }
 }
 
