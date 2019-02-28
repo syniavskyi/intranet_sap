@@ -152,37 +152,15 @@ export default {
     data() {
       return {
       files: [],
-      link: {
-          fileName: "",
-          type: "",
-          url: "",
-          addToStarter: false,
-          sendEmail: false
-      },
       show: false,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
-
-    validations: {
-        files: {
-            required,
-            $each: {
-                fileName: { required, minLength: minLength(3) },
-                fileType: { required }
-            }
-        },
-        link: {
-            fileName: { required, minLength: minLength(3) },
-            type: { required },
-            url: { required, url}
-        }
-    },
-
     computed: {
         ...mapGetters({
             fileTypes: "getUploadFileTypes",
-            showToast: "getDisplayToast"
+            showToast: "getDisplayToast",
+            link: "getLinkStructure"
         }),
         showEmailToast() {
             return this.link.sendEmail
@@ -195,6 +173,20 @@ export default {
             } else {
                 this.$store.commit("SET_SHOW_TOAST", false)
             }
+        }
+    },
+    validations: {
+        files: {
+            required,
+            $each: {
+                fileName: { required, minLength: minLength(3) },
+                fileType: { required }
+            }
+        },
+        link: {
+            fileName: { required, minLength: minLength(3) },
+            type: { required },
+            url: { required, url}
         }
     },
     components: {

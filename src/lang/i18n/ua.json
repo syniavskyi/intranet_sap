@@ -298,7 +298,8 @@
         "toGenerateCvClickButton": "To generate a CV, select the generate button in the header",
         "dragToUpade": "Drag here the files that you want to add to the system.",
         "noFilesChosen": "No files chosen.",
-        "mailWillBeSend": "E-mail with information about new file will be send to btech.wszyscy@btech.pl"
+        "mailWillBeSend": "E-mail with information about new file will be send to btech.wszyscy@btech.pl",
+        "linkAdded": "Link has been added"
     },
     "select": {
         "language": {
