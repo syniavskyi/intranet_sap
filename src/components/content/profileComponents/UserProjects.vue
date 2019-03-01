@@ -370,8 +370,8 @@ export default {
         bIndustries,
         bModules,
         bDateStart,
-        bDateEnd,
         bCurrent,
+        bDateEnd,
         bDateChange,
         bDesc,
         beforeEdit = this._beforeEditingProjects[index],
@@ -379,48 +379,32 @@ export default {
       if (beforeEdit) {
         bProjectName = beforeEdit.ProjectName !== userPro.ProjectName;
         bContractor = beforeEdit.Contractor !== userPro.Contractor;
-        if (beforeEdit.Industries.length !== userPro.Industries.length) {
-          bIndustries = true;
-        } else {
-          for (const item of beforeEdit.Industries) {
-            if (!userPro.Industries.find(o => o.id === item.id)) {
-              bIndustries = true;
-            }
+        bIndustries = this._checkIndustries(beforeEdit.Industries, userPro.Industries);
+        bModules = this._checkModules(beforeEdit.Modules, userPro.Modules)
+        bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart, "equal");
+        bCurrent = beforeEdit.IsCurrent !== userPro.IsCurrent;
+        if(userPro.DateEnd) {
+            bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userPro.DateEnd, "equal");
+        }
+        bDateChange = bCurrent || bDateEnd;
+        bDesc = beforeEdit.Description !== userPro.Description;
+        bChanged =
+          bProjectName ||
+          bContractor ||
+          bIndustries ||
+          bModules ||
+          bDateStart ||
+          bDateChange ||
+          bDesc
+            ? true
+            : false;
+          } else {
+            bChanged = true;
           }
-        }
-        if (beforeEdit.Modules.length !== userPro.Modules.length) {
-          bModules = true;
-        } else {
-          for (const item of beforeEdit.Modules) {
-            if (!userPro.Modules.find(o => o.id === item.id)) {
-              bModules = true;
-            }
-          }
-        }
-      bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart, "equal");
-      bCurrent = beforeEdit.IsCurrent !== userPro.IsCurrent;
-      if(userPro.DateEnd) {
-          bDateEnd = utils.dateToValid(beforeEdit.DateEnd, userPro.DateEnd, "equal");
-      }
-      bDateChange = bCurrent || bDateEnd;
-      bDesc = beforeEdit.Description !== userPro.Description;
-      bChanged =
-        bProjectName ||
-        bContractor ||
-        bIndustries ||
-        bModules ||
-        bDateStart ||
-        bDateChange ||
-        bDesc
-          ? true
-          : false;
-        } else {
-          bChanged = true;
-        }
-      this.$store.commit("SET_DATA_CHANGE_PROF", {
-        changed: bChanged,
-        editMode: this.projectEditMode
-      });
+        this.$store.commit("SET_DATA_CHANGE_PROF", {
+          changed: bChanged,
+          editMode: this.projectEditMode
+        });
       if (
         userPro.ProjectName &&
         userPro.ContractorName &&
@@ -439,6 +423,32 @@ export default {
           index
         ].disabled = true;
       }
+    },
+    _checkModules(beforeModules, currentModules){
+        let bModules;
+        if (beforeModules.length !== currentModules.length) {
+          bModules = true;
+        } else {
+          for (const item of beforeModules) {
+            if (!currentModules.find(o => o.id === item.id)) {
+              bModules = true;
+            }
+          }
+        }
+        return bModules;
+    },
+    _checkIndustries(beforeIndustries, currentIndustries){
+        let bIndustries;
+        if (beforeIndustries.length !== currentIndustries.length) {
+          bIndustries = true;
+        } else {
+          for (const item of beforeIndustries) {
+            if (!currentIndustries.find(o => o.id === item.id)) {
+              bIndustries = true;
+            }
+          }
+        }
+        return bIndustries;
     },
     formatId(index) {
       return index + "p";
