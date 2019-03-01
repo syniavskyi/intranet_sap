@@ -434,6 +434,7 @@
 /* COOL RADIOBUTTON */
 
 .select-reset {
+    display: flex;
     position: absolute;
     top: .45rem;
     right: 1.8rem;
@@ -443,6 +444,10 @@
     background: #ffffff;
     transition: all .25s ease;
     cursor: pointer;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
 }
 
 .select-reset:hover {
