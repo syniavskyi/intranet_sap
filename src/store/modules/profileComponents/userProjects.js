@@ -122,6 +122,7 @@ const actions = {
     dataToSend.DateEnd = utils.formatDateForBackend(dataToSend.DateEnd);
     dataToSend.IsCurrent = dataToSend.IsCurrent ? 'X' : '-';
     dataToSend.DateStartToChange = utils.formatDateForBackend(dataToSend.DateStartToChange);
+    // dataToSend.DateEndToChange = dataToSend.IsCurrent === "X" ? null : dataToSend.DateEndToChange
     dataToSend.DateEndToChange = utils.formatDateForBackend(dataToSend.DateEndToChange);
     dataToSend.Language = localStorage.getItem('lang');
     /* DJA */
@@ -153,7 +154,7 @@ const actions = {
         dispatch('displayModal', message);
         commit('SET_DISPLAY_LOADER', false)
         commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
-        dispatch('getData');
+        dispatch('getData', { user: localStorage.getItem('cvUser') });
       }).catch(error => {
         commit('SET_DISPLAY_LOADER', false)
       })

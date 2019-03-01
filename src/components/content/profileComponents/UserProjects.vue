@@ -32,8 +32,8 @@
           <div class="prof-thead">
             <div class="prof-thead-item">{{ $t("label.eg") }}</div>
             <div class="prof-thead-item">{{ $t("table.projectName") }}</div>
-            <div class="prof-thead-item">{{ $t("table.contractor") }}</div>
             <div class="prof-thead-item">{{ $t("table.duration") }}</div>
+            <div class="prof-thead-item">{{ $t("table.contractor") }}</div>
             <div class="prof-thead-item">{{ $t("table.Industry") }}</div>
             <div class="prof-thead-item">{{ $t("table.Modules") }}</div>
             <div class="prof-thead-item">{{ $t("table.Descr") }}</div>
@@ -51,19 +51,6 @@
                 <div class="prof-tbody-item-title">{{ $t("table.projectName") }}</div>
                 <div class="prof-tbody-item-txt">
                   <input :disabled="!projectEditMode" @input="checkProjectName(index)" :class="projectEditMode ? 'profile-table-input-edit' : 'profile-table-input' " v-model="userProjects[index].ProjectName" maxlength="255">        
-                </div>
-              </div>
-              <div class="prof-tbody-item">
-                <div class="prof-tbody-item-title">{{ $t("table.contractor") }}</div>
-                <div class="prof-tbody-item-txt">
-                  <p v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
-                  <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName">
-                  <p class="profile-table-input-view" v-if="projectEditMode && _beforeEditingProjects[index]" v-once>{{ _beforeEditingProjects[index].ContractorName }}</p>
-                  <p class="profile-table-input-view" v-if="projectEditMode && !_beforeEditingProjects[index]" v-once>{{ userProjects[index].ContractorName }}</p>
-                  <select ref="emptyContractors" @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)">
-                    <option disabled selected value>{{ $t("table.addContractor") }}:</option>
-                    <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
-                  </select>
                 </div>
               </div>
               <div class="prof-tbody-item">
@@ -88,6 +75,19 @@
                     <div class="checkbox-in"></div>
                     <p style="padding:0;margin:0;color:#7a7a7a;">{{ $t("label.present") }}</p>
                   </label>
+                </div>
+              </div>
+              <div class="prof-tbody-item">
+                <div class="prof-tbody-item-title">{{ $t("table.contractor") }}</div>
+                <div class="prof-tbody-item-txt">
+                  <p v-if="projectEditMode" style="padding:0; margin:0; display: flex; text-align: center; align-items: center; font-size: .8rem; color: #ccc;">{{$t('table.currentContractor')}}</p>
+                  <input v-if="!projectEditMode" class="profile-table-input" :disabled="!projectEditMode" v-model="userProjects[index].ContractorName">
+                  <p class="profile-table-input-view" v-if="projectEditMode && _beforeEditingProjects[index]" v-once>{{ _beforeEditingProjects[index].ContractorName }}</p>
+                  <p class="profile-table-input-view" v-if="projectEditMode && !_beforeEditingProjects[index]" v-once>{{ userProjects[index].ContractorName }}</p>
+                  <select ref="emptyContractors" @input="checkFields(index)" v-if="projectEditMode" class="profile-table-select profile-table-select-industry" @change="selectContractor($event, index)">
+                    <option disabled selected value>{{ $t("table.addContractor") }}:</option>
+                    <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId" :id="index">{{ contractor.ContractorName }}</option>
+                  </select>
                 </div>
               </div>
               <div class="prof-tbody-item">
@@ -161,26 +161,6 @@ export default {
       allowToSort: true
     };
   },
-  watch: {
-    selectedUser(value) {
-      this.projectEditMode = false;
-    },
-    resetContractors(value) {
-      let aContractors =this.$refs.emptyContractors,
-          aIndustries = this.$refs.industryEmpty
-      this.contractorIndustries = []
-      if (aIndustries && value === true) {
-        for (var i = 0; i < aIndustries.length; i++) {
-          aContractors[i].selectedIndex = 0
-          aIndustries[i].selectedIndex = 0
-          while(aIndustries[i].childElementCount > 1) {
-            aIndustries[i].removeChild(aIndustries[i].lastElementChild)
-          }
-        }
-      }
-      this.$emit('set-reset-industries', false)
-    }
-  },
   components: {
     Toast
   },
@@ -204,13 +184,28 @@ export default {
     sortedProjects() {
       let sortedPro;
       sortedPro = this.userProjects;
-      for(let pro of sortedPro) {
-        if(pro.IsCurrent) {
-          pro.DateEnd = new Date()
-        }
-      }
       this.projectEditMode && !this.allowToSort ? sortedPro : sortedPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
       return sortedPro;
+    }
+  },
+  watch: {
+    selectedUser(value) {
+      this.projectEditMode = false;
+    },
+    resetContractors(value) {
+      let aContractors =this.$refs.emptyContractors,
+          aIndustries = this.$refs.industryEmpty
+      this.contractorIndustries = []
+      if (aIndustries && value === true) {
+        for (var i = 0; i < aIndustries.length; i++) {
+          aContractors[i].selectedIndex = 0
+          aIndustries[i].selectedIndex = 0
+          while(aIndustries[i].childElementCount > 1) {
+            aIndustries[i].removeChild(aIndustries[i].lastElementChild)
+          }
+        }
+      }
+      this.$emit('set-reset-industries', false)
     }
   },
   methods: {
@@ -349,7 +344,7 @@ export default {
         newData = utils.createClone(this.userProjects[index])
       // newData.index = index;
       newData.Action = "U";
-      newData.DateEndToChange = newData.DateEnd;
+      // newData.DateEndToChange = newData.DateEnd;
       newData.Language = localStorage.getItem("lang"); //temp
       if (dataToChange) {
         newData.DateStartToChange = dataToChange.DateStart;
