@@ -14,7 +14,7 @@
     <!-- remove style after adding appropriate classes, it is only for testing purposes  -->
     <div class="profile-tile-content">
       <div class="prof-tile-column">
-        <div class="prof-div-row" v-for="(education, index) in sotredEducation" :key='index'>
+        <div class="prof-div-row" v-for="(education, index) in sortedEducation" :key='index'>
           <div class="prof-row-dates">
             <div :class="editMode ? 'prof-row-dates-left' : 'prof-row-dates-left-s'">
               <p class="prof-date-label" v-if="!editMode"> {{ formatDate(education.DateStart) }} </p>

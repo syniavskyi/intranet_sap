@@ -23,6 +23,7 @@
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileTypeUpl") }}</label>
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.addToSPUpl") }}</label>
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
+                    <label for="" class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;</label>
                     <label class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;</label>
                 </header>
                 <section>
@@ -54,7 +55,12 @@
                                         <div class="checkbox-in"></div>
                                     </label>
                                 </div>
-                                
+                                <div class="dd-table__cell dd-table__c-files">
+                                    <label class="checkbox-wrap">
+                                        <input type="checkbox" class="checkbox-new" v-model="file.status" />
+                                        <div class="checkbox-in"></div>
+                                    </label>
+                                </div>
                                 <div class="dd-table__cell dd-table__c-files">
                                     <button @click="removeFile(index)" class="dd-table__remove-btn">X</button>
                                 </div>
@@ -152,7 +158,7 @@ export default {
     data() {
       return {
       files: [],
-      show: false,
+      show: true,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
@@ -460,8 +466,9 @@ export default {
 .dd-table__c-files:nth-of-type(1), 
 .dd-table__c-files:nth-of-type(4), 
 .dd-table__c-files:nth-of-type(5),
-.dd-table__c-files:nth-of-type(6){
-    width: 10%;
+.dd-table__c-files:nth-of-type(6),
+.dd-table__c-files:nth-of-type(7){
+    width: 8%;
 }
 
 .dd-table__c-files:nth-of-type(2),

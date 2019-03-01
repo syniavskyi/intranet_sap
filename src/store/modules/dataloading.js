@@ -862,7 +862,10 @@ const actions = {
 
   _setProjectOrginalEndDate({commit}, aUserProject){
     for(let i = 0; i < aUserProject.length; i++){
-      aUserProject[i].DateEndToChange = aUserProject[i].DateEnd;
+      aUserProject[i].DateEndToChange = aUserProject[i].DateEnd; // DateEndToChange is original date of entry
+      if(aUserProject[i].IsCurrent){
+        aUserProject[i].DateEnd = new Date()
+      }
     }
     commit("SET_USER_PROJECTS_LIST", aUserProject);
   },
