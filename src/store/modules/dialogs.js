@@ -44,7 +44,7 @@ const actions = {
   }) {
     commit('SET_LEAVE_PAGE_DIALOG', false)
     commit('SET_LEAVE_PAGE_FLAG', true)
-    getters.showCV ? router.replace(getters.getNextPath) : commit("SET_SHOW_CV_DIALOG", true);
+    getters.getShowCV === false ? router.replace(getters.getNextPath) : commit("SET_SHOW_CV_DIALOG", true);
     commit('SET_SHOW_CV', false)
   },
   rejectPageLeave({
