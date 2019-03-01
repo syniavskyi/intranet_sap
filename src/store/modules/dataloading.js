@@ -867,6 +867,7 @@ const actions = {
         aUserProject[i].DateEnd = new Date()
       }
     }
+    aUserProject.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
     commit("SET_USER_PROJECTS_LIST", aUserProject);
   },
 
