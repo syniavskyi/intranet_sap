@@ -114,15 +114,19 @@ export default {
     methods: {
         ...mapActions([]),
         countDays(holiday) {
-            let dateStart = new Date(holiday.dateStart),
+            let dateStart, dateEnd, countedDays;
+            if(holiday.dateStart && holiday.dateEnd){
+                dateStart = new Date(holiday.dateStart)
                 dateEnd = new Date(holiday.dateEnd)
-            let countedDays = (( dateEnd - dateStart) / 86400000) + 1;
-            for(let d = dateStart; d <= dateEnd; d.setDate(d.getDate()+1)){
-                if(!this._chekIfWorkDate(d)){
-                    --countedDays;
+                countedDays = (( dateEnd - dateStart) / 86400000) + 1;
+                for(let d = dateStart; d <= dateEnd; d.setDate(d.getDate()+1)){
+                    if(!this._chekIfWorkDate(d)){
+                        --countedDays;
+                    }
                 }
             }
-            holiday.countedDays = holiday.countedDays ? countedDays : 0;
+
+            holiday.countedDays = countedDays ? countedDays : 0;
             
         },
         _chekIfWorkDate(date){
