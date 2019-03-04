@@ -122,7 +122,7 @@ export default {
                     --countedDays;
                 }
             }
-            holiday.countedDays = countedDays;
+            holiday.countedDays = holiday.countedDays ? countedDays : 0;
             
         },
         _chekIfWorkDate(date){
