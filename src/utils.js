@@ -37,6 +37,13 @@ export const formatDateForBackend = function (date) {
   }
 };
 
+export const addDaysToDate = function(date, days){
+  let baseDate = new Date(),
+      orgDate = date,
+      newDate = new Date(orgDate.setDate(date.getDate() + days))
+      return newDate
+}
+
 export const dateStringToObj = function (date) {
   if (date && date !== null) {
     return new Date(parseInt(date.substring(6, date.length - 2)));

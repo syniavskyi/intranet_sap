@@ -98,6 +98,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import i18n from "../../lang/lang";
+const utils = require("../../utils")
 export default {
     name: 'holidayRequestTemplate',
      created() {
@@ -117,18 +118,79 @@ export default {
                 dateEnd = new Date(holiday.dateEnd)
             let countedDays = (( dateEnd - dateStart) / 86400000) + 1;
             for(let d = dateStart; d <= dateEnd; d.setDate(d.getDate()+1)){
-                if(this._chekIsHoliday(d)){
+                if(!this._chekIfWorkDate(d)){
                     --countedDays;
                 }
             }
             holiday.countedDays = countedDays;
+            
         },
-        _chekIsHoliday(date){
+        _chekIfWorkDate(date){
             if(date.getDay() === 0 || date.getDay() === 6){
+                return false
+            } else if(this._chechIfHoliday(date)){
+                return false
+            } else {
+                return true
+            }
+        },
+        _chechIfHoliday(date){
+            let holidays = this._determinesHolidays(date)
+            if(holidays.find(h => h.getFullYear() === date.getFullYear() && h.getMonth() === date.getMonth() && h.getDate() === date.getDate())){
                 return true
             } else {
                 return false
             }
+        },
+        _getEasterDate(date){
+            let year = date.getFullYear(),
+                baseDate = new Date(year, 2, 22),
+                easter;
+            let A = 24, 
+                B = year >= 2100 ? 6 : 5, 
+                a = year % 19, 
+                b = year % 4, 
+                c = year % 7, 
+                d = ( a * 19 + A ) % 30, 
+                e = ( 2 * b + 4 * c + 6 * d + B) % 7;
+            easter = new Date(baseDate.setDate(baseDate.getDate() + d + e))
+            // WYJĄTKI 
+            //jeśli 26.04 to tydzień wcześniej -> 19.04 (tylko wg współczynników)
+            if(d === 29 && e === 6){
+                easter = new Date(year, 3, 19)
+            }
+            // jeśli 25.04 to tydzień wcześniej -> 18.04
+            if(d === 28 && e === 6){
+                easter = new Date(year, 3, 18)
+            }
+
+            return easter;
+
+        },
+        _determinesHolidays(date){
+            let easter = this._getEasterDate(date),
+                addDate = new Date(),
+                year = date.getFullYear(),
+                easterMonday = utils.addDaysToDate(easter, 1),
+                ascensionDay = utils.addDaysToDate(easter, 40),
+                pentecost = utils.addDaysToDate(easter, 49),
+                corpusChristi = utils.addDaysToDate(easter, 60),
+                holidays = [
+                    new Date(year, 0, 1), // new year
+                    new Date(year, 0, 6), // three kings
+                    easter, 
+                    easterMonday,
+                    new Date(year, 4, 1), // labour day
+                    new Date(year, 4, 3), // Constitution Day of May 3
+                    pentecost, 
+                    ascensionDay,
+                    new Date(year, 7, 15), // Armed Forces Day
+                    new Date(year, 10, 1), // All the saints
+                    new Date(year, 10, 11), //Independence Day
+                    new Date(year, 11, 25), // Christmas (first day)
+                    new Date(year, 11, 26) //Christmas (second date day)
+                    ]
+            return holidays
         }
     }
 }
