@@ -33,7 +33,7 @@
                         <select v-if="editMode && avail.StatusId !== 'CO'" class="cd-wselect mla mtb" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
                             <option v-for="type in filteredAvailTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select>
-                        <button v-if="avail.TypeId !== 'WR' && !editMode" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
+                        <button v-if="avail.TypeId === 'LE' && !editMode" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
                             <img src="../../../assets/images/printer32px.png">
                         </button>
                     </div>
