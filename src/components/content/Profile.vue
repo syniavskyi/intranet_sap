@@ -328,6 +328,7 @@ export default {
     let oStore = this.$store,
         sUserAlias = localStorage.getItem("id"),
         sLang = localStorage.getItem("lang");
+    localStorage.setItem("cvUser", sUserAlias)
     oStore.commit('SET_PROMISE_TO_READ', oStore.getters.getProfileToRead);
     if (oStore.getters.getCookie) {
       if (oStore.getters.getGoFromCv && oStore.getters.getRoleList.length > 0) { // if go from CV - do not read data
