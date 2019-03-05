@@ -58,7 +58,7 @@
                                         <button class="select-reset" :title="$t('title.reset')" v-if="selectedStatus" @click="selectedStatus = null">&#10006;</button>
                                         <label class="cd-slabel">{{ $t("label.status") }}</label>
                                     </div>
-                                    <button class="ava-button ava-button-edit" v-if="selectedUser != null" @click="showContent = true">{{ $t("label.display") }}</button>
+                                    <!-- <button class="ava-button ava-button-edit" v-if="selectedUser != null" @click="showContent = true">{{ $t("label.display") }}</button> -->
                                 </div>
                                 <!-- <div class="calendar" v-if="selectedUser != null"> -->
                                 <!-- calendar for projects -->
@@ -114,11 +114,8 @@ export default {
     data() {
         return {
             showUsersCalendar: false,
-            // selectedDepartment: null,
-            // selectedBranch: null,
             showBranchSelect: true,
-            // selectedUser: null,
-            showContent: false,
+            showContent: true,
             selectedType: null,
             selectedStatus: null,
             loginAlias: localStorage.getItem("id")
@@ -249,12 +246,10 @@ export default {
         selectedType(value) {
             let isTypeIdNull = !value ? true : false;
             this.$store.commit('SET_NEW_LEAVE', {TypeId: value, TypeIdNull: isTypeIdNull});
-            // this.newLeave.TypeId = value;
         },
         selectedUser(value){
             this.$store.commit('SET_NEW_LEAVE', {UserId: value});
             this.$refs.projectsTable.cancel() 
-            // this.newLeave.UserId = value.UserAlias;
             this.newProject.UserAlias = value;
             this.checkAuthorization();
         },
