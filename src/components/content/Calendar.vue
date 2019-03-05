@@ -163,26 +163,38 @@ export default {
       },
       // events filter by clicked day
       filterEventForDay() {
-        let aEvents = this.events;
+        let aEvents = this.events,
+            userData = this.userData,
+            filterDep = this.filters.department,
+            loggedUser = userData.UserAlias
         const day = this.selectedDay.date;
-
         const fnFilter = oItem => oItem.DateFrom <= day.setHours(1) && day.setHours(1) <= oItem.DateTo
-        const fnFilterTargetGroup = function (event) {
-          if(this.filters.department) {
-            for(let values of event.TargetGroup) {
-              return values === this.filters.department
+        const filterByTargetAndUser = event => {
+          let depToFilter = filterDep ? filterDep : userData.DepartmentId
+          // Search in target groups
+          if(event.TargetGroup.length >= 1 && userData.DepartmentId){ 
+            if(event.TargetGroup[0] !== ""){ //check if first item is not empty
+              for(let val in event.TargetGroup){
+                if(event.TargetGroup[val] === depToFilter){
+                  return true;
+                }
+              }
             }
-          } else if(this.userData.DepartmentId) {
-            for(let values of event.TargetGroup) {
-              return values === this.userData.DepartmentId
-            }
-          } else {
-            return event;
           }
-        }.bind(this);
+          // Search in employees
+          if(event.Employee.length >= 1){
+            if(event.Employee[0] !== ""){ //check if first item is not empty
+              for(let val2 in event.Employee){
+                if(event.Employee[val2] === loggedUser){
+                  return true;
+                }
+              }
+            } 
+          }
+        }
 
-        aEvents = aEvents.filter(fnFilter);
-        return aEvents = aEvents.filter(fnFilterTargetGroup)
+        aEvents = aEvents.filter(fnFilter).filter(filterByTargetAndUser) // filter by dates than by target group and user
+        return aEvents
       },
       // calendar attributes
       attributes() {
