@@ -47,7 +47,6 @@
     display: flex;
     text-align: center;
     width: 100%;
-
     font-family: 'Roboto';
     font-size: 1.1rem;
     background :transparent;
@@ -62,8 +61,9 @@
 
 .cd-input { min-height: 2rem; }
 
-.cd-tinput { height: 1.5rem;}
-/* delegations table input */
+
+.cd-tinput { height: 1.5rem; } /* delegations table input */
+
 .cd-tinput,
 .cd-tinput-dis { width: 6rem; }
 
@@ -400,11 +400,11 @@
 
 .cd-rangem input { width: 14rem; }
 
-.cd-rangex input { width: 15rem; }
-/* COOL (CONTET) DIV DATE PICKER INPUT */
-/* COOL (CONTENT) DIV INPUT / SELECT / TEXTAREA  - end */
+.cd-rangex input { width: 15rem; } /* (CONTET DIV DATE PICKER INPUT */
 
-/* COOL RADIOBUTTON */
+/* (CONTENT DIV INPUT / SELECT / TEXTAREA  - end */
+
+/* RADIOBUTTON */
 .cd-rbtn {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -431,7 +431,93 @@
     cursor: pointer;
     transition: color .1s;
 }
-/* COOL RADIOBUTTON */
+/* RADIOBUTTON */
+
+/* CHECKBOX */
+
+.checkbox-wrap {
+    display: flex;
+    align-self: center;
+    position: relative;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox-margin {margin-right:.5rem}
+.checkbox-wrap input {
+    opacity: 0;
+    margin:5px;
+    padding: 0;
+}
+.checkbox-in {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: rgb(224, 224, 224);
+    border-radius:2px;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.checkbox-wrap input:checked ~ div:after {
+    opacity: 1;
+}
+.checkbox-wrap input:checked ~ div {
+    background: #ffa500;
+}
+
+.checkbox-wrap input:checked:hover ~ div {
+    background: rgb(218, 141, 0);
+}
+.checkbox-wrap input:disabled ~ div {
+    background: rgb(243, 243, 243);
+    cursor: context-menu;
+    pointer-events: none;
+}
+
+/* WHEN CHECKBOX IS CHECKED BUT DISABLED */
+.checkbox-wrap input:disabled:checked ~ div {
+    background: #ffa500;
+}
+.checkbox-wrap input:disabled:checked:hover ~ div {
+    background: rgb(243, 243, 243);
+}
+/* WHEN CHECKBOX IS CHECKED BUT DISABLED */
+
+.checkbox-wrap div:hover {
+    background: #ccc;
+}
+
+.checkbox-in:after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    opacity:0;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Grey out checkbox in Profile Tile experience */
+.checkbox-margin:disabled:not(:checked),
+.checkbox-margin:disabled:not(:checked) ~ div,
+.checkbox-margin:disabled:not(:checked) ~ p {
+    display: none;
+    color: #ccc;
+}
+
+.checkbox-label {
+    padding:0;
+    margin:0;
+    cursor: pointer;
+    margin-left:.5rem;
+}
+/* CHECKBOX */
 
 .select-reset {
     display: flex;

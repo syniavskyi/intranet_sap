@@ -220,7 +220,7 @@ export default {
   created() {
     let oStore = this.$store;
     utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
-    this.this.sortForCV();
+    // this.this.sortForCV();
   },
   methods: {
     ...mapActions([
