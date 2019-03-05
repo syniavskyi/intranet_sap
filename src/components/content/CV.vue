@@ -218,13 +218,12 @@ export default {
      this.$i18n.locale  = retrievedObject.language.toLowerCase();
   },
   created() {
-    let oStore = this.$store;
-    utils.checkAuthLink(this.$router, oStore.getters.getUserAuth.ZMENU);
-    // this.this.sortForCV();
+    utils.checkAuthLink(this.$router, this.$store.getters.getUserAuth.ZMENU);
+    this.sortForCV()
   },
   methods: {
     ...mapActions([
-       "getIndustries"
+       "sortForCV"
     ]),
     descriptionFormatting(desc) {
       return desc.replace(/\n/g, "<br/>")
