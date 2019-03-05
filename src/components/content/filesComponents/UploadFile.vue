@@ -158,7 +158,7 @@ export default {
     data() {
       return {
       files: [],
-      show: true,
+      show: false,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
