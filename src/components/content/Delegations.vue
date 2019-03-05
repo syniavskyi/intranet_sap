@@ -29,7 +29,7 @@
                                 </select>
                                 <label class="cd-slabel">{{ $t("label.selectTeamMember") }}</label>
                             </div>
-                            <button class="func-btn" :disabled="disableGenerating" @click="generatePdf">{{ $t("button.generatePDF") }}</button>
+                            <button class="func-btn" v-if="forViewing" :disabled="disableGenerating" @click="generatePdf">{{ $t("button.generatePDF") }}</button>
                         </div>
                         <div class="tile-underscore"></div>
                     </div>
@@ -173,7 +173,8 @@ export default {
             delegationUsername: localStorage.getItem('id'),
             generatingPdfMode: false,
             disableDelegationNumber: true,
-            showDelegationNoError: false
+            showDelegationNoError: false,
+            forViewing: true
         }
     },
     components: {
@@ -286,35 +287,39 @@ export default {
         },
         generatePdf() {
             this.generatingPdfMode = true
+            this.forViewing = false
             // this.loopClasses()
             const source = document.body.getElementsByClassName('delegations-content')[0]
-
-            html2canvas(source).then(canvas => {
-                    let contentWidth = canvas.width,
-                    contentHeight = canvas.height,
-                    pageHeight = contentWidth / 540 * 841.89,
-                    leftHeight = contentHeight,
-                    position = 0,
-                    imgWidth = 540,
-                    imgHeight = 540/contentWidth * contentHeight,
-                    pageData = canvas.toDataURL('image/jpeg', 1.0),
-                    pdf = new jsPDF('', 'pt', 'a4')
-                    if (leftHeight < pageHeight) {
-                        pdf.addImage(pageData, 'JPEG', 30, 30, imgWidth, imgHeight );
-                    } else {
-                        while(leftHeight > 0) {
-                            pdf.addImage(pageData, 'JPEG', 30, position, imgWidth, imgHeight)
-                            leftHeight -= pageHeight;
-                            position -= 841.89;
-                            if(leftHeight > 0) {
-                                pdf.addPage();
+            this.$store.commit('SET_DISPLAY_LOADER', true)
+            setTimeout(() => {html2canvas(source).then(canvas => {
+                        let contentWidth = canvas.width,
+                        contentHeight = canvas.height,
+                        pageHeight = contentWidth / 540 * 841.89,
+                        leftHeight = contentHeight,
+                        position = 0,
+                        imgWidth = 540,
+                        imgHeight = 540/contentWidth * contentHeight,
+                        pageData = canvas.toDataURL('image/jpeg', 1.0),
+                        pdf = new jsPDF('', 'pt', 'a4')
+                        if (leftHeight < pageHeight) {
+                            pdf.addImage(pageData, 'JPEG', 30, 30, imgWidth, imgHeight );
+                        } else {
+                            while(leftHeight > 0) {
+                                pdf.addImage(pageData, 'JPEG', 30, position, imgWidth, imgHeight)
+                                leftHeight -= pageHeight;
+                                position -= 841.89;
+                                if(leftHeight > 0) {
+                                    pdf.addPage();
+                                }
                             }
                         }
-                    }
-                    let fileName = this.delegationNumber ? this.delegationNumber : 'Delegacja'
-                    pdf.save(fileName + '.pdf');
-                    this.$store.commit('SET_SHOW_CONFIRM_DELEG', true)
-            })
+                        let fileName = this.delegationNumber ? this.delegationNumber : 'Delegacja'
+                        pdf.save(fileName + '.pdf');
+                        this.$store.commit('SET_SHOW_CONFIRM_DELEG', true)
+                })
+                this.forViewing = true
+                this.$store.commit('SET_DISPLAY_LOADER', false)
+            }, 1000)
         },
 
         loopClasses() {
