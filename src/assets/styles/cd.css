@@ -45,6 +45,7 @@
 .cd-input,
 .cd-tinput { /* delegations table input */
     display: flex;
+    margin: 0;
     justify-content: center;
     align-items: flex-end;
     text-align: center;
