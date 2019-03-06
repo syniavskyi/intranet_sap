@@ -220,7 +220,7 @@ const actions = {
       let lang = localStorage.getItem('lang').toUpperCase() === 'PL' ? lang = "EN" : lang = "PL";
       commit('SET_DATA_FOR_HINT', true);
       let dataToSend = {
-        user: localStorage.getItem('id'),
+        user: localStorage.getItem('cvUser') || localStorage.getItem('id'),
         lang: lang,
         changePage: false
       }
