@@ -27,9 +27,10 @@
                 <div class="ava-tbody-s">
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.entryType") }}</div>
-                        <select disabled v-if="!editMode || avail.StatusId === 'CO'" class="cd-wdselect" v-model="avail.TypeId">
+                        <!-- <select disabled v-if="!editMode || avail.StatusId === 'CO'" class="cd-wdselect" v-model="avail.TypeId">
                             <option v-for="type in availTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
-                        </select>
+                        </select> -->
+                        <div v-if="!editMode" class="ava-tablep">{{ availType(avail.TypeId) }}</div>
                         <select v-if="editMode && avail.StatusId !== 'CO'" class="cd-wselect mla mtb" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
                             <option v-for="type in filteredAvailTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select>
@@ -56,9 +57,10 @@
                     </div>
                     <div class="ava-tbs-item">
                         <div class="ava-tbs-ititle">{{ $t("label.status") }}</div>
-                        <select disabled class="cd-wdselect mla mtb" v-model="avail.StatusId">
+                        <div class="ava-tablep">{{ statusType(avail.StatusId) }}</div> 
+                        <!-- <select disabled class="cd-wdselect mla mtb" v-model="avail.StatusId">
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="ava-tbs-item confirmButtonAvail" v-if="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'">
                         <button class="btn-row" v-show="!editMode && authAcc && newLeave.UserId !== loginAlias && filteredTeamUsers.find(o => o.UserAlias === newLeave.UserId) || !editMode && authAcc ==='*'" :disabled="disabledBtnToEditAvail || avail.StatusId !== 'PL'" @click="operation({index, avail, operation: 'confirm'})">{{ $t("button.confirm") }}</button>
@@ -168,6 +170,16 @@ export default {
          }
     },
     methods: {
+        availType(id) {
+            if (id !== undefined) {
+                var index = utils.getIndex(this.availTypes, id)
+                if (index !== -1) return this.availTypes[index].Value
+            }
+        },
+        statusType(id) {
+            var index = utils.getIndex(this.availStatus, id)
+            if (index !== -1) return this.availStatus[index].Value
+        },
         ...mapActions(["removeUserAvail", "updateUserAvail"]),
          edit() {
             this.editMode = true;

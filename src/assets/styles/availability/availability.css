@@ -306,6 +306,19 @@
 
 /* Availability Tables and their Inputs / Selects */
 
+.ava-tablep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 1.2rem 'Roboto';
+    color: #333;
+    text-align: center;
+    color: #808080;
+    margin: 8px;
+    padding: 0;
+    padding-left: .1rem;
+}
+
 .ava-proj-table, /* Projects Table */
 .ava-table-s {
     display: flex;
@@ -435,6 +448,9 @@
 }
 
 @media(min-width: 56.25rem) {
+    .ava-tablep {
+        padding: 0;
+    }
     .holiday-button-static {
         display : flex;
     }

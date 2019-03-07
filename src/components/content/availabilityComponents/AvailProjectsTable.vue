@@ -30,9 +30,10 @@
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.projectName") }}</div>
-                        <select disabled v-if="!editMode" class="cd-wdselect mla" v-model="project.ProjectId" >
+                        <!-- <select disabled v-if="!editMode" class="cd-wdselect mla" v-model="project.ProjectId" >
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
-                        </select>
+                        </select> -->
+                        <div v-if="!editMode" class="ava-tablep">{{ projectName(project.ProjectId, index) }}</div>
                         <select v-if="editMode" class="cd-wselect mla" v-model="project.ProjectId" @change="checkFields(index)">
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
                         </select>
@@ -64,9 +65,10 @@
                         <select v-if="editMode" class="cd-wselect mla mtb" v-model="project.StatusId" @change="checkFields(index)">
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
                         </select>
-                         <select disabled v-if="!editMode" class="cd-wdselect mla mtb" v-model="project.StatusId" >
+                        <!-- <select disabled v-if="!editMode" class="cd-wdselect mla mtb" v-model="project.StatusId" >
                             <option v-for="status in availStatus" :key="status.Key" :value="status.Key">{{status.Value}}</option>
-                        </select>
+                        </select> -->
+                        <div v-if="!editMode" class="ava-tablep">{{ projectStatus(project.StatusId) }}</div>
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.remarks") }}</div>
@@ -133,9 +135,17 @@ export default {
     },
     methods: {
         ...mapActions(["updateUserProject", "removeUserProject"]),
-         edit() {
+        edit() {
             this.editMode = true;
             this._beforeEditingCache = utils.createClone(this.userProjects);
+        },
+        projectName(id, projectId) {
+            let project = this.userProjects[projectId]
+            return project.ProjectName
+        },
+        projectStatus(id) {
+            let index = utils.getIndex(this.availStatus, id)
+            return this.availStatus[index].Value
         },
         remove(project) {
             // this._beforeEditingCache.splice(index, 1);
