@@ -1,6 +1,13 @@
 import moment from "moment";
 import i18n from './lang/lang';
 
+export const getIndex = function (array, id) {
+  let index = array.map((elem) => {
+    return elem.Key
+  }).indexOf(id)
+  return index
+}
+
 export const createRateDate = function (rateDate) {
   let day = parseFloat(moment(rateDate).format("D")),
     month = parseFloat(moment(rateDate).format("M")),
