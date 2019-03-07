@@ -378,7 +378,7 @@ export default {
         userPro = this.userProjects[index];
       if (beforeEdit) {
         bProjectName = beforeEdit.ProjectName !== userPro.ProjectName;
-        bContractor = beforeEdit.Contractor !== userPro.Contractor;
+        bContractor = beforeEdit.ContractorName !== userPro.ContractorName;
         bIndustries = this._checkIndustries(beforeEdit.Industries, userPro.Industries);
         bModules = this._checkModules(beforeEdit.Modules, userPro.Modules)
         bDateStart = utils.dateToValid(beforeEdit.DateStart, userPro.DateStart, "equal");

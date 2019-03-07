@@ -546,8 +546,10 @@
 
 @media (min-width:56.25rem) {
     .cd-wdselect {
-        text-align-last: center;
+        /* text-align-last: center; */
         text-indent: 0;
+        /* padding-left: 2rem */
+        justify-content: center;
     }
     .cd-wselect { margin-left: .1rem; }
 }
