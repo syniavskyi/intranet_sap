@@ -1249,7 +1249,7 @@
 }
 
 .profile-table-module-button {
-    width: 2rem;
+    min-width: 2rem;
     padding:.1rem;
 }
 
