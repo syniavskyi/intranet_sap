@@ -64,7 +64,7 @@
                     <div class="del-tbody-2">
                         <div class="del-tbody2-item-wfoot-adv"></div>
                         <div class="del-tbody2-item-adv">{{ $t("table.delegations.amount") }}  {{newDelegation.currency}}</div>
-                        <div class="del-tbody2-item-adv">{{totalCostsInCurr.advance }}</div>
+                        <div class="del-tbody2-item-adv">{{totalCostsInCurr.advance.toFixed(2) }}</div>
                         <div class="del-tbody2-item-adv">&nbsp;</div>
                     </div>
                 </div>
