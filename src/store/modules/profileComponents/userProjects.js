@@ -1,5 +1,7 @@
 import axios from 'axios'
 import moment from 'moment'
+import Vue from 'vue';
+
 
 let utils = require('../../../utils')
 
@@ -15,7 +17,8 @@ const state = {
   showHintProject: {},
   editedProjectIdx: "",
   editedProjectContractor: "",
-  sortedCVPro: []
+  sortedCVPro: [],
+  beforeProjectsEdit: null
 };
 
 const mutations = {
@@ -57,6 +60,24 @@ const mutations = {
   },
   SET_SORTED_CV_PRO(state, data) {
     state.sortedCVPro = data
+  },
+  SET_BEFORE_PROJECT_EDIT(state, obj){
+    if(obj.row && obj.push){
+      state.beforeProjectsEdit.push(obj.row);
+    }
+    if(obj.data) {
+      // let sortedPro = obj.data;
+      // sortedPro.sort((a,b) => ((a.DateEnd < b.DateEnd) ? 1 : (b.DateEnd < a.DateEnd) ? -1 : (a.DateStart < b.DateStart) ? 1 : (a.DateStart < b.DateStart) -1));
+      state.beforeProjectsEdit = obj.data //sortedPro
+    } 
+    if(obj.index >= 0 && obj.row){
+      state.beforeProjectsEdit[obj.index] = obj.row //[obj.index] = obj.row
+    } else if(obj.index >= 0) {
+      state.beforeProjectsEdit.splice(obj.index, 1)
+    }
+  },
+  SET_USER_PROJECT_AFTER_EDIT(state, obj){
+    state.sortedCVPro[obj.index] = obj.row 
   }
 }
 
@@ -80,7 +101,7 @@ const actions = {
     commit('SET_PROJECT_ERROR', false)
   },
   saveUserProjectsPosition({
-    dispatch, getters
+    dispatch, getters, commit
   }, data) {
     getters.getSelectedForCvUser ? data.UserAlias = getters.getSelectedForCvUser : data.UserAlias = localStorage.getItem("id");
     data.DateStart = utils.formatDateForBackend(data.DateStart);
@@ -106,10 +127,12 @@ const actions = {
           "x-csrf-token": sToken
       }
     }).then(res => {
-      let message = res.headers;
+      let message = res.headers,
+          oObject = { push: true, row: data };
       dispatch('displayModal', message);
-      commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
-      dispatch('getData');
+      // commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
+      // dispatch('getData');
+      commit("SET_BEFORE_PROJECT_EDIT", oObject)
       }).catch(error => {
     })
   },
@@ -132,7 +155,7 @@ const actions = {
     /* DJA */
     delete dataToSend.User;
     dispatch('formatProjectToString', dataToSend);
-    let projectName = encodeURIComponent(dataToSend.ProjectName)
+    let projectName = encodeURIComponent(dataToSend.ProjectNameToChange)
     let urlD = `UserCvProjects(UserAlias='${dataToSend.UserAlias}',DateStart=datetime'${moment(dataToSend.DateStart).format("YYYY-MM-DD")}T00:00:00',DateEnd=datetime'${moment(dataToSend.DateEnd).format("YYYY-MM-DD")}T00:00:00',ProjectName='`+projectName+`',Language='${dataToSend.Language}')`;
     let urlU = "UserCvProjects(UserAlias='" + dataToSend.UserAlias + "',DateStart=datetime'" + moment(dataToSend.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00" + "',DateEnd=datetime'" + moment(dataToSend.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00" + "',ProjectName='" + projectName + "',Language='" + dataToSend.Language + "')";
     let sToken = getters.getToken;
@@ -149,13 +172,20 @@ const actions = {
       }
     }).then(res => {
         let message = res.headers;
-        if(dataToSend.Action === 'D'){
-          commit('SET_USER_PROJECTS_LIST_REMOVE', data.index)
-        }
+        
+          if(dataToSend.Action === 'D'){
+            commit('SET_USER_PROJECTS_LIST_REMOVE', data.index)
+            commit('SET_BEFORE_PROJECT_EDIT', { index: data.index })
+          } else if(dataToSend.Action === 'U') {
+            dataToSend.DateEndToChange = dataToSend.DateEnd;
+            commit('SET_BEFORE_PROJECT_EDIT', { index: data.index, row: dataToSend })
+            commit('SET_USER_PROJECT_AFTER_EDIT', { index: data.index, row: dataToSend })
+          }
+
         dispatch('displayModal', message);
         commit('SET_DISPLAY_LOADER', false)
-        commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
-        dispatch('getData', { user: localStorage.getItem('cvUser') });
+        // commit("SET_PROMISE_TO_READ", ["NewToken", "UserData"]);
+        // dispatch('getData', { user: localStorage.getItem('cvUser') });
       }).catch(error => {
         commit('SET_DISPLAY_LOADER', false)
       })
@@ -452,6 +482,9 @@ const getters = {
   },
   getEditedProjectContractor(state) {
     return state.editedProjectContractor
+  },
+  getBeforeProjects(state) {
+    return state.beforeProjectsEdit
   }
 }
 

@@ -36,11 +36,11 @@ export const createRateDate = function (rateDate) {
 };
 
 export const formatDateForBackend = function (date) {
-  if(date){
+  if(date && typeof(date) === "object"){
      date = this.formatTimeZone(date, 1);
     return "/Date(" + new Date(date).getTime().toString() + ")/";
-  } else {
-    return null;
+  } else if(date && typeof(date) === "string") {
+    return date;
   }
 };
 
@@ -272,22 +272,25 @@ export const checkRole = function(data) {
   }
 //compare dates and check changes in profile components
  export const dateToValid = function(beforeData, newData, operation) {
-   
-   let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDate());
-   let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDate());
-   if(operation === "equal") {
-    return a.getTime() !== b.getTime()
-   } else if(operation === "later" ) {
-    return a.getTime() >= b.getTime()
+   if(typeof(beforeData) === "object"){
+    let a = new Date(beforeData.getFullYear(), beforeData.getMonth(), beforeData.getDate());
+    let b = new Date(newData.getFullYear(), newData.getMonth(), newData.getDate());
+    if(operation === "equal") {
+     return a.getTime() !== b.getTime()
+    } else if(operation === "later" ) {
+     return a.getTime() >= b.getTime()
+    }
    }
  }
  //add one day to data send to backend
  export const formatTimeZone = function(oDate) {
-  var nUserOffset;
-  if (oDate) {
-    nUserOffset = oDate.getTimezoneOffset() * 60 * 1000;
-    return new Date(oDate.getTime() - nUserOffset);
-      }
+    var nUserOffset;
+    if (oDate && typeof(oDate) === "object") {
+      nUserOffset = oDate.getTimezoneOffset() * 60 * 1000;
+      return new Date(oDate.getTime() - nUserOffset);
+    } else if(oDate){
+      return oDate;
+    }
   }
   export const checkAuthLink = function(oEvent, oStore) {
     var sCurrentPath = oEvent.currentRoute.name,
