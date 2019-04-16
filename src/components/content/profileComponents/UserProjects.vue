@@ -154,7 +154,7 @@ export default {
       invalidDates: false,
       invalidDatePos: null,
       showEndInput: true,
-      _beforeEditingProjects: null,
+      // _beforeEditingProjects: null,
       showHintAfterSave: false,
       contractorIndustries: [],
       hoverOrEdit: false,
@@ -179,7 +179,8 @@ export default {
       contractorsBranches: "getContractorsBranches",
       showToast: "getDisplayToast",
       editedProjectIdx: "getEditedProjectIdx",
-      editedProjectContractor: "getEditedProjectContractor"
+      editedProjectContractor: "getEditedProjectContractor",
+      _beforeEditingProjects: "getBeforeProjects"
     }),
     sortedProjects() {
       let sortedPro;
@@ -217,14 +218,17 @@ export default {
     }),
     setEditedProjectContractor(index) {
       this.$nextTick(function() {
+        let aBeforeEditing =  this.$store.getters.getBeforeProjects;
         if (this.editedProjectIdx === index) {
           return this.editedProjectContractor;
         } else if (this.editedProjectIdx === "") {
           if (
-            this._beforeEditingProjects !== null &&
-            this._beforeEditingProjects !== undefined
+            // this._beforeEditingProjects !== null &&
+            // this._beforeEditingProjects !== undefined
+            aBeforeEditing !== null &&
+            aBeforeEditing !== undefined
           ) {
-            return this._beforeEditingProjects[index].ContractorName;
+            return aBeforeEditing[index].ContractorName;//this._beforeEditingProjects[index].ContractorName;
           } else return this.userProjects[index].ContractorName;
         } else {
           return this.userProjects[index].ContractorName;
@@ -333,14 +337,15 @@ export default {
       newData.Action = 'D'
       this.$store.dispatch("updateUserProjectsPosition", { newData, index })
       // this.userProjects.splice(index, 1);
-      this._beforeEditingProjects = utils.createClone(this.userProjects)
+      // this._beforeEditingProjects = utils.createClone(this.userProjects)
+      // this._beforeEditingProjects.splice(index, 1) TMP
       this.$store.commit("SET_DATA_CHANGE_PROF", {
         changed: false,
         editMode: false
       })
     },
     save(index) {
-      const dataToChange = this._beforeEditingProjects[index],
+      const dataToChange = this.$store.getters.getBeforeProjects[index],//this._beforeEditingProjects[index],
         newData = utils.createClone(this.userProjects[index])
       // newData.index = index;
       newData.Action = "U";
@@ -350,12 +355,16 @@ export default {
         newData.DateStartToChange = dataToChange.DateStart;
         // newData.DateEndToChange = dataToChange.DateEnd; 25.01.2019 AWi
         newData.ProjectNameToChange = dataToChange.ProjectName;
-        this.$store.dispatch("updateUserProjectsPosition", { newData });
+        newData.WasCurrent = dataToChange.IsCurrent ? "X" : "";
+        this.$nextTick(() => {
+          this.$store.dispatch("updateUserProjectsPosition", { newData, index });
+        })
+        console.log(this.$refs.emptyContractors)
       } else {
         this.$store.dispatch("saveUserProjectsPosition", newData);
         // newData.Action ='A';
       }
-      this._beforeEditingProjects = utils.createClone(this.userProjects);
+      // this.$store.commit('SET_BEFORE_PROJECT_EDIT', {  row: utils.createClone(this.userProjects[index]), index: index });// this._beforeEditingProjects = utils.createClone(this.userProjects);
       document.getElementsByClassName("projSaveButton")[index].disabled = true;
       this.showHintAfterSave = true;
       this.$store.commit("SET_DATA_CHANGE_PROF", {
@@ -374,7 +383,7 @@ export default {
         bDateEnd,
         bDateChange,
         bDesc,
-        beforeEdit = this._beforeEditingProjects[index],
+        beforeEdit =  this.$store.getters.getBeforeProjects[index],//this._beforeEditingProjects[index],
         userPro = this.userProjects[index];
       if (beforeEdit) {
         bProjectName = beforeEdit.ProjectName !== userPro.ProjectName;
@@ -487,7 +496,7 @@ export default {
     },
     finishEditing() {
       this.$store.commit("SET_PROJECT_ERROR", false);
-      this.$store.commit("SET_USER_PROJECTS_LIST", this._beforeEditingProjects);
+      this.$store.commit("SET_USER_PROJECTS_LIST",  this.$store.getters.getBeforeProjects);//this._beforeEditingProjects);
       this.projectEditMode = false;
       this.allowToSort = false;
       this.hoverOrEdit = false;
@@ -501,7 +510,7 @@ export default {
     editProjects() {
       this.projectEditMode = true;
       this.allowToSort = false;
-      this._beforeEditingProjects = utils.createClone(this.userProjects);
+      this.$store.commit('SET_BEFORE_PROJECT_EDIT', {  data: utils.createClone(this.userProjects) });// this._beforeEditingProjects = utils.createClone(this.userProjects);
       this.hoverOrEdit = true;
     },
     formatDate(date) {
