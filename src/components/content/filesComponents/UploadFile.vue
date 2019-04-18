@@ -320,8 +320,8 @@ export default {
         sendFiles({getters}){
             let files = this.files;
 
-            for(const file of files){
-                // this.$store.dispatch("uploadDocument", file)
+            for(let i = 0; i < files.length; i++){
+                this.$store.dispatch("uploadDocument", { file: files[i], totalAmount: files.length, index: i })
             }
         },
 
@@ -331,8 +331,7 @@ export default {
         },
 
         removeFile(index){
-            this.files.splice
-            console.log(this.files);
+            this.files.splice(index, 1);
         }
 
     }

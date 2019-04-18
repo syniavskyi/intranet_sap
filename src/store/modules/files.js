@@ -16,6 +16,7 @@ const state = {
     url: "",
     addToStarter: false,
     sendEmail: false },
+  messages: []
 }
 
 const mutations = {
@@ -39,6 +40,9 @@ const mutations = {
   },
   SET_LINK_STRUCTURE(state, data){
     state.linkStructure = data
+  },
+  SET_FILE_MESSAGES(state, data){
+    state.messages = data
   }
 }
 
@@ -101,24 +105,52 @@ const actions = {
       tiles[i].lastElementChild.style.height = "0px"
     }
   },
-  uploadDocument({getters}, file){
-    let slugHeader = `${file.name};TEST-DOCUM;PL;;${file.type};${file.addToStarter};${file.sendEmail}`;
-    axios({
-      method: 'POST',
-      url: 'AttachmentMedias',
-      data: file,
-      headers: {
-        "Content-type": file.type,
-        "X-Requesteg-With": "XMLHttpRequest",
-        "Slug": slugHeader,
-        "x-csrf-token": getters.getToken
-      }
-    }).then(res=>{
-      console.log(res)
-    }).catch(error=>{
-      console.log(error)
-    })
+  uploadDocument({getters, commit, dispatch}, data){
+    let file = data.file,
+        newFileName = `${file.fileName}.${file.fileId.substr(file.fileId.lastIndexOf('.') + 1)}`,
+        addToStarter = file.addToStarter ? "X" : "",
+        sendEmail = file.sendEmail ? "X" : "",
+        slugHeader = `${newFileName};${file.fileType};PL;;${file.type};${addToStarter};${sendEmail};UPL`; 
+        file = file.nativeFile;
+
+        commit('SET_DISPLAY_LOADER', true)
+        axios({
+          method: 'POST',
+          url: 'AttachmentMedias',
+          data: file,
+          headers: {
+            "Content-type": file.type,
+            "X-Requesteg-With": "XMLHttpRequest",
+            "Slug": slugHeader,
+            "x-csrf-token": getters.getToken
+          }
+        }).then(res=>{
+          let message = res.headers,
+              fileMessages = getters.getFileMessages,
+              detail = JSON.parse(message["sap-message"]).details;
+          for(let i = 0; i < detail.length; i++){
+            fileMessages.push(detail[i]);
+          }
+          
+          // If it is the last file
+          if(data.index + 1 === data.totalAmount){
+            commit('SET_DISPLAY_LOADER', false);
+         // get files data
+            commit("SET_PROMISE_TO_READ", ["Documents", "NewToken"])
+            dispatch("getData", null)
+            dispatch('displayModalFewMessages', fileMessages);
+            commit("SET_FILE_MESSAGES", []);
+          } else {
+            commit("SET_FILE_MESSAGES", fileMessages);
+          }
+
+
+        }).catch(error=>{
+          commit('SET_DISPLAY_LOADER', false)
+          dispatch('displayModal', res.headers);
+        })
   },
+
   uploadLink({getters, dispatch, commit}, link){
     let data = {
       FileId: link.type,
@@ -180,6 +212,9 @@ const getters = {
   },
   getLinkStructure(state){
     return state.linkStructure
+  },
+  getFileMessages(state){
+    return state.messages
   }
 }
 

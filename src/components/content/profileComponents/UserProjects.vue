@@ -359,7 +359,6 @@ export default {
         this.$nextTick(() => {
           this.$store.dispatch("updateUserProjectsPosition", { newData, index });
         })
-        console.log(this.$refs.emptyContractors)
       } else {
         this.$store.dispatch("saveUserProjectsPosition", newData);
         // newData.Action ='A';

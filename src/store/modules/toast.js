@@ -51,6 +51,17 @@ const actions = {
             }
             catch(err){}
         }
+    },
+    displayModalFewMessages({commit, getters}, messages) {
+              commit('SET_MESSAGE_LOG', messages);
+              commit('SET_SHOW_MODAL', true);
+              if(messages.find(o => o.severity === 'error')) {
+                commit('SET_HEADER_MODAL_CLASS', 'modal-header-err');
+              } else if(messages.find(o => o.severity === 'warning') ){
+                commit('SET_HEADER_MODAL_CLASS', 'modal-header-war');
+              } else {
+                commit('SET_HEADER_MODAL_CLASS', 'modal-header-info');
+              }
     }
 }
 
