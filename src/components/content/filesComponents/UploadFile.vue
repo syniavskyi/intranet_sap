@@ -1,8 +1,7 @@
 <template>
     <div class="file-upload" v-if="this.authType !== 'OWN'">
-    <!-- <div class="file-upload" v-if="this.authType !== 'OWN' && this.show"> -->
-        <h3 v-if="this.show" class="content-header-title content-header-title-h3">{{ $t("header.addNewFile") }}</h3>
-        <div v-if="this.show" class="drag-drop">
+        <h3 class="content-header-title content-header-title-h3">{{ $t("header.addNewFile") }}</h3>
+        <div class="drag-drop">
             <div id="drop" class="drag-drop__container" draggable="true" @dragover.prevent="handleDragOver" @dragleave="handleLeave"
              @dragenter="handleDragEnter" @drop.prevent="handleDrop">
                 <div class="drag-drop__container--border">
@@ -14,8 +13,8 @@
             </div>       
         </div>
         <!-- FILES TABLE -->
-        <h4 v-if="this.show" class="content-header-title content-header-title-h4">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h4>
-        <div v-if="this.show" class="drag-drop__list">     
+        <h4 class="content-header-title content-header-title-h4">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h4>
+        <div class="drag-drop__list">     
             <div class="dd-table">
                 <header class="dd-table__header">
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
@@ -72,7 +71,7 @@
                 </section>
             </div>
         </div>
-        <div v-if="this.show" class="drag-drop__btn">
+        <div class="drag-drop__btn">
             <button :disabled="$v.files.$invalid" @click="sendFiles" class="func-btn cd-b">{{ $t("button.sendFiles")}}</button>
         </div>
         <!-- LINK TABLE -->
@@ -158,7 +157,6 @@ export default {
     data() {
       return {
       files: [],
-      show: false,
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
