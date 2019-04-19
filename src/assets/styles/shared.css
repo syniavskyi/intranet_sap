@@ -494,10 +494,6 @@ input:required {
     justify-content: center;
   }
 
-  .nav-user .picture-loader {
-    position: fixed;
-  }
-
   @keyframes picture_loader {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
