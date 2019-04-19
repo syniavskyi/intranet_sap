@@ -346,4 +346,8 @@ export default {
 </script>
 
 <style scoped>
+  .advBtns {
+    padding: 4px;
+  }
+
 </style>

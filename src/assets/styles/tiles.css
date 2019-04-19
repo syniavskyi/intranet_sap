@@ -39,6 +39,7 @@
     flex: 1 1 auto;
     flex-wrap: wrap;
     width: 100%;
+    align-items: flex-start;
     justify-content: center;
 }
 /* tile head */
