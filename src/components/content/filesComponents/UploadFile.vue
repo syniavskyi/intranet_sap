@@ -23,7 +23,11 @@
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.addToSPUpl") }}</label>
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
                     <label for="" class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;</label>
-                    <label class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;</label>
+                    <label class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;
+                        <!-- <button @click="refreshFileList" class="dd-table__refresh-btn">
+                            &#x21bb;
+                        </button> -->
+                    </label>
                 </header>
                 <section>
                         <div class="dd-table__body" v-if="files.length > 0">
@@ -55,9 +59,18 @@
                                     </label>
                                 </div>
                                 <div class="dd-table__cell dd-table__c-files">
-                                    <label class="checkbox-wrap">
-                                        <input type="checkbox" class="checkbox-new" v-model="file.status" />
-                                        <div class="checkbox-in"></div>
+                                    <label class="sk-folding-label">
+                                        <!-- Loading -->
+                                        <div class="sk-folding-cube" v-if="file.status === 'P'">
+                                            <div class="sk-cube1 sk-cube"></div>
+                                            <div class="sk-cube2 sk-cube"></div>
+                                            <div class="sk-cube4 sk-cube"></div>
+                                            <div class="sk-cube3 sk-cube"></div>
+                                        </div>
+                                        <!-- Completed -->
+                                        <div class="sk-container-compl" v-if="file.status === 'C'">
+                                            <button :disabled="true" class="upload-compl-btn">&#x2714;</button>
+                                        </div>
                                     </label>
                                 </div>
                                 <div class="dd-table__cell dd-table__c-files">
@@ -133,22 +146,14 @@
     </div>
 </template>
 
-
 <script>
 
-/* TO DO:
- * -obsłużyć dodawanie linków
- * -uporządkować CSS-y
- * -obsłużyć usuwanie przed zapisem
- * -obsłużyć backend
- * -dodać loadera 
- * -walidacja
- */
 
 import i18n from "../../../lang/lang";
 import { mapGetters } from 'vuex';
 import { required, minLength, url } from "vuelidate/lib/validators";
 import Toast from "../../dialogs/Toast";
+import axios from "axios";
 
 const insideElements = new Set();
 
@@ -315,11 +320,42 @@ export default {
             this.$emit("drag-leave", e);
             // alert("Left!")
         },
-        sendFiles({getters}){
-            let files = this.files;
+        sendFiles({getters, commit, dispatch}){
+            let files = this.files,
+                oStore = this.$store,
+                currIndex;
 
             for(let i = 0; i < files.length; i++){
-                this.$store.dispatch("uploadDocument", { file: files[i], totalAmount: files.length, index: i })
+                let file = files[i],
+                    newFileName = `${file.fileName}.${file.fileId.substr(file.fileId.lastIndexOf('.') + 1)}`,
+                    addToStarter = file.addToStarter ? "X" : "",
+                    sendEmail = file.sendEmail ? "X" : "",
+                    slugHeader = `${newFileName};${file.fileType};PL;;${file.type};${addToStarter};${sendEmail};UPL`; 
+                    file = file.nativeFile;
+                    oStore.commit('SET_DISPLAY_LOADER', true)
+                    this.files[i].status = "P"
+                    axios({
+                    method: 'POST',
+                    url: 'AttachmentMedias',
+                    data: file,
+                    headers: {
+                        "Content-type": file.type,
+                        "X-Requesteg-With": "XMLHttpRequest",
+                        "Slug": slugHeader,
+                        "x-csrf-token": oStore.getters.getToken
+                    }
+                    }).then(res=>{
+                        if(currIndex || currIndex === 0){
+                            currIndex += 1;
+                        } else {
+                            currIndex = 0;
+                        }
+                        this.files[currIndex].status = "C"
+                        oStore.dispatch('proceedFile', {res: res, index: currIndex, totalAmount: files.length})
+                    }).catch(error=>{
+                        oStore.commit('SET_DISPLAY_LOADER', false)
+                        oStore.dispatch('displayModal', res.headers)
+                    })
             }
         },
 
@@ -335,197 +371,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-
-.file-upload {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    align-items: flex-start;
-    width: 95%;
-    
-}
-
-.drag-drop {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 20rem;
-    width: 100%;
-    position: relative;
-}
-
-.drag-drop__container {
-    display: flex;
-    flex: 1;
-    min-height: 12rem;
-    max-height: 14rem;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    -webkit-background-image: linear-gradient(to right bottom, rgba(211, 211, 211, 0.5), #fff);
-    background-image: linear-gradient(to right bottom, rgba(211, 211, 211, 0.5), #fff);
-    border: 1px solid #d3d3d3;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-    font-size: 1.8rem;
-    color:	#888888;
-    
-}
-
-.drag-drop__container--border {
-    display: flex;
-    flex: 0 1 auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 90%;
-    width: 98.5%;
-    border: 2px dashed #d3d3d3;
-}
-
-.drag-drop__container--image {
-    display: flex;
-    width: 7rem;
-}
-
-.drag-drop__list {
-    display: flex;
-    margin:0;
-    padding:0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-self: center;
-    box-shadow: 0px 0px 10px #808080;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    border-bottom-left-radius: .75rem;
-    border-bottom-right-radius: .75rem;
-}
-
-.dd-table {
-    margin:0;
-    padding:0;
-    display: flex;
-    flex-direction: column;
-    background: #ebebeb;
-    border: 1px solid #d3d3d3;
-}
-
-.dd-table__header {
-    display: flex;
-}
-
-.dd-table__body {
-    display: flex;
-    flex-direction: column;
-}
-
-.dd-table__row {
-    align-self: center;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    transition: background-color .2s;
-}
-
-.dd-table__row:not(:last-child){
-    margin-bottom: 3rem;
-}
-
-.dd-table__cell {
-    display:flex;
-    height: 3rem;
-    transition: background-color .2s;
-    padding: .1rem 1.5rem;
-    justify-content: center;
-}
-
-.dd-table__links-btn {
-    height: 100%;
-}
-
-.dd-table__label {
-    color: #7b7777;
-    height: 3rem;
-    font-weight: 500;
-    align-items: center;
-    text-align: left;
-    justify-content: left;
-}
-
-.dd-table__c-files:nth-of-type(1), 
-.dd-table__c-files:nth-of-type(4), 
-.dd-table__c-files:nth-of-type(5),
-.dd-table__c-files:nth-of-type(6),
-.dd-table__c-files:nth-of-type(7){
-    width: 8%;
-}
-
-.dd-table__c-files:nth-of-type(2),
-.dd-table__c-files:nth-of-type(3){
-    width: 30%;
-}
-
-.dd-table__c-link:nth-of-type(5),
-.dd-table__c-link:nth-of-type(6) {
-    /* visibility: hidden; */
-    width: 8%;
-}
-
-.dd-table__c-link:nth-of-type(1),
-.dd-table__c-link:nth-of-type(7) {
-    width: 10%;
-}
-
-.dd-table__c-link:nth-of-type(4) {
-    width: 16%;
-}
-
-.dd-table__c-link:nth-of-type(2),
-.dd-table__c-link:nth-of-type(3){
-    width: 24%;
-}
-
-.dd-table__no-files-choosen {
-    text-align: center;
-    padding: 1.5rem 1.8rem;
-    color: #7b7777;
-    font-weight: 500;
-}
-
-.dd-table__remove-btn {
-    width: 4rem;
-    height: 2rem;
-    cursor: pointer;
-    color: #ffffff;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    justify-content: center;
-    align-items: center;
-    margin: .2rem;
-    outline-color: orange;
-    text-transform: capitalize;
-    box-shadow: 0 3px 3px -2px gray;
-    border: 0;
-    color: black;
-    background: #e6e6e6;
-}
-
-.dd-table__remove-btn:hover {
-    background: #b6b6b6;
-}
-
-.drag-drop__btn {
-    align-self: center;
-    text-align: center;
-}
-
-
-</style>
