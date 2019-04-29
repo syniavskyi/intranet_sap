@@ -151,6 +151,28 @@ const actions = {
         })
   },
 
+  proceedFile({getters, commit, dispatch}, data){
+    let message = data.res.headers,
+        fileMessages = getters.getFileMessages,
+        detail = JSON.parse(message["sap-message"]).details;
+    for(let i = 0; i < detail.length; i++){
+      fileMessages.push(detail[i]);
+    }
+
+    // If it is the last file
+    if(data.index + 1 === data.totalAmount){
+      commit('SET_DISPLAY_LOADER', false);
+    // get files data
+      commit("SET_PROMISE_TO_READ", ["Documents", "NewToken"])
+      dispatch("getData", null)
+      dispatch('displayModalFewMessages', fileMessages);
+      commit("SET_FILE_MESSAGES", []);
+    } else {
+      commit("SET_FILE_MESSAGES", fileMessages);
+    }
+    commit('SET_DISPLAY_LOADER', false);
+  },
+
   uploadLink({getters, dispatch, commit}, link){
     let data = {
       FileId: link.type,

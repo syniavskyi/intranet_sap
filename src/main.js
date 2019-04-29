@@ -34,6 +34,7 @@ require('./assets/styles/starterPage/starterPage.css');
 require('./assets/styles/availability/availability.css');
 require('./assets/styles/employees/employees.css');
 require('./assets/styles/files/files.css');
+require('./assets/styles/files/upload-file.css');
 require('./assets/styles/delegations/delegations.css');
 require('./assets/styles/calendar/calendar.css');
 require('./assets/styles/news/news.css');
