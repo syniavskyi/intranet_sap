@@ -16,6 +16,7 @@ import StarterPage from '@/components/content/StarterPage'
 import CV from '@/components/content/CV'
 import Delegations from '@/components/content/Delegations'
 import HolidayRequest from '@/components/content/availabilityComponents/HolidayRequest'
+import Reservation from '@/components/content/Reservation'
 
 import AuthGuard from './auth-guard'
 
@@ -98,7 +99,13 @@ export default new Router({
         path: '*',
         name: 'Default',
         redirect: '/news'
-    }
+    },
+    {
+        path: '/reservation',
+        name: 'Reservation',
+        component: Reservation,
+        beforeEnter: AuthGuard
+    },
 ],
 linkExactActiveClass: 'active-router-link'
 })

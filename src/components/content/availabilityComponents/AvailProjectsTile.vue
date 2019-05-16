@@ -14,17 +14,19 @@
             <div id="add-project-dialog">
                 <div class="ava-add">
                     <div class="cd-for-select cd-b">
-                        <select required class="cd-select" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
+                        <!-- <select required class="cd-select" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
                             <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
-                        </select>
+                        </select> -->
+                        <input required class="cd-input" v-model="newProjectForUser.ContractorId" @input="validateNewProject"/>
                         <label class="cd-slabel">{{ $t("label.contractor") }}</label>
                     </div>
                 </div>
                 <div class="ava-add">
                     <div class="cd-for-select cd-b">
-                        <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
+                        <!-- <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
                             <option v-for="project in filteredProjects" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
-                        </select>
+                        </select> -->
+                        <input required class="cd-input" v-model="newProjectForUser.ProjectId" @input="validateNewProject"/>
                         <label class="cd-slabel">{{ $t("label.project") }}</label>
                     </div>
                     <div class="cd-for-input cd-b">
