@@ -424,7 +424,7 @@ body {
     font-size: 1.2rem;
     justify-content: end;
     padding: .2rem;
-    font-family: 'IBM Plex Sans', serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 #articles p {
