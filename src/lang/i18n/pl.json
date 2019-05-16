@@ -303,7 +303,9 @@
     "dragToUpade": "Przeciągnij tutaj pliki, które chcesz dodać do systemu.",
     "noFilesChosen": "Nie wybrano żadnych plików.",
     "mailWillBeSend": "E-mail z informacją o dodaniu pliku zostanie wysłany na adres btech.wszyscy@btech.pl",
-    "linkAdded": "Link został dodany"
+    "linkAdded": "Link został dodany",
+    "refreshFileList": "Wyczyść listę plików",
+    "listWillRefresh": "Lista plików zostanie wyczyszczona. Dane na temat wgrywanych plików zostaną utracone. Czy chcesz kontynuować?"
   },
   "select": {
     "language": {

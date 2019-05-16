@@ -1,5 +1,18 @@
 <template>
     <div class="file-upload" v-if="this.authType !== 'OWN'">
+
+            <!-- BEGIN OF MESSAGEBOX -->
+            <MessageBox v-if="showMessageBox">
+            <template slot="modal-title">
+            {{ $t("header.warning") }}
+            </template>
+            <template slot="modal-text">
+            {{ $t("message.listWillRefresh") }}
+            </template>
+            <slot name="myConfirm" :confirmMethod="confirmMethod"></slot>
+            </MessageBox>
+            <!-- END OF MESSAGEBOX -->
+
         <h3 class="content-header-title content-header-title-h3">{{ $t("header.addNewFile") }}</h3>
         <div class="drag-drop">
             <div id="drop" class="drag-drop__container" draggable="true" @dragover.prevent="handleDragOver" @dragleave="handleLeave"
@@ -23,8 +36,9 @@
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.addToSPUpl") }}</label>
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.sendEmailUpl") }}</label>
                     <label for="" class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;</label>
-                    <label class="dd-table__cell dd-table__c-files dd-table__label">&nbsp;
-                        <!-- <button @click="refreshFileList" class="dd-table__refresh-btn">
+                    <label class="dd-table__cell dd-table__c-files dd-table__label dd-table__label--refresh">&nbsp;
+                        <!-- <button @click="refreshFileList" :disabled="files.length === 0"
+                        :title="$t('message.refreshFileList')" class="dd-table__refresh-btn">
                             &#x21bb;
                         </button> -->
                     </label>
@@ -154,6 +168,7 @@ import { mapGetters } from 'vuex';
 import { required, minLength, url } from "vuelidate/lib/validators";
 import Toast from "../../dialogs/Toast";
 import axios from "axios";
+import MessageBox from '../../dialogs/MessageBox';
 
 const insideElements = new Set();
 
@@ -169,7 +184,8 @@ export default {
         ...mapGetters({
             fileTypes: "getUploadFileTypes",
             showToast: "getDisplayToast",
-            link: "getLinkStructure"
+            link: "getLinkStructure",
+            showMessageBox: "getDisplayMessageBox"
         }),
         showEmailToast() {
             return this.link.sendEmail
@@ -199,7 +215,8 @@ export default {
         }
     },
     components: {
-        Toast
+        Toast,
+        MessageBox
     },
     methods: {
         handleDragEnter(e) {
@@ -272,6 +289,15 @@ export default {
             oFile.typeClass = this._determineFileClass(oFile.format);
             oFile.name = `${oFile.fileName}.${oFile.format}`
             return oFile;
+        },
+
+        refreshFileList({}) {
+            this.$store.commit('SET_MESSAGE_BOX', true);
+            // this.files = []
+        },
+
+        confirmMethod(){
+            this.files = []
         },
 
         _determineFileClass(fileType){

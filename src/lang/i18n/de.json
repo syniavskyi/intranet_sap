@@ -301,7 +301,9 @@
         "dragToUpade": "Drag here the files that you want to add to the system.",
         "noFilesChosen": "No files chosen.",
         "mailWillBeSend": "E-mail with information about new file will be send to btech.wszyscy@btech.pl",
-        "linkAdded": "Link has been added"
+        "linkAdded": "Link has been added",
+        "refreshFileList": "Clear file list",
+        "listWillRefresh": "The list of files will be cleared. Data on the files being uploaded will be lost. Do you want to continue?"
     },
     "select": {
         "language": {
