@@ -247,7 +247,8 @@
     "photoErr": "Błąd podczas przesyłania zdjęcia",
     "addNewFile": "Dodaj nowy dokument",
     "addNewLink": "Dodaj nowy link",
-    "prevDocuments": "Przeglądaj dokumenty"
+    "prevDocuments": "Przeglądaj dokumenty",
+    "reservation": "Rezerwacje"
   },
   "message": {
     "loginError": "Wprowadzona nazwa użytkownika lub hasło są nieprawidłowe",

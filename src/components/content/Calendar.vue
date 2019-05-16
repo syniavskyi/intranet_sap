@@ -168,11 +168,12 @@ export default {
             filterDep = this.filters.department,
             loggedUser = userData.UserAlias
         const day = this.selectedDay.date;
-        const fnFilter = oItem => oItem.DateFrom <= day.setHours(1) && day.setHours(1) <= oItem.DateTo
-        const filterByTargetAndUser = event => {
+        const fnFilter = (oItem) => oItem.DateFrom.setHours(0, 0, 0, 0) <= day.setHours(0, 0, 0, 0) && day.setHours(0, 0, 0, 0) <= oItem.DateTo.setHours(0, 0, 0, 0)
+        // const fnFilter = utils.dateToValid()
+        const filterByTargetAndUser = (event) => {
           let depToFilter = filterDep ? filterDep : userData.DepartmentId
           // Search in target groups
-          if(event.TargetGroup.length >= 1 && userData.DepartmentId){ 
+          if(event.TargetGroup.length >= 1 && userData.DepartmentId){
             if(event.TargetGroup[0] !== ""){ //check if first item is not empty
               for(let val in event.TargetGroup){
                 if(event.TargetGroup[val] === depToFilter){

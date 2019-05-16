@@ -77,6 +77,14 @@
                         </button>
                     </router-link>
                 </li>
+                <li v-if="menuAuth.registration">
+                    <router-link class="nav-router-link" to="/reservation">
+                        <button @click="closeMenu" class="nav-item">
+                             <img class="nav-item-img" src="../assets/images/nav3/grey_616161/account-plus-24.png">
+                             <p>{{ $t("header.reservation") }}</p>
+                        </button>
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </div>

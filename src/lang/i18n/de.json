@@ -247,7 +247,8 @@
         "photoErr": "Error while uploading photo",
         "addNewFile": "Add new document",
         "addNewLink": "Add new link",
-        "prevDocuments": "Preview documents"
+        "prevDocuments": "Preview documents",
+        "reservation": "Reservations"
     },
     "message": {
         "loginError": "Passwort oder Benutzername sind ungültig.",
