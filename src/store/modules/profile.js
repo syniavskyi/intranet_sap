@@ -155,6 +155,7 @@ const actions = {
     delete userDataToSend.UserEducations
     delete userDataToSend.UserCvProjects
     delete userDataToSend.UserAuth
+    delete userDataToSend.UserExperience2
     userDataToSend.EmploymentDate = utils.formatDateForBackend(userData.EmploymentDate);
     userDataToSend.DateBirth = utils.formatDateForBackend(userData.DateBirth);
     axios({

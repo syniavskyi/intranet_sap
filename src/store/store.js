@@ -27,6 +27,7 @@ import loader from './modules/loader'
 import confirmDialog from './modules/confirmdialog'
 import dialogs from './modules/dialogs'
 import files from './modules/files'
+import reservation from './modules/reservation'
 
 import settings from './modules/settings'
 
@@ -62,6 +63,7 @@ export default new Vuex.Store({
         confirmDialog,
         loader,
         files,
-        dialogs
+        dialogs,
+        reservation
     }
 });

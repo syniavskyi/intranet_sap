@@ -286,7 +286,7 @@ const actions = {
             obj[index].IsCurrent = obj[index].IsCurrent === 'X' ? true : false
             if (obj[index].DateEnd ) {
               obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
-            } 
+            }
             // else {
             //   obj[index].DateEnd = utils.dateStringToObj(obj[index].DateEnd);
             // }
@@ -557,6 +557,14 @@ const actions = {
               }));
               aPromises.push(projectsContractors);
             }
+            break;
+         case "RoomsReservations":
+            const roomsReservationPromise = dispatch('getRoomsReserv', userData).then(res => ({
+              res: res,
+              promise: "RoomsReservations"
+            }));
+            aPromises.push(roomsReservationPromise);
+            break;
         }
       }
       commit("SET_PROMISE_LIST", aPromises);
@@ -655,6 +663,10 @@ const actions = {
           break;
         case "ContractorsBranchesSet":
           commit("SET_CONTRACTORS_BRANCHES", aResults)
+          break;
+        case "RoomsReservations":
+          commit("SET_ROOMS_RESERVATIONS", aResults)
+          dispatch('adjustRooms', aResults)
           break;
         default:
           let bEndFunction = false;
