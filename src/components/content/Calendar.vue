@@ -141,7 +141,7 @@ export default {
           if (aFilters.department && aFilters.employee) {
             fnFilter = function(oItem) {
               return (
-                oItem.TargetGroup.includes(aFilters.department) &&
+                oItem.TargetGroup.includes(aFilters.department) ||
                 oItem.Employee.includes(aFilters.employee)
               );
             };
@@ -186,7 +186,7 @@ export default {
           if(event.Employee.length >= 1){
             if(event.Employee[0] !== ""){ //check if first item is not empty
               for(let val2 in event.Employee){
-                if(event.Employee[val2] === loggedUser){
+                if(event.Employee[val2] === loggedUser || event.EventPrivacy === "PBL"){
                   return true;
                 }
               }
