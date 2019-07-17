@@ -169,6 +169,10 @@ export default {
         selectedUser: {
             get () {
                 let sUserId = this.$store.getters.getSelectedUser
+               if(window.location.href.includes('?')) {
+                   let iIndex = window.location.href.indexOf('?') + 1
+                   sUserId = window.location.href.slice(iIndex)
+               }
                 return sUserId
             },
             set (userId) {
