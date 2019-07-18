@@ -219,7 +219,7 @@ export default {
   },
   created() {
     utils.checkAuthLink(this.$router, this.$store.getters.getUserAuth.ZMENU);
-    this.sortForCV()
+    this.sortForCV();
   },
   methods: {
     ...mapActions([
@@ -397,7 +397,7 @@ export default {
   computed: {
     ...mapGetters({
       userEducation: "getSortedUserEducation",
-      userProjects: "getSortedUserProjectsList",
+      userProjects: "getSortedUserProjectsList",// "getSortedUserProjectsList",
       userExperience: "getSortedUserExperience",
       userData: "userData",
       cvElements: "getCvElements",

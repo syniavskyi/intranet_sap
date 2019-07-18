@@ -408,6 +408,7 @@ const actions = {
       projects[i].Modules = fullProjects[i].Modules;
     }
     commit('SET_USER_PROJECTS_LIST', projects);
+    commit('SET_SORTED_CV_PRO', projects);
   },
   // find industry description, method for adjustProjects function
   checkProjectKey({
