@@ -140,6 +140,7 @@ const actions = {
     dispatch, commit
   }, data) {
     const dataToSend = data.newData;
+    const formattedData = utils.createClone(data.newData);
     getters.getSelectedForCvUser ? dataToSend.UserAlias = getters.getSelectedForCvUser : dataToSend.UserAlias = localStorage.getItem("id");
     dataToSend.DateStart = utils.formatDateForBackend(dataToSend.DateStart);
     dataToSend.DateEnd = utils.formatDateForBackend(dataToSend.DateEnd);
@@ -178,8 +179,8 @@ const actions = {
             commit('SET_BEFORE_PROJECT_EDIT', { index: data.index })
           } else if(dataToSend.Action === 'U') {
             dataToSend.DateEndToChange = dataToSend.DateEnd;
-            commit('SET_BEFORE_PROJECT_EDIT', { index: data.index, row: dataToSend })
-            commit('SET_USER_PROJECT_AFTER_EDIT', { index: data.index, row: dataToSend })
+            commit('SET_BEFORE_PROJECT_EDIT', { index: data.index, row: formattedData })
+            commit('SET_USER_PROJECT_AFTER_EDIT', { index: data.index, row: formattedData })
           }
 
         dispatch('displayModal', message);
@@ -441,7 +442,7 @@ const actions = {
     showHintFnProject({commit}, data) {
       let oData = {
         show: data.show,
-        index: data.index
+        name: data.name
       }
       commit("SET_SHOW_HINT_PROJECT", oData);
     }
