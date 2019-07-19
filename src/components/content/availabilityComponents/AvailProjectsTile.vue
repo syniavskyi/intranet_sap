@@ -26,7 +26,7 @@
                         <!-- <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
                             <option v-for="project in filteredProjects" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
                         </select> -->
-                        <input required class="cd-input" v-model="newProjectForUser.ProjectId" @input="validateNewProject"/>
+                        <input required class="cd-input" v-model="newProjectForUser.ProjectName" @input="validateNewProject"/>
                         <label class="cd-slabel">{{ $t("label.project") }}</label>
                     </div>
                     <div class="cd-for-input cd-b">

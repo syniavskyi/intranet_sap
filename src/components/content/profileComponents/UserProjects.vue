@@ -116,12 +116,12 @@
               </div>
               <div class="prof-tbody-item">
                 <div class="prof-tbody-item-title">{{ $t("table.Descr") }}</div>
-                <button class="btn-hint-item" v-if="projectEditMode" @click="showHintFnProject({show: true, index: index})">?</button>
+                <button class="btn-hint-item" v-if="projectEditMode" @click="showHintFnProject({show: true, name: project.ProjectName})">?</button>
                 <div class="prof-tbody-item-txt">
                   <textarea class="cd-textarea" :disabled="!projectEditMode" @input="checkFields(index)" v-model="userProjects[index].Description"/>
                 </div>
-                <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && index===showHintProject.index">
-                  <button class="prof-hint-close" @click="showHintFnProject({index: '', show: false})">X</button>
+                <div class="prof-skills-hint prof-skills-hint-project" v-if="showHintProject.show && project.ProjectName===showHintProject.name">
+                  <button class="prof-hint-close" @click="showHintFnProject({name: '', show: false})">X</button>
                   <div class="prof-hint-item">{{showSingleHint()}}</div>
                 </div>
               </div>
@@ -540,9 +540,9 @@ export default {
       this.checkFields(index);
     },
     showSingleHint() {
-      let index = this.showHintProject.index;
+      let name = this.showHintProject.name;
       if (this.userProjectsDfLang.length !== 0) {
-        return this.userProjectsDfLang[index].Description;
+        return this.userProjectsDfLang.find(o => o.ProjectName === name).Description;
       } else {
         return;
       }
