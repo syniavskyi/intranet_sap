@@ -12,12 +12,12 @@
         </div>
         <div class="availability-tile-content">
             <div id="add-project-dialog">
-                <div class="ava-add">
+               <div class="ava-add">
                     <div class="cd-for-select cd-b">
-                        <!-- <select required class="cd-select" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
+                        <select required class="cd-select" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
                             <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
-                        </select> -->
-                        <input required class="cd-input" v-model="newProjectForUser.ContractorId" @input="validateNewProject"/>
+                        </select>
+                  <!--        <input required class="cd-input" v-model="newProjectForUser.ContractorId" @input="validateNewProject"/> -->
                         <label class="cd-slabel">{{ $t("label.contractor") }}</label>
                     </div>
                 </div>
@@ -26,6 +26,9 @@
                         <!-- <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
                             <option v-for="project in filteredProjects" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
                         </select> -->
+                          <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
+                            <option v-for="project in projectsList" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
+                        </select>
                         <input required class="cd-input" v-model="newProjectForUser.ProjectName" @input="validateNewProject"/>
                         <label class="cd-slabel">{{ $t("label.project") }}</label>
                     </div>
@@ -157,14 +160,7 @@ export default {
         },
         validateNewProject(){
             let obj = this.newProjectForUser
-            for (let key in obj) {
-                if (!obj[key]){
-                    this.disableSave = true
-                    return
-                } else {
-                    this.disableSave = false
-                }
-            }
+            !obj.Engag || !obj.StartDate || !obj.EndDate || !obj.StatusId ? this.disableSave = true : this.disableSave = false;
         },
         validateNewEngag(engag){
             let project = this.newProjectForUser

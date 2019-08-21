@@ -205,6 +205,28 @@ const actions = {
       commit("SET_LINK_STRUCTURE", clearStructure)
     }).catch(error=>{
     })   
+  },
+  deleteFile({getters, dispatch, commit}, file) {
+      let url =  `AttachmentMedias(FileId='${file.FileId}',Language='PL',UserAlias='')/$value`;
+      commit('SET_DISPLAY_LOADER', true)
+      axios({
+          method: 'delete',
+          url: url,
+          headers: {
+               "Content-type": "application/json",
+               "X-Requesteg-With": "XMLHttpRequest",
+                "x-csrf-token": getters.getToken
+               }
+            }).then(res=> {
+              commit('SET_DISPLAY_LOADER', false)
+              let message = res.headers;
+              dispatch('displayModal', message);
+              commit("SET_PROMISE_TO_READ", ["Documents", "NewToken"])
+              dispatch("getData", null)
+              }).catch(error=> {
+                error
+                 commit('SET_DISPLAY_LOADER', false)
+           })
   }
 }
 const getters = {
