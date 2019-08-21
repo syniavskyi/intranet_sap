@@ -27,6 +27,7 @@
               <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
               <div class="doc-file-desc">{{ doc.Filename }}</div>
             </a>
+            <p @click="deleteFile(doc)" v-if="authType !== 'OWN'" class="doc-file-delete">x</p>
           </div>
         </div>
       </div>
@@ -36,12 +37,14 @@
 <script>
 import i18n from "../../lang/lang";
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "fileRow",
   props: ["file-type", "header-name"],
   data() {
     return {
-      closed: "true"
+      closed: "true",
+      authType: this.$store.getters.getUserAuth.ZPROF_ATCV
     }
   },
   computed: {
@@ -51,6 +54,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions(["deleteFile"]),
     checkFileFormat(name) {
       return name.slice(name.lastIndexOf(".")).toLowerCase()
     },

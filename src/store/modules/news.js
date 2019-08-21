@@ -287,9 +287,6 @@ const actions = {
     // get news from RSS -> XML
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     // const url = "https://fakty.interia.pl/ciekawostki/feed"; // site that doesn’t send Access-Control-*
-    // const url ="https://www.rmf24.pl/rozrywka/ciekawostki/feed"
-    // const url = "http://www.wykop.pl/rss/index.xml"
-    // const url = "https://nt.interia.pl/feed"
     const url = "https://nt.interia.pl/feed"
     fetch(proxyurl + url)
       .then(response => response.text())

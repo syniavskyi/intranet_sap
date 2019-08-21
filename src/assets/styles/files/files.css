@@ -247,6 +247,15 @@
     animation-fill-mode: forwards;
 }
 
+.doc-file-delete {
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+    text-align: center;
+    width: 15px;
+    color: orange;
+}
+
 @keyframes slide-left {
     from { transform: translateX(220%);}
     to { transform: translateX(0%);}

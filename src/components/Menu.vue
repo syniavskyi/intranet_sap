@@ -77,7 +77,7 @@
                         </button>
                     </router-link>
                 </li>
-                <li v-if="menuAuth.registration">
+                <li v-if="alias === 'SPI'">
                     <router-link class="nav-router-link" to="/reservation">
                         <button @click="closeMenu" class="nav-item">
                              <img class="nav-item-img" src="../assets/images/nav3/grey_616161/account-plus-24.png">
@@ -99,6 +99,11 @@ export default {
         userPhotoUrl: 'getUserPhotoUrl',
         menuAuth: 'getMenuAuth'
       })
+    },
+    data() {
+        return {
+            alias: localStorage.getItem('id')
+        }
     },
     methods: {
         logout() {
