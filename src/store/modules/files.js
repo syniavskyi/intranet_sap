@@ -16,7 +16,9 @@ const state = {
     url: "",
     addToStarter: false,
     sendEmail: false },
-  messages: []
+  messages: [],
+  showFileConfDialog: false,
+  docToDelete: {}
 }
 
 const mutations = {
@@ -43,6 +45,12 @@ const mutations = {
   },
   SET_FILE_MESSAGES(state, data){
     state.messages = data
+  },
+  SET_SHOW_FILE_CONF_DIALOG(state, data){
+    state.showFileConfDialog = data
+  },
+  SET_DOC_TO_DELETE(state, data){
+    state.docToDelete = data
   }
 }
 
@@ -204,10 +212,11 @@ const actions = {
       dispatch("getData", null)
       commit("SET_LINK_STRUCTURE", clearStructure)
     }).catch(error=>{
-    })   
+    })
   },
-  deleteFile({getters, dispatch, commit}, file) {
-      let url =  `AttachmentMedias(FileId='${file.FileId}',Language='PL',UserAlias='')/$value`;
+  deleteFile({getters, dispatch, commit}) {
+      let file = getters.getDocToDelete,
+          url = `AttachmentMedias(FileId='${file.FileId}',Language='PL',UserAlias='')/$value`;
       commit('SET_DISPLAY_LOADER', true)
       axios({
           method: 'delete',
@@ -259,6 +268,12 @@ const getters = {
   },
   getFileMessages(state){
     return state.messages
+  },
+  getShowFileConfDialog(state){
+    return state.showFileConfDialog
+  },
+  getDocToDelete(state){
+    return state.docToDelete
   }
 }
 

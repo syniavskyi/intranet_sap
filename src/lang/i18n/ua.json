@@ -33,6 +33,7 @@
         "format": "Формат",
         "generatePDF": "Вигенерувати PDF",
         "yes": "Так",
+        "no": "No",
         "confirm": "Підтвердити",
         "reject": "Відхилити",
         "newMessage": "Нове повідомлення",
@@ -397,6 +398,7 @@
         "save": "Записати",
         "reset": "Cкинути",
         "openHoliday": "click to create new holiday request",
-        "editDelegationNumber": "Edit delegation number"
+        "editDelegationNumber": "Edit delegation number",
+        "deleteConfirm": "Are you sure you want to delete the file {docName}?"
     }
 }
