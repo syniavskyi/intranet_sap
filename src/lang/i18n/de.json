@@ -33,6 +33,7 @@
         "format": "Format",
         "generatePDF": "PDF erzeugen",
         "yes": "Ja",
+        "no": "Nein",
         "confirm": "Bestätigen",
         "reject": "Ablehnen",
         "newMessage": "Neue Nachricht",
@@ -399,6 +400,7 @@
         "save": "speichern",
         "reset": "zurücksetzen",
         "openHoliday": "Klicken Sie hier, um eine neue Urlaubsanfrage zu erstellen",
-        "editDelegationNumber": "Edit delegation number"
+        "editDelegationNumber": "Edit delegation number",
+        "deleteConfirm": "Are you sure you want to delete the file {docName}?"
     }
 }

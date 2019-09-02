@@ -33,6 +33,7 @@
     "format": "Format",
     "generatePDF": "Generuj PDF",
     "yes": "Tak",
+    "no": "Nie",
     "confirm": "Zatwierdź",
     "reject": "Odrzuć",
     "newMessage": "Nowa wiadomość",
@@ -401,6 +402,7 @@
     "save": "zapisz",
     "reset": "resetuj",
     "openHoliday": "Kliknij aby wygenerować wniosek urlopowy",
-    "editDelegationNumber": "Edytuj numer delegacji"
+    "editDelegationNumber": "Edytuj numer delegacji",
+    "deleteConfirm": "Na pewno chcesz usunąć plik {docName}?"
   }
 }

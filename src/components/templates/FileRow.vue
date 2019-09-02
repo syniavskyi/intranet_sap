@@ -27,9 +27,10 @@
               <div class="doc-file-img doc-file-zip" v-if="checkFileFormat(doc.Filename) == '.zip'"></div>
               <div class="doc-file-desc">{{ doc.Filename }}</div>
             </a>
-            <p @click="deleteFile(doc)" v-if="authType !== 'OWN'" class="doc-file-delete">x</p>
+            <p :title="$t('button.delete')" @click="openConfDialog(doc)" v-if="authType !== 'OWN'" class="doc-file-delete">x</p>
           </div>
         </div>
+         <confirm-file-deletion v-if="showDialog"></confirm-file-deletion>
       </div>
     </div>
   </div>
@@ -38,6 +39,7 @@
 import i18n from "../../lang/lang";
 import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
+import ConfirmFileDeletion from '../dialogs/ConfirmFileDeletion';
 export default {
   name: "fileRow",
   props: ["file-type", "header-name"],
@@ -47,10 +49,15 @@ export default {
       authType: this.$store.getters.getUserAuth.ZPROF_ATCV
     }
   },
+  components: {
+      'confirm-file-deletion': ConfirmFileDeletion,
+
+  },
   computed: {
     ...mapGetters({
       displayMenu: "getShowMenu",
-      displayOverlay: "getShowMenuOverlay"
+      displayOverlay: "getShowMenuOverlay",
+      showDialog: "getShowFileConfDialog"
     })
   },
   methods: {
@@ -71,6 +78,10 @@ export default {
         elChild = evt.target.nextElementSibling;
       const name = { el, elChild };
       this.$store.dispatch("toggleDocTile", name);
+    },
+    openConfDialog(doc) {
+      this.$store.commit('SET_DOC_TO_DELETE', doc)
+      this.$store.commit('SET_SHOW_FILE_CONF_DIALOG', true)
     }
   }
 }

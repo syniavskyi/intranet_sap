@@ -33,6 +33,7 @@
     "format": "Format",
     "generatePDF": "Generate PDF",
     "yes": "Yes",
+    "no": "No",
     "confirm": "Confirm",
     "reject": "Reject",
     "newMessage": "New message",
@@ -402,6 +403,7 @@
     "save": "save",
     "reset": "reset",
     "openHoliday": "click to create new leave request",
-    "editDelegationNumber": "Edit delegation number"
+    "editDelegationNumber": "Edit delegation number",
+    "deleteConfirm": "Are you sure you want to delete the file {docName}?"
   }
 }
