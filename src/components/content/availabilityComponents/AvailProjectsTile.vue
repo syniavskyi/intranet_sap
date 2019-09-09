@@ -17,7 +17,6 @@
                         <select required class="cd-select" @change="removeSelectedProject" v-model="newProjectForUser.ContractorId">
                             <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
                         </select>
-                  <!--        <input required class="cd-input" v-model="newProjectForUser.ContractorId" @input="validateNewProject"/> -->
                         <label class="cd-slabel">{{ $t("label.contractor") }}</label>
                     </div>
                 </div>
@@ -26,9 +25,6 @@
                         <!-- <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
                             <option v-for="project in filteredProjects" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
                         </select> -->
-                          <select required class="cd-select" @change="validateNewProject" v-model="newProjectForUser.ProjectId">
-                            <option v-for="project in projectsList" :key="project.ProjectId" :value="project.ProjectId"> {{ project.ProjectName }}</option>
-                        </select>
                         <input required class="cd-input" v-model="newProjectForUser.ProjectName" @input="validateNewProject"/>
                         <label class="cd-slabel">{{ $t("label.project") }}</label>
                     </div>
@@ -94,22 +90,22 @@ export default {
     computed: {
         ...mapGetters({
             newProjectForUser: 'getNewProjectForUser',
-            projectsList: 'projectsList',
+            // projectsList: 'projectsList',
             contractorsList: 'getContractorsList',
             availStatusList: 'getAvailStatus',
             usersList: 'usersList'
         }),
-        filteredProjects() {
-            const projectsList = this.projectsList
-            let filteredProjects = []
+        // filteredProjects() {
+        //     const projectsList = this.projectsList
+        //     let filteredProjects = []
 
-            for (let project of projectsList) {
-                if (project.ContractorId === this.newProjectForUser.ContractorId) {
-                    filteredProjects.push(project)
-                }
-            }
-            return filteredProjects
-        },
+        //     for (let project of projectsList) {
+        //         if (project.ContractorId === this.newProjectForUser.ContractorId) {
+        //             filteredProjects.push(project)
+        //         }
+        //     }
+        //     return filteredProjects
+        // },
         formattedUsername() {
             const userId = this.selectedUser
             for (let i = 0; i < this.usersList.length; i++){
@@ -133,7 +129,7 @@ export default {
                   contractorId = this.newProjectForUser.ContractorId,
                 newProjectForUser = {
                     UserAlias: userId,
-                    ProjectId: null,
+                    ProjectName: null,
                     ContractorId: contractorId,
                     Engag: null,
                     Description: null,
@@ -148,7 +144,7 @@ export default {
             this.disableSave = true
             this.$store.commit('SET_NEW_PROJECT_FOR_USER', {
                 UserAlias: null,
-                ProjectId: null,
+                ProjectName: null,
                 ContractorId: null,
                 Engag: null,
                 StatusId: null,

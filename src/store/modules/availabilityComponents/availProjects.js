@@ -8,7 +8,7 @@ const state = {
   userAvailProjects: [],
   newProjectForUser: {
     UserAlias: null,
-    ProjectId: null,
+    ProjectName: null,
     ContractorId: null,
     Engag: null,
     StatusId: null,
@@ -58,13 +58,13 @@ const actions = {
   }, userProjects) {
     // set projects data with props for calendar
     const projectsList = getters.projectsList
-    for (let i = 0; i < userProjects.length; i++) {
-      for (let j = 0; j < projectsList.length; j++) {
-        if (userProjects[i].ProjectId === projectsList[j].ProjectId) {
-          userProjects[i].ProjectName = projectsList[j].ProjectName
-        }
-      }
-    }
+    // for (let i = 0; i < userProjects.length; i++) {
+    //   // for (let j = 0; j < projectsList.length; j++) {
+    //   //   if (userProjects[i].ProjectId === projectsList[j].ProjectId) {
+    //   //     userProjects[i].ProjectName = projectsList[j].ProjectName
+    //   //   }
+    //   // }
+    // }
     for (let i = 0; i < userProjects.length; i++) {
       let project = userProjects[i]
       project.Color = project.StatusId === 'PL' ? '#fde692' : '#cff09e'
@@ -83,7 +83,6 @@ const actions = {
     let data = getters.getNewProjectForUser,
       url = 'UserProjects',
       sToken = getters.getToken;
-
     data.Engag = parseInt(data.Engag)
     axios({
       url: url,
@@ -100,7 +99,7 @@ const actions = {
       dispatch('getData');
       commit('SET_NEW_PROJECT_FOR_USER', {
         UserAlias: null,
-        ProjectId: null,
+        ProjectName: null,
         ContractorId: null,
         Engag: null,
         StatusId: null,
@@ -115,7 +114,7 @@ const actions = {
     commit,
     dispatch, getters
   }, data) {
-    const UrlU = "UserProjects(ProjectId='" + data.ProjectIdToChange + "',UserAlias='" + data.UserAlias + "',StartDate=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00',EndDate=datetime'" + moment(data.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00',Language='')"
+    const UrlU = "UserProjects(ProjectName='" + data.ProjectNameToChange + "',UserAlias='" + data.UserAlias + "',StartDate=datetime'" + moment(data.DateStartToChange).format("YYYY-MM-DD") + "T00:00:00',EndDate=datetime'" + moment(data.DateEndToChange).format("YYYY-MM-DD") + "T00:00:00',Language='')"
     let sToken = getters.getToken;
     data.StartDate = utils.formatDateForBackend(data.StartDate);
     data.EndDate = utils.formatDateForBackend(data.EndDate);
@@ -123,7 +122,7 @@ const actions = {
     data.EndDateToChange = utils.formatDateForBackend(data.EndDateToChange);
     data.Engag = parseInt(data.Engag)
 
-    delete data.ProjectName
+    // delete data.ProjectName
     delete data.Color
     delete data.Order
     delete data.EntryId
@@ -158,7 +157,7 @@ const actions = {
     commit,
     dispatch, getters
   }, data) {
-    const UrlD = "UserProjects(ProjectId='" + data.ProjectId + "',UserAlias='" + data.UserAlias + "',StartDate=datetime'" + moment(data.StartDate).format("YYYY-MM-DD") + "T00:00:00',EndDate=datetime'" + moment(data.EndDate).format("YYYY-MM-DD") + "T00:00:00',Language='')"
+    const UrlD = "UserProjects(ProjectName='" + data.ProjectName + "',UserAlias='" + data.UserAlias + "',StartDate=datetime'" + moment(data.StartDate).format("YYYY-MM-DD") + "T00:00:00',EndDate=datetime'" + moment(data.EndDate).format("YYYY-MM-DD") + "T00:00:00',Language='')"
     let sToken = getters.getToken;
 
     axios({
