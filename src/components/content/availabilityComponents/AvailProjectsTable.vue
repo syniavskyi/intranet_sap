@@ -16,6 +16,7 @@
                 <div class="ava-proj-thead">
                     <div class="ava-thproj-item">{{ $t("label.entryType") }}</div>
                     <div class="ava-thproj-item">{{ $t("label.projectName") }}</div>
+                    <div class="ava-thproj-item">{{ $t("label.contractorName") }}</div>
                     <div class="ava-thproj-item">{{ $t("label.engag") }}</div>
                     <div class="ava-thproj-item">{{ $t("label.from") }}</div>
                     <div class="ava-thproj-item">{{ $t("label.to") }}</div>
@@ -33,10 +34,21 @@
                         <!-- <select disabled v-if="!editMode" class="cd-wdselect mla" v-model="project.ProjectId" >
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
                         </select> -->
-                        <div v-if="!editMode" class="ava-tablep">{{ projectName(project.ProjectId, index) }}</div>
-                        <select v-if="editMode" class="cd-wselect mla" v-model="project.ProjectId" @change="checkFields(index)">
+                        <div v-if="!editMode" class="ava-tablep">{{ project.ProjectName }} </div>
+                        <input required v-if="editMode" class="cd-input" v-model="project.ProjectName" @input="checkFields(index)"/>
+                        <!-- <select v-if="editMode" class="cd-wselect mla" v-model="project.ProjectId" @change="checkFields(index)">
                             <option v-for="proj in allProjects" :key="proj.ProjectId" :value="proj.ProjectId">{{proj.ProjectName}}</option>
-                        </select>
+                        </select> -->
+                    </div>
+                    <div class="ava-tbproj-item">
+                        <div class="ava-tbproj-ititle">{{ $t("label.contracotrName") }}</div>
+                        <div v-if="!editMode" class="ava-tablep">{{ formatContractorName(project.ContractorId) }} </div>
+                        <!-- <input required v-if="editMode" class="cd-input" v-model="project.ContractorId" @input="checkFields(index)"/> -->
+                            <!-- <div class="cd-for-select cd-b"> -->
+                                <select v-if="editMode" required class="cd-select" v-model="project.ContractorId">
+                                    <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
+                                </select>
+                         <!-- </div> -->
                     </div>
                     <div class="ava-tbproj-item">
                         <div class="ava-tbproj-ititle">{{ $t("label.engag") }}</div>
@@ -105,8 +117,9 @@ export default {
             userProjects: 'userProjectsList',
             availTypes: 'getAvailType',
             availStatus: 'getAvailStatus',
-            allProjects: 'projectsList',
-            disabledBtnToEditAvail: "getDisabledBtnToEditAvail"
+            // allProjects: 'projectsList',
+            disabledBtnToEditAvail: "getDisabledBtnToEditAvail",
+            contractorsList: 'getContractorsList'
         }),
         noAvailEntries() {
             if(!this.filteredUserProjects){
@@ -139,9 +152,12 @@ export default {
             this.editMode = true;
             this._beforeEditingCache = utils.createClone(this.userProjects);
         },
-        projectName(id, projectId) {
-            let project = this.userProjects[projectId]
-            return project.ProjectName
+        // projectName(id, projectId) {
+        //     let project = this.userProjects[projectId]
+        //     return project.ProjectName
+        // },
+        formatContractorName(contrId){
+            return this.contractorsList.find(o => o.ContractorId === contrId).ContractorName
         },
         projectStatus(id) {
             let index = utils.getIndex(this.availStatus, id)
@@ -159,7 +175,7 @@ export default {
 
                 newData.StartDateToChange = dataToChange.StartDate;
                 newData.EndDateToChange = dataToChange.EndDate;
-                newData.ProjectIdToChange = dataToChange.ProjectId;
+                newData.ProjectNameToChange = dataToChange.ProjectName;
 
             this.updateUserProject(newData);
             this._beforeEditingCache = utils.createClone(this.userProjects);
@@ -200,23 +216,23 @@ export default {
             }
         },
         checkFields(index) {
-            let bEnd, bStart, bType, bStatus, bEngag, bChanged, bDesc,
+            let bEnd, bStart, bName, bStatus, bEngag, bChanged, bDesc,
             beforeEdit = this._beforeEditingCache[index];
 // check if data was changed
              bEnd = beforeEdit.EndDate.getTime() !== this.userProjects[index].EndDate.getTime(),
              bStart = beforeEdit.StartDate.getTime() !== this.userProjects[index].StartDate.getTime(),
-             bType = beforeEdit.ProjectId !== this.userProjects[index].ProjectId,
+             bName = beforeEdit.ProjectName !== this.userProjects[index].ProjectName,
              bStatus = beforeEdit.StatusId !== this.userProjects[index].StatusId,
              bEngag = beforeEdit.Engag !== this.userProjects[index].Engag,
              bDesc = beforeEdit.Description !== this.userProjects[index].Description;
 
 // if data was changed set boolean variable to true
-        bChanged = bEnd || bStart || bType || bStatus || bEngag || bDesc ? true : false;
+        bChanged = bEnd || bStart || bName || bStatus || bEngag || bDesc ? true : false;
 
 // check if data are not empty and was changed and set button to disabled or not
             if(this.filteredUserProjects.length > 0) {
                if( bChanged &&
-                 this.filteredUserProjects[index].ProjectId &&
+                 this.filteredUserProjects[index].ProjectName &&
                  this.filteredUserProjects[index].StartDate &&
                  this.filteredUserProjects[index].EndDate &&
                  this.filteredUserProjects[index].Engag &&

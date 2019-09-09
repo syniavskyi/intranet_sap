@@ -220,6 +220,9 @@ export default {
         projectsAttr() {
             return this.userProjects.map(t => ({
                 key: t.EntryId,
+                dot: {
+                    backgroundColor: t.Color
+                },
                 highlight: {
                     backgroundColor: t.Color,
                     borderRadius: '0px',

@@ -30,10 +30,10 @@
                         <!-- <select disabled v-if="!editMode || avail.StatusId === 'CO'" class="cd-wdselect" v-model="avail.TypeId">
                             <option v-for="type in availTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
                         </select> -->
-                        <div v-if="!editMode" class="ava-tablep">{{ availType(avail.TypeId) }}</div>
-                        <select v-if="editMode && avail.StatusId !== 'CO'" class="cd-wselect mla mtb" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
+                        <div class="ava-tablep">{{ availType(avail.TypeId) }}</div>
+                        <!-- <select v-if="editMode && avail.StatusId !== 'CO'" class="cd-wselect mla mtb" v-model="avail.TypeId" @change="checkFields(index, avail.EntryId)">
                             <option v-for="type in filteredAvailTypes" :key="type.Key" :value="type.Key">{{type.Value}}</option>
-                        </select>
+                        </select> -->
                         <button v-if="avail.TypeId === 'LE' && !editMode" class="holiday-button" :title="$t('title.openHoliday')" @click="setDataToLeave(avail)">
                             <img src="../../../assets/images/printer32px.png">
                         </button>
