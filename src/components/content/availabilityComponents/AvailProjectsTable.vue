@@ -45,7 +45,7 @@
                         <div v-if="!editMode" class="ava-tablep">{{ formatContractorName(project.ContractorId) }} </div>
                         <!-- <input required v-if="editMode" class="cd-input" v-model="project.ContractorId" @input="checkFields(index)"/> -->
                             <!-- <div class="cd-for-select cd-b"> -->
-                                <select v-if="editMode" required class="cd-select" v-model="project.ContractorId">
+                                <select v-if="editMode" required class="cd-select" v-model="project.ContractorId" @change="checkFields(index)">
                                     <option v-for="contractor in contractorsList" :key="contractor.ContractorId" :value="contractor.ContractorId"> {{ contractor.ContractorName }}</option>
                                 </select>
                          <!-- </div> -->
@@ -91,8 +91,8 @@
                     <div class="ava-tbproj-item eduButtonsProj">
                          <!-- ava-tbs-item -->
                         <div class="ava-tbs-ititle">{{ $t("label.options") }}</div>
-                        <button class="btn-row" v-if="editMode" @click="update(index)">{{ $t("button.save") }}</button>
-                        <button class="btn-row" v-if="editMode" @click="remove(project)">{{ $t("button.delete") }}</button>
+                        <button class="btn-row" v-if="editMode" @click="update(index)" :disabled='true'>{{ $t("button.save") }}</button>
+                        <button class="btn-row" v-if="editMode" @click="remove(index, project)">{{ $t("button.delete") }}</button>
                     </div>
                 </div>
             </div>
@@ -119,6 +119,7 @@ export default {
             availStatus: 'getAvailStatus',
             // allProjects: 'projectsList',
             disabledBtnToEditAvail: "getDisabledBtnToEditAvail",
+            // disabledBtnToEditPro: "getDisabledBtnToEditPro",
             contractorsList: 'getContractorsList'
         }),
         noAvailEntries() {
@@ -163,10 +164,14 @@ export default {
             let index = utils.getIndex(this.availStatus, id)
             return this.availStatus[index].Value
         },
-        remove(project) {
-            // this._beforeEditingCache.splice(index, 1);
+        remove(index, data) {
+            let project = utils.createClone(data);
             this.removeUserProject(project);
+            this.userProjects.splice(index, 1);
             this._beforeEditingCache = utils.createClone(this.userProjects);
+            // // this._beforeEditingCache.splice(index, 1);
+            // this.removeUserProject(project);
+            // this._beforeEditingCache = utils.createClone(this.userProjects);
         },
         update(index) {
             const dataToChange = this._beforeEditingCache[index],
@@ -216,18 +221,19 @@ export default {
             }
         },
         checkFields(index) {
-            let bEnd, bStart, bName, bStatus, bEngag, bChanged, bDesc,
+            let bEnd, bStart, bName, bContr, bStatus, bEngag, bChanged, bDesc,
             beforeEdit = this._beforeEditingCache[index];
 // check if data was changed
              bEnd = beforeEdit.EndDate.getTime() !== this.userProjects[index].EndDate.getTime(),
              bStart = beforeEdit.StartDate.getTime() !== this.userProjects[index].StartDate.getTime(),
              bName = beforeEdit.ProjectName !== this.userProjects[index].ProjectName,
+             bContr = beforeEdit.ContractorId !== this.userProjects[index].ContractorId,
              bStatus = beforeEdit.StatusId !== this.userProjects[index].StatusId,
              bEngag = beforeEdit.Engag !== this.userProjects[index].Engag,
              bDesc = beforeEdit.Description !== this.userProjects[index].Description;
 
 // if data was changed set boolean variable to true
-        bChanged = bEnd || bStart || bName || bStatus || bEngag || bDesc ? true : false;
+        bChanged = bEnd || bStart || bName || bStatus || bEngag || bDesc || bContr ? true : false;
 
 // check if data are not empty and was changed and set button to disabled or not
             if(this.filteredUserProjects.length > 0) {
