@@ -72,6 +72,7 @@
     "eventDescription": "Opis wydarzenia",
     "eventType": "Typ wydarzenia",
     "eventLink": "Link",
+    "eventLinkDesc": "Opis linku",
     "priority": "Priorytet",
     "visibility": "Widoczność",
     "createdBy": "Utworzony przez",
