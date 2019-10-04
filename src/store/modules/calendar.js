@@ -138,6 +138,9 @@ const actions = {
       eventData.EventTime = utils.formatTimeForBackend(eventData.EventTime);
     }
     eventData = utils.formatToString(eventData);
+    if(!eventData.LinkDesc) {
+      eventData.LinkDesc = 'link'
+    }
     delete eventData.color;
     let url = 'Events';
     axios({
@@ -173,6 +176,9 @@ const actions = {
     eventData.DateTo = !eventData.DateTo ? eventData.DateFrom : utils.formatDateForBackend(eventData.DateTo);
     if(eventData.EventTime){
       eventData.EventTime = utils.formatTimeForBackend(eventData.EventTime);
+    }
+    if(!eventData.LinkDesc) {
+      eventData.LinkDesc = 'link'
     }
     eventData = utils.formatToString(eventData);
     delete eventData.color;

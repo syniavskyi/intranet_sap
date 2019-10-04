@@ -29,7 +29,7 @@
             <label class="cd-label">{{ $t("label.eventLink") }}</label>
           </div>
           <div class="cd-for-input-xl">
-            <input required class="cd-input" v-model="addEvent.LinkDesc" :maxlength="70">
+            <input class="cd-input" v-model="addEvent.LinkDesc" :maxlength="70" :disabled="!addEvent.Link" :required="addEvent.Link">
             <span class="cd-span"/>
             <label class="cd-label">{{ $t("label.eventLinkDesc") }}</label>
           </div>
@@ -160,6 +160,7 @@ export default {
       this.addEvent.Employee = [];
       this.addEvent.TargetGroup = [];
     }
+
   }
 }
 </script>
