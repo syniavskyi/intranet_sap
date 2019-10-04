@@ -69,6 +69,8 @@
         "role": "Роля",
         "eventTitle": "Назва події",
         "eventTime": "Час події",
+        "eventLink": "Link",
+        "eventLinkDesc": "Link description",
         "eventDescription": "Опис події",
         "eventType": "Тип події",
         "priority": "Приорітет",

@@ -72,7 +72,7 @@
         "eventDescription": "Beschreibung der Veranstaltung",
         "eventType": "Art der Veranstaltung",
         "eventLink": "Link",
-        "link": "Go to",
+        "eventLinkDesc": "Link description",
         "priority": "Priorität",
         "visibility": "Visibility",
         "createdBy": "Erstellt von",

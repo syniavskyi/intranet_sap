@@ -72,7 +72,7 @@
     "eventDescription": "Event description",
     "eventType": "Event type",
     "eventLink": "Link",
-    "link": "Go to",
+    "eventLinkDesc": "Link description",
     "priority": "Priority",
     "visibility": "Visibility",
     "createdBy": "Created by",
