@@ -1,7 +1,7 @@
 <template>
-    <div class="file-upload" v-if="this.authType !== 'OWN'">
+    <div class="file-upload" >
 
-            <!-- BEGIN OF MESSAGEBOX -->
+            <!-- BEGIN OF MESSAGEBOX   v-if="this.authType !== 'OWN'" -->
             <MessageBox v-if="showMessageBox">
             <template slot="modal-title">
             {{ $t("header.warning") }}
@@ -177,7 +177,7 @@ export default {
     data() {
       return {
       files: [],
-      authType: this.$store.getters.getUserAuth.ZPROF_ATCV
+    //   authType: this.$store.getters.getUserAuth.ZPROF_ATCV
       }
     },
     computed: {

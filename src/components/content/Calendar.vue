@@ -56,6 +56,11 @@
                       <div class="evt-desc">{{ attr.Description}}</div>
                       <div class="evt-type">{{ attr.EventTypeName }}</div>
                       <div class="evt-priv">{{ attr.EventPrivacy }}</div>
+                      <div>
+                         <a v-if="attr.Link" :href="attr.Link" target="_blank" class="event-link">
+                           <p class="event-link">{{ attr.LinkDesc }}</p>
+                         </a>
+                      </div>
                     </div>
                     <div class="events-buttons" v-if="enableToEdit">
                       <button class="cal-btn-edit" :disabled="attr.CreatedBy !== loginAlias && authType !== '*'" @click="editEventClick(attr, $t)">
@@ -132,7 +137,8 @@ export default {
       },
       filteredEvents() {
         let aEvents = this.events,
-          aFilters = this.filters;
+          aFilters = this.filters,
+          login = localStorage.getItem("id");
         let aFilteredEvents = [];
         if (aFilters.department === null && aFilters.employee === null) {
           return aEvents;
@@ -147,7 +153,8 @@ export default {
             };
           } else if (aFilters.department) {
             fnFilter = function(oItem) {
-              return oItem.TargetGroup.includes(aFilters.department);
+              return oItem.TargetGroup.includes(aFilters.department) ||
+                     oItem.Employee.includes(login);
             };
           } else if (aFilters.employee) {
             fnFilter = function(oItem) {

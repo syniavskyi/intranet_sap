@@ -172,7 +172,7 @@ const actions = {
     let urlU = `UserLang(UserId='${data.UserId}',Lang='${data.Lang}',LanguageId='${data.LanguageToChange}')`;
     axios({
       url: data.Action === 'D' ? urlD : urlU,
-      method: 'put',
+      method: 'PUT',
       data: data,
       headers: {
           "Content-Type": "application/json",

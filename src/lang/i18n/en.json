@@ -71,6 +71,8 @@
     "eventTime": "Event time",
     "eventDescription": "Event description",
     "eventType": "Event type",
+    "eventLink": "Link",
+    "link": "Go to",
     "priority": "Priority",
     "visibility": "Visibility",
     "createdBy": "Created by",

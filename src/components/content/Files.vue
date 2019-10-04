@@ -10,7 +10,7 @@
             <h2 class="content-header-title">{{ $t("header.documents") }}</h2>
           </div>
         </div>
-        <upload-file-component></upload-file-component>
+        <upload-file-component v-if="authType.ZPROF_ATCV === '*'"></upload-file-component>
         <div class="documents-page-tiles">
           <file-row :file-type="docFiles" :header-name="'header.documentsCount'"></file-row>
           <file-row :file-type="systemFiles" :header-name="'header.systemData'"></file-row>
@@ -44,7 +44,8 @@ export default {
       officeFiles: "getOfficeFiles",
       systemFiles: "getSystemFiles",
       displayMenu: "getShowMenu",
-      displayOverlay: "getShowMenuOverlay"
+      displayOverlay: "getShowMenuOverlay",
+      authType: "getUserAuth"
     })
   ),
   created() {
@@ -56,6 +57,9 @@ export default {
   watch: {
     docFiles(value){
       this.calcDocsHeight()
+    },
+    authType(value) {
+      this.authType = this.$store.getters.getUserAuth.ZPROF_ATCV
     }
   },
   mounted() {

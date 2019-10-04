@@ -71,6 +71,7 @@
     "eventTime": "Godzina wydarzenia",
     "eventDescription": "Opis wydarzenia",
     "eventType": "Typ wydarzenia",
+    "eventLink": "Link",
     "priority": "Priorytet",
     "visibility": "Widoczność",
     "createdBy": "Utworzony przez",

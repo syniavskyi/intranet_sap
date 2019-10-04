@@ -430,6 +430,22 @@
     color: #ff0000;
     font-size: .7rem;
 }
+.event-link {
+    margin: 4px 0;
+    padding: 0;
+    color: #65cae6;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+}
+.event-link:hover {
+    cursor: pointer;
+}
+.event-link:visited {
+    text-decoration: none;
+}
+
+
 @media (min-width: 44rem) {
     .calendar-header-menu {
         display: none;
