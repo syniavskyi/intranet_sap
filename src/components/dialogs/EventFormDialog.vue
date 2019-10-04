@@ -23,6 +23,16 @@
             <span class="cd-span"/>
             <label class="cd-label">{{ $t("label.eventDescription") }}</label>
           </div>
+          <div class="cd-for-input-xl">
+            <input required class="cd-input" v-model="addEvent.Link" :maxlength="70">
+            <span class="cd-span"/>
+            <label class="cd-label">{{ $t("label.eventLink") }}</label>
+          </div>
+          <div class="cd-for-input-xl">
+            <input required class="cd-input" v-model="addEvent.LinkDesc" :maxlength="70">
+            <span class="cd-span"/>
+            <label class="cd-label">{{ $t("label.eventLinkDesc") }}</label>
+          </div>
           <div class="cd-for-select-xl">
             <v-date-picker required class="cd-wxdate cd-date" popoverDirection="bottom" is-expanded mode="single" v-model="addEvent.DateFrom" :min-date="new Date()">
               <input value="addEvent.DateFrom">
@@ -96,7 +106,7 @@ export default {
     return {
       isSelected: false,
       selectedUser: false,
-      selectedGroup: false,
+      selectedGroup: false
       }
   },
   props: ['disabled-edit-button', 'display-save-button'],
