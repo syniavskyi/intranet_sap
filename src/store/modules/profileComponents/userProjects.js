@@ -103,23 +103,24 @@ const actions = {
   saveUserProjectsPosition({
     dispatch, getters, commit
   }, data) {
-    getters.getSelectedForCvUser ? data.UserAlias = getters.getSelectedForCvUser : data.UserAlias = localStorage.getItem("id");
-    data.DateStart = utils.formatDateForBackend(data.DateStart);
-    data.DateEnd = utils.formatDateForBackend(data.DateEnd);
-    data.DateEndToChange = null;
-    data.DateStartToChange = null;
-    data.ProjectNameToChange = null;
-    data.Duplicated = null;
-    dispatch('formatProjectToString', data);
-    data.IsCurrent = data.IsCurrent ? 'X' : '-';
-    data.Language = localStorage.getItem('lang');
+    const formattedData = utils.createClone(data);
+    getters.getSelectedForCvUser ? formattedData.UserAlias = getters.getSelectedForCvUser : formattedData.UserAlias = localStorage.getItem("id");
+    formattedData.DateStart = utils.formatDateForBackend(data.DateStart);
+    formattedData.DateEnd = utils.formatDateForBackend(data.DateEnd);
+    formattedData.DateEndToChange = null;
+    formattedData.DateStartToChange = null;
+    formattedData.ProjectNameToChange = null;
+    formattedData.Duplicated = null;
+    dispatch('formatProjectToString', formattedData);
+    formattedData.IsCurrent = data.IsCurrent ? 'X' : '-';
+    formattedData.Language = localStorage.getItem('lang');
     let sToken = getters.getToken;
-    delete data.User;
+    delete formattedData.User;
     let url = 'UserCvProjects';
     axios({
       url: url,
       method: 'post',
-      data: data,
+      data: formattedData,
       headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
