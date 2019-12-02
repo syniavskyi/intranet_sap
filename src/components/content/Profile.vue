@@ -475,6 +475,7 @@ export default {
         data = utils.createClone(this.userData)
         this.$store.dispatch("saveUserData", data);
         this.editMode = !this.editMode;
+        this.$store.commit("SET_DATA_CHANGE_PROF", {changed: this.hasDataChanged, editMode: this.editMode});
         this._beforeEditingCache = data;
       }
       this.disableSaveBtn = true;
