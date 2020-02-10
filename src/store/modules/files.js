@@ -8,7 +8,9 @@ const state = {
   officeFiles: [],
   informationFiles: [],
   instructionFiles: [],
-  fileTypes: ['INFO', 'DOC', 'OFF', 'SAPB', 'INST'],
+  marketingFiles: [],
+  trainingFiles: [],
+  fileTypes: ['INFO', 'DOC', 'OFF', 'SAPB', 'INST', 'MKT', "TRN"],
   dataToRead: ["UserData", "Documents", "NewToken", "Domains"],
   linkStructure: {
     fileName: "",
@@ -39,6 +41,12 @@ const mutations = {
   },
   SET_INSTRUCTION_FILES(state, docs) {
     state.instructionFiles = docs
+  },
+  SET_MARKETING_FILES(state, docs) {
+    state.marketingFiles = docs
+  },
+  SET_TRAINING_FILES(state, docs) {
+    state.trainingFiles = docs
   },
   SET_LINK_STRUCTURE(state, data){
     state.linkStructure = data
@@ -256,6 +264,12 @@ const getters = {
   },
   getInstructionFiles(state) {
     return state.instructionFiles
+  },
+  getMarketingFiles(state) {
+    return state.marketingFiles
+  },
+  getTrainingFiles(state) {
+    return state.trainingFiles
   },
   getFileTypes(state) {
     return state.fileTypes
