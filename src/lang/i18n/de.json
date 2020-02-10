@@ -244,6 +244,8 @@
         "office": "Büro ({number})",
         "information": "Informationen ({number})",
         "instructions": "Instruktionen ({number})",
+        "marketing": "Marketing ({number})",
+        "trainings": "Training materials ({number})",
         "error": "Fehler",
         "info": "Information",
         "warning": "Warnung",
