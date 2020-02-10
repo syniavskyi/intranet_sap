@@ -244,6 +244,8 @@
         "office": "Офіс ({number})",
         "information": "Інформація ({number})",
         "instructions": "Інструкції ({number})",
+        "marketing": "Marketing ({number})",
+        "trainings": "Training materials ({number})",
         "error": "Помилка",
         "photoErr": "Error while uploading photo",
         "addNewFile": "Add new document",
