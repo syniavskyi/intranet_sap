@@ -17,6 +17,8 @@
           <file-row :file-type="officeFiles" :header-name="'header.office'"></file-row>
           <file-row :file-type="infoFiles" :header-name="'header.information'"></file-row>
           <file-row :file-type="instrFiles" :header-name="'header.instructions'"></file-row>
+          <file-row :file-type="marketingFiles" :header-name="'header.marketing'"></file-row>
+          <file-row :file-type="trainingFiles" :header-name="'header.trainings'"></file-row>
         </div>
       </div>
     </div>
@@ -34,6 +36,7 @@ const utils = require("../../utils");
 export default {
   data() {
     return {
+      authType: this.$store.getters.getUserAuth
     }
   },
   computed: Object.assign(
@@ -43,9 +46,11 @@ export default {
       instrFiles: "getInstructionFiles",
       officeFiles: "getOfficeFiles",
       systemFiles: "getSystemFiles",
+      marketingFiles: "getMarketingFiles",
+      trainingFiles: "getTrainingFiles",
       displayMenu: "getShowMenu",
       displayOverlay: "getShowMenuOverlay",
-      authType: "getUserAuth"
+      // authType: "getUserAuth"
     })
   ),
   created() {
@@ -59,7 +64,10 @@ export default {
       this.calcDocsHeight()
     },
     authType(value) {
-      this.authType = this.$store.getters.getUserAuth.ZPROF_ATCV
+       let auth = this.$store.getters.getUserAuth;
+       auth.ZPROF_ATCV = value;
+
+       this.$store.commit("SET_USER_AUTH", auth);
     }
   },
   mounted() {

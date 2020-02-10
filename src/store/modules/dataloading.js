@@ -810,6 +810,12 @@ const actions = {
       case 'INST':
         sCommitName = "SET_INSTRUCTION_FILES";
         break;
+     case 'MKT':
+        sCommitName = "SET_MARKETING_FILES";
+        break;
+     case 'TRN':
+         sCommitName = "SET_TRAINING_FILES";
+         break;
     }
     commit(sCommitName, aResults);
   },

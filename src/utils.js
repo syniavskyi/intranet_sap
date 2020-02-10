@@ -327,14 +327,16 @@ export const checkRole = function(data) {
               sLink, sService, iLength, iStart, sSet
           aResult  = aResult.d.results
           //add set name
-          sLink    = aResult[0].__metadata.id
-          sService = '/ZGW_INTRANET_SRV/'
-          iLength  = sService.length
-          iStart   = sLink.search(sService) + iLength
-          sSet     = sLink.slice(iStart, sLink.length)
-          sSet     = sSet.split('(')[0]
-          aResult.Set = sSet
-          aData.push(aResult)
+          if(aResult[0]) {
+            sLink    = aResult[0].__metadata.id
+            sService = '/ZGW_INTRANET_SRV/'
+            iLength  = sService.length
+            iStart   = sLink.search(sService) + iLength
+            sSet     = sLink.slice(iStart, sLink.length)
+            sSet     = sSet.split('(')[0]
+            aResult.Set = sSet
+            aData.push(aResult)
+         }
       })
     return aData
    }

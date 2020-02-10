@@ -3,6 +3,7 @@
     <div @click.self="toggleDocTile" class="documents-tiles-row-header" aria-expanded="false">
       <i18n :path="headerName">
         <span place="number">{{ fileType.length }}</span>
+        <!-- <span  place="number"> 1 </span> -->
       </i18n>
     </div>
     <div class="documents-tiles-row-content">
