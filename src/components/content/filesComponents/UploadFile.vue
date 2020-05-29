@@ -21,13 +21,13 @@
                     <img src="../../../assets/images/icons/upload-icon-grey.svg" class="drag-drop__container--image">
                     <p class="p-empty" style="padding: 0; margin: 0;">
                         {{ $t("message.dragToUpade") }}
-                    </p> 
+                    </p>
                 </div>
-            </div>       
+            </div>
         </div>
         <!-- FILES TABLE -->
         <h4 class="content-header-title content-header-title-h4">{{ $tc("label.filesToUpload", 1, { amount: files.length } )}} </h4>
-        <div class="drag-drop__list">     
+        <div class="drag-drop__list">
             <div class="dd-table">
                 <header class="dd-table__header">
                     <label class="dd-table__cell dd-table__c-files dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
@@ -103,7 +103,7 @@
         </div>
         <!-- LINK TABLE -->
         <h3 class="content-header-title content-header-title-h3">{{ $t("header.addNewLink") }}</h3>
-        <div class="drag-drop__list">     
+        <div class="drag-drop__list">
             <div class="dd-table">
                 <header class="dd-table__header">
                     <label class="dd-table__cell dd-table__c-link dd-table__label">{{ $t("label.fileFormatUpl") }}</label>
@@ -315,13 +315,13 @@ export default {
                 break;
                 case 'mp3':
                 className = "doc-file-mp3"
-                break;                
+                break;
                 case 'mp4':
                 className = "doc-file-mp4"
                 break;
                 case 'pdf':
                 className = "doc-file-pdf"
-                break;                
+                break;
                 case 'png':
                 className = 'doc-file-png'
                 break;
@@ -333,6 +333,10 @@ export default {
                 break;
                 case 'zip':
                 className = 'doc-file-zip'
+                break;
+                case 'dot':
+                case 'dotx':
+                className = 'doc-file-dot'
                 break;
                 default:
                 className = ""
