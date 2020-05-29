@@ -515,7 +515,8 @@ const actions = {
             }).catch(err => {})
             break;
           case "Documents":
-            let aResponse = dispatch('getDocuments', getters.getFileTypes).then(res => {
+            let docTypes = Array.from(getters.getUploadFileTypes, x => x.Key);
+            let aResponse = dispatch('getDocuments', docTypes).then(res => {
               let oParsedData = utils.parseBatchResponse(res)
               commit('SET_BATCH_RES', oParsedData)
               let aRes = [],
@@ -680,8 +681,8 @@ const actions = {
               bEndFunction = true;
             }
           }
-          for (let l = 0; l < getters.getFileTypes.length; l++) {
-            let documentType = getters.getFileTypes[l];
+          for (let l = 0; l < getters.ggetUploadFileTypes.length; l++) {
+            let documentType = getters.getUploadFileTypes[l].Key;
             if (documentType === sPromiseName && !bEndFunction) {
               dispatch("setDocumentList", {
                 aResults,
